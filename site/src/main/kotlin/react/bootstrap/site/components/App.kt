@@ -1,6 +1,7 @@
 package react.bootstrap.site.components
 
 import react.RBuilder
+import react.RProps
 import react.bootstrap.layout.containerFluid
 import react.bootstrap.site.components.docs.Docs
 import react.child
@@ -17,7 +18,13 @@ fun RBuilder.app() =
             header()
             containerFluid {
                 switch {
-                    route(PATH_DOCS) { child(Docs) }
+                    route<RProps>(PATH_DOCS) {
+                        child(Docs::class) {
+                            attrs {
+                                match = it.match
+                            }
+                        }
+                    }
                     route("/") { child(Home) }
                 }
             }
