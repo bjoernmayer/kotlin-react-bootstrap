@@ -1,17 +1,15 @@
 package react.bootstrap.site.components.docs.layout
 
-import react.RProps
+import react.*
 import react.bootstrap.site.components.docs.layout.overview.Overview
-import react.child
-import react.functionalComponent
+import react.router.dom.RouteResultProps
 import react.router.dom.route
 import react.router.dom.switch
-import react.router.dom.useRouteMatch
 
-val Layout = functionalComponent<RProps> {
-    val match = useRouteMatch<RProps>() ?: return@functionalComponent
-
-    switch {
-        route("${match.url}/overview/") { child(Overview) }
+class Layout : RComponent<RouteResultProps<RProps>, RState>() {
+    override fun RBuilder.render() {
+        switch {
+            route("${props.match.path}overview/") { child(Overview) }
+        }
     }
 }

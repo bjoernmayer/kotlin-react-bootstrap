@@ -19,10 +19,12 @@ var CommonAttributeGroupFacade.ariaLabel: String
         this.attributes["aria-label"] = newValue
     }
 
-fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(className: String) {
+fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg className: String) {
     attrs {
         classes = classes.toMutableSet().apply {
-            add(className)
+            className.forEach {
+                add(it)
+            }
         }
     }
 }
