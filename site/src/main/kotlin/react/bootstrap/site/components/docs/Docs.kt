@@ -21,7 +21,7 @@ import react.router.dom.switch
 class Docs : RComponent<RouteResultProps<RProps>, RState>() {
     override fun RBuilder.render() {
         row("${ClassNames.FLEX_XL_NOWRAP}") {
-            col(md = ColsMd.COL_3, xl = ColsXl.COL_2, classes = "bd-sidebar") {
+            col(md =  Widths.WD_3 off Offsets.OFF_1 ord Orderings.ORD_10, xl = Widths.WD_2, classes = "bd-sidebar") {
                 route<RProps>(props.location.pathname) {
                     child(Navigation::class) {
                         attrs {
@@ -30,9 +30,9 @@ class Docs : RComponent<RouteResultProps<RProps>, RState>() {
                     }
                 }
             }
-            col(xl = ColsXl.COL_2, classes = "${ClassNames.D_NONE} ${ClassNames.D_XL_BLOCK} bd-toc") {
+            col(xl = Widths.WD_2, classes = "${ClassNames.D_NONE} ${ClassNames.D_XL_BLOCK} bd-toc") {
             }
-            col(md = ColsMd.COL_9, xl = ColsXl.COL_8, classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content"
+            col(md = Widths.WD_9, xl = Widths.WD_8, classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content"
             ) {
                 switch {
                     Categories.categories.forEach { category ->

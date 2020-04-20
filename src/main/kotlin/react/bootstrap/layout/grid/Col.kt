@@ -8,133 +8,228 @@ import react.bootstrap.lib.ClassNames
 import react.dom.RDOMBuilder
 import react.dom.div
 
-enum class Cols(private val classNames: ClassNames) {
-    COL_1(ClassNames.COL_1),
-    COL_2(ClassNames.COL_2),
-    COL_3(ClassNames.COL_3),
-    COL_4(ClassNames.COL_4),
-    COL_5(ClassNames.COL_5),
-    COL_6(ClassNames.COL_6),
-    COL_7(ClassNames.COL_7),
-    COL_8(ClassNames.COL_8),
-    COL_9(ClassNames.COL_9),
-    COL_10(ClassNames.COL_10),
-    COL_11(ClassNames.COL_11),
-    COL_12(ClassNames.COL_12),
-    COL(ClassNames.COL),
-    COL_AUTO(ClassNames.COL_AUTO);
+data class WidthOffsetPair(
+    val first: Widths,
+    val second: Offsets
+) : Width, Offset {
+    override fun width(): Widths? = first.width()
 
-    override fun toString(): String {
-        return "$classNames"
-    }
+    override fun offset(): Offsets? = second.offset()
+
+    override fun toString(): String = "($first, $second)"
+
+    infix fun ord(that: Orderings): WidthOffsetOrderTriple =
+        WidthOffsetOrderTriple(first, second, that)
 }
 
-enum class ColsSm(private val classNames: ClassNames) {
-    COL_1(ClassNames.COL_SM_1),
-    COL_2(ClassNames.COL_SM_2),
-    COL_3(ClassNames.COL_SM_3),
-    COL_4(ClassNames.COL_SM_4),
-    COL_5(ClassNames.COL_SM_5),
-    COL_6(ClassNames.COL_SM_6),
-    COL_7(ClassNames.COL_SM_7),
-    COL_8(ClassNames.COL_SM_8),
-    COL_9(ClassNames.COL_SM_9),
-    COL_10(ClassNames.COL_SM_10),
-    COL_11(ClassNames.COL_SM_11),
-    COL_12(ClassNames.COL_SM_12),
-    COL(ClassNames.COL_SM),
-    COL_AUTO(ClassNames.COL_SM_AUTO);
+data class WidthOrderPair(
+    val first: Widths,
+    val second: Orderings
+) : Width, Order {
+    override fun width(): Widths? = first.width()
 
-    override fun toString(): String {
-        return "$classNames"
-    }
+    override fun order(): Orderings? = second.order()
+
+    override fun toString(): String = "($first, $second)"
 }
 
-enum class ColsMd(private val classNames: ClassNames) {
-    COL_1(ClassNames.COL_MD_1),
-    COL_2(ClassNames.COL_MD_2),
-    COL_3(ClassNames.COL_MD_3),
-    COL_4(ClassNames.COL_MD_4),
-    COL_5(ClassNames.COL_MD_5),
-    COL_6(ClassNames.COL_MD_6),
-    COL_7(ClassNames.COL_MD_7),
-    COL_8(ClassNames.COL_MD_8),
-    COL_9(ClassNames.COL_MD_9),
-    COL_10(ClassNames.COL_MD_10),
-    COL_11(ClassNames.COL_MD_11),
-    COL_12(ClassNames.COL_MD_12),
-    COL(ClassNames.COL_MD),
-    COL_AUTO(ClassNames.COL_MD_AUTO);
+data class OffsetOrderPair(
+    val first: Offsets,
+    val second: Orderings
+) : Offset, Order {
+    override fun offset(): Offsets? = first.offset()
 
-    override fun toString(): String {
-        return "$classNames"
-    }
+    override fun order(): Orderings? = second.order()
+
+    override fun toString(): String = "($first, $second)"
 }
 
-enum class ColsLg(private val classNames: ClassNames) {
-    COL_1(ClassNames.COL_LG_1),
-    COL_2(ClassNames.COL_LG_2),
-    COL_3(ClassNames.COL_LG_3),
-    COL_4(ClassNames.COL_LG_4),
-    COL_5(ClassNames.COL_LG_5),
-    COL_6(ClassNames.COL_LG_6),
-    COL_7(ClassNames.COL_LG_7),
-    COL_8(ClassNames.COL_LG_8),
-    COL_9(ClassNames.COL_LG_9),
-    COL_10(ClassNames.COL_LG_10),
-    COL_11(ClassNames.COL_LG_11),
-    COL_12(ClassNames.COL_LG_12),
-    COL(ClassNames.COL_LG),
-    COL_AUTO(ClassNames.COL_LG_AUTO);
+data class WidthOffsetOrderTriple(
+    val first: Widths,
+    val second: Offsets,
+    val third: Orderings
+) : Width, Offset, Order {
+    override fun width(): Widths? = first.width()
 
-    override fun toString(): String {
-        return "$classNames"
-    }
+    override fun offset(): Offsets? = second.offset()
+
+    override fun order(): Orderings? = third.order()
+
+    override fun toString(): String = "($first, $second, $third)"
 }
 
-enum class ColsXl(private val classNames: ClassNames) {
-    COL_1(ClassNames.COL_XL_1),
-    COL_2(ClassNames.COL_XL_2),
-    COL_3(ClassNames.COL_XL_3),
-    COL_4(ClassNames.COL_XL_4),
-    COL_5(ClassNames.COL_XL_5),
-    COL_6(ClassNames.COL_XL_6),
-    COL_7(ClassNames.COL_XL_7),
-    COL_8(ClassNames.COL_XL_8),
-    COL_9(ClassNames.COL_XL_9),
-    COL_10(ClassNames.COL_XL_10),
-    COL_11(ClassNames.COL_XL_11),
-    COL_12(ClassNames.COL_XL_12),
-    COL(ClassNames.COL_XL),
-    COL_AUTO(ClassNames.COL_XL_AUTO);
+interface ColAttribute
 
-    override fun toString(): String {
-        return "$classNames"
+interface Width : ColAttribute {
+    fun width(): Widths? = null
+}
+
+interface Offset : ColAttribute {
+    fun offset(): Offsets? = null
+}
+
+interface Order : ColAttribute {
+    fun order(): Orderings? = null
+}
+
+enum class Widths(val postfix: String) : Width {
+    WD_1("_1"),
+    WD_2("_2"),
+    WD_3("_3"),
+    WD_4("_4"),
+    WD_5("_5"),
+    WD_6("_6"),
+    WD_7("_7"),
+    WD_8("_8"),
+    WD_9("_9"),
+    WD_10("_10"),
+    WD_11("_11"),
+    WD_12("_12"),
+    WD_AUTO("_AUTO"),
+    WD_COL("");
+
+    override fun width(): Widths? {
+        return this
+    }
+
+    infix fun off(that: Offsets) =
+        WidthOffsetPair(this, that)
+
+    infix fun ord(that: Orderings) =
+        WidthOrderPair(this, that)
+}
+
+enum class Offsets(val postfix: String) : Offset {
+    OFF_1("_1"),
+    OFF_2("_2"),
+    OFF_3("_3"),
+    OFF_4("_4"),
+    OFF_5("_5"),
+    OFF_6("_6"),
+    OFF_7("_7"),
+    OFF_8("_8"),
+    OFF_9("_9"),
+    OFF_10("_10"),
+    OFF_11("_11"),
+    OFF_12("_12");
+
+    override fun offset(): Offsets? {
+        return this
+    }
+
+    infix fun ord(that: Orderings) =
+        OffsetOrderPair(this, that)
+}
+
+enum class Orderings(val postfix: String) : Order {
+    ORD_0("_0"),
+    ORD_1("_1"),
+    ORD_2("_2"),
+    ORD_3("_3"),
+    ORD_4("_4"),
+    ORD_5("_5"),
+    ORD_6("_6"),
+    ORD_7("_7"),
+    ORD_8("_8"),
+    ORD_9("_9"),
+    ORD_10("_10"),
+    ORD_11("_11"),
+    ORD_12("_12"),
+    ORD_FIRST("_FIRST"),
+    ORD_LAST("_LAST");
+
+    override fun order(): Orderings? {
+        return this
     }
 }
 
 class COL(initialAttributes: Map<String, String>, consumer: TagConsumer<*>) : DIV(initialAttributes, consumer)
 
+interface ColWidthProps : RProps {
+    var col: Widths?
+    var sm: Widths?
+    var md: Widths?
+    var lg: Widths?
+    var xl: Widths?
+
+    companion object {
+        fun empty(): ColWidthProps =
+            object : ColWidthProps {
+                override var col: Widths? = null
+                override var sm: Widths? = null
+                override var md: Widths? = null
+                override var lg: Widths? = null
+                override var xl: Widths? = null
+            }
+    }
+}
+
+interface ColOffsetProps : RProps {
+    var col: Offsets?
+    var sm: Offsets?
+    var md: Offsets?
+    var lg: Offsets?
+    var xl: Offsets?
+
+    companion object {
+        fun empty(): ColOffsetProps =
+            object : ColOffsetProps {
+                override var col: Offsets? = null
+                override var sm: Offsets? = null
+                override var md: Offsets? = null
+                override var lg: Offsets? = null
+                override var xl: Offsets? = null
+            }
+    }
+}
+
+interface ColOrderProps : RProps {
+    var col: Orderings?
+    var sm: Orderings?
+    var md: Orderings?
+    var lg: Orderings?
+    var xl: Orderings?
+
+    companion object {
+        fun empty(): ColOrderProps =
+            object : ColOrderProps {
+                override var col: Orderings? = null
+                override var sm: Orderings? = null
+                override var md: Orderings? = null
+                override var lg: Orderings? = null
+                override var xl: Orderings? = null
+            }
+    }
+}
+
 interface ColProps : RProps {
-    var col: Cols?
-    var sm: ColsSm?
-    var md: ColsMd?
-    var lg: ColsLg?
-    var xl: ColsXl?
+    var widths: ColWidthProps?
+    var offsets: ColOffsetProps?
+    var orderings: ColOrderProps?
     var classes: String?
     var block: RDOMBuilder<COL>.() -> Unit
 }
 
 internal class Col : RComponent<ColProps, RState>() {
     override fun RBuilder.render() {
-        val variants = listOfNotNull(props.col, props.sm, props.md, props.lg, props.xl).run {
-            if (isEmpty()) {
-                listOf(Cols.COL)
-            } else {
-                this
-            }
-        }
-        val classes = props.classes.appendClass(variants.joinToString(" "))
+        val colClasses = listOfNotNull(
+            props.widths?.col?.let { ClassNames.valueOf("COL${it.postfix}") },
+            props.widths?.sm?.let { ClassNames.valueOf("COL_SM${it.postfix}") },
+            props.widths?.md?.let { ClassNames.valueOf("COL_MD${it.postfix}") },
+            props.widths?.lg?.let { ClassNames.valueOf("COL_LG${it.postfix}") },
+            props.widths?.xl?.let { ClassNames.valueOf("COL_XL${it.postfix}") },
+            props.offsets?.col?.let { ClassNames.valueOf("OFFSET${it.postfix}") },
+            props.offsets?.sm?.let { ClassNames.valueOf("OFFSET_SM${it.postfix}") },
+            props.offsets?.md?.let { ClassNames.valueOf("OFFSET_MD${it.postfix}") },
+            props.offsets?.lg?.let { ClassNames.valueOf("OFFSET_LG${it.postfix}") },
+            props.offsets?.xl?.let { ClassNames.valueOf("OFFSET_XL${it.postfix}") },
+            props.orderings?.col?.let { ClassNames.valueOf("ORDER${it.postfix}") },
+            props.orderings?.sm?.let { ClassNames.valueOf("ORDER_SM${it.postfix}") },
+            props.orderings?.md?.let { ClassNames.valueOf("ORDER_MD${it.postfix}") },
+            props.orderings?.lg?.let { ClassNames.valueOf("ORDER_LG${it.postfix}") },
+            props.orderings?.xl?.let { ClassNames.valueOf("ORDER_XL${it.postfix}") }
+        )
+        val classes = props.classes.appendClass(colClasses.joinToString(" "))
 
         col(classes) {
             val block = props.block
@@ -150,27 +245,91 @@ internal class Col : RComponent<ColProps, RState>() {
 }
 
 fun RBuilder.col(
-    col: Cols? = null,
-    sm: ColsSm? = null,
-    md: ColsMd? = null,
-    lg: ColsLg? = null,
-    xl: ColsXl? = null,
     classes: String? = null,
     block: RDOMBuilder<COL>.() -> Unit
 ): ReactElement = child(Col::class) {
-    attrs.col = col
-    attrs.sm = sm
-    attrs.md = md
-    attrs.lg = lg
-    attrs.xl = xl
+    attrs.widths = ColWidthProps.empty().apply { col = Widths.WD_COL }
 
     attrs.classes = classes
     attrs.block = block
 }
 
-/**
-col() -> <div class="col">
-col(Cols.COL1) -> div class="col-1">
+fun RBuilder.col(
+    col: ColAttribute? = null,
+    sm: ColAttribute? = null,
+    md: ColAttribute? = null,
+    lg: ColAttribute? = null,
+    xl: ColAttribute? = null,
+    classes: String? = null,
+    block: RDOMBuilder<COL>.() -> Unit
+): ReactElement {
+    return child(Col::class) {
+        attrs.widths = ColWidthProps.empty().apply {
+            if (col is Width) {
+                this.col = col.width()
+            }
 
+            if (sm is Width) {
+                this.sm = sm.width()
+            }
 
- */
+            if (md is Width) {
+                this.md = md.width()
+            }
+
+            if (lg is Width) {
+                this.lg = lg.width()
+            }
+
+            if (xl is Width) {
+                this.xl = xl.width()
+            }
+        }
+        attrs.offsets = ColOffsetProps.empty().apply {
+            if (col is Offset) {
+                this.col = col.offset()
+            }
+
+            if (sm is Offset) {
+                this.sm = sm.offset()
+            }
+
+            if (md is Offset) {
+                this.md = md.offset()
+            }
+
+            if (lg is Offset) {
+                this.lg = lg.offset()
+            }
+
+            if (xl is Offset) {
+                this.xl = xl.offset()
+            }
+        }
+        attrs.orderings = ColOrderProps.empty().apply {
+            if (col is Order) {
+                this.col = col.order()
+            }
+
+            if (sm is Order) {
+                this.sm = sm.order()
+            }
+
+            if (md is Order) {
+                this.md = md.order()
+            }
+
+            if (lg is Order) {
+                this.lg = lg.order()
+            }
+
+            if (xl is Order) {
+                this.xl = xl.order()
+            }
+        }
+
+        attrs.classes = classes
+        attrs.block = block
+    }
+}
+
