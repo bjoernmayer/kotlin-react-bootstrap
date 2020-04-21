@@ -85,6 +85,7 @@ interface Order : ColAttribute {
     override fun offset(): Offsets? = null
 }
 
+@Suppress("unused")
 enum class Widths(val postfix: String) : Width {
     WD_1("_1"),
     WD_2("_2"),
@@ -112,6 +113,7 @@ enum class Widths(val postfix: String) : Width {
         WidthOrderPair(this, that)
 }
 
+@Suppress("unused")
 enum class Offsets(val postfix: String) : Offset {
     OFF_1("_1"),
     OFF_2("_2"),
@@ -134,6 +136,7 @@ enum class Offsets(val postfix: String) : Offset {
         OffsetOrderPair(this, that)
 }
 
+@Suppress("unused")
 enum class Orderings(val postfix: String) : Order {
     ORD_0("_0"),
     ORD_1("_1"),
@@ -177,7 +180,7 @@ interface ColWidthProps : RProps {
     }
 }
 
-interface ColOffsetProps : RProps {
+internal interface ColOffsetProps : RProps {
     var col: Offsets?
     var sm: Offsets?
     var md: Offsets?
@@ -196,7 +199,7 @@ interface ColOffsetProps : RProps {
     }
 }
 
-interface ColOrderProps : RProps {
+internal interface ColOrderProps : RProps {
     var col: Orderings?
     var sm: Orderings?
     var md: Orderings?
@@ -215,7 +218,7 @@ interface ColOrderProps : RProps {
     }
 }
 
-interface ColProps : RProps {
+internal interface ColProps : RProps {
     var widths: ColWidthProps?
     var offsets: ColOffsetProps?
     var orderings: ColOrderProps?
