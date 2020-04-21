@@ -18,7 +18,7 @@ fun RBuilder.app() =
     browserRouter {
         attrs {
             @Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
-            (this as BrowserRouterProps).basename ="/kotlin-react-bootstrap"
+            (this as BrowserRouterProps).basename = "/kotlin-react-bootstrap"
         }
         div {
             header()

@@ -2,11 +2,33 @@ package react.bootstrap.site.components.docs.content.typography
 
 import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
-import react.bootstrap.content.typography.*
+import react.bootstrap.content.typography.toH1
+import react.bootstrap.content.typography.toH2
+import react.bootstrap.content.typography.toH3
+import react.bootstrap.content.typography.toH4
+import react.bootstrap.content.typography.toH5
+import react.bootstrap.content.typography.toH6
+import react.bootstrap.content.typography.toTextMuted
 import react.bootstrap.site.components.docs.contentTitle
 import react.bootstrap.site.components.docs.example
 import react.bootstrap.site.components.docs.kotlinExample
-import react.dom.*
+import react.dom.RDOMBuilder
+import react.dom.br
+import react.dom.code
+import react.dom.h1
+import react.dom.h2
+import react.dom.h3
+import react.dom.h4
+import react.dom.h5
+import react.dom.h6
+import react.dom.p
+import react.dom.small
+import react.dom.table
+import react.dom.tbody
+import react.dom.td
+import react.dom.th
+import react.dom.thead
+import react.dom.tr
 
 fun RBuilder.headings() {
     contentTitle { +"Headings" }

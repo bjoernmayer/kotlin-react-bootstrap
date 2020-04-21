@@ -4,7 +4,11 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
-import react.bootstrap.layout.grid.*
+import react.bootstrap.layout.grid.Offsets
+import react.bootstrap.layout.grid.Orderings
+import react.bootstrap.layout.grid.Widths
+import react.bootstrap.layout.grid.col
+import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.about.About
 import react.bootstrap.site.components.docs.components.Components
@@ -21,7 +25,7 @@ import react.router.dom.switch
 class Docs : RComponent<RouteResultProps<RProps>, RState>() {
     override fun RBuilder.render() {
         row("${ClassNames.FLEX_XL_NOWRAP}") {
-            col(md =  Widths.WD_3 off Offsets.OFF_1 ord Orderings.ORD_10, xl = Widths.WD_2, classes = "bd-sidebar") {
+            col(md = Widths.WD_3 off Offsets.OFF_1 ord Orderings.ORD_10, xl = Widths.WD_2, classes = "bd-sidebar") {
                 route<RProps>(props.location.pathname) {
                     child(Navigation::class) {
                         attrs {
@@ -32,7 +36,8 @@ class Docs : RComponent<RouteResultProps<RProps>, RState>() {
             }
             col(xl = Widths.WD_2, classes = "${ClassNames.D_NONE} ${ClassNames.D_XL_BLOCK} bd-toc") {
             }
-            col(md = Widths.WD_9, xl = Widths.WD_8, classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content"
+            col(
+                md = Widths.WD_9, xl = Widths.WD_8, classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content"
             ) {
                 switch {
                     Categories.categories.forEach { category ->
@@ -83,7 +88,7 @@ class Docs : RComponent<RouteResultProps<RProps>, RState>() {
                 "content",
                 Content::class
             ).apply {
-                //"Reboot", "reboot",
+                // "Reboot", "reboot",
                 addSubCategory("Typography", "typography")
                 addSubCategory("Code", "code")
                 addSubCategory("Images", "images")

@@ -1,7 +1,13 @@
 package react.bootstrap.site
 
-import kotlinx.css.*
+import kotlinx.css.BorderStyle
+import kotlinx.css.CSSBuilder
+import kotlinx.css.Color
+import kotlinx.css.background
+import kotlinx.css.margin
+import kotlinx.css.padding
 import kotlinx.css.properties.border
+import kotlinx.css.rem
 import styled.StyledComponents
 import styled.injectGlobal
 

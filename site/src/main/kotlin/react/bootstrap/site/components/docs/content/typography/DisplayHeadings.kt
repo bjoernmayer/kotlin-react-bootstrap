@@ -10,7 +10,15 @@ import react.bootstrap.content.typography.toDisplay4
 import react.bootstrap.site.components.docs.contentTitle
 import react.bootstrap.site.components.docs.example
 import react.bootstrap.site.components.docs.kotlinExample
-import react.dom.*
+import react.dom.RDOMBuilder
+import react.dom.br
+import react.dom.p
+import react.dom.span
+import react.dom.strong
+import react.dom.table
+import react.dom.tbody
+import react.dom.td
+import react.dom.tr
 
 fun RBuilder.displayHeadings() {
     contentTitle { +"Display headings" }

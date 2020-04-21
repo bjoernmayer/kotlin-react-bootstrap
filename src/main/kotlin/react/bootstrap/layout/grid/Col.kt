@@ -2,7 +2,11 @@ package react.bootstrap.layout.grid
 
 import kotlinx.html.DIV
 import kotlinx.html.TagConsumer
-import react.*
+import react.RBuilder
+import react.RComponent
+import react.RProps
+import react.RState
+import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
 import react.dom.RDOMBuilder
@@ -348,4 +352,3 @@ fun RBuilder.col(
         attrs.block = block
     }
 }
-

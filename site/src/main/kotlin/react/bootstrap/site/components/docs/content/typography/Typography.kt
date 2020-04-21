@@ -21,4 +21,3 @@ fun RBuilder.typography() =
         abbreviations()
         blockquotes()
     }
-

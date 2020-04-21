@@ -33,7 +33,6 @@ fun RDOMBuilder<CommonAttributeGroupFacade>.toH5() = toH(Headings.H5)
 
 fun RDOMBuilder<CommonAttributeGroupFacade>.toH6() = toH(Headings.H6)
 
-
 // Todo: move this to the other text stuff
 fun RDOMBuilder<CommonAttributeGroupFacade>.toTextMuted() =
     addClass("${ClassNames.TEXT_MUTED}")

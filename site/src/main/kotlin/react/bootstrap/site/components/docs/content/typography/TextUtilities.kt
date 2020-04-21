@@ -7,6 +7,7 @@ import react.dom.p
 fun RBuilder.textUtilities() {
     contentTitle { +"Text utilities" }
     p {
-        +"Change text alignment, transform, style, weight, and color with our text utilities and color utilities." // FIXME links
+        // FIXME links
+        +"Change text alignment, transform, style, weight, and color with our text utilities and color utilities."
     }
 }

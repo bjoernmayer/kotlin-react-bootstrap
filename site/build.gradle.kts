@@ -1,5 +1,6 @@
 plugins {
     kotlin("js")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 repositories {
@@ -25,7 +26,6 @@ dependencies {
     implementation(npm("react", "16.13.1"))
     implementation(npm("react-dom", "16.13.1"))
     implementation(npm("react-router-dom", "5.1.2"))
-
 
     implementation("org.jetbrains:kotlin-styled:1.0.0-${Versions.KOTLIN_JS_WRAPPERS}")
     implementation(npm("styled-components"))

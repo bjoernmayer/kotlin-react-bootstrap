@@ -7,7 +7,11 @@ import react.bootstrap.content.typography.toInitialism
 import react.bootstrap.site.components.docs.contentTitle
 import react.bootstrap.site.components.docs.example
 import react.bootstrap.site.components.docs.kotlinExample
-import react.dom.*
+import react.dom.RDOMBuilder
+import react.dom.abbr
+import react.dom.br
+import react.dom.code
+import react.dom.p
 
 fun RBuilder.abbreviations() {
     contentTitle { +"Abbreviations" }

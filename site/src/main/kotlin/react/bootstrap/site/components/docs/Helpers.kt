@@ -1,12 +1,23 @@
 package react.bootstrap.site.components.docs
 
-import kotlinx.html.*
+import kotlinx.html.CODE
+import kotlinx.html.DIV
+import kotlinx.html.H1
+import kotlinx.html.H2
+import kotlinx.html.P
 import react.RBuilder
 import react.RProps
 import react.bootstrap.data
 import react.bootstrap.site.external.MatchProps
 import react.bootstrap.site.external.matchPath
-import react.dom.*
+import react.dom.RDOMBuilder
+import react.dom.code
+import react.dom.div
+import react.dom.figure
+import react.dom.h1
+import react.dom.h2
+import react.dom.p
+import react.dom.pre
 import react.router.dom.RouteResultProps
 
 fun RBuilder.kotlinExample(block: RDOMBuilder<CODE>.() -> Unit) =

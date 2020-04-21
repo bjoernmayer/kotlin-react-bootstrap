@@ -2,7 +2,11 @@ package react.bootstrap.site.components
 
 import react.RBuilder
 import react.bootstrap.ariaLabel
-import react.dom.*
+import react.dom.a
+import react.dom.div
+import react.dom.header
+import react.dom.li
+import react.dom.ul
 import react.router.dom.navLink
 
 fun RBuilder.header() {

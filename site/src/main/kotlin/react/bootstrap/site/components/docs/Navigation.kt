@@ -8,7 +8,11 @@ import react.RState
 import react.bootstrap.addClass
 import react.bootstrap.ariaLabel
 import react.bootstrap.site.components.PATH_DOCS
-import react.dom.*
+import react.dom.RDOMBuilder
+import react.dom.div
+import react.dom.li
+import react.dom.nav
+import react.dom.ul
 import react.router.dom.RouteResultProps
 import react.router.dom.navLink
 import react.router.dom.routeLink

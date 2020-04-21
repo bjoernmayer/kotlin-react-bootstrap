@@ -7,7 +7,16 @@ import react.bootstrap.content.typography.toSmall
 import react.bootstrap.site.components.docs.contentTitle
 import react.bootstrap.site.components.docs.example
 import react.bootstrap.site.components.docs.kotlinExample
-import react.dom.*
+import react.dom.RDOMBuilder
+import react.dom.br
+import react.dom.code
+import react.dom.del
+import react.dom.em
+import react.dom.ins
+import react.dom.mark
+import react.dom.p
+import react.dom.small
+import react.dom.strong
 
 fun RBuilder.inlineTextElements() {
     contentTitle { +"Inline text elements" }
