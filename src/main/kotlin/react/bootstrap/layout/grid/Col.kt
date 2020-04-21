@@ -16,6 +16,8 @@ data class WidthOffsetPair(
 
     override fun offset(): Offsets? = second.offset()
 
+    override fun order(): Orderings? = null
+
     override fun toString(): String = "($first, $second)"
 
     infix fun ord(that: Orderings): WidthOffsetOrderTriple =
@@ -28,6 +30,8 @@ data class WidthOrderPair(
 ) : Width, Order {
     override fun width(): Widths? = first.width()
 
+    override fun offset(): Offsets? = null
+
     override fun order(): Orderings? = second.order()
 
     override fun toString(): String = "($first, $second)"
@@ -37,6 +41,8 @@ data class OffsetOrderPair(
     val first: Offsets,
     val second: Orderings
 ) : Offset, Order {
+    override fun width(): Widths? = null
+
     override fun offset(): Offsets? = first.offset()
 
     override fun order(): Orderings? = second.order()
@@ -58,18 +64,25 @@ data class WidthOffsetOrderTriple(
     override fun toString(): String = "($first, $second, $third)"
 }
 
-interface ColAttribute
+interface ColAttribute {
+    fun width(): Widths?
+    fun offset(): Offsets?
+    fun order(): Orderings?
+}
 
 interface Width : ColAttribute {
-    fun width(): Widths? = null
+    override fun offset(): Offsets? = null
+    override fun order(): Orderings? = null
 }
 
 interface Offset : ColAttribute {
-    fun offset(): Offsets? = null
+    override fun width(): Widths? = null
+    override fun order(): Orderings? = null
 }
 
 interface Order : ColAttribute {
-    fun order(): Orderings? = null
+    override fun width(): Widths? = null
+    override fun offset(): Offsets? = null
 }
 
 enum class Widths(val postfix: String) : Width {
