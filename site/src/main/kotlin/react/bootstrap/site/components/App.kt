@@ -2,7 +2,8 @@ package react.bootstrap.site.components
 
 import react.RBuilder
 import react.RProps
-import react.bootstrap.layout.containerFluid
+import react.bootstrap.layout.Viscosities
+import react.bootstrap.layout.container
 import react.bootstrap.site.components.docs.Docs
 import react.bootstrap.site.components.docs.from
 import react.bootstrap.site.external.BrowserRouterProps
@@ -22,7 +23,7 @@ fun RBuilder.app() =
         }
         div {
             header()
-            containerFluid {
+            container(viscosity = Viscosities.FLUID) {
                 switch {
                     route<RProps>(PATH_DOCS) {
                         child(Docs::class) {

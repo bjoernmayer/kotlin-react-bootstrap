@@ -37,6 +37,11 @@ fun RBuilder.example(block: RDOMBuilder<DIV>.() -> Unit) =
         block()
     }
 
+fun RBuilder.exampleRow(block: RDOMBuilder<DIV>.() -> Unit) =
+    div("bd-example-row") {
+        block()
+    }
+
 fun RBuilder.contentTitle(block: RDOMBuilder<H2>.() -> Unit) =
     h2("bd-content-title", block)
 

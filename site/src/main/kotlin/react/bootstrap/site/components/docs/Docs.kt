@@ -4,9 +4,7 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
-import react.bootstrap.layout.grid.Offsets
-import react.bootstrap.layout.grid.Orderings
-import react.bootstrap.layout.grid.Widths
+import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
@@ -24,8 +22,8 @@ import react.router.dom.switch
 
 class Docs : RComponent<RouteResultProps<RProps>, RState>() {
     override fun RBuilder.render() {
-        row("${ClassNames.FLEX_XL_NOWRAP}") {
-            col(md = Widths.WD_3 off Offsets.OFF_1 ord Orderings.ORD_10, xl = Widths.WD_2, classes = "bd-sidebar") {
+        row(classes = "${ClassNames.FLEX_XL_NOWRAP}") {
+            col(md = Sizes.SZ_3, xl = Sizes.SZ_2, classes = "bd-sidebar") {
                 route<RProps>(props.location.pathname) {
                     child(Navigation::class) {
                         attrs {
@@ -34,10 +32,10 @@ class Docs : RComponent<RouteResultProps<RProps>, RState>() {
                     }
                 }
             }
-            col(xl = Widths.WD_2, classes = "${ClassNames.D_NONE} ${ClassNames.D_XL_BLOCK} bd-toc") {
+            col(xl = Sizes.SZ_2, classes = "${ClassNames.D_NONE} ${ClassNames.D_XL_BLOCK} bd-toc") {
             }
             col(
-                md = Widths.WD_9, xl = Widths.WD_8, classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content"
+                md = Sizes.SZ_9, xl = Sizes.SZ_8, classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content"
             ) {
                 switch {
                     Categories.categories.forEach { category ->

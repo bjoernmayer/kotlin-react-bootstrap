@@ -21,7 +21,7 @@ fun RBuilder.abbreviations() {
         +"hover and to users of assistive technologies."
     }
     p {
-        +"Use "; code { +".${RDOMBuilder<ABBR>::toInitialism.name}" }; +" on an abbreviation  for a slightly smaller "
+        +"Use "; code { +".${RDOMBuilder<ABBR>::toInitialism.name}()" }; +" on an abbreviation  for a slightly smaller "
         +"font-size."
     }
     example {

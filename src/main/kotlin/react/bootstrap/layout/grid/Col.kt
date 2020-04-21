@@ -1,7 +1,6 @@
 package react.bootstrap.layout.grid
 
 import kotlinx.html.DIV
-import kotlinx.html.TagConsumer
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -12,11 +11,11 @@ import react.bootstrap.lib.ClassNames
 import react.dom.RDOMBuilder
 import react.dom.div
 
-data class WidthOffsetPair(
-    val first: Widths,
+data class SizeOffsetPair(
+    val first: Sizes,
     val second: Offsets
-) : Width, Offset {
-    override fun width(): Widths? = first.width()
+) : Size, Offset {
+    override fun size(): Sizes? = first.size()
 
     override fun offset(): Offsets? = second.offset()
 
@@ -24,15 +23,15 @@ data class WidthOffsetPair(
 
     override fun toString(): String = "($first, $second)"
 
-    infix fun ord(that: Orderings): WidthOffsetOrderTriple =
-        WidthOffsetOrderTriple(first, second, that)
+    infix fun ord(that: Orderings): SizeOffsetOrderTriple =
+        SizeOffsetOrderTriple(first, second, that)
 }
 
-data class WidthOrderPair(
-    val first: Widths,
+data class SizeOrderPair(
+    val first: Sizes,
     val second: Orderings
-) : Width, Order {
-    override fun width(): Widths? = first.width()
+) : Size, Order {
+    override fun size(): Sizes? = first.size()
 
     override fun offset(): Offsets? = null
 
@@ -45,7 +44,7 @@ data class OffsetOrderPair(
     val first: Offsets,
     val second: Orderings
 ) : Offset, Order {
-    override fun width(): Widths? = null
+    override fun size(): Sizes? = null
 
     override fun offset(): Offsets? = first.offset()
 
@@ -54,12 +53,12 @@ data class OffsetOrderPair(
     override fun toString(): String = "($first, $second)"
 }
 
-data class WidthOffsetOrderTriple(
-    val first: Widths,
+data class SizeOffsetOrderTriple(
+    val first: Sizes,
     val second: Offsets,
     val third: Orderings
-) : Width, Offset, Order {
-    override fun width(): Widths? = first.width()
+) : Size, Offset, Order {
+    override fun size(): Sizes? = first.size()
 
     override fun offset(): Offsets? = second.offset()
 
@@ -69,56 +68,56 @@ data class WidthOffsetOrderTriple(
 }
 
 interface ColAttribute {
-    fun width(): Widths?
+    fun size(): Sizes?
     fun offset(): Offsets?
     fun order(): Orderings?
 }
 
-interface Width : ColAttribute {
+interface Size : ColAttribute {
     override fun offset(): Offsets? = null
     override fun order(): Orderings? = null
 }
 
 interface Offset : ColAttribute {
-    override fun width(): Widths? = null
+    override fun size(): Sizes? = null
     override fun order(): Orderings? = null
 }
 
 interface Order : ColAttribute {
-    override fun width(): Widths? = null
+    override fun size(): Sizes? = null
     override fun offset(): Offsets? = null
 }
 
 @Suppress("unused")
-enum class Widths(val postfix: String) : Width {
-    WD_1("_1"),
-    WD_2("_2"),
-    WD_3("_3"),
-    WD_4("_4"),
-    WD_5("_5"),
-    WD_6("_6"),
-    WD_7("_7"),
-    WD_8("_8"),
-    WD_9("_9"),
-    WD_10("_10"),
-    WD_11("_11"),
-    WD_12("_12"),
-    WD_AUTO("_AUTO"),
-    WD_COL("");
+enum class Sizes(internal val postfix: String) : Size {
+    SZ_1("_1"),
+    SZ_2("_2"),
+    SZ_3("_3"),
+    SZ_4("_4"),
+    SZ_5("_5"),
+    SZ_6("_6"),
+    SZ_7("_7"),
+    SZ_8("_8"),
+    SZ_9("_9"),
+    SZ_10("_10"),
+    SZ_11("_11"),
+    SZ_12("_12"),
+    AUTO("_AUTO"),
+    EQ("");
 
-    override fun width(): Widths? {
+    override fun size(): Sizes? {
         return this
     }
 
     infix fun off(that: Offsets) =
-        WidthOffsetPair(this, that)
+        SizeOffsetPair(this, that)
 
     infix fun ord(that: Orderings) =
-        WidthOrderPair(this, that)
+        SizeOrderPair(this, that)
 }
 
 @Suppress("unused")
-enum class Offsets(val postfix: String) : Offset {
+enum class Offsets(internal val postfix: String) : Offset {
     OFF_1("_1"),
     OFF_2("_2"),
     OFF_3("_3"),
@@ -141,7 +140,7 @@ enum class Offsets(val postfix: String) : Offset {
 }
 
 @Suppress("unused")
-enum class Orderings(val postfix: String) : Order {
+enum class Orderings(internal val postfix: String) : Order {
     ORD_0("_0"),
     ORD_1("_1"),
     ORD_2("_2"),
@@ -163,23 +162,21 @@ enum class Orderings(val postfix: String) : Order {
     }
 }
 
-class COL(initialAttributes: Map<String, String>, consumer: TagConsumer<*>) : DIV(initialAttributes, consumer)
-
 interface ColWidthProps : RProps {
-    var col: Widths?
-    var sm: Widths?
-    var md: Widths?
-    var lg: Widths?
-    var xl: Widths?
+    var col: Sizes?
+    var sm: Sizes?
+    var md: Sizes?
+    var lg: Sizes?
+    var xl: Sizes?
 
     companion object {
         fun empty(): ColWidthProps =
             object : ColWidthProps {
-                override var col: Widths? = null
-                override var sm: Widths? = null
-                override var md: Widths? = null
-                override var lg: Widths? = null
-                override var xl: Widths? = null
+                override var col: Sizes? = null
+                override var sm: Sizes? = null
+                override var md: Sizes? = null
+                override var lg: Sizes? = null
+                override var xl: Sizes? = null
             }
     }
 }
@@ -227,7 +224,7 @@ internal interface ColProps : RProps {
     var offsets: ColOffsetProps?
     var orderings: ColOrderProps?
     var classes: String?
-    var block: RDOMBuilder<COL>.() -> Unit
+    var block: RDOMBuilder<DIV>.() -> Unit
 }
 
 internal class Col : RComponent<ColProps, RState>() {
@@ -251,63 +248,52 @@ internal class Col : RComponent<ColProps, RState>() {
         )
         val classes = props.classes.appendClass(colClasses.joinToString(" "))
 
-        col(classes) {
+        div(classes) {
             val block = props.block
             block()
         }
-    }
-
-    companion object {
-        private fun RBuilder.col(classes: String? = null, block: RDOMBuilder<COL>.() -> Unit): ReactElement =
-            @Suppress("UNCHECKED_CAST")
-            div(classes, block as RDOMBuilder<DIV>.() -> Unit)
     }
 }
 
 fun RBuilder.col(
     classes: String? = null,
-    block: RDOMBuilder<COL>.() -> Unit
-): ReactElement = child(Col::class) {
-    attrs.widths = ColWidthProps.empty().apply { col = Widths.WD_COL }
-
-    attrs.classes = classes
-    attrs.block = block
-}
+    block: RDOMBuilder<DIV>.() -> Unit
+): ReactElement = col(all = Sizes.EQ, classes = classes, block = block)
 
 fun RBuilder.col(
-    col: ColAttribute? = null,
+    all: ColAttribute? = null,
     sm: ColAttribute? = null,
     md: ColAttribute? = null,
     lg: ColAttribute? = null,
     xl: ColAttribute? = null,
     classes: String? = null,
-    block: RDOMBuilder<COL>.() -> Unit
+    block: RDOMBuilder<DIV>.() -> Unit
 ): ReactElement {
     return child(Col::class) {
         attrs.widths = ColWidthProps.empty().apply {
-            if (col is Width) {
-                this.col = col.width()
+            if (all is Size) {
+                this.col = all.size()
             }
 
-            if (sm is Width) {
-                this.sm = sm.width()
+            if (sm is Size) {
+                this.sm = sm.size()
             }
 
-            if (md is Width) {
-                this.md = md.width()
+            if (md is Size) {
+                this.md = md.size()
             }
 
-            if (lg is Width) {
-                this.lg = lg.width()
+            if (lg is Size) {
+                this.lg = lg.size()
             }
 
-            if (xl is Width) {
-                this.xl = xl.width()
+            if (xl is Size) {
+                this.xl = xl.size()
             }
         }
         attrs.offsets = ColOffsetProps.empty().apply {
-            if (col is Offset) {
-                this.col = col.offset()
+            if (all is Offset) {
+                this.col = all.offset()
             }
 
             if (sm is Offset) {
@@ -327,8 +313,8 @@ fun RBuilder.col(
             }
         }
         attrs.orderings = ColOrderProps.empty().apply {
-            if (col is Order) {
-                this.col = col.order()
+            if (all is Order) {
+                this.col = all.order()
             }
 
             if (sm is Order) {
