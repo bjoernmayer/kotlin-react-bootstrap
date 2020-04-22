@@ -63,6 +63,12 @@ fun RBuilder.howItWorks() {
         code { +"${RBuilder::container.name} { }" }; +"."
     }
     p {
-        +"Todo: Breakdown"
+        +"Be aware of the limitations and "
+        a("https://github.com/philipwalton/flexbugs") {
+            +"bugs around flexbox"
+        }; +", like the "
+        a("https://github.com/philipwalton/flexbugs#flexbug-9") {
+            +"inability to use some HTML elements as flex containers"
+        }; +"."
     }
 }

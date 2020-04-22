@@ -1,12 +1,20 @@
 package react.bootstrap.content.typography
 
-import kotlinx.html.CommonAttributeGroupFacade
-import react.bootstrap.addClass
+import kotlinx.html.HTMLTag
+import react.RBuilder
+import react.ReactElement
+import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
 import react.dom.RDOMBuilder
 
-fun RDOMBuilder<CommonAttributeGroupFacade>.toSmall() =
-    addClass("${ClassNames.SMALL}")
+fun <T : HTMLTag> RBuilder.small(
+    tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
+    classes: String? = null,
+    block: RDOMBuilder<T>.() -> Unit
+) = tagFun(classes.appendClass("${ClassNames.SMALL}"), block)
 
-fun RDOMBuilder<CommonAttributeGroupFacade>.toMark() =
-    addClass("${ClassNames.MARK}")
+fun <T : HTMLTag> RBuilder.mark(
+    tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
+    classes: String? = null,
+    block: RDOMBuilder<T>.() -> Unit
+) = tagFun(classes.appendClass("${ClassNames.MARK}"), block)

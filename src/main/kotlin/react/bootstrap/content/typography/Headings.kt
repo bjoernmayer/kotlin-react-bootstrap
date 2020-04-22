@@ -1,10 +1,8 @@
 package react.bootstrap.content.typography
 
-import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.HTMLTag
 import react.RBuilder
 import react.ReactElement
-import react.bootstrap.addClass
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
 import react.dom.RDOMBuilder
@@ -67,5 +65,8 @@ fun <T : HTMLTag> RBuilder.h6(
 ) = h(Headings.H6, tagFun, classes, block)
 
 // Todo: move this to the other text stuff
-fun RDOMBuilder<CommonAttributeGroupFacade>.toTextMuted() =
-    addClass("${ClassNames.TEXT_MUTED}")
+fun <T : HTMLTag> RBuilder.muted(
+    tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
+    classes: String? = null,
+    block: RDOMBuilder<T>.() -> Unit
+) = tagFun(classes.appendClass("${ClassNames.TEXT_MUTED}"), block)

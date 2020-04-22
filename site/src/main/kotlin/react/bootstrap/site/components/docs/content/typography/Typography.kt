@@ -12,12 +12,9 @@ fun RBuilder.typography() =
             +"Documentation and examples for Bootstrap typography, including global settings, headings, body text, "
             +"lists, and more."
         }
-        globalSettings()
         headings()
         displayHeadings()
         lead()
         inlineTextElements()
-        textUtilities()
-        abbreviations()
         blockquotes()
     }

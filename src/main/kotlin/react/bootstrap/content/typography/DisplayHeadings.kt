@@ -1,9 +1,19 @@
 package react.bootstrap.content.typography
 
-import kotlinx.html.CommonAttributeGroupFacade
-import react.bootstrap.addClass
+import kotlinx.html.H1
+import kotlinx.html.H2
+import kotlinx.html.H3
+import kotlinx.html.H4
+import kotlinx.html.HTMLTag
+import react.RBuilder
+import react.ReactElement
+import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
 import react.dom.RDOMBuilder
+import react.dom.h1
+import react.dom.h2
+import react.dom.h3
+import react.dom.h4
 
 enum class DisplayHeadings(private val classNames: ClassNames) {
     DISPLAY_1(ClassNames.DISPLAY_1),
@@ -16,13 +26,21 @@ enum class DisplayHeadings(private val classNames: ClassNames) {
     }
 }
 
-fun RDOMBuilder<CommonAttributeGroupFacade>.toDisplay(displayHeadings: DisplayHeadings) =
-    addClass("$displayHeadings")
+fun RBuilder.display1(classes: String? = null, block: RDOMBuilder<H1>.() -> Unit) =
+    h1(classes.appendClass("${ClassNames.DISPLAY_1}"), block)
 
-fun RDOMBuilder<CommonAttributeGroupFacade>.toDisplay1() = toDisplay(DisplayHeadings.DISPLAY_1)
+fun RBuilder.display2(classes: String? = null, block: RDOMBuilder<H2>.() -> Unit) =
+    h2(classes.appendClass("${ClassNames.DISPLAY_2}"), block)
 
-fun RDOMBuilder<CommonAttributeGroupFacade>.toDisplay2() = toDisplay(DisplayHeadings.DISPLAY_2)
+fun RBuilder.display3(classes: String? = null, block: RDOMBuilder<H3>.() -> Unit) =
+    h3(classes.appendClass("${ClassNames.DISPLAY_3}"), block)
 
-fun RDOMBuilder<CommonAttributeGroupFacade>.toDisplay3() = toDisplay(DisplayHeadings.DISPLAY_3)
+fun RBuilder.display4(classes: String? = null, block: RDOMBuilder<H4>.() -> Unit) =
+    h4(classes.appendClass("${ClassNames.DISPLAY_4}"), block)
 
-fun RDOMBuilder<CommonAttributeGroupFacade>.toDisplay4() = toDisplay(DisplayHeadings.DISPLAY_4)
+fun <T : HTMLTag> RBuilder.display(
+    variant: DisplayHeadings,
+    tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
+    classes: String? = null,
+    block: RDOMBuilder<T>.() -> Unit
+) = tagFun(classes.appendClass(variant.toString()), block)

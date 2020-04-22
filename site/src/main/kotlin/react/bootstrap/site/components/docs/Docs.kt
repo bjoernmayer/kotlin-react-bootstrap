@@ -77,9 +77,9 @@ class Docs : RComponent<RouteResultProps<RProps>, RState>() {
                 "layout",
                 Layout::class
             ).apply {
-                addSubCategory("Overview", "overview")
+//                addSubCategory("Overview", "overview")
                 addSubCategory("Grid", "grid")
-                addSubCategory("Utilities for layout", "utilities-for-layout")
+//                addSubCategory("Utilities for layout", "utilities-for-layout")
             },
             Category(
                 "Content",

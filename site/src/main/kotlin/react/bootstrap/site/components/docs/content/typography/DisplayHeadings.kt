@@ -1,16 +1,12 @@
 package react.bootstrap.site.components.docs.content.typography
 
-import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
 import react.bootstrap.content.toTable
-import react.bootstrap.content.typography.toDisplay1
-import react.bootstrap.content.typography.toDisplay2
-import react.bootstrap.content.typography.toDisplay3
-import react.bootstrap.content.typography.toDisplay4
+import react.bootstrap.content.typography.DisplayHeadings
+import react.bootstrap.content.typography.display
 import react.bootstrap.site.components.docs.contentTitle
 import react.bootstrap.site.components.docs.example
 import react.bootstrap.site.components.docs.kotlinExample
-import react.dom.RDOMBuilder
 import react.dom.br
 import react.dom.p
 import react.dom.span
@@ -25,8 +21,7 @@ fun RBuilder.displayHeadings() {
     p {
         +"Traditional heading elements are designed to work best in the meat of your page content. When you need a "
         +"heading to stand out, consider using a "; strong { +"display heading" }; +"—a larger, slightly more "
-        +"opinionated heading style. Keep in mind these headings are not responsive by default, but it’s possible to "
-        +"enable responsive font sizes." // FIXME insert link here
+        +"opinionated heading style."
     }
     example {
         table {
@@ -34,33 +29,31 @@ fun RBuilder.displayHeadings() {
             tbody {
                 tr {
                     td {
-                        span {
+                        display(DisplayHeadings.DISPLAY_1, RBuilder::span) {
                             +"Display 1"
-                            toDisplay1()
                         }
                     }
                 }
                 tr {
                     td {
-                        span {
+                        display(DisplayHeadings.DISPLAY_2, RBuilder::span) {
                             +"Display 2"
-                            toDisplay2()
                         }
                     }
                 }
                 tr {
                     td {
-                        span {
+                        display(DisplayHeadings.DISPLAY_3, RBuilder::span) {
                             +"Display 3"
-                            toDisplay3()
                         }
                     }
                 }
                 tr {
                     td {
                         span {
-                            +"Display 4"
-                            toDisplay4()
+                            display(DisplayHeadings.DISPLAY_4, RBuilder::span) {
+                                +"Display 4"
+                            }
                         }
                     }
                 }
@@ -68,12 +61,14 @@ fun RBuilder.displayHeadings() {
         }
     }
     kotlinExample {
-        for (x in 1..4) {
-            +"h$x {"; br { }
+        for (x in 1..3) {
+            +"display$x {"; br { }
             +"    +\"Display $x\""; br { }
-            +"    ${RDOMBuilder<CommonAttributeGroupFacade>::toDisplay1.name.replace('1', x.toChar())}()"
-            br { }
             +"}"; br { }
         }
+        +"// Or you use a more generic way"
+        +"display(${DisplayHeadings::class.simpleName}.${DisplayHeadings.DISPLAY_4.name}, RBuilder::span) {"; br { }
+        +"    +\"Display 4\""; br { }
+        +"}"; br { }
     }
 }
