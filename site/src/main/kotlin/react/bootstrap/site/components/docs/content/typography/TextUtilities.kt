@@ -8,6 +8,7 @@ fun RBuilder.textUtilities() {
     contentTitle { +"Text utilities" }
     p {
         // FIXME links
-        +"Change text alignment, transform, style, weight, and color with our text utilities and color utilities."
+        +"Change text alignment, transform, style, weight, and color with Bootstrap's text utilities and color "
+        +"utilities."
     }
 }

@@ -23,8 +23,7 @@ data class SizeOffsetPair(
 
     override fun toString(): String = "($first, $second)"
 
-    infix fun ord(that: Orderings): SizeOffsetOrderTriple =
-        SizeOffsetOrderTriple(first, second, that)
+    infix fun ord(that: Orderings): SizeOffsetOrderTriple = SizeOffsetOrderTriple(first, second, that)
 }
 
 data class SizeOrderPair(
@@ -38,6 +37,8 @@ data class SizeOrderPair(
     override fun order(): Orderings? = second.order()
 
     override fun toString(): String = "($first, $second)"
+
+    infix fun off(that: Offsets): SizeOffsetOrderTriple = SizeOffsetOrderTriple(first, that, second)
 }
 
 data class OffsetOrderPair(
@@ -51,6 +52,8 @@ data class OffsetOrderPair(
     override fun order(): Orderings? = second.order()
 
     override fun toString(): String = "($first, $second)"
+
+    infix fun sz(that: Sizes): SizeOffsetOrderTriple = SizeOffsetOrderTriple(that, first, second)
 }
 
 data class SizeOffsetOrderTriple(
@@ -105,15 +108,11 @@ enum class Sizes(internal val postfix: String) : Size {
     AUTO("_AUTO"),
     EQ("");
 
-    override fun size(): Sizes? {
-        return this
-    }
+    override fun size(): Sizes? = this
 
-    infix fun off(that: Offsets) =
-        SizeOffsetPair(this, that)
+    infix fun off(that: Offsets) = SizeOffsetPair(this, that)
 
-    infix fun ord(that: Orderings) =
-        SizeOrderPair(this, that)
+    infix fun ord(that: Orderings) = SizeOrderPair(this, that)
 }
 
 @Suppress("unused")
@@ -131,12 +130,11 @@ enum class Offsets(internal val postfix: String) : Offset {
     OFF_11("_11"),
     OFF_12("_12");
 
-    override fun offset(): Offsets? {
-        return this
-    }
+    override fun offset(): Offsets? = this
 
-    infix fun ord(that: Orderings) =
-        OffsetOrderPair(this, that)
+    infix fun sz(that: Sizes) = SizeOffsetPair(that, this)
+
+    infix fun ord(that: Orderings) = OffsetOrderPair(this, that)
 }
 
 @Suppress("unused")
@@ -157,9 +155,11 @@ enum class Orderings(internal val postfix: String) : Order {
     ORD_FIRST("_FIRST"),
     ORD_LAST("_LAST");
 
-    override fun order(): Orderings? {
-        return this
-    }
+    override fun order(): Orderings? = this
+
+    infix fun sz(that: Sizes) = SizeOrderPair(that, this)
+
+    infix fun off(that: Offsets) = OffsetOrderPair(that, this)
 }
 
 interface ColWidthProps : RProps {
@@ -289,6 +289,10 @@ fun RBuilder.col(
 
             if (xl is Size) {
                 this.xl = xl.size()
+            }
+
+            if (all !is Size && sm !is Size && md !is Size && lg !is Size && xl !is Size) {
+                this.col = Sizes.EQ
             }
         }
         attrs.offsets = ColOffsetProps.empty().apply {

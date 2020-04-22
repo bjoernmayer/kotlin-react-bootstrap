@@ -5,6 +5,7 @@ import react.bootstrap.layout.container
 import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
+import react.bootstrap.site.components.docs.ColFun
 import react.bootstrap.site.components.docs.contentTitle
 import react.bootstrap.site.components.docs.example
 import react.bootstrap.site.components.docs.exampleRow
@@ -40,20 +41,25 @@ fun RBuilder.howItWorks() {
             }
         }
     }
+    val colFun: ColFun = RBuilder::col
     kotlinExample {
-        +"container {"; br { }
-        +"    row {"; br { }
-        +"        for (x in 1..3) {"; br { }
-        +"            col(sm = ${Sizes::class.simpleName}.${Sizes.EQ.name}) {"; br { }
-        +"                +\"One of three columns\""; br { }
-        +"            }"; br { }
-        +"        }"; br { }
+        +"${RBuilder::container.name} {"; br { }
+        +"    ${RBuilder::row.name} {"; br { }
+        +"       ${colFun.name}(sm = ${Sizes::class.simpleName}.${Sizes.EQ.name}) {"; br { }
+        +"           +\"One of three columns\""; br { }
+        +"       }"; br { }
+        +"       ${colFun.name}(sm = ${Sizes::class.simpleName}.${Sizes.EQ.name}) {"; br { }
+        +"           +\"One of three columns\""; br { }
+        +"       }"; br { }
+        +"       ${colFun.name}(sm = ${Sizes::class.simpleName}.${Sizes.EQ.name}) {"; br { }
+        +"           +\"One of three columns\""; br { }
+        +"       }"; br { }
         +"    }"; br { }
         +"}"; br { }
     }
     p {
         +"The above example creates three equal-width columns on small, medium, large, and extra large devices using "
-        +"our predefined grid classes. Those columns are centered in the page with the parent "
+        +"Bootstrap's predefined grid classes. Those columns are centered in the page with the parent "
         code { +"${RBuilder::container.name} { }" }; +"."
     }
     p {

@@ -28,17 +28,24 @@ internal interface RowProps : RProps {
     var block: RDOMBuilder<DIV>.() -> Unit
 }
 
+// Todo combine column count with align items
 fun RBuilder.row(
     all: ColumnCount? = null,
     sm: ColumnCount? = null,
     md: ColumnCount? = null,
     lg: ColumnCount? = null,
     xl: ColumnCount? = null,
+    gutters: Boolean = true,
     classes: String? = null,
     block: RDOMBuilder<DIV>.() -> Unit
 ): ReactElement {
     val rowClasses = listOfNotNull(
         "${ClassNames.ROW}",
+        if (!gutters) {
+            "${ClassNames.NO_GUTTERS}"
+        } else {
+            null
+        },
         all?.let { ClassNames.valueOf("ROW_COLS_${it.value}") },
         sm?.let { ClassNames.valueOf("ROW_COLS_SM_${it.value}") },
         md?.let { ClassNames.valueOf("ROW_COLS_MD_${it.value}") },

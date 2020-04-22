@@ -28,13 +28,13 @@ dependencies {
     implementation(npm("react-router-dom", "5.1.2"))
 
     implementation("org.jetbrains:kotlin-styled:1.0.0-${Versions.KOTLIN_JS_WRAPPERS}")
-    implementation(npm("styled-components"))
-    implementation(npm("inline-style-prefixer"))
+    implementation(npm("styled-components", "5.1.0"))
+    implementation(npm("inline-style-prefixer", "6.0.0"))
 
-    implementation(npm("bootstrap"))
+//    implementation(npm("bootstrap", "4.4.1"))
 
-    implementation(npm("css-loader"))
-    implementation(npm("style-loader"))
+    implementation(npm("css-loader", "3.5.2"))
+    implementation(npm("style-loader", "1.1.4"))
 }
 
 kotlin.target.browser {

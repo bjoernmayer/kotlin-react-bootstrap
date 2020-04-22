@@ -1,14 +1,11 @@
 package react.bootstrap.site.components.docs.layout.grid
 
-import kotlinx.html.DIV
 import kotlinx.html.ThScope
 import react.RBuilder
-import react.ReactElement
-import react.bootstrap.layout.grid.ColAttribute
 import react.bootstrap.layout.grid.col
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.site.components.docs.ColFun
 import react.bootstrap.site.components.docs.contentTitle
-import react.dom.RDOMBuilder
 import react.dom.br
 import react.dom.code
 import react.dom.p
@@ -19,7 +16,6 @@ import react.dom.td
 import react.dom.th
 import react.dom.thead
 import react.dom.tr
-import kotlin.reflect.KFunction8
 
 fun RBuilder.gridOptions() {
     contentTitle { +"Grid options" }
@@ -66,11 +62,7 @@ fun RBuilder.gridOptions() {
                 td { +"960px" }
                 td { +"1140px" }
             }
-            val colFun: KFunction8<RBuilder, @ParameterName(name = "all") ColAttribute?,
-                @ParameterName(name = "sm") ColAttribute?, @ParameterName(name = "md") ColAttribute?,
-                @ParameterName(name = "lg") ColAttribute?, @ParameterName(name = "xl") ColAttribute?,
-                @ParameterName(name = "classes") String?, @ParameterName(name = "block") (RDOMBuilder<DIV>.() -> Unit),
-                ReactElement> = RBuilder::col
+            val colFun: ColFun = RBuilder::col
             tr {
                 th(scope = ThScope.row, classes = "${ClassNames.TEXT_NOWRAP}") { +"Function Argument" }
                 td { code { +"${colFun.name}(col = )" } }

@@ -2,12 +2,12 @@ package react.bootstrap.site.components.docs.content.typography
 
 import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
-import react.bootstrap.content.typography.toH1
-import react.bootstrap.content.typography.toH2
-import react.bootstrap.content.typography.toH3
-import react.bootstrap.content.typography.toH4
-import react.bootstrap.content.typography.toH5
-import react.bootstrap.content.typography.toH6
+import react.bootstrap.content.typography.h1
+import react.bootstrap.content.typography.h2
+import react.bootstrap.content.typography.h3
+import react.bootstrap.content.typography.h4
+import react.bootstrap.content.typography.h5
+import react.bootstrap.content.typography.h6
 import react.bootstrap.content.typography.toTextMuted
 import react.bootstrap.site.components.docs.contentTitle
 import react.bootstrap.site.components.docs.example
@@ -75,46 +75,25 @@ fun RBuilder.headings() {
         }
     }
     p {
-        code { +".${RDOMBuilder<CommonAttributeGroupFacade>::toH1.name}()" }; +" through "
-        code { +".${RDOMBuilder<CommonAttributeGroupFacade>::toH6.name}()" }
-        +" extension functions are also available, for when you want to match the font styling of a heading but "
-        +"cannot use the associated HTML element."
+        +"Alternative implementations for "; code { +"h1 { }" }; +" through "; code { +"h6 { }" }; +" are also"
+        +"available, for when you want to match the font styling of a heading but cannot use the associated HTML "
+        +"element."
     }
     example {
-        p {
-            +"h1. Bootstrap heading"
-            toH1()
-        }
-        p {
-            +"h2. Bootstrap heading"
-            toH2()
-        }
-        p {
-            +"h3. Bootstrap heading"
-            toH3()
-        }
-        p {
-            +"h4. Bootstrap heading"
-            toH4()
-        }
-        p {
-            +"h5. Bootstrap heading"
-            toH5()
-        }
-        p {
-            +"h6. Bootstrap heading"
-            toH6()
-        }
+        h1(RBuilder::p) { +"h1. Bootstrap heading" }
+        h2(RBuilder::p) { +"h2. Bootstrap heading" }
+        h3(RBuilder::p) { +"h3. Bootstrap heading" }
+        h4(RBuilder::p) { +"h4. Bootstrap heading" }
+        h5(RBuilder::p) { +"h5. Bootstrap heading" }
+        h6(RBuilder::p) { +"h6. Bootstrap heading" }
     }
+
     kotlinExample {
         for (x in 1..6) {
-            +"p {"; br { }
-            +"    +\"h$x. Bootstrap heading\""; br { }
-            +"    ${RDOMBuilder<CommonAttributeGroupFacade>::toH1.name.replace('1', x.toChar())}()"; br { }
-            +"}"; br { }
+            +"h$x(RBuilder::p) { +\"h$x. Bootstrap heading\" }"; br { }
         }
     }
-    contentTitle { +"Customizing headings"; toH3() }
+    contentTitle(RBuilder::h3) { +"Customizing headings" }
     p {
         +"Use the included utility classes to recreate the small secondary heading text from Bootstrap 3."
     }
