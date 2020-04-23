@@ -10,14 +10,14 @@ import react.bootstrap.site.components.docs.example
 import react.bootstrap.site.components.docs.kotlinExample
 import react.dom.br
 import react.dom.code
-import react.dom.h2
+import react.dom.h3
 import react.dom.li
 import react.dom.p
 import react.dom.strong
 
 fun RBuilder.lists() {
     contentTitle { +"Lists" }
-    contentTitle(RBuilder::h2) { +"Unstyled" }
+    contentTitle(RBuilder::h3) { +"Unstyled" }
     p {
         +"Remove the default "; code { +"list-style" }; +" and left margin on list items (immediate children only). "
         strong { +"This only applies to immediate children list items" }; +", meaning you will need to add the class "
@@ -63,11 +63,11 @@ fun RBuilder.lists() {
         +"    li { +\"Eget porttitor lorem\" }"; br { }
         +"}"
     }
-    contentTitle(RBuilder::h2) { +"Inline" }
+    contentTitle(RBuilder::h3) { +"Inline" }
     p {
         +"Remove a list’s bullets and apply some light "; code { +"margin" }; +" with a combination of two functions, "
-        code { +"\"ul(${ListStyles::class.simpleName}.${ListStyles.INLINE.name}) { }" }; +" and "
-        code { +"\"li(${ListItemStyles::class.simpleName}.${ListItemStyles.INLINE.name}) { }" }; +"."
+        code { +"ul(${ListStyles::class.simpleName}.${ListStyles.INLINE.name}) { }" }; +" and "
+        code { +"li(${ListItemStyles::class.simpleName}.${ListItemStyles.INLINE.name}) { }" }; +"."
     }
     example {
         ul(ListStyles.INLINE) {
