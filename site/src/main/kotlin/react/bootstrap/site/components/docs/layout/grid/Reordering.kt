@@ -8,6 +8,7 @@ import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.ColFun
+import react.bootstrap.site.components.docs.RowFun
 import react.bootstrap.site.components.docs.contentTitle
 import react.bootstrap.site.components.docs.example
 import react.bootstrap.site.components.docs.exampleRow
@@ -21,6 +22,7 @@ import react.dom.p
 import react.dom.strong
 
 fun RBuilder.reordering() {
+    val rowFun: RowFun = RBuilder::row
     val colFun: ColFun = RBuilder::col
     val sizesName = Sizes::class.simpleName
     val offsetsName = Offsets::class.simpleName
@@ -49,7 +51,7 @@ fun RBuilder.reordering() {
         }
         kotlinExample {
             +"${RBuilder::container.name} {"; br { }
-            +"    ${RBuilder::row.name} {"; br { }
+            +"    ${rowFun.name} {"; br { }
             +"        ${colFun.name} { +\"First in DOM, no order applied\" }"; br { }
             +"        ${colFun.name}(all = $orderingsName.${Orderings.ORD_12.name}) { +\" Second in DOM, with a larger "
             +"order\" }"; br { }
@@ -104,7 +106,7 @@ fun RBuilder.reordering() {
         }
         kotlinExample {
             +"${RBuilder::container.name} {"; br { }
-            +"    ${RBuilder::row.name} {"; br { }
+            +"    ${rowFun.name} {"; br { }
             +"        ${colFun.name}(md = $sizesName.${Sizes.SZ_4.name}) { +\"md = $sizesName.${Sizes.SZ_4.name}\" }"
             br { }
 
@@ -112,14 +114,14 @@ fun RBuilder.reordering() {
             +" = $sizesName.${Sizes.SZ_4.name} off $offsetsName.${Offsets.OFF_4.name}\" } "; br { }
             +"    }"; br { }
 
-            +"    ${RBuilder::row.name} {"; br { }
+            +"    ${rowFun.name} {"; br { }
             for (x in 1..2) {
                 +"        ${colFun.name}(md = $sizesName.${Sizes.SZ_3.name} off $offsetsName.${Offsets.OFF_3.name}) { +"
                 +"\"md = $sizesName.${Sizes.SZ_3.name} off $offsetsName.${Offsets.OFF_3.name}\" } "; br { }
             }
             +"    }"; br { }
 
-            +"    ${RBuilder::row.name} {"; br { }
+            +"    ${rowFun.name} {"; br { }
             +"        ${colFun.name}(md = $sizesName.${Sizes.SZ_6.name} off $offsetsName.${Offsets.OFF_3.name}) { +\""
             +"md = $sizesName.${Sizes.SZ_6.name} off $offsetsName.${Offsets.OFF_3.name}\" }"; br { }
             +"    }"; br { }

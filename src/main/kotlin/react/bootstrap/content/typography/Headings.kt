@@ -15,9 +15,7 @@ enum class Headings(private val classNames: ClassNames) {
     H5(ClassNames.H5),
     H6(ClassNames.H6);
 
-    override fun toString(): String {
-        return "$classNames"
-    }
+    override fun toString(): String = classNames.toString()
 }
 
 fun <T : HTMLTag> RBuilder.h(

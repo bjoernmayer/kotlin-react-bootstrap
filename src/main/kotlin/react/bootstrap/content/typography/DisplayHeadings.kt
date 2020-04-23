@@ -21,9 +21,7 @@ enum class DisplayHeadings(private val classNames: ClassNames) {
     DISPLAY_3(ClassNames.DISPLAY_3),
     DISPLAY_4(ClassNames.DISPLAY_4);
 
-    override fun toString(): String {
-        return "$classNames"
-    }
+    override fun toString(): String = classNames.toString()
 }
 
 fun RBuilder.display1(classes: String? = null, block: RDOMBuilder<H1>.() -> Unit) =

@@ -17,4 +17,5 @@ fun RBuilder.typography() =
         lead()
         inlineTextElements()
         blockquotes()
+        lists()
     }

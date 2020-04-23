@@ -29,10 +29,12 @@ fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg className: String) {
     }
 }
 
-fun String?.appendClass(className: String) = run {
+fun String?.appendClass(className: String) = appendClass(listOf(className))
+
+fun String?.appendClass(classNames: Iterable<String>) = run {
     if (this == null) {
-        className
+        classNames.joinToString(" ")
     } else {
-        "$this $className"
+        "$this ${classNames.joinToString(" ")}"
     }
 }

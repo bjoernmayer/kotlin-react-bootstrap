@@ -1,6 +1,7 @@
 package react.bootstrap.layout.grid
 
 import kotlinx.html.DIV
+import kotlinx.html.HTMLTag
 import react.RBuilder
 import react.RProps
 import react.ReactElement
@@ -38,6 +39,28 @@ fun RBuilder.row(
     gutters: Boolean = true,
     classes: String? = null,
     block: RDOMBuilder<DIV>.() -> Unit
+): ReactElement = row(
+    tagFun = RBuilder::div,
+    all = all,
+    sm = sm,
+    md = md,
+    lg = lg,
+    xl = xl,
+    gutters = gutters,
+    classes = classes,
+    block = block
+)
+
+fun <T : HTMLTag> RBuilder.row(
+    tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
+    all: ColumnCount? = null,
+    sm: ColumnCount? = null,
+    md: ColumnCount? = null,
+    lg: ColumnCount? = null,
+    xl: ColumnCount? = null,
+    gutters: Boolean = true,
+    classes: String? = null,
+    block: RDOMBuilder<T>.() -> Unit
 ): ReactElement {
     val rowClasses = listOfNotNull(
         "${ClassNames.ROW}",
@@ -53,7 +76,7 @@ fun RBuilder.row(
         xl?.let { ClassNames.valueOf("ROW_COLS_XL_${it.value}") }
     )
 
-    return div(
+    return tagFun(
         classes.appendClass(rowClasses.joinToString(" "))
     ) {
         block()

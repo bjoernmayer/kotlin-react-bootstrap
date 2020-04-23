@@ -6,6 +6,7 @@ import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.ColFun
+import react.bootstrap.site.components.docs.RowFun
 import react.bootstrap.site.components.docs.contentTitle
 import react.bootstrap.site.components.docs.example
 import react.bootstrap.site.components.docs.exampleRow
@@ -41,10 +42,11 @@ fun RBuilder.howItWorks() {
             }
         }
     }
+    val rowFun: RowFun = RBuilder::row
     val colFun: ColFun = RBuilder::col
     kotlinExample {
         +"${RBuilder::container.name} {"; br { }
-        +"    ${RBuilder::row.name} {"; br { }
+        +"    ${rowFun.name} {"; br { }
         +"       ${colFun.name}(sm = ${Sizes::class.simpleName}.${Sizes.EQ.name}) {"; br { }
         +"           +\"One of three columns\""; br { }
         +"       }"; br { }

@@ -7,6 +7,7 @@ import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.ColFun
+import react.bootstrap.site.components.docs.RowFun
 import react.bootstrap.site.components.docs.contentTitle
 import react.bootstrap.site.components.docs.example
 import react.bootstrap.site.components.docs.exampleRow
@@ -17,6 +18,7 @@ import react.dom.h3
 import react.dom.p
 
 fun RBuilder.autoLayoutColumns() {
+    val rowFun: RowFun = RBuilder::row
     val colFun: ColFun = RBuilder::col
     val enumName = Sizes::class.simpleName
     val autoName = Sizes.AUTO.name
@@ -49,12 +51,12 @@ fun RBuilder.autoLayoutColumns() {
         }
         kotlinExample {
             +"${RBuilder::container.name} {"; br { }
-            +"    ${RBuilder::row.name} {"; br { }
+            +"    ${rowFun.name} {"; br { }
             +"        ${colFun.name} { +\"1 of 2\" }"; br { }
             +"        ${colFun.name} { +\"2 of 2\" }"; br { }
             +"        // Same as: col(all = $enumName.${Sizes.EQ.name}) { +\"x of 2\" }"; br { }
             +"    }"; br { }
-            +"    ${RBuilder::row.name} {"; br { }
+            +"    ${rowFun.name} {"; br { }
             +"        ${colFun.name} { +\"1 of 3\" }"; br { }
             +"        ${colFun.name} { +\"2 of 3\" }"; br { }
             +"        ${colFun.name} { +\"3 of 3\" }"; br { }
@@ -85,12 +87,12 @@ fun RBuilder.autoLayoutColumns() {
         }
         kotlinExample {
             +"${RBuilder::container.name} {"; br { }
-            +"    ${RBuilder::row.name} {"; br { }
-            +"        ${RBuilder::row.name} { +\"1 of 3\" }"; br { }
+            +"    ${rowFun.name} {"; br { }
+            +"        ${rowFun.name} { +\"1 of 3\" }"; br { }
             +"        ${colFun.name}(all = $enumName.${Sizes.SZ_6.name}) { +\"2 of 3 (wider)\" }"; br { }
             +"        ${colFun.name} { +\"3 of 3\" }"; br { }
             +"    }"; br { }
-            +"    ${RBuilder::row.name} {"; br { }
+            +"    ${rowFun.name} {"; br { }
             +"        ${colFun.name} { +\"1 of 3\" }"; br { }
             +"        ${colFun.name}(all = $enumName.${Sizes.SZ_5.name}) { +\"2 of 3 (wider)\" }"; br { }
             +"        ${colFun.name} { +\"3 of 3\" }"; br { }
@@ -124,12 +126,12 @@ fun RBuilder.autoLayoutColumns() {
             val classNames = ClassNames::class.simpleName
             val justifyName = ClassNames.JUSTIFY_CONTENT_MD_CENTER.name
             +"${RBuilder::container.name} {"; br { }
-            +"    ${RBuilder::row.name}(classes = \"\$$classNames.$justifyName}\") {"; br { }
+            +"    ${rowFun.name}(classes = \"\$$classNames.$justifyName}\") {"; br { }
             +"        ${colFun.name}(all = $enumName.$eqName, lg = $enumName.$sz2Name) { +\"1 of 3\" }"; br { }
             +"        ${colFun.name}(md = $enumName.$autoName) { +\"Variable width content\" }"; br { }
             +"        ${colFun.name}(all = $enumName.$eqName, lg = $enumName.$sz2Name) { +\"3 of 3\" }"; br { }
             +"    }"; br { }
-            +"    ${RBuilder::row.name} {"; br { }
+            +"    ${rowFun.name} {"; br { }
             +"        ${colFun.name} { +\"1 of 3\"}"; br { }
             +"        ${colFun.name}(md = $enumName.$autoName) { +\"Variable width content\" }"; br { }
             +"        ${colFun.name}(all = $enumName.$eqName, lg = $enumName.$sz2Name) { +\"3 of 3\" }"; br { }
