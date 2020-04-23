@@ -35,6 +35,7 @@ dependencies {
 
     implementation(npm("css-loader", "3.5.2"))
     implementation(npm("style-loader", "1.1.4"))
+    implementation(npm("file-loader", "6.0.0"))
 }
 
 kotlin.target.browser {
