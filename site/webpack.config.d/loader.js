@@ -8,5 +8,8 @@ config.module.rules.push({
 
 config.module.rules.push({
     test: /\.(png|svg|jpg|gif)$/,
-    loader: 'file-loader'
+    loader: 'file-loader',
+    options: {
+        name: '[name].[ext]',
+    },
 });
