@@ -28,16 +28,3 @@ jobs:
 
     - name: Build with Gradle
       run: ./gradlew build
-
-    - name: Build Documentation
-      run: ./gradlew :site:browserProductionWebpack
-
-    - name: Deploy Documentation
-      uses: JamesIves/github-pages-deploy-action@releases/v3
-      with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: master
-        FOLDER: docs
-        TARGET_FOLDER: docs
-        COMMIT_MESSAGE: Documentation Update
-
