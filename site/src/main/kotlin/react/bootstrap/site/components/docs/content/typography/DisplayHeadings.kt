@@ -66,7 +66,7 @@ fun RBuilder.displayHeadings() {
             +"    +\"Display $x\""; br { }
             +"}"; br { }
         }
-        +"// Or you use a more generic way"; br {  }
+        +"// Or you use a more generic way"; br { }
         +"display(${DisplayHeadings::class.simpleName}.${DisplayHeadings.DISPLAY_4.name}, RBuilder::span) {"; br { }
         +"    +\"Display 4\""; br { }
         +"}"; br { }
