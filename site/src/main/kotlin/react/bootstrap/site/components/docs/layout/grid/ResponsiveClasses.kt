@@ -2,8 +2,8 @@ package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
 import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.ColAttribute
-import react.bootstrap.layout.grid.ColumnCount
+import react.bootstrap.layout.grid.ColAttributes
+import react.bootstrap.layout.grid.ColCounts
 import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
@@ -35,7 +35,7 @@ fun RBuilder.responsiveClasses() {
     contentTitle(RBuilder::h3) { +"All breakpoints" }
     p {
         +"For grids that are the same from the smallest of devices to the largest, set the "
-        code { +"all = "; em { +"${ColAttribute::class.simpleName}?" } }; +" argument. Specify a numbered "
+        code { +"all = "; em { +"${ColAttributes::class.simpleName}?" } }; +" argument. Specify a numbered "
         code { +"$enumName" }; +" enum value when you need a particularly sized column; otherwise, "
         +"feel free to not set the argument at all, which defaults to "
         code { +"all = $enumName.$eqName" }; +"."
@@ -70,7 +70,7 @@ fun RBuilder.responsiveClasses() {
     }
     contentTitle(RBuilder::h3) { +"Stacked to horizontal" }
     p {
-        +"By setting the "; code { +"sm = "; em { +"${ColAttribute::class.simpleName}?" } }; +" argument, you can "
+        +"By setting the "; code { +"sm = "; em { +"${ColAttributes::class.simpleName}?" } }; +" argument, you can "
         +"create a basic grid system that starts out stacked and becomes horizontal at the small breakpoint ("
         code { +"sm" }; +")."
     }
@@ -152,14 +152,14 @@ fun RBuilder.responsiveClasses() {
     }
     contentTitle(RBuilder::h3) { +"Row columns" }
     p {
-        +"Set the "; code { +"${ColumnCount::class.simpleName}" }; +" argument to quickly set the number of columns "
+        +"Set the "; code { +"${ColCounts::class.simpleName}" }; +" argument to quickly set the number of columns "
         +"that best render your content and layout. The row columns classes are set on the parent "
         code { +"${rowFun.name} { }" }; +" as a shortcut."
     }
     exampleRow {
         example {
             container {
-                row(all = ColumnCount.CNT_2) {
+                row(all = ColCounts.CNT_2) {
                     for (x in 1..4) {
                         col { +"Column" }
                     }
@@ -168,7 +168,7 @@ fun RBuilder.responsiveClasses() {
         }
         kotlinExample {
             +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(all = ${ColumnCount::class.simpleName}.${ColumnCount.CNT_2.name}) {"; br { }
+            +"    ${rowFun.name}(all = ${ColCounts::class.simpleName}.${ColCounts.CNT_2.name}) {"; br { }
             for (x in 1..4) {
                 +"        ${colFun.name} { +\"Column\" }"; br { }
             }
@@ -179,7 +179,7 @@ fun RBuilder.responsiveClasses() {
     exampleRow {
         example {
             container {
-                row(all = ColumnCount.CNT_3) {
+                row(all = ColCounts.CNT_3) {
                     for (x in 1..4) {
                         col { +"Column" }
                     }
@@ -188,7 +188,7 @@ fun RBuilder.responsiveClasses() {
         }
         kotlinExample {
             +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(all = ${ColumnCount::class.simpleName}.${ColumnCount.CNT_3.name}) {"; br { }
+            +"    ${rowFun.name}(all = ${ColCounts::class.simpleName}.${ColCounts.CNT_3.name}) {"; br { }
             for (x in 1..4) {
                 +"        ${colFun.name} { +\"Column\" }"; br { }
             }
@@ -199,7 +199,7 @@ fun RBuilder.responsiveClasses() {
     exampleRow {
         example {
             container {
-                row(all = ColumnCount.CNT_4) {
+                row(all = ColCounts.CNT_4) {
                     for (x in 1..4) {
                         col { +"Column" }
                     }
@@ -208,7 +208,7 @@ fun RBuilder.responsiveClasses() {
         }
         kotlinExample {
             +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(all = ${ColumnCount::class.simpleName}.${ColumnCount.CNT_4.name}) {"; br { }
+            +"    ${rowFun.name}(all = ${ColCounts::class.simpleName}.${ColCounts.CNT_4.name}) {"; br { }
             for (x in 1..4) {
                 +"        ${colFun.name} { +\"Column\" }"; br { }
             }
@@ -219,7 +219,7 @@ fun RBuilder.responsiveClasses() {
     exampleRow {
         example {
             container {
-                row(all = ColumnCount.CNT_4) {
+                row(all = ColCounts.CNT_4) {
                     for (x in 1..2) {
                         col { +"Column" }
                     }
@@ -230,7 +230,7 @@ fun RBuilder.responsiveClasses() {
         }
         kotlinExample {
             +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(all = ${ColumnCount::class.simpleName}.${ColumnCount.CNT_4.name}) {"; br { }
+            +"    ${rowFun.name}(all = ${ColCounts::class.simpleName}.${ColCounts.CNT_4.name}) {"; br { }
             for (x in 1..2) {
                 +"        ${colFun.name} { +\"Column\" }"; br { }
             }
@@ -242,7 +242,7 @@ fun RBuilder.responsiveClasses() {
     exampleRow {
         example {
             container {
-                row(all = ColumnCount.CNT_1, sm = ColumnCount.CNT_2, md = ColumnCount.CNT_4) {
+                row(all = ColCounts.CNT_1, sm = ColCounts.CNT_2, md = ColCounts.CNT_4) {
                     for (x in 1..4) {
                         col { +"Column" }
                     }
@@ -251,9 +251,9 @@ fun RBuilder.responsiveClasses() {
         }
         kotlinExample {
             +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(all = ${ColumnCount::class.simpleName}.${ColumnCount.CNT_1.name}, sm = "
-            +"${ColumnCount::class.simpleName}.${ColumnCount.CNT_2.name}, md = "
-            +"${ColumnCount::class.simpleName}.${ColumnCount.CNT_4.name}) {"; br { }
+            +"    ${rowFun.name}(all = ${ColCounts::class.simpleName}.${ColCounts.CNT_1.name}, sm = "
+            +"${ColCounts::class.simpleName}.${ColCounts.CNT_2.name}, md = "
+            +"${ColCounts::class.simpleName}.${ColCounts.CNT_4.name}) {"; br { }
             for (x in 1..4) {
                 +"        ${colFun.name} { +\"Column\" }"; br { }
             }

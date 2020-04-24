@@ -10,8 +10,8 @@ import react.RBuilder
 import react.RProps
 import react.ReactElement
 import react.bootstrap.data
-import react.bootstrap.layout.grid.ColAttribute
-import react.bootstrap.layout.grid.ColumnCount
+import react.bootstrap.layout.grid.ColAttributes
+import react.bootstrap.layout.grid.ColCounts
 import react.bootstrap.site.external.MatchProps
 import react.bootstrap.site.external.matchPath
 import react.dom.RDOMBuilder
@@ -26,11 +26,11 @@ import react.router.dom.RouteResultProps
 import kotlin.reflect.KFunction8
 import kotlin.reflect.KFunction9
 
-typealias ColFun = KFunction8<RBuilder, ColAttribute?, ColAttribute?, ColAttribute?, ColAttribute?, ColAttribute?,
+typealias ColFun = KFunction8<RBuilder, ColAttributes?, ColAttributes?, ColAttributes?, ColAttributes?, ColAttributes?,
     String?, (RDOMBuilder<DIV>.() -> Unit), ReactElement>
 
-typealias RowFun = KFunction9<RBuilder, ColumnCount?, ColumnCount?, ColumnCount?, ColumnCount?, ColumnCount?, Boolean,
-    String?, (RDOMBuilder<DIV>.() -> Unit), ReactElement>
+typealias RowFun = KFunction9<RBuilder, ColCounts?, ColCounts?, ColCounts?, ColCounts?, ColCounts?, Boolean, String?,
+    (RDOMBuilder<DIV>.() -> Unit), ReactElement>
 
 fun RBuilder.kotlinExample(block: RDOMBuilder<CODE>.() -> Unit) =
     figure("highlight") {
