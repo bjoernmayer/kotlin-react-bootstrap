@@ -10,80 +10,8 @@ import react.bootstrap.lib.ClassNames
 import react.dom.RDOMBuilder
 import react.dom.div
 
-data class SizeOffsetPair(
-    val first: Sizes,
-    val second: Offsets
-) : Size, Offset {
-    override val size: Sizes = first.size
-    override val offset: Offsets = second.offset
-    override val order: Orderings? = null
-
-    override val classNamePrefix: String? = null
-    override val classNamePostfix: String? = null
-
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${size.getClassName(breakpoints)} ${offset.getClassName(breakpoints)}"
-    }
-
-    infix fun ord(that: Orderings): SizeOffsetOrderTriple = SizeOffsetOrderTriple(first, second, that)
-}
-
-data class SizeOrderPair(
-    val first: Sizes,
-    val second: Orderings
-) : Size, Order {
-    override val size: Sizes = first.size
-    override val offset: Offsets? = null
-    override val order: Orderings = second.order
-
-    override val classNamePrefix: String? = null
-    override val classNamePostfix: String? = null
-
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${size.getClassName(breakpoints)} ${order.getClassName(breakpoints)}"
-    }
-
-    infix fun off(that: Offsets): SizeOffsetOrderTriple = SizeOffsetOrderTriple(first, that, second)
-}
-
-data class OffsetOrderPair(
-    val first: Offsets,
-    val second: Orderings
-) : Offset, Order {
-    override val size: Sizes? = null
-    override val offset: Offsets = first.offset
-    override val order: Orderings = second.order
-
-    override val classNamePrefix: String? = null
-    override val classNamePostfix: String? = null
-
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${offset.getClassName(breakpoints)} ${order.getClassName(breakpoints)}"
-    }
-
-    infix fun sz(that: Sizes): SizeOffsetOrderTriple = SizeOffsetOrderTriple(that, first, second)
-}
-
-data class SizeOffsetOrderTriple(
-    val first: Sizes,
-    val second: Offsets,
-    val third: Orderings
-) : Size, Offset, Order {
-    override val size: Sizes = first.size
-    override val offset: Offsets = second.offset
-    override val order: Orderings = third.order
-
-    override val classNamePrefix: String? = null
-    override val classNamePostfix: String? = null
-
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${size.getClassName(breakpoints)} " +
-            "${offset.getClassName(breakpoints)} " +
-            "${order.getClassName(breakpoints)}"
-    }
-}
-
-interface ColAttribute {
+// Todo: Add Alignment
+interface ColAttributes {
     val size: Sizes?
     val offset: Offsets?
     val order: Orderings?
@@ -104,7 +32,7 @@ interface ColAttribute {
     }
 }
 
-interface Size : ColAttribute {
+interface Size : ColAttributes {
     override val classNamePrefix: String?
         get() = "COL"
 
@@ -115,7 +43,7 @@ interface Size : ColAttribute {
         get() = null
 }
 
-interface Offset : ColAttribute {
+interface Offset : ColAttributes {
     override val classNamePrefix: String?
         get() = "OFFSET"
 
@@ -126,7 +54,7 @@ interface Offset : ColAttribute {
         get() = null
 }
 
-interface Order : ColAttribute {
+interface Order : ColAttributes {
     override val classNamePrefix: String?
         get() = "ORDER"
 
@@ -138,7 +66,7 @@ interface Order : ColAttribute {
 }
 
 @Suppress("unused")
-enum class Sizes(postfix: String) : Size {
+enum class Sizes(override val classNamePostfix: String) : Size {
     SZ_1("_1"),
     SZ_2("_2"),
     SZ_3("_3"),
@@ -156,15 +84,13 @@ enum class Sizes(postfix: String) : Size {
 
     override val size: Sizes = this
 
-    override val classNamePostfix: String = postfix
-
     infix fun off(that: Offsets) = SizeOffsetPair(this, that)
 
     infix fun ord(that: Orderings) = SizeOrderPair(this, that)
 }
 
 @Suppress("unused")
-enum class Offsets(postfix: String) : Offset {
+enum class Offsets(override val classNamePostfix: String) : Offset {
     OFF_1("_1"),
     OFF_2("_2"),
     OFF_3("_3"),
@@ -180,15 +106,13 @@ enum class Offsets(postfix: String) : Offset {
 
     override val offset: Offsets = this
 
-    override val classNamePostfix: String = postfix
-
     infix fun sz(that: Sizes) = SizeOffsetPair(that, this)
 
     infix fun ord(that: Orderings) = OffsetOrderPair(this, that)
 }
 
 @Suppress("unused")
-enum class Orderings(postfix: String) : Order {
+enum class Orderings(override val classNamePostfix: String) : Order {
     ORD_0("_0"),
     ORD_1("_1"),
     ORD_2("_2"),
@@ -207,11 +131,82 @@ enum class Orderings(postfix: String) : Order {
 
     override val order: Orderings = this
 
-    override val classNamePostfix: String = postfix
-
     infix fun sz(that: Sizes) = SizeOrderPair(that, this)
 
     infix fun off(that: Offsets) = OffsetOrderPair(that, this)
+}
+
+data class SizeOffsetPair(
+    val first: Sizes,
+    val second: Offsets
+) : Size, Offset {
+    override val size: Sizes = first
+    override val offset: Offsets = second
+    override val order: Orderings? = null
+
+    override val classNamePrefix: String? = null
+    override val classNamePostfix: String? = null
+
+    override fun getClassName(breakpoints: Breakpoints?): String? {
+        return "${size.getClassName(breakpoints)} ${offset.getClassName(breakpoints)}"
+    }
+
+    infix fun ord(that: Orderings): SizeOffsetOrderTriple = SizeOffsetOrderTriple(first, second, that)
+}
+
+data class SizeOrderPair(
+    val first: Sizes,
+    val second: Orderings
+) : Size, Order {
+    override val size: Sizes = first
+    override val offset: Offsets? = null
+    override val order: Orderings = second
+
+    override val classNamePrefix: String? = null
+    override val classNamePostfix: String? = null
+
+    override fun getClassName(breakpoints: Breakpoints?): String? {
+        return "${size.getClassName(breakpoints)} ${order.getClassName(breakpoints)}"
+    }
+
+    infix fun off(that: Offsets): SizeOffsetOrderTriple = SizeOffsetOrderTriple(first, that, second)
+}
+
+data class OffsetOrderPair(
+    val first: Offsets,
+    val second: Orderings
+) : Offset, Order {
+    override val size: Sizes? = null
+    override val offset: Offsets = first
+    override val order: Orderings = second
+
+    override val classNamePrefix: String? = null
+    override val classNamePostfix: String? = null
+
+    override fun getClassName(breakpoints: Breakpoints?): String? {
+        return "${offset.getClassName(breakpoints)} ${order.getClassName(breakpoints)}"
+    }
+
+    infix fun sz(that: Sizes): SizeOffsetOrderTriple = SizeOffsetOrderTriple(that, first, second)
+}
+
+data class SizeOffsetOrderTriple(
+    val first: Sizes,
+    val second: Offsets,
+    val third: Orderings
+) : Size, Offset, Order {
+    override val size: Sizes = first
+    override val offset: Offsets = second
+    override val order: Orderings = third
+
+    override val classNamePrefix: String? = null
+    override val classNamePostfix: String? = null
+
+    override fun getClassName(breakpoints: Breakpoints?): String? {
+        return "${size.getClassName(breakpoints)} " +
+            "${offset.getClassName(breakpoints)} " +
+            "${order.getClassName(breakpoints)}"
+    }
 }
 
 fun RBuilder.col(
@@ -227,11 +222,11 @@ fun <T : HTMLTag> RBuilder.col(
     col(tagFun = tagFun, all = Sizes.EQ, classes = classes, block = block)
 
 fun RBuilder.col(
-    all: ColAttribute? = null,
-    sm: ColAttribute? = null,
-    md: ColAttribute? = null,
-    lg: ColAttribute? = null,
-    xl: ColAttribute? = null,
+    all: ColAttributes? = null,
+    sm: ColAttributes? = null,
+    md: ColAttributes? = null,
+    lg: ColAttributes? = null,
+    xl: ColAttributes? = null,
     classes: String? = null,
     block: RDOMBuilder<DIV>.() -> Unit
 ): ReactElement = col(
@@ -247,11 +242,11 @@ fun RBuilder.col(
 
 fun <T : HTMLTag> RBuilder.col(
     tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
-    all: ColAttribute? = null,
-    sm: ColAttribute? = null,
-    md: ColAttribute? = null,
-    lg: ColAttribute? = null,
-    xl: ColAttribute? = null,
+    all: ColAttributes? = null,
+    sm: ColAttributes? = null,
+    md: ColAttributes? = null,
+    lg: ColAttributes? = null,
+    xl: ColAttributes? = null,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
 ): ReactElement {
@@ -275,12 +270,12 @@ fun <T : HTMLTag> RBuilder.col(
     return tagFun(classes.appendClass(colClasses), block)
 }
 
-private inline fun <reified T : ColAttribute> resolveColClasses(
-    all: ColAttribute? = null,
-    sm: ColAttribute? = null,
-    md: ColAttribute? = null,
-    lg: ColAttribute? = null,
-    xl: ColAttribute? = null
+private inline fun <reified T : ColAttributes> resolveColClasses(
+    all: ColAttributes? = null,
+    sm: ColAttributes? = null,
+    md: ColAttributes? = null,
+    lg: ColAttributes? = null,
+    xl: ColAttributes? = null
 ): Set<String> {
     val classes = mutableSetOf<String>()
 
