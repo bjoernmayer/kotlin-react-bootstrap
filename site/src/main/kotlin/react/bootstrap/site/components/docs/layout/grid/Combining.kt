@@ -8,6 +8,7 @@ import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.ColFun
+import react.bootstrap.site.components.docs.RowFun
 import react.bootstrap.site.components.docs.contentTitle
 import react.bootstrap.site.components.docs.example
 import react.bootstrap.site.components.docs.exampleRow
@@ -19,112 +20,113 @@ import react.dom.p
 
 fun RBuilder.combining() {
     val colFun: ColFun = RBuilder::col
-    val sizesName = Sizes::class.simpleName
+    val rowFun: RowFun = RBuilder::row
+    val sizes = Sizes::class.simpleName
     val sz4 = Sizes.SZ_4.name
     val szOrd = Sizes::ord.name
     val szOff = Sizes::off.name
 
-    val offsetsName = Offsets::class.simpleName
+    val offsets = Offsets::class.simpleName
     val off1 = Offsets.OFF_1.name
     val offSz = Offsets::sz.name
     val offOrd = Offsets::ord.name
 
-    val orderingsName = Orderings::class.simpleName
+    val orderings = Orderings::class.simpleName
     val ord3 = Orderings.ORD_3
     val ordSz = Orderings::sz.name
     val ordOff = Orderings::off.name
 
-    contentTitle { +"$sizesName, $offsetsName, $orderingsName" }
+    contentTitle { +"$sizes, $offsets, $orderings" }
     p {
         +"As you can see in the examples above, all three values are set using the same arguments. Custom pairing "
         +"functions are used to combine the values."
     }
-    contentTitle(RBuilder::h3) { +"$sizesName <-> $offsetsName" }
+    contentTitle(RBuilder::h3) { +"$sizes <-> $offsets" }
     p {
-        +"Combine "; code { +"$sizesName" }; +" and "; code { +"$offsetsName" }; +" by using "; code { +szOff }; +", if"
-        +" you want to combine a "; code { +"$sizesName" }; +" and an "; code { +"$offsetsName" }; +". Use "
-        code { +offSz }; +", if you want to combine an "; code { +"$offsetsName" }; +" and a "; code { +"$sizesName" }
+        +"Combine "; code { +"$sizes" }; +" and "; code { +"$offsets" }; +" by using "; code { +szOff }; +", if"
+        +" you want to combine a "; code { +"$sizes" }; +" and an "; code { +"$offsets" }; +". Use "
+        code { +offSz }; +", if you want to combine an "; code { +"$offsets" }; +" and a "; code { +"$sizes" }
     }
     exampleRow {
         example {
             container {
                 row {
-                    col(all = Sizes.SZ_4 off Offsets.OFF_1) { +"all = $sizesName.$sz4 $szOff $offsetsName.$off1" }
-                    col(all = Offsets.OFF_1 sz Sizes.SZ_4) { +"all = $offsetsName.$off1 $offSz $sizesName.$sz4" }
+                    col(all = Sizes.SZ_4 off Offsets.OFF_1) { +"all = $sizes.$sz4 $szOff $offsets.$off1" }
+                    col(all = Offsets.OFF_1 sz Sizes.SZ_4) { +"all = $offsets.$off1 $offSz $sizes.$sz4" }
                 }
             }
         }
         kotlinExample {
-            +"container {"; br { }
-            +"    row {"; br { }
-            +"        col(all = $sizesName.$sz4 $szOff $offsetsName.$off1) { +\"all = $sizesName.$sz4 $szOff "
-            +"$offsetsName.$off1\" }"; br { }
-            +"        col(all = $offsetsName.$off1 $offSz $sizesName.$sz4) { +\"all = $offsetsName.$off1 $offSz "
-            +"$sizesName.$sz4\" }"; br { }
+            +"${RBuilder::container.name} {"; br { }
+            +"    ${rowFun.name} {"; br { }
+            +"        ${colFun.name}(all = $sizes.$sz4 $szOff $offsets.$off1) { +\"all = $sizes.$sz4 $szOff "
+            +"$offsets.$off1\" }"; br { }
+            +"        ${colFun.name}(all = $offsets.$off1 $offSz $sizes.$sz4) { +\"all = $offsets.$off1 $offSz "
+            +"$sizes.$sz4\" }"; br { }
             +"    }"; br { }
             +"}"
         }
     }
 
-    contentTitle(RBuilder::h3) { +"$sizesName <-> $orderingsName" }
+    contentTitle(RBuilder::h3) { +"$sizes <-> $orderings" }
     p {
-        +"Combine "; code { +"$sizesName" }; +" and "; code { +"$orderingsName" }; +" by using "; code { +szOrd }; +", "
-        +"if you want to combine a "; code { +"$sizesName" }; +" and an "; code { +"$orderingsName" }; +". Use "
-        code { +ordSz }; +", if you want to combine an "; code { +"$orderingsName" }; +" and a "; code { +"$sizesName" }
+        +"Combine "; code { +"$sizes" }; +" and "; code { +"$orderings" }; +" by using "; code { +szOrd }; +", "
+        +"if you want to combine a "; code { +"$sizes" }; +" and an "; code { +"$orderings" }; +". Use "
+        code { +ordSz }; +", if you want to combine an "; code { +"$orderings" }; +" and a "; code { +"$sizes" }
     }
     exampleRow {
         example {
             container {
                 row {
-                    col(all = Sizes.SZ_4 ord Orderings.ORD_3) { +"all = $sizesName.$sz4 $szOrd $orderingsName.$off1" }
-                    col(all = Orderings.ORD_3 sz Sizes.SZ_4) { +"all = $orderingsName.$off1 $ordSz $sizesName.$sz4" }
+                    col(all = Sizes.SZ_4 ord Orderings.ORD_3) { +"all = $sizes.$sz4 $szOrd $orderings.$off1" }
+                    col(all = Orderings.ORD_3 sz Sizes.SZ_4) { +"all = $orderings.$off1 $ordSz $sizes.$sz4" }
                 }
             }
         }
         kotlinExample {
-            +"container {"; br { }
-            +"    row {"; br { }
-            +"        col(all = $sizesName.$sz4 $szOrd $orderingsName.$ord3) { +\"all = $sizesName.$sz4 $szOrd "
-            +"$orderingsName.$ord3\" }"; br { }
-            +"        col(all = $orderingsName.$ord3 $ordSz $sizesName.$sz4) { +\"all = $orderingsName.$ord3 $ordSz "
-            +"$sizesName.$sz4\" }"; br { }
+            +"${RBuilder::container.name} {"; br { }
+            +"    ${rowFun.name} {"; br { }
+            +"        ${colFun.name}(all = $sizes.$sz4 $szOrd $orderings.$ord3) { +\"all = $sizes.$sz4 $szOrd "
+            +"$orderings.$ord3\" }"; br { }
+            +"        ${colFun.name}(all = $orderings.$ord3 $ordSz $sizes.$sz4) { +\"all = $orderings.$ord3 $ordSz "
+            +"$sizes.$sz4\" }"; br { }
             +"    }"; br { }
             +"}"
         }
     }
 
-    contentTitle(RBuilder::h3) { +"$offsetsName <-> $orderingsName" }
+    contentTitle(RBuilder::h3) { +"$offsets <-> $orderings" }
     p {
-        +"Combine "; code { +"$offsetsName" }; +" and "; code { +"$orderingsName" }; +" by using "; code { +offOrd }
-        +", if you want to combine an "; code { +"$offsetsName" }; +" and an "; code { +"$orderingsName" }; +". Use "
-        code { +ordOff }; +", if you want to combine an "; code { +"$orderingsName" }; +" and an "
-        code { +"$offsetsName" }
+        +"Combine "; code { +"$offsets" }; +" and "; code { +"$orderings" }; +" by using "; code { +offOrd }
+        +", if you want to combine an "; code { +"$offsets" }; +" and an "; code { +"$orderings" }; +". Use "
+        code { +ordOff }; +", if you want to combine an "; code { +"$orderings" }; +" and an "
+        code { +"$offsets" }
     }
     exampleRow {
         example {
             container {
                 row {
                     col(all = Offsets.OFF_1 ord Orderings.ORD_3) {
-                        +"all = $offsetsName.$off1 $offOrd $orderingsName.$off1"
+                        +"all = $offsets.$off1 $offOrd $orderings.$off1"
                     }
                     col(all = Orderings.ORD_3 off Offsets.OFF_1) {
-                        +"all = $orderingsName.$ord3 $ordOff $offsetsName.$off1"
+                        +"all = $orderings.$ord3 $ordOff $offsets.$off1"
                     }
                 }
             }
         }
         kotlinExample {
-            +"container {"; br { }
+            +"${RBuilder::container.name} {"; br { }
             +"    row {"; br { }
-            +"        col(all = $offsetsName.$off1 $offOrd $orderingsName.$ord3) { +\"all = $offsetsName.$off1 $offOrd "
-            +"$orderingsName.$ord3\" }"; br { }
-            +"        col(all = $orderingsName.$ord3 $ordOff $offsetsName.$off1) { +\"all = $orderingsName.$ord3 "
-            +"$ordOff $offsetsName.$off1\" }"; br { }
+            +"        ${colFun.name}(all = $offsets.$off1 $offOrd $orderings.$ord3) { +\"all = $offsets.$off1 $offOrd "
+            +"$orderings.$ord3\" }"; br { }
+            +"        ${colFun.name}(all = $orderings.$ord3 $ordOff $offsets.$off1) { +\"all = $orderings.$ord3 "
+            +"$ordOff $offsets.$off1\" }"; br { }
             +"    }"; br { }
             +"}"
         }
     }
-    contentTitle(RBuilder::h3) { +"$sizesName <-> $offsetsName <-> $orderingsName" }
+    contentTitle(RBuilder::h3) { +"$sizes <-> $offsets <-> $orderings" }
     p {
         +"Use the same pairing functions to combine all three in all different orders."
     }
@@ -133,66 +135,66 @@ fun RBuilder.combining() {
             container {
                 row {
                     col(all = Sizes.SZ_4 off Offsets.OFF_1 ord Orderings.ORD_3) {
-                        +"all = $sizesName.$sz4 $szOff $offsetsName.$off1 $offOrd $orderingsName.$ord3"
+                        +"all = $sizes.$sz4 $szOff $offsets.$off1 $offOrd $orderings.$ord3"
                     }
                 }
                 row {
                     col(all = Sizes.SZ_4 ord Orderings.ORD_3 off Offsets.OFF_1) {
-                        +"all = $sizesName.$sz4 $szOrd $orderingsName.$ord3 $ordOff $offsetsName.$off1"
+                        +"all = $sizes.$sz4 $szOrd $orderings.$ord3 $ordOff $offsets.$off1"
                     }
                 }
                 row {
                     col(all = Offsets.OFF_1 sz Sizes.SZ_4 ord Orderings.ORD_3) {
-                        +"all = $offsetsName.$off1 $offSz $sizesName.$sz4 $szOrd $orderingsName.$ord3"
+                        +"all = $offsets.$off1 $offSz $sizes.$sz4 $szOrd $orderings.$ord3"
                     }
                 }
                 row {
                     col(all = Offsets.OFF_1 ord Orderings.ORD_3 sz Sizes.SZ_4) {
-                        +"all = $offsetsName.$off1 $offOrd $orderingsName.$ord3 $ordSz $sizesName.$sz4"
+                        +"all = $offsets.$off1 $offOrd $orderings.$ord3 $ordSz $sizes.$sz4"
                     }
                 }
                 row {
                     col(all = Orderings.ORD_3 sz Sizes.SZ_4 off Offsets.OFF_1) {
-                        +"all = $orderingsName.$ord3 $ordSz $sizesName.$sz4 $szOff $offsetsName.$off1"
+                        +"all = $orderings.$ord3 $ordSz $sizes.$sz4 $szOff $offsets.$off1"
                     }
                 }
                 row {
                     col(all = Orderings.ORD_3 off Offsets.OFF_1 sz Sizes.SZ_4) {
-                        +"all = $orderingsName.$ord3 $ordOff $offsetsName.$off1 $offSz $sizesName.$sz4"
+                        +"all = $orderings.$ord3 $ordOff $offsets.$off1 $offSz $sizes.$sz4"
                     }
                 }
             }
         }
         kotlinExample {
-            +"container { "; br { }
-            +"    row { "; br { }
-            +"        col(all = $sizesName.$sz4 $szOff $offsetsName.$off1 $offOrd $orderingsName.$ord3) { "; br { }
-            +"            +\"all = $sizesName.$sz4 $szOff $offsetsName.$off1 $offOrd $orderingsName.$ord3\""; br { }
+            +"${RBuilder::container.name} { "; br { }
+            +"    ${rowFun.name} { "; br { }
+            +"        ${colFun.name}(all = $sizes.$sz4 $szOff $offsets.$off1 $offOrd $orderings.$ord3) { "; br { }
+            +"            +\"all = $sizes.$sz4 $szOff $offsets.$off1 $offOrd $orderings.$ord3\""; br { }
             +"        }"; br { }
             +"    }"; br { }
-            +"    row { "; br { }
-            +"        col(all = $sizesName.$sz4 $szOrd $orderingsName.$ord3 $ordOff $offsetsName.$off1) {"; br { }
-            +"            +\"all = $sizesName.$sz4 $szOrd $orderingsName.$ord3 $ordOff $offsetsName.$off1\""; br { }
+            +"    ${rowFun.name} { "; br { }
+            +"        ${colFun.name}(all = $sizes.$sz4 $szOrd $orderings.$ord3 $ordOff $offsets.$off1) {"; br { }
+            +"            +\"all = $sizes.$sz4 $szOrd $orderings.$ord3 $ordOff $offsets.$off1\""; br { }
             +"        }"; br { }
             +"    }"; br { }
-            +"    row {"; br { }
-            +"        col($offsetsName.$off1 $offSz $sizesName.$sz4 $szOrd $orderingsName.$ord3) {"; br { }
-            +"            +\"all = $offsetsName.$off1 $offSz $sizesName.$sz4 $szOrd $orderingsName.$ord3\""; br { }
+            +"    ${rowFun.name} {"; br { }
+            +"        ${colFun.name}($offsets.$off1 $offSz $sizes.$sz4 $szOrd $orderings.$ord3) {"; br { }
+            +"            +\"all = $offsets.$off1 $offSz $sizes.$sz4 $szOrd $orderings.$ord3\""; br { }
             +"        }"; br { }
             +"    }"; br { }
-            +"    row {"; br { }
-            +"        col($offsetsName.$off1 $offOrd $orderingsName.$ord3 $ordSz $sizesName.$sz4) {"; br { }
-            +"            +\"all = $offsetsName.$off1 $offOrd $orderingsName.$ord3 $ordSz $sizesName.$sz4\""; br { }
+            +"    ${rowFun.name} {"; br { }
+            +"        ${colFun.name}($offsets.$off1 $offOrd $orderings.$ord3 $ordSz $sizes.$sz4) {"; br { }
+            +"            +\"all = $offsets.$off1 $offOrd $orderings.$ord3 $ordSz $sizes.$sz4\""; br { }
             +"        }"; br { }
             +"    }"; br { }
-            +"    row {"; br { }
-            +"        col(all = $orderingsName.$ord3 $ordSz $sizesName.$sz4 $szOff $offsetsName.$off1) {"; br { }
-            +"            +\"all = $orderingsName.$ord3 $ordSz $sizesName.$sz4 $szOff $offsetsName.$off1\""; br { }
+            +"    ${rowFun.name} {"; br { }
+            +"        ${colFun.name}(all = $orderings.$ord3 $ordSz $sizes.$sz4 $szOff $offsets.$off1) {"; br { }
+            +"            +\"all = $orderings.$ord3 $ordSz $sizes.$sz4 $szOff $offsets.$off1\""; br { }
             +"        }"; br { }
             +"    }"; br { }
-            +"    row {"; br { }
-            +"        col(all = $orderingsName.$ord3 $ordOff $offsetsName.$off1 $offSz $sizesName.$sz4) {"; br { }
-            +"            +\"all = $orderingsName.$ord3 $ordOff $offsetsName.$off1 $offSz $sizesName.$sz4\""; br { }
+            +"    ${rowFun.name} {"; br { }
+            +"        ${colFun.name}(all = $orderings.$ord3 $ordOff $offsets.$off1 $offSz $sizes.$sz4) {"; br { }
+            +"            +\"all = $orderings.$ord3 $ordOff $offsets.$off1 $offSz $sizes.$sz4\""; br { }
             +"        }"; br { }
             +"    }"; br { }
             +"}"
