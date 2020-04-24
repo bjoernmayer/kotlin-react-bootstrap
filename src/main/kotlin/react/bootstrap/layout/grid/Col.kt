@@ -148,7 +148,7 @@ data class SizeOffsetPair(
     override val classNamePostfix: String? = null
 
     override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${size.getClassName(breakpoints)} ${offset.getClassName(breakpoints)}"
+        return "${first.getClassName(breakpoints)} ${second.getClassName(breakpoints)}"
     }
 
     infix fun ord(that: Orderings): SizeOffsetOrderTriple = SizeOffsetOrderTriple(first, second, that)
@@ -166,7 +166,7 @@ data class SizeOrderPair(
     override val classNamePostfix: String? = null
 
     override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${size.getClassName(breakpoints)} ${order.getClassName(breakpoints)}"
+        return "${first.getClassName(breakpoints)} ${second.getClassName(breakpoints)}"
     }
 
     infix fun off(that: Offsets): SizeOffsetOrderTriple = SizeOffsetOrderTriple(first, that, second)
@@ -184,7 +184,7 @@ data class OffsetOrderPair(
     override val classNamePostfix: String? = null
 
     override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${offset.getClassName(breakpoints)} ${order.getClassName(breakpoints)}"
+        return "${first.getClassName(breakpoints)} ${second.getClassName(breakpoints)}"
     }
 
     infix fun sz(that: Sizes): SizeOffsetOrderTriple = SizeOffsetOrderTriple(that, first, second)
@@ -203,9 +203,9 @@ data class SizeOffsetOrderTriple(
     override val classNamePostfix: String? = null
 
     override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${size.getClassName(breakpoints)} " +
-            "${offset.getClassName(breakpoints)} " +
-            "${order.getClassName(breakpoints)}"
+        return "${first.getClassName(breakpoints)} " +
+            "${second.getClassName(breakpoints)} " +
+            "${third.getClassName(breakpoints)}"
     }
 }
 

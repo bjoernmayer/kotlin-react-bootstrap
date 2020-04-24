@@ -12,7 +12,8 @@ import react.dom.div
 
 interface RowAttributes {
     val colCount: ColCounts?
-    val itemsAlignments: ItemsAlignments?
+    val itemsX: ItemsXs?
+    val itemsY: ItemsYs?
 
     val classNamePrefix: String?
     val classNamePostfix: String?
@@ -23,7 +24,7 @@ interface RowAttributes {
         }
 
         val breakpoint = if (breakpoints !== null) {
-            "_${breakpoints.name.toUpperCase()}"
+            "${breakpoints.name.toUpperCase()}_"
         } else ""
 
         return ClassNames.valueOf("$classNamePrefix$breakpoint$classNamePostfix").toString()
@@ -34,24 +35,42 @@ interface ColCount : RowAttributes {
     override val classNamePrefix: String?
         get() = "ROW_COLS_"
     override val classNamePostfix: String?
-        get() = colCount.value.toString()
+        get() = "${colCount.value}"
 
     override val colCount: ColCounts
-    override val itemsAlignments: ItemsAlignments?
+    override val itemsX: ItemsXs?
+        get() = null
+    override val itemsY: ItemsYs?
         get() = null
 }
 
-interface ItemAlignment : RowAttributes {
+interface ItemsX : RowAttributes {
     override val classNamePrefix: String?
-        get() = "ALIGN_ITEMS_"
+        get() = "JUSTIFY_CONTENT_"
     override val classNamePostfix: String?
-        get() = "_${itemsAlignments.name}"
+        get() = itemsX.name
 
     override val colCount: ColCounts?
         get() = null
-    override val itemsAlignments: ItemsAlignments
+    override val itemsY: ItemsYs?
+        get() = null
+    override val itemsX: ItemsXs
 }
 
+interface ItemsY : RowAttributes {
+    override val classNamePrefix: String?
+        get() = "ALIGN_ITEMS_"
+    override val classNamePostfix: String?
+        get() = itemsY.name
+
+    override val colCount: ColCounts?
+        get() = null
+    override val itemsX: ItemsXs?
+        get() = null
+    override val itemsY: ItemsYs
+}
+
+@Suppress("unused")
 enum class ColCounts(internal val value: Int) : ColCount {
     CNT_1(1),
     CNT_2(2),
@@ -62,33 +81,101 @@ enum class ColCounts(internal val value: Int) : ColCount {
 
     override val colCount: ColCounts = this
 
-    infix fun align(that: ItemsAlignments): ColCountItemsAlignmentPair = ColCountItemsAlignmentPair(this, that)
+    infix fun xs(that: ItemsXs): ColCountItemXsPair = ColCountItemXsPair(this, that)
+    infix fun ys(that: ItemsYs): ColCountItemYsPair = ColCountItemYsPair(this, that)
 }
 
-enum class ItemsAlignments : ItemAlignment {
+@Suppress("unused")
+enum class ItemsXs : ItemsX {
+    AROUND,
+    BETWEEN,
+    CENTER,
+    END;
+
+    override val itemsX: ItemsXs = this
+
+    infix fun colcount(that: ColCounts): ColCountItemXsPair = ColCountItemXsPair(that, this)
+    infix fun ys(that: ItemsYs): ItemsXsItemsYsPair = ItemsXsItemsYsPair(this, that)
+}
+
+@Suppress("unused")
+enum class ItemsYs : ItemsY {
     START,
     CENTER,
     END,
     BASELINE,
     STRETCH;
 
-    override val itemsAlignments: ItemsAlignments = this
+    override val itemsY: ItemsYs = this
 
-    infix fun colcount(that: ColCounts): ColCountItemsAlignmentPair = ColCountItemsAlignmentPair(that, this)
+    infix fun colcount(that: ColCounts): ColCountItemYsPair = ColCountItemYsPair(that, this)
+    infix fun xs(that: ItemsXs): ItemsXsItemsYsPair = ItemsXsItemsYsPair(that, this)
 }
 
-data class ColCountItemsAlignmentPair(
+data class ColCountItemXsPair(
     val first: ColCounts,
-    val second: ItemsAlignments
-) : ColCount, ItemAlignment {
+    val second: ItemsXs
+) : ColCount, ItemsX {
     override val colCount: ColCounts = first
-    override val itemsAlignments: ItemsAlignments = second
+    override val itemsX: ItemsXs = second
+    override val itemsY: ItemsYs? = null
 
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
 
     override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${colCount.getClassName(breakpoints)} ${itemsAlignments.getClassName(breakpoints)}"
+        return "${first.getClassName(breakpoints)} ${second.getClassName(breakpoints)}"
+    }
+
+    infix fun ys(that: ItemsYs): ColCountItemXsItemYsTriple = ColCountItemXsItemYsTriple(first, second, that)
+}
+
+data class ColCountItemYsPair(
+    val first: ColCounts,
+    val second: ItemsYs
+) : ColCount, ItemsY {
+    override val colCount: ColCounts = first
+    override val itemsX: ItemsXs? = null
+    override val itemsY: ItemsYs = second
+
+    override val classNamePrefix: String? = null
+    override val classNamePostfix: String? = null
+
+    override fun getClassName(breakpoints: Breakpoints?): String? {
+        return "${first.getClassName(breakpoints)} ${second.getClassName(breakpoints)}"
+    }
+
+    infix fun xs(that: ItemsXs): ColCountItemXsItemYsTriple = ColCountItemXsItemYsTriple(first, that, second)
+}
+
+data class ItemsXsItemsYsPair(
+    val first: ItemsXs,
+    val second: ItemsYs
+) : ItemsX, ItemsY {
+    override val colCount: ColCounts? = null
+    override val itemsX: ItemsXs = first
+    override val itemsY: ItemsYs = second
+
+    override val classNamePrefix: String? = null
+    override val classNamePostfix: String? = null
+}
+
+data class ColCountItemXsItemYsTriple(
+    val first: ColCounts,
+    val second: ItemsXs,
+    val third: ItemsYs
+) : ColCount, ItemsX, ItemsY {
+    override val colCount: ColCounts = first
+    override val itemsX: ItemsXs = second
+    override val itemsY: ItemsYs = third
+
+    override val classNamePrefix: String? = null
+    override val classNamePostfix: String? = null
+
+    override fun getClassName(breakpoints: Breakpoints?): String? {
+        return "${first.getClassName(breakpoints)} " +
+            "${second.getClassName(breakpoints)} " +
+            "${third.getClassName(breakpoints)}"
     }
 }
 
@@ -135,7 +222,7 @@ fun <T : HTMLTag> RBuilder.row(
         resolveRowClasses<ColCount>(all, sm, md, lg, xl)
     )
     rowClasses.addAll(
-        resolveRowClasses<ItemAlignment>(all, sm, md, lg, xl)
+        resolveRowClasses<ItemsY>(all, sm, md, lg, xl)
     )
 
     return tagFun(

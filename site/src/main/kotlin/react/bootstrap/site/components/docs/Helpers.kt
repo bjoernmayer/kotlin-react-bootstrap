@@ -9,6 +9,7 @@ import kotlinx.html.P
 import react.RBuilder
 import react.RProps
 import react.ReactElement
+import react.bootstrap.appendClass
 import react.bootstrap.data
 import react.bootstrap.layout.grid.ColAttributes
 import react.bootstrap.layout.grid.ColCounts
@@ -49,8 +50,8 @@ fun RBuilder.example(block: RDOMBuilder<DIV>.() -> Unit) =
         block()
     }
 
-fun RBuilder.exampleRow(block: RDOMBuilder<DIV>.() -> Unit) =
-    div("bd-example-row") {
+fun RBuilder.exampleRow(classes: String? = null, block: RDOMBuilder<DIV>.() -> Unit) =
+    div(classes.appendClass("bd-example-row")) {
         block()
     }
 

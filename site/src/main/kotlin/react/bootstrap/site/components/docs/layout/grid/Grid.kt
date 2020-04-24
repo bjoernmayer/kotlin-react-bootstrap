@@ -16,6 +16,7 @@ fun RBuilder.grid() =
         gridOptions()
         autoLayoutColumns()
         responsiveClasses()
+        alignment()
         reordering()
         combining()
     }
