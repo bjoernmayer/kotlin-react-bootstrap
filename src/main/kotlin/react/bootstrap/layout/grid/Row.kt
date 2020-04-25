@@ -23,17 +23,19 @@ interface RowAttributes {
             return null
         }
 
-        val breakpoint = if (breakpoints !== null) {
-            "${breakpoints.name.toUpperCase()}_"
-        } else ""
+        val breakpoint: String? = if (breakpoints !== null) {
+            breakpoints.name.toUpperCase()
+        } else null
 
-        return ClassNames.valueOf("$classNamePrefix$breakpoint$classNamePostfix").toString()
+        val className = listOfNotNull(classNamePrefix, breakpoint, classNamePostfix).joinToString("_")
+
+        return ClassNames.valueOf(className).toString()
     }
 }
 
 interface ColCount : RowAttributes {
     override val classNamePrefix: String?
-        get() = "ROW_COLS_"
+        get() = "ROW_COLS"
     override val classNamePostfix: String?
         get() = "${colCount.value}"
 
@@ -46,7 +48,7 @@ interface ColCount : RowAttributes {
 
 interface ItemsX : RowAttributes {
     override val classNamePrefix: String?
-        get() = "JUSTIFY_CONTENT_"
+        get() = "JUSTIFY_CONTENT"
     override val classNamePostfix: String?
         get() = itemsX.name
 
@@ -59,7 +61,7 @@ interface ItemsX : RowAttributes {
 
 interface ItemsY : RowAttributes {
     override val classNamePrefix: String?
-        get() = "ALIGN_ITEMS_"
+        get() = "ALIGN_ITEMS"
     override val classNamePostfix: String?
         get() = itemsY.name
 
@@ -90,7 +92,8 @@ enum class ItemsXs : ItemsX {
     AROUND,
     BETWEEN,
     CENTER,
-    END;
+    END,
+    START;
 
     override val itemsX: ItemsXs = this
 
@@ -100,10 +103,10 @@ enum class ItemsXs : ItemsX {
 
 @Suppress("unused")
 enum class ItemsYs : ItemsY {
-    START,
+    BASELINE,
     CENTER,
     END,
-    BASELINE,
+    START,
     STRETCH;
 
     override val itemsY: ItemsYs = this
@@ -223,6 +226,10 @@ fun <T : HTMLTag> RBuilder.row(
     )
     rowClasses.addAll(
         resolveRowClasses<ItemsY>(all, sm, md, lg, xl)
+    )
+
+    rowClasses.addAll(
+        resolveRowClasses<ItemsX>(all, sm, md, lg, xl)
     )
 
     return tagFun(
