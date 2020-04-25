@@ -8,13 +8,13 @@ import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.about.About
-import react.bootstrap.site.components.docs.components.Components
+// import react.bootstrap.site.components.docs.about.About
+// import react.bootstrap.site.components.docs.components.Components
 import react.bootstrap.site.components.docs.content.Content
-import react.bootstrap.site.components.docs.extend.Extend
-import react.bootstrap.site.components.docs.gettingstarted.GettingStarted
+// import react.bootstrap.site.components.docs.extend.Extend
+// import react.bootstrap.site.components.docs.gettingstarted.GettingStarted
 import react.bootstrap.site.components.docs.layout.Layout
-import react.bootstrap.site.components.docs.utilities.Utilities
+// import react.bootstrap.site.components.docs.utilities.Utilities
 import react.router.dom.RouteResultProps
 import react.router.dom.redirect
 import react.router.dom.route
@@ -57,21 +57,21 @@ class Docs : RComponent<RouteResultProps<RProps>, RState>() {
 
     object Categories {
         var categories: List<Category<*>> = listOf(
-            Category(
-                "Getting started",
-                "getting-started",
-                GettingStarted::class
-            ).apply {
-                addSubCategory("Introduction", "introduction")
-                addSubCategory("Download", "download")
-                addSubCategory("Contents", "contents")
-                addSubCategory("Browsers & devices", "browsers-devices")
-                addSubCategory("JavaScript", "javascript")
-                addSubCategory("Theming", "theming")
-                addSubCategory("Build,ols", "build-tools")
-                addSubCategory("Webpack", "webpack")
-                addSubCategory("Accessibility", "accessibility")
-            },
+//            Category(
+//                "Getting started",
+//                "getting-started",
+//                GettingStarted::class
+//            ).apply {
+//                addSubCategory("Introduction", "introduction")
+//                addSubCategory("Download", "download")
+//                addSubCategory("Contents", "contents")
+//                addSubCategory("Browsers & devices", "browsers-devices")
+//                addSubCategory("JavaScript", "javascript")
+//                addSubCategory("Theming", "theming")
+//                addSubCategory("Build,ols", "build-tools")
+//                addSubCategory("Webpack", "webpack")
+//                addSubCategory("Accessibility", "accessibility")
+//            },
             Category(
                 "Layout",
                 "layout",
@@ -88,82 +88,82 @@ class Docs : RComponent<RouteResultProps<RProps>, RState>() {
             ).apply {
                 // "Reboot", "reboot",
                 addSubCategory("Typography", "typography")
-                addSubCategory("Code", "code")
-                addSubCategory("Images", "images")
-                addSubCategory("Tables", "tables")
-                addSubCategory("Figures", "figures")
-            },
-            Category(
-                "Components",
-                "components",
-                Components::class
-            ).apply {
-                addSubCategory("Alerts", "alerts")
-                addSubCategory("Badge", "badge")
-                addSubCategory("Breadcrumb", "breadcrumb")
-                addSubCategory("Buttons", "buttons")
-                addSubCategory("Button group", "button-group")
-                addSubCategory("Card", "card")
-                addSubCategory("Carousel", "carousel")
-                addSubCategory("Collapse", "collapse")
-                addSubCategory("Dropdowns", "dropdowns")
-                addSubCategory("Forms", "forms")
-                addSubCategory("Input group", "input-group")
-                addSubCategory("Jumbotron", "jumbotron")
-                addSubCategory("List group", "list-group")
-                addSubCategory("Media object", "media-object")
-                addSubCategory("Modal", "modal")
-                addSubCategory("Navs", "navs")
-                addSubCategory("Navbar", "navbar")
-                addSubCategory("Pagination", "pagination")
-                addSubCategory("Popovers", "popovers")
-                addSubCategory("Progress", "progress")
-                addSubCategory("Scrollspy", "scrollspy")
-                addSubCategory("Spinners", "spinners")
-                addSubCategory("Toasts", "toasts")
-                addSubCategory("Tooltips", "tooltips")
-            },
-            Category(
-                "Utilities",
-                "utilities",
-                Utilities::class
-            ).apply {
-                addSubCategory("Borders", "borders")
-                addSubCategory("Clearfix", "clearfix")
-                addSubCategory("Close icon", "close-icon")
-                addSubCategory("Colors", "colors")
-                addSubCategory("Display", "display")
-                addSubCategory("Embed", "embed")
-                addSubCategory("Flex", "flex")
-                addSubCategory("Float", "float")
-                addSubCategory("Image replacement", "image-replacement")
-                addSubCategory("Overflow", "overflow")
-                addSubCategory("Position", "position")
-                addSubCategory("Screen readers", "screen readers")
-                addSubCategory("Shadows", "shadows")
-                addSubCategory("Sizing", "sizing")
-                addSubCategory("Spacing", "spacing")
-                addSubCategory("Stretched link", "stretched link")
-                addSubCategory("Text", "text")
-                addSubCategory("Vertical align", "vertical align")
-                addSubCategory("Visibility", "visibility")
-                addSubCategory("Extend", "extend")
-            },
-            Category(
-                "Extend",
-                "extend",
-                Extend::class
-            ).apply {
-                addSubCategory("Approach", "approach")
-                addSubCategory("Icons", "icons")
-            },
-            Category(
-                "About",
-                "about",
-                About::class
-            ).apply {
-                addSubCategory("Overview", "overview")
-            }
+//                addSubCategory("Code", "code")
+//                addSubCategory("Images", "images")
+//                addSubCategory("Tables", "tables")
+//                addSubCategory("Figures", "figures")
+            } // ,
+//            Category(
+//                "Components",
+//                "components",
+//                Components::class
+//            ).apply {
+//                addSubCategory("Alerts", "alerts")
+//                addSubCategory("Badge", "badge")
+//                addSubCategory("Breadcrumb", "breadcrumb")
+//                addSubCategory("Buttons", "buttons")
+//                addSubCategory("Button group", "button-group")
+//                addSubCategory("Card", "card")
+//                addSubCategory("Carousel", "carousel")
+//                addSubCategory("Collapse", "collapse")
+//                addSubCategory("Dropdowns", "dropdowns")
+//                addSubCategory("Forms", "forms")
+//                addSubCategory("Input group", "input-group")
+//                addSubCategory("Jumbotron", "jumbotron")
+//                addSubCategory("List group", "list-group")
+//                addSubCategory("Media object", "media-object")
+//                addSubCategory("Modal", "modal")
+//                addSubCategory("Navs", "navs")
+//                addSubCategory("Navbar", "navbar")
+//                addSubCategory("Pagination", "pagination")
+//                addSubCategory("Popovers", "popovers")
+//                addSubCategory("Progress", "progress")
+//                addSubCategory("Scrollspy", "scrollspy")
+//                addSubCategory("Spinners", "spinners")
+//                addSubCategory("Toasts", "toasts")
+//                addSubCategory("Tooltips", "tooltips")
+//            },
+//            Category(
+//                "Utilities",
+//                "utilities",
+//                Utilities::class
+//            ).apply {
+//                addSubCategory("Borders", "borders")
+//                addSubCategory("Clearfix", "clearfix")
+//                addSubCategory("Close icon", "close-icon")
+//                addSubCategory("Colors", "colors")
+//                addSubCategory("Display", "display")
+//                addSubCategory("Embed", "embed")
+//                addSubCategory("Flex", "flex")
+//                addSubCategory("Float", "float")
+//                addSubCategory("Image replacement", "image-replacement")
+//                addSubCategory("Overflow", "overflow")
+//                addSubCategory("Position", "position")
+//                addSubCategory("Screen readers", "screen readers")
+//                addSubCategory("Shadows", "shadows")
+//                addSubCategory("Sizing", "sizing")
+//                addSubCategory("Spacing", "spacing")
+//                addSubCategory("Stretched link", "stretched link")
+//                addSubCategory("Text", "text")
+//                addSubCategory("Vertical align", "vertical align")
+//                addSubCategory("Visibility", "visibility")
+//                addSubCategory("Extend", "extend")
+//            },
+//            Category(
+//                "Extend",
+//                "extend",
+//                Extend::class
+//            ).apply {
+//                addSubCategory("Approach", "approach")
+//                addSubCategory("Icons", "icons")
+//            },
+//            Category(
+//                "About",
+//                "about",
+//                About::class
+//            ).apply {
+//                addSubCategory("Overview", "overview")
+//            }
         )
     }
 }
