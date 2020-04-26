@@ -2,15 +2,15 @@ package react.bootstrap.site.components.docs.content.typography
 
 import react.RBuilder
 import react.bootstrap.content.typography.lead
-import react.bootstrap.site.components.docs.contentTitle
-import react.bootstrap.site.components.docs.example
-import react.bootstrap.site.components.docs.kotlinExample
+import react.bootstrap.site.components.docs.fixings.contentTitle
+import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.kotlinExample
 import react.dom.br
 import react.dom.code
 import react.dom.p
 
 fun RBuilder.lead() {
-    contentTitle { +"Lead" }
+    contentTitle("Lead") { }
     p {
         +"Make a paragraph stand out by using "; code { +"${RBuilder::lead.name} { }" }; +" instead."
     }

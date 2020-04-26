@@ -5,12 +5,14 @@ import react.bootstrap.layout.container
 import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
-import react.bootstrap.site.components.docs.ColFun
-import react.bootstrap.site.components.docs.RowFun
-import react.bootstrap.site.components.docs.contentTitle
-import react.bootstrap.site.components.docs.example
-import react.bootstrap.site.components.docs.exampleRow
-import react.bootstrap.site.components.docs.kotlinExample
+import react.bootstrap.site.components.docs.colFun
+import react.bootstrap.site.components.docs.containerFun
+import react.bootstrap.site.components.docs.fixings.contentTitle
+import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.exampleRow
+import react.bootstrap.site.components.docs.fixings.kotlinExample
+import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.components.docs.rowFun
 import react.dom.a
 import react.dom.br
 import react.dom.code
@@ -18,7 +20,7 @@ import react.dom.p
 import react.dom.strong
 
 fun RBuilder.howItWorks() {
-    contentTitle { +"How it works" }
+    contentTitle("How it works") { }
     p {
         +"Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s "
         +"built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid "
@@ -42,18 +44,16 @@ fun RBuilder.howItWorks() {
             }
         }
     }
-    val rowFun: RowFun = RBuilder::row
-    val colFun: ColFun = RBuilder::col
     kotlinExample {
-        +"${RBuilder::container.name} {"; br { }
-        +"    ${rowFun.name} {"; br { }
-        +"       ${colFun.name}(sm = ${Sizes::class.simpleName}.${Sizes.EQ.name}) {"; br { }
+        +"$containerFun {"; br { }
+        +"    $rowFun {"; br { }
+        +"       $colFun(sm = ${Sizes.EQ.kt}) {"; br { }
         +"           +\"One of three columns\""; br { }
         +"       }"; br { }
-        +"       ${colFun.name}(sm = ${Sizes::class.simpleName}.${Sizes.EQ.name}) {"; br { }
+        +"       $colFun(sm = ${Sizes.EQ.kt}) {"; br { }
         +"           +\"One of three columns\""; br { }
         +"       }"; br { }
-        +"       ${colFun.name}(sm = ${Sizes::class.simpleName}.${Sizes.EQ.name}) {"; br { }
+        +"       $colFun(sm = ${Sizes.EQ.kt}) {"; br { }
         +"           +\"One of three columns\""; br { }
         +"       }"; br { }
         +"    }"; br { }
@@ -62,13 +62,11 @@ fun RBuilder.howItWorks() {
     p {
         +"The above example creates three equal-width columns on small, medium, large, and extra large devices using "
         +"Bootstrap's predefined grid classes. Those columns are centered in the page with the parent "
-        code { +"${RBuilder::container.name} { }" }; +"."
+        code { +"$containerFun { }" }; +"."
     }
     p {
         +"Be aware of the limitations and "
-        a("https://github.com/philipwalton/flexbugs") {
-            +"bugs around flexbox"
-        }; +", like the "
+        a("https://github.com/philipwalton/flexbugs") { +"bugs around flexbox" }; +", like the "
         a("https://github.com/philipwalton/flexbugs#flexbug-9") {
             +"inability to use some HTML elements as flex containers"
         }; +"."

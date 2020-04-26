@@ -8,9 +8,9 @@ import react.bootstrap.content.typography.h4
 import react.bootstrap.content.typography.h5
 import react.bootstrap.content.typography.h6
 import react.bootstrap.content.typography.muted
-import react.bootstrap.site.components.docs.contentTitle
-import react.bootstrap.site.components.docs.example
-import react.bootstrap.site.components.docs.kotlinExample
+import react.bootstrap.site.components.docs.fixings.contentTitle
+import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.kotlinExample
 import react.dom.br
 import react.dom.code
 import react.dom.h3
@@ -18,7 +18,7 @@ import react.dom.p
 import react.dom.small
 
 fun RBuilder.headings() {
-    contentTitle { +"Headings" }
+    contentTitle("Headings") { }
     p {
         +"Alternative implementations for "; code { +"h1 { }" }; +" through "; code { +"h6 { }" }; +" are provided,"
         +" for when you want to match the font styling of a heading but cannot use the associated HTML element."
@@ -37,7 +37,7 @@ fun RBuilder.headings() {
             +"h$x(RBuilder::p) { +\"h$x. Bootstrap heading\" }"; br { }
         }
     }
-    contentTitle(RBuilder::h3) { +"Customizing headings" }
+    contentTitle(RBuilder::h3, "Customizing headings") { }
     p {
         +"You can recreate the small secondary heading text from Bootstrap 3."
     }

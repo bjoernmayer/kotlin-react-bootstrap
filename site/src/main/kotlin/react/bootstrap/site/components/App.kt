@@ -5,7 +5,7 @@ import react.RProps
 import react.bootstrap.layout.Viscosities
 import react.bootstrap.layout.container
 import react.bootstrap.site.components.docs.Docs
-import react.bootstrap.site.components.docs.from
+import react.bootstrap.site.from
 import react.bootstrap.site.external.BrowserRouterProps
 import react.child
 import react.dom.div

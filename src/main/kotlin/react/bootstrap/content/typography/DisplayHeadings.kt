@@ -24,16 +24,20 @@ enum class DisplayHeadings(private val classNames: ClassNames) {
     override fun toString(): String = classNames.toString()
 }
 
-fun RBuilder.display1(classes: String? = null, block: RDOMBuilder<H1>.() -> Unit) =
+@Suppress("unused")
+fun RBuilder.display1(classes: String? = null, block: RDOMBuilder<H1>.() -> Unit): ReactElement =
     h1(classes.appendClass("${ClassNames.DISPLAY_1}"), block)
 
-fun RBuilder.display2(classes: String? = null, block: RDOMBuilder<H2>.() -> Unit) =
+@Suppress("unused")
+fun RBuilder.display2(classes: String? = null, block: RDOMBuilder<H2>.() -> Unit): ReactElement =
     h2(classes.appendClass("${ClassNames.DISPLAY_2}"), block)
 
-fun RBuilder.display3(classes: String? = null, block: RDOMBuilder<H3>.() -> Unit) =
+@Suppress("unused")
+fun RBuilder.display3(classes: String? = null, block: RDOMBuilder<H3>.() -> Unit): ReactElement =
     h3(classes.appendClass("${ClassNames.DISPLAY_3}"), block)
 
-fun RBuilder.display4(classes: String? = null, block: RDOMBuilder<H4>.() -> Unit) =
+@Suppress("unused")
+fun RBuilder.display4(classes: String? = null, block: RDOMBuilder<H4>.() -> Unit): ReactElement =
     h4(classes.appendClass("${ClassNames.DISPLAY_4}"), block)
 
 fun <T : HTMLTag> RBuilder.display(
@@ -41,4 +45,4 @@ fun <T : HTMLTag> RBuilder.display(
     tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
-) = tagFun(classes.appendClass(variant.toString()), block)
+): ReactElement = tagFun(classes.appendClass(variant.toString()), block)

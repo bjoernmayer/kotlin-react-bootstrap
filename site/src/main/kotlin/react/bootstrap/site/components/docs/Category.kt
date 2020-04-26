@@ -2,6 +2,7 @@ package react.bootstrap.site.components.docs
 
 import react.RComponent
 import react.RProps
+import react.bootstrap.site.MatchProps
 import react.bootstrap.site.components.PATH_DOCS
 import react.router.dom.RouteResultProps
 import kotlin.reflect.KClass

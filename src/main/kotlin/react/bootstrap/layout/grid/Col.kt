@@ -5,33 +5,20 @@ import kotlinx.html.HTMLTag
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.bootstrap.lib.Breakpoints
+import react.bootstrap.lib.AttributePair
+import react.bootstrap.lib.AttributeQuadruple
+import react.bootstrap.lib.AttributeTriple
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.CombinedAttributes
+import react.bootstrap.lib.resolveAttributeClassNames
 import react.dom.RDOMBuilder
 import react.dom.div
 
-interface ColAttributes {
+interface ColAttributes : CombinedAttributes {
     val size: Sizes?
     val offset: Offsets?
     val order: Orderings?
     val alignment: Alignments?
-
-    val classNamePrefix: String?
-    val classNamePostfix: String?
-
-    fun getClassName(breakpoints: Breakpoints?): String? {
-        if (classNamePrefix == null && classNamePostfix == null) {
-            return null
-        }
-
-        val breakpoint: String? = if (breakpoints !== null) {
-            breakpoints.name.toUpperCase()
-        } else null
-
-        val className = listOfNotNull(classNamePrefix, breakpoint, classNamePostfix).joinToString("_")
-
-        return ClassNames.valueOf(className).toString()
-    }
 }
 
 interface Size : ColAttributes {
@@ -186,9 +173,9 @@ enum class Alignments : Alignment {
 }
 
 data class SizeOffsetPair(
-    val first: Sizes,
-    val second: Offsets
-) : Size, Offset {
+    override val first: Sizes,
+    override val second: Offsets
+) : Size, Offset, AttributePair<Size, Offset> {
     override val size: Sizes = first
     override val offset: Offsets = second
     override val order: Orderings? = null
@@ -197,19 +184,15 @@ data class SizeOffsetPair(
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
 
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} ${second.getClassName(breakpoints)}"
-    }
-
     infix fun ord(that: Orderings): SizeOffsetOrderTriple = SizeOffsetOrderTriple(first, second, that)
 
     infix fun align(that: Alignments): SizeOffsetAlignmentTriple = SizeOffsetAlignmentTriple(first, second, that)
 }
 
 data class SizeOrderPair(
-    val first: Sizes,
-    val second: Orderings
-) : Size, Order {
+    override val first: Sizes,
+    override val second: Orderings
+) : Size, Order, AttributePair<Size, Order> {
     override val size: Sizes = first
     override val offset: Offsets? = null
     override val order: Orderings = second
@@ -217,10 +200,6 @@ data class SizeOrderPair(
 
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
-
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} ${second.getClassName(breakpoints)}"
-    }
 
     infix fun off(that: Offsets): SizeOffsetOrderTriple = SizeOffsetOrderTriple(first, that, second)
 
@@ -228,9 +207,9 @@ data class SizeOrderPair(
 }
 
 data class SizeAlignmentPair(
-    val first: Sizes,
-    val second: Alignments
-) : Size, Alignment {
+    override val first: Sizes,
+    override val second: Alignments
+) : Size, Alignment, AttributePair<Size, Alignment> {
     override val size: Sizes = first
     override val offset: Offsets? = null
     override val order: Orderings? = null
@@ -239,19 +218,15 @@ data class SizeAlignmentPair(
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
 
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} ${second.getClassName(breakpoints)}"
-    }
-
     infix fun off(that: Offsets): SizeOffsetAlignmentTriple = SizeOffsetAlignmentTriple(first, that, second)
 
     infix fun ord(that: Orderings): SizeOrderAlignmentTriple = SizeOrderAlignmentTriple(first, that, second)
 }
 
 data class OffsetOrderPair(
-    val first: Offsets,
-    val second: Orderings
-) : Offset, Order {
+    override val first: Offsets,
+    override val second: Orderings
+) : Offset, Order, AttributePair<Offset, Order> {
     override val size: Sizes? = null
     override val offset: Offsets = first
     override val order: Orderings = second
@@ -260,19 +235,15 @@ data class OffsetOrderPair(
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
 
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} ${second.getClassName(breakpoints)}"
-    }
-
     infix fun sz(that: Sizes): SizeOffsetOrderTriple = SizeOffsetOrderTriple(that, first, second)
 
     infix fun align(that: Alignments): OffsetOrderAlignmentTriple = OffsetOrderAlignmentTriple(first, second, that)
 }
 
 data class OffsetAlignmentPair(
-    val first: Offsets,
-    val second: Alignments
-) : Offset, Alignment {
+    override val first: Offsets,
+    override val second: Alignments
+) : Offset, Alignment, AttributePair<Offset, Alignment> {
     override val size: Sizes? = null
     override val offset: Offsets = first
     override val order: Orderings? = null
@@ -281,19 +252,15 @@ data class OffsetAlignmentPair(
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
 
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} ${second.getClassName(breakpoints)}"
-    }
-
     infix fun sz(that: Sizes): SizeOffsetAlignmentTriple = SizeOffsetAlignmentTriple(that, first, second)
 
     infix fun ord(that: Orderings): OffsetOrderAlignmentTriple = OffsetOrderAlignmentTriple(first, that, second)
 }
 
 data class OrderAlignmentPair(
-    val first: Orderings,
-    val second: Alignments
-) : Order, Alignment {
+    override val first: Orderings,
+    override val second: Alignments
+) : Order, Alignment, AttributePair<Order, Alignment> {
     override val size: Sizes? = null
     override val offset: Offsets? = null
     override val order: Orderings = first
@@ -302,20 +269,16 @@ data class OrderAlignmentPair(
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
 
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} ${second.getClassName(breakpoints)}"
-    }
-
     infix fun sz(that: Sizes): SizeOrderAlignmentTriple = SizeOrderAlignmentTriple(that, first, second)
 
     infix fun off(that: Offsets): OffsetOrderAlignmentTriple = OffsetOrderAlignmentTriple(that, first, second)
 }
 
 data class SizeOffsetOrderTriple(
-    val first: Sizes,
-    val second: Offsets,
-    val third: Orderings
-) : Size, Offset, Order {
+    override val first: Sizes,
+    override val second: Offsets,
+    override val third: Orderings
+) : Size, Offset, Order, AttributeTriple<Size, Offset, Order> {
     override val size: Sizes = first
     override val offset: Offsets = second
     override val order: Orderings = third
@@ -324,21 +287,15 @@ data class SizeOffsetOrderTriple(
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
 
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} " +
-            "${second.getClassName(breakpoints)} " +
-            "${third.getClassName(breakpoints)}"
-    }
-
     infix fun align(that: Alignments): SizeOffsetOrderAlignmentQuadruple =
         SizeOffsetOrderAlignmentQuadruple(first, second, third, that)
 }
 
 data class SizeOffsetAlignmentTriple(
-    val first: Sizes,
-    val second: Offsets,
-    val third: Alignments
-) : Size, Offset, Alignment {
+    override val first: Sizes,
+    override val second: Offsets,
+    override val third: Alignments
+) : Size, Offset, Alignment, AttributeTriple<Size, Offset, Alignment> {
     override val size: Sizes = first
     override val offset: Offsets = second
     override val order: Orderings? = null
@@ -347,21 +304,15 @@ data class SizeOffsetAlignmentTriple(
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
 
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} " +
-            "${second.getClassName(breakpoints)} " +
-            "${third.getClassName(breakpoints)}"
-    }
-
     infix fun ord(that: Orderings): SizeOffsetOrderAlignmentQuadruple =
         SizeOffsetOrderAlignmentQuadruple(first, second, that, third)
 }
 
 data class SizeOrderAlignmentTriple(
-    val first: Sizes,
-    val second: Orderings,
-    val third: Alignments
-) : Size, Order, Alignment {
+    override val first: Sizes,
+    override val second: Orderings,
+    override val third: Alignments
+) : Size, Order, Alignment, AttributeTriple<Size, Order, Alignment> {
     override val size: Sizes = first
     override val offset: Offsets? = null
     override val order: Orderings = second
@@ -370,21 +321,15 @@ data class SizeOrderAlignmentTriple(
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
 
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} " +
-            "${second.getClassName(breakpoints)} " +
-            "${third.getClassName(breakpoints)}"
-    }
-
     infix fun off(that: Offsets): SizeOffsetOrderAlignmentQuadruple =
         SizeOffsetOrderAlignmentQuadruple(first, that, second, third)
 }
 
 data class OffsetOrderAlignmentTriple(
-    val first: Offsets,
-    val second: Orderings,
-    val third: Alignments
-) : Offset, Order, Alignment {
+    override val first: Offsets,
+    override val second: Orderings,
+    override val third: Alignments
+) : Offset, Order, Alignment, AttributeTriple<Offset, Order, Alignment> {
     override val size: Sizes? = null
     override val offset: Offsets = first
     override val order: Orderings = second
@@ -393,22 +338,16 @@ data class OffsetOrderAlignmentTriple(
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
 
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} " +
-            "${second.getClassName(breakpoints)} " +
-            "${third.getClassName(breakpoints)}"
-    }
-
     infix fun sz(that: Sizes): SizeOffsetOrderAlignmentQuadruple =
         SizeOffsetOrderAlignmentQuadruple(that, first, second, third)
 }
 
 data class SizeOffsetOrderAlignmentQuadruple(
-    val first: Sizes,
-    val second: Offsets,
-    val third: Orderings,
-    val fourth: Alignments
-) : Size, Offset, Order, Alignment {
+    override val first: Sizes,
+    override val second: Offsets,
+    override val third: Orderings,
+    override val fourth: Alignments
+) : Size, Offset, Order, Alignment, AttributeQuadruple<Size, Offset, Order, Alignment> {
     override val size: Sizes = first
     override val offset: Offsets = second
     override val order: Orderings = third
@@ -416,13 +355,6 @@ data class SizeOffsetOrderAlignmentQuadruple(
 
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
-
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} " +
-            "${second.getClassName(breakpoints)} " +
-            "${third.getClassName(breakpoints)} " +
-            "${fourth.getClassName(breakpoints)}"
-    }
 }
 
 fun RBuilder.col(
@@ -467,56 +399,24 @@ fun <T : HTMLTag> RBuilder.col(
     block: RDOMBuilder<T>.() -> Unit
 ): ReactElement {
     // Pairs and Triples match in multiple of those. That's why we need a Set
-    val colClasses = mutableSetOf<String>()
+    val colClasses = mutableSetOf<ClassNames>()
 
     if (all?.size == null && sm?.size == null && md?.size == null && lg?.size == null && xl?.size == null) {
-        Sizes.EQ.getClassName(null)?.let(colClasses::add)
+        Sizes.EQ.getClassNames(null).let(colClasses::addAll)
     }
 
     colClasses.addAll(
-        resolveColClasses<Size>(all, sm, md, lg, xl)
+        resolveAttributeClassNames<Size>(all, sm, md, lg, xl)
     )
     colClasses.addAll(
-        resolveColClasses<Offset>(all, sm, md, lg, xl)
+        resolveAttributeClassNames<Offset>(all, sm, md, lg, xl)
     )
     colClasses.addAll(
-        resolveColClasses<Order>(all, sm, md, lg, xl)
+        resolveAttributeClassNames<Order>(all, sm, md, lg, xl)
     )
     colClasses.addAll(
-        resolveColClasses<Alignment>(all, sm, md, lg, xl)
+        resolveAttributeClassNames<Alignment>(all, sm, md, lg, xl)
     )
 
     return tagFun(classes.appendClass(colClasses), block)
-}
-
-private inline fun <reified T : ColAttributes> resolveColClasses(
-    all: ColAttributes? = null,
-    sm: ColAttributes? = null,
-    md: ColAttributes? = null,
-    lg: ColAttributes? = null,
-    xl: ColAttributes? = null
-): Set<String> {
-    val classes = mutableSetOf<String>()
-
-    if (all is T) {
-        all.getClassName(null)?.let(classes::add)
-    }
-
-    if (sm is T) {
-        sm.getClassName(Breakpoints.SM)?.let(classes::add)
-    }
-
-    if (md is T) {
-        md.getClassName(Breakpoints.MD)?.let(classes::add)
-    }
-
-    if (lg is T) {
-        lg.getClassName(Breakpoints.LG)?.let(classes::add)
-    }
-
-    if (xl is T) {
-        xl.getClassName(Breakpoints.XL)?.let(classes::add)
-    }
-
-    return classes
 }

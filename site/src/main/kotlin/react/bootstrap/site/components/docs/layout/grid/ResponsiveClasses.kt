@@ -7,12 +7,14 @@ import react.bootstrap.layout.grid.ColCounts
 import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
-import react.bootstrap.site.components.docs.ColFun
-import react.bootstrap.site.components.docs.RowFun
-import react.bootstrap.site.components.docs.contentTitle
-import react.bootstrap.site.components.docs.example
-import react.bootstrap.site.components.docs.exampleRow
-import react.bootstrap.site.components.docs.kotlinExample
+import react.bootstrap.site.components.docs.colFun
+import react.bootstrap.site.components.docs.containerFun
+import react.bootstrap.site.components.docs.fixings.contentTitle
+import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.exampleRow
+import react.bootstrap.site.components.docs.fixings.kotlinExample
+import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.components.docs.rowFun
 import react.dom.br
 import react.dom.code
 import react.dom.em
@@ -20,55 +22,48 @@ import react.dom.h3
 import react.dom.p
 
 fun RBuilder.responsiveClasses() {
-    val rowFun: RowFun = RBuilder::row
-    val colFun: ColFun = RBuilder::col
-    val enumName = Sizes::class.simpleName
-    val eqName = Sizes.EQ.name
-    val sz8Name = Sizes.SZ_8.name
-    val sz6Name = Sizes.SZ_6.name
-    val sz4Name = Sizes.SZ_4.name
-    contentTitle { +"Responsive classes" }
+    contentTitle("Responsive classes") { }
     p {
         +"Bootstrap’s grid includes five tiers of predefined classes for building complex responsive layouts. Customize"
         +"the size of your columns on extra small, small, medium, large, or extra large devices however you see fit."
     }
-    contentTitle(RBuilder::h3) { +"All breakpoints" }
+    contentTitle(RBuilder::h3, "All breakpoints") { }
     p {
         +"For grids that are the same from the smallest of devices to the largest, set the "
         code { +"all = "; em { +"${ColAttributes::class.simpleName}?" } }; +" argument. Specify a numbered "
-        code { +"$enumName" }; +" enum value when you need a particularly sized column; otherwise, "
+        code { +"${Sizes::class.simpleName}" }; +" enum value when you need a particularly sized column; otherwise, "
         +"feel free to not set the argument at all, which defaults to "
-        code { +"all = $enumName.$eqName" }; +"."
+        code { +"all = ${Sizes.EQ.kt}" }; +"."
     }
     exampleRow {
         example {
             container {
                 row {
                     for (x in 1..4) {
-                        col { em { +"all = $enumName.$eqName" } }
+                        col { em { +"all = ${Sizes.EQ.kt}" } }
                     }
                 }
                 row {
-                    col(all = Sizes.SZ_8) { +"all = $enumName.$sz8Name" }
-                    col(all = Sizes.SZ_4) { +"all = $enumName.$sz4Name" }
+                    col(all = Sizes.SZ_8) { +"all = ${Sizes.SZ_8.kt}" }
+                    col(all = Sizes.SZ_4) { +"all = ${Sizes.SZ_4.kt}" }
                 }
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name} {"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun {"; br { }
             for (x in 1..4) {
-                +"        ${colFun.name} { em { +\"all = $enumName.$eqName\" } }"; br { }
+                +"        $colFun { em { +\"all = ${Sizes.EQ.kt}\" } }"; br { }
             }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = $enumName.$sz8Name) { +\"all = $enumName.$sz8Name\" }"; br { }
-            +"        ${colFun.name}(all = $enumName.$sz4Name) { +\"all = $enumName.$sz4Name\" }"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = ${Sizes.SZ_8.kt}) { +\"all = ${Sizes.SZ_8.kt}\" }"; br { }
+            +"        $colFun(all = ${Sizes.SZ_4.kt}) { +\"all = ${Sizes.SZ_4.kt}\" }"; br { }
             +"    }"; br { }
             +"}"
         }
     }
-    contentTitle(RBuilder::h3) { +"Stacked to horizontal" }
+    contentTitle(RBuilder::h3, "Stacked to horizontal") { }
     p {
         +"By setting the "; code { +"sm = "; em { +"${ColAttributes::class.simpleName}?" } }; +" argument, you can "
         +"create a basic grid system that starts out stacked and becomes horizontal at the small breakpoint ("
@@ -78,31 +73,31 @@ fun RBuilder.responsiveClasses() {
         example {
             container {
                 row {
-                    col(sm = Sizes.SZ_8) { +"sm = $enumName.$sz8Name" }
-                    col(sm = Sizes.SZ_4) { +"sm = $enumName.$sz4Name" }
+                    col(sm = Sizes.SZ_8) { +"sm = ${Sizes.SZ_8.kt}" }
+                    col(sm = Sizes.SZ_4) { +"sm = ${Sizes.SZ_4.kt}" }
                 }
                 row {
                     for (x in 1..3) {
-                        col(sm = Sizes.EQ) { +"sm = $enumName.$eqName" }
+                        col(sm = Sizes.EQ) { +"sm = ${Sizes.EQ.kt}" }
                     }
                 }
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(sm = $enumName.$sz8Name) { +\"sm = $enumName.$sz8Name\" }"; br { }
-            +"        ${colFun.name}(sm = $enumName.$sz4Name) { +\"sm = $enumName.$sz4Name\" }"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(sm = ${Sizes.SZ_8.kt}) { +\"sm = ${Sizes.SZ_8.kt}\" }"; br { }
+            +"        $colFun(sm = ${Sizes.SZ_4.kt}) { +\"sm = ${Sizes.SZ_4.kt}\" }"; br { }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
+            +"    $rowFun {"; br { }
             for (x in 1..3) {
-                +"        ${colFun.name}(sm = $enumName.$eqName) { +\"sm = $enumName.$eqName\" }"; br { }
+                +"        $colFun(sm = ${Sizes.EQ.kt}) { +\"sm = ${Sizes.EQ.kt}\" }"; br { }
             }
             +"    }"; br { }
             +"}"
         }
     }
-    contentTitle(RBuilder::h3) { +"Mix and match" }
+    contentTitle(RBuilder::h3, "Mix and match") { }
     p {
         +"Don’t want your columns to simply stack in some grid tiers? Use a combination of different classes for each "
         +"tier as needed. See the example below for a better idea of how it all works."
@@ -111,50 +106,50 @@ fun RBuilder.responsiveClasses() {
         example {
             container {
                 row {
-                    col(md = Sizes.SZ_8) { +"md = $enumName.$sz8Name" }
-                    col(all = Sizes.SZ_6, md = Sizes.SZ_4) { +"all = $enumName.$sz6Name, md = $enumName.$sz4Name" }
+                    col(md = Sizes.SZ_8) { +"md = ${Sizes.SZ_8.kt}" }
+                    col(all = Sizes.SZ_6, md = Sizes.SZ_4) { +"all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}" }
                 }
                 row {
                     for (x in 1..3) {
-                        col(all = Sizes.SZ_6, md = Sizes.SZ_4) { +"all = $enumName.$sz6Name, md = $enumName.$sz4Name" }
+                        col(all = Sizes.SZ_6, md = Sizes.SZ_4) { +"all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}" }
                     }
                 }
                 row {
                     for (x in 1..2) {
-                        col(all = Sizes.SZ_6) { +"all = $enumName.$sz6Name" }
+                        col(all = Sizes.SZ_6) { +"all = ${Sizes.SZ_6.kt}" }
                     }
                 }
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name} {"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun {"; br { }
             +"        // Stack the columns on mobile by making one full-width and the other half-width"; br { }
-            +"        ${colFun.name}(md = $enumName.$sz8Name) { +\"md = $enumName.$sz8Name\" }"; br { }
-            +"        ${colFun.name}(all = $enumName.$sz6Name, md = $enumName.$sz4Name) { +\"all = $enumName.$sz6Name, "
-            +"md = $enumName.$sz4Name\" }"; br { }
+            +"        $colFun(md = ${Sizes.SZ_8.kt}) { +\"md = ${Sizes.SZ_8.kt}\" }"; br { }
+            +"        $colFun(all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}) { +\"all = ${Sizes.SZ_6.kt}, "
+            +"md = ${Sizes.SZ_4.kt}\" }"; br { }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
+            +"    $rowFun {"; br { }
             +"        // Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop"; br { }
             for (x in 1..3) {
-                +"        ${colFun.name}(all = $enumName.$sz6Name, md = $enumName.$sz4Name) { +\"all = $enumName."
-                +"$sz6Name, md = $enumName.$sz4Name\" }"; br { }
+                +"        $colFun(all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}) { +\"all = ${Sizes.SZ_6.kt}, md = "
+                +"${Sizes.SZ_4.kt}\" }"; br { }
             }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
+            +"    $rowFun {"; br { }
             +"        // Columns are always 50% wide, on mobile and desktop"; br { }
             for (x in 1..2) {
-                +"        ${colFun.name}(all = $enumName.$sz6Name) { +\"all = $enumName.$sz6Name\" }"; br { }
+                +"        $colFun(all = ${Sizes.SZ_6.kt}) { +\"all = ${Sizes.SZ_6.kt}\" }"; br { }
             }
             +"    }"; br { }
             +"}"
         }
     }
-    contentTitle(RBuilder::h3) { +"Row columns" }
+    contentTitle(RBuilder::h3, "Row columns") { }
     p {
         +"Set the "; code { +"${ColCounts::class.simpleName}" }; +" argument to quickly set the number of columns "
         +"that best render your content and layout. The row columns classes are set on the parent "
-        code { +"${rowFun.name} { }" }; +" as a shortcut."
+        code { +"$rowFun { }" }; +" as a shortcut."
     }
     exampleRow {
         example {
@@ -167,10 +162,10 @@ fun RBuilder.responsiveClasses() {
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(all = ${ColCounts::class.simpleName}.${ColCounts.CNT_2.name}) {"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun(all = ${ColCounts.CNT_2.kt}) {"; br { }
             for (x in 1..4) {
-                +"        ${colFun.name} { +\"Column\" }"; br { }
+                +"        $colFun { +\"Column\" }"; br { }
             }
             +"    }"; br { }
             +"}"
@@ -187,10 +182,10 @@ fun RBuilder.responsiveClasses() {
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(all = ${ColCounts::class.simpleName}.${ColCounts.CNT_3.name}) {"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun(all = ${ColCounts.CNT_3.kt}) {"; br { }
             for (x in 1..4) {
-                +"        ${colFun.name} { +\"Column\" }"; br { }
+                +"        $colFun { +\"Column\" }"; br { }
             }
             +"    }"; br { }
             +"}"
@@ -207,10 +202,10 @@ fun RBuilder.responsiveClasses() {
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(all = ${ColCounts::class.simpleName}.${ColCounts.CNT_4.name}) {"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun(all = ${ColCounts.CNT_4.kt}) {"; br { }
             for (x in 1..4) {
-                +"        ${colFun.name} { +\"Column\" }"; br { }
+                +"        $colFun { +\"Column\" }"; br { }
             }
             +"    }"; br { }
             +"}"
@@ -229,12 +224,12 @@ fun RBuilder.responsiveClasses() {
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(all = ${ColCounts::class.simpleName}.${ColCounts.CNT_4.name}) {"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun(all = ${ColCounts.CNT_4.kt}) {"; br { }
             for (x in 1..2) {
-                +"        ${colFun.name} { +\"Column\" }"; br { }
+                +"        $colFun { +\"Column\" }"; br { }
             }
-            +"        ${colFun.name}(all = $enumName.$sz6Name) { +\"Column\" }"; br { }
+            +"        $colFun(all = ${Sizes.SZ_6.kt}) { +\"Column\" }"; br { }
             +"    }"; br { }
             +"}"
         }
@@ -250,22 +245,21 @@ fun RBuilder.responsiveClasses() {
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(all = ${ColCounts::class.simpleName}.${ColCounts.CNT_1.name}, sm = "
-            +"${ColCounts::class.simpleName}.${ColCounts.CNT_2.name}, md = "
-            +"${ColCounts::class.simpleName}.${ColCounts.CNT_4.name}) {"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun(all = ${ColCounts.CNT_1.kt}, sm = ${ColCounts.CNT_2.kt}, md = ${ColCounts.CNT_4.kt}) {"
+            br { }
             for (x in 1..4) {
-                +"        ${colFun.name} { +\"Column\" }"; br { }
+                +"        $colFun { +\"Column\" }"; br { }
             }
             +"    }"; br { }
             +"}"
         }
     }
-    contentTitle(RBuilder::h3) { +"No gutters" }
+    contentTitle(RBuilder::h3, "No gutters") { }
     p {
         +"The gutters between columns in Bootstrap's predefined grid classes can be removed by setting "
         code { +"gutters = false" }; +". This removes the negative "; code { +"margin" }; +"s from "
-        code { +"${rowFun.name} { }" }; +" and the horizontal "; code { +"padding" }; +" from all immediate "
+        code { +"$rowFun { }" }; +" and the horizontal "; code { +"padding" }; +" from all immediate "
         +"children columns."
     }
     p {
@@ -276,18 +270,18 @@ fun RBuilder.responsiveClasses() {
         example {
             container {
                 row(gutters = false) {
-                    col(sm = Sizes.SZ_6, md = Sizes.SZ_8) { +"sm = $enumName.$sz6Name, md = $enumName.$sz8Name" }
-                    col(all = Sizes.SZ_6, md = Sizes.SZ_4) { +"all = $enumName.$sz6Name, md = $enumName. $sz4Name" }
+                    col(sm = Sizes.SZ_6, md = Sizes.SZ_8) { +"sm = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_8.kt}" }
+                    col(all = Sizes.SZ_6, md = Sizes.SZ_4) { +"all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}" }
                 }
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(gutters = false) {"; br { }
-            +"        ${colFun.name}(sm = $enumName.$sz6Name, md = $enumName.$sz8Name) { +\"sm = $enumName.$sz6Name, md"
-            +" = $enumName.$sz8Name\" }"; br { }
-            +"        ${colFun.name}(all = $enumName.$sz6Name, md = $enumName.$sz4Name) { +\"all = $enumName.$sz6Name, "
-            +"md = $enumName. $sz4Name\" }"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun(gutters = false) {"; br { }
+            +"        $colFun(sm = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_8.kt}) { +\"sm = ${Sizes.SZ_6.kt}, md"
+            +" = ${Sizes.SZ_8.kt}\" }"; br { }
+            +"        $colFun(all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}) { +\"all = ${Sizes.SZ_6.kt}, "
+            +"md = ${Sizes.SZ_4.kt}\" }"; br { }
             +"    }"; br { }
             +"}"
         }

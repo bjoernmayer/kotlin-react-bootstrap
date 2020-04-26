@@ -5,32 +5,18 @@ import kotlinx.html.HTMLTag
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.bootstrap.lib.Breakpoints
+import react.bootstrap.lib.AttributePair
+import react.bootstrap.lib.AttributeTriple
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.CombinedAttributes
+import react.bootstrap.lib.resolveAttributeClassNames
 import react.dom.RDOMBuilder
 import react.dom.div
 
-interface RowAttributes {
+interface RowAttributes : CombinedAttributes {
     val colCount: ColCounts?
     val itemsX: ItemsXs?
     val itemsY: ItemsYs?
-
-    val classNamePrefix: String?
-    val classNamePostfix: String?
-
-    fun getClassName(breakpoints: Breakpoints?): String? {
-        if (classNamePrefix == null && classNamePostfix == null) {
-            return null
-        }
-
-        val breakpoint: String? = if (breakpoints !== null) {
-            breakpoints.name.toUpperCase()
-        } else null
-
-        val className = listOfNotNull(classNamePrefix, breakpoint, classNamePostfix).joinToString("_")
-
-        return ClassNames.valueOf(className).toString()
-    }
 }
 
 interface ColCount : RowAttributes {
@@ -116,9 +102,9 @@ enum class ItemsYs : ItemsY {
 }
 
 data class ColCountItemXsPair(
-    val first: ColCounts,
-    val second: ItemsXs
-) : ColCount, ItemsX {
+    override val first: ColCounts,
+    override val second: ItemsXs
+) : ColCount, ItemsX, AttributePair<ColCount, ItemsX> {
     override val colCount: ColCounts = first
     override val itemsX: ItemsXs = second
     override val itemsY: ItemsYs? = null
@@ -126,17 +112,14 @@ data class ColCountItemXsPair(
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
 
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} ${second.getClassName(breakpoints)}"
-    }
-
+    @Suppress("unused")
     infix fun ys(that: ItemsYs): ColCountItemXsItemYsTriple = ColCountItemXsItemYsTriple(first, second, that)
 }
 
 data class ColCountItemYsPair(
-    val first: ColCounts,
-    val second: ItemsYs
-) : ColCount, ItemsY {
+    override val first: ColCounts,
+    override val second: ItemsYs
+) : ColCount, ItemsY, AttributePair<ColCount, ItemsY> {
     override val colCount: ColCounts = first
     override val itemsX: ItemsXs? = null
     override val itemsY: ItemsYs = second
@@ -144,17 +127,14 @@ data class ColCountItemYsPair(
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
 
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} ${second.getClassName(breakpoints)}"
-    }
-
+    @Suppress("unused")
     infix fun xs(that: ItemsXs): ColCountItemXsItemYsTriple = ColCountItemXsItemYsTriple(first, that, second)
 }
 
 data class ItemsXsItemsYsPair(
-    val first: ItemsXs,
-    val second: ItemsYs
-) : ItemsX, ItemsY {
+    override val first: ItemsXs,
+    override val second: ItemsYs
+) : ItemsX, ItemsY, AttributePair<ItemsX, ItemsY> {
     override val colCount: ColCounts? = null
     override val itemsX: ItemsXs = first
     override val itemsY: ItemsYs = second
@@ -164,22 +144,16 @@ data class ItemsXsItemsYsPair(
 }
 
 data class ColCountItemXsItemYsTriple(
-    val first: ColCounts,
-    val second: ItemsXs,
-    val third: ItemsYs
-) : ColCount, ItemsX, ItemsY {
+    override val first: ColCounts,
+    override val second: ItemsXs,
+    override val third: ItemsYs
+) : ColCount, ItemsX, ItemsY, AttributeTriple<ColCount, ItemsX, ItemsY> {
     override val colCount: ColCounts = first
     override val itemsX: ItemsXs = second
     override val itemsY: ItemsYs = third
 
     override val classNamePrefix: String? = null
     override val classNamePostfix: String? = null
-
-    override fun getClassName(breakpoints: Breakpoints?): String? {
-        return "${first.getClassName(breakpoints)} " +
-            "${second.getClassName(breakpoints)} " +
-            "${third.getClassName(breakpoints)}"
-    }
 }
 
 fun RBuilder.row(
@@ -215,21 +189,21 @@ fun <T : HTMLTag> RBuilder.row(
     block: RDOMBuilder<T>.() -> Unit
 ): ReactElement {
     // Pairs and Triples match in multiple of those. That's why we need a Set
-    val rowClasses = mutableSetOf("${ClassNames.ROW}")
+    val rowClasses = mutableSetOf(ClassNames.ROW)
 
     if (!gutters) {
-        rowClasses.add("${ClassNames.NO_GUTTERS}")
+        rowClasses.add(ClassNames.NO_GUTTERS)
     }
 
     rowClasses.addAll(
-        resolveRowClasses<ColCount>(all, sm, md, lg, xl)
+        resolveAttributeClassNames<ColCount>(all, sm, md, lg, xl)
     )
     rowClasses.addAll(
-        resolveRowClasses<ItemsY>(all, sm, md, lg, xl)
+        resolveAttributeClassNames<ItemsY>(all, sm, md, lg, xl)
     )
 
     rowClasses.addAll(
-        resolveRowClasses<ItemsX>(all, sm, md, lg, xl)
+        resolveAttributeClassNames<ItemsX>(all, sm, md, lg, xl)
     )
 
     return tagFun(
@@ -237,36 +211,4 @@ fun <T : HTMLTag> RBuilder.row(
     ) {
         block()
     }
-}
-
-private inline fun <reified T : RowAttributes> resolveRowClasses(
-    all: RowAttributes? = null,
-    sm: RowAttributes? = null,
-    md: RowAttributes? = null,
-    lg: RowAttributes? = null,
-    xl: RowAttributes? = null
-): Set<String> {
-    val classes = mutableSetOf<String>()
-
-    if (all is T) {
-        all.getClassName(null)?.let(classes::add)
-    }
-
-    if (sm is T) {
-        sm.getClassName(Breakpoints.SM)?.let(classes::add)
-    }
-
-    if (md is T) {
-        md.getClassName(Breakpoints.MD)?.let(classes::add)
-    }
-
-    if (lg is T) {
-        lg.getClassName(Breakpoints.LG)?.let(classes::add)
-    }
-
-    if (xl is T) {
-        xl.getClassName(Breakpoints.XL)?.let(classes::add)
-    }
-
-    return classes
 }

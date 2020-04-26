@@ -3,6 +3,7 @@ package react.bootstrap
 import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.Tag
 import kotlinx.html.classes
+import react.bootstrap.lib.ClassNames
 import react.dom.RDOMBuilder
 
 fun Tag.data(key: String, value: String) {
@@ -29,9 +30,13 @@ fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg className: String) {
     }
 }
 
-fun String?.appendClass(className: String) = appendClass(listOf(className))
+fun String?.appendClass(className: ClassNames) = appendClass(setOf(className.toString()))
 
-fun String?.appendClass(classNames: Iterable<String>) = run {
+fun String?.appendClass(className: String) = appendClass(setOf(className))
+
+fun String?.appendClass(classNames: Set<ClassNames>) = appendClass(classNames.map(ClassNames::toString).toSet())
+
+fun String?.appendClass(classNames: Set<String>) = run {
     if (this == null) {
         classNames.joinToString(" ")
     } else {

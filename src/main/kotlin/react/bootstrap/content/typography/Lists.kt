@@ -3,6 +3,7 @@ package react.bootstrap.content.typography
 import kotlinx.html.LI
 import kotlinx.html.UL
 import react.RBuilder
+import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
 import react.dom.RDOMBuilder
@@ -20,7 +21,7 @@ fun RBuilder.ul(
     listStyles: ListStyles? = null,
     classes: String? = null,
     block: RDOMBuilder<UL>.() -> Unit
-) = ul(
+): ReactElement = ul(
     if (listStyles !== null) {
         classes.appendClass(listStyles.toString())
     } else {
@@ -39,7 +40,7 @@ fun RBuilder.li(
     listItemStyles: ListItemStyles? = null,
     classes: String? = null,
     block: RDOMBuilder<LI>.() -> Unit
-) = li(
+): ReactElement = li(
     if (listItemStyles !== null) {
         classes.appendClass(listItemStyles.toString())
     } else {

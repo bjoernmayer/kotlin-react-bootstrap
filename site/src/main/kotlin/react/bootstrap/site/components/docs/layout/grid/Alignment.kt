@@ -8,12 +8,15 @@ import react.bootstrap.layout.grid.ItemsYs
 import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
-import react.bootstrap.site.components.docs.ColFun
-import react.bootstrap.site.components.docs.RowFun
-import react.bootstrap.site.components.docs.contentTitle
-import react.bootstrap.site.components.docs.example
-import react.bootstrap.site.components.docs.exampleRow
-import react.bootstrap.site.components.docs.kotlinExample
+import react.bootstrap.site.components.docs.colFun
+import react.bootstrap.site.components.docs.containerFun
+import react.bootstrap.site.components.docs.fixings.contentTitle
+import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.exampleRow
+import react.bootstrap.site.components.docs.fixings.flexColsExampleRow
+import react.bootstrap.site.components.docs.fixings.kotlinExample
+import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.components.docs.rowFun
 import react.dom.a
 import react.dom.br
 import react.dom.code
@@ -22,9 +25,7 @@ import react.dom.p
 import react.dom.strong
 
 fun RBuilder.alignment() {
-    val rowFun: RowFun = RBuilder::row
-    val colFun: ColFun = RBuilder::col
-    contentTitle { +"Alignment" }
+    contentTitle("Alignment") { }
     p {
         +"Use flexbox alignment utilities to vertically and horizontally align columns. "
         strong {
@@ -33,8 +34,8 @@ fun RBuilder.alignment() {
         }
         a(href = "https://github.com/philipwalton/flexbugs#flexbug-3") { +" See Flexbugs #3 for more details" }; +"."
     }
-    contentTitle(RBuilder::h3) { +"Vertical alignment" }
-    exampleRow("bd-example-row-flex-cols") {
+    contentTitle(RBuilder::h3, "Vertical alignment") { }
+    flexColsExampleRow {
         example {
             container {
                 row(all = ItemsYs.START) {
@@ -55,26 +56,26 @@ fun RBuilder.alignment() {
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(all = ${ItemsYs::class.simpleName}.${ItemsYs.START.name}) {"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun(all = ${ItemsYs.START.kt}) {"; br { }
             for (x in 1..3) {
-                +"        ${colFun.name} { +\"One of three columns\" }"; br { }
+                +"        $colFun { +\"One of three columns\" }"; br { }
             }
             +"    }"; br { }
-            +"    ${rowFun.name}(all = ${ItemsYs::class.simpleName}.${ItemsYs.CENTER.name}) {"; br { }
+            +"    $rowFun(all = ${ItemsYs.CENTER.kt}) {"; br { }
             for (x in 1..3) {
-                +"        ${colFun.name} { +\"One of three columns\" }"; br { }
+                +"        $colFun { +\"One of three columns\" }"; br { }
             }
             +"    }"; br { }
-            +"    ${rowFun.name}(all = ${ItemsYs::class.simpleName}.${ItemsYs.END.name}) {"; br { }
+            +"    $rowFun(all = ${ItemsYs.END.kt}) {"; br { }
             for (x in 1..3) {
-                +"        ${colFun.name} { +\"One of three columns\" }"; br { }
+                +"        $colFun { +\"One of three columns\" }"; br { }
             }
             +"    }"; br { }
             +"}"
         }
     }
-    exampleRow("bd-example-row-flex-cols") {
+    flexColsExampleRow {
         example {
             container {
                 row {
@@ -85,19 +86,16 @@ fun RBuilder.alignment() {
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = ${Alignments::class.simpleName}.${Alignments.START.name}) { +\"One of "
-            +"three columns\" }"; br { }
-            +"        ${colFun.name}(all = ${Alignments::class.simpleName}.${Alignments.CENTER.name}) { +\"One of "
-            +"three columns\" }"; br { }
-            +"        ${colFun.name}(all = ${Alignments::class.simpleName}.${Alignments.END.name}) { +\"One of "
-            +"three columns\" }"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = ${Alignments.START.kt}) { +\"One of three columns\" }"; br { }
+            +"        $colFun(all = ${Alignments.CENTER.kt}) { +\"One of three columns\" }"; br { }
+            +"        $colFun(all = ${Alignments.END.kt}) { +\"One of three columns\" }"; br { }
             +"    }"; br { }
             +"}"
         }
     }
-    contentTitle(RBuilder::h3) { +"Horizontal alignment" }
+    contentTitle(RBuilder::h3, "Horizontal alignment") { }
     exampleRow {
         example {
             container {
@@ -130,30 +128,30 @@ fun RBuilder.alignment() {
         }
         val sizes = Sizes::class.simpleName
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(all = ${ItemsXs::class.simpleName}.${ItemsXs.START.name}) { "; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun(all = ${ItemsXs.START.kt}) { "; br { }
             for (x in 1..2) {
-                +"        ${colFun.name}(all = $sizes.${Sizes.SZ_4.name}) { +\"One of two columns\" }"; br { }
+                +"        $colFun(all = $sizes.${Sizes.SZ_4}) { +\"One of two columns\" }"; br { }
             }
             +"    }"; br { }
-            +"    ${rowFun.name}(all = ${ItemsXs::class.simpleName}.${ItemsXs.CENTER.name}) { "; br { }
+            +"    $rowFun(all = ${ItemsXs.CENTER.kt}) { "; br { }
             for (x in 1..2) {
-                +"        ${colFun.name}(all = $sizes.${Sizes.SZ_4.name}) { +\"One of two columns\" }"; br { }
+                +"        $colFun(all = $sizes.${Sizes.SZ_4}) { +\"One of two columns\" }"; br { }
             }
             +"    }"; br { }
-            +"    ${rowFun.name}(all = ${ItemsXs::class.simpleName}.${ItemsXs.END.name}) { "; br { }
+            +"    $rowFun(all = ${ItemsXs.END.kt}) { "; br { }
             for (x in 1..2) {
-                +"        ${colFun.name}(all = $sizes.${Sizes.SZ_4.name}) { +\"One of two columns\" }"; br { }
+                +"        $colFun(all = $sizes.${Sizes.SZ_4}) { +\"One of two columns\" }"; br { }
             }
             +"    }"; br { }
-            +"    ${rowFun.name}(all = ${ItemsXs::class.simpleName}.${ItemsXs.AROUND.name}) { "; br { }
+            +"    $rowFun(all = ${ItemsXs.AROUND.kt}) { "; br { }
             for (x in 1..2) {
-                +"        ${colFun.name}(all = $sizes.${Sizes.SZ_4.name}) { +\"One of two columns\" }"; br { }
+                +"        $colFun(all = $sizes.${Sizes.SZ_4}) { +\"One of two columns\" }"; br { }
             }
             +"    }"; br { }
-            +"    ${rowFun.name}all = ${ItemsXs::class.simpleName}.${ItemsXs.BETWEEN.name}) { "; br { }
+            +"    $rowFun(all = ${ItemsXs.BETWEEN.kt}) { "; br { }
             for (x in 1..2) {
-                +"        ${colFun.name}(all = $sizes.${Sizes.SZ_4.name}) { +\"One of two columns\" }"; br { }
+                +"        $colFun(all = $sizes.${Sizes.SZ_4}) { +\"One of two columns\" }"; br { }
             }
             +"    }"; br { }
             +"}"

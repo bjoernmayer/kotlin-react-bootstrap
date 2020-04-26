@@ -5,9 +5,9 @@ import react.RBuilder
 import react.bootstrap.content.typography.blockQuoteFooter
 import react.bootstrap.content.typography.bsBlockQuote
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.contentTitle
-import react.bootstrap.site.components.docs.example
-import react.bootstrap.site.components.docs.kotlinExample
+import react.bootstrap.site.components.docs.fixings.contentTitle
+import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.kotlinExample
 import react.dom.abbr
 import react.dom.br
 import react.dom.cite
@@ -16,7 +16,7 @@ import react.dom.h3
 import react.dom.p
 
 fun RBuilder.blockquotes() {
-    contentTitle { +"Blockquotes" }
+    contentTitle("Blockquotes") { }
     p {
         +"For quoting blocks of content from another source within your document. Wrap "
         code { +"${RBuilder::bsBlockQuote.name} { }" }
@@ -32,7 +32,7 @@ fun RBuilder.blockquotes() {
         +"    +\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.\""; br { }
         +"}"
     }
-    contentTitle(RBuilder::h3) { +"Naming a source" }
+    contentTitle(RBuilder::h3, "Naming a source") { }
     p {
         +"Add a "; code { +"${RBuilder::blockQuoteFooter.name} { }" }; +" for identifying the source. Wrap the name of "
         +"the source work in "; code { +"cite { }" }; +"."

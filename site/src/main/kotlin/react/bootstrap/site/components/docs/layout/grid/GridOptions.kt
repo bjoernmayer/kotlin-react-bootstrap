@@ -2,10 +2,9 @@ package react.bootstrap.site.components.docs.layout.grid
 
 import kotlinx.html.ThScope
 import react.RBuilder
-import react.bootstrap.layout.grid.col
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.ColFun
-import react.bootstrap.site.components.docs.contentTitle
+import react.bootstrap.site.components.docs.colFun
+import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.dom.br
 import react.dom.code
 import react.dom.p
@@ -18,7 +17,7 @@ import react.dom.thead
 import react.dom.tr
 
 fun RBuilder.gridOptions() {
-    contentTitle { +"Grid options" }
+    contentTitle("Grid options") { }
     p {
         +"While Bootstrap uses "; code { +"em" }; +"s or "; code { +"rem" }; +"s for defining most sizes, "
         code { +"px" }; +"s are used for grid breakpoints and container widths. This is because the viewport width is "
@@ -62,14 +61,13 @@ fun RBuilder.gridOptions() {
                 td { +"960px" }
                 td { +"1140px" }
             }
-            val colFun: ColFun = RBuilder::col
             tr {
                 th(scope = ThScope.row, classes = "${ClassNames.TEXT_NOWRAP}") { +"Function Argument" }
-                td { code { +"${colFun.name}(col = )" } }
-                td { code { +"${colFun.name}(sm = )" } }
-                td { code { +"${colFun.name}(md = )" } }
-                td { code { +"${colFun.name}(lg = )" } }
-                td { code { +"${colFun.name}(xl = )" } }
+                td { code { +"$colFun(col = )" } }
+                td { code { +"$colFun(sm = )" } }
+                td { code { +"$colFun(md = )" } }
+                td { code { +"$colFun(lg = )" } }
+                td { code { +"$colFun(xl = )" } }
             }
             tr {
                 th(scope = ThScope.row, classes = "${ClassNames.TEXT_NOWRAP}") { +"# of columns" }

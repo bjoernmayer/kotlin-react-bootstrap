@@ -20,12 +20,14 @@ import react.bootstrap.layout.grid.SizeOrderPair
 import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
-import react.bootstrap.site.components.docs.ColFun
-import react.bootstrap.site.components.docs.RowFun
-import react.bootstrap.site.components.docs.contentTitle
-import react.bootstrap.site.components.docs.example
-import react.bootstrap.site.components.docs.exampleRow
-import react.bootstrap.site.components.docs.kotlinExample
+import react.bootstrap.site.components.docs.colFun
+import react.bootstrap.site.components.docs.containerFun
+import react.bootstrap.site.components.docs.fixings.contentTitle
+import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.flexColsExampleRow
+import react.bootstrap.site.components.docs.fixings.kotlinExample
+import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.components.docs.rowFun
 import react.dom.br
 import react.dom.code
 import react.dom.h3
@@ -34,36 +36,33 @@ import react.dom.p
 import kotlin.reflect.KFunction2
 
 fun RBuilder.combining() {
-    val colFun: ColFun = RBuilder::col
-    val rowFun: RowFun = RBuilder::row
-
     val sz = Offsets::sz.name
     val ord = Sizes::ord.name
     val off = Sizes::off.name
     val align = Sizes::align.name
 
     val sizes = Sizes::class.simpleName
-    val sz4 = "$sizes.${Sizes.SZ_4.name}"
+    val sz4 = Sizes.SZ_4.kt
 
     val offsets = Offsets::class.simpleName
-    val off1 = "$offsets.${Offsets.OFF_1.name}"
+    val off1 = Offsets.OFF_1.kt
 
     val orderings = Orderings::class.simpleName
-    val ord3 = "$orderings.${Orderings.ORD_3}"
+    val ord3 = Orderings.ORD_3.kt
 
     val alignments = Alignments::class.simpleName
-    val end = "$alignments.${Alignments.END.name}"
+    val end = Alignments.END.kt
 
-    contentTitle { +"$sizes, $offsets, $orderings, $alignments" }
+    contentTitle("$sizes, $offsets, $orderings, $alignments") { }
     p {
         +"As you can see in the examples above, all col attributes are set using the same arguments. Custom pairing "
         +"functions are used to combine the values."
     }
-    contentTitle(RBuilder::h3) { +"Combine with $sizes" }
+    contentTitle(RBuilder::h3, "Combine with $sizes") { }
     p {
         +"Combine other attributes with "; code { +"$sizes" }; +" by using "; code { +sz }; +"."
     }
-    exampleRow("bd-example-row-flex-cols") {
+    flexColsExampleRow {
         example {
             container {
                 row {
@@ -81,28 +80,28 @@ fun RBuilder.combining() {
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = $off1 $sz $sz4) { +\"all = $off1 $sz $sz4\" }"; br { }
-            +"        ${colFun.name} { +\"Reference\" }"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = $off1 $sz $sz4) { +\"all = $off1 $sz $sz4\" }"; br { }
+            +"        $colFun { +\"Reference\" }"; br { }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = $ord3 $sz $sz4) { +\"all = $ord3 $sz $sz4\" }"; br { }
-            +"        ${colFun.name} { +\"Reference\" }"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = $ord3 $sz $sz4) { +\"all = $ord3 $sz $sz4\" }"; br { }
+            +"        $colFun { +\"Reference\" }"; br { }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = $end $sz $sz4) { +\"all = $end $sz $sz4\" }"; br { }
-            +"        ${colFun.name} { +\"Reference\" }"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = $end $sz $sz4) { +\"all = $end $sz $sz4\" }"; br { }
+            +"        $colFun { +\"Reference\" }"; br { }
             +"    }"; br { }
             +"}"
         }
     }
 
-    contentTitle(RBuilder::h3) { +"Combine with $offsets" }
+    contentTitle(RBuilder::h3, "Combine with $offsets") { }
     p {
         +"Combine other attributes with "; code { +"$offsets" }; +" by using "; code { +off }; +"."
     }
-    exampleRow("bd-example-row-flex-cols") {
+    flexColsExampleRow {
         example {
             container {
                 row {
@@ -120,28 +119,28 @@ fun RBuilder.combining() {
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = $sz4 $off $off1) { +\"all = $sz4 $off $off1\" }"; br { }
-            +"        ${colFun.name} { +\"Reference\" }"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = $sz4 $off $off1) { +\"all = $sz4 $off $off1\" }"; br { }
+            +"        $colFun { +\"Reference\" }"; br { }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = $ord3 $off $off1) { +\"all = $ord3 $off $off1\" }"; br { }
-            +"        ${colFun.name} { +\"Reference\" }"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = $ord3 $off $off1) { +\"all = $ord3 $off $off1\" }"; br { }
+            +"        $colFun { +\"Reference\" }"; br { }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = $end $off $off1) { +\"all = $end $off $off1\" }"; br { }
-            +"        ${colFun.name} { +\"Reference\" }"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = $end $off $off1) { +\"all = $end $off $off1\" }"; br { }
+            +"        $colFun { +\"Reference\" }"; br { }
             +"    }"; br { }
             +"}"
         }
     }
 
-    contentTitle(RBuilder::h3) { +"Combine with $orderings" }
+    contentTitle(RBuilder::h3, "Combine with $orderings") { }
     p {
         +"Combine other attributes with "; code { +"$orderings" }; +" by using "; code { +ord }; +"."
     }
-    exampleRow("bd-example-row-flex-cols") {
+    flexColsExampleRow {
         example {
             container {
                 row {
@@ -159,28 +158,28 @@ fun RBuilder.combining() {
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = $sz4 $ord $ord3) { +\"all = $sz4 $ord $ord3\" }"; br { }
-            +"        ${colFun.name} { +\"Reference\" }"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = $sz4 $ord $ord3) { +\"all = $sz4 $ord $ord3\" }"; br { }
+            +"        $colFun { +\"Reference\" }"; br { }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = $off1 $ord $ord3) { +\"all = $off1 $ord $ord3\" }"; br { }
-            +"        ${colFun.name} { +\"Reference\" }"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = $off1 $ord $ord3) { +\"all = $off1 $ord $ord3\" }"; br { }
+            +"        $colFun { +\"Reference\" }"; br { }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = $end $ord $ord3) { +\"all = $end $ord $ord3\" }"; br { }
-            +"        ${colFun.name} { +\"Reference\" }"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = $end $ord $ord3) { +\"all = $end $ord $ord3\" }"; br { }
+            +"        $colFun { +\"Reference\" }"; br { }
             +"    }"; br { }
             +"}"
         }
     }
 
-    contentTitle(RBuilder::h3) { +"Combine with $alignments" }
+    contentTitle(RBuilder::h3, "Combine with $alignments") { }
     p {
         +"Combine other attributes with "; code { +"$alignments" }; +" by using "; code { +align }; +"."
     }
-    exampleRow("bd-example-row-flex-cols") {
+    flexColsExampleRow {
         example {
             container {
                 row {
@@ -198,24 +197,24 @@ fun RBuilder.combining() {
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = $sz4 $align $end) { +\"all = $sz4 $align $end\" }"; br { }
-            +"        ${colFun.name} { +\"Reference\" }"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = $sz4 $align $end) { +\"all = $sz4 $align $end\" }"; br { }
+            +"        $colFun { +\"Reference\" }"; br { }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = $off1 $align $end) { +\"all = $off1 $align $end\" }"; br { }
-            +"        ${colFun.name} { +\"Reference\" }"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = $off1 $align $end) { +\"all = $off1 $align $end\" }"; br { }
+            +"        $colFun { +\"Reference\" }"; br { }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name}(all = $ord3 $align $end) { +\"all = $ord3 $align $end\" }"; br { }
-            +"        ${colFun.name} { +\"Reference\" }"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun(all = $ord3 $align $end) { +\"all = $ord3 $align $end\" }"; br { }
+            +"        $colFun { +\"Reference\" }"; br { }
             +"    }"; br { }
             +"}"
         }
     }
 
-    contentTitle(RBuilder::h3) { +"Combine all" }
+    contentTitle(RBuilder::h3, "Combine all") { }
     p {
         +"You can use the same pairing functions in any order to combine all attributes."
     }
@@ -223,9 +222,6 @@ fun RBuilder.combining() {
 }
 
 private fun RBuilder.allPossibleCombinations() {
-    val colFun: ColFun = RBuilder::col
-    val rowFun: RowFun = RBuilder::row
-
     val sizeToOffset = Pairing(Sizes.SZ_4, Offsets.OFF_1, Sizes::off)
     val sizeToOrder = Pairing(Sizes.SZ_4, Orderings.ORD_3, Sizes::ord)
     val sizeToAlignment = Pairing(Sizes.SZ_4, Alignments.END, Sizes::align)
@@ -357,8 +353,8 @@ private fun RBuilder.allPossibleCombinations() {
     }
 
     allPairings.toSet().forEach { pairing ->
-        contentTitle(RBuilder::h4) { +"${pairing.thisClassName} + ${pairing.withClassName}" }
-        exampleRow("bd-example-row-flex-cols") {
+        contentTitle(RBuilder::h4, "${pairing.thisClassName} + ${pairing.withClassName}") { }
+        flexColsExampleRow {
             example {
                 container {
                     row {
@@ -368,10 +364,10 @@ private fun RBuilder.allPossibleCombinations() {
                 }
             }
             kotlinExample {
-                +"${RBuilder::container.name} {"; br { }
-                +"    ${rowFun.name} {"; br { }
-                +"        ${colFun.name}(all = ${pairing.argString}) { +\"all = ${pairing.argString}\" }"; br { }
-                +"        ${colFun.name} { +\"Reference\" }"; br { }
+                +"$containerFun {"; br { }
+                +"    $rowFun {"; br { }
+                +"        $colFun(all = ${pairing.argString}) { +\"all = ${pairing.argString}\" }"; br { }
+                +"        $colFun { +\"Reference\" }"; br { }
                 +"    }"; br { }
                 +"}"
             }
@@ -389,8 +385,8 @@ private fun RBuilder.allPossibleCombinations() {
 
             val argString = "${pairing.argString} ${tripling.tripleUsing.name} ${tripling.thisString}"
 
-            contentTitle(RBuilder::h4) { +combination }
-            exampleRow("bd-example-row-flex-cols") {
+            contentTitle(RBuilder::h4, combination) { }
+            flexColsExampleRow {
                 example {
                     container {
                         row {
@@ -400,10 +396,10 @@ private fun RBuilder.allPossibleCombinations() {
                     }
                 }
                 kotlinExample {
-                    +"${RBuilder::container.name} {"; br { }
-                    +"    ${rowFun.name} {"; br { }
-                    +"        ${colFun.name}(all = $argString) { +\"all = $argString\" }"; br { }
-                    +"        ${colFun.name} { +\"Reference\" }"; br { }
+                    +"$containerFun {"; br { }
+                    +"    $rowFun {"; br { }
+                    +"        $colFun(all = $argString) { +\"all = $argString\" }"; br { }
+                    +"        $colFun { +\"Reference\" }"; br { }
                     +"    }"; br { }
                     +"}"
                 }
@@ -427,8 +423,8 @@ private fun RBuilder.allPossibleCombinations() {
                     "${pairing.argString} ${tripling.tripleUsing.name} ${tripling.thisString} " +
                         "${quadruple.quadrupleUsing.name} ${quadruple.thisString}"
 
-                contentTitle(RBuilder::h4) { +combination }
-                exampleRow("bd-example-row-flex-cols") {
+                contentTitle(RBuilder::h4, combination) { }
+                flexColsExampleRow {
                     example {
                         container {
                             row {
@@ -439,10 +435,10 @@ private fun RBuilder.allPossibleCombinations() {
                     }
                 }
                 kotlinExample {
-                    +"${RBuilder::container.name} {"; br { }
-                    +"    ${rowFun.name} {"; br { }
-                    +"        ${colFun.name}(all = $argString) { +\"all = $argString\" }"; br { }
-                    +"        ${colFun.name} { +\"Reference\" }"; br { }
+                    +"$containerFun {"; br { }
+                    +"    $rowFun {"; br { }
+                    +"        $colFun(all = $argString) { +\"all = $argString\" }"; br { }
+                    +"        $colFun { +\"Reference\" }"; br { }
                     +"    }"; br { }
                     +"}"
                 }

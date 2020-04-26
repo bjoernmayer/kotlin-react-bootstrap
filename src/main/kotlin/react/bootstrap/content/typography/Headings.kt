@@ -23,32 +23,32 @@ fun <T : HTMLTag> RBuilder.h(
     tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
-) =
+): ReactElement =
     tagFun(classes.appendClass("$headings"), block)
 
 fun <T : HTMLTag> RBuilder.h1(
     tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
-) = h(Headings.H1, tagFun, classes, block)
+): ReactElement = h(Headings.H1, tagFun, classes, block)
 
 fun <T : HTMLTag> RBuilder.h2(
     tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
-) = h(Headings.H2, tagFun, classes, block)
+): ReactElement = h(Headings.H2, tagFun, classes, block)
 
 fun <T : HTMLTag> RBuilder.h3(
     tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
-) = h(Headings.H3, tagFun, classes, block)
+): ReactElement = h(Headings.H3, tagFun, classes, block)
 
 fun <T : HTMLTag> RBuilder.h4(
     tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
-) = h(Headings.H4, tagFun, classes, block)
+): ReactElement = h(Headings.H4, tagFun, classes, block)
 
 fun <T : HTMLTag> RBuilder.h5(
     tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
@@ -60,11 +60,11 @@ fun <T : HTMLTag> RBuilder.h6(
     tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
-) = h(Headings.H6, tagFun, classes, block)
+): ReactElement = h(Headings.H6, tagFun, classes, block)
 
 // Todo: move this to the other text stuff
 fun <T : HTMLTag> RBuilder.muted(
     tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
-) = tagFun(classes.appendClass("${ClassNames.TEXT_MUTED}"), block)
+): ReactElement = tagFun(classes.appendClass("${ClassNames.TEXT_MUTED}"), block)

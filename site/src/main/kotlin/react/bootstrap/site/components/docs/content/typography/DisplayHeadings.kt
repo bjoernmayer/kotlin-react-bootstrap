@@ -4,9 +4,9 @@ import react.RBuilder
 import react.bootstrap.content.toTable
 import react.bootstrap.content.typography.DisplayHeadings
 import react.bootstrap.content.typography.display
-import react.bootstrap.site.components.docs.contentTitle
-import react.bootstrap.site.components.docs.example
-import react.bootstrap.site.components.docs.kotlinExample
+import react.bootstrap.site.components.docs.fixings.contentTitle
+import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.kotlinExample
 import react.dom.br
 import react.dom.p
 import react.dom.span
@@ -17,7 +17,7 @@ import react.dom.td
 import react.dom.tr
 
 fun RBuilder.displayHeadings() {
-    contentTitle { +"Display headings" }
+    contentTitle("Display headings") { }
     p {
         +"Traditional heading elements are designed to work best in the meat of your page content. When you need a "
         +"heading to stand out, consider using a "; strong { +"display heading" }; +"—a larger, slightly more "

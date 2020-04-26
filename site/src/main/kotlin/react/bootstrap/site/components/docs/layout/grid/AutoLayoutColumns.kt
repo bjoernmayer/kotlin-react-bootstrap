@@ -6,32 +6,29 @@ import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.ColFun
-import react.bootstrap.site.components.docs.RowFun
-import react.bootstrap.site.components.docs.contentTitle
-import react.bootstrap.site.components.docs.example
-import react.bootstrap.site.components.docs.exampleRow
-import react.bootstrap.site.components.docs.kotlinExample
+import react.bootstrap.site.components.docs.colFun
+import react.bootstrap.site.components.docs.containerFun
+import react.bootstrap.site.components.docs.fixings.contentTitle
+import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.exampleRow
+import react.bootstrap.site.components.docs.fixings.kotlinExample
+import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.components.docs.rowFun
 import react.dom.br
 import react.dom.code
 import react.dom.h3
 import react.dom.p
 
 fun RBuilder.autoLayoutColumns() {
-    val rowFun: RowFun = RBuilder::row
-    val colFun: ColFun = RBuilder::col
-    val enumName = Sizes::class.simpleName
-    val autoName = Sizes.AUTO.name
-
-    contentTitle { +"Auto-layout columns" }
+    contentTitle("Auto-layout columns") { }
     p {
         +"Utilize breakpoint-specific equal-size enum values for easy column sizing without an explicit numbered enum "
-        +"value like "; code { +"$enumName.${Sizes.SZ_6.name}" }; +"."
+        +"value like "; code { +Sizes.SZ_6.kt }; +"."
     }
-    contentTitle(RBuilder::h3) { +"Equal-width" }
+    contentTitle(RBuilder::h3, "Equal-width") { }
     p {
-        +"For example, here are two grid layouts that apply to every device and viewport, from "; code { +"xs" }
-        +" to "; code { +"xl" }; +". Add any number of equal-size enums for each breakpoint you need and every column"
+        +"For example, here are two grid layouts that apply to every device and viewport, from "; code { +"xs" }; +" to"
+        +" "; code { +"xl" }; +". Add any number of equal-size enums for each breakpoint you need and every column"
         +"will be the same width."
     }
     exampleRow {
@@ -50,21 +47,21 @@ fun RBuilder.autoLayoutColumns() {
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name} { +\"1 of 2\" }"; br { }
-            +"        ${colFun.name} { +\"2 of 2\" }"; br { }
-            +"        // Same as: col(all = $enumName.${Sizes.EQ.name}) { +\"x of 2\" }"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun { +\"1 of 2\" }"; br { }
+            +"        $colFun { +\"2 of 2\" }"; br { }
+            +"        // Same as: col(all = ${Sizes.EQ.kt}) { +\"x of 2\" }"; br { }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name} { +\"1 of 3\" }"; br { }
-            +"        ${colFun.name} { +\"2 of 3\" }"; br { }
-            +"        ${colFun.name} { +\"3 of 3\" }"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun { +\"1 of 3\" }"; br { }
+            +"        $colFun { +\"2 of 3\" }"; br { }
+            +"        $colFun { +\"3 of 3\" }"; br { }
             +"    }"; br { }
             +"}"
         }
     }
-    contentTitle(RBuilder::h3) { +"Setting one column width" }
+    contentTitle(RBuilder::h3, "Setting one column width") { }
     p {
         +"Auto-layout for flexbox grid columns also means you can set the width of one column and have the sibling "
         +"columns automatically resize around it. You may use predefined grid enumbs (as shown below), grid mixins, or "
@@ -86,23 +83,23 @@ fun RBuilder.autoLayoutColumns() {
             }
         }
         kotlinExample {
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${rowFun.name} { +\"1 of 3\" }"; br { }
-            +"        ${colFun.name}(all = $enumName.${Sizes.SZ_6.name}) { +\"2 of 3 (wider)\" }"; br { }
-            +"        ${colFun.name} { +\"3 of 3\" }"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun {"; br { }
+            +"        $rowFun { +\"1 of 3\" }"; br { }
+            +"        $colFun(all = ${Sizes.SZ_6.kt}) { +\"2 of 3 (wider)\" }"; br { }
+            +"        $colFun { +\"3 of 3\" }"; br { }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name} { +\"1 of 3\" }"; br { }
-            +"        ${colFun.name}(all = $enumName.${Sizes.SZ_5.name}) { +\"2 of 3 (wider)\" }"; br { }
-            +"        ${colFun.name} { +\"3 of 3\" }"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun { +\"1 of 3\" }"; br { }
+            +"        $colFun(all = ${Sizes.SZ_5.kt}) { +\"2 of 3 (wider)\" }"; br { }
+            +"        $colFun { +\"3 of 3\" }"; br { }
             +"    }"; br {}
             +"}"
         }
     }
-    contentTitle(RBuilder::h3) { +"Variable width content" }
+    contentTitle(RBuilder::h3, "Variable width content") { }
     p {
-        +"Use the "; code { +"$enumName.$autoName" }; +" enum value to size columns based on the natural width of their"
+        +"Use the "; code { +Sizes.AUTO.kt }; +" enum value to size columns based on the natural width of their"
         +"content."
     }
     exampleRow {
@@ -121,20 +118,16 @@ fun RBuilder.autoLayoutColumns() {
             }
         }
         kotlinExample {
-            val sz2Name = Sizes.SZ_2.name
-            val eqName = Sizes.EQ.name
-            val classNames = ClassNames::class.simpleName
-            val justifyName = ClassNames.JUSTIFY_CONTENT_MD_CENTER.name
-            +"${RBuilder::container.name} {"; br { }
-            +"    ${rowFun.name}(classes = \"\$$classNames.$justifyName}\") {"; br { }
-            +"        ${colFun.name}(all = $enumName.$eqName, lg = $enumName.$sz2Name) { +\"1 of 3\" }"; br { }
-            +"        ${colFun.name}(md = $enumName.$autoName) { +\"Variable width content\" }"; br { }
-            +"        ${colFun.name}(all = $enumName.$eqName, lg = $enumName.$sz2Name) { +\"3 of 3\" }"; br { }
+            +"$containerFun {"; br { }
+            +"    $rowFun(classes = \"\$${ClassNames.JUSTIFY_CONTENT_MD_CENTER.kt}}\") {"; br { }
+            +"        $colFun(all = ${Sizes.EQ.kt}, lg =  ${Sizes.SZ_2.kt}) { +\"1 of 3\" }"; br { }
+            +"        $colFun(md = ${Sizes.AUTO.kt}) { +\"Variable width content\" }"; br { }
+            +"        $colFun(all = ${Sizes.EQ.kt}, lg = ${Sizes.SZ_2.kt}) { +\"3 of 3\" }"; br { }
             +"    }"; br { }
-            +"    ${rowFun.name} {"; br { }
-            +"        ${colFun.name} { +\"1 of 3\"}"; br { }
-            +"        ${colFun.name}(md = $enumName.$autoName) { +\"Variable width content\" }"; br { }
-            +"        ${colFun.name}(all = $enumName.$eqName, lg = $enumName.$sz2Name) { +\"3 of 3\" }"; br { }
+            +"    $rowFun {"; br { }
+            +"        $colFun { +\"1 of 3\"}"; br { }
+            +"        $colFun(md = ${Sizes.AUTO.kt}) { +\"Variable width content\" }"; br { }
+            +"        $colFun(all = ${Sizes.EQ.kt}, lg = ${Sizes.SZ_2.kt}) { +\"3 of 3\" }"; br { }
             +"    }"; br { }
             +"}"
         }

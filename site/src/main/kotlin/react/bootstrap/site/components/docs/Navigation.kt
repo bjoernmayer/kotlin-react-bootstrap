@@ -8,6 +8,7 @@ import react.RState
 import react.bootstrap.addClass
 import react.bootstrap.ariaLabel
 import react.bootstrap.site.components.PATH_DOCS
+import react.bootstrap.site.pathMatches
 import react.dom.RDOMBuilder
 import react.dom.div
 import react.dom.li
@@ -24,7 +25,11 @@ class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
 
             Docs.Categories.categories.forEach { category ->
                 div("bd-toc-item") {
-                    if (pathMatches(props.location.pathname, category.matchProps)) {
+                    if (pathMatches(
+                            props.location.pathname,
+                            category.matchProps
+                        )
+                    ) {
                         addClass("active")
                     }
 
@@ -38,7 +43,11 @@ class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
                     ul("nav bd-sidenav") {
                         category.subCategories.forEach { subCategory ->
                             li {
-                                if (pathMatches(props.location.pathname, subCategory.matchProps)) {
+                                if (pathMatches(
+                                        props.location.pathname,
+                                        subCategory.matchProps
+                                    )
+                                ) {
                                     markActive()
                                 }
                                 navLink(subCategory.link) {

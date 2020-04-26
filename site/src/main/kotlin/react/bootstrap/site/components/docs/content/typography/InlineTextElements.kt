@@ -3,16 +3,16 @@ package react.bootstrap.site.components.docs.content.typography
 import react.RBuilder
 import react.bootstrap.content.typography.mark
 import react.bootstrap.content.typography.small
-import react.bootstrap.site.components.docs.contentTitle
-import react.bootstrap.site.components.docs.example
-import react.bootstrap.site.components.docs.kotlinExample
+import react.bootstrap.site.components.docs.fixings.contentTitle
+import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.kotlinExample
 import react.dom.br
 import react.dom.code
 import react.dom.p
 import react.dom.span
 
 fun RBuilder.inlineTextElements() {
-    contentTitle { +"Inline text elements" }
+    contentTitle("Inline text elements") { }
     p {
         +"Alternative implementations of "; code { +"mark { }" }; +" and "; code { +"small { }" }; +" are provided to"
         +" to apply the same styles while avoiding any unwanted semantic implications that the tags would bring."

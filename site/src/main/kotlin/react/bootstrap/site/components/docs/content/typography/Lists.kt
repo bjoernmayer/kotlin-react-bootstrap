@@ -5,9 +5,9 @@ import react.bootstrap.content.typography.ListItemStyles
 import react.bootstrap.content.typography.ListStyles
 import react.bootstrap.content.typography.li
 import react.bootstrap.content.typography.ul
-import react.bootstrap.site.components.docs.contentTitle
-import react.bootstrap.site.components.docs.example
-import react.bootstrap.site.components.docs.kotlinExample
+import react.bootstrap.site.components.docs.fixings.contentTitle
+import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.kotlinExample
 import react.dom.br
 import react.dom.code
 import react.dom.h3
@@ -16,8 +16,8 @@ import react.dom.p
 import react.dom.strong
 
 fun RBuilder.lists() {
-    contentTitle { +"Lists" }
-    contentTitle(RBuilder::h3) { +"Unstyled" }
+    contentTitle("Lists") { }
+    contentTitle(RBuilder::h3, "Unstyled") { }
     p {
         +"Remove the default "; code { +"list-style" }; +" and left margin on list items (immediate children only). "
         strong { +"This only applies to immediate children list items" }; +", meaning you will need to add the class "
@@ -63,7 +63,7 @@ fun RBuilder.lists() {
         +"    li { +\"Eget porttitor lorem\" }"; br { }
         +"}"
     }
-    contentTitle(RBuilder::h3) { +"Inline" }
+    contentTitle(RBuilder::h3, "Inline") { }
     p {
         +"Remove a list’s bullets and apply some light "; code { +"margin" }; +" with a combination of two functions, "
         code { +"ul(${ListStyles::class.simpleName}.${ListStyles.INLINE.name}) { }" }; +" and "
