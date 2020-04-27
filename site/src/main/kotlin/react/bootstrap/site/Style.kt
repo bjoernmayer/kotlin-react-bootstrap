@@ -29,7 +29,7 @@ fun style() {
         }
 
         ".bd-navbar .navbar-nav .nav-link" {
-            color = rgba(255,255,255,.5);
+            color = rgba(255, 255, 255, .5)
         }
     }
     StyledComponents.injectGlobal(styles.toString())

@@ -3,14 +3,11 @@ package react.bootstrap.site.components
 import react.RProps
 import react.bootstrap.content.typography.lead
 import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.ItemsX
 import react.bootstrap.layout.grid.ItemsXs
-import react.bootstrap.layout.grid.Orderings
 import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
-import react.dom.a
 import react.dom.br
 import react.dom.div
 import react.dom.h1
@@ -38,5 +35,4 @@ val Home = functionalComponent<RProps> {
             }
         }
     }
-
 }
