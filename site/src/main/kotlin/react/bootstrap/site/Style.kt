@@ -4,10 +4,12 @@ import kotlinx.css.BorderStyle
 import kotlinx.css.CSSBuilder
 import kotlinx.css.Color
 import kotlinx.css.background
+import kotlinx.css.color
 import kotlinx.css.margin
 import kotlinx.css.padding
 import kotlinx.css.properties.border
 import kotlinx.css.rem
+import kotlinx.css.rgba
 import styled.StyledComponents
 import styled.injectGlobal
 
@@ -24,6 +26,10 @@ fun style() {
             padding(1.5.rem)
             margin(top = 1.rem)
             border(width = 0.2.rem, style = BorderStyle.solid, color = Color("#f8f9fa"))
+        }
+
+        ".bd-navbar .navbar-nav .nav-link" {
+            color = rgba(255,255,255,.5);
         }
     }
     StyledComponents.injectGlobal(styles.toString())
