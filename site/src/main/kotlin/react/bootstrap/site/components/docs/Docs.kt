@@ -49,7 +49,7 @@ class Docs : RComponent<RouteResultProps<RProps>, RState>() {
                         }
                     }
                     route<RProps>(props.match.path) {
-                        redirect(from = props.match.path, to = Categories.categories.first().link)
+                        redirect(from = props.location.pathname, to = Categories.categories.first().link)
                     }
                 }
             }
