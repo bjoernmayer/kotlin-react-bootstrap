@@ -363,7 +363,7 @@ fun RBuilder.col(
 ): ReactElement = col(all = Sizes.EQ, classes = classes, block = block)
 
 fun <T : HTMLTag> RBuilder.col(
-    tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
+    tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
 ): ReactElement =
@@ -389,7 +389,7 @@ fun RBuilder.col(
 )
 
 fun <T : HTMLTag> RBuilder.col(
-    tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
+    tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
     all: ColAttributes? = null,
     sm: ColAttributes? = null,
     md: ColAttributes? = null,

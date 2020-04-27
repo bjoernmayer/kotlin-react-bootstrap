@@ -21,7 +21,7 @@ fun RBuilder.contentTitle(contentTitle: String, block: RDOMBuilder<H2>.() -> Uni
     contentTitle(RBuilder::h2, contentTitle, block)
 
 fun <T : HTMLTag> RBuilder.contentTitle(
-    tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
+    tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
     contentTitle: String,
     block: RDOMBuilder<T>.() -> Unit
 ): ReactElement =

@@ -178,7 +178,7 @@ fun RBuilder.row(
 )
 
 fun <T : HTMLTag> RBuilder.row(
-    tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
+    tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
     all: RowAttributes? = null,
     sm: RowAttributes? = null,
     md: RowAttributes? = null,

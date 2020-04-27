@@ -42,7 +42,7 @@ fun RBuilder.display4(classes: String? = null, block: RDOMBuilder<H4>.() -> Unit
 
 fun <T : HTMLTag> RBuilder.display(
     variant: DisplayHeadings,
-    tagFun: RBuilder.(String?, RDOMBuilder<T>.() -> Unit) -> ReactElement,
+    tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
 ): ReactElement = tagFun(classes.appendClass(variant.toString()), block)
