@@ -8,6 +8,7 @@ import react.bootstrap.content.typography.ul
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.kotlinExample
+import react.bootstrap.site.components.docs.kt
 import react.dom.br
 import react.dom.code
 import react.dom.h3
@@ -44,7 +45,7 @@ fun RBuilder.lists() {
         }
     }
     kotlinExample {
-        +"ul(${ListStyles::class.simpleName}.${ListStyles.UNSTYLED.name}) {"; br { }
+        +"ul(${ListStyles.UNSTYLED.kt}) {"; br { }
         +"    li { +\"Lorem ipsum dolor sit amet\" }"; br { }
         +"    li { +\"Consectetur adipiscing elit\" }"; br { }
         +"    li { +\"Integer molestie lorem at massa\" }"; br { }
@@ -66,8 +67,8 @@ fun RBuilder.lists() {
     contentTitle(RBuilder::h3, "Inline") { }
     p {
         +"Remove a list’s bullets and apply some light "; code { +"margin" }; +" with a combination of two functions, "
-        code { +"ul(${ListStyles::class.simpleName}.${ListStyles.INLINE.name}) { }" }; +" and "
-        code { +"li(${ListItemStyles::class.simpleName}.${ListItemStyles.INLINE.name}) { }" }; +"."
+        code { +"ul(${ListStyles.INLINE.kt}) { }" }; +" and "
+        code { +"li(${ListItemStyles.INLINE.kt}) { }" }; +"."
     }
     example {
         ul(ListStyles.INLINE) {

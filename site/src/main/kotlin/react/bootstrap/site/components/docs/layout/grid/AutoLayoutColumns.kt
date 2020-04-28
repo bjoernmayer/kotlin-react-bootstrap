@@ -119,7 +119,7 @@ fun RBuilder.autoLayoutColumns() {
         }
         kotlinExample {
             +"$containerFun {"; br { }
-            +"    $rowFun(classes = \"\$${ClassNames.JUSTIFY_CONTENT_MD_CENTER.kt}}\") {"; br { }
+            +"    $rowFun(classes = \"\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.kt}}\") {"; br { }
             +"        $colFun(all = ${Sizes.EQ.kt}, lg =  ${Sizes.SZ_2.kt}) { +\"1 of 3\" }"; br { }
             +"        $colFun(md = ${Sizes.AUTO.kt}) { +\"Variable width content\" }"; br { }
             +"        $colFun(all = ${Sizes.EQ.kt}, lg = ${Sizes.SZ_2.kt}) { +\"3 of 3\" }"; br { }

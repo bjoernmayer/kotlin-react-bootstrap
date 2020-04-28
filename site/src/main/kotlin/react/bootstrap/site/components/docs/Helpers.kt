@@ -37,4 +37,4 @@ val RBuilder.rowFun: String
     get() = rowFunFun.name
 
 val Enum<*>.kt: String
-    get() = "${this::class.simpleName}.$this"
+    get() = "${this::class.simpleName}.$name"

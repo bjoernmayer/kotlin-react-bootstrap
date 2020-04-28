@@ -7,6 +7,7 @@ import react.bootstrap.content.typography.display
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.kotlinExample
+import react.bootstrap.site.components.docs.kt
 import react.dom.br
 import react.dom.p
 import react.dom.span
@@ -67,7 +68,7 @@ fun RBuilder.displayHeadings() {
             +"}"; br { }
         }
         +"// Or you use a more generic way"; br { }
-        +"display(${DisplayHeadings::class.simpleName}.${DisplayHeadings.DISPLAY_4.name}, RBuilder::span) {"; br { }
+        +"display(${DisplayHeadings.DISPLAY_4.kt}, RBuilder::span) {"; br { }
         +"    +\"Display 4\""; br { }
         +"}"; br { }
     }
