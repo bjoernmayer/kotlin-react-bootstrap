@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackOutput.Target.COMMONJS
+
 plugins {
     kotlin("js") version "1.3.71"
     id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
@@ -19,4 +22,14 @@ dependencies {
     implementation(kotlinReact("dom", Versions.REACT_VERSION, Versions.KOTLIN_JS_WRAPPERS))
 }
 
-kotlin.target.browser { }
+tasks.named("compileKotlinJs") {
+    this as KotlinJsCompile
+
+    kotlinOptions.moduleKind = COMMONJS
+}
+
+kotlin.target.browser {
+    webpackTask {
+        output.libraryTarget = COMMONJS
+    }
+}

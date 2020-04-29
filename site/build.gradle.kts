@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackOutput.Target.COMMONJS
+
 plugins {
     kotlin("js")
     id("org.jlleitschuh.gradle.ktlint")
@@ -27,8 +30,16 @@ dependencies {
     implementation(npm("style-loader", "1.1.4"))
     implementation(npm("file-loader", "6.0.0"))
 }
+tasks.named("compileKotlinJs") {
+    this as KotlinJsCompile
+
+    kotlinOptions.moduleKind = COMMONJS
+}
 
 kotlin.target.browser {
+    webpackTask {
+        output.libraryTarget = COMMONJS
+    }
     distribution {
         directory = File("$rootDir/docs/")
     }
