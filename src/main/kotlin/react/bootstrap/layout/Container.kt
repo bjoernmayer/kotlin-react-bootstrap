@@ -1,13 +1,16 @@
 package react.bootstrap.layout
 
-import kotlinx.html.DIV
 import react.RBuilder
+import react.RComponent
+import react.RElementBuilder
+import react.RProps
+import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
-import react.dom.RDOMBuilder
 import react.dom.div
 
+@Suppress("unused")
 enum class Viscosities(val className: ClassNames) {
     FLUID(ClassNames.CONTAINER_FLUID),
     SM(ClassNames.CONTAINER_SM),
@@ -19,9 +22,26 @@ enum class Viscosities(val className: ClassNames) {
 fun RBuilder.container(
     viscosity: Viscosities? = null,
     classes: String? = null,
-    block: RDOMBuilder<DIV>.() -> Unit
-): ReactElement {
-    val className: ClassNames = viscosity?.className ?: ClassNames.CONTAINER
+    block: RElementBuilder<Container.Props>.() -> Unit
+): ReactElement = child(Container::class) {
+    attrs {
+        this.viscosity = viscosity
+        this.classes = classes
+    }
+    block()
+}
 
-    return div(classes.appendClass("$className"), block)
+class Container : RComponent<Container.Props, RState>() {
+    interface Props : RProps {
+        var viscosity: Viscosities?
+        var classes: String?
+    }
+
+    override fun RBuilder.render() {
+        val className: ClassNames = props.viscosity?.className ?: ClassNames.CONTAINER
+
+        div(classes = props.classes.appendClass(className)) {
+            children()
+        }
+    }
 }
