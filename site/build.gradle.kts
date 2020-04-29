@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackOutput.Target.COMMONJS
 
 plugins {
@@ -29,11 +28,6 @@ dependencies {
     implementation(npm("css-loader", "3.5.2"))
     implementation(npm("style-loader", "1.1.4"))
     implementation(npm("file-loader", "6.0.0"))
-}
-tasks.named("compileKotlinJs") {
-    this as KotlinJsCompile
-
-    kotlinOptions.moduleKind = COMMONJS
 }
 
 kotlin.target.browser {
