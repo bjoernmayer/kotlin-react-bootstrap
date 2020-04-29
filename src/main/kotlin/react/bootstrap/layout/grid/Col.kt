@@ -1,8 +1,11 @@
 package react.bootstrap.layout.grid
 
-import kotlinx.html.DIV
-import kotlinx.html.HTMLTag
+import react.Children
 import react.RBuilder
+import react.RComponent
+import react.RElementBuilder
+import react.RProps
+import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.AttributePair
@@ -11,7 +14,9 @@ import react.bootstrap.lib.AttributeTriple
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.CombinedAttributes
 import react.bootstrap.lib.resolveAttributeClassNames
-import react.dom.RDOMBuilder
+import react.children
+import react.cloneElement
+import react.dom.WithClassName
 import react.dom.div
 
 interface ColAttributes : CombinedAttributes {
@@ -358,65 +363,80 @@ data class SizeOffsetOrderAlignmentQuadruple(
 }
 
 fun RBuilder.col(
-    classes: String? = null,
-    block: RDOMBuilder<DIV>.() -> Unit
-): ReactElement = col(all = Sizes.EQ, classes = classes, block = block)
-
-fun <T : HTMLTag> RBuilder.col(
-    tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
-    classes: String? = null,
-    block: RDOMBuilder<T>.() -> Unit
-): ReactElement =
-    col(tagFun = tagFun, all = Sizes.EQ, classes = classes, block = block)
-
-fun RBuilder.col(
     all: ColAttributes? = null,
     sm: ColAttributes? = null,
     md: ColAttributes? = null,
     lg: ColAttributes? = null,
     xl: ColAttributes? = null,
+    renderAs: (RBuilder.() -> ReactElement)? = null,
     classes: String? = null,
-    block: RDOMBuilder<DIV>.() -> Unit
-): ReactElement = col(
-    tagFun = RBuilder::div,
-    all = all,
-    sm = sm,
-    md = md,
-    lg = lg,
-    xl = xl,
-    classes = classes,
-    block = block
-)
-
-fun <T : HTMLTag> RBuilder.col(
-    tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
-    all: ColAttributes? = null,
-    sm: ColAttributes? = null,
-    md: ColAttributes? = null,
-    lg: ColAttributes? = null,
-    xl: ColAttributes? = null,
-    classes: String? = null,
-    block: RDOMBuilder<T>.() -> Unit
-): ReactElement {
-    // Pairs and Triples match in multiple of those. That's why we need a Set
-    val colClasses = mutableSetOf<ClassNames>()
-
-    if (all?.size == null && sm?.size == null && md?.size == null && lg?.size == null && xl?.size == null) {
-        Sizes.EQ.getClassNames(null).let(colClasses::addAll)
+    block: RElementBuilder<Col.Props>.() -> Unit
+): ReactElement = child(Col::class) {
+    attrs {
+        this.renderAs = renderAs
+        this.all = all
+        this.sm = sm
+        this.md = md
+        this.lg = lg
+        this.xl = xl
+        this.classes = classes
     }
 
-    colClasses.addAll(
-        resolveAttributeClassNames<Size>(all, sm, md, lg, xl)
-    )
-    colClasses.addAll(
-        resolveAttributeClassNames<Offset>(all, sm, md, lg, xl)
-    )
-    colClasses.addAll(
-        resolveAttributeClassNames<Order>(all, sm, md, lg, xl)
-    )
-    colClasses.addAll(
-        resolveAttributeClassNames<Alignment>(all, sm, md, lg, xl)
-    )
+    block()
+}
 
-    return tagFun(classes.appendClass(colClasses), block)
+class Col : RComponent<Col.Props, RState>() {
+    interface Props : RProps {
+        var renderAs: (RBuilder.() -> ReactElement)?
+        var all: ColAttributes?
+        var sm: ColAttributes?
+        var md: ColAttributes?
+        var lg: ColAttributes?
+        var xl: ColAttributes?
+        var classes: String?
+    }
+
+    override fun RBuilder.render() {
+        // Pairs and Triples match in multiple of those. That's why we need a Set
+        val colClasses = mutableSetOf<ClassNames>()
+
+        with(props) {
+            if (all?.size == null && sm?.size == null && md?.size == null && lg?.size == null && xl?.size == null) {
+                Sizes.EQ.getClassNames(null).let(colClasses::addAll)
+            }
+
+            colClasses.addAll(
+                resolveAttributeClassNames<Size>(all, sm, md, lg, xl)
+            )
+            colClasses.addAll(
+                resolveAttributeClassNames<Offset>(all, sm, md, lg, xl)
+            )
+            colClasses.addAll(
+                resolveAttributeClassNames<Order>(all, sm, md, lg, xl)
+            )
+            colClasses.addAll(
+                resolveAttributeClassNames<Alignment>(all, sm, md, lg, xl)
+            )
+        }
+
+        if (props.renderAs !== null) {
+            child(cloneElement<WithClassName>(props.renderAs!!(), *Children.toArray(props.children)) {
+                className = className.appendClass(colClasses)
+            })
+        } else {
+            div(props.classes.appendClass(colClasses)) {
+                children()
+            }
+        }
+    }
+
+    override fun render(): dynamic {
+        return if (props.renderAs !== null) {
+            RBuilder().apply {
+                this.render()
+            }.childList.last()
+        } else {
+            super.render()
+        }
+    }
 }
