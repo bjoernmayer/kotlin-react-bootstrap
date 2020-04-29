@@ -25,7 +25,7 @@ val Home = functionalComponent<RProps> {
                         +"Rebuilt for Kotlin React"
                     }
                     row(classes = "${ClassNames.MB_N2}") {
-                        col("${ClassNames.PX_2}") {
+                        col(classes = "${ClassNames.PX_2}") {
                             routeLink(PATH_DOCS, className = "btn btn-lg btn-bd-primary w-100 mb-3") {
                                 +"Documentation"
                             }
