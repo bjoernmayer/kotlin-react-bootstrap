@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackOutput.Target.COMMONJS
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackOutput.Target.UMD
 
 plugins {
     kotlin("js")
@@ -32,7 +32,7 @@ dependencies {
 
 kotlin.target.browser {
     webpackTask {
-        output.libraryTarget = COMMONJS
+        output.libraryTarget = UMD
     }
     distribution {
         directory = File("$rootDir/docs/")
