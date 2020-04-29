@@ -5,7 +5,7 @@ import react.bootstrap.site.external.MatchProps
 import react.bootstrap.site.external.matchPath
 import react.router.dom.RouteResultProps
 
-fun RouteResultProps<RProps>.from(props: RouteResultProps<RProps>) {
+fun <T : RProps> RouteResultProps<T>.from(props: RouteResultProps<T>) {
     history = props.history
     location = props.location
     match = props.match

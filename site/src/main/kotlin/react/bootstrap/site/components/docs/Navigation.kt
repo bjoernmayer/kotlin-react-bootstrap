@@ -50,7 +50,7 @@ class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
                                 ) {
                                     markActive()
                                 }
-                                navLink(subCategory.link) {
+                                navLink<RProps>(subCategory.link) {
                                     +subCategory.name
                                 }
                             }

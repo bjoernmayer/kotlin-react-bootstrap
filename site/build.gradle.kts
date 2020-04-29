@@ -14,24 +14,14 @@ dependencies {
 
     implementation(kotlin("stdlib-js"))
 
-    implementation(kotlinx("html-js", "0.7.1"))
+    implementation(kotlinReact(Versions.REACT_VERSION, Versions.KOTLIN_JS_WRAPPERS))
+    implementation(kotlinReact("dom", Versions.REACT_VERSION, Versions.KOTLIN_JS_WRAPPERS))
+    implementation(kotlinReact("router-dom", "5.1.2", Versions.KOTLIN_JS_WRAPPERS))
+    implementation(kotlinReact("redux", "5.0.7", Versions.KOTLIN_JS_WRAPPERS))
 
-    implementation("org.jetbrains:kotlin-css:1.0.0-${Versions.KOTLIN_JS_WRAPPERS}")
-    implementation("org.jetbrains:kotlin-extensions:1.0.1-${Versions.KOTLIN_JS_WRAPPERS}")
-
-    implementation(kotlinReact("16.13.0", Versions.KOTLIN_JS_WRAPPERS))
-    implementation(kotlinReact("dom", "16.13.0", Versions.KOTLIN_JS_WRAPPERS))
-    implementation(kotlinReact("router-dom", "4.3.1", Versions.KOTLIN_JS_WRAPPERS))
-
-    implementation(npm("react", "16.13.1"))
-    implementation(npm("react-dom", "16.13.1"))
-    implementation(npm("react-router-dom", "5.1.2"))
-
-    implementation("org.jetbrains:kotlin-styled:1.0.0-${Versions.KOTLIN_JS_WRAPPERS}")
-    implementation(npm("styled-components", "5.1.0"))
-    implementation(npm("inline-style-prefixer", "6.0.0"))
-
-//    implementation(npm("bootstrap", "4.4.1"))
+    implementation(jetbrains("kotlin-styled", "1.0.0-${Versions.KOTLIN_JS_WRAPPERS}"))
+    implementation(jetbrains("kotlin-css", "1.0.0-${Versions.KOTLIN_JS_WRAPPERS}"))
+    implementation(jetbrains("kotlin-extensions", "1.0.1-${Versions.KOTLIN_JS_WRAPPERS}"))
 
     implementation(npm("css-loader", "3.5.2"))
     implementation(npm("style-loader", "1.1.4"))

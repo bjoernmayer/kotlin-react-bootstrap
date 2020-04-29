@@ -3,6 +3,7 @@ package react.bootstrap.site.components
 import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
+import react.RProps
 import react.bootstrap.ariaLabel
 import react.dom.a
 import react.dom.div
@@ -38,10 +39,10 @@ fun RBuilder.header() {
         div("navbar-nav-scroll") {
             ul("navbar-nav bd-navbar-nav flex-row") {
                 li("nav-item") {
-                    navLink(to = "/", className = "nav-link", exact = true) { +"Home" }
+                    navLink<RProps>(to = "/", className = "nav-link", exact = true) { +"Home" }
                 }
                 li("nav-item") {
-                    navLink(to = PATH_DOCS, className = "nav-link") { +"Documentation" }
+                    navLink<RProps>(to = PATH_DOCS, className = "nav-link") { +"Documentation" }
                 }
             }
         }

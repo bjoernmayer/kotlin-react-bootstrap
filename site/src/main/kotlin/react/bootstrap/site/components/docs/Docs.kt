@@ -1,5 +1,10 @@
 package react.bootstrap.site.components.docs
 
+// import react.bootstrap.site.components.docs.about.About
+// import react.bootstrap.site.components.docs.components.Components
+// import react.bootstrap.site.components.docs.extend.Extend
+// import react.bootstrap.site.components.docs.gettingstarted.GettingStarted
+// import react.bootstrap.site.components.docs.utilities.Utilities
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -8,14 +13,9 @@ import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
-// import react.bootstrap.site.components.docs.about.About
-// import react.bootstrap.site.components.docs.components.Components
 import react.bootstrap.site.components.docs.content.Content
-// import react.bootstrap.site.components.docs.extend.Extend
-// import react.bootstrap.site.components.docs.gettingstarted.GettingStarted
 import react.bootstrap.site.components.docs.layout.Layout
 import react.bootstrap.site.from
-// import react.bootstrap.site.components.docs.utilities.Utilities
 import react.router.dom.RouteResultProps
 import react.router.dom.redirect
 import react.router.dom.route
