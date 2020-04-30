@@ -3,15 +3,48 @@ package react.bootstrap.content.typography
 import kotlinx.html.BLOCKQUOTE
 import kotlinx.html.DIV
 import react.RBuilder
+import react.RComponent
+import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
 import react.dom.RDOMBuilder
+import react.dom.WithClassName
 import react.dom.blockQuote
 import react.dom.div
 
-fun RBuilder.bsBlockQuote(classes: String? = null, block: RDOMBuilder<BLOCKQUOTE>.() -> Unit): ReactElement =
-    blockQuote(classes.appendClass("${ClassNames.BLOCKQUOTE}"), block)
+fun RBuilder.blockQuote(classes: String? = null, block: RDOMBuilder<BLOCKQUOTE>.() -> Unit): ReactElement =
+    child(BlockQuote::class) {
+        attrs {
+            this.className = classes
+            this.block = block
+        }
+    }
+
+class BlockQuote : RComponent<BlockQuote.Props, RState>() {
+    interface Props : WithClassName {
+        var block: RDOMBuilder<BLOCKQUOTE>.() -> Unit
+    }
+
+    override fun RBuilder.render() {
+        blockQuote(classes = props.className.appendClass(ClassNames.BLOCKQUOTE), block = props.block)
+    }
+}
 
 fun RBuilder.blockQuoteFooter(classes: String? = null, block: RDOMBuilder<DIV>.() -> Unit): ReactElement =
-    div(classes.appendClass("${ClassNames.BLOCKQUOTE_FOOTER}"), block)
+    child(BlockQuoteFooter::class) {
+        attrs {
+            this.className = classes
+            this.block = block
+        }
+    }
+
+class BlockQuoteFooter : RComponent<BlockQuoteFooter.Props, RState>() {
+    interface Props : WithClassName {
+        var block: RDOMBuilder<DIV>.() -> Unit
+    }
+
+    override fun RBuilder.render() {
+        div(classes = props.className.appendClass(ClassNames.BLOCKQUOTE_FOOTER), block = props.block)
+    }
+}

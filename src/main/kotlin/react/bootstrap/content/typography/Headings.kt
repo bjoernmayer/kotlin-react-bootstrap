@@ -7,15 +7,13 @@ import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
 import react.dom.RDOMBuilder
 
-enum class Headings(private val classNames: ClassNames) {
+enum class Headings(val className: ClassNames) {
     H1(ClassNames.H1),
     H2(ClassNames.H2),
     H3(ClassNames.H3),
     H4(ClassNames.H4),
     H5(ClassNames.H5),
     H6(ClassNames.H6);
-
-    override fun toString(): String = classNames.toString()
 }
 
 fun <T : HTMLTag> RBuilder.h(
@@ -24,7 +22,7 @@ fun <T : HTMLTag> RBuilder.h(
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
 ): ReactElement =
-    tagFun(classes.appendClass("$headings"), block)
+    tagFun(classes.appendClass(headings.className), block)
 
 fun <T : HTMLTag> RBuilder.h1(
     tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
@@ -67,4 +65,4 @@ fun <T : HTMLTag> RBuilder.muted(
     tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
-): ReactElement = tagFun(classes.appendClass("${ClassNames.TEXT_MUTED}"), block)
+): ReactElement = tagFun(classes.appendClass(ClassNames.TEXT_MUTED), block)

@@ -11,10 +11,10 @@ fun <T : HTMLTag> RBuilder.small(
     tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
-): ReactElement = tagFun(classes.appendClass("${ClassNames.SMALL}"), block)
+): ReactElement = tagFun(classes.appendClass(ClassNames.SMALL), block)
 
 fun <T : HTMLTag> RBuilder.mark(
     tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
     classes: String? = null,
     block: RDOMBuilder<T>.() -> Unit
-): ReactElement = tagFun(classes.appendClass("${ClassNames.MARK}"), block)
+): ReactElement = tagFun(classes.appendClass(ClassNames.MARK), block)

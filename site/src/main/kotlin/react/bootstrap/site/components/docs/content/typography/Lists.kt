@@ -15,6 +15,7 @@ import react.dom.h3
 import react.dom.li
 import react.dom.p
 import react.dom.strong
+import react.dom.ul
 
 fun RBuilder.lists() {
     contentTitle("Lists") { }
@@ -76,5 +77,12 @@ fun RBuilder.lists() {
             li(ListItemStyles.INLINE) { +"Phasellus iaculis" }
             li(ListItemStyles.INLINE) { +"Nulla volutpat" }
         }
+    }
+    kotlinExample {
+        +"ul(${ListStyles.INLINE.kt}) {"; br { }
+        +"    li(${ListItemStyles.INLINE.kt}) { +\"Lorem ipsum\" }"; br { }
+        +"    li(${ListItemStyles.INLINE.kt}) { +\"Phasellus iaculis\" }"; br { }
+        +"    li(${ListItemStyles.INLINE.kt}) { +\"Nulla volutpat\" }"; br { }
+        +"}"
     }
 }
