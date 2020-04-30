@@ -1,10 +1,7 @@
 package react.bootstrap.layout.grid
 
-import react.Children
 import react.RBuilder
-import react.RComponent
 import react.RElementBuilder
-import react.RProps
 import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
@@ -13,9 +10,9 @@ import react.bootstrap.lib.AttributeQuadruple
 import react.bootstrap.lib.AttributeTriple
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.CombinedAttributes
+import react.bootstrap.lib.RenderAsComponent
+import react.bootstrap.lib.WithRenderAs
 import react.bootstrap.lib.resolveAttributeClassNames
-import react.children
-import react.cloneElement
 import react.dom.WithClassName
 import react.dom.div
 
@@ -373,21 +370,20 @@ fun RBuilder.col(
     block: RElementBuilder<Col.Props>.() -> Unit
 ): ReactElement = child(Col::class) {
     attrs {
-        this.renderAs = renderAs
         this.all = all
         this.sm = sm
         this.md = md
         this.lg = lg
         this.xl = xl
+        this.renderAs = renderAs
         this.classes = classes
     }
 
     block()
 }
 
-class Col : RComponent<Col.Props, RState>() {
-    interface Props : RProps {
-        var renderAs: (RBuilder.() -> ReactElement)?
+class Col : RenderAsComponent<Col.Props, RState>() {
+    interface Props : WithRenderAs {
         var all: ColAttributes?
         var sm: ColAttributes?
         var md: ColAttributes?
@@ -396,7 +392,7 @@ class Col : RComponent<Col.Props, RState>() {
         var classes: String?
     }
 
-    override fun RBuilder.render() {
+    override fun WithClassName.setProps() {
         // Pairs and Triples match in multiple of those. That's why we need a Set
         val colClasses = mutableSetOf<ClassNames>()
 
@@ -419,24 +415,8 @@ class Col : RComponent<Col.Props, RState>() {
             )
         }
 
-        if (props.renderAs !== null) {
-            child(cloneElement<WithClassName>(props.renderAs!!(), *Children.toArray(props.children)) {
-                className = className.appendClass(colClasses)
-            })
-        } else {
-            div(props.classes.appendClass(colClasses)) {
-                children()
-            }
-        }
+        className = props.classes.appendClass(colClasses)
     }
 
-    override fun render(): dynamic {
-        return if (props.renderAs !== null) {
-            RBuilder().apply {
-                this.render()
-            }.childList.last()
-        } else {
-            super.render()
-        }
-    }
+    override fun RBuilder.defaultElement(): ReactElement = div { }
 }

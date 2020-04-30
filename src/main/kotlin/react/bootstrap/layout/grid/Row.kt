@@ -1,16 +1,18 @@
 package react.bootstrap.layout.grid
 
-import kotlinx.html.DIV
-import kotlinx.html.HTMLTag
 import react.RBuilder
+import react.RElementBuilder
+import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.AttributePair
 import react.bootstrap.lib.AttributeTriple
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.CombinedAttributes
+import react.bootstrap.lib.RenderAsComponent
+import react.bootstrap.lib.WithRenderAs
 import react.bootstrap.lib.resolveAttributeClassNames
-import react.dom.RDOMBuilder
+import react.dom.WithClassName
 import react.dom.div
 
 interface RowAttributes : CombinedAttributes {
@@ -163,52 +165,58 @@ fun RBuilder.row(
     lg: RowAttributes? = null,
     xl: RowAttributes? = null,
     gutters: Boolean = true,
+    renderAs: (RBuilder.() -> ReactElement)? = null,
     classes: String? = null,
-    block: RDOMBuilder<DIV>.() -> Unit
-): ReactElement = row(
-    tagFun = RBuilder::div,
-    all = all,
-    sm = sm,
-    md = md,
-    lg = lg,
-    xl = xl,
-    gutters = gutters,
-    classes = classes,
-    block = block
-)
-
-fun <T : HTMLTag> RBuilder.row(
-    tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
-    all: RowAttributes? = null,
-    sm: RowAttributes? = null,
-    md: RowAttributes? = null,
-    lg: RowAttributes? = null,
-    xl: RowAttributes? = null,
-    gutters: Boolean = true,
-    classes: String? = null,
-    block: RDOMBuilder<T>.() -> Unit
-): ReactElement {
-    // Pairs and Triples match in multiple of those. That's why we need a Set
-    val rowClasses = mutableSetOf(ClassNames.ROW)
-
-    if (!gutters) {
-        rowClasses.add(ClassNames.NO_GUTTERS)
+    block: RElementBuilder<Row.Props>.() -> Unit
+): ReactElement = child(Row::class) {
+    attrs {
+        this.all = all
+        this.sm = sm
+        this.md = md
+        this.lg = lg
+        this.xl = xl
+        this.gutters = gutters
+        this.renderAs = renderAs
+        this.classes = classes
     }
 
-    rowClasses.addAll(
-        resolveAttributeClassNames<ColCount>(all, sm, md, lg, xl)
-    )
-    rowClasses.addAll(
-        resolveAttributeClassNames<ItemsY>(all, sm, md, lg, xl)
-    )
+    block()
+}
 
-    rowClasses.addAll(
-        resolveAttributeClassNames<ItemsX>(all, sm, md, lg, xl)
-    )
-
-    return tagFun(
-        classes.appendClass(rowClasses.joinToString(" "))
-    ) {
-        block()
+class Row : RenderAsComponent<Row.Props, RState>() {
+    interface Props : WithRenderAs {
+        var all: RowAttributes?
+        var sm: RowAttributes?
+        var md: RowAttributes?
+        var lg: RowAttributes?
+        var xl: RowAttributes?
+        var gutters: Boolean?
+        var classes: String?
     }
+
+    override fun WithClassName.setProps() {
+        // Pairs and Triples match in multiple of those. That's why we need a Set
+        val rowClasses = mutableSetOf(ClassNames.ROW)
+
+        with(props) {
+            if (gutters == false) {
+                rowClasses.add(ClassNames.NO_GUTTERS)
+            }
+
+            rowClasses.addAll(
+                resolveAttributeClassNames<ColCount>(all, sm, md, lg, xl)
+            )
+            rowClasses.addAll(
+                resolveAttributeClassNames<ItemsY>(all, sm, md, lg, xl)
+            )
+
+            rowClasses.addAll(
+                resolveAttributeClassNames<ItemsX>(all, sm, md, lg, xl)
+            )
+        }
+
+        className = props.classes.appendClass(rowClasses)
+    }
+
+    override fun RBuilder.defaultElement(): ReactElement = div { }
 }
