@@ -1,24 +1,22 @@
 package react.bootstrap.site.components.docs.content
 
 import react.RBuilder
-import react.RComponent
-import react.RProps
-import react.RState
+import react.bootstrap.site.components.docs.Category
+import react.bootstrap.site.components.docs.DocumentationPage
+import react.bootstrap.site.components.docs.content.tables.tables
 import react.bootstrap.site.components.docs.content.typography.typography
-import react.router.dom.RouteResultProps
-import react.router.dom.redirect
-import react.router.dom.route
-import react.router.dom.switch
 
-class Content : RComponent<RouteResultProps<RProps>, RState>() {
-    override fun RBuilder.render() {
-        switch {
-            route<RProps>("/docs/content/typography/") {
-                typography()
-            }
-            route("/docs/content/") {
-                redirect(props.location.pathname, "/docs/content/typography/")
-            }
-        }
-    }
+internal val content = Category(
+    "Content",
+    "content",
+    Content::class
+).apply {
+    // "Reboot", "reboot",
+    addSubCategory("Typography", "typography", RBuilder::typography)
+    addSubCategory("Code", "code", RBuilder::code)
+//                addSubCategory("Images", "images")
+    addSubCategory("Tables", "tables", RBuilder::tables)
+//                addSubCategory("Figures", "figures")
 }
+
+internal class Content : DocumentationPage(content)

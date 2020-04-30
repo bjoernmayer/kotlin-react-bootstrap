@@ -12,7 +12,7 @@ import react.dom.div
 import react.dom.figure
 import react.dom.pre
 
-fun RBuilder.kotlinExample(block: RDOMBuilder<CODE>.() -> Unit): ReactElement =
+fun RBuilder.codeBox(block: RDOMBuilder<CODE>.() -> Unit): ReactElement =
     figure("highlight") {
         pre {
             code("kotlin") {

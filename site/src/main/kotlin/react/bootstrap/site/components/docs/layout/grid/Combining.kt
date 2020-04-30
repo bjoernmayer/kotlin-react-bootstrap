@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
@@ -20,14 +22,12 @@ import react.bootstrap.layout.grid.SizeOrderPair
 import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
-import react.bootstrap.site.components.docs.colFun
-import react.bootstrap.site.components.docs.containerFun
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.flexColsExampleRow
-import react.bootstrap.site.components.docs.fixings.kotlinExample
+import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.rowFun
+import react.bootstrap.site.components.docs.ln
 import react.dom.br
 import react.dom.code
 import react.dom.h3
@@ -35,7 +35,7 @@ import react.dom.h4
 import react.dom.p
 import kotlin.reflect.KFunction2
 
-fun RBuilder.combining() {
+internal fun RBuilder.combining() {
     val sz = Offsets::sz.name
     val ord = Sizes::ord.name
     val off = Sizes::off.name
@@ -53,7 +53,7 @@ fun RBuilder.combining() {
     val alignments = Alignments::class.simpleName
     val end = Alignments.END.kt
 
-    contentTitle("$sizes, $offsets, $orderings, $alignments") { }
+    contentTitle("$sizes, $offsets, $orderings, $alignments")
     p {
         +"As you can see in the examples above, all col attributes are set using the same arguments. Custom pairing "
         +"functions are used to combine the values."
@@ -79,21 +79,28 @@ fun RBuilder.combining() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(all = $off1 $sz $sz4) { +\"all = $off1 $sz $sz4\" }"; br { }
-            +"        $colFun { +\"Reference\" }"; br { }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(all = $ord3 $sz $sz4) { +\"all = $ord3 $sz $sz4\" }"; br { }
-            +"        $colFun { +\"Reference\" }"; br { }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(all = $end $sz $sz4) { +\"all = $end $sz $sz4\" }"; br { }
-            +"        $colFun { +\"Reference\" }"; br { }
-            +"    }"; br { }
-            +"}"
+        codeBox {
+            containerFunImport()
+            gridEnumImport(Offsets::class)
+            gridEnumImport(Orderings::class)
+            gridEnumImport(Sizes::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(all = $off1 $sz $sz4) { +\"all = $off1 $sz $sz4\" }" }
+                    ln(il) { +"$colFun { +\"Reference\" }" }
+                }
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(all = $ord3 $sz $sz4) { +\"all = $ord3 $sz $sz4\" }" }
+                    ln(il) { +"$colFun { +\"Reference\" }" }
+                }
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(all = $end $sz $sz4) { +\"all = $end $sz $sz4\" }" }
+                    ln(il) { +"$colFun { +\"Reference\" }" }
+                }
+            }
         }
     }
 
@@ -118,21 +125,28 @@ fun RBuilder.combining() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(all = $sz4 $off $off1) { +\"all = $sz4 $off $off1\" }"; br { }
-            +"        $colFun { +\"Reference\" }"; br { }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(all = $ord3 $off $off1) { +\"all = $ord3 $off $off1\" }"; br { }
-            +"        $colFun { +\"Reference\" }"; br { }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(all = $end $off $off1) { +\"all = $end $off $off1\" }"; br { }
-            +"        $colFun { +\"Reference\" }"; br { }
-            +"    }"; br { }
-            +"}"
+        codeBox {
+            containerFunImport()
+            gridEnumImport(Offsets::class)
+            gridEnumImport(Orderings::class)
+            gridEnumImport(Sizes::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(all = $sz4 $off $off1) { +\"all = $sz4 $off $off1\" }" }
+                    ln(il) { +"$colFun { +\"Reference\" }" }
+                }
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(all = $ord3 $off $off1) { +\"all = $ord3 $off $off1\" }" }
+                    ln(il) { +"$colFun { +\"Reference\" }" }
+                }
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(all = $end $off $off1) { +\"all = $end $off $off1\" }" }
+                    ln(il) { +"$colFun { +\"Reference\" }" }
+                }
+            }
         }
     }
 
@@ -157,21 +171,28 @@ fun RBuilder.combining() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(all = $sz4 $ord $ord3) { +\"all = $sz4 $ord $ord3\" }"; br { }
-            +"        $colFun { +\"Reference\" }"; br { }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(all = $off1 $ord $ord3) { +\"all = $off1 $ord $ord3\" }"; br { }
-            +"        $colFun { +\"Reference\" }"; br { }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(all = $end $ord $ord3) { +\"all = $end $ord $ord3\" }"; br { }
-            +"        $colFun { +\"Reference\" }"; br { }
-            +"    }"; br { }
-            +"}"
+        codeBox {
+            containerFunImport()
+            gridEnumImport(Offsets::class)
+            gridEnumImport(Orderings::class)
+            gridEnumImport(Sizes::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(all = $sz4 $ord $ord3) { +\"all = $sz4 $ord $ord3\" }" }
+                    ln(il) { +"$colFun { +\"Reference\" }" }
+                }
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(all = $off1 $ord $ord3) { +\"all = $off1 $ord $ord3\" }" }
+                    ln(il) { +"$colFun { +\"Reference\" }" }
+                }
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(all = $end $ord $ord3) { +\"all = $end $ord $ord3\" }" }
+                    ln(il) { +"$colFun { +\"Reference\" }" }
+                }
+            }
         }
     }
 
@@ -196,21 +217,28 @@ fun RBuilder.combining() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(all = $sz4 $align $end) { +\"all = $sz4 $align $end\" }"; br { }
-            +"        $colFun { +\"Reference\" }"; br { }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(all = $off1 $align $end) { +\"all = $off1 $align $end\" }"; br { }
-            +"        $colFun { +\"Reference\" }"; br { }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(all = $ord3 $align $end) { +\"all = $ord3 $align $end\" }"; br { }
-            +"        $colFun { +\"Reference\" }"; br { }
-            +"    }"; br { }
-            +"}"
+        codeBox {
+            containerFunImport()
+            gridEnumImport(Offsets::class)
+            gridEnumImport(Orderings::class)
+            gridEnumImport(Sizes::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(all = $sz4 $align $end) { +\"all = $sz4 $align $end\" }" }
+                    ln(il) { +"$colFun { +\"Reference\" }" }
+                }
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(all = $off1 $align $end) { +\"all = $off1 $align $end\" }" }
+                    ln(il) { +"$colFun { +\"Reference\" }" }
+                }
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(all = $ord3 $align $end) { +\"all = $ord3 $align $end\" }" }
+                    ln(il) { +"$colFun { +\"Reference\" }" }
+                }
+            }
         }
     }
 
@@ -363,13 +391,19 @@ private fun RBuilder.allPossibleCombinations() {
                     }
                 }
             }
-            kotlinExample {
-                +"$containerFun {"; br { }
-                +"    $rowFun {"; br { }
-                +"        $colFun(all = ${pairing.argString}) { +\"all = ${pairing.argString}\" }"; br { }
-                +"        $colFun { +\"Reference\" }"; br { }
-                +"    }"; br { }
-                +"}"
+            val imports = listOf(pairing.thisClassName, pairing.withClassName).sortedBy { it }
+            codeBox {
+                containerFunImport()
+                imports.forEach {
+                    gridImport(it!!)
+                }
+                colFunImport()
+                rowFunImport()
+                br { }
+                ktConRow { il ->
+                    ln(il) { +"$colFun(all = ${pairing.argString}) { +\"all = ${pairing.argString}\" }" }
+                    ln(il) { +"$colFun { +\"Reference\" }" }
+                }
             }
         }
     }
@@ -377,7 +411,8 @@ private fun RBuilder.allPossibleCombinations() {
     val shownTriplings = mutableListOf<String>()
     allTriplings.toSet().forEach { tripling ->
         tripling.withList.forEach next@{ pairing ->
-            val combination = "${pairing.thisClassName} + ${pairing.withClassName} + ${tripling.thisClassName}"
+            val enumNames = listOf(pairing.thisClassName, pairing.withClassName, tripling.thisClassName)
+            val combination = enumNames.joinToString(" + ")
             if (shownTriplings.contains(combination)) {
                 return@next
             }
@@ -395,13 +430,18 @@ private fun RBuilder.allPossibleCombinations() {
                         }
                     }
                 }
-                kotlinExample {
-                    +"$containerFun {"; br { }
-                    +"    $rowFun {"; br { }
-                    +"        $colFun(all = $argString) { +\"all = $argString\" }"; br { }
-                    +"        $colFun { +\"Reference\" }"; br { }
-                    +"    }"; br { }
-                    +"}"
+                codeBox {
+                    containerFunImport()
+                    enumNames.sortedBy { it }.forEach {
+                        gridImport(it!!)
+                    }
+                    colFunImport()
+                    rowFunImport()
+                    br { }
+                    ktConRow { il ->
+                        ln(il) { +"$colFun(all = $argString) { +\"all = $argString\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
                 }
             }
         }
@@ -434,13 +474,19 @@ private fun RBuilder.allPossibleCombinations() {
                         }
                     }
                 }
-                kotlinExample {
-                    +"$containerFun {"; br { }
-                    +"    $rowFun {"; br { }
-                    +"        $colFun(all = $argString) { +\"all = $argString\" }"; br { }
-                    +"        $colFun { +\"Reference\" }"; br { }
-                    +"    }"; br { }
-                    +"}"
+                codeBox {
+                    containerFunImport()
+                    gridEnumImport(Alignments::class)
+                    gridEnumImport(Offsets::class)
+                    gridEnumImport(Orderings::class)
+                    gridEnumImport(Sizes::class)
+                    colFunImport()
+                    rowFunImport()
+                    br { }
+                    ktConRow { il ->
+                        ln(il) { +"$colFun(all = $argString) { +\"all = $argString\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
                 }
             }
         }

@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package react.bootstrap.site.components.docs.content.typography
 
 import react.RBuilder
@@ -5,10 +7,12 @@ import react.bootstrap.content.typography.ListItemStyles
 import react.bootstrap.content.typography.ListStyles
 import react.bootstrap.content.typography.li
 import react.bootstrap.content.typography.ul
+import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
-import react.bootstrap.site.components.docs.fixings.kotlinExample
 import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.components.docs.layout.grid.ktBlock
+import react.bootstrap.site.components.docs.ln
 import react.dom.br
 import react.dom.code
 import react.dom.h3
@@ -17,8 +21,8 @@ import react.dom.p
 import react.dom.strong
 import react.dom.ul
 
-fun RBuilder.lists() {
-    contentTitle("Lists") { }
+internal fun RBuilder.lists() {
+    contentTitle("Lists")
     contentTitle(RBuilder::h3, "Unstyled") { }
     p {
         +"Remove the default "; code { +"list-style" }; +" and left margin on list items (immediate children only). "
@@ -45,25 +49,28 @@ fun RBuilder.lists() {
             li { +"Eget porttitor lorem" }
         }
     }
-    kotlinExample {
-        +"ul(${ListStyles.UNSTYLED.kt}) {"; br { }
-        +"    li { +\"Lorem ipsum dolor sit amet\" }"; br { }
-        +"    li { +\"Consectetur adipiscing elit\" }"; br { }
-        +"    li { +\"Integer molestie lorem at massa\" }"; br { }
-        +"    li { +\"Facilisis in pretium nisl aliquet\" }"; br { }
-        +"    li {"; br { }
-        +"        +\"Nulla volutpat aliquam \""; br { }
-        +"        ul {"; br { }
-        +"            li { +\"Phasellus iaculis neque\" }"; br { }
-        +"            li { +\"Purus sodales ultricies\" }"; br { }
-        +"            li { +\"Vestibulum laoreet porttitor sem\" }"; br { }
-        +"            li { +\"Ac tristique libero volutpat at\" }"; br { }
-        +"        }"; br { }
-        +"    }"; br { }
-        +"    li { +\"Faucibus porta lacus fringilla vel\" }"; br { }
-        +"    li { +\"Aenean sit amet erat nunc\" }"; br { }
-        +"    li { +\"Eget porttitor lorem\" }"; br { }
-        +"}"
+    codeBox {
+        ln { +"import react.bootstrap.content.typography.${ListStyles::class.simpleName}" }
+        ln { +"import react.bootstrap.content.typography.ul" }
+        br { }
+        ktBlock(0, "ul(${ListStyles.UNSTYLED.kt})") { il ->
+            ln(il) { +"li { +\"Lorem ipsum dolor sit amet\" }" }
+            ln(il) { +"li { +\"Consectetur adipiscing elit\" }" }
+            ln(il) { +"li { +\"Integer molestie lorem at massa\" }" }
+            ln(il) { +"li { +\"Facilisis in pretium nisl aliquet\" }" }
+            ktBlock(il, "li") { il ->
+                ln(il) { +"+\"Nulla volutpat aliquam \"" }
+                ktBlock(il, "ul") { il ->
+                    ln(il) { +"li { +\"Phasellus iaculis neque\" }" }
+                    ln(il) { +"li { +\"Purus sodales ultricies\" }" }
+                    ln(il) { +"li { +\"Vestibulum laoreet porttitor sem\" }" }
+                    ln(il) { +"li { +\"Ac tristique libero volutpat at\" }" }
+                }
+            }
+            ln(il) { +"li { +\"Faucibus porta lacus fringilla vel\" }" }
+            ln(il) { +"li { +\"Aenean sit amet erat nunc\" }" }
+            ln(il) { +"li { +\"Eget porttitor lorem\" }" }
+        }
     }
     contentTitle(RBuilder::h3, "Inline") { }
     p {
@@ -78,11 +85,16 @@ fun RBuilder.lists() {
             li(ListItemStyles.INLINE) { +"Nulla volutpat" }
         }
     }
-    kotlinExample {
-        +"ul(${ListStyles.INLINE.kt}) {"; br { }
-        +"    li(${ListItemStyles.INLINE.kt}) { +\"Lorem ipsum\" }"; br { }
-        +"    li(${ListItemStyles.INLINE.kt}) { +\"Phasellus iaculis\" }"; br { }
-        +"    li(${ListItemStyles.INLINE.kt}) { +\"Nulla volutpat\" }"; br { }
-        +"}"
+    codeBox {
+        ln { +"import react.bootstrap.content.typography.${ListItemStyles::class.simpleName}" }
+        ln { +"import react.bootstrap.content.typography.${ListStyles::class.simpleName}" }
+        ln { +"import react.bootstrap.content.typography.li" }
+        ln { +"import react.bootstrap.content.typography.ul" }
+        br { }
+        ktBlock(0, "ul(${ListStyles.INLINE.kt}) ") { il ->
+            ln(il) { +"li(${ListItemStyles.INLINE.kt}) { +\"Lorem ipsum\" }" }
+            ln(il) { +"li(${ListItemStyles.INLINE.kt}) { +\"Phasellus iaculis\" }" }
+            ln(il) { +"li(${ListItemStyles.INLINE.kt}) { +\"Nulla volutpat\" }" }
+        }
     }
 }

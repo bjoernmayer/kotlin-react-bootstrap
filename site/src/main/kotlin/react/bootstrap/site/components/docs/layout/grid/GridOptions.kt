@@ -3,9 +3,8 @@ package react.bootstrap.site.components.docs.layout.grid
 import kotlinx.html.ThScope
 import react.RBuilder
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.colFun
 import react.bootstrap.site.components.docs.fixings.contentTitle
-import react.dom.br
+import react.bootstrap.site.components.docs.ln
 import react.dom.code
 import react.dom.p
 import react.dom.small
@@ -16,8 +15,8 @@ import react.dom.th
 import react.dom.thead
 import react.dom.tr
 
-fun RBuilder.gridOptions() {
-    contentTitle("Grid options") { }
+internal fun RBuilder.gridOptions() {
+    contentTitle("Grid options")
     p {
         +"While Bootstrap uses "; code { +"em" }; +"s or "; code { +"rem" }; +"s for defining most sizes, "
         code { +"px" }; +"s are used for grid breakpoints and container widths. This is because the viewport width is "
@@ -31,23 +30,23 @@ fun RBuilder.gridOptions() {
             tr {
                 th { }
                 th(classes = "${ClassNames.TEXT_CENTER}") {
-                    +"Extra small"; br { }
+                    ln { +"Extra small" }
                     small { +"<576px" }
                 }
                 th(classes = "${ClassNames.TEXT_CENTER}") {
-                    +"Small"; br { }
+                    ln { +"Small" }
                     small { +"≥576px" }
                 }
                 th(classes = "${ClassNames.TEXT_CENTER}") {
-                    +"Medium"; br { }
+                    ln { +"Medium" }
                     small { +"≥768px" }
                 }
                 th(classes = "${ClassNames.TEXT_CENTER}") {
-                    +"Large"; br { }
+                    ln { +"Large" }
                     small { +"≥992px" }
                 }
                 th(classes = "${ClassNames.TEXT_CENTER}") {
-                    +"Extra Large"; br { }
+                    ln { +"Extra Large" }
                     small { +"≥1200px" }
                 }
             }

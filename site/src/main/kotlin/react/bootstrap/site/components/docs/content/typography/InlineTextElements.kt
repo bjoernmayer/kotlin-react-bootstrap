@@ -5,14 +5,16 @@ import react.bootstrap.content.typography.mark
 import react.bootstrap.content.typography.small
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
-import react.bootstrap.site.components.docs.fixings.kotlinExample
+import react.bootstrap.site.components.docs.fixings.codeBox
+import react.bootstrap.site.components.docs.layout.grid.ktBlock
+import react.bootstrap.site.components.docs.ln
 import react.dom.br
 import react.dom.code
 import react.dom.p
 import react.dom.span
 
-fun RBuilder.inlineTextElements() {
-    contentTitle("Inline text elements") { }
+internal fun RBuilder.inlineTextElements() {
+    contentTitle("Inline text elements")
     p {
         +"Alternative implementations of "; code { +"mark { }" }; +" and "; code { +"small { }" }; +" are provided to"
         +" to apply the same styles while avoiding any unwanted semantic implications that the tags would bring."
@@ -25,12 +27,15 @@ fun RBuilder.inlineTextElements() {
             small(RBuilder::span) { +"This line of text is meant to be treated as fine print." }
         }
     }
-    kotlinExample {
-        +"p {"; br { }
-        +"    +\"You can use the mark tag to \";  mark(RBuilder::span) { +\"highlight\" }; +\" text.\""; br { }
-        +"}"; br { }
-        +"p {"; br { }
-        +"    small(RBuilder::span) { +\"This line of text is meant to be treated as fine print.\" }"; br { }
-        +"}"; br { }
+    codeBox {
+        ln { +"import react.bootstrap.content.typography.mark" }
+        ln { +"import react.bootstrap.content.typography.small" }
+        br { }
+        ktBlock(0, "p") { il ->
+            ln(il) { +"+\"You can use the mark tag to \";  mark(RBuilder::span) { +\"highlight\" }; +\" text.\"" }
+        }
+        ktBlock(0, "p") { il ->
+            ln(il) { +"small(RBuilder::span) { +\"This line of text is meant to be treated as fine print.\" }" }
+        }
     }
 }

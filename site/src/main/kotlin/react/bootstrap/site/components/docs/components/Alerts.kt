@@ -5,7 +5,7 @@ import react.bootstrap.site.components.docs.fixings.contentPageLead
 import react.bootstrap.site.components.docs.fixings.contentPageTitle
 
 fun RBuilder.alerts() {
-    contentPageTitle("Alerts") { }
+    contentPageTitle("Alerts")
     contentPageLead {
         +"Provide contextual feedback messages for typical user actions with the handful of available and flexible"
         +"alert messages."

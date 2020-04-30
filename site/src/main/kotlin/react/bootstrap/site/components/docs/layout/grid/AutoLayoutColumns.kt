@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
@@ -6,21 +8,20 @@ import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.colFun
-import react.bootstrap.site.components.docs.containerFun
+import react.bootstrap.site.components.docs.classNamesImport
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.exampleRow
-import react.bootstrap.site.components.docs.fixings.kotlinExample
+import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.rowFun
+import react.bootstrap.site.components.docs.ln
 import react.dom.br
 import react.dom.code
 import react.dom.h3
 import react.dom.p
 
-fun RBuilder.autoLayoutColumns() {
-    contentTitle("Auto-layout columns") { }
+internal fun RBuilder.autoLayoutColumns() {
+    contentTitle("Auto-layout columns")
     p {
         +"Utilize breakpoint-specific equal-size enum values for easy column sizing without an explicit numbered enum "
         +"value like "; code { +Sizes.SZ_6.kt }; +"."
@@ -46,19 +47,24 @@ fun RBuilder.autoLayoutColumns() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun { +\"1 of 2\" }"; br { }
-            +"        $colFun { +\"2 of 2\" }"; br { }
-            +"        // Same as: col(all = ${Sizes.EQ.kt}) { +\"x of 2\" }"; br { }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun { +\"1 of 3\" }"; br { }
-            +"        $colFun { +\"2 of 3\" }"; br { }
-            +"        $colFun { +\"3 of 3\" }"; br { }
-            +"    }"; br { }
-            +"}"
+        codeBox {
+            containerFunImport()
+            gridEnumImport(Sizes::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun { +\"1 of 2\" }" }
+                    ln(il) { +"$colFun { +\"2 of 2\" }" }
+                    ln(il) { +"// Same as: col(all = ${Sizes.EQ.kt}) { +\"x of 2\" }" }
+                }
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun { +\"1 of 3\" }" }
+                    ln(il) { +"$colFun { +\"2 of 3\" }" }
+                    ln(il) { +"$colFun { +\"3 of 3\" }" }
+                }
+            }
         }
     }
     contentTitle(RBuilder::h3, "Setting one column width") { }
@@ -82,19 +88,24 @@ fun RBuilder.autoLayoutColumns() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun {"; br { }
-            +"        $rowFun { +\"1 of 3\" }"; br { }
-            +"        $colFun(all = ${Sizes.SZ_6.kt}) { +\"2 of 3 (wider)\" }"; br { }
-            +"        $colFun { +\"3 of 3\" }"; br { }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun { +\"1 of 3\" }"; br { }
-            +"        $colFun(all = ${Sizes.SZ_5.kt}) { +\"2 of 3 (wider)\" }"; br { }
-            +"        $colFun { +\"3 of 3\" }"; br { }
-            +"    }"; br {}
-            +"}"
+        codeBox {
+            containerFunImport()
+            gridEnumImport(Sizes::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun { +\"1 of 3\" }" }
+                    ln(il) { +"$colFun(all = ${Sizes.SZ_6.kt}) { +\"2 of 3 (wider)\" }" }
+                    ln(il) { +"$colFun { +\"3 of 3\" }" }
+                }
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun { +\"1 of 3\" }" }
+                    ln(il) { +"$colFun(all = ${Sizes.SZ_5.kt}) { +\"2 of 3 (wider)\" }" }
+                    ln(il) { +"$colFun { +\"3 of 3\" }" }
+                }
+            }
         }
     }
     contentTitle(RBuilder::h3, "Variable width content") { }
@@ -117,19 +128,25 @@ fun RBuilder.autoLayoutColumns() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun(classes = \"\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.kt}}\") {"; br { }
-            +"        $colFun(all = ${Sizes.EQ.kt}, lg =  ${Sizes.SZ_2.kt}) { +\"1 of 3\" }"; br { }
-            +"        $colFun(md = ${Sizes.AUTO.kt}) { +\"Variable width content\" }"; br { }
-            +"        $colFun(all = ${Sizes.EQ.kt}, lg = ${Sizes.SZ_2.kt}) { +\"3 of 3\" }"; br { }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun { +\"1 of 3\"}"; br { }
-            +"        $colFun(md = ${Sizes.AUTO.kt}) { +\"Variable width content\" }"; br { }
-            +"        $colFun(all = ${Sizes.EQ.kt}, lg = ${Sizes.SZ_2.kt}) { +\"3 of 3\" }"; br { }
-            +"    }"; br { }
-            +"}"
+        codeBox {
+            containerFunImport()
+            gridEnumImport(Sizes::class)
+            colFunImport()
+            rowFunImport()
+            classNamesImport()
+            br { }
+            ktContainer { il ->
+                ktBlock(il, "$rowFun(classes = \"\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.kt}}\")") { il ->
+                    ln(il) { +"$colFun(all = ${Sizes.EQ.kt}, lg =  ${Sizes.SZ_2.kt}) { +\"1 of 3\" }" }
+                    ln(il) { +"$colFun(md = ${Sizes.AUTO.kt}) { +\"Variable width content\" }" }
+                    ln(il) { +"$colFun(all = ${Sizes.EQ.kt}, lg = ${Sizes.SZ_2.kt}) { +\"3 of 3\" }" }
+                }
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun { +\"1 of 3\"}" }
+                    ln(il) { +"$colFun(md = ${Sizes.AUTO.kt}) { +\"Variable width content\" }" }
+                    ln(il) { +"$colFun(all = ${Sizes.EQ.kt}, lg = ${Sizes.SZ_2.kt}) { +\"3 of 3\" }" }
+                }
+            }
         }
     }
 }

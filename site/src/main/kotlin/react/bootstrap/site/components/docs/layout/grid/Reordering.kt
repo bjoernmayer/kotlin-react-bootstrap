@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
@@ -7,14 +9,12 @@ import react.bootstrap.layout.grid.Orderings
 import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
-import react.bootstrap.site.components.docs.colFun
-import react.bootstrap.site.components.docs.containerFun
+import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.exampleRow
-import react.bootstrap.site.components.docs.fixings.kotlinExample
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.rowFun
+import react.bootstrap.site.components.docs.ln
 import react.dom.a
 import react.dom.br
 import react.dom.code
@@ -23,11 +23,11 @@ import react.dom.h4
 import react.dom.p
 import react.dom.strong
 
-fun RBuilder.reordering() {
+internal fun RBuilder.reordering() {
     val offsetsName = Offsets::class.simpleName
     val orderingsName = Orderings::class.simpleName
 
-    contentTitle("Reordering") { }
+    contentTitle("Reordering")
     contentTitle(RBuilder::h3, "$orderingsName enum") { }
     p {
         +"Use "; code { +"$orderingsName" }; +" values for controlling the "; strong { +"visual order" }
@@ -45,14 +45,17 @@ fun RBuilder.reordering() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun { +\"First in DOM, no order applied\" }"; br { }
-            +"        $colFun(all = ${Orderings.ORD_12.kt}) { +\" Second in DOM, with a larger order\" }"; br { }
-            +"        $colFun(all = ${Orderings.ORD_1.kt}) { +\"Third in DOM, with an order of 1\" }"; br { }
-            +"    }"; br { }
-            +"}"
+        codeBox {
+            containerFunImport()
+            gridEnumImport(Orderings::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktConRow { il ->
+                ln(il) { +"$colFun { +\"First in DOM, no order applied\" }" }
+                ln(il) { +"$colFun(all = ${Orderings.ORD_12.kt}) { +\" Second in DOM, with a larger order\" }" }
+                ln(il) { +"$colFun(all = ${Orderings.ORD_1.kt}) { +\"Third in DOM, with an order of 1\" }" }
+            }
         }
     }
     contentTitle(RBuilder::h3, "Offsetting columns") { }
@@ -89,26 +92,36 @@ fun RBuilder.reordering() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(md = ${Sizes.SZ_4.kt}) { +\"md = ${Sizes.SZ_4.kt}\" }"; br { }
-            +"        $colFun(md = ${Sizes.SZ_4.kt} $off ${Offsets.OFF_4.kt}) { +\"md = ${Sizes.SZ_4.kt} $off "
-            +"${Offsets.OFF_4.kt}\" } "; br { }
-            +"    }"; br { }
-
-            +"    $rowFun {"; br { }
-            for (x in 1..2) {
-                +"        $colFun(md = ${Sizes.SZ_3.kt} $off ${Offsets.OFF_3.kt}) { +\"md = ${Sizes.SZ_3.kt} $off "
-                +"${Offsets.OFF_3.kt}\" } "; br { }
+        codeBox {
+            containerFunImport()
+            gridEnumImport(Offsets::class)
+            gridEnumImport(Sizes::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(md = ${Sizes.SZ_4.kt}) { +\"md = ${Sizes.SZ_4.kt}\" }" }
+                    ln(il) {
+                        +"$colFun(md = ${Sizes.SZ_4.kt} $off ${Offsets.OFF_4.kt}) { +\"md = ${Sizes.SZ_4.kt} $off "
+                        +"${Offsets.OFF_4.kt}\" }"
+                    }
+                }
+                ktRow(il) { il ->
+                    for (x in 1..2) {
+                        ln(il) {
+                            +"$colFun(md = ${Sizes.SZ_3.kt} $off ${Offsets.OFF_3.kt}) { +\"md = ${Sizes.SZ_3.kt} $off "
+                            +"${Offsets.OFF_3.kt}\" } "
+                        }
+                    }
+                }
+                ktRow(il) { il ->
+                    ln(il) {
+                        +"$colFun(md = ${Sizes.SZ_6.kt} $off ${Offsets.OFF_3.kt}) { +\"md = ${Sizes.SZ_6.kt} $off "
+                        +"${Offsets.OFF_3.kt}\" }"
+                    }
+                }
             }
-            +"    }"; br { }
-
-            +"    $rowFun {"; br { }
-            +"        $colFun(md = ${Sizes.SZ_6.kt} $off ${Offsets.OFF_3.kt}) { +\"md = ${Sizes.SZ_6.kt} $off "
-            +"${Offsets.OFF_3.kt}\" }"; br { }
-            +"    }"; br { }
-            +"}"
         }
     }
 }

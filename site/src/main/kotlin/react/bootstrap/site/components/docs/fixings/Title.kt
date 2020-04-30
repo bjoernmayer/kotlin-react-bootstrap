@@ -10,14 +10,14 @@ import react.dom.RDOMBuilder
 import react.dom.h1
 import react.dom.h2
 
-fun RBuilder.contentPageTitle(pagetitle: String, block: RDOMBuilder<H1>.() -> Unit): ReactElement {
+fun RBuilder.contentPageTitle(pagetitle: String, block: RDOMBuilder<H1>.() -> Unit = { }): ReactElement {
     pageTitle(pagetitle)
     return h1("bd-title") {
         +pagetitle
         block()
     }
 }
-fun RBuilder.contentTitle(contentTitle: String, block: RDOMBuilder<H2>.() -> Unit): ReactElement =
+fun RBuilder.contentTitle(contentTitle: String, block: RDOMBuilder<H2>.() -> Unit = { }): ReactElement =
     contentTitle(RBuilder::h2, contentTitle, block)
 
 fun <T : HTMLTag> RBuilder.contentTitle(

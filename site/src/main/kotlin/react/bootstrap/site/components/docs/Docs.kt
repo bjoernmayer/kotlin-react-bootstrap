@@ -13,8 +13,8 @@ import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.content.Content
-import react.bootstrap.site.components.docs.layout.Layout
+import react.bootstrap.site.components.docs.content.content
+import react.bootstrap.site.components.docs.layout.layout
 import react.bootstrap.site.from
 import react.router.dom.RouteResultProps
 import react.router.dom.redirect
@@ -56,7 +56,7 @@ class Docs : RComponent<RouteResultProps<RProps>, RState>() {
         }
     }
 
-    object Categories {
+    internal object Categories {
         var categories: List<Category<*>> = listOf(
 //            Category(
 //                "Getting started",
@@ -73,27 +73,8 @@ class Docs : RComponent<RouteResultProps<RProps>, RState>() {
 //                addSubCategory("Webpack", "webpack")
 //                addSubCategory("Accessibility", "accessibility")
 //            },
-            Category(
-                "Layout",
-                "layout",
-                Layout::class
-            ).apply {
-//                addSubCategory("Overview", "overview")
-                addSubCategory("Grid", "grid")
-//                addSubCategory("Utilities for layout", "utilities-for-layout")
-            },
-            Category(
-                "Content",
-                "content",
-                Content::class
-            ).apply {
-                // "Reboot", "reboot",
-                addSubCategory("Typography", "typography")
-//                addSubCategory("Code", "code")
-//                addSubCategory("Images", "images")
-//                addSubCategory("Tables", "tables")
-//                addSubCategory("Figures", "figures")
-            } // ,
+            layout,
+            content // ,
 //            Category(
 //                "Components",
 //                "components",

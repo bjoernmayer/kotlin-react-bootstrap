@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
@@ -7,22 +9,20 @@ import react.bootstrap.layout.grid.ColCounts
 import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
-import react.bootstrap.site.components.docs.colFun
-import react.bootstrap.site.components.docs.containerFun
+import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.exampleRow
-import react.bootstrap.site.components.docs.fixings.kotlinExample
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.rowFun
+import react.bootstrap.site.components.docs.ln
 import react.dom.br
 import react.dom.code
 import react.dom.em
 import react.dom.h3
 import react.dom.p
 
-fun RBuilder.responsiveClasses() {
-    contentTitle("Responsive classes") { }
+internal fun RBuilder.responsiveClasses() {
+    contentTitle("Responsive classes")
     p {
         +"Bootstrap’s grid includes five tiers of predefined classes for building complex responsive layouts. Customize"
         +"the size of your columns on extra small, small, medium, large, or extra large devices however you see fit."
@@ -49,18 +49,23 @@ fun RBuilder.responsiveClasses() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun {"; br { }
-            for (x in 1..4) {
-                +"        $colFun { em { +\"all = ${Sizes.EQ.kt}\" } }"; br { }
+        codeBox {
+            containerFunImport()
+            gridEnumImport(Sizes::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktRow(il) { il ->
+                    for (x in 1..4) {
+                        ln(il) { +"$colFun { em { +\"all = ${Sizes.EQ.kt}\" } }" }
+                    }
+                }
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(all = ${Sizes.SZ_8.kt}) { +\"all = ${Sizes.SZ_8.kt}\" }" }
+                    ln(il) { +"$colFun(all = ${Sizes.SZ_4.kt}) { +\"all = ${Sizes.SZ_4.kt}\" }" }
+                }
             }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(all = ${Sizes.SZ_8.kt}) { +\"all = ${Sizes.SZ_8.kt}\" }"; br { }
-            +"        $colFun(all = ${Sizes.SZ_4.kt}) { +\"all = ${Sizes.SZ_4.kt}\" }"; br { }
-            +"    }"; br { }
-            +"}"
         }
     }
     contentTitle(RBuilder::h3, "Stacked to horizontal") { }
@@ -83,18 +88,23 @@ fun RBuilder.responsiveClasses() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun {"; br { }
-            +"        $colFun(sm = ${Sizes.SZ_8.kt}) { +\"sm = ${Sizes.SZ_8.kt}\" }"; br { }
-            +"        $colFun(sm = ${Sizes.SZ_4.kt}) { +\"sm = ${Sizes.SZ_4.kt}\" }"; br { }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            for (x in 1..3) {
-                +"        $colFun(sm = ${Sizes.EQ.kt}) { +\"sm = ${Sizes.EQ.kt}\" }"; br { }
+        codeBox {
+            containerFunImport()
+            gridEnumImport(Sizes::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktRow(il) { il ->
+                    ln(il) { +"$colFun(sm = ${Sizes.SZ_8.kt}) { +\"sm = ${Sizes.SZ_8.kt}\" }" }
+                    ln(il) { +"$colFun(sm = ${Sizes.SZ_4.kt}) { +\"sm = ${Sizes.SZ_4.kt}\" }" }
+                }
+                ktRow(il) { il ->
+                    for (x in 1..3) {
+                        ln(il) { +"$colFun(sm = ${Sizes.EQ.kt}) { +\"sm = ${Sizes.EQ.kt}\" }" }
+                    }
+                }
             }
-            +"    }"; br { }
-            +"}"
         }
     }
     contentTitle(RBuilder::h3, "Mix and match") { }
@@ -121,28 +131,37 @@ fun RBuilder.responsiveClasses() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun {"; br { }
-            +"        // Stack the columns on mobile by making one full-width and the other half-width"; br { }
-            +"        $colFun(md = ${Sizes.SZ_8.kt}) { +\"md = ${Sizes.SZ_8.kt}\" }"; br { }
-            +"        $colFun(all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}) { +\"all = ${Sizes.SZ_6.kt}, "
-            +"md = ${Sizes.SZ_4.kt}\" }"; br { }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        // Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop"; br { }
-            for (x in 1..3) {
-                +"        $colFun(all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}) { +\"all = ${Sizes.SZ_6.kt}, md = "
-                +"${Sizes.SZ_4.kt}\" }"; br { }
+        codeBox {
+            containerFunImport()
+            gridEnumImport(Sizes::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktRow(il) { il ->
+                    ln(il) { +"// Stack the columns on mobile by making one full-width and the other half-width" }
+                    ln(il) { +"$colFun(md = ${Sizes.SZ_8.kt}) { +\"md = ${Sizes.SZ_8.kt}\" }" }
+                    ln(il) {
+                        +"$colFun(all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}) { +\"all = ${Sizes.SZ_6.kt}, "
+                        +"md = ${Sizes.SZ_4.kt}\" }"
+                    }
+                }
+                ktRow(il) { il ->
+                    ln(il) { +"// Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop" }
+                    for (x in 1..3) {
+                        ln(il) {
+                            +"$colFun(all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}) { +\"all = ${Sizes.SZ_6.kt}, md = "
+                            +"${Sizes.SZ_4.kt}\" }"
+                        }
+                    }
+                }
+                ktRow(il) { il ->
+                    ln(2) { +"// Columns are always 50% wide, on mobile and desktop" }
+                    for (x in 1..2) {
+                        ln(il) { +"$colFun(all = ${Sizes.SZ_6.kt}) { +\"all = ${Sizes.SZ_6.kt}\" }" }
+                    }
+                }
             }
-            +"    }"; br { }
-            +"    $rowFun {"; br { }
-            +"        // Columns are always 50% wide, on mobile and desktop"; br { }
-            for (x in 1..2) {
-                +"        $colFun(all = ${Sizes.SZ_6.kt}) { +\"all = ${Sizes.SZ_6.kt}\" }"; br { }
-            }
-            +"    }"; br { }
-            +"}"
         }
     }
     contentTitle(RBuilder::h3, "Row columns") { }
@@ -161,14 +180,19 @@ fun RBuilder.responsiveClasses() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun(all = ${ColCounts.CNT_2.kt}) {"; br { }
-            for (x in 1..4) {
-                +"        $colFun { +\"Column\" }"; br { }
+        codeBox {
+            containerFunImport()
+            gridEnumImport(ColCounts::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktBlock(il, "$rowFun(all = ${ColCounts.CNT_2.kt})") { il ->
+                    for (x in 1..4) {
+                        ln(il) { +"$colFun { +\"Column\" }" }
+                    }
+                }
             }
-            +"    }"; br { }
-            +"}"
         }
     }
     exampleRow {
@@ -181,14 +205,19 @@ fun RBuilder.responsiveClasses() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun(all = ${ColCounts.CNT_3.kt}) {"; br { }
-            for (x in 1..4) {
-                +"        $colFun { +\"Column\" }"; br { }
+        codeBox {
+            containerFunImport()
+            gridEnumImport(ColCounts::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktBlock(il, "$rowFun(all = ${ColCounts.CNT_3.kt})") { il ->
+                    for (x in 1..4) {
+                        ln(il) { +"$colFun { +\"Column\" }" }
+                    }
+                }
             }
-            +"    }"; br { }
-            +"}"
         }
     }
     exampleRow {
@@ -201,14 +230,19 @@ fun RBuilder.responsiveClasses() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun(all = ${ColCounts.CNT_4.kt}) {"; br { }
-            for (x in 1..4) {
-                +"        $colFun { +\"Column\" }"; br { }
+        codeBox {
+            containerFunImport()
+            gridEnumImport(ColCounts::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktBlock(il, "$rowFun(all = ${ColCounts.CNT_4.kt})") { il ->
+                    for (x in 1..4) {
+                        ln(il) { +"$colFun { +\"Column\" }" }
+                    }
+                }
             }
-            +"    }"; br { }
-            +"}"
         }
     }
     exampleRow {
@@ -223,15 +257,23 @@ fun RBuilder.responsiveClasses() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun(all = ${ColCounts.CNT_4.kt}) {"; br { }
-            for (x in 1..2) {
-                +"        $colFun { +\"Column\" }"; br { }
+        codeBox {
+            containerFunImport()
+            gridEnumImport(ColCounts::class)
+            gridEnumImport(Sizes::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktBlock(il, "$rowFun(all = ${ColCounts.CNT_4.kt})") { il ->
+                    for (x in 1..2) {
+                        ln(il) { +"$colFun { +\"Column\" }" }
+                    }
+                }
+                ktBlock(il, "$rowFun(all = ${ColCounts.CNT_4.kt})") { il ->
+                    ln(il) { +"$colFun(all = ${Sizes.SZ_6.kt}) { +\"Column\" }" }
+                }
             }
-            +"        $colFun(all = ${Sizes.SZ_6.kt}) { +\"Column\" }"; br { }
-            +"    }"; br { }
-            +"}"
         }
     }
     exampleRow {
@@ -244,15 +286,22 @@ fun RBuilder.responsiveClasses() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun(all = ${ColCounts.CNT_1.kt}, sm = ${ColCounts.CNT_2.kt}, md = ${ColCounts.CNT_4.kt}) {"
+        codeBox {
+            containerFunImport()
+            gridEnumImport(ColCounts::class)
+            colFunImport()
+            rowFunImport()
             br { }
-            for (x in 1..4) {
-                +"        $colFun { +\"Column\" }"; br { }
+            ktContainer { il ->
+                ktBlock(
+                    il,
+                    "$rowFun(all = ${ColCounts.CNT_1.kt}, sm = ${ColCounts.CNT_2.kt}, md = ${ColCounts.CNT_4.kt})"
+                ) { il ->
+                    for (x in 1..4) {
+                        ln(il) { +"$colFun { +\"Column\" }" }
+                    }
+                }
             }
-            +"    }"; br { }
-            +"}"
         }
     }
     contentTitle(RBuilder::h3, "No gutters") { }
@@ -275,15 +324,24 @@ fun RBuilder.responsiveClasses() {
                 }
             }
         }
-        kotlinExample {
-            +"$containerFun {"; br { }
-            +"    $rowFun(gutters = false) {"; br { }
-            +"        $colFun(sm = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_8.kt}) { +\"sm = ${Sizes.SZ_6.kt}, md"
-            +" = ${Sizes.SZ_8.kt}\" }"; br { }
-            +"        $colFun(all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}) { +\"all = ${Sizes.SZ_6.kt}, "
-            +"md = ${Sizes.SZ_4.kt}\" }"; br { }
-            +"    }"; br { }
-            +"}"
+        codeBox {
+            containerFunImport()
+            gridEnumImport(Sizes::class)
+            colFunImport()
+            rowFunImport()
+            br { }
+            ktContainer { il ->
+                ktBlock(il, "$rowFun(gutters = false)") { il ->
+                    ln(il) {
+                        +"$colFun(sm = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_8.kt}) { +\"sm = ${Sizes.SZ_6.kt}, md"
+                        +" = ${Sizes.SZ_8.kt}\" }"
+                    }
+                    ln(il) {
+                        +"$colFun(all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}) { +\"all = ${Sizes.SZ_6.kt}, "
+                        +"md = ${Sizes.SZ_4.kt}\" }"
+                    }
+                }
+            }
         }
     }
 }

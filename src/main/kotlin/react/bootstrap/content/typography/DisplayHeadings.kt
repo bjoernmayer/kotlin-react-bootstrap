@@ -14,31 +14,24 @@ import react.dom.h2
 import react.dom.h3
 import react.dom.h4
 
-enum class DisplayHeadings(val className: ClassNames) {
-    DISPLAY_1(ClassNames.DISPLAY_1),
-    DISPLAY_2(ClassNames.DISPLAY_2),
-    DISPLAY_3(ClassNames.DISPLAY_3),
-    DISPLAY_4(ClassNames.DISPLAY_4);
-}
-
 @Suppress("unused")
 fun RBuilder.display1(classes: String? = null, block: RElementBuilder<Display.Props>.() -> Unit): ReactElement =
-    display(variant = DisplayHeadings.DISPLAY_1, classes = classes, block = block)
+    display(variant = Display.Variants.DISPLAY_1, classes = classes, block = block)
 
 @Suppress("unused")
 fun RBuilder.display2(classes: String? = null, block: RElementBuilder<Display.Props>.() -> Unit): ReactElement =
-    display(variant = DisplayHeadings.DISPLAY_2, classes = classes, block = block)
+    display(variant = Display.Variants.DISPLAY_2, classes = classes, block = block)
 
 @Suppress("unused")
 fun RBuilder.display3(classes: String? = null, block: RElementBuilder<Display.Props>.() -> Unit): ReactElement =
-    display(variant = DisplayHeadings.DISPLAY_3, classes = classes, block = block)
+    display(variant = Display.Variants.DISPLAY_3, classes = classes, block = block)
 
 @Suppress("unused")
 fun RBuilder.display4(classes: String? = null, block: RElementBuilder<Display.Props>.() -> Unit): ReactElement =
-    display(variant = DisplayHeadings.DISPLAY_4, classes = classes, block = block)
+    display(variant = Display.Variants.DISPLAY_4, classes = classes, block = block)
 
 fun RBuilder.display(
-    variant: DisplayHeadings,
+    variant: Display.Variants,
     renderAs: (RBuilder.() -> ReactElement)? = null,
     classes: String? = null,
     block: RElementBuilder<Display.Props>.() -> Unit
@@ -53,8 +46,17 @@ fun RBuilder.display(
 }
 
 class Display : RenderAsComponent<Display.Props, RState>() {
+    enum class Variants(val className: ClassNames) {
+        DISPLAY_1(ClassNames.DISPLAY_1),
+        DISPLAY_2(ClassNames.DISPLAY_2),
+        DISPLAY_3(ClassNames.DISPLAY_3),
+        DISPLAY_4(ClassNames.DISPLAY_4);
+
+        val kt = "${Display::class.simpleName}.${this::class.simpleName}.$name"
+    }
+
     interface Props : WithRenderAs, WithClassName {
-        var variant: DisplayHeadings
+        var variant: Variants
     }
 
     override fun WithClassName.setProps() {
@@ -62,9 +64,9 @@ class Display : RenderAsComponent<Display.Props, RState>() {
     }
 
     override fun RBuilder.defaultElement(): ReactElement = when (props.variant) {
-        DisplayHeadings.DISPLAY_1 -> h1 { }
-        DisplayHeadings.DISPLAY_2 -> h2 { }
-        DisplayHeadings.DISPLAY_3 -> h3 { }
-        DisplayHeadings.DISPLAY_4 -> h4 { }
+        Variants.DISPLAY_1 -> h1 { }
+        Variants.DISPLAY_2 -> h2 { }
+        Variants.DISPLAY_3 -> h3 { }
+        Variants.DISPLAY_4 -> h4 { }
     }
 }

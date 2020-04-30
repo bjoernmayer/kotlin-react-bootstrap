@@ -10,15 +10,17 @@ import react.bootstrap.content.typography.h6
 import react.bootstrap.content.typography.muted
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
-import react.bootstrap.site.components.docs.fixings.kotlinExample
+import react.bootstrap.site.components.docs.fixings.codeBox
+import react.bootstrap.site.components.docs.layout.grid.ktBlock
+import react.bootstrap.site.components.docs.ln
 import react.dom.br
 import react.dom.code
 import react.dom.h3
 import react.dom.p
 import react.dom.small
 
-fun RBuilder.headings() {
-    contentTitle("Headings") { }
+internal fun RBuilder.headings() {
+    contentTitle("Headings")
     p {
         +"Alternative implementations for "; code { +"h1 { }" }; +" through "; code { +"h6 { }" }; +" are provided,"
         +" for when you want to match the font styling of a heading but cannot use the associated HTML element."
@@ -32,9 +34,13 @@ fun RBuilder.headings() {
         h6(RBuilder::p) { +"h6. Bootstrap heading" }
     }
 
-    kotlinExample {
+    codeBox {
         for (x in 1..6) {
-            +"h$x(RBuilder::p) { +\"h$x. Bootstrap heading\" }"; br { }
+            ln { +"import react.bootstrap.content.typography.h$x" }
+        }
+        br { }
+        for (x in 1..6) {
+            ln { +"h$x(RBuilder::p) { +\"h$x. Bootstrap heading\" }" }
         }
     }
     contentTitle(RBuilder::h3, "Customizing headings") { }
@@ -47,10 +53,12 @@ fun RBuilder.headings() {
             muted(RBuilder::small) { +"With faded secondary text" }
         }
     }
-    kotlinExample {
-        +"h3 {"; br { }
-        +"    +\"Fancy display heading \""; br { }
-        +"    muted(RBuilder::small) { +\"With faded secondary text\" }"; br { }
-        +"}"
+    codeBox {
+        ln { +"import react.bootstrap.content.typography.muted" }
+        br { }
+        ktBlock(0, "h3") { il ->
+            ln(il) { +"+\"Fancy display heading \"" }
+            ln(il) { +"muted(RBuilder::small) { +\"With faded secondary text\" }" }
+        }
     }
 }

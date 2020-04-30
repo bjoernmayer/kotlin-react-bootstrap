@@ -8,6 +8,7 @@ import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.WithBlock
 import react.dom.RDOMBuilder
 import react.dom.WithClassName
 import react.dom.li
@@ -50,9 +51,7 @@ class UnstyledList : RComponent<UnstyledList.Props, RState>() {
 }
 
 class InlineList : RComponent<InlineList.Props, RState>() {
-    interface Props : WithClassName {
-        var block: RDOMBuilder<UL>.() -> Unit
-    }
+    interface Props : WithClassName, WithBlock<UL>
 
     override fun RBuilder.render() {
         ul(classes = props.className.appendClass(ListStyles.INLINE.className), block = props.block)
@@ -77,9 +76,7 @@ fun RBuilder.li(
 }
 
 class InlineListItem : RComponent<InlineListItem.Props, RState>() {
-    interface Props : WithClassName {
-        var block: RDOMBuilder<LI>.() -> Unit
-    }
+    interface Props : WithClassName, WithBlock<LI>
 
     override fun RBuilder.render() {
         li(classes = props.className.appendClass(ListItemStyles.INLINE.className), block = props.block)

@@ -8,6 +8,7 @@ import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.WithBlock
 import react.dom.RDOMBuilder
 import react.dom.WithClassName
 import react.dom.blockQuote
@@ -22,9 +23,7 @@ fun RBuilder.blockQuote(classes: String? = null, block: RDOMBuilder<BLOCKQUOTE>.
     }
 
 class BlockQuote : RComponent<BlockQuote.Props, RState>() {
-    interface Props : WithClassName {
-        var block: RDOMBuilder<BLOCKQUOTE>.() -> Unit
-    }
+    interface Props : WithClassName, WithBlock<BLOCKQUOTE>
 
     override fun RBuilder.render() {
         blockQuote(classes = props.className.appendClass(ClassNames.BLOCKQUOTE), block = props.block)
@@ -40,9 +39,7 @@ fun RBuilder.blockQuoteFooter(classes: String? = null, block: RDOMBuilder<DIV>.(
     }
 
 class BlockQuoteFooter : RComponent<BlockQuoteFooter.Props, RState>() {
-    interface Props : WithClassName {
-        var block: RDOMBuilder<DIV>.() -> Unit
-    }
+    interface Props : WithClassName, WithBlock<DIV>
 
     override fun RBuilder.render() {
         div(classes = props.className.appendClass(ClassNames.BLOCKQUOTE_FOOTER), block = props.block)

@@ -1,24 +1,24 @@
 package react.bootstrap.site.components.docs.content.typography
 
 import react.RBuilder
-import react.bootstrap.content.toTable
-import react.bootstrap.content.typography.DisplayHeadings
+import react.bootstrap.content.table
+import react.bootstrap.content.typography.Display
 import react.bootstrap.content.typography.display
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
-import react.bootstrap.site.components.docs.fixings.kotlinExample
-import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.components.docs.fixings.codeBox
+import react.bootstrap.site.components.docs.layout.grid.ktBlock
+import react.bootstrap.site.components.docs.ln
 import react.dom.br
 import react.dom.p
 import react.dom.span
 import react.dom.strong
-import react.dom.table
 import react.dom.tbody
 import react.dom.td
 import react.dom.tr
 
-fun RBuilder.displayHeadings() {
-    contentTitle("Display headings") { }
+internal fun RBuilder.displayHeadings() {
+    contentTitle("Display headings")
     p {
         +"Traditional heading elements are designed to work best in the meat of your page content. When you need a "
         +"heading to stand out, consider using a "; strong { +"display heading" }; +"—a larger, slightly more "
@@ -26,25 +26,24 @@ fun RBuilder.displayHeadings() {
     }
     example {
         table {
-            toTable()
             tbody {
                 tr {
                     td {
-                        display(DisplayHeadings.DISPLAY_1, { span { } }) {
+                        display(Display.Variants.DISPLAY_1, { span { } }) {
                             +"Display 1"
                         }
                     }
                 }
                 tr {
                     td {
-                        display(DisplayHeadings.DISPLAY_2, { span { } }) {
+                        display(Display.Variants.DISPLAY_2, { span { } }) {
                             +"Display 2"
                         }
                     }
                 }
                 tr {
                     td {
-                        display(DisplayHeadings.DISPLAY_3, { span { } }) {
+                        display(Display.Variants.DISPLAY_3, { span { } }) {
                             +"Display 3"
                         }
                     }
@@ -52,7 +51,7 @@ fun RBuilder.displayHeadings() {
                 tr {
                     td {
                         span {
-                            display(DisplayHeadings.DISPLAY_4, { span { } }) {
+                            display(Display.Variants.DISPLAY_4, { span { } }) {
                                 +"Display 4"
                             }
                         }
@@ -61,15 +60,22 @@ fun RBuilder.displayHeadings() {
             }
         }
     }
-    kotlinExample {
+    codeBox {
+        ln { +"import react.bootstrap.content.typography.${Display::class.simpleName}" }
+        ln { +"import react.bootstrap.content.typography.${RBuilder::display.name}" }
         for (x in 1..3) {
-            +"${RBuilder::display.name}$x {"; br { }
-            +"    +\"Display $x\""; br { }
-            +"}"; br { }
+            ln { +"import react.bootstrap.content.typography.${RBuilder::display.name}$x" }
         }
-        +"// Or you use a more generic way"; br { }
-        +"${RBuilder::display.name}(${DisplayHeadings.DISPLAY_4.kt}, { span { } }) {"; br { }
-        +"    +\"Display 4\""; br { }
-        +"}"; br { }
+        br { }
+
+        for (x in 1..3) {
+            ktBlock(0, "${RBuilder::display.name}$x") { il ->
+                ln(il) { +"+\"Display $x\"" }
+            }
+        }
+        ln { +"// Or you use a more generic way" }
+        ktBlock(0, "${RBuilder::display.name}(${Display.Variants.DISPLAY_4.kt}, { span { } })") { il ->
+            ln(il) { +"+\"Display 4\"" }
+        }
     }
 }
