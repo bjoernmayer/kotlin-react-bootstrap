@@ -376,20 +376,19 @@ fun RBuilder.col(
         this.lg = lg
         this.xl = xl
         this.renderAs = renderAs
-        this.classes = classes
+        this.className = classes
     }
 
     block()
 }
 
 class Col : RenderAsComponent<Col.Props, RState>() {
-    interface Props : WithRenderAs {
+    interface Props : WithRenderAs, WithClassName {
         var all: ColAttributes?
         var sm: ColAttributes?
         var md: ColAttributes?
         var lg: ColAttributes?
         var xl: ColAttributes?
-        var classes: String?
     }
 
     override fun WithClassName.setProps() {
@@ -415,7 +414,7 @@ class Col : RenderAsComponent<Col.Props, RState>() {
             )
         }
 
-        className = props.classes.appendClass(colClasses)
+        className = props.className.appendClass(colClasses)
     }
 
     override fun RBuilder.defaultElement(): ReactElement = div { }

@@ -177,21 +177,20 @@ fun RBuilder.row(
         this.xl = xl
         this.gutters = gutters
         this.renderAs = renderAs
-        this.classes = classes
+        this.className = classes
     }
 
     block()
 }
 
 class Row : RenderAsComponent<Row.Props, RState>() {
-    interface Props : WithRenderAs {
+    interface Props : WithRenderAs, WithClassName {
         var all: RowAttributes?
         var sm: RowAttributes?
         var md: RowAttributes?
         var lg: RowAttributes?
         var xl: RowAttributes?
         var gutters: Boolean?
-        var classes: String?
     }
 
     override fun WithClassName.setProps() {
@@ -215,7 +214,7 @@ class Row : RenderAsComponent<Row.Props, RState>() {
             )
         }
 
-        className = props.classes.appendClass(rowClasses)
+        className = props.className.appendClass(rowClasses)
     }
 
     override fun RBuilder.defaultElement(): ReactElement = div { }

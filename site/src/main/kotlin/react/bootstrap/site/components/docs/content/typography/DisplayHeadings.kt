@@ -30,21 +30,21 @@ fun RBuilder.displayHeadings() {
             tbody {
                 tr {
                     td {
-                        display(DisplayHeadings.DISPLAY_1, RBuilder::span) {
+                        display(DisplayHeadings.DISPLAY_1, { span { } }) {
                             +"Display 1"
                         }
                     }
                 }
                 tr {
                     td {
-                        display(DisplayHeadings.DISPLAY_2, RBuilder::span) {
+                        display(DisplayHeadings.DISPLAY_2, { span { } }) {
                             +"Display 2"
                         }
                     }
                 }
                 tr {
                     td {
-                        display(DisplayHeadings.DISPLAY_3, RBuilder::span) {
+                        display(DisplayHeadings.DISPLAY_3, { span { } }) {
                             +"Display 3"
                         }
                     }
@@ -52,7 +52,7 @@ fun RBuilder.displayHeadings() {
                 tr {
                     td {
                         span {
-                            display(DisplayHeadings.DISPLAY_4, RBuilder::span) {
+                            display(DisplayHeadings.DISPLAY_4, { span { } }) {
                                 +"Display 4"
                             }
                         }
@@ -63,12 +63,12 @@ fun RBuilder.displayHeadings() {
     }
     kotlinExample {
         for (x in 1..3) {
-            +"display$x {"; br { }
+            +"${RBuilder::display.name}$x {"; br { }
             +"    +\"Display $x\""; br { }
             +"}"; br { }
         }
         +"// Or you use a more generic way"; br { }
-        +"display(${DisplayHeadings.DISPLAY_4.kt}, RBuilder::span) {"; br { }
+        +"${RBuilder::display.name}(${DisplayHeadings.DISPLAY_4.kt}, { span { } }) {"; br { }
         +"    +\"Display 4\""; br { }
         +"}"; br { }
     }

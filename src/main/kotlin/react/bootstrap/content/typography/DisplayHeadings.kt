@@ -1,48 +1,70 @@
 package react.bootstrap.content.typography
 
-import kotlinx.html.H1
-import kotlinx.html.H2
-import kotlinx.html.H3
-import kotlinx.html.H4
-import kotlinx.html.HTMLTag
 import react.RBuilder
+import react.RElementBuilder
+import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
-import react.dom.RDOMBuilder
+import react.bootstrap.lib.RenderAsComponent
+import react.bootstrap.lib.WithRenderAs
+import react.dom.WithClassName
 import react.dom.h1
 import react.dom.h2
 import react.dom.h3
 import react.dom.h4
 
-enum class DisplayHeadings(private val classNames: ClassNames) {
+enum class DisplayHeadings(val className: ClassNames) {
     DISPLAY_1(ClassNames.DISPLAY_1),
     DISPLAY_2(ClassNames.DISPLAY_2),
     DISPLAY_3(ClassNames.DISPLAY_3),
     DISPLAY_4(ClassNames.DISPLAY_4);
-
-    override fun toString(): String = classNames.toString()
 }
 
 @Suppress("unused")
-fun RBuilder.display1(classes: String? = null, block: RDOMBuilder<H1>.() -> Unit): ReactElement =
-    h1(classes.appendClass("${ClassNames.DISPLAY_1}"), block)
+fun RBuilder.display1(classes: String? = null, block: RElementBuilder<Display.Props>.() -> Unit): ReactElement =
+    display(variant = DisplayHeadings.DISPLAY_1, classes = classes, block = block)
 
 @Suppress("unused")
-fun RBuilder.display2(classes: String? = null, block: RDOMBuilder<H2>.() -> Unit): ReactElement =
-    h2(classes.appendClass("${ClassNames.DISPLAY_2}"), block)
+fun RBuilder.display2(classes: String? = null, block: RElementBuilder<Display.Props>.() -> Unit): ReactElement =
+    display(variant = DisplayHeadings.DISPLAY_2, classes = classes, block = block)
 
 @Suppress("unused")
-fun RBuilder.display3(classes: String? = null, block: RDOMBuilder<H3>.() -> Unit): ReactElement =
-    h3(classes.appendClass("${ClassNames.DISPLAY_3}"), block)
+fun RBuilder.display3(classes: String? = null, block: RElementBuilder<Display.Props>.() -> Unit): ReactElement =
+    display(variant = DisplayHeadings.DISPLAY_3, classes = classes, block = block)
 
 @Suppress("unused")
-fun RBuilder.display4(classes: String? = null, block: RDOMBuilder<H4>.() -> Unit): ReactElement =
-    h4(classes.appendClass("${ClassNames.DISPLAY_4}"), block)
+fun RBuilder.display4(classes: String? = null, block: RElementBuilder<Display.Props>.() -> Unit): ReactElement =
+    display(variant = DisplayHeadings.DISPLAY_4, classes = classes, block = block)
 
-fun <T : HTMLTag> RBuilder.display(
+fun RBuilder.display(
     variant: DisplayHeadings,
-    tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
+    renderAs: (RBuilder.() -> ReactElement)? = null,
     classes: String? = null,
-    block: RDOMBuilder<T>.() -> Unit
-): ReactElement = tagFun(classes.appendClass(variant.toString()), block)
+    block: RElementBuilder<Display.Props>.() -> Unit
+): ReactElement = child(Display::class) {
+    attrs {
+        this.variant = variant
+        this.renderAs = renderAs
+        this.className = classes
+    }
+
+    block()
+}
+
+class Display : RenderAsComponent<Display.Props, RState>() {
+    interface Props : WithRenderAs, WithClassName {
+        var variant: DisplayHeadings
+    }
+
+    override fun WithClassName.setProps() {
+        className = props.className.appendClass(props.variant.className)
+    }
+
+    override fun RBuilder.defaultElement(): ReactElement = when (props.variant) {
+        DisplayHeadings.DISPLAY_1 -> h1 { }
+        DisplayHeadings.DISPLAY_2 -> h2 { }
+        DisplayHeadings.DISPLAY_3 -> h3 { }
+        DisplayHeadings.DISPLAY_4 -> h4 { }
+    }
+}
