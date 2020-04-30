@@ -1,4 +1,4 @@
-package react.bootstrap.content
+package react.bootstrap.content.tables
 
 import kotlinx.html.TABLE
 import react.RBuilder
@@ -7,6 +7,7 @@ import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.Breakpoints
+import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.WithBlock
 import react.dom.RDOMBuilder
@@ -38,9 +39,25 @@ fun RBuilder.table(
 
 @Suppress("unused")
 class Table : RComponent<Table.Props, RState>() {
-    enum class BorderStyles(val className: ClassNames) {
+    enum class BorderStyles(override val className: ClassNames) : ClassNameEnum {
         BORDERED(ClassNames.TABLE_BORDERED),
-        BORDERLESS(ClassNames.TABLE_BORDERLESS)
+        BORDERLESS(ClassNames.TABLE_BORDERLESS);
+
+        val kt = "${Table::class.simpleName}.${this::class.simpleName}.$name"
+    }
+
+    enum class ContextualStyle(override val className: ClassNames) : ClassNameEnum {
+        ACTIVE(ClassNames.TABLE_ACTIVE),
+        DANGER(ClassNames.TABLE_DANGER),
+        DARK(ClassNames.TABLE_DARK),
+        INFO(ClassNames.TABLE_INFO),
+        LIGHT(ClassNames.TABLE_LIGHT),
+        PRIMARY(ClassNames.TABLE_PRIMARY),
+        SECONDARY(ClassNames.TABLE_SECONDARY),
+        SUCCESS(ClassNames.TABLE_SUCCESS),
+        WARNING(ClassNames.TABLE_WARNING);
+
+        val kt = "${Table::class.simpleName}.${this::class.simpleName}.$name"
     }
 
     interface Props : WithClassName, WithBlock<TABLE> {

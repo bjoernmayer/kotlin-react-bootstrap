@@ -1,7 +1,7 @@
 package react.bootstrap.site.components.docs.content.typography
 
 import react.RBuilder
-import react.bootstrap.content.table
+import react.bootstrap.content.tables.table
 import react.bootstrap.content.typography.Display
 import react.bootstrap.content.typography.display
 import react.bootstrap.site.components.docs.fixings.contentTitle

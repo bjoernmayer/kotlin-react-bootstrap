@@ -1,10 +1,12 @@
-@file:Suppress("NAME_SHADOWING")
+@file:Suppress("DuplicatedCode", "NAME_SHADOWING")
 
 package react.bootstrap.site.components.docs.content.tables
 
 import kotlinx.html.ThScope
 import react.RBuilder
+import react.bootstrap.content.tables.THead
 import react.bootstrap.content.tables.table
+import react.bootstrap.content.tables.thead
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
@@ -16,24 +18,48 @@ import react.dom.p
 import react.dom.tbody
 import react.dom.td
 import react.dom.th
-import react.dom.thead
 import react.dom.tr
 
-internal fun RBuilder.examples() {
-    contentTitle("Examples")
+internal fun RBuilder.tableHeadOptions() {
+    contentTitle("Table head options")
     p {
-        +"Due to the widespread use of tables across third-party widgets like calendars and date pickers, Bootstrap has"
-        +"designed their tables to be opt-in. Just use the this package's "; code { +"table { }" }; +" with its various"
-        +" arguments to modify the table."
-    }
-    p {
-        +"Using this package's "; code { +"table { }" }; +" without arguments, here’s how such tables look in Bootstrap"
-        +". All table styles are inherited in Bootstrap 4, meaning any nested tables will be styled in the same manner "
-        +"as the parent."
+        +"Similar to tables and dark tables, use the "; code { +"thead(style)" }; +" argument to make table headers"
+        +"appear light or dark gray."
     }
     example {
         table {
-            thead {
+            thead(THead.Styles.DARK) {
+                tr {
+                    th(ThScope.col) { +"#" }
+                    th(ThScope.col) { +"First" }
+                    th(ThScope.col) { +"Last" }
+                    th(ThScope.col) { +"Handle" }
+                }
+            }
+            tbody {
+                tr {
+                    th(ThScope.row) { +"1" }
+                    td { +"Mark" }
+                    td { +"Otto" }
+                    td { +"@mdo" }
+                }
+                tr {
+                    th(ThScope.row) { +"2" }
+                    td { +"Jacob" }
+                    td { +"Thornton" }
+                    td { +"@fat" }
+                }
+                tr {
+                    th(ThScope.row) { +"3" }
+                    td { +"Larry" }
+                    td { +"the Bird" }
+                    td { +"@twitter" }
+                }
+            }
+        }
+
+        table {
+            thead(THead.Styles.LIGHT) {
                 tr {
                     th(ThScope.col) { +"#" }
                     th(ThScope.col) { +"First" }
@@ -64,10 +90,12 @@ internal fun RBuilder.examples() {
         }
     }
     codeBox {
+        ln { +"import react.bootstrap.content.tables.${THead::class.simpleName}" }
         ln { +"import react.bootstrap.content.tables.table" }
+        ln { +"import react.bootstrap.content.tables.thead" }
         br { }
         ktBlock(opener = "table") { il ->
-            ktBlock(il, "thead") { il ->
+            ktBlock(il, "thead(${THead.Styles.DARK.kt})") { il ->
                 ktBlock(il, "tr") { il ->
                     ln(il) { +"th(ThScope.col) { +\"#\" }" }
                     ln(il) { +"th(ThScope.col) { +\"First\" }" }
@@ -96,48 +124,9 @@ internal fun RBuilder.examples() {
                 }
             }
         }
-    }
-    p {
-        +"You can also invert the colors—with light text on dark backgrounds—by setting "
-        code { +"table(dark = true)" }; +"."
-    }
-    example {
-        table(dark = true) {
-            thead {
-                tr {
-                    th(ThScope.col) { +"#" }
-                    th(ThScope.col) { +"First" }
-                    th(ThScope.col) { +"Last" }
-                    th(ThScope.col) { +"Handle" }
-                }
-            }
-            tbody {
-                tr {
-                    th(ThScope.row) { +"1" }
-                    td { +"Mark" }
-                    td { +"Otto" }
-                    td { +"@mdo" }
-                }
-                tr {
-                    th(ThScope.row) { +"2" }
-                    td { +"Jacob" }
-                    td { +"Thornton" }
-                    td { +"@fat" }
-                }
-                tr {
-                    th(ThScope.row) { +"3" }
-                    td { +"Larry" }
-                    td { +"the Bird" }
-                    td { +"@twitter" }
-                }
-            }
-        }
-    }
-    codeBox {
-        ln { +"import react.bootstrap.content.tables.table" }
         br { }
-        ktBlock(opener = "table(dark = true)") { il ->
-            ktBlock(il, "thead") { il ->
+        ktBlock(opener = "table") { il ->
+            ktBlock(il, "thead(${THead.Styles.LIGHT.kt})") { il ->
                 ktBlock(il, "tr") { il ->
                     ln(il) { +"th(ThScope.col) { +\"#\" }" }
                     ln(il) { +"th(ThScope.col) { +\"First\" }" }

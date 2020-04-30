@@ -11,4 +11,9 @@ fun RBuilder.tables() = div {
         +"Documentation and examples for opt-in styling of tables with Bootstrap."
     }
     examples()
+    tableHeadOptions()
+    stripedRows()
+    borderStyles()
+    hoverableRows()
+    smallTable()
 }

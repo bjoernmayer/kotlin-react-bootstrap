@@ -5,6 +5,7 @@ import react.RElementBuilder
 import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
+import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.RenderAsComponent
 import react.bootstrap.lib.WithRenderAs
@@ -46,7 +47,7 @@ fun RBuilder.display(
 }
 
 class Display : RenderAsComponent<Display.Props, RState>() {
-    enum class Variants(val className: ClassNames) {
+    enum class Variants(override val className: ClassNames) : ClassNameEnum {
         DISPLAY_1(ClassNames.DISPLAY_1),
         DISPLAY_2(ClassNames.DISPLAY_2),
         DISPLAY_3(ClassNames.DISPLAY_3),

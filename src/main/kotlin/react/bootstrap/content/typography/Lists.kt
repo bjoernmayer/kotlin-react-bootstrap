@@ -7,6 +7,7 @@ import react.RComponent
 import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
+import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.WithBlock
 import react.dom.RDOMBuilder
@@ -14,7 +15,7 @@ import react.dom.WithClassName
 import react.dom.li
 import react.dom.ul
 
-enum class ListStyles(val className: ClassNames) {
+enum class ListStyles(override val className: ClassNames) : ClassNameEnum {
     UNSTYLED(ClassNames.LIST_UNSTYLED),
     INLINE(ClassNames.LIST_INLINE);
 }
@@ -58,7 +59,7 @@ class InlineList : RComponent<InlineList.Props, RState>() {
     }
 }
 
-enum class ListItemStyles(val className: ClassNames) {
+enum class ListItemStyles(override val className: ClassNames) : ClassNameEnum {
     INLINE(ClassNames.LIST_INLINE);
 }
 

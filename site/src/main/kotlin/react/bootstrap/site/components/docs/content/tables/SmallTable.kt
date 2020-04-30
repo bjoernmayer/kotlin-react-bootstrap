@@ -1,4 +1,4 @@
-@file:Suppress("NAME_SHADOWING")
+@file:Suppress("DuplicatedCode", "NAME_SHADOWING")
 
 package react.bootstrap.site.components.docs.content.tables
 
@@ -19,20 +19,45 @@ import react.dom.th
 import react.dom.thead
 import react.dom.tr
 
-internal fun RBuilder.examples() {
-    contentTitle("Examples")
+internal fun RBuilder.smallTable() {
+    contentTitle("Small Table")
     p {
-        +"Due to the widespread use of tables across third-party widgets like calendars and date pickers, Bootstrap has"
-        +"designed their tables to be opt-in. Just use the this package's "; code { +"table { }" }; +" with its various"
-        +" arguments to modify the table."
-    }
-    p {
-        +"Using this package's "; code { +"table { }" }; +" without arguments, here’s how such tables look in Bootstrap"
-        +". All table styles are inherited in Bootstrap 4, meaning any nested tables will be styled in the same manner "
-        +"as the parent."
+        +"Set the "; code { +"table(hoverable)" }; +"-argument to "; code { +"true" }; +" to make tables more compact "
+        +"by cutting cell padding in half."
     }
     example {
-        table {
+        table(small = true) {
+            thead {
+                tr {
+                    th(ThScope.col) { +"#" }
+                    th(ThScope.col) { +"First" }
+                    th(ThScope.col) { +"Last" }
+                    th(ThScope.col) { +"Handle" }
+                }
+            }
+            tbody {
+                tr {
+                    th(ThScope.row) { +"1" }
+                    td { +"Mark" }
+                    td { +"Otto" }
+                    td { +"@mdo" }
+                }
+                tr {
+                    th(ThScope.row) { +"2" }
+                    td { +"Jacob" }
+                    td { +"Thornton" }
+                    td { +"@fat" }
+                }
+                tr {
+                    th(ThScope.row) { +"3" }
+                    td { +"Larry" }
+                    td { +"the Bird" }
+                    td { +"@twitter" }
+                }
+            }
+        }
+
+        table(small = true, dark = true) {
             thead {
                 tr {
                     th(ThScope.col) { +"#" }
@@ -66,7 +91,7 @@ internal fun RBuilder.examples() {
     codeBox {
         ln { +"import react.bootstrap.content.tables.table" }
         br { }
-        ktBlock(opener = "table") { il ->
+        ktBlock(opener = "table(small = true)") { il ->
             ktBlock(il, "thead") { il ->
                 ktBlock(il, "tr") { il ->
                     ln(il) { +"th(ThScope.col) { +\"#\" }" }
@@ -96,47 +121,8 @@ internal fun RBuilder.examples() {
                 }
             }
         }
-    }
-    p {
-        +"You can also invert the colors—with light text on dark backgrounds—by setting "
-        code { +"table(dark = true)" }; +"."
-    }
-    example {
-        table(dark = true) {
-            thead {
-                tr {
-                    th(ThScope.col) { +"#" }
-                    th(ThScope.col) { +"First" }
-                    th(ThScope.col) { +"Last" }
-                    th(ThScope.col) { +"Handle" }
-                }
-            }
-            tbody {
-                tr {
-                    th(ThScope.row) { +"1" }
-                    td { +"Mark" }
-                    td { +"Otto" }
-                    td { +"@mdo" }
-                }
-                tr {
-                    th(ThScope.row) { +"2" }
-                    td { +"Jacob" }
-                    td { +"Thornton" }
-                    td { +"@fat" }
-                }
-                tr {
-                    th(ThScope.row) { +"3" }
-                    td { +"Larry" }
-                    td { +"the Bird" }
-                    td { +"@twitter" }
-                }
-            }
-        }
-    }
-    codeBox {
-        ln { +"import react.bootstrap.content.tables.table" }
         br { }
-        ktBlock(opener = "table(dark = true)") { il ->
+        ktBlock(opener = "table(small = true, dark = true)") { il ->
             ktBlock(il, "thead") { il ->
                 ktBlock(il, "tr") { il ->
                     ln(il) { +"th(ThScope.col) { +\"#\" }" }
