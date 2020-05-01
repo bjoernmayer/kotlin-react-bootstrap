@@ -30,6 +30,12 @@ dependencies {
     implementation(npm("file-loader", "6.0.0"))
 }
 
+tasks.named("compileKotlinJs") {
+    this as org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
+
+    kotlinOptions.moduleKind = UMD
+}
+
 kotlin.target.browser {
     webpackTask {
         output.libraryTarget = UMD

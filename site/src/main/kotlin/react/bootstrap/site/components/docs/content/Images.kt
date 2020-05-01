@@ -11,13 +11,13 @@ import react.bootstrap.site.components.docs.fixings.contentPageTitle
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.ln
+import react.bootstrap.site.external.Fragment
 import react.dom.br
 import react.dom.code
-import react.dom.div
 import react.dom.p
 import react.dom.svg
 
-internal fun RBuilder.images() = div {
+internal fun RBuilder.images() = Fragment {
     contentPageTitle("Images")
     contentPageLead {
         +"Documentation and examples for opting images into responsive behavior (so they never become larger than their"

@@ -2,13 +2,14 @@ package react.bootstrap.site.components.docs.layout.grid
 
 import kotlinx.html.ThScope
 import react.RBuilder
+import react.bootstrap.content.tables.BorderStyles
+import react.bootstrap.content.tables.table
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.ln
 import react.dom.code
 import react.dom.p
 import react.dom.small
-import react.dom.table
 import react.dom.tbody
 import react.dom.td
 import react.dom.th
@@ -25,7 +26,7 @@ internal fun RBuilder.gridOptions() {
     p {
         +"See how aspects of the Bootstrap grid system work across multiple devices with a handy table."
     }
-    table("${ClassNames.TABLE} ${ClassNames.TABLE_BORDERED} ${ClassNames.TABLE_STRIPED}") {
+    table(borderStyle = BorderStyles.BORDERED, striped = true) {
         thead {
             tr {
                 th { }
@@ -62,7 +63,7 @@ internal fun RBuilder.gridOptions() {
             }
             tr {
                 th(scope = ThScope.row, classes = "${ClassNames.TEXT_NOWRAP}") { +"Function Argument" }
-                td { code { +"$colFun(col = )" } }
+                td { code { +"$colFun(all = )" } }
                 td { code { +"$colFun(sm = )" } }
                 td { code { +"$colFun(md = )" } }
                 td { code { +"$colFun(lg = )" } }

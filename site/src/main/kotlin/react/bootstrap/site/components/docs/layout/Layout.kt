@@ -13,7 +13,6 @@ internal val layout = Category(
 ).apply {
     addSubCategory("Overview", "overview", RBuilder::overview)
     addSubCategory("Grid", "grid", RBuilder::grid)
-//                addSubCategory("Utilities for layout", "utilities-for-layout")
 }
 
 internal class Layout : DocumentationPage(layout)

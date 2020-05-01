@@ -9,12 +9,12 @@ import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
+import react.bootstrap.site.external.Fragment
 import react.dom.br
 import react.dom.code
-import react.dom.div
 import react.dom.p
 
-fun RBuilder.code() = div {
+fun RBuilder.code() = Fragment {
     contentPageTitle("Code")
     contentPageLead {
         +"Documentation and examples for displaying inline and multiline blocks of code with Bootstrap."

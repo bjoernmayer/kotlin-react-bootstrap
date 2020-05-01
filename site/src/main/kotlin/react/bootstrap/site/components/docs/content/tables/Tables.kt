@@ -3,9 +3,9 @@ package react.bootstrap.site.components.docs.content.tables
 import react.RBuilder
 import react.bootstrap.site.components.docs.fixings.contentPageLead
 import react.bootstrap.site.components.docs.fixings.contentPageTitle
-import react.dom.div
+import react.bootstrap.site.external.Fragment
 
-fun RBuilder.tables() = div {
+fun RBuilder.tables() = Fragment {
     contentPageTitle("Tables")
     contentPageLead {
         +"Documentation and examples for opt-in styling of tables with Bootstrap."

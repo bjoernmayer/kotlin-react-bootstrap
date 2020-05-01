@@ -7,8 +7,8 @@ import react.bootstrap.layout.container
 import react.bootstrap.site.components.docs.Docs
 import react.bootstrap.site.from
 import react.bootstrap.site.external.BrowserRouterProps
+import react.bootstrap.site.external.Fragment
 import react.child
-import react.dom.div
 import react.router.dom.browserRouter
 import react.router.dom.route
 import react.router.dom.switch
@@ -21,7 +21,7 @@ fun RBuilder.app() =
             @Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
             (this as BrowserRouterProps).basename = "/kotlin-react-bootstrap"
         }
-        div {
+        Fragment {
             header()
             container(viscosity = Container.Viscosities.FLUID) {
                 switch {
