@@ -13,6 +13,7 @@ import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
+import react.dom.br
 import react.dom.code
 import react.dom.h3
 import react.dom.p
@@ -36,6 +37,7 @@ fun RBuilder.responsiveTables() {
         }
     }
     codeBox {
+        exampleImports()
         ktBlock(0, "table(responsive = ${Breakpoints.ALL.kt}") { il ->
             ln(il) { +"..." }
         }
@@ -60,6 +62,7 @@ fun RBuilder.responsiveTables() {
         }
     }
     codeBox {
+        exampleImports()
         ktBlock(0, "table(responsive = ${Breakpoints.SM.kt}") { il ->
             ln(il) { +"..." }
         }
@@ -70,6 +73,7 @@ fun RBuilder.responsiveTables() {
         }
     }
     codeBox {
+        exampleImports()
         ktBlock(0, "table(responsive = ${Breakpoints.MD.kt}") { il ->
             ln(il) { +"..." }
         }
@@ -80,6 +84,7 @@ fun RBuilder.responsiveTables() {
         }
     }
     codeBox {
+        exampleImports()
         ktBlock(0, "table(responsive = ${Breakpoints.LG.kt}") { il ->
             ln(il) { +"..." }
         }
@@ -90,10 +95,17 @@ fun RBuilder.responsiveTables() {
         }
     }
     codeBox {
+        exampleImports()
         ktBlock(0, "table(responsive = ${Breakpoints.XL.kt}") { il ->
             ln(il) { +"..." }
         }
     }
+}
+
+fun RBuilder.exampleImports() {
+    ln { +"import react.bootstrap.content.tables.table" }
+    ln { +"import react.bootstrap.lib.${Breakpoints::class.simpleName}" }
+    br { }
 }
 
 fun RBuilder.exampleTableBody() {

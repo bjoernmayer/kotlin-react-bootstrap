@@ -14,7 +14,7 @@ internal val content = Category(
     // "Reboot", "reboot",
     addSubCategory("Typography", "typography", RBuilder::typography)
     addSubCategory("Code", "code", RBuilder::code)
-//                addSubCategory("Images", "images")
+    addSubCategory("Images", "images", RBuilder::images)
     addSubCategory("Tables", "tables", RBuilder::tables)
 //                addSubCategory("Figures", "figures")
 }

@@ -1,11 +1,11 @@
 package react.bootstrap.site.components.docs.layout.overview
 
-import react.RProps
+import react.RBuilder
 import react.bootstrap.site.components.docs.fixings.contentPageLead
 import react.bootstrap.site.components.docs.fixings.contentPageTitle
-import react.functionalComponent
+import react.dom.div
 
-val Overview = functionalComponent<RProps> {
+fun RBuilder.overview() = div {
     contentPageTitle("Overview")
     contentPageLead {
         +"Components and options for laying out your Bootstrap project, including wrapping containers, a powerful grid "

@@ -24,8 +24,8 @@ fun RBuilder.codeBox(block: RDOMBuilder<CODE>.() -> Unit): ReactElement =
         }
     }
 
-fun RBuilder.example(block: RDOMBuilder<DIV>.() -> Unit): ReactElement =
-    div("bd-example", block)
+fun RBuilder.example(classes: String? = null, block: RDOMBuilder<DIV>.() -> Unit): ReactElement =
+    div(classes.appendClass("bd-example"), block)
 
 fun RBuilder.exampleRow(classes: String? = null, block: RDOMBuilder<DIV>.() -> Unit): ReactElement =
     div(classes.appendClass("bd-example-row")) {

@@ -58,7 +58,7 @@ fun RBuilder.header() {
                             role = "img"
 
                             set("viewBox", "0 0 512 499.36")
-                            set("focusable", "false")
+                            set("focusable", false)
                             unsafe {
                                 raw(
                                     "<title>Github</title><path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M256" +
