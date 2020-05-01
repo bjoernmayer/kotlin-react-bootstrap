@@ -4,11 +4,12 @@ package react.bootstrap.site.components.docs.content.tables
 
 import kotlinx.html.ThScope
 import react.RBuilder
-import react.bootstrap.content.tables.Table
+import react.bootstrap.content.tables.BorderStyles
 import react.bootstrap.content.tables.table
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
 import react.dom.br
@@ -23,12 +24,12 @@ import react.dom.tr
 internal fun RBuilder.borderStyles() {
     contentTitle("Border Styles")
     p {
-        +"Use the "; code { +"table(borderStyle)" }; +"-argument with value "; code { +Table.BorderStyles.BORDERED.kt }
+        +"Use the "; code { +"table(borderStyle)" }; +"-argument with value "; code { +BorderStyles.BORDERED.kt }
         +" to get borders on all sides of the table and cells. Or set the value to "
-        code { +Table.BorderStyles.BORDERLESS.kt }; +" for a table without borders."
+        code { +BorderStyles.BORDERLESS.kt }; +" for a table without borders."
     }
     example {
-        table(borderStyle = Table.BorderStyles.BORDERED) {
+        table(borderStyle = BorderStyles.BORDERED) {
             thead {
                 tr {
                     th(ThScope.col) { +"#" }
@@ -59,7 +60,7 @@ internal fun RBuilder.borderStyles() {
             }
         }
 
-        table(borderStyle = Table.BorderStyles.BORDERED, dark = true) {
+        table(borderStyle = BorderStyles.BORDERED, dark = true) {
             thead {
                 tr {
                     th(ThScope.col) { +"#" }
@@ -90,7 +91,7 @@ internal fun RBuilder.borderStyles() {
             }
         }
 
-        table(borderStyle = Table.BorderStyles.BORDERLESS) {
+        table(borderStyle = BorderStyles.BORDERLESS) {
             thead {
                 tr {
                     th(ThScope.col) { +"#" }
@@ -121,7 +122,7 @@ internal fun RBuilder.borderStyles() {
             }
         }
 
-        table(borderStyle = Table.BorderStyles.BORDERLESS, dark = true) {
+        table(borderStyle = BorderStyles.BORDERLESS, dark = true) {
             thead {
                 tr {
                     th(ThScope.col) { +"#" }
@@ -153,10 +154,10 @@ internal fun RBuilder.borderStyles() {
         }
     }
     codeBox {
-        ln { +"import react.bootstrap.content.tables.${Table::class.simpleName}" }
+        ln { +"import react.bootstrap.content.tables.${BorderStyles::class.simpleName}" }
         ln { +"import react.bootstrap.content.tables.table" }
         br { }
-        ktBlock(opener = "table(borderStyle = ${Table.BorderStyles.BORDERED.kt})") { il ->
+        ktBlock(opener = "table(borderStyle = ${BorderStyles.BORDERED.kt})") { il ->
             ktBlock(il, "thead") { il ->
                 ktBlock(il, "tr") { il ->
                     ln(il) { +"th(ThScope.col) { +\"#\" }" }
@@ -187,7 +188,7 @@ internal fun RBuilder.borderStyles() {
             }
         }
         br { }
-        ktBlock(opener = "table(borderStyle = ${Table.BorderStyles.BORDERED.kt}, dark = true)") { il ->
+        ktBlock(opener = "table(borderStyle = ${BorderStyles.BORDERED.kt}, dark = true)") { il ->
             ktBlock(il, "thead") { il ->
                 ktBlock(il, "tr") { il ->
                     ln(il) { +"th(ThScope.col) { +\"#\" }" }
@@ -218,7 +219,7 @@ internal fun RBuilder.borderStyles() {
             }
         }
         br { }
-        ktBlock(opener = "table(borderStyle = ${Table.BorderStyles.BORDERLESS.kt})") { il ->
+        ktBlock(opener = "table(borderStyle = ${BorderStyles.BORDERLESS.kt})") { il ->
             ktBlock(il, "thead") { il ->
                 ktBlock(il, "tr") { il ->
                     ln(il) { +"th(ThScope.col) { +\"#\" }" }
@@ -249,7 +250,7 @@ internal fun RBuilder.borderStyles() {
             }
         }
         br { }
-        ktBlock(opener = "table(borderStyle = ${Table.BorderStyles.BORDERLESS.kt}, dark = true)") { il ->
+        ktBlock(opener = "table(borderStyle = ${BorderStyles.BORDERLESS.kt}, dark = true)") { il ->
             ktBlock(il, "thead") { il ->
                 ktBlock(il, "tr") { il ->
                     ln(il) { +"th(ThScope.col) { +\"#\" }" }

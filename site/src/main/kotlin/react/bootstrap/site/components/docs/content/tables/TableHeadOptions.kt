@@ -4,12 +4,13 @@ package react.bootstrap.site.components.docs.content.tables
 
 import kotlinx.html.ThScope
 import react.RBuilder
-import react.bootstrap.content.tables.THead
+import react.bootstrap.content.tables.THeadStyles
 import react.bootstrap.content.tables.table
 import react.bootstrap.content.tables.thead
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
 import react.dom.br
@@ -28,7 +29,7 @@ internal fun RBuilder.tableHeadOptions() {
     }
     example {
         table {
-            thead(THead.Styles.DARK) {
+            thead(THeadStyles.DARK) {
                 tr {
                     th(ThScope.col) { +"#" }
                     th(ThScope.col) { +"First" }
@@ -59,7 +60,7 @@ internal fun RBuilder.tableHeadOptions() {
         }
 
         table {
-            thead(THead.Styles.LIGHT) {
+            thead(THeadStyles.LIGHT) {
                 tr {
                     th(ThScope.col) { +"#" }
                     th(ThScope.col) { +"First" }
@@ -90,12 +91,12 @@ internal fun RBuilder.tableHeadOptions() {
         }
     }
     codeBox {
-        ln { +"import react.bootstrap.content.tables.${THead::class.simpleName}" }
+        ln { +"import react.bootstrap.content.tables.${THeadStyles::class.simpleName}" }
         ln { +"import react.bootstrap.content.tables.table" }
         ln { +"import react.bootstrap.content.tables.thead" }
         br { }
         ktBlock(opener = "table") { il ->
-            ktBlock(il, "thead(${THead.Styles.DARK.kt})") { il ->
+            ktBlock(il, "thead(${THeadStyles.DARK.kt})") { il ->
                 ktBlock(il, "tr") { il ->
                     ln(il) { +"th(ThScope.col) { +\"#\" }" }
                     ln(il) { +"th(ThScope.col) { +\"First\" }" }
@@ -126,7 +127,7 @@ internal fun RBuilder.tableHeadOptions() {
         }
         br { }
         ktBlock(opener = "table") { il ->
-            ktBlock(il, "thead(${THead.Styles.LIGHT.kt})") { il ->
+            ktBlock(il, "thead(${THeadStyles.LIGHT.kt})") { il ->
                 ktBlock(il, "tr") { il ->
                     ln(il) { +"th(ThScope.col) { +\"#\" }" }
                     ln(il) { +"th(ThScope.col) { +\"First\" }" }

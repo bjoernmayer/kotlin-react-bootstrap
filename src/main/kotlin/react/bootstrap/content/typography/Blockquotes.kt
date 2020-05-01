@@ -15,20 +15,7 @@ import react.dom.blockQuote
 import react.dom.div
 
 fun RBuilder.blockQuote(classes: String? = null, block: RDOMBuilder<BLOCKQUOTE>.() -> Unit): ReactElement =
-    child(BlockQuote::class) {
-        attrs {
-            this.className = classes
-            this.block = block
-        }
-    }
-
-class BlockQuote : RComponent<BlockQuote.Props, RState>() {
-    interface Props : WithClassName, WithBlock<BLOCKQUOTE>
-
-    override fun RBuilder.render() {
-        blockQuote(classes = props.className.appendClass(ClassNames.BLOCKQUOTE), block = props.block)
-    }
-}
+    blockQuote(classes = classes.appendClass(ClassNames.BLOCKQUOTE), block = block)
 
 fun RBuilder.blockQuoteFooter(classes: String? = null, block: RDOMBuilder<DIV>.() -> Unit): ReactElement =
     child(BlockQuoteFooter::class) {
