@@ -23,7 +23,7 @@ fun RBuilder.contentTitle(contentTitle: String, block: RDOMBuilder<H2>.() -> Uni
 fun <T : HTMLTag> RBuilder.contentTitle(
     tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
     contentTitle: String,
-    block: RDOMBuilder<T>.() -> Unit
+    block: RDOMBuilder<T>.() -> Unit = { }
 ): ReactElement =
     tagFun("bd-content-title") {
         +contentTitle

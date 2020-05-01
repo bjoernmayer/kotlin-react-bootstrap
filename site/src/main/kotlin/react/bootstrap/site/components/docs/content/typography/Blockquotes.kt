@@ -39,7 +39,7 @@ internal fun RBuilder.blockquotes() {
             ln(il) { +"+\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.\"" }
         }
     }
-    contentTitle(RBuilder::h3, "Naming a source") { }
+    contentTitle(RBuilder::h3, "Naming a source")
     p {
         +"Add a "; code { +"${RBuilder::blockQuoteFooter.name} { }" }; +" for identifying the source. Wrap the name of "
         +"the source work in "; code { +"cite { }" }; +"."

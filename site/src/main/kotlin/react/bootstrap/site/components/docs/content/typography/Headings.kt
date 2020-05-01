@@ -43,7 +43,7 @@ internal fun RBuilder.headings() {
             ln { +"h$x(RBuilder::p) { +\"h$x. Bootstrap heading\" }" }
         }
     }
-    contentTitle(RBuilder::h3, "Customizing headings") { }
+    contentTitle(RBuilder::h3, "Customizing headings")
     p {
         +"You can recreate the small secondary heading text from Bootstrap 3."
     }

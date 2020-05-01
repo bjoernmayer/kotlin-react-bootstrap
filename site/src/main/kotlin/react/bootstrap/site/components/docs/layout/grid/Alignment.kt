@@ -34,7 +34,7 @@ internal fun RBuilder.alignment() {
         }
         a(href = "https://github.com/philipwalton/flexbugs#flexbug-3") { +" See Flexbugs #3 for more details" }; +"."
     }
-    contentTitle(RBuilder::h3, "Vertical alignment") { }
+    contentTitle(RBuilder::h3, "Vertical alignment")
     flexColsExampleRow {
         example {
             container {
@@ -103,7 +103,7 @@ internal fun RBuilder.alignment() {
             }
         }
     }
-    contentTitle(RBuilder::h3, "Horizontal alignment") { }
+    contentTitle(RBuilder::h3, "Horizontal alignment")
     exampleRow {
         example {
             container {

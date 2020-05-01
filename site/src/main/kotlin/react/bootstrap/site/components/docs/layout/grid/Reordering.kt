@@ -28,7 +28,7 @@ internal fun RBuilder.reordering() {
     val orderingsName = Orderings::class.simpleName
 
     contentTitle("Reordering")
-    contentTitle(RBuilder::h3, "$orderingsName enum") { }
+    contentTitle(RBuilder::h3, "$orderingsName enum")
     p {
         +"Use "; code { +"$orderingsName" }; +" values for controlling the "; strong { +"visual order" }
         +" of your content. The classes are responsive, so you can set the "; code { +"order" }; +" by breakpoint "
@@ -58,14 +58,14 @@ internal fun RBuilder.reordering() {
             }
         }
     }
-    contentTitle(RBuilder::h3, "Offsetting columns") { }
+    contentTitle(RBuilder::h3, "Offsetting columns")
     p {
         +"You can offset grid columns in two ways: our "; code { +"$offsetsName" }; +" values and Bootstrap's "
         a("https://getbootstrap.com/docs/4.4/utilities/spacing/") { +"margin utilities" }; +". Grid classes are "
         +"sized to match columns while margins are more useful for quick layouts where the width of the offset is "
         +"variable."
     }
-    contentTitle(RBuilder::h4, "$offsetsName enum") { }
+    contentTitle(RBuilder::h4, "$offsetsName enum")
     p {
         +"Move columns to the right by setting "; code { +"$offsetsName" }; +" enum values. These increase the left "
         +"margin of a column by "; code { +"*" }; +" columns. For example, "

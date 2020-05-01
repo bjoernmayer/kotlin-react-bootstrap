@@ -27,7 +27,7 @@ internal fun RBuilder.responsiveClasses() {
         +"Bootstrap’s grid includes five tiers of predefined classes for building complex responsive layouts. Customize"
         +"the size of your columns on extra small, small, medium, large, or extra large devices however you see fit."
     }
-    contentTitle(RBuilder::h3, "All breakpoints") { }
+    contentTitle(RBuilder::h3, "All breakpoints")
     p {
         +"For grids that are the same from the smallest of devices to the largest, set the "
         code { +"all = "; em { +"${ColAttributes::class.simpleName}?" } }; +" argument. Specify a numbered "
@@ -68,7 +68,7 @@ internal fun RBuilder.responsiveClasses() {
             }
         }
     }
-    contentTitle(RBuilder::h3, "Stacked to horizontal") { }
+    contentTitle(RBuilder::h3, "Stacked to horizontal")
     p {
         +"By setting the "; code { +"sm = "; em { +"${ColAttributes::class.simpleName}?" } }; +" argument, you can "
         +"create a basic grid system that starts out stacked and becomes horizontal at the small breakpoint ("
@@ -107,7 +107,7 @@ internal fun RBuilder.responsiveClasses() {
             }
         }
     }
-    contentTitle(RBuilder::h3, "Mix and match") { }
+    contentTitle(RBuilder::h3, "Mix and match")
     p {
         +"Don’t want your columns to simply stack in some grid tiers? Use a combination of different classes for each "
         +"tier as needed. See the example below for a better idea of how it all works."
@@ -164,7 +164,7 @@ internal fun RBuilder.responsiveClasses() {
             }
         }
     }
-    contentTitle(RBuilder::h3, "Row columns") { }
+    contentTitle(RBuilder::h3, "Row columns")
     p {
         +"Set the "; code { +"${ColCounts::class.simpleName}" }; +" argument to quickly set the number of columns "
         +"that best render your content and layout. The row columns classes are set on the parent "
@@ -304,7 +304,7 @@ internal fun RBuilder.responsiveClasses() {
             }
         }
     }
-    contentTitle(RBuilder::h3, "No gutters") { }
+    contentTitle(RBuilder::h3, "No gutters")
     p {
         +"The gutters between columns in Bootstrap's predefined grid classes can be removed by setting "
         code { +"gutters = false" }; +". This removes the negative "; code { +"margin" }; +"s from "

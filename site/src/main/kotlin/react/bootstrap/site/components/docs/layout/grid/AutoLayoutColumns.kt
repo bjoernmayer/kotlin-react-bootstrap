@@ -26,7 +26,7 @@ internal fun RBuilder.autoLayoutColumns() {
         +"Utilize breakpoint-specific equal-size enum values for easy column sizing without an explicit numbered enum "
         +"value like "; code { +Sizes.SZ_6.kt }; +"."
     }
-    contentTitle(RBuilder::h3, "Equal-width") { }
+    contentTitle(RBuilder::h3, "Equal-width")
     p {
         +"For example, here are two grid layouts that apply to every device and viewport, from "; code { +"xs" }; +" to"
         +" "; code { +"xl" }; +". Add any number of equal-size enums for each breakpoint you need and every column"
@@ -67,7 +67,7 @@ internal fun RBuilder.autoLayoutColumns() {
             }
         }
     }
-    contentTitle(RBuilder::h3, "Setting one column width") { }
+    contentTitle(RBuilder::h3, "Setting one column width")
     p {
         +"Auto-layout for flexbox grid columns also means you can set the width of one column and have the sibling "
         +"columns automatically resize around it. You may use predefined grid enumbs (as shown below), grid mixins, or "
@@ -108,7 +108,7 @@ internal fun RBuilder.autoLayoutColumns() {
             }
         }
     }
-    contentTitle(RBuilder::h3, "Variable width content") { }
+    contentTitle(RBuilder::h3, "Variable width content")
     p {
         +"Use the "; code { +Sizes.AUTO.kt }; +" enum value to size columns based on the natural width of their"
         +"content."

@@ -58,7 +58,7 @@ internal fun RBuilder.combining() {
         +"As you can see in the examples above, all col attributes are set using the same arguments. Custom pairing "
         +"functions are used to combine the values."
     }
-    contentTitle(RBuilder::h3, "Combine with $sizes") { }
+    contentTitle(RBuilder::h3, "Combine with $sizes")
     p {
         +"Combine other attributes with "; code { +"$sizes" }; +" by using "; code { +sz }; +"."
     }
@@ -104,7 +104,7 @@ internal fun RBuilder.combining() {
         }
     }
 
-    contentTitle(RBuilder::h3, "Combine with $offsets") { }
+    contentTitle(RBuilder::h3, "Combine with $offsets")
     p {
         +"Combine other attributes with "; code { +"$offsets" }; +" by using "; code { +off }; +"."
     }
@@ -150,7 +150,7 @@ internal fun RBuilder.combining() {
         }
     }
 
-    contentTitle(RBuilder::h3, "Combine with $orderings") { }
+    contentTitle(RBuilder::h3, "Combine with $orderings")
     p {
         +"Combine other attributes with "; code { +"$orderings" }; +" by using "; code { +ord }; +"."
     }
@@ -196,7 +196,7 @@ internal fun RBuilder.combining() {
         }
     }
 
-    contentTitle(RBuilder::h3, "Combine with $alignments") { }
+    contentTitle(RBuilder::h3, "Combine with $alignments")
     p {
         +"Combine other attributes with "; code { +"$alignments" }; +" by using "; code { +align }; +"."
     }
@@ -242,7 +242,7 @@ internal fun RBuilder.combining() {
         }
     }
 
-    contentTitle(RBuilder::h3, "Combine all") { }
+    contentTitle(RBuilder::h3, "Combine all")
     p {
         +"You can use the same pairing functions in any order to combine all attributes."
     }
@@ -381,7 +381,7 @@ private fun RBuilder.allPossibleCombinations() {
     }
 
     allPairings.toSet().forEach { pairing ->
-        contentTitle(RBuilder::h4, "${pairing.thisClassName} + ${pairing.withClassName}") { }
+        contentTitle(RBuilder::h4, "${pairing.thisClassName} + ${pairing.withClassName}")
         flexColsExampleRow {
             example {
                 container {
@@ -463,7 +463,7 @@ private fun RBuilder.allPossibleCombinations() {
                     "${pairing.argString} ${tripling.tripleUsing.name} ${tripling.thisString} " +
                         "${quadruple.quadrupleUsing.name} ${quadruple.thisString}"
 
-                contentTitle(RBuilder::h4, combination) { }
+                contentTitle(RBuilder::h4, combination)
                 flexColsExampleRow {
                     example {
                         container {

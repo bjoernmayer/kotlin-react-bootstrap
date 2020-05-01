@@ -23,7 +23,7 @@ import react.dom.ul
 
 internal fun RBuilder.lists() {
     contentTitle("Lists")
-    contentTitle(RBuilder::h3, "Unstyled") { }
+    contentTitle(RBuilder::h3, "Unstyled")
     p {
         +"Remove the default "; code { +"list-style" }; +" and left margin on list items (immediate children only). "
         strong { +"This only applies to immediate children list items" }; +", meaning you will need to add the class "
@@ -72,7 +72,7 @@ internal fun RBuilder.lists() {
             ln(il) { +"li { +\"Eget porttitor lorem\" }" }
         }
     }
-    contentTitle(RBuilder::h3, "Inline") { }
+    contentTitle(RBuilder::h3, "Inline")
     p {
         +"Remove a list’s bullets and apply some light "; code { +"margin" }; +" with a combination of two functions, "
         code { +"ul(${ListStyles.INLINE.kt}) { }" }; +" and "

@@ -16,4 +16,6 @@ fun RBuilder.tables() = div {
     borderStyles()
     hoverableRows()
     smallTable()
+    contextualStyles()
+    responsiveTables()
 }
