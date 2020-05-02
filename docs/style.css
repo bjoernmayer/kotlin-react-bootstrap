@@ -71,6 +71,6 @@ a, a:hover {
     color: #6b70fc
 }
 
-pre[class*="language-"] {
-    overflow-x: scroll;
+figure.highlight > pre {
+    overflow-x: scroll !important;
 }
