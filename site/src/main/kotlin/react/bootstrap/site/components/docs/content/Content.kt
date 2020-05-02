@@ -16,7 +16,7 @@ internal val content = Category(
     addSubCategory("Code", "code", RBuilder::code)
     addSubCategory("Images", "images", RBuilder::images)
     addSubCategory("Tables", "tables", RBuilder::tables)
-//                addSubCategory("Figures", "figures")
+    addSubCategory("Figures", "figures", RBuilder::figures)
 }
 
 internal class Content : DocumentationPage(content)
