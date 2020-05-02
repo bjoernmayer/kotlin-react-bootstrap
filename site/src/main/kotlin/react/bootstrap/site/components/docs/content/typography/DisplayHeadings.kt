@@ -9,7 +9,6 @@ import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.br
 import react.dom.p
 import react.dom.span
 import react.dom.strong
@@ -66,7 +65,7 @@ internal fun RBuilder.displayHeadings() {
         for (x in 1..3) {
             ln { +"import react.bootstrap.content.typography.${RBuilder::display.name}$x" }
         }
-        br { }
+        ln { }
 
         for (x in 1..3) {
             ktBlock(0, "${RBuilder::display.name}$x") { il ->

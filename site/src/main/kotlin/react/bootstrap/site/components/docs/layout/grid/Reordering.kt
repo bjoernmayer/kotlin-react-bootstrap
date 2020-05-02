@@ -16,7 +16,6 @@ import react.bootstrap.site.components.docs.fixings.exampleRow
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.ln
 import react.dom.a
-import react.dom.br
 import react.dom.code
 import react.dom.h3
 import react.dom.h4
@@ -50,7 +49,7 @@ internal fun RBuilder.reordering() {
             gridEnumImport(Orderings::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktConRow { il ->
                 ln(il) { +"$colFun { +\"First in DOM, no order applied\" }" }
                 ln(il) { +"$colFun(all = ${Orderings.ORD_12.kt}) { +\" Second in DOM, with a larger order\" }" }
@@ -98,7 +97,7 @@ internal fun RBuilder.reordering() {
             gridEnumImport(Sizes::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktRow(il) { il ->
                     ln(il) { +"$colFun(md = ${Sizes.SZ_4.kt}) { +\"md = ${Sizes.SZ_4.kt}\" }" }

@@ -10,7 +10,6 @@ import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
 import react.bootstrap.site.external.Fragment
-import react.dom.br
 import react.dom.code
 import react.dom.p
 
@@ -32,15 +31,15 @@ fun RBuilder.code() = Fragment {
             ) { il ->
                 ln(il) { +"val first: T1" }
                 ln(il) { +"val second: T2" }
-                br { }
+                ln { }
                 ln(1) { +"override fun getClassNames(breakpoints: Breakpoints?): Set<ClassNames> = listOf(" }
                 ln(2) { +"first.getClassNames(breakpoints)," }
                 ln(2) { +"second.getClassNames(breakpoints)" }
                 ln(1) { +").flatten().toSet()" }
             }
-            br { }
+            ln { }
             +"interface AttributeTriple<T1 : CombinedAttributes, T2 : CombinedAttributes, T3 : CombinedAttributes> :"
-            br { }
+            ln { }
             ln(1) { +"AttributePair<T1, T2> {" }
             ln(1) { +"val third: T3" }
             ln { +"" }
@@ -53,7 +52,7 @@ fun RBuilder.code() = Fragment {
     }
     codeBox {
         ln { +"import react.bootstrap.content.pre" }
-        br { }
+        ln { }
         ktBlock(0, "pre(scrollable = true)") { il ->
             ln(il) { +"// Kotlin Code was here" }
         }

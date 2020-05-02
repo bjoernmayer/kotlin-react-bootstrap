@@ -1,26 +1,24 @@
 package react.bootstrap.site.components.docs.fixings
 
-import kotlinx.html.CODE
 import kotlinx.html.DIV
 import react.RBuilder
+import react.RElementBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.bootstrap.data
+import react.bootstrap.site.external.PrismCode
+import react.bootstrap.site.external.PrismCodeProps
 import react.dom.RDOMBuilder
-import react.dom.code
 import react.dom.div
 import react.dom.figure
-import react.dom.pre
 
-fun RBuilder.codeBox(block: RDOMBuilder<CODE>.() -> Unit): ReactElement =
+fun RBuilder.codeBox(block: RElementBuilder<PrismCodeProps>.() -> Unit): ReactElement =
     figure("highlight") {
-        pre {
-            code("kotlin") {
-                attrs {
-                    data("lang", "kotlin")
-                }
-                block()
+        PrismCode {
+            attrs {
+                className = "language-kotlin"
+                component = "pre"
             }
+            block()
         }
     }
 

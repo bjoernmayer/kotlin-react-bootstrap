@@ -13,7 +13,6 @@ import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.br
 import react.dom.code
 import react.dom.h3
 import react.dom.p
@@ -38,7 +37,7 @@ internal fun RBuilder.headings() {
         for (x in 1..6) {
             ln { +"import react.bootstrap.content.typography.h$x" }
         }
-        br { }
+        ln { }
         for (x in 1..6) {
             ln { +"h$x(RBuilder::p) { +\"h$x. Bootstrap heading\" }" }
         }
@@ -55,7 +54,7 @@ internal fun RBuilder.headings() {
     }
     codeBox {
         ln { +"import react.bootstrap.content.typography.muted" }
-        br { }
+        ln { }
         ktBlock(0, "h3") { il ->
             ln(il) { +"+\"Fancy display heading \"" }
             ln(il) { +"muted(RBuilder::small) { +\"With faded secondary text\" }" }

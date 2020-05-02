@@ -13,7 +13,6 @@ import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.br
 import react.dom.code
 import react.dom.h3
 import react.dom.li
@@ -52,7 +51,7 @@ internal fun RBuilder.lists() {
     codeBox {
         ln { +"import react.bootstrap.content.typography.${ListStyles::class.simpleName}" }
         ln { +"import react.bootstrap.content.typography.ul" }
-        br { }
+        ln { }
         ktBlock(0, "ul(${ListStyles.UNSTYLED.kt})") { il ->
             ln(il) { +"li { +\"Lorem ipsum dolor sit amet\" }" }
             ln(il) { +"li { +\"Consectetur adipiscing elit\" }" }
@@ -90,7 +89,7 @@ internal fun RBuilder.lists() {
         ln { +"import react.bootstrap.content.typography.${ListStyles::class.simpleName}" }
         ln { +"import react.bootstrap.content.typography.li" }
         ln { +"import react.bootstrap.content.typography.ul" }
-        br { }
+        ln { }
         ktBlock(0, "ul(${ListStyles.INLINE.kt}) ") { il ->
             ln(il) { +"li(${ListItemStyles.INLINE.kt}) { +\"Lorem ipsum\" }" }
             ln(il) { +"li(${ListItemStyles.INLINE.kt}) { +\"Phasellus iaculis\" }" }

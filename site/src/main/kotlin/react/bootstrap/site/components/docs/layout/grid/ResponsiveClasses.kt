@@ -15,7 +15,6 @@ import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.exampleRow
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.ln
-import react.dom.br
 import react.dom.code
 import react.dom.em
 import react.dom.h3
@@ -54,7 +53,7 @@ internal fun RBuilder.responsiveClasses() {
             gridEnumImport(Sizes::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktRow(il) { il ->
                     for (x in 1..4) {
@@ -93,7 +92,7 @@ internal fun RBuilder.responsiveClasses() {
             gridEnumImport(Sizes::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktRow(il) { il ->
                     ln(il) { +"$colFun(sm = ${Sizes.SZ_8.kt}) { +\"sm = ${Sizes.SZ_8.kt}\" }" }
@@ -136,7 +135,7 @@ internal fun RBuilder.responsiveClasses() {
             gridEnumImport(Sizes::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktRow(il) { il ->
                     ln(il) { +"// Stack the columns on mobile by making one full-width and the other half-width" }
@@ -185,7 +184,7 @@ internal fun RBuilder.responsiveClasses() {
             gridEnumImport(ColCounts::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktBlock(il, "$rowFun(all = ${ColCounts.CNT_2.kt})") { il ->
                     for (x in 1..4) {
@@ -210,7 +209,7 @@ internal fun RBuilder.responsiveClasses() {
             gridEnumImport(ColCounts::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktBlock(il, "$rowFun(all = ${ColCounts.CNT_3.kt})") { il ->
                     for (x in 1..4) {
@@ -235,7 +234,7 @@ internal fun RBuilder.responsiveClasses() {
             gridEnumImport(ColCounts::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktBlock(il, "$rowFun(all = ${ColCounts.CNT_4.kt})") { il ->
                     for (x in 1..4) {
@@ -263,7 +262,7 @@ internal fun RBuilder.responsiveClasses() {
             gridEnumImport(Sizes::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktBlock(il, "$rowFun(all = ${ColCounts.CNT_4.kt})") { il ->
                     for (x in 1..2) {
@@ -291,7 +290,7 @@ internal fun RBuilder.responsiveClasses() {
             gridEnumImport(ColCounts::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktBlock(
                     il,
@@ -329,7 +328,7 @@ internal fun RBuilder.responsiveClasses() {
             gridEnumImport(Sizes::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktBlock(il, "$rowFun(gutters = false)") { il ->
                     ln(il) {

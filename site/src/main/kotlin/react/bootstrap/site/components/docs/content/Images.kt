@@ -12,7 +12,6 @@ import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.ln
 import react.bootstrap.site.external.Fragment
-import react.dom.br
 import react.dom.code
 import react.dom.p
 import react.dom.svg
@@ -47,7 +46,7 @@ internal fun RBuilder.images() = Fragment {
     }
     codeBox {
         ln { +"import react.bootstrap.content.img" }
-        br { }
+        ln { }
         ln { +"img(fluid = true, alt =\"Responsive image\", src = ...) { }" }
     }
     contentTitle("Image thumbnails")
@@ -76,7 +75,7 @@ internal fun RBuilder.images() = Fragment {
     }
     codeBox {
         ln { +"import react.bootstrap.content.img" }
-        br { }
+        ln { }
         ln { +"img(thumbnail = true, alt =\"Responsive image\", src = ...) { }" }
     }
 }

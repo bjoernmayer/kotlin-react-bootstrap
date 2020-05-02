@@ -18,7 +18,6 @@ import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.ln
 import react.dom.a
-import react.dom.br
 import react.dom.code
 import react.dom.h3
 import react.dom.p
@@ -60,7 +59,7 @@ internal fun RBuilder.alignment() {
             gridEnumImport(ItemsYs::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktBlock(il, "$rowFun(all = ${ItemsYs.START.kt})") { il ->
                     for (x in 1..3) {
@@ -95,7 +94,7 @@ internal fun RBuilder.alignment() {
             gridEnumImport(Alignments::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktConRow { il ->
                 ln(il) { +"$colFun(all = ${Alignments.START.kt}) { +\"One of three columns\" }" }
                 ln(il) { +"$colFun(all = ${Alignments.CENTER.kt}) { +\"One of three columns\" }" }
@@ -140,7 +139,7 @@ internal fun RBuilder.alignment() {
             gridEnumImport(Sizes::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktBlock(il, "rowFun(all = ${ItemsXs.START.kt})") { il ->
                     for (x in 1..2) {

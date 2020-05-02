@@ -8,7 +8,6 @@ import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.br
 import react.dom.code
 import react.dom.p
 import react.dom.span
@@ -30,7 +29,7 @@ internal fun RBuilder.inlineTextElements() {
     codeBox {
         ln { +"import react.bootstrap.content.typography.mark" }
         ln { +"import react.bootstrap.content.typography.small" }
-        br { }
+        ln { }
         ktBlock(0, "p") { il ->
             ln(il) { +"+\"You can use the mark tag to \";  mark(RBuilder::span) { +\"highlight\" }; +\" text.\"" }
         }

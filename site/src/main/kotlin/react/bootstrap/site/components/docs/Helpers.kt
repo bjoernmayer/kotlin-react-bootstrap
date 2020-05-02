@@ -5,7 +5,6 @@ import react.RComponent
 import react.RProps
 import react.RState
 import react.bootstrap.lib.ClassNames
-import react.dom.br
 import react.router.dom.RouteResultProps
 import react.router.dom.redirect
 import react.router.dom.route
@@ -44,5 +43,5 @@ internal fun RBuilder.ln(indentationLevel: Int = 0, block: RBuilder.() -> Unit) 
         +"    "
     }
     block()
-    br { }
+    +"\n"
 }

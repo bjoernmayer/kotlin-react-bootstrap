@@ -28,7 +28,6 @@ import react.bootstrap.site.components.docs.fixings.flexColsExampleRow
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.ln
-import react.dom.br
 import react.dom.code
 import react.dom.h3
 import react.dom.h4
@@ -86,7 +85,7 @@ internal fun RBuilder.combining() {
             gridEnumImport(Sizes::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktRow(il) { il ->
                     ln(il) { +"$colFun(all = $off1 $sz $sz4) { +\"all = $off1 $sz $sz4\" }" }
@@ -132,7 +131,7 @@ internal fun RBuilder.combining() {
             gridEnumImport(Sizes::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktRow(il) { il ->
                     ln(il) { +"$colFun(all = $sz4 $off $off1) { +\"all = $sz4 $off $off1\" }" }
@@ -178,7 +177,7 @@ internal fun RBuilder.combining() {
             gridEnumImport(Sizes::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktRow(il) { il ->
                     ln(il) { +"$colFun(all = $sz4 $ord $ord3) { +\"all = $sz4 $ord $ord3\" }" }
@@ -224,7 +223,7 @@ internal fun RBuilder.combining() {
             gridEnumImport(Sizes::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktRow(il) { il ->
                     ln(il) { +"$colFun(all = $sz4 $align $end) { +\"all = $sz4 $align $end\" }" }
@@ -399,7 +398,7 @@ private fun RBuilder.allPossibleCombinations() {
                 }
                 colFunImport()
                 rowFunImport()
-                br { }
+                ln { }
                 ktConRow { il ->
                     ln(il) { +"$colFun(all = ${pairing.argString}) { +\"all = ${pairing.argString}\" }" }
                     ln(il) { +"$colFun { +\"Reference\" }" }
@@ -437,7 +436,7 @@ private fun RBuilder.allPossibleCombinations() {
                     }
                     colFunImport()
                     rowFunImport()
-                    br { }
+                    ln { }
                     ktConRow { il ->
                         ln(il) { +"$colFun(all = $argString) { +\"all = $argString\" }" }
                         ln(il) { +"$colFun { +\"Reference\" }" }
@@ -482,7 +481,7 @@ private fun RBuilder.allPossibleCombinations() {
                     gridEnumImport(Sizes::class)
                     colFunImport()
                     rowFunImport()
-                    br { }
+                    ln { }
                     ktConRow { il ->
                         ln(il) { +"$colFun(all = $argString) { +\"all = $argString\" }" }
                         ln(il) { +"$colFun { +\"Reference\" }" }

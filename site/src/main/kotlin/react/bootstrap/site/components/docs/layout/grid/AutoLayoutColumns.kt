@@ -15,7 +15,6 @@ import react.bootstrap.site.components.docs.fixings.exampleRow
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.ln
-import react.dom.br
 import react.dom.code
 import react.dom.h3
 import react.dom.p
@@ -52,7 +51,7 @@ internal fun RBuilder.autoLayoutColumns() {
             gridEnumImport(Sizes::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktRow(il) { il ->
                     ln(il) { +"$colFun { +\"1 of 2\" }" }
@@ -93,7 +92,7 @@ internal fun RBuilder.autoLayoutColumns() {
             gridEnumImport(Sizes::class)
             colFunImport()
             rowFunImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktRow(il) { il ->
                     ln(il) { +"$colFun { +\"1 of 3\" }" }
@@ -134,7 +133,7 @@ internal fun RBuilder.autoLayoutColumns() {
             colFunImport()
             rowFunImport()
             classNamesImport()
-            br { }
+            ln { }
             ktContainer { il ->
                 ktBlock(il, "$rowFun(classes = \"\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.kt}}\")") { il ->
                     ln(il) { +"$colFun(all = ${Sizes.EQ.kt}, lg =  ${Sizes.SZ_2.kt}) { +\"1 of 3\" }" }

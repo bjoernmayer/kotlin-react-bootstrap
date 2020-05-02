@@ -10,7 +10,6 @@ import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.br
 import react.dom.code
 import react.dom.p
 import react.dom.tbody
@@ -65,7 +64,7 @@ internal fun RBuilder.examples() {
     }
     codeBox {
         ln { +"import react.bootstrap.content.tables.table" }
-        br { }
+        ln { }
         ktBlock(opener = "table") { il ->
             ktBlock(il, "thead") { il ->
                 ktBlock(il, "tr") { il ->
@@ -135,7 +134,7 @@ internal fun RBuilder.examples() {
     }
     codeBox {
         ln { +"import react.bootstrap.content.tables.table" }
-        br { }
+        ln { }
         ktBlock(opener = "table(dark = true)") { il ->
             ktBlock(il, "thead") { il ->
                 ktBlock(il, "tr") { il ->

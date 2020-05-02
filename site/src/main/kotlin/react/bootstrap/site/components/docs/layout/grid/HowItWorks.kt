@@ -14,7 +14,6 @@ import react.bootstrap.site.components.docs.fixings.exampleRow
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.ln
 import react.dom.a
-import react.dom.br
 import react.dom.code
 import react.dom.p
 import react.dom.strong
@@ -49,7 +48,7 @@ internal fun RBuilder.howItWorks() {
         gridEnumImport(Sizes::class)
         colFunImport()
         rowFunImport()
-        br { }
+        ln { }
         ktConRow { il ->
             for (x in 1..3) {
                 ktBlock(il, "$colFun(sm = ${Sizes.EQ.kt})") { il ->

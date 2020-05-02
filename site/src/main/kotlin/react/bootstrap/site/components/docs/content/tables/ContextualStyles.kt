@@ -11,7 +11,6 @@ import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.br
 import react.dom.p
 import react.dom.tbody
 import react.dom.td
@@ -91,10 +90,10 @@ fun RBuilder.contextualStyles() {
         ln { +"import react.bootstrap.content.tables.table" }
         ln { +"import react.bootstrap.content.tables.td" }
         ln { +"import react.bootstrap.content.tables.tr" }
-        br { }
+        ln { }
         ln { +"// On rows" }
         ln { +"tr(${ContextualStyle.ACTIVE.kt}) { ... }" }
-        br { }
+        ln { }
         ln { +"tr(${ContextualStyle.PRIMARY.kt}) { ... }" }
         ln { +"tr(${ContextualStyle.SECONDARY.kt}) { ... }" }
         ln { +"tr(${ContextualStyle.SUCCESS.kt}) { ... }" }
@@ -103,11 +102,11 @@ fun RBuilder.contextualStyles() {
         ln { +"tr(${ContextualStyle.INFO.kt}) { ... }" }
         ln { +"tr(${ContextualStyle.LIGHT.kt}) { ... }" }
         ln { +"tr(${ContextualStyle.DARK.kt}) { ... }" }
-        br { }
+        ln { }
         ln { +"// On cells (`td` or `th`)" }
         ktBlock(0, "tr") { il ->
             ln(il) { +"td(${ContextualStyle.ACTIVE.kt}) { ... }" }
-            br { }
+            ln { }
             ln(il) { +"td(${ContextualStyle.PRIMARY.kt}) { ... }" }
             ln(il) { +"td(${ContextualStyle.SECONDARY.kt}) { ... }" }
             ln(il) { +"td(${ContextualStyle.SUCCESS.kt}) { ... }" }

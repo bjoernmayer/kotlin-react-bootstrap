@@ -12,7 +12,6 @@ import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.br
 import react.dom.code
 import react.dom.p
 import react.dom.tbody
@@ -156,7 +155,7 @@ internal fun RBuilder.borderStyles() {
     codeBox {
         ln { +"import react.bootstrap.content.tables.${BorderStyles::class.simpleName}" }
         ln { +"import react.bootstrap.content.tables.table" }
-        br { }
+        ln { }
         ktBlock(opener = "table(borderStyle = ${BorderStyles.BORDERED.kt})") { il ->
             ktBlock(il, "thead") { il ->
                 ktBlock(il, "tr") { il ->
@@ -187,7 +186,7 @@ internal fun RBuilder.borderStyles() {
                 }
             }
         }
-        br { }
+        ln { }
         ktBlock(opener = "table(borderStyle = ${BorderStyles.BORDERED.kt}, dark = true)") { il ->
             ktBlock(il, "thead") { il ->
                 ktBlock(il, "tr") { il ->
@@ -218,7 +217,7 @@ internal fun RBuilder.borderStyles() {
                 }
             }
         }
-        br { }
+        ln { }
         ktBlock(opener = "table(borderStyle = ${BorderStyles.BORDERLESS.kt})") { il ->
             ktBlock(il, "thead") { il ->
                 ktBlock(il, "tr") { il ->
@@ -249,7 +248,7 @@ internal fun RBuilder.borderStyles() {
                 }
             }
         }
-        br { }
+        ln { }
         ktBlock(opener = "table(borderStyle = ${BorderStyles.BORDERLESS.kt}, dark = true)") { il ->
             ktBlock(il, "thead") { il ->
                 ktBlock(il, "tr") { il ->
