@@ -27,8 +27,7 @@ dependencies {
     implementation(npm("style-loader", "1.1.4"))
     implementation(npm("file-loader", "6.0.0"))
 
-    implementation(npm("react-prism", "4.3.2"))
-    implementation(npm("prismjs", "1.20.0"))
+    implementation(npm("react-syntax-highlighter", "12.2.1"))
 }
 
 tasks.named("compileKotlinJs") {

@@ -2,25 +2,34 @@ package react.bootstrap.site.components.docs.fixings
 
 import kotlinx.html.DIV
 import react.RBuilder
-import react.RElementBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.bootstrap.site.external.PrismCode
-import react.bootstrap.site.external.PrismCodeProps
+import react.bootstrap.site.external.Prism
 import react.dom.RDOMBuilder
 import react.dom.div
 import react.dom.figure
 
-fun RBuilder.codeBox(block: RElementBuilder<PrismCodeProps>.() -> Unit): ReactElement =
-    figure("highlight") {
-        PrismCode {
+@JsNonModule
+@JsModule("react-syntax-highlighter/dist/esm/styles/prism/coy")
+external val coy: dynamic
+
+fun RBuilder.codeBox(block: RBuilder.() -> Unit): ReactElement {
+    val code = RBuilder().apply {
+        block()
+    }
+
+    val codeString = code.childList.joinToString("")
+
+    return figure("highlight") {
+        Prism {
             attrs {
-                className = "language-kotlin"
-                component = "pre"
+                language = "kotlin"
+                style = coy.default
             }
-            block()
+            +codeString
         }
     }
+}
 
 fun RBuilder.example(classes: String? = null, block: RDOMBuilder<DIV>.() -> Unit): ReactElement =
     div(classes.appendClass("bd-example"), block)

@@ -6,9 +6,6 @@ import kotlin.browser.document
 
 fun main() {
     kotlinext.js.require("docs.min.css")
-    kotlinext.js.require("prismjs")
-    kotlinext.js.require("prismjs/themes/prism-coy.css")
-    kotlinext.js.require("prismjs/components/prism-kotlin")
     kotlinext.js.require("style.css")
 
     val rootDiv = document.getElementById("root")
