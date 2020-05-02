@@ -11,7 +11,7 @@ import react.dom.img
 @Suppress("unused")
 fun RBuilder.img(
     fluid: Boolean? = true,
-    isThumbnail: Boolean? = true,
+    isThumbnail: Boolean? = null,
     alt: String? = null,
     src: String? = null,
     classes: String? = null,
