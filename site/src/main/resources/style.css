@@ -1,0 +1,72 @@
+@import url(https://fonts.googleapis.com/css?family=Inter:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,500,700);
+
+
+
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: Inter, Arial, sans-serif;
+}
+
+.btn-bd-primary {
+    background-color: #6a6ffc;
+    color: white;
+    border: none
+}
+
+.btn-bd-primary:hover {
+    background-color: #878bfc
+}
+
+.bd-navbar {
+    background-color: #27282c;
+    box-shadow: none;
+}
+
+.bd-example {
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border: .2rem solid #f8f9fa;
+}
+
+.bd-navbar .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, .5)
+}
+
+.bd-navbar .navbar-nav .nav-link.active {
+    font-weight: normal;
+}
+
+.bd-masthead {
+    background-color: #27282c;
+    color: white;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.bd-masthead .btn {
+    font-weight: normal;
+}
+
+.home-logo {
+    max-height: 430px;
+}
+
+code {
+    color: #f8863c
+}
+
+.bd-title {
+    font-weight: 700
+}
+
+.bd-content-title {
+    font-weight: bold;
+}
+
+a, a:hover {
+    color: #6b70fc
+}

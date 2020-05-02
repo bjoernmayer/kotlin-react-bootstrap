@@ -5,6 +5,7 @@ import kotlinx.html.unsafe
 import react.RBuilder
 import react.RProps
 import react.bootstrap.ariaLabel
+import react.bootstrap.lib.ClassNames
 import react.dom.a
 import react.dom.div
 import react.dom.header
@@ -15,26 +16,17 @@ import react.dom.ul
 import react.router.dom.navLink
 
 @JsNonModule
-@JsModule("kotlin.png")
-external val kotlinLogo: dynamic
-
-@JsNonModule
-@JsModule("react.png")
-external val reactLogo: dynamic
-
-@JsNonModule
-@JsModule("bootstrap.png")
-external val bootstrapLogo: dynamic
+@JsModule("logo.png")
+external val logo: dynamic
 
 fun RBuilder.header() {
     header("navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar") {
-        a(href = "/", classes = "navbar-brand mr-0 mr-md-2") {
+        a(href = "/", classes = "navbar-brand ${ClassNames.MR_0} ${ClassNames.MR_MD_2}") {
             attrs {
                 ariaLabel = "Kotlin React Bootstrap"
             }
-            img(src = kotlinLogo.default as? String) { attrs { height = "30" } }
-            img(src = reactLogo.default as? String) { attrs { height = "30" } }
-            img(src = bootstrapLogo.default as? String) { attrs { height = "30" } }
+            img(src = logo.default as? String, classes = "${ClassNames.MR_2}") { attrs { height = "30" } }
+            +"Kotlin React Bootstrap"
         }
         div("navbar-nav-scroll") {
             ul("navbar-nav bd-navbar-nav flex-row") {

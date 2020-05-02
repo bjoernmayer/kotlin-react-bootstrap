@@ -5,7 +5,8 @@ import react.dom.render
 import kotlin.browser.document
 
 fun main() {
-    style()
+    kotlinext.js.require("docs.min.css")
+    kotlinext.js.require("style.css")
 
     val rootDiv = document.getElementById("root")
     render(rootDiv) {
