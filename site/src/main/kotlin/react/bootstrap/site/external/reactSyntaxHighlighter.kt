@@ -1,5 +1,6 @@
 @file:JsModule("react-syntax-highlighter")
 @file:JsNonModule
+@file:Suppress("unused")
 
 package react.bootstrap.site.external
 
@@ -22,4 +23,12 @@ external interface ReactSyntaxHighlighterProps : RProps {
     var codeTag: ReactElement?
 }
 
-external val Prism: RClass<ReactSyntaxHighlighterProps>
+external interface SyntaxHighlighterInterface : RClass<ReactSyntaxHighlighterProps> {
+    fun registerLanguage(language: String, module: dynamic)
+}
+
+external val Prism: SyntaxHighlighterInterface
+external val PrismLight: SyntaxHighlighterInterface
+
+external val SyntaxHighlighter: SyntaxHighlighterInterface
+external val Light: SyntaxHighlighterInterface

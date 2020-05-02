@@ -4,7 +4,7 @@ import kotlinx.html.DIV
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.bootstrap.site.external.Prism
+import react.bootstrap.site.external.PrismLight
 import react.dom.RDOMBuilder
 import react.dom.div
 import react.dom.figure
@@ -13,15 +13,20 @@ import react.dom.figure
 @JsModule("react-syntax-highlighter/dist/esm/styles/prism/coy")
 external val coy: dynamic
 
+@JsNonModule
+@JsModule("react-syntax-highlighter/dist/esm/languages/prism/kotlin")
+external val kotlin: dynamic
+
 fun RBuilder.codeBox(block: RBuilder.() -> Unit): ReactElement {
     val code = RBuilder().apply {
         block()
     }
 
+    PrismLight.registerLanguage("kotlin", kotlin.default)
     val codeString = code.childList.joinToString("")
 
     return figure("highlight") {
-        Prism {
+        PrismLight {
             attrs {
                 language = "kotlin"
                 style = coy.default
