@@ -1,5 +1,6 @@
 package react.bootstrap.site.components.docs.content
 
+import react.Fragment
 import react.RBuilder
 import react.bootstrap.content.pre
 import react.bootstrap.site.components.docs.fixings.codeBox
@@ -9,7 +10,6 @@ import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.bootstrap.site.external.Fragment
 import react.dom.code
 import react.dom.p
 

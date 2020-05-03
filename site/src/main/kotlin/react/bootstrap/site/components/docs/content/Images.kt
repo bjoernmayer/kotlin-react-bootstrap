@@ -2,6 +2,7 @@ package react.bootstrap.site.components.docs.content
 
 import kotlinx.html.role
 import kotlinx.html.unsafe
+import react.Fragment
 import react.RBuilder
 import react.bootstrap.ariaLabel
 import react.bootstrap.lib.ClassNames
@@ -11,7 +12,6 @@ import react.bootstrap.site.components.docs.fixings.contentPageTitle
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.ln
-import react.bootstrap.site.external.Fragment
 import react.dom.code
 import react.dom.p
 import react.dom.svg

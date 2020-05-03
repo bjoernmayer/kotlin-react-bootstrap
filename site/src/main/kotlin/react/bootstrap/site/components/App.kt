@@ -1,5 +1,6 @@
 package react.bootstrap.site.components
 
+import react.Fragment
 import react.RBuilder
 import react.RProps
 import react.bootstrap.layout.Container
@@ -7,7 +8,6 @@ import react.bootstrap.layout.container
 import react.bootstrap.site.components.docs.Docs
 import react.bootstrap.site.from
 import react.bootstrap.site.external.BrowserRouterProps
-import react.bootstrap.site.external.Fragment
 import react.child
 import react.router.dom.browserRouter
 import react.router.dom.route

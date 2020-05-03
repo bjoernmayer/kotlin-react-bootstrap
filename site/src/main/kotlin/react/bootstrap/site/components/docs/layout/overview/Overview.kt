@@ -1,10 +1,9 @@
 package react.bootstrap.site.components.docs.layout.overview
 
+import react.Fragment
 import react.RBuilder
 import react.bootstrap.site.components.docs.fixings.contentPageLead
 import react.bootstrap.site.components.docs.fixings.contentPageTitle
-import react.bootstrap.site.external.Fragment
-import react.dom.div
 
 fun RBuilder.overview() = Fragment {
     contentPageTitle("Overview")

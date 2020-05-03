@@ -1,5 +1,4 @@
 @file:JsModule("react-syntax-highlighter")
-@file:JsNonModule
 @file:Suppress("unused")
 
 package react.bootstrap.site.external
