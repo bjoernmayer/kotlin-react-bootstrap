@@ -10,12 +10,13 @@ import react.ReactElement
 import react.children
 import react.cloneElement
 import react.dom.WithClassName
+import react.dom.fixAttributeName
 
 interface WithRenderAs : RProps {
     var renderAs: (RBuilder.() -> ReactElement)?
 }
 
-abstract class RenderAsComponent<P : WithRenderAs, S : RState> : RComponent<P, S> {
+abstract class RenderAsComponent<P : WithRenderAs, RP : WithClassName, S : RState> : RComponent<P, S> {
     constructor() : super() {
         state = jsObject { init() }
     }
@@ -24,15 +25,20 @@ abstract class RenderAsComponent<P : WithRenderAs, S : RState> : RComponent<P, S
         state = jsObject { init(props) }
     }
 
-    abstract fun WithClassName.setProps()
+    protected abstract fun RP.handleProps()
 
-    abstract fun RBuilder.defaultElement(): ReactElement
+    protected abstract fun RBuilder.getDefaultRenderer(): ReactElement
+
+    protected fun RP.setProp(attribute: String, value: Any?) {
+        val key = fixAttributeName(attribute)
+        props.asDynamic()[key] = value
+    }
 
     final override fun RBuilder.render() {
-        val element: ReactElement = props.renderAs?.invoke(this) ?: defaultElement()
+        val element: ReactElement = props.renderAs?.invoke(this) ?: getDefaultRenderer()
 
-        child(cloneElement<WithClassName>(element, *Children.toArray(props.children)) {
-            setProps()
+        child(cloneElement<RP>(element, *Children.toArray(props.children)) {
+            handleProps()
         })
     }
 

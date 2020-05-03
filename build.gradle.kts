@@ -18,18 +18,13 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-js"))
 
-    implementation(kotlinReact(Versions.REACT_VERSION, Versions.KOTLIN_JS_WRAPPERS))
-    implementation(kotlinReact("dom", Versions.REACT_VERSION, Versions.KOTLIN_JS_WRAPPERS))
+    api(kotlinReact(Versions.REACT_VERSION, Versions.KOTLIN_JS_WRAPPERS))
+    api(kotlinReact("dom", Versions.REACT_VERSION, Versions.KOTLIN_JS_WRAPPERS))
 }
 
-tasks.named("compileKotlinJs") {
-    this as KotlinJsCompile
-
+tasks.withType<KotlinJsCompile> {
+    // Also used by kotlin-wrappers. See http://www.commonjs.org/specs/modules/1.0/
     kotlinOptions.moduleKind = COMMONJS
 }
 
-kotlin.target.browser {
-    webpackTask {
-        output.libraryTarget = COMMONJS
-    }
-}
+kotlin.target.browser()

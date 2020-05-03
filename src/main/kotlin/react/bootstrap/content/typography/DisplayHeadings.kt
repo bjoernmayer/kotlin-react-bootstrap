@@ -46,7 +46,7 @@ fun RBuilder.display(
     block()
 }
 
-class Display : RenderAsComponent<Display.Props, RState>() {
+class Display : RenderAsComponent<Display.Props, WithClassName, RState>() {
     enum class Variants(override val className: ClassNames) : ClassNameEnum {
         DISPLAY_1(ClassNames.DISPLAY_1),
         DISPLAY_2(ClassNames.DISPLAY_2),
@@ -60,11 +60,11 @@ class Display : RenderAsComponent<Display.Props, RState>() {
         var variant: Variants
     }
 
-    override fun WithClassName.setProps() {
+    override fun WithClassName.handleProps() {
         className = props.className.appendClass(props.variant.className)
     }
 
-    override fun RBuilder.defaultElement(): ReactElement = when (props.variant) {
+    override fun RBuilder.getDefaultRenderer(): ReactElement = when (props.variant) {
         Variants.DISPLAY_1 -> h1 { }
         Variants.DISPLAY_2 -> h2 { }
         Variants.DISPLAY_3 -> h3 { }

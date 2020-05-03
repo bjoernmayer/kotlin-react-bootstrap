@@ -15,6 +15,7 @@ import react.bootstrap.lib.WithRenderAs
 import react.bootstrap.lib.resolveAttributeClassNames
 import react.dom.WithClassName
 import react.dom.div
+import react.dom.fixAttributeName
 
 interface ColAttributes : CombinedAttributes {
     val size: Sizes?
@@ -382,7 +383,7 @@ fun RBuilder.col(
     block()
 }
 
-class Col : RenderAsComponent<Col.Props, RState>() {
+class Col : RenderAsComponent<Col.Props, WithClassName, RState>() {
     interface Props : WithRenderAs, WithClassName {
         var all: ColAttributes?
         var sm: ColAttributes?
@@ -391,7 +392,7 @@ class Col : RenderAsComponent<Col.Props, RState>() {
         var xl: ColAttributes?
     }
 
-    override fun WithClassName.setProps() {
+    override fun WithClassName.handleProps() {
         // Pairs and Triples match in multiple of those. That's why we need a Set
         val colClasses = mutableSetOf<ClassNames>()
 
@@ -417,5 +418,5 @@ class Col : RenderAsComponent<Col.Props, RState>() {
         className = props.className.appendClass(colClasses)
     }
 
-    override fun RBuilder.defaultElement(): ReactElement = div { }
+    override fun RBuilder.getDefaultRenderer(): ReactElement = div { }
 }

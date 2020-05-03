@@ -1,4 +1,5 @@
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackOutput.Target.UMD
+import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackOutput.Target.AMD
 
 plugins {
     kotlin("js")
@@ -16,8 +17,6 @@ dependencies {
 
     implementation(kotlin("stdlib-js"))
 
-    implementation(kotlinReact(Versions.REACT_VERSION, Versions.KOTLIN_JS_WRAPPERS))
-    implementation(kotlinReact("dom", Versions.REACT_VERSION, Versions.KOTLIN_JS_WRAPPERS))
     implementation(kotlinReact("router-dom", "5.1.2", Versions.KOTLIN_JS_WRAPPERS))
     implementation(kotlinReact("redux", "5.0.7", Versions.KOTLIN_JS_WRAPPERS))
 
@@ -30,16 +29,12 @@ dependencies {
     implementation(npm("react-syntax-highlighter", "12.2.1"))
 }
 
-tasks.named("compileKotlinJs") {
-    this as org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
-
-    kotlinOptions.moduleKind = UMD
+tasks.withType<KotlinJsCompile> {
+    // See https://github.com/amdjs/amdjs-api/blob/master/AMD.md
+    kotlinOptions.moduleKind = AMD
 }
 
 kotlin.target.browser {
-    webpackTask {
-        output.libraryTarget = UMD
-    }
     distribution {
         directory = File("$rootDir/docs/")
     }

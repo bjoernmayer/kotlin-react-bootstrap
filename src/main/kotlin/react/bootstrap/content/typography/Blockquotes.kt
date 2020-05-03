@@ -8,7 +8,7 @@ import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.WithBlock
+import react.bootstrap.lib.WithRDOMBuilderBlock
 import react.dom.RDOMBuilder
 import react.dom.WithClassName
 import react.dom.blockQuote
@@ -26,7 +26,7 @@ fun RBuilder.blockQuoteFooter(classes: String? = null, block: RDOMBuilder<DIV>.(
     }
 
 class BlockQuoteFooter : RComponent<BlockQuoteFooter.Props, RState>() {
-    interface Props : WithClassName, WithBlock<DIV>
+    interface Props : WithClassName, WithRDOMBuilderBlock<DIV>
 
     override fun RBuilder.render() {
         div(classes = props.className.appendClass(ClassNames.BLOCKQUOTE_FOOTER), block = props.block)
