@@ -7,18 +7,17 @@ import react.bootstrap.layout.Container
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.layout.grid.containerFun
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.layout.grid.ktContainer
 import react.bootstrap.site.components.docs.ln
 import react.dom.br
 import react.dom.code
-import react.dom.em
 import react.dom.h3
 import react.dom.li
 import react.dom.p
 import react.dom.span
-import react.dom.strong
 import react.dom.td
 import react.dom.th
 import react.dom.thead
@@ -27,12 +26,12 @@ import react.dom.ul
 
 internal fun RBuilder.containers() {
     contentTitle("Containers")
-    p {
-        +"Containers are the most basic layout element in Bootstrap and are "; strong {
-        +"required when using Bootstrap"
-        +"'s default grid system"
-    }; +". Containers are used to contain, pad, and (sometimes) center the content within"
-        +" them. While containers "; em { +"can" }; +" be nested, most layouts do not require a nested container."
+    formattedText {
+        """
+                Containers are the most basic layout element in Bootstrap and are <required when using our default grid
+                system|strong>. Containers are used to contain, pad, and (sometimes) center the content within them.
+                While containers <can|em> be nested, most layouts do not require a nested container.
+            """.trimIndent()
     }
     p {
         +"Bootstrap comes with three different containers:"
@@ -54,10 +53,12 @@ internal fun RBuilder.containers() {
             code { +"width: 100%" }; +" until the specified breakpoint"
         }
     }
-    p {
-        +"The table below illustrates how each container’s "; code { +"max-width" }; +" compares to the original "
-        code { +"$containerFun { }" }; +" and "
-        code { +"$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }" }; +" across each breakpoint."
+    formattedText {
+        """
+            The table below illustrates how each container’s <max-width|code> compares to the original <$containerFun
+            { }|code> and <$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }|code> accross each
+            breakpoint.
+        """.trimIndent()
     }
     p {
         +"See them in action and compare them in our Grid example." // Todo link to examples
@@ -120,9 +121,11 @@ internal fun RBuilder.containers() {
         }
     }
     contentTitle(RBuilder::h3, "All-in-one")
-    p {
-        +"Bootstrap's default "; code { +"$containerFun { }" }; +" is a responsive, fixed-width container, meaning its "
-        +"max-width changes at each breakpoint."
+    formattedText {
+        """
+            Our default <$containerFun { }|code> is a responsive, fixed-width container, meaning its max-width changes
+             at each breakpoint.
+        """.trimIndent()
     }
     codeBox {
         ktContainer { il ->
@@ -130,9 +133,11 @@ internal fun RBuilder.containers() {
         }
     }
     contentTitle(RBuilder::h3, "Fluid")
-    p {
-        +"Use "; code { +"$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }" }; +" for a full width "
-        +"container, spanning the entire width of the viewport."
+    formattedText {
+        """
+            Use <$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }|code> for a full width container,
+            spanning the entire width of the viewport.
+        """.trimIndent()
     }
     codeBox {
         ktBlock(0, "$containerFun(viscosity = ${Container.Viscosities.FLUID.kt})") { il ->
@@ -140,12 +145,14 @@ internal fun RBuilder.containers() {
         }
     }
     contentTitle(RBuilder::h3, "Responsive")
-    p {
-        +"Responsive containers are new in Bootstrap v4.4. They allow you to specify a class that is 100% wide until "
-        +"the specified breakpoint is reached, after which we apply "; code { +"max-width" }; +"s for each of the "
-        +"higher breakpoints. For example, "; code { +"$containerFun(viscosity = ${Container.Viscosities.SM.kt}) { }" }
-        +" is 100% wide to start until the "; code { +"sm" }; +" breakpoint is reached, where it will scale up with "
-        code { +"md" }; +", "; code { +"lg" }; +", and "; code { +"xl" }; +"."
+    formattedText {
+        """
+            Responsive containers are new in Bootstrap v4.4. They allow you to specify a class that is 100% wide until
+            the specified breakpoint is reached, after which we apply <max-width|code>s for each of the higher
+            breakpoints. For example, <$containerFun(viscosity = ${Container.Viscosities.SM.kt}) { }|code> is 100% wide
+            to start until the <sm|code> breakpoint is reached, where it will scale up with <md|code>, <lg|code>, and
+            <xl|code>.
+        """.trimIndent()
     }
     codeBox {
         ktBlock(0, "$containerFun(viscosity = ${Container.Viscosities.SM.kt})") { il ->

@@ -10,27 +10,28 @@ import react.bootstrap.layout.grid.ItemsYs
 import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
+import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.exampleRow
 import react.bootstrap.site.components.docs.fixings.flexColsExampleRow
-import react.bootstrap.site.components.docs.fixings.codeBox
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.ln
 import react.dom.a
-import react.dom.code
 import react.dom.h3
 import react.dom.p
-import react.dom.strong
 
 internal fun RBuilder.alignment() {
     contentTitle("Alignment")
+    formattedText {
+        """
+            Use flexbox alignment utilities to vertically and horizontally align columns. <Internet Explorer 10-11 do
+            not support vertical alignment of flex items when the flex container has a |strong><min-height|code>< as
+            shown below. |strong>
+        """.trimIndent()
+    }
     p {
-        +"Use flexbox alignment utilities to vertically and horizontally align columns. "
-        strong {
-            +"Internet Explorer 10-11 do not support vertical alignment of flex items when the flex container has "
-            +"a "; code { +"min-height" }; +" as shown below. "
-        }
         a(href = "https://github.com/philipwalton/flexbugs#flexbug-3") { +" See Flexbugs #3 for more details" }; +"."
     }
     contentTitle(RBuilder::h3, "Vertical alignment")

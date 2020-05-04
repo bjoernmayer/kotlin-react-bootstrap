@@ -13,9 +13,9 @@ import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.exampleRow
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.ln
-import react.dom.code
 import react.dom.em
 import react.dom.h3
 import react.dom.p
@@ -23,16 +23,20 @@ import react.dom.p
 internal fun RBuilder.responsiveClasses() {
     contentTitle("Responsive classes")
     p {
-        +"Bootstrap’s grid includes five tiers of predefined classes for building complex responsive layouts. Customize"
-        +"the size of your columns on extra small, small, medium, large, or extra large devices however you see fit."
+        +"""
+            Bootstrap’s grid includes five tiers of predefined classes for building complex responsive layouts.
+            Customize the size of your columns on extra small, small, medium, large, or extra large devices however you
+            see fit.
+        """.trimIndent()
     }
     contentTitle(RBuilder::h3, "All breakpoints")
-    p {
-        +"For grids that are the same from the smallest of devices to the largest, set the "
-        code { +"all = "; em { +"${ColAttributes::class.simpleName}?" } }; +" argument. Specify a numbered "
-        code { +"${Sizes::class.simpleName}" }; +" enum value when you need a particularly sized column; otherwise, "
-        +"feel free to not set the argument at all, which defaults to "
-        code { +"all = ${Sizes.EQ.kt}" }; +"."
+    formattedText {
+        """
+            For grids that are the same from the smallest of devices to the largest, set the <all =
+            ${ColAttributes::class.simpleName}?|code>-argument. Specify a numbered <${Sizes::class.simpleName}|code>
+            enum value when you need a particularly sized column; otherwise, feel free to not set the argument at all,
+            which defaults to <all = ${Sizes.EQ.kt}|code>.
+        """.trimIndent()
     }
     exampleRow {
         example {
@@ -68,10 +72,11 @@ internal fun RBuilder.responsiveClasses() {
         }
     }
     contentTitle(RBuilder::h3, "Stacked to horizontal")
-    p {
-        +"By setting the "; code { +"sm = "; em { +"${ColAttributes::class.simpleName}?" } }; +" argument, you can "
-        +"create a basic grid system that starts out stacked and becomes horizontal at the small breakpoint ("
-        code { +"sm" }; +")."
+    formattedText {
+        """
+            By setting the <sm = ${ColAttributes::class.simpleName}?|code>-argument, you can create a basic grid system
+            that starts out stacked and becomes horizontal at the small breakpoint (<sm|code>).
+        """.trimIndent()
     }
     exampleRow {
         example {
@@ -108,8 +113,10 @@ internal fun RBuilder.responsiveClasses() {
     }
     contentTitle(RBuilder::h3, "Mix and match")
     p {
-        +"Don’t want your columns to simply stack in some grid tiers? Use a combination of different classes for each "
-        +"tier as needed. See the example below for a better idea of how it all works."
+        +"""
+            Don’t want your columns to simply stack in some grid tiers? Use a combination of different classes for each
+            tier as needed. See the example below for a better idea of how it all works.
+        """.trimIndent()
     }
     exampleRow {
         example {
@@ -164,10 +171,11 @@ internal fun RBuilder.responsiveClasses() {
         }
     }
     contentTitle(RBuilder::h3, "Row columns")
-    p {
-        +"Set the "; code { +"${ColCounts::class.simpleName}" }; +" argument to quickly set the number of columns "
-        +"that best render your content and layout. The row columns classes are set on the parent "
-        code { +"$rowFun { }" }; +" as a shortcut."
+    formattedText {
+        """
+            Set the <${ColCounts::class.simpleName}|code>-argument to quickly set the number of columns that best render
+            your content and layout. The row columns classes are set on the parent <$rowFun { }|code> as a shortcut.
+        """.trimIndent()
     }
     exampleRow {
         example {
@@ -304,15 +312,18 @@ internal fun RBuilder.responsiveClasses() {
         }
     }
     contentTitle(RBuilder::h3, "No gutters")
-    p {
-        +"The gutters between columns in Bootstrap's predefined grid classes can be removed by setting "
-        code { +"gutters = false" }; +". This removes the negative "; code { +"margin" }; +"s from "
-        code { +"$rowFun { }" }; +" and the horizontal "; code { +"padding" }; +" from all immediate "
-        +"children columns."
+    formattedText {
+        """
+            The gutters between columns in Bootstrap's predefined grid classes can be removed by setting <gutters =
+            false|code>. This removes the negative <margin|code>s from <$rowFun { }|code> and the horizontal
+            <padding|code> from all immediate children columns.
+        """.trimIndent()
     }
     p {
-        +"In practice, here’s how it looks. Note you can continue to use this with all other predefined grid settings"
-        +" (including column widths, responsive tiers, reorders, and more)."
+        +"""
+            In practice, here’s how it looks. Note you can continue to use this with all other predefined grid settings
+            (including column widths, responsive tiers, reorders, and more).
+        """.trimIndent()
     }
     exampleRow {
         example {

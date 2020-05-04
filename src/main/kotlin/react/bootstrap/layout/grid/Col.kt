@@ -1,7 +1,7 @@
 package react.bootstrap.layout.grid
 
 import react.RBuilder
-import react.RElementBuilder
+import react.RHandler
 import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
@@ -15,7 +15,6 @@ import react.bootstrap.lib.WithRenderAs
 import react.bootstrap.lib.resolveAttributeClassNames
 import react.dom.WithClassName
 import react.dom.div
-import react.dom.fixAttributeName
 
 interface ColAttributes : CombinedAttributes {
     val size: Sizes?
@@ -368,7 +367,7 @@ fun RBuilder.col(
     xl: ColAttributes? = null,
     renderAs: (RBuilder.() -> ReactElement)? = null,
     classes: String? = null,
-    block: RElementBuilder<Col.Props>.() -> Unit
+    block: RHandler<Col.Props>
 ): ReactElement = child(Col::class) {
     attrs {
         this.all = all

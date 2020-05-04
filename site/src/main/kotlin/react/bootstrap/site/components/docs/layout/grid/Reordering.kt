@@ -13,6 +13,7 @@ import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.exampleRow
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.ln
 import react.dom.a
@@ -20,7 +21,6 @@ import react.dom.code
 import react.dom.h3
 import react.dom.h4
 import react.dom.p
-import react.dom.strong
 
 internal fun RBuilder.reordering() {
     val offsetsName = Offsets::class.simpleName
@@ -28,11 +28,12 @@ internal fun RBuilder.reordering() {
 
     contentTitle("Reordering")
     contentTitle(RBuilder::h3, "$orderingsName enum")
-    p {
-        +"Use "; code { +"$orderingsName" }; +" values for controlling the "; strong { +"visual order" }
-        +" of your content. The classes are responsive, so you can set the "; code { +"order" }; +" by breakpoint "
-        +"(e.g., "; "" + code { +"all = ${Orderings.ORD_1.kt}, md = ${Orderings.ORD_2.kt}" }; +"). Includes support for"
-        +" 1 through 12 across all five grid tiers."
+    formattedText {
+        """
+            Use <$orderingsName|code> values for controlling the <visual order|strong>  of your content. The classes are
+            responsive, so you can set the <order|code> by breakpoint (e.g., <all = ${Orderings.ORD_1.kt}, md =
+            ${Orderings.ORD_2.kt}|code>). Includes support for 1 through 12 across all five grid tiers.
+        """.trimIndent()
     }
     exampleRow {
         example {

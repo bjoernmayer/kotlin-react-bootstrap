@@ -10,23 +10,23 @@ import react.bootstrap.content.typography.ul
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.code
 import react.dom.h3
 import react.dom.li
-import react.dom.p
-import react.dom.strong
 import react.dom.ul
 
 internal fun RBuilder.lists() {
     contentTitle("Lists")
     contentTitle(RBuilder::h3, "Unstyled")
-    p {
-        +"Remove the default "; code { +"list-style" }; +" and left margin on list items (immediate children only). "
-        strong { +"This only applies to immediate children list items" }; +", meaning you will need to add the class "
-        +"for any nested lists as well."
+    formattedText {
+        """
+            Remove the default <list-style|code> and left margin on list items (immediate children only). <This only
+            applies to immediate children list items|strong>, meaning you will need to add the class for any nested
+            lists as well.
+        """.trimIndent()
     }
     example {
         ul(ListStyles.UNSTYLED) {
@@ -72,10 +72,11 @@ internal fun RBuilder.lists() {
         }
     }
     contentTitle(RBuilder::h3, "Inline")
-    p {
-        +"Remove a list’s bullets and apply some light "; code { +"margin" }; +" with a combination of two functions, "
-        code { +"ul(${ListStyles.INLINE.kt}) { }" }; +" and "
-        code { +"li(${ListItemStyles.INLINE.kt}) { }" }; +"."
+    formattedText {
+        """
+            Remove a list’s bullets and apply some light <margin|code> with a combination of two functions,
+            <ul(${ListStyles.INLINE.kt}) { }|code> and <li(${ListItemStyles.INLINE.kt}) { }|code>.
+        """.trimIndent()
     }
     example {
         ul(ListStyles.INLINE) {

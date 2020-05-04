@@ -14,11 +14,10 @@ import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentPageLead
 import react.bootstrap.site.components.docs.fixings.contentPageTitle
 import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.code
-import react.dom.p
 import react.dom.svg
 
 internal fun RBuilder.figures() = Fragment {
@@ -26,15 +25,18 @@ internal fun RBuilder.figures() = Fragment {
     contentPageLead {
         +"Documentation and examples for displaying related images and text with the figure component in Bootstrap."
     }
-    p {
-        +"Anytime you need to display a piece of content—like an image with an optional caption, consider using a "
-        code { +"figure { }" }; +"."
+    formattedText {
+        """
+            Anytime you need to display a piece of content—like an image with an optional caption, consider using a
+            <figure { }|code>.
+        """.trimIndent()
     }
-    p {
-        +"Use the included "; code { +"figure" }; +", "; code { +"img" }; +" and "; code { +"figcaption" }
-        +" functions to provide some baseline styles for the HTML5 "; code { +"<figure>" }; +"and "
-        code { +"<figcaption>" }; +" elements. Images in figures have no explicit size, so be sure to add set "
-        code { +"img(fluid)" }; +" to "; code { +"true" }; +" to make it responsive."
+    formattedText {
+        """
+            Use the included <figure|code> , <img|code> and <figcaption|code> functions to provide some baseline styles
+            for the HTML5 elements. Images in figures have no explicit size, so be sure to add the <img(fluid)|code> to
+            <true|code> to make it responsive.
+        """.trimIndent()
     }
     example {
         figure {

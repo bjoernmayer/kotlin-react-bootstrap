@@ -8,10 +8,9 @@ import react.bootstrap.content.tables.table
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.code
-import react.dom.p
 import react.dom.tbody
 import react.dom.td
 import react.dom.th
@@ -20,9 +19,11 @@ import react.dom.tr
 
 internal fun RBuilder.smallTable() {
     contentTitle("Small Table")
-    p {
-        +"Set the "; code { +"table(hoverable)" }; +"-argument to "; code { +"true" }; +" to make tables more compact "
-        +"by cutting cell padding in half."
+    formattedText {
+        """
+            Set the <table(hoverable)|code>-argument to <true|code> to make tables more compact by cutting cell
+            padding in half.
+        """.trimIndent()
     }
     example {
         table(small = true) {

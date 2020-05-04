@@ -10,10 +10,10 @@ import react.bootstrap.lib.Breakpoints
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.code
 import react.dom.h3
 import react.dom.p
 import react.dom.strong
@@ -22,13 +22,15 @@ import react.dom.th
 
 fun RBuilder.responsiveTables() {
     contentTitle("Responsive tables")
-    p {
-        +"Responsive tables allow tables to be scrolled horizontally with ease. Make any table responsive across the "
-        +"usual viewport breakpoints by setting the "; code { +"table(responsive)" }; +"-argument."
+    formattedText {
+        """
+            Responsive tables allow tables to be scrolled horizontally with ease. Make any table responsive accross the
+            usual viewport breakpoints by setting the <table(responsive)|code>-argument.
+        """.trimIndent()
     }
     contentTitle(RBuilder::h3, "Always responsive")
-    p {
-        +"Across every breakpoint, set "; code { +"responsive" }; +" to "; code { +Breakpoints.ALL.kt }; +"."
+    formattedText {
+        "Accross every breakpoint, set <table(responsive)|code> to <${Breakpoints.ALL.kt}|code>."
     }
     example {
         table(responsive = Breakpoints.ALL) {
@@ -42,13 +44,13 @@ fun RBuilder.responsiveTables() {
         }
     }
     contentTitle(RBuilder::h3, "Breakpoint specific")
-    p {
-        +"Use "
-        code {
-            +"${Breakpoints::class.simpleName}{.${Breakpoints.SM.name}|.${Breakpoints.MD.name}|."
-            +"${Breakpoints.LG.name}|.${Breakpoints.XL.name}|}"
-        }; +" as needed to create responsive tables up to a particular breakpoint. From that breakpoint and up, the "
-        +"table will behave normally and not scroll horizontally."
+    formattedText {
+        """
+            Use <${Breakpoints::class.simpleName}{.${Breakpoints.SM.name} |.${Breakpoints.MD.name}
+            |.${Breakpoints.LG.name} |.${Breakpoints.XL.name}}|code> as needed to create responsive tables up to a
+            particular breakpoint. From that breakpoint and up, the table will behave normally and not scroll
+            horizontally.
+        """.trimIndent()
     }
     p {
         strong {

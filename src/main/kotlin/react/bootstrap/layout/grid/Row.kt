@@ -1,7 +1,7 @@
 package react.bootstrap.layout.grid
 
 import react.RBuilder
-import react.RElementBuilder
+import react.RHandler
 import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
@@ -167,7 +167,7 @@ fun RBuilder.row(
     gutters: Boolean = true,
     renderAs: (RBuilder.() -> ReactElement)? = null,
     classes: String? = null,
-    block: RElementBuilder<Row.Props>.() -> Unit
+    block: RHandler<Row.Props>
 ): ReactElement = child(Row::class) {
     attrs {
         this.all = all

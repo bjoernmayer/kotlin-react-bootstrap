@@ -1,6 +1,5 @@
 package react.bootstrap.site.components.docs.content.typography
 
-import kotlinx.html.title
 import react.RBuilder
 import react.bootstrap.content.typography.blockQuote
 import react.bootstrap.content.typography.blockQuoteFooter
@@ -9,21 +8,20 @@ import react.bootstrap.site.components.docs.classNamesImport
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.abbr
 import react.dom.cite
-import react.dom.code
 import react.dom.h3
-import react.dom.p
 
 internal fun RBuilder.blockquotes() {
     contentTitle("Blockquotes")
-    p {
-        +"For quoting blocks of content from another source within your document. Wrap "
-        code { +"${RBuilder::blockQuote.name} { }" }
-        +" around any "; abbr { attrs { title = "HyperText Markup Language" }; +"HTML" }; +" as the quote."
+    formattedText {
+        """
+            For quoting blocks of content from another source within your document. Wrap <${RBuilder::blockQuote.name}
+            { }|code> around any HTML as the quote.
+        """.trimIndent()
     }
     example {
         blockQuote("${ClassNames.MB_0}") {
@@ -34,14 +32,16 @@ internal fun RBuilder.blockquotes() {
         ln { +"import react.bootstrap.content.typography.${RBuilder::blockQuote.name}" }
         classNamesImport()
         ln { }
-        ktBlock(0, "${RBuilder::blockQuote.name}(\"\${${ ClassNames.MB_0.kt }}\")") { il ->
+        ktBlock(0, "${RBuilder::blockQuote.name}(\"\${${ClassNames.MB_0.kt}}\")") { il ->
             ln(il) { +"+\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.\"" }
         }
     }
     contentTitle(RBuilder::h3, "Naming a source")
-    p {
-        +"Add a "; code { +"${RBuilder::blockQuoteFooter.name} { }" }; +" for identifying the source. Wrap the name of "
-        +"the source work in "; code { +"cite { }" }; +"."
+    formattedText {
+        """
+            Add a <${RBuilder::blockQuoteFooter.name} { }|code>  for identifying the source. Wrap the name of the source
+            work in <cite { }|code>.
+        """.trimIndent()
     }
     example {
         blockQuote("${ClassNames.MB_0}") {

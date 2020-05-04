@@ -22,13 +22,13 @@ import react.bootstrap.layout.grid.SizeOrderPair
 import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
+import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.flexColsExampleRow
-import react.bootstrap.site.components.docs.fixings.codeBox
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.ln
-import react.dom.code
 import react.dom.h3
 import react.dom.h4
 import react.dom.p
@@ -54,12 +54,14 @@ internal fun RBuilder.combining() {
 
     contentTitle("$sizes, $offsets, $orderings, $alignments")
     p {
-        +"As you can see in the examples above, all col attributes are set using the same arguments. Custom pairing "
-        +"functions are used to combine the values."
+        +"""
+            As you can see in the examples above, all col attributes are set using the same arguments. Custom pairing
+            functions are used to combine the values.
+        """.trimIndent()
     }
     contentTitle(RBuilder::h3, "Combine with $sizes")
-    p {
-        +"Combine other attributes with "; code { +"$sizes" }; +" by using "; code { +sz }; +"."
+    formattedText {
+        "Combine other attributes with <$sizes|code> by using <$sz|code>."
     }
     flexColsExampleRow {
         example {
@@ -104,8 +106,8 @@ internal fun RBuilder.combining() {
     }
 
     contentTitle(RBuilder::h3, "Combine with $offsets")
-    p {
-        +"Combine other attributes with "; code { +"$offsets" }; +" by using "; code { +off }; +"."
+    formattedText {
+        "Combine other attributes with <$offsets|code> by using <$off|code>."
     }
     flexColsExampleRow {
         example {
@@ -150,8 +152,8 @@ internal fun RBuilder.combining() {
     }
 
     contentTitle(RBuilder::h3, "Combine with $orderings")
-    p {
-        +"Combine other attributes with "; code { +"$orderings" }; +" by using "; code { +ord }; +"."
+    formattedText {
+        "Combine other attributes with <$orderings|code> by using <$ord|code>."
     }
     flexColsExampleRow {
         example {
@@ -196,8 +198,8 @@ internal fun RBuilder.combining() {
     }
 
     contentTitle(RBuilder::h3, "Combine with $alignments")
-    p {
-        +"Combine other attributes with "; code { +"$alignments" }; +" by using "; code { +align }; +"."
+    formattedText {
+        "Combine other attributes with <$alignments|code> by using <$align|code>."
     }
     flexColsExampleRow {
         example {

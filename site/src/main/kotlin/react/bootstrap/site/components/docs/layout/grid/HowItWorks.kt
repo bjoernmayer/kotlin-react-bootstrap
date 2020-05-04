@@ -11,19 +11,21 @@ import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.exampleRow
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.ln
 import react.dom.a
-import react.dom.code
 import react.dom.p
 import react.dom.strong
 
 internal fun RBuilder.howItWorks() {
     contentTitle("How it works")
     p {
-        +"Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s "
-        +"built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid "
-        +"comes together."
+        +"""
+            Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s
+            built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes
+            together.
+        """.trimIndent()
     }
     p {
         val link = "https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background"
@@ -57,10 +59,12 @@ internal fun RBuilder.howItWorks() {
             }
         }
     }
-    p {
-        +"The above example creates three equal-width columns on small, medium, large, and extra large devices using "
-        +"Bootstrap's predefined grid classes. Those columns are centered in the page with the parent "
-        code { +"$containerFun { }" }; +"."
+    formattedText {
+        """
+            The above example creates three equal-width columns on small, medium, large, and extra large devices using
+            Bootstrap's predefined grid classes. Those columns are centered in the page with the parent <$containerFun
+            { }|code>.
+        """.trimIndent()
     }
     p {
         +"Be aware of the limitations and "

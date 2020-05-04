@@ -8,10 +8,9 @@ import react.bootstrap.site.components.docs.fixings.contentPageLead
 import react.bootstrap.site.components.docs.fixings.contentPageTitle
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.code
-import react.dom.p
 
 fun RBuilder.code() = Fragment {
     contentPageTitle("Code")
@@ -19,9 +18,11 @@ fun RBuilder.code() = Fragment {
         +"Documentation and examples for displaying inline and multiline blocks of code with Bootstrap."
     }
     contentTitle("Code blocks")
-    p {
-        +"In order to make "; code { +"pre { }" }; +"s scrollable, you can set the "; code { +"scrollable" }
-        +"-argument, which will set a max-height of 340px and provide a y-axis scrollbar."
+    formattedText {
+        """
+            In order to make <pre { }|code>s scrollable, you can set the <scrollable>-argument, which will set a
+            max-height of 340px and provide a y-axis scrollbar.
+        """.trimIndent()
     }
     example {
         pre(scrollable = true) {

@@ -9,27 +9,30 @@ import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.classNamesImport
+import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
 import react.bootstrap.site.components.docs.fixings.exampleRow
-import react.bootstrap.site.components.docs.fixings.codeBox
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.ln
-import react.dom.code
 import react.dom.h3
 import react.dom.p
 
 internal fun RBuilder.autoLayoutColumns() {
     contentTitle("Auto-layout columns")
-    p {
-        +"Utilize breakpoint-specific equal-size enum values for easy column sizing without an explicit numbered enum "
-        +"value like "; code { +Sizes.SZ_6.kt }; +"."
+    formattedText {
+        """
+            Utilize breakpoint-specific equal-size enum values for easy column sizing without an explicit numbered enum
+            value like <${Sizes.SZ_6.kt}|code>.
+        """.trimIndent()
     }
     contentTitle(RBuilder::h3, "Equal-width")
-    p {
-        +"For example, here are two grid layouts that apply to every device and viewport, from "; code { +"xs" }; +" to"
-        +" "; code { +"xl" }; +". Add any number of equal-size enums for each breakpoint you need and every column"
-        +"will be the same width."
+    formattedText {
+        """
+            For example, here are two grid layouts that apply to every device and viewport, from <xs|code> to <xl|code>.
+            Add any number of equal-size enums for each breakpoint you need and every column will be the same width.
+        """.trimIndent()
     }
     exampleRow {
         example {
@@ -68,9 +71,11 @@ internal fun RBuilder.autoLayoutColumns() {
     }
     contentTitle(RBuilder::h3, "Setting one column width")
     p {
-        +"Auto-layout for flexbox grid columns also means you can set the width of one column and have the sibling "
-        +"columns automatically resize around it. You may use predefined grid enumbs (as shown below), grid mixins, or "
-        +"inline widths. Note that the other columns will resize no matter the width of the center column."
+        +"""
+            Auto-layout for flexbox grid columns also means you can set the width of one column and have the sibling
+            columns automatically resize around it. You may use predefined grid enumbs (as shown below), grid mixins, or
+            inline widths. Note that the other columns will resize no matter the width of the center column.
+        """.trimIndent()
     }
     exampleRow {
         example {
@@ -108,9 +113,8 @@ internal fun RBuilder.autoLayoutColumns() {
         }
     }
     contentTitle(RBuilder::h3, "Variable width content")
-    p {
-        +"Use the "; code { +Sizes.AUTO.kt }; +" enum value to size columns based on the natural width of their"
-        +"content."
+    formattedText {
+        "Use the <${Sizes.AUTO.kt}|code> enum value to size columns based on the natural width of their content."
     }
     exampleRow {
         example {

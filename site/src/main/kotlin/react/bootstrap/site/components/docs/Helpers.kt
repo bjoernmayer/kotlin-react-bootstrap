@@ -4,7 +4,13 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
+import react.ReactElement
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.invoke
+import react.dom.code
+import react.dom.em
+import react.dom.p
+import react.dom.strong
 import react.router.dom.RouteResultProps
 import react.router.dom.redirect
 import react.router.dom.route
@@ -44,4 +50,37 @@ internal fun RBuilder.ln(indentationLevel: Int = 0, block: RBuilder.() -> Unit) 
     }
     block()
     +"\n"
+}
+
+internal fun RBuilder.formattedText(block: () -> String) {
+    val text = block()
+
+    p {
+        text.split("<").forEach { chunk ->
+            if (!chunk.contains(">")) {
+                +chunk
+            } else {
+                wrapTags(
+                    mapOf(
+                        "|code>" to code { },
+                        "|strong>" to strong { },
+                        "|em>" to em { }
+                    ),
+                    chunk
+                )
+            }
+        }
+    }
+}
+
+private fun RBuilder.wrapTags(wraps: Map<String, ReactElement>, target: String) {
+    wraps.forEach { (tag, element) ->
+        if (target.contains(tag)) {
+            child(element {
+                +target.substringBefore(tag)
+            })
+
+            +target.substringAfter(tag)
+        }
+    }
 }

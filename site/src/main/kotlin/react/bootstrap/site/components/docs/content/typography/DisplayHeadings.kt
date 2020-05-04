@@ -4,24 +4,25 @@ import react.RBuilder
 import react.bootstrap.content.tables.table
 import react.bootstrap.content.typography.Display
 import react.bootstrap.content.typography.display
+import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
-import react.bootstrap.site.components.docs.fixings.codeBox
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.p
 import react.dom.span
-import react.dom.strong
 import react.dom.tbody
 import react.dom.td
 import react.dom.tr
 
 internal fun RBuilder.displayHeadings() {
     contentTitle("Display headings")
-    p {
-        +"Traditional heading elements are designed to work best in the meat of your page content. When you need a "
-        +"heading to stand out, consider using a "; strong { +"display heading" }; +"—a larger, slightly more "
-        +"opinionated heading style."
+    formattedText {
+        """
+            Traditional heading elements are designed to work best in the meat of your page content. When you need a
+            heading to stand out, consider using a <display heading|strong> - a larger, slightly more opinionated
+            heading style.
+        """.trimIndent()
     }
     example {
         table {

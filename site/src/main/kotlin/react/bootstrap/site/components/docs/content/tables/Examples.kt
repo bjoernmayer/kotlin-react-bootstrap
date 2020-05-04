@@ -8,10 +8,9 @@ import react.bootstrap.content.tables.table
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.code
-import react.dom.p
 import react.dom.tbody
 import react.dom.td
 import react.dom.th
@@ -20,15 +19,19 @@ import react.dom.tr
 
 internal fun RBuilder.examples() {
     contentTitle("Examples")
-    p {
-        +"Due to the widespread use of tables across third-party widgets like calendars and date pickers, Bootstrap has"
-        +"designed their tables to be opt-in. Just use the this package's "; code { +"table { }" }; +" with its various"
-        +" arguments to modify the table."
+    formattedText {
+        """
+            Due to the widespread use of tables across third-party widgets like calendars and date pickers, Bootstrap
+            has designed their tables to be <opt-in|strong>. Just use the <table { }|code> extension function provided
+            with this library with its various arguments to modify the table.
+        """.trimIndent()
     }
-    p {
-        +"Using this package's "; code { +"table { }" }; +" without arguments, here’s how such tables look in Bootstrap"
-        +". All table styles are inherited in Bootstrap 4, meaning any nested tables will be styled in the same manner "
-        +"as the parent."
+    formattedText {
+        """
+            Using the most basic table markup, here’s how <table { }|code>-based tables look in Bootstrap. <All table
+            styles are inherited in Bootstrap 4|strong>, meaning any nested tables will be styled in the same manner as
+            the parent.
+        """.trimIndent()
     }
     example {
         table {
@@ -96,9 +99,8 @@ internal fun RBuilder.examples() {
             }
         }
     }
-    p {
-        +"You can also invert the colors—with light text on dark backgrounds—by setting "
-        code { +"table(dark = true)" }; +"."
+    formattedText {
+        "You can also invert the colors - with light text on dark background - by setting <table(dark = true)|code>."
     }
     example {
         table(dark = true) {

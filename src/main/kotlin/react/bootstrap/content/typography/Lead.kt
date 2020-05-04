@@ -2,7 +2,7 @@ package react.bootstrap.content.typography
 
 import react.RBuilder
 import react.RComponent
-import react.RElementBuilder
+import react.RHandler
 import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
@@ -10,7 +10,7 @@ import react.bootstrap.lib.ClassNames
 import react.dom.WithClassName
 import react.dom.p
 
-fun RBuilder.lead(classes: String? = null, block: RElementBuilder<Lead.Props>.() -> Unit): ReactElement =
+fun RBuilder.lead(classes: String? = null, block: RHandler<Lead.Props>): ReactElement =
     child(Lead::class) {
         attrs {
             className = classes

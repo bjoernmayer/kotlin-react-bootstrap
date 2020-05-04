@@ -8,21 +8,23 @@ import react.bootstrap.content.typography.h4
 import react.bootstrap.content.typography.h5
 import react.bootstrap.content.typography.h6
 import react.bootstrap.content.typography.muted
+import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
-import react.bootstrap.site.components.docs.fixings.codeBox
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.code
 import react.dom.h3
 import react.dom.p
 import react.dom.small
 
 internal fun RBuilder.headings() {
     contentTitle("Headings")
-    p {
-        +"Alternative implementations for "; code { +"h1 { }" }; +" through "; code { +"h6 { }" }; +" are provided,"
-        +" for when you want to match the font styling of a heading but cannot use the associated HTML element."
+    formattedText {
+        """
+            Alternative implementation for <h1 { }|code> through <h6 { }|code> are provided, for when you want to match
+            the font styling of a heading but cannot use the associated HTML element.
+        """.trimIndent()
     }
     example {
         h1(RBuilder::p) { +"h1. Bootstrap heading" }

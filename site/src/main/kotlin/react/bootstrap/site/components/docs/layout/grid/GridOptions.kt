@@ -6,6 +6,7 @@ import react.bootstrap.content.tables.BorderStyles
 import react.bootstrap.content.tables.table
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.contentTitle
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.ln
 import react.dom.code
 import react.dom.p
@@ -18,10 +19,12 @@ import react.dom.tr
 
 internal fun RBuilder.gridOptions() {
     contentTitle("Grid options")
-    p {
-        +"While Bootstrap uses "; code { +"em" }; +"s or "; code { +"rem" }; +"s for defining most sizes, "
-        code { +"px" }; +"s are used for grid breakpoints and container widths. This is because the viewport width is "
-        +"in pixels and does not change with the font size."
+    formattedText {
+        """
+            While Bootstrap uses <em|code>s or <rem|code>s for defining most sizes, <px|code>s are used for grid
+            breakpoints and container widths. This is because the viewport width is in pixels and does not change with
+            the font size.
+        """.trimIndent()
     }
     p {
         +"See how aspects of the Bootstrap grid system work across multiple devices with a handy table."

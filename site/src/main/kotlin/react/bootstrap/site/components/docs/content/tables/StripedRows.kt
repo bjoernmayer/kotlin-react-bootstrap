@@ -8,10 +8,9 @@ import react.bootstrap.content.tables.table
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
-import react.dom.code
-import react.dom.p
 import react.dom.tbody
 import react.dom.td
 import react.dom.th
@@ -20,8 +19,8 @@ import react.dom.tr
 
 internal fun RBuilder.stripedRows() {
     contentTitle("Striped rows")
-    p {
-        +"Use the "; code { +"table(striped)" }; +"-argument to add zebra-striping to any table row within the tbody."
+    formattedText {
+        "Use the <table(striped)|code>-argument to add zebra-striping to any table row within the tbody."
     }
     example {
         table(striped = true) {

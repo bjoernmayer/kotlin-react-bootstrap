@@ -11,20 +11,21 @@ import react.bootstrap.site.components.docs.fixings.contentPageLead
 import react.bootstrap.site.components.docs.fixings.contentPageTitle
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.ln
-import react.dom.code
-import react.dom.p
 import react.dom.svg
 
 internal fun RBuilder.images() = Fragment {
     contentPageTitle("Images")
     contentPageLead {
-        +"Documentation and examples for opting images into responsive behavior (so they never become larger than their"
-        +" parent elements) and add lightweight styles to them"
+        +"""
+            Documentation and examples for opting images into responsive behavior (so they never become larger than
+            their parent elements).
+        """.trimIndent()
     }
     contentTitle("Responsive images")
-    p {
-        +"Images in Bootstrap are made responsive with "; code { +"img(fluid = true)" }; +"."
+    formattedText {
+        "Images in Bootstrap are made responsive with <img(fluid = true)|code>."
     }
     example("bd-example-images") {
         svg(classes = "bd-placeholder-img bd-placeholder-img-lg ${ClassNames.IMG_FLUID}") {
@@ -50,9 +51,11 @@ internal fun RBuilder.images() = Fragment {
         ln { +"img(fluid = true, alt =\"Responsive image\", src = ...) { }" }
     }
     contentTitle("Image thumbnails")
-    p {
-        +"You can set the "; code { +"img(thumbnail)" }; +"-argument to true to give an image a rounded 1px border "
-        +"appearance."
+    formattedText {
+        """
+            You can set the <img(thumbnail)|code>-argument to <true|code> to give an image a rounded 1px border
+            appearance.
+        """.trimIndent()
     }
     example("bd-example-images") {
         svg(classes = "bd-placeholder-img bd-placeholder-img-lg ${ClassNames.IMG_THUMBNAIL}") {

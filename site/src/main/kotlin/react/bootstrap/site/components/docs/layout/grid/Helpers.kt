@@ -65,13 +65,3 @@ internal fun RBuilder.ktBlock(
     block(indentationLevel + 1)
     ln(indentationLevel) { +"}" }
 }
-
-internal fun RBuilder.ktFun(
-    indentationLevel: Int = 0,
-    opener: String,
-    block: RBuilder.(indentationLevel: Int) -> Unit
-) {
-    ln(indentationLevel) { +"$opener (" }
-    block(indentationLevel + 1)
-    ln(indentationLevel) { +")" }
-}
