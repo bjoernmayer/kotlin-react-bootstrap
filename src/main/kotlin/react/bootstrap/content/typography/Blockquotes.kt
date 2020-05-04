@@ -26,9 +26,9 @@ fun RBuilder.blockQuoteFooter(classes: String? = null, block: RDOMBuilder<DIV>.(
     }
 
 class BlockQuoteFooter : RComponent<BlockQuoteFooter.Props, RState>() {
-    interface Props : WithClassName, WithRDOMBuilderBlock<DIV>
-
     override fun RBuilder.render() {
         div(classes = props.className.appendClass(ClassNames.BLOCKQUOTE_FOOTER), block = props.block)
     }
+
+    interface Props : WithClassName, WithRDOMBuilderBlock<DIV>
 }

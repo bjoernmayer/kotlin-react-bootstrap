@@ -71,6 +71,10 @@ a, a:hover {
     color: #6b70fc
 }
 
+figure.highlight {
+    background: none rgb(253, 253, 253);
+}
+
 figure.highlight > pre {
-    overflow-x: scroll !important;
+    overflow-x: auto !important;
 }

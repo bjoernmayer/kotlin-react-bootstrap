@@ -184,15 +184,6 @@ fun RBuilder.row(
 }
 
 class Row : RenderAsComponent<Row.Props, WithClassName, RState>() {
-    interface Props : WithRenderAs, WithClassName {
-        var all: RowAttributes?
-        var sm: RowAttributes?
-        var md: RowAttributes?
-        var lg: RowAttributes?
-        var xl: RowAttributes?
-        var gutters: Boolean?
-    }
-
     override fun WithClassName.handleProps() {
         // Pairs and Triples match in multiple of those. That's why we need a Set
         val rowClasses = mutableSetOf(ClassNames.ROW)
@@ -218,4 +209,13 @@ class Row : RenderAsComponent<Row.Props, WithClassName, RState>() {
     }
 
     override fun RBuilder.getDefaultRenderer(): ReactElement = div { }
+
+    interface Props : WithRenderAs, WithClassName {
+        var all: RowAttributes?
+        var sm: RowAttributes?
+        var md: RowAttributes?
+        var lg: RowAttributes?
+        var xl: RowAttributes?
+        var gutters: Boolean?
+    }
 }

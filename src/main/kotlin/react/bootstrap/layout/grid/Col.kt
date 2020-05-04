@@ -383,14 +383,6 @@ fun RBuilder.col(
 }
 
 class Col : RenderAsComponent<Col.Props, WithClassName, RState>() {
-    interface Props : WithRenderAs, WithClassName {
-        var all: ColAttributes?
-        var sm: ColAttributes?
-        var md: ColAttributes?
-        var lg: ColAttributes?
-        var xl: ColAttributes?
-    }
-
     override fun WithClassName.handleProps() {
         // Pairs and Triples match in multiple of those. That's why we need a Set
         val colClasses = mutableSetOf<ClassNames>()
@@ -418,4 +410,12 @@ class Col : RenderAsComponent<Col.Props, WithClassName, RState>() {
     }
 
     override fun RBuilder.getDefaultRenderer(): ReactElement = div { }
+
+    interface Props : WithRenderAs, WithClassName {
+        var all: ColAttributes?
+        var sm: ColAttributes?
+        var md: ColAttributes?
+        var lg: ColAttributes?
+        var xl: ColAttributes?
+    }
 }

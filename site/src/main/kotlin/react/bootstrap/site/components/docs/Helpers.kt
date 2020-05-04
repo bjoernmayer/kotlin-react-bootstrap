@@ -52,19 +52,19 @@ internal fun RBuilder.ln(indentationLevel: Int = 0, block: RBuilder.() -> Unit) 
     +"\n"
 }
 
-internal fun RBuilder.formattedText(block: () -> String) {
+internal fun RBuilder.formattedText(opener: Char = '<', closer: Char = '>', block: () -> String) {
     val text = block()
 
     p {
-        text.split("<").forEach { chunk ->
-            if (!chunk.contains(">")) {
+        text.split(opener).forEach { chunk ->
+            if (!chunk.contains(closer)) {
                 +chunk
             } else {
                 wrapTags(
                     mapOf(
-                        "|code>" to code { },
-                        "|strong>" to strong { },
-                        "|em>" to em { }
+                        "|code".plus(closer) to code { },
+                        "|strong".plus(closer) to strong { },
+                        "|em".plus(closer) to em { }
                     ),
                     chunk
                 )

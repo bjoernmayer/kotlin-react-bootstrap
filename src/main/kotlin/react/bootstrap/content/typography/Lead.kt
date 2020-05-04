@@ -20,11 +20,11 @@ fun RBuilder.lead(classes: String? = null, block: RHandler<Lead.Props>): ReactEl
     }
 
 class Lead : RComponent<Lead.Props, RState>() {
-    interface Props : WithClassName
-
     override fun RBuilder.render() {
         p(classes = props.className.appendClass(ClassNames.LEAD)) {
             children()
         }
     }
+
+    interface Props : WithClassName
 }

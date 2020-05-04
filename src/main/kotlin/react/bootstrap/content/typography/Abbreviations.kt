@@ -12,5 +12,4 @@ fun RBuilder.abbr(
     @Suppress("UNUSED_PARAMETER") initialism: Boolean,
     classes: String? = null,
     block: RDOMBuilder<ABBR>.() -> Unit
-) =
-    abbr(classes = classes.appendClass(ClassNames.INITIALISM), block = block)
+) = abbr(classes = classes.appendClass(ClassNames.INITIALISM), block = block)

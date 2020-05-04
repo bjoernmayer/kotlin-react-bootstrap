@@ -24,6 +24,14 @@ fun RBuilder.container(
 }
 
 class Container : RComponent<Container.Props, RState>() {
+    override fun RBuilder.render() {
+        val className: ClassNames = props.viscosity?.className ?: ClassNames.CONTAINER
+
+        div(classes = props.classes.appendClass(className)) {
+            children()
+        }
+    }
+
     enum class Viscosities(override val className: ClassNames) : ClassNameEnum {
         FLUID(ClassNames.CONTAINER_FLUID),
         SM(ClassNames.CONTAINER_SM),
@@ -37,13 +45,5 @@ class Container : RComponent<Container.Props, RState>() {
     interface Props : RProps {
         var viscosity: Viscosities?
         var classes: String?
-    }
-
-    override fun RBuilder.render() {
-        val className: ClassNames = props.viscosity?.className ?: ClassNames.CONTAINER
-
-        div(classes = props.classes.appendClass(className)) {
-            children()
-        }
     }
 }

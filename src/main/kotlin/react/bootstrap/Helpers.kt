@@ -34,6 +34,8 @@ fun String?.appendClass(className: ClassNames) = appendClass(setOf(className.toS
 
 fun String?.appendClass(className: String) = appendClass(setOf(className))
 
+fun String?.appendClass(vararg className: ClassNames) = appendClass(className.toSet())
+
 fun String?.appendClass(classNames: Set<ClassNames>) = appendClass(classNames.map(ClassNames::toString).toSet())
 
 fun String?.appendClass(classNames: Set<String>) = run {
