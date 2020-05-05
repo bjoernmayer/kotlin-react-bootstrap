@@ -13,7 +13,7 @@ data class Section(
     val subSections: MutableSet<Section> = mutableSetOf()
 ) {
     // generate id here
-    val id = "Test"
+    val id = getSanitizedId(title)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -29,6 +29,11 @@ data class Section(
         var result = title.hashCode()
         result = 31 * result + id.hashCode()
         return result
+    }
+
+    companion object {
+        fun getSanitizedId(toSanitize: String): String =
+            toSanitize.toLowerCase().replace(", ", "-").replace(' ', '-')
     }
 }
 

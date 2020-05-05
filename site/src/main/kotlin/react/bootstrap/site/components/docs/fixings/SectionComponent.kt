@@ -49,6 +49,9 @@ internal abstract class SectionComponent : RComponent<SectionComponent.Props, RS
             val className = "bd-content-title"
 
             h2(className) {
+                attrs {
+                    set("id", props.section.id)
+                }
                 +props.section.title
                 children()
             }
@@ -61,18 +64,24 @@ internal abstract class SectionComponent : RComponent<SectionComponent.Props, RS
     }
 
     class SubSectionTitle : RComponent<SubSectionTitle.Props, RState>() {
+        lateinit var section: Section
+
         override fun componentDidMount() {
             props.onNewSection(
                 props.parentSection.apply {
-                    subSections.add(Section(props.title))
+                    subSections.add(section)
                 }
             )
         }
 
         override fun RBuilder.render() {
+            section = Section(props.title)
             val className = "bd-content-title"
 
             h3(className) {
+                attrs {
+                    set("id", section.id)
+                }
                 +props.title
                 children()
             }
