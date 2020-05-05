@@ -22,6 +22,7 @@ import react.bootstrap.layout.grid.SizeOrderPair
 import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
+import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.example
@@ -29,225 +30,228 @@ import react.bootstrap.site.components.docs.fixings.flexColsExampleRow
 import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.ln
-import react.dom.h3
 import react.dom.h4
 import react.dom.p
 import kotlin.reflect.KFunction2
 
-internal fun RBuilder.combining() {
-    val sz = Offsets::sz.name
-    val ord = Sizes::ord.name
-    val off = Sizes::off.name
-    val align = Sizes::align.name
+internal class Combining : SectionComponent() {
+    private val sz = Offsets::sz.name
+    private val ord = Sizes::ord.name
+    private val off = Sizes::off.name
+    private val align = Sizes::align.name
 
-    val sizes = Sizes::class.simpleName
-    val sz4 = Sizes.SZ_4.kt
+    private val sizes = Sizes::class.simpleName
+    private val sz4 = Sizes.SZ_4.kt
 
-    val offsets = Offsets::class.simpleName
-    val off1 = Offsets.OFF_1.kt
+    private val offsets = Offsets::class.simpleName
+    private val off1 = Offsets.OFF_1.kt
 
-    val orderings = Orderings::class.simpleName
-    val ord3 = Orderings.ORD_3.kt
+    private val orderings = Orderings::class.simpleName
+    private val ord3 = Orderings.ORD_3.kt
 
-    val alignments = Alignments::class.simpleName
-    val end = Alignments.END.kt
+    private val alignments = Alignments::class.simpleName
+    private val end = Alignments.END.kt
 
-    contentTitle("$sizes, $offsets, $orderings, $alignments")
-    p {
-        +"""
+    override val title: String = "$sizes, $offsets, $orderings, $alignments"
+
+    override fun RBuilder.render() {
+        sectionTitle(section)
+        p {
+            +"""
             As you can see in the examples above, all col attributes are set using the same arguments. Custom pairing
             functions are used to combine the values.
         """.trimIndent()
-    }
-    contentTitle(RBuilder::h3, "Combine with $sizes")
-    formattedText {
-        "Combine other attributes with <$sizes|code> by using <$sz|code>."
-    }
-    flexColsExampleRow {
-        example {
-            container {
-                row {
-                    col(all = Offsets.OFF_1 sz Sizes.SZ_4) { +"all = $off1 $sz $sz4" }
-                    col { +"Reference" }
+        }
+        subSectionTitle("Combine with $sizes", section)
+        formattedText {
+            "Combine other attributes with <$sizes|code> by using <$sz|code>."
+        }
+        flexColsExampleRow {
+            example {
+                container {
+                    row {
+                        col(all = Offsets.OFF_1 sz Sizes.SZ_4) { +"all = $off1 $sz $sz4" }
+                        col { +"Reference" }
+                    }
+                    row {
+                        col(all = Orderings.ORD_3 sz Sizes.SZ_4) { +"all = $ord3 $sz $sz4" }
+                        col { +"Reference" }
+                    }
+                    row {
+                        col(all = Alignments.END sz Sizes.SZ_4) { +"all = $end $sz $sz4" }
+                        col { +"Reference" }
+                    }
                 }
-                row {
-                    col(all = Orderings.ORD_3 sz Sizes.SZ_4) { +"all = $ord3 $sz $sz4" }
-                    col { +"Reference" }
-                }
-                row {
-                    col(all = Alignments.END sz Sizes.SZ_4) { +"all = $end $sz $sz4" }
-                    col { +"Reference" }
+            }
+            codeBox {
+                containerFunImport()
+                gridEnumImport(Offsets::class)
+                gridEnumImport(Orderings::class)
+                gridEnumImport(Sizes::class)
+                colFunImport()
+                rowFunImport()
+                ln { }
+                ktContainer { il ->
+                    ktRow(il) { il ->
+                        ln(il) { +"$colFun(all = $off1 $sz $sz4) { +\"all = $off1 $sz $sz4\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
+                    ktRow(il) { il ->
+                        ln(il) { +"$colFun(all = $ord3 $sz $sz4) { +\"all = $ord3 $sz $sz4\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
+                    ktRow(il) { il ->
+                        ln(il) { +"$colFun(all = $end $sz $sz4) { +\"all = $end $sz $sz4\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
                 }
             }
         }
-        codeBox {
-            containerFunImport()
-            gridEnumImport(Offsets::class)
-            gridEnumImport(Orderings::class)
-            gridEnumImport(Sizes::class)
-            colFunImport()
-            rowFunImport()
-            ln { }
-            ktContainer { il ->
-                ktRow(il) { il ->
-                    ln(il) { +"$colFun(all = $off1 $sz $sz4) { +\"all = $off1 $sz $sz4\" }" }
-                    ln(il) { +"$colFun { +\"Reference\" }" }
-                }
-                ktRow(il) { il ->
-                    ln(il) { +"$colFun(all = $ord3 $sz $sz4) { +\"all = $ord3 $sz $sz4\" }" }
-                    ln(il) { +"$colFun { +\"Reference\" }" }
-                }
-                ktRow(il) { il ->
-                    ln(il) { +"$colFun(all = $end $sz $sz4) { +\"all = $end $sz $sz4\" }" }
-                    ln(il) { +"$colFun { +\"Reference\" }" }
-                }
-            }
-        }
-    }
 
-    contentTitle(RBuilder::h3, "Combine with $offsets")
-    formattedText {
-        "Combine other attributes with <$offsets|code> by using <$off|code>."
-    }
-    flexColsExampleRow {
-        example {
-            container {
-                row {
-                    col(all = Sizes.SZ_4 off Offsets.OFF_1) { +"all = $sz4 $off $off1" }
-                    col { +"Reference" }
+        subSectionTitle("Combine with $offsets", section)
+        formattedText {
+            "Combine other attributes with <$offsets|code> by using <$off|code>."
+        }
+        flexColsExampleRow {
+            example {
+                container {
+                    row {
+                        col(all = Sizes.SZ_4 off Offsets.OFF_1) { +"all = $sz4 $off $off1" }
+                        col { +"Reference" }
+                    }
+                    row {
+                        col(all = Orderings.ORD_3 off Offsets.OFF_1) { +"all = $ord3 $off $off1" }
+                        col { +"Reference" }
+                    }
+                    row {
+                        col(all = Alignments.END off Offsets.OFF_1) { +"all = $end $off $off1" }
+                        col { +"Reference" }
+                    }
                 }
-                row {
-                    col(all = Orderings.ORD_3 off Offsets.OFF_1) { +"all = $ord3 $off $off1" }
-                    col { +"Reference" }
-                }
-                row {
-                    col(all = Alignments.END off Offsets.OFF_1) { +"all = $end $off $off1" }
-                    col { +"Reference" }
+            }
+            codeBox {
+                containerFunImport()
+                gridEnumImport(Offsets::class)
+                gridEnumImport(Orderings::class)
+                gridEnumImport(Sizes::class)
+                colFunImport()
+                rowFunImport()
+                ln { }
+                ktContainer { il ->
+                    ktRow(il) { il ->
+                        ln(il) { +"$colFun(all = $sz4 $off $off1) { +\"all = $sz4 $off $off1\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
+                    ktRow(il) { il ->
+                        ln(il) { +"$colFun(all = $ord3 $off $off1) { +\"all = $ord3 $off $off1\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
+                    ktRow(il) { il ->
+                        ln(il) { +"$colFun(all = $end $off $off1) { +\"all = $end $off $off1\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
                 }
             }
         }
-        codeBox {
-            containerFunImport()
-            gridEnumImport(Offsets::class)
-            gridEnumImport(Orderings::class)
-            gridEnumImport(Sizes::class)
-            colFunImport()
-            rowFunImport()
-            ln { }
-            ktContainer { il ->
-                ktRow(il) { il ->
-                    ln(il) { +"$colFun(all = $sz4 $off $off1) { +\"all = $sz4 $off $off1\" }" }
-                    ln(il) { +"$colFun { +\"Reference\" }" }
-                }
-                ktRow(il) { il ->
-                    ln(il) { +"$colFun(all = $ord3 $off $off1) { +\"all = $ord3 $off $off1\" }" }
-                    ln(il) { +"$colFun { +\"Reference\" }" }
-                }
-                ktRow(il) { il ->
-                    ln(il) { +"$colFun(all = $end $off $off1) { +\"all = $end $off $off1\" }" }
-                    ln(il) { +"$colFun { +\"Reference\" }" }
-                }
-            }
-        }
-    }
 
-    contentTitle(RBuilder::h3, "Combine with $orderings")
-    formattedText {
-        "Combine other attributes with <$orderings|code> by using <$ord|code>."
-    }
-    flexColsExampleRow {
-        example {
-            container {
-                row {
-                    col(all = Sizes.SZ_4 ord Orderings.ORD_3) { +"all = $sz4 $ord $ord3" }
-                    col { +"Reference" }
+        subSectionTitle("Combine with $orderings", section)
+        formattedText {
+            "Combine other attributes with <$orderings|code> by using <$ord|code>."
+        }
+        flexColsExampleRow {
+            example {
+                container {
+                    row {
+                        col(all = Sizes.SZ_4 ord Orderings.ORD_3) { +"all = $sz4 $ord $ord3" }
+                        col { +"Reference" }
+                    }
+                    row {
+                        col(all = Offsets.OFF_1 ord Orderings.ORD_3) { +"all = $off1 $ord $ord3" }
+                        col { +"Reference" }
+                    }
+                    row {
+                        col(all = Alignments.END ord Orderings.ORD_3) { +"all = $end $ord $ord3" }
+                        col { +"Reference" }
+                    }
                 }
-                row {
-                    col(all = Offsets.OFF_1 ord Orderings.ORD_3) { +"all = $off1 $ord $ord3" }
-                    col { +"Reference" }
-                }
-                row {
-                    col(all = Alignments.END ord Orderings.ORD_3) { +"all = $end $ord $ord3" }
-                    col { +"Reference" }
+            }
+            codeBox {
+                containerFunImport()
+                gridEnumImport(Offsets::class)
+                gridEnumImport(Orderings::class)
+                gridEnumImport(Sizes::class)
+                colFunImport()
+                rowFunImport()
+                ln { }
+                ktContainer { il ->
+                    ktRow(il) { il ->
+                        ln(il) { +"$colFun(all = $sz4 $ord $ord3) { +\"all = $sz4 $ord $ord3\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
+                    ktRow(il) { il ->
+                        ln(il) { +"$colFun(all = $off1 $ord $ord3) { +\"all = $off1 $ord $ord3\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
+                    ktRow(il) { il ->
+                        ln(il) { +"$colFun(all = $end $ord $ord3) { +\"all = $end $ord $ord3\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
                 }
             }
         }
-        codeBox {
-            containerFunImport()
-            gridEnumImport(Offsets::class)
-            gridEnumImport(Orderings::class)
-            gridEnumImport(Sizes::class)
-            colFunImport()
-            rowFunImport()
-            ln { }
-            ktContainer { il ->
-                ktRow(il) { il ->
-                    ln(il) { +"$colFun(all = $sz4 $ord $ord3) { +\"all = $sz4 $ord $ord3\" }" }
-                    ln(il) { +"$colFun { +\"Reference\" }" }
-                }
-                ktRow(il) { il ->
-                    ln(il) { +"$colFun(all = $off1 $ord $ord3) { +\"all = $off1 $ord $ord3\" }" }
-                    ln(il) { +"$colFun { +\"Reference\" }" }
-                }
-                ktRow(il) { il ->
-                    ln(il) { +"$colFun(all = $end $ord $ord3) { +\"all = $end $ord $ord3\" }" }
-                    ln(il) { +"$colFun { +\"Reference\" }" }
-                }
-            }
-        }
-    }
 
-    contentTitle(RBuilder::h3, "Combine with $alignments")
-    formattedText {
-        "Combine other attributes with <$alignments|code> by using <$align|code>."
-    }
-    flexColsExampleRow {
-        example {
-            container {
-                row {
-                    col(all = Sizes.SZ_4 align Alignments.END) { +"all = $sz4 $align $end" }
-                    col { +"Reference" }
+        subSectionTitle("Combine with $alignments", section)
+        formattedText {
+            "Combine other attributes with <$alignments|code> by using <$align|code>."
+        }
+        flexColsExampleRow {
+            example {
+                container {
+                    row {
+                        col(all = Sizes.SZ_4 align Alignments.END) { +"all = $sz4 $align $end" }
+                        col { +"Reference" }
+                    }
+                    row {
+                        col(all = Offsets.OFF_1 align Alignments.END) { +"all = $off1 $align $end" }
+                        col { +"Reference" }
+                    }
+                    row {
+                        col(all = Orderings.ORD_3 align Alignments.END) { +"all = $ord3 $align $end" }
+                        col { +"Reference" }
+                    }
                 }
-                row {
-                    col(all = Offsets.OFF_1 align Alignments.END) { +"all = $off1 $align $end" }
-                    col { +"Reference" }
-                }
-                row {
-                    col(all = Orderings.ORD_3 align Alignments.END) { +"all = $ord3 $align $end" }
-                    col { +"Reference" }
+            }
+            codeBox {
+                containerFunImport()
+                gridEnumImport(Offsets::class)
+                gridEnumImport(Orderings::class)
+                gridEnumImport(Sizes::class)
+                colFunImport()
+                rowFunImport()
+                ln { }
+                ktContainer { il ->
+                    ktRow(il) { il ->
+                        ln(il) { +"$colFun(all = $sz4 $align $end) { +\"all = $sz4 $align $end\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
+                    ktRow(il) { il ->
+                        ln(il) { +"$colFun(all = $off1 $align $end) { +\"all = $off1 $align $end\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
+                    ktRow(il) { il ->
+                        ln(il) { +"$colFun(all = $ord3 $align $end) { +\"all = $ord3 $align $end\" }" }
+                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    }
                 }
             }
         }
-        codeBox {
-            containerFunImport()
-            gridEnumImport(Offsets::class)
-            gridEnumImport(Orderings::class)
-            gridEnumImport(Sizes::class)
-            colFunImport()
-            rowFunImport()
-            ln { }
-            ktContainer { il ->
-                ktRow(il) { il ->
-                    ln(il) { +"$colFun(all = $sz4 $align $end) { +\"all = $sz4 $align $end\" }" }
-                    ln(il) { +"$colFun { +\"Reference\" }" }
-                }
-                ktRow(il) { il ->
-                    ln(il) { +"$colFun(all = $off1 $align $end) { +\"all = $off1 $align $end\" }" }
-                    ln(il) { +"$colFun { +\"Reference\" }" }
-                }
-                ktRow(il) { il ->
-                    ln(il) { +"$colFun(all = $ord3 $align $end) { +\"all = $ord3 $align $end\" }" }
-                    ln(il) { +"$colFun { +\"Reference\" }" }
-                }
-            }
-        }
-    }
 
-    contentTitle(RBuilder::h3, "Combine all")
-    p {
-        +"You can use the same pairing functions in any order to combine all attributes."
+        subSectionTitle("Combine all", section)
+        p {
+            +"You can use the same pairing functions in any order to combine all attributes."
+        }
+        allPossibleCombinations()
     }
-    allPossibleCombinations()
 }
 
 private fun RBuilder.allPossibleCombinations() {

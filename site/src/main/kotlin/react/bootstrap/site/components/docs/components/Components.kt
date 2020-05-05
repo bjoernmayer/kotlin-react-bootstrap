@@ -1,16 +1,17 @@
 package react.bootstrap.site.components.docs.components
 
-import react.RBuilder
 import react.bootstrap.site.components.docs.Category
-import react.bootstrap.site.components.docs.DocumentationPage
-import react.bootstrap.site.components.docs.components.alerts.alerts
+import react.bootstrap.site.components.docs.components.alerts.Alerts
+import react.bootstrap.site.components.docs.fixings.CategoryComponent
 
-internal val components = Category(
-    "Components",
-    "components",
-    Components::class
-).apply {
-    addSubCategory("Alerts", "alerts", RBuilder::alerts)
+internal class Components : CategoryComponent() {
+    companion object {
+        val component = Category(
+            "Components",
+            "components",
+            Components::class
+        ).apply {
+            addCategory("Alerts", "alerts", Alerts::class)
 //                addSubCategory("Badge", "badge")
 //                addSubCategory("Breadcrumb", "breadcrumb")
 //                addSubCategory("Buttons", "buttons")
@@ -34,6 +35,6 @@ internal val components = Category(
 //                addSubCategory("Spinners", "spinners")
 //                addSubCategory("Toasts", "toasts")
 //                addSubCategory("Tooltips", "tooltips")
+        }
+    }
 }
-
-internal class Components : DocumentationPage(components)

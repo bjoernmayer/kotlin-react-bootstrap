@@ -1,24 +1,21 @@
 package react.bootstrap.site.components.docs
 
-import react.RBuilder
-import react.RComponent
-import react.RProps
-import react.ReactElement
 import react.bootstrap.site.MatchProps
 import react.bootstrap.site.components.PATH_DOCS
-import react.router.dom.RouteResultProps
+import react.bootstrap.site.components.docs.fixings.PageComponent
+import react.bootstrap.site.components.docs.fixings.CategoryComponent
 import kotlin.reflect.KClass
 
-internal data class Category<T : RComponent<RouteResultProps<RProps>, *>>(
+internal data class Category(
     val name: String,
     val path: String,
-    val component: KClass<T>
+    val component: KClass<out CategoryComponent>
 ) {
-    data class SubCategory(
-        val category: Category<*>,
+    data class Page(
+        val category: Category,
         val name: String,
         val path: String,
-        val renderer: RBuilder.() -> ReactElement
+        val renderer: KClass<out PageComponent>
     ) {
         val link = "$PATH_DOCS${category.path}/$path/"
         val matchProps = MatchProps(link, true)
@@ -26,9 +23,13 @@ internal data class Category<T : RComponent<RouteResultProps<RProps>, *>>(
 
     val link = "$PATH_DOCS$path/"
     val matchProps = MatchProps(link)
-    val subCategories: MutableList<SubCategory> = mutableListOf()
+    val pages: MutableList<Page> = mutableListOf()
 
-    fun addSubCategory(name: String, path: String, renderer: RBuilder.() -> ReactElement) {
-        subCategories.add(SubCategory(this, name, path, renderer))
+    fun addCategory(
+        name: String,
+        path: String,
+        renderer: KClass<out PageComponent>
+    ) {
+        pages.add(Page(this, name, path, renderer))
     }
 }

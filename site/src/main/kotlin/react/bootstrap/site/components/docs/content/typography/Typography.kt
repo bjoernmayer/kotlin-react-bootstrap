@@ -1,22 +1,22 @@
 package react.bootstrap.site.components.docs.content.typography
 
-import react.Fragment
 import react.RBuilder
-import react.bootstrap.site.components.docs.fixings.contentPageLead
-import react.bootstrap.site.components.docs.fixings.contentPageTitle
+import react.bootstrap.site.components.docs.fixings.PageComponent
 
-fun RBuilder.typography() = Fragment {
-    contentPageTitle("Typography")
-    contentPageLead {
-        +"""
+internal class Typography : PageComponent() {
+    override fun RBuilder.render() {
+        pageTitle("Typography")
+        pageLead {
+            +"""
             Documentation and examples for Bootstrap typography, including global settings, headings, body text, lists,
             and more.
         """.trimIndent()
+        }
+        child(Headings::class)
+        child(DisplayHeadings::class)
+        child(Lead::class)
+        child(InlineTextElements::class)
+        child(Blockquotes::class)
+        child(Lists::class)
     }
-    headings()
-    displayHeadings()
-    lead()
-    inlineTextElements()
-    blockquotes()
-    lists()
 }

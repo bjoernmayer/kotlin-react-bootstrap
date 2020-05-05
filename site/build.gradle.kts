@@ -18,7 +18,6 @@ dependencies {
     implementation(kotlin("stdlib-js"))
 
     implementation(kotlinReact("router-dom", "5.1.2", Versions.KOTLIN_JS_WRAPPERS))
-    implementation(kotlinReact("redux", "5.0.7", Versions.KOTLIN_JS_WRAPPERS))
 
     implementation(jetbrains("kotlin-extensions", "1.0.1-${Versions.KOTLIN_JS_WRAPPERS}"))
 

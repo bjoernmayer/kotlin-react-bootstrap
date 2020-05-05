@@ -18,12 +18,13 @@ import react.router.dom.RouteResultProps
 import react.router.dom.navLink
 import react.router.dom.routeLink
 
+// categories should come in via props
 class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
     override fun RBuilder.render() {
         nav("collapse bd-links") {
             attrs { ariaLabel = "Main navigation" }
 
-            Docs.Categories.categories.forEach { category ->
+            Docs.Pages.categories.forEach { category ->
                 div("bd-toc-item") {
                     if (pathMatches(
                             props.location.pathname,
@@ -34,14 +35,14 @@ class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
                     }
 
                     routeLink(
-                        "$PATH_DOCS${category.path}/${category.subCategories.first().path}",
+                        "$PATH_DOCS${category.path}/${category.pages.first().path}",
                         className = "bd-toc-link"
                     ) {
                         +category.name
                     }
 
                     ul("nav bd-sidenav") {
-                        category.subCategories.forEach { subCategory ->
+                        category.pages.forEach { subCategory ->
                             li {
                                 if (pathMatches(
                                         props.location.pathname,

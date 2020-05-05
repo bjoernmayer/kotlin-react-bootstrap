@@ -44,7 +44,7 @@ val Home = functionalComponent<RProps> {
                         }
                         col(lg = Sizes.EQ, classes = "${ClassNames.PX_2}") {
                             routeLink(
-                                PATH_DOCS,
+                                "${PATH_DOCS}components",
                                 className = "btn btn-lg btn-outline-secondary rounded-pill w-100 mb-3"
                             ) {
                                 +"Components"

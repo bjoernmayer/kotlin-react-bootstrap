@@ -13,16 +13,41 @@ import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.components.components
-import react.bootstrap.site.components.docs.content.content
-import react.bootstrap.site.components.docs.layout.layout
+import react.bootstrap.site.components.docs.components.Components
+import react.bootstrap.site.components.docs.content.Content
+import react.bootstrap.site.components.docs.fixings.CategoryComponent
+import react.bootstrap.site.components.docs.layout.Layout
 import react.bootstrap.site.from
 import react.router.dom.RouteResultProps
 import react.router.dom.redirect
 import react.router.dom.route
 import react.router.dom.switch
+import react.setState
 
-class Docs : RComponent<RouteResultProps<RProps>, RState>() {
+typealias NewSectionHandler = (Section) -> Unit
+
+class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
+    init {
+        state.sections = mutableSetOf()
+    }
+
+    fun onClearSections() {
+        setState {
+            sections.clear()
+        }
+    }
+
+    fun onAddSection(section: Section) {
+        setState {
+            if (section in sections) {
+                // Todo: Use a Map or something
+                sections.find { it.title == section.title }!!.subSections.add(section.subSections.last())
+            } else {
+                sections.add(section)
+            }
+        }
+    }
+
     override fun RBuilder.render() {
         row(classes = "${ClassNames.FLEX_XL_NOWRAP}") {
             col(md = Sizes.SZ_3, xl = Sizes.SZ_2, classes = "bd-sidebar") {
@@ -35,30 +60,47 @@ class Docs : RComponent<RouteResultProps<RProps>, RState>() {
                 }
             }
             col(xl = Sizes.SZ_2, classes = "${ClassNames.D_NONE} ${ClassNames.D_XL_BLOCK} bd-toc") {
+                child(SectionNav::class) {
+                    attrs {
+                        sections = state.sections
+                    }
+                }
             }
             col(
                 md = Sizes.SZ_9, xl = Sizes.SZ_8, classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content"
             ) {
                 switch {
-                    Categories.categories.forEach { category ->
-                        route<RProps>(category.link) {
+                    Pages.categories.forEach { category ->
+                        route<CategoryComponent.Props>(category.link) {
                             child(category.component) {
                                 attrs {
                                     from(it)
+                                    match.params.category = category
+                                    match.params.onNewPage = this@Docs::onClearSections
+                                    match.params.onNewSection = this@Docs::onAddSection
                                 }
                             }
                         }
                     }
                     route<RProps>(props.match.path) {
-                        redirect(from = props.location.pathname, to = Categories.categories.first().link)
+                        redirect(from = props.location.pathname, to = Pages.categories.first().link)
                     }
                 }
             }
         }
     }
 
-    internal object Categories {
-        var categories: List<Category<*>> = listOf(
+    interface SectionNavEvents : RProps {
+        var onNewPage: () -> Unit
+        var onNewSection: NewSectionHandler
+    }
+
+    interface State : RState {
+        var sections: MutableSet<Section>
+    }
+
+    internal object Pages {
+        var categories: List<Category> = listOf<Category>(
 //            Category(
 //                "Getting started",
 //                "getting-started",
@@ -74,9 +116,9 @@ class Docs : RComponent<RouteResultProps<RProps>, RState>() {
 //                addSubCategory("Webpack", "webpack")
 //                addSubCategory("Accessibility", "accessibility")
 //            },
-            layout,
-            content,
-            components // ,
+            Layout.component,
+            Content.component,
+            Components.component // ,
 //            Category(
 //                "Utilities",
 //                "utilities",

@@ -1,4 +1,5 @@
 @file:JsModule("react-router-dom")
+@file:Suppress("unused")
 
 package react.bootstrap.site.external
 
