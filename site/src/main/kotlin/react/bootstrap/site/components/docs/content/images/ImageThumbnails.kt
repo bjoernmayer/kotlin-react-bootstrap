@@ -3,7 +3,7 @@ package react.bootstrap.site.components.docs.content.images
 import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
-import react.bootstrap.ariaLabel
+import react.bootstrap.lib.ariaLabel
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeBox

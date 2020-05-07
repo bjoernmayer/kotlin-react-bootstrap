@@ -12,3 +12,7 @@ interface WithRDOMBuilderBlock<T : HTMLTag> : RProps {
 interface WithRHandlerBlock<T : RProps> : RProps {
     var block: RHandler<T>
 }
+
+interface WithOnClick : RProps {
+    var onClick: EventHandler?
+}

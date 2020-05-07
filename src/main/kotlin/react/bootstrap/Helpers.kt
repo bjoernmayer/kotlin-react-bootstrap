@@ -14,12 +14,6 @@ fun Tag.data(keyValue: Pair<String, String>) {
     attributes["data-${keyValue.first}"] = keyValue.second
 }
 
-var CommonAttributeGroupFacade.ariaLabel: String
-    get() = this.attributes["aria-label"].toString()
-    set(newValue) {
-        this.attributes["aria-label"] = newValue
-    }
-
 fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg className: String) {
     attrs {
         classes = classes.toMutableSet().apply {

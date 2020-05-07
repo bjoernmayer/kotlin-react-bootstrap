@@ -3,7 +3,8 @@ package react.bootstrap.site.components.docs
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.invoke
+import react.buildElements
+import react.cloneElement
 import react.dom.code
 import react.dom.em
 import react.dom.p
@@ -61,3 +62,6 @@ private fun RBuilder.wrapTags(wraps: Map<String, ReactElement>, target: String) 
         }
     }
 }
+
+operator fun ReactElement.invoke(handler: RBuilder.() -> Unit): ReactElement =
+    cloneElement(this, props, buildElements(handler))
