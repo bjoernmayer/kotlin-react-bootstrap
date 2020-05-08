@@ -14,7 +14,7 @@ import react.RProps
 import react.RState
 import react.ReactElement
 import react.asElementOrNull
-import react.bootstrap.lib.ArglessEventHandler
+import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.WithOnClick
@@ -172,12 +172,12 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
         /**
          * This handler is called immediately when the [onDismiss] handler was called.
          */
-        var onClose: ArglessEventHandler?
+        var onClose: NoArgEventHandler?
 
         /**
          * This handler is called when the alert has been closed (will wait for CSS transitions to complete).
          */
-        var onClosed: ArglessEventHandler?
+        var onClosed: NoArgEventHandler?
     }
 
     internal interface CloseElementMarkerProps : RProps {
