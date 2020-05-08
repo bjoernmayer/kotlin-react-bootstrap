@@ -7,4 +7,4 @@ import react.ReactElement
 typealias NoArgEventHandler = () -> Unit
 typealias EventHandler = (Event) -> Unit
 
-typealias ElementProvider = (RBuilder.() -> ReactElement)
+typealias ElementProvider = RBuilder.() -> ReactElement

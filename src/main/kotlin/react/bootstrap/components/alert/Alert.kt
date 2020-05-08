@@ -14,9 +14,10 @@ import react.RProps
 import react.RState
 import react.ReactElement
 import react.asElementOrNull
-import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.ElementProvider
+import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.lib.WithOnClick
 import react.bootstrap.lib.onTransitionEnd
 import react.bootstrap.utilities.close
@@ -148,36 +149,6 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
         DANGER(ClassNames.ALERT_DANGER),
         LIGHT(ClassNames.ALERT_LIGHT),
         DARK(ClassNames.ALERT_DARK);
-
-        val kt = "${Alert::class.simpleName}.${Variants::class.simpleName}.$name"
-    }
-
-    interface DismissibleProps : RProps {
-        /**
-         * When set to *true* the alert fades out, when dismissed.
-         *
-         * Defaults to *false*
-         */
-        var fade: Boolean?
-
-        /**
-         * This is the element the user can click on to dismiss the alert.
-         *
-         * Be aware that [WithOnClick.onClick] gets overriden.
-         *
-         * Defaults [react.bootstrap.utilities.Close]
-         */
-        var closeElement: ReactElement?
-
-        /**
-         * This handler is called immediately when the [onDismiss] handler was called.
-         */
-        var onClose: NoArgEventHandler?
-
-        /**
-         * This handler is called when the alert has been closed (will wait for CSS transitions to complete).
-         */
-        var onClosed: NoArgEventHandler?
     }
 
     internal interface CloseElementMarkerProps : RProps {
@@ -186,8 +157,38 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
 
     interface Props : WithClassName {
         var variant: Variants?
-        var dismissible: DismissibleProps?
+        var dismissible: Dismissible?
+
+        interface Dismissible {
+            /**
+             * When set to *true* the alert fades out, when dismissed.
+             *
+             * Defaults to *false*
+             */
+            var fade: Boolean?
+
+            /**
+             * This is the element the user can click on to dismiss the alert.
+             *
+             * Be aware that [WithOnClick.onClick] gets overriden.
+             *
+             * Defaults [react.bootstrap.utilities.Close]
+             */
+            var closeElement: ReactElement?
+
+            /**
+             * This handler is called immediately when the [onDismiss] handler was called.
+             */
+            var onClose: NoArgEventHandler?
+
+            /**
+             * This handler is called when the alert has been closed (will wait for CSS transitions to complete).
+             */
+            var onClosed: NoArgEventHandler?
+        }
     }
+
+    interface DismissibleProps : Props
 
     enum class States {
         SHOWN,
@@ -200,6 +201,17 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
     }
 }
 
+/**
+ * Adds an alert component.
+ *
+ * This extension function adds an alert component to the given RBuilder.
+ * Beware: This alert is not dismissible. To create a dismissible alert, use [dismissibleAlert].
+ *
+ * @param variant The variant of this alert (primary, secondary, warning, etc.).
+ * @param classes Additional CSS classnames for the rendered dom element.
+ * @param block handler of type [RElementBuilder] with [Alert.Props] props.
+ * @return ReactElement of type [Alert].
+ */
 fun RBuilder.alert(
     variant: Alert.Variants,
     classes: String? = null,
@@ -213,11 +225,22 @@ fun RBuilder.alert(
     block()
 }
 
+/**
+ * Adds an dismissible alert component.
+ *
+ * This extension function adds an dismissible alert component to the given RBuilder.
+ *
+ * @param variant The variant of this alert (primary, secondary, warning, etc.).
+ * @param fade If set to `true` the alert will fade out. Defaults to `false`.
+ * @param classes Additional CSS classnames for the rendered dom element.
+ * @param block handler of type [RElementBuilder] with [Alert.Props] props.
+ * @return ReactElement of type [Alert].
+ */
 fun RBuilder.dismissibleAlert(
     variant: Alert.Variants,
     fade: Boolean? = null,
     classes: String? = null,
-    block: RHandler<Alert.Props>
+    block: RHandler<Alert.DismissibleProps>
 ): ReactElement = child(Alert::class) {
     attrs {
         this.variant = variant
@@ -228,10 +251,20 @@ fun RBuilder.dismissibleAlert(
         }
     }
 
-    block()
+    @Suppress("UNCHECKED_CAST")
+    (block as RHandler<Alert.Props>).invoke(this)
 }
 
-fun RElementBuilder<Alert.Props>.closingElement(block: RBuilder.() -> ReactElement) {
+/**
+ * Wrapper for a custom alert closing element.
+ *
+ * Build whatever close element you like.
+ * Be aware that the [WithOnClick.onClick] of the outer most element gets overwritten.
+ *
+ * @param block [RBuilder] block function
+ * @return The ceated ReactElement
+ */
+fun RElementBuilder<Alert.DismissibleProps>.closingElement(block: ElementProvider): ReactElement {
     val element = RBuilder().block()
 
     // The closing element is marked, to be able to find it in the childlist
@@ -239,11 +272,11 @@ fun RElementBuilder<Alert.Props>.closingElement(block: RBuilder.() -> ReactEleme
         this.random = Random.nextInt()
     })
 
-    child(clone)
-
     attrs {
         dismissible = (dismissible ?: jsObject()).apply {
             closeElement = clone
         }
     }
+
+    return child(clone)
 }

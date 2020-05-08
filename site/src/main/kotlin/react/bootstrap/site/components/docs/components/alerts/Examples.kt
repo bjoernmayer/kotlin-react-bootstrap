@@ -5,7 +5,6 @@ package react.bootstrap.site.components.docs.components.alerts
 import kotlinx.html.currentTimeMillis
 import kotlinx.html.js.onClickFunction
 import react.RBuilder
-import react.RElementBuilder
 import react.RProps
 import react.bootstrap.components.alert.Alert
 import react.bootstrap.components.alert.alert
@@ -23,6 +22,7 @@ import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.grid.ktBlock
 import react.bootstrap.site.components.docs.ln
 import react.child
+import react.dom.a
 import react.dom.button
 import react.dom.h4
 import react.dom.hr
@@ -54,7 +54,7 @@ internal class Examples : SectionComponent() {
             ln { +"import react.bootstrap.components.alert.alert" }
             ln { }
             Alert.Variants.values().iterator().forEach { variant ->
-                ktBlock(0, "${RBuilder::alert.name}(${variant.kt})") { il ->
+                ktBlock(0, "$alertName(${variant.kt})") { il ->
                     ln(il) { +"+\"A simple ${variant.name.toLowerCase()} alert-check it out!\"" }
                 }
             }
@@ -62,7 +62,7 @@ internal class Examples : SectionComponent() {
         subSectionTitle("Link color", section)
         formattedText('%', '&') {
             """
-            Use the %link|code&-function (only available inside %RElementBuilder<Alert>|code& to quickly provide
+            Use the %$linkName|code&-function (only available inside %RElementBuilder<Alert>|code& to quickly provide
             matching colored links within any alert.
         """.trimIndent()
         }
@@ -70,7 +70,7 @@ internal class Examples : SectionComponent() {
             Alert.Variants.values().iterator().forEach { variant ->
                 alert(variant) {
                     +"A simple ${variant.name.toLowerCase()} alert with "
-                    link("#") { +"an example link" }; +". Give it a click if you like."
+                    link { a(href = "#") { +"an example link" } }; +". Give it a click if you like."
                 }
             }
         }
@@ -80,10 +80,10 @@ internal class Examples : SectionComponent() {
             ln { +"import react.bootstrap.components.alert.alert" }
             ln { }
             Alert.Variants.values().iterator().forEach { variant ->
-                ktBlock(0, "${RBuilder::alert.name}(${variant.kt})") { il ->
+                ktBlock(0, "$alertName(${variant.kt})") { il ->
                     ln(il) { +"+\"A simple ${variant.name.toLowerCase()} alert with \"" }
                     ln(il) {
-                        +"${RElementBuilder<Alert.Props>::link.name}(\"#\") { +\"an example link\" }; +\". Give it a"
+                        +"$linkName { a(href = \"#\") { +\"another example link\" } }; +\". Give it a"
                         +"click if you like.\""
                     }
                 }
@@ -140,7 +140,7 @@ internal class Examples : SectionComponent() {
         subSectionTitle("Dismissing", section)
         formattedText {
             """
-                Use <${RBuilder::dismissibleAlert.name} { }|code> to create a dismissible alert.
+                Use <$dismissibleAlertName { }|code> to create a dismissible alert.
             """.trimIndent()
         }
         example {
@@ -164,16 +164,16 @@ internal class Examples : SectionComponent() {
             ln { }
             ktBlock(
                 0,
-                "${RBuilder::dismissibleAlert.name}(variant = ${Alert.Variants.WARNING.kt}, fade = true)"
+                "$dismissibleAlertName(variant = ${Alert.Variants.WARNING.kt}, fade = true)"
             ) { il ->
                 ktBlock(il, "attrs") { il ->
                     ktBlock(il, "${Alert.Props::dismissible.name}?.apply") { il ->
-                        ktBlock(il, Alert.DismissibleProps::onClose.name) { il ->
+                        ktBlock(il, Alert.Props.Dismissible::onClose.name) { il ->
                             ln(il) {
                                 +"console.log(\"Close on Alert was clicked. Timestamp: \${currentTimeMillis()}\")"
                             }
                         }
-                        ktBlock(il, Alert.DismissibleProps::onClosed.name) { il ->
+                        ktBlock(il, Alert.Props.Dismissible::onClosed.name) { il ->
                             ln(il) {
                                 +"console.log(\"Close on Alert was clicked. Timestamp: \${currentTimeMillis()}\")"
                             }
@@ -184,12 +184,7 @@ internal class Examples : SectionComponent() {
             }
         }
         contentTitle(RBuilder::h4, "Close element")
-        formattedText {
-            """
-                You can build your own custom close element, by using
-                <${RElementBuilder<Alert.Props>::closingElement.name} { }|code>.
-            """.trimIndent()
-        }
+        formattedText { "You can build your own custom close element, by using <$closingElementName { }|code>." }
         example {
             dismissibleAlert(variant = Alert.Variants.INFO) {
                 +"You want some cookies?"
@@ -209,11 +204,11 @@ internal class Examples : SectionComponent() {
             ln { }
             ktBlock(
                 0,
-                "${RBuilder::dismissibleAlert.name}(variant = ${Alert.Variants.INFO.kt})"
+                "$dismissibleAlertName(variant = ${Alert.Variants.INFO.kt})"
             ) { il ->
                 ln(il) { +" +\"You want some cookies?\"" }
                 ln(il) { +"hr { }" }
-                ktBlock(il, RElementBuilder<Alert.Props>::closingElement.name) { il ->
+                ktBlock(il, closingElementName) { il ->
                     ktBlock(il, "button(classes = \"\${ClassNames.BTN} \${ClassNames.BTN_SUCCESS}\")") { il ->
                         ln(il) { +"+\"Sure!\"" }
                     }
@@ -237,17 +232,17 @@ internal class Examples : SectionComponent() {
                 ln(il) { +"val (show, setShow) = useState(false)" }
                 ln { }
                 ktBlock(il, "if (show)") { il ->
-                    ktBlock(il, "${RBuilder::dismissibleAlert.name}(variant = ${Alert.Variants.DANGER.kt})") { il ->
+                    ktBlock(il, "$dismissibleAlertName(variant = ${Alert.Variants.DANGER.kt})") { il ->
                         ktBlock(il, "attrs") { il ->
                             ktBlock(il, "${Alert.Props::dismissible.name}?.apply") { il ->
-                                ktBlock(il, Alert.DismissibleProps::onClosed.name) { il ->
+                                ktBlock(il, Alert.Props.Dismissible::onClosed.name) { il ->
                                     ln(il) { +"setShow(false)" }
                                 }
                             }
                         }
                         ln(il) { +"+\"You picked the wrong house, fool!\"" }
                         ln(il) { +"hr { }" }
-                        ktBlock(il, RElementBuilder<Alert.Props>::closingElement.name) { il ->
+                        ktBlock(il, closingElementName) { il ->
                             ktBlock(il, "button(classes = \"\${ClassNames.BTN} \${ClassNames.BTN_INFO}\") ") { il ->
                                 ln(il) { +"+\"Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!\"" }
                             }
