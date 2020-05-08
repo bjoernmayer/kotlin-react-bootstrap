@@ -52,7 +52,10 @@ internal class Reference : SectionComponent() {
         }
         subSectionTitle(headingName, section)
         formattedText {
-            "Adds <${ClassNames.ALERT_HEADING.kt}|code> to the outer most <ReactElement|code> resulting from <block|code>."
+            """
+                Adds <${ClassNames.ALERT_HEADING.kt}|code> to the outer most <ReactElement|code> resulting from
+                <block|code>."
+            """.trimIndent()
         }
         codeBox {
             val funDef = "fun RElementBuilder<$alertPropsName>.heading(headings: ${Headings::class.simpleName}, " +
@@ -122,7 +125,6 @@ internal class Reference : SectionComponent() {
                 "Be aware that the <${WithOnClick::class.simpleName}.${WithOnClick::onClick.name}|code> of the outer" +
                     "most element gets overwritten."
             }
-
         }
         codeBox {
             val funDef = "fun RElementBuilder<${Alert.DismissibleProps::class.nestedName}>.closingElement(block: Ele" +
