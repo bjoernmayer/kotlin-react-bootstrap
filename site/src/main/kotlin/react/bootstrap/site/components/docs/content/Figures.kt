@@ -5,7 +5,7 @@ package react.bootstrap.site.components.docs.content
 import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
-import react.bootstrap.ariaLabel
+import react.bootstrap.lib.ariaLabel
 import react.bootstrap.content.figures.figcaption
 import react.bootstrap.content.figures.figure
 import react.bootstrap.lib.ClassNames

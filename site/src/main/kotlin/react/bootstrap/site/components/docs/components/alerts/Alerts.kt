@@ -13,5 +13,6 @@ internal class Alerts : PageComponent() {
         """.trimIndent()
         }
         child(Examples::class)
+        child(Reference::class)
     }
 }

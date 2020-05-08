@@ -6,7 +6,7 @@ import react.RComponent
 import react.RProps
 import react.RState
 import react.bootstrap.addClass
-import react.bootstrap.ariaLabel
+import react.bootstrap.lib.ariaLabel
 import react.bootstrap.site.components.PATH_DOCS
 import react.bootstrap.site.pathMatches
 import react.dom.RDOMBuilder

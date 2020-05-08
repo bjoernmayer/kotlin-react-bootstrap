@@ -4,7 +4,7 @@ import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
 import react.RProps
-import react.bootstrap.ariaLabel
+import react.bootstrap.lib.ariaLabel
 import react.bootstrap.lib.ClassNames
 import react.dom.a
 import react.dom.div

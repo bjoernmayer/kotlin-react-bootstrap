@@ -1,71 +1,145 @@
 package react.bootstrap.components.alert
 
-import kotlinx.html.ButtonType
-import kotlinx.html.js.onClickFunction
+import kotlinext.js.asJsObject
+import kotlinext.js.jsObject
+import kotlinx.html.classes
 import kotlinx.html.role
 import org.w3c.dom.events.Event
+import react.Children
 import react.RBuilder
 import react.RComponent
+import react.RElementBuilder
 import react.RHandler
+import react.RProps
 import react.RState
 import react.ReactElement
-import react.bootstrap.appendClass
+import react.asElementOrNull
 import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.ElementProvider
+import react.bootstrap.lib.NoArgEventHandler
+import react.bootstrap.lib.WithOnClick
+import react.bootstrap.lib.onTransitionEnd
+import react.bootstrap.utilities.close
+import react.children
+import react.cloneElement
 import react.dom.WithClassName
-import react.dom.button
 import react.dom.div
-import react.dom.span
 import react.setState
+import kotlin.random.Random
 
 class Alert : RComponent<Alert.Props, Alert.State>() {
-    private fun onDismiss(event: Event) {
+    override fun componentDidMount() {
         setState {
-            hide = true
+            state = States.SHOWN
+        }
+    }
+
+    private fun onDismiss(@Suppress("UNUSED_PARAMETER") event: Event) {
+        props.dismissible?.onClose?.apply {
+            invoke()
+        }
+
+        if (props.dismissible?.fade == true) {
+            setState {
+                state = States.DISMISSING
+            }
+
+            return
+        }
+
+        setState {
+            state = States.DISMISSED
+        }
+
+        props.dismissible?.onClosed?.apply {
+            invoke()
+        }
+    }
+
+    private fun onTransitionEnd(@Suppress("UNUSED_PARAMETER") event: Event) {
+        // Only react, under the right circumstances
+        if (props.dismissible?.fade == true && state.state == States.DISMISSING) {
+            props.dismissible?.onClosed?.apply {
+                invoke()
+            }
+
+            setState {
+                state = States.DISMISSED
+            }
         }
     }
 
     override fun RBuilder.render() {
-        val alertClasses = mutableSetOf(ClassNames.ALERT)
-
-        props.variant?.also { alertClasses.add(it.className) }
-
-        if (props.dismissible !== null) {
-            alertClasses.add(ClassNames.ALERT_DISMISSIBLE)
-
-            when (props.dismissible) {
-                Transition.POP_OUT -> alertClasses.add(ClassNames.SHOW)
-                Transition.FADE_OUT -> alertClasses.addAll(listOf(ClassNames.SHOW, ClassNames.FADE))
-                Transition.FADE_IN -> alertClasses.add(ClassNames.FADE)
-                else -> Unit
-            }
-        }
-
-        if (state.hide == true) {
+        if (state.state == States.DISMISSED) {
             return
         }
 
-        div(props.className.appendClass(alertClasses)) {
+        div {
+            props.children()
+
+            val alertClasses = mutableSetOf(ClassNames.ALERT)
+
+            props.variant?.also { alertClasses.add(it.className) }
+
+            props.dismissible?.also { dismissibleProps ->
+                alertClasses.add(ClassNames.ALERT_DISMISSIBLE)
+
+                if (state.state == States.SHOWN) {
+                    alertClasses.add(ClassNames.SHOW)
+                }
+
+                if (dismissibleProps.fade == true) {
+                    alertClasses.add(ClassNames.FADE)
+                    attrs.onTransitionEnd = this@Alert::onTransitionEnd
+                }
+
+                val closingElement = cloneElement<WithOnClick>(
+                    dismissibleProps.closeElement ?: RBuilder().close { },
+                    jsObject {
+                        onClick = this@Alert::onDismiss
+                    }
+                )
+
+                if (dismissibleProps.closeElement != null) {
+                    childList.replaceCloseElement(closingElement)
+                } else {
+                    childList.add(closingElement)
+                }
+            }
+
             attrs {
                 role = "alert"
-            }
-            children()
-            if (props.dismissible !== null) {
-                button(type = ButtonType.button, classes = "${ClassNames.CLOSE}") {
-                    attrs {
-                        onClickFunction = this@Alert::onDismiss
-                    }
-                    span {
-                        attrs {
-                            set("aria-hidden", true)
-                        }
-                        +"×"
-                    }
-                }
+                classes = alertClasses.map { it.className }.toSet()
             }
         }
     }
 
+    /**
+     * We marked the close element before. Now we find it in the children and replace it
+     */
+    private fun MutableList<Any>.replaceCloseElement(newClosingElement: ReactElement) {
+        val closeElementInChildren = Children.toArray(props.children).indexOfFirst {
+            it.asElementOrNull()?.let { el ->
+                val props = el.props.asJsObject()
+
+                if (props.hasOwnProperty(CloseElementMarkerProps::random.name)) {
+                    @Suppress("UnsafeCastFromDynamic")
+                    props.asDynamic().random == newClosingElement.props.asDynamic().random
+                } else {
+                    false
+                }
+            } ?: false
+        }
+
+        if (closeElementInChildren == -1) {
+            error("Given close element could not be found in children.")
+        }
+
+        this[closeElementInChildren] = newClosingElement
+    }
+
+    @Suppress("unused")
     enum class Variants(override val className: ClassNames) : ClassNameEnum {
         PRIMARY(ClassNames.ALERT_PRIMARY),
         SECONDARY(ClassNames.ALERT_SECONDARY),
@@ -75,39 +149,134 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
         DANGER(ClassNames.ALERT_DANGER),
         LIGHT(ClassNames.ALERT_LIGHT),
         DARK(ClassNames.ALERT_DARK);
-
-        val kt = "${Alert::class.simpleName}.${Alert.Variants::class.simpleName}.$name"
     }
 
-    enum class Transition {
-        POP_OUT,
-        FADE_OUT,
-        POP_IN,
-        FADE_IN;
+    internal interface CloseElementMarkerProps : RProps {
+        var random: Int?
     }
 
     interface Props : WithClassName {
         var variant: Variants?
-        var dismissible: Transition?
+        var dismissible: Dismissible?
+
+        interface Dismissible {
+            /**
+             * When set to *true* the alert fades out, when dismissed.
+             *
+             * Defaults to *false*
+             */
+            var fade: Boolean?
+
+            /**
+             * This is the element the user can click on to dismiss the alert.
+             *
+             * Be aware that [WithOnClick.onClick] gets overriden.
+             *
+             * Defaults [react.bootstrap.utilities.Close]
+             */
+            var closeElement: ReactElement?
+
+            /**
+             * This handler is called immediately when the [onDismiss] handler was called.
+             */
+            var onClose: NoArgEventHandler?
+
+            /**
+             * This handler is called when the alert has been closed (will wait for CSS transitions to complete).
+             */
+            var onClosed: NoArgEventHandler?
+        }
+    }
+
+    interface DismissibleProps : Props
+
+    enum class States {
+        SHOWN,
+        DISMISSING,
+        DISMISSED;
     }
 
     interface State : RState {
-        var hide: Boolean?
+        var state: States
     }
 }
 
+/**
+ * Adds an alert component.
+ *
+ * This extension function adds an alert component to the given RBuilder.
+ * Beware: This alert is not dismissible. To create a dismissible alert, use [dismissibleAlert].
+ *
+ * @param variant The variant of this alert (primary, secondary, warning, etc.).
+ * @param classes Additional CSS classnames for the rendered dom element.
+ * @param block handler of type [RElementBuilder] with [Alert.Props] props.
+ * @return ReactElement of type [Alert].
+ */
 fun RBuilder.alert(
     variant: Alert.Variants,
-    dismissible: Alert.Transition? = null,
     classes: String? = null,
     block: RHandler<Alert.Props>
 ): ReactElement = child(Alert::class) {
     attrs {
-
         this.variant = variant
         this.className = classes
-        this.dismissible = dismissible
     }
 
     block()
+}
+
+/**
+ * Adds an dismissible alert component.
+ *
+ * This extension function adds an dismissible alert component to the given RBuilder.
+ *
+ * @param variant The variant of this alert (primary, secondary, warning, etc.).
+ * @param fade If set to `true` the alert will fade out. Defaults to `false`.
+ * @param classes Additional CSS classnames for the rendered dom element.
+ * @param block handler of type [RElementBuilder] with [Alert.Props] props.
+ * @return ReactElement of type [Alert].
+ */
+fun RBuilder.dismissibleAlert(
+    variant: Alert.Variants,
+    fade: Boolean? = null,
+    classes: String? = null,
+    block: RHandler<Alert.DismissibleProps>
+): ReactElement = child(Alert::class) {
+    attrs {
+        this.variant = variant
+        this.className = classes
+
+        dismissible = (dismissible ?: jsObject()).apply {
+            this.fade = fade
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    (block as RHandler<Alert.Props>).invoke(this)
+}
+
+/**
+ * Wrapper for a custom alert closing element.
+ *
+ * Build whatever close element you like.
+ * Be aware that the [WithOnClick.onClick] of the outer most element gets overwritten.
+ *
+ * @param block [RBuilder] block function
+ * @return The ceated ReactElement
+ */
+fun RElementBuilder<Alert.DismissibleProps>.closingElement(block: ElementProvider): ReactElement {
+    val element = RBuilder().block()
+
+    // The closing element is marked, to be able to find it in the childlist
+    val clone = cloneElement<Alert.CloseElementMarkerProps>(element, jsObject {
+        this.random = Random.nextInt()
+    })
+
+    attrs {
+        dismissible = (dismissible ?: jsObject()).apply {
+            closeElement = clone
+        }
+    }
+
+    return child(clone)
 }
