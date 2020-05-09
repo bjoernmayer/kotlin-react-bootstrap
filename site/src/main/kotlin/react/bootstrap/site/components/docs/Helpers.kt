@@ -30,6 +30,7 @@ internal fun RBuilder.ln(indentationLevel: Int = 0, block: RBuilder.() -> Unit) 
     +"\n"
 }
 
+// Todo change to markup
 internal fun RBuilder.formattedText(opener: Char = '<', closer: Char = '>', block: () -> String) {
     val text = block()
 
@@ -63,5 +64,5 @@ private fun RBuilder.wrapTags(wraps: Map<String, ReactElement>, target: String) 
     }
 }
 
-operator fun ReactElement.invoke(handler: RBuilder.() -> Unit): ReactElement =
+internal operator fun ReactElement.invoke(handler: RBuilder.() -> Unit): ReactElement =
     cloneElement(this, props, buildElements(handler))

@@ -2,6 +2,7 @@ package react.bootstrap.site.components.docs.components
 
 import react.bootstrap.site.components.docs.Category
 import react.bootstrap.site.components.docs.components.alerts.Alerts
+import react.bootstrap.site.components.docs.components.buttons.Buttons
 import react.bootstrap.site.components.docs.fixings.CategoryComponent
 
 internal class Components : CategoryComponent() {
@@ -14,7 +15,7 @@ internal class Components : CategoryComponent() {
             addCategory("Alerts", "alerts", Alerts::class)
 //                addSubCategory("Badge", "badge")
 //                addSubCategory("Breadcrumb", "breadcrumb")
-//                addSubCategory("Buttons", "buttons")
+            addCategory("Buttons", "buttons", Buttons::class)
 //                addSubCategory("Button group", "button-group")
 //                addSubCategory("Card", "card")
 //                addSubCategory("Carousel", "carousel")

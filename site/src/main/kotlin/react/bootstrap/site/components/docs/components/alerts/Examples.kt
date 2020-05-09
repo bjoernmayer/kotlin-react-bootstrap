@@ -13,6 +13,8 @@ import react.bootstrap.components.alert.dismissibleAlert
 import react.bootstrap.components.alert.h4
 import react.bootstrap.components.alert.link
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.site.components.docs.classNamesImport
+import react.bootstrap.site.components.docs.components.packageName
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeBox
 import react.bootstrap.site.components.docs.fixings.contentTitle
@@ -50,8 +52,8 @@ internal class Examples : SectionComponent() {
             }
         }
         codeBox {
-            ln { +"import react.bootstrap.components.alert.Alert" }
-            ln { +"import react.bootstrap.components.alert.alert" }
+            ln { +"${packageName}alert.Alert" }
+            ln { +"${packageName}alert.alert" }
             ln { }
             Alert.Variants.values().iterator().forEach { variant ->
                 ktBlock(0, "$alertName(${variant.kt})") { il ->
@@ -60,9 +62,9 @@ internal class Examples : SectionComponent() {
             }
         }
         subSectionTitle("Link color", section)
-        formattedText('%', '&') {
+        formattedText('[', ']') {
             """
-            Use the %$linkName|code&-function (only available inside %RElementBuilder<Alert>|code& to quickly provide
+            Use the [$linkName|code]-function (only available inside %RElementBuilder<Alert>|code& to quickly provide
             matching colored links within any alert.
         """.trimIndent()
         }
@@ -75,9 +77,9 @@ internal class Examples : SectionComponent() {
             }
         }
         codeBox {
-            ln { +"import react.bootstrap.components.alert.Alert" }
-            ln { +"import react.bootstrap.components.alert.link" }
-            ln { +"import react.bootstrap.components.alert.alert" }
+            ln { +"${packageName}alert.Alert" }
+            ln { +"${packageName}alert.$linkName" }
+            ln { +"${packageName}alert.alert" }
             ln { }
             Alert.Variants.values().iterator().forEach { variant ->
                 ktBlock(0, "$alertName(${variant.kt})") { il ->
@@ -111,10 +113,10 @@ internal class Examples : SectionComponent() {
             }
         }
         codeBox {
-            ln { +"import react.bootstrap.components.alert.Alert" }
-            ln { +"import react.bootstrap.components.alert.alert" }
-            ln { +"import react.bootstrap.components.alert.h4" }
-            ln { +"import react.bootstrap.lib.ClassNames" }
+            ln { +"${packageName}alert.Alert" }
+            ln { +"${packageName}alert.alert" }
+            ln { +"${packageName}alert.h4" }
+            classNamesImport()
             ln { }
             ktBlock(0, "alert(${Alert.Variants.SUCCESS.kt})") { il ->
                 ln(il) { +"h4 { +\"Well done!\" }" }
@@ -159,8 +161,8 @@ internal class Examples : SectionComponent() {
             }
         }
         codeBox {
-            ln { +"import react.bootstrap.components.alert.Alert" }
-            ln { +"import react.bootstrap.components.alert.dismissibleAlert" }
+            ln { +"${packageName}alert.Alert" }
+            ln { +"${packageName}alert.$dismissibleAlertName" }
             ln { }
             ktBlock(
                 0,
@@ -197,10 +199,10 @@ internal class Examples : SectionComponent() {
             }
         }
         codeBox {
-            ln { +"import react.bootstrap.components.alert.Alert" }
-            ln { +"import react.bootstrap.components.alert.closingElement" }
-            ln { +"import react.bootstrap.components.alert.dismissibleAlert" }
-            ln { +"import react.bootstrap.lib.ClassNames" }
+            ln { +"${packageName}alert.Alert" }
+            ln { +"${packageName}alert.$closingElementName" }
+            ln { +"${packageName}alert.$dismissibleAlertName" }
+            classNamesImport()
             ln { }
             ktBlock(
                 0,
@@ -223,10 +225,10 @@ internal class Examples : SectionComponent() {
             child(dismissibleAlert)
         }
         codeBox {
-            ln { +"import react.bootstrap.components.alert.Alert" }
-            ln { +"import react.bootstrap.components.alert.closingElement" }
-            ln { +"import react.bootstrap.components.alert.dismissibleAlert" }
-            ln { +"import react.bootstrap.lib.ClassNames" }
+            ln { +"${packageName}alert.Alert" }
+            ln { +"${packageName}alert.$closingElementName" }
+            ln { +"${packageName}alert.$dismissibleAlertName" }
+            classNamesImport()
             ln { }
             ktBlock(0, "private val dismissibleAlert = functionalComponent<RProps>") { il ->
                 ln(il) { +"val (show, setShow) = useState(false)" }

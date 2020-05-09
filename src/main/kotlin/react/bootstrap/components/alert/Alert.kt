@@ -141,14 +141,14 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
 
     @Suppress("unused")
     enum class Variants(override val className: ClassNames) : ClassNameEnum {
+        DANGER(ClassNames.ALERT_DANGER),
+        DARK(ClassNames.ALERT_DARK),
+        INFO(ClassNames.ALERT_INFO),
+        LIGHT(ClassNames.ALERT_LIGHT),
         PRIMARY(ClassNames.ALERT_PRIMARY),
         SECONDARY(ClassNames.ALERT_SECONDARY),
         SUCCESS(ClassNames.ALERT_SUCCESS),
-        INFO(ClassNames.ALERT_INFO),
-        WARNING(ClassNames.ALERT_WARNING),
-        DANGER(ClassNames.ALERT_DANGER),
-        LIGHT(ClassNames.ALERT_LIGHT),
-        DARK(ClassNames.ALERT_DARK);
+        WARNING(ClassNames.ALERT_WARNING);
     }
 
     internal interface CloseElementMarkerProps : RProps {
@@ -156,17 +156,10 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
     }
 
     interface Props : WithClassName {
-        var variant: Variants?
         var dismissible: Dismissible?
+        var variant: Variants?
 
         interface Dismissible {
-            /**
-             * When set to *true* the alert fades out, when dismissed.
-             *
-             * Defaults to *false*
-             */
-            var fade: Boolean?
-
             /**
              * This is the element the user can click on to dismiss the alert.
              *
@@ -175,6 +168,13 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
              * Defaults [react.bootstrap.utilities.Close]
              */
             var closeElement: ReactElement?
+
+            /**
+             * When set to *true* the alert fades out, when dismissed.
+             *
+             * Defaults to *false*
+             */
+            var fade: Boolean?
 
             /**
              * This handler is called immediately when the [onDismiss] handler was called.
