@@ -15,5 +15,6 @@ and more.
         child(Examples::class)
         child(ButtonTags::class)
         child(OutlineButtons::class)
+        child(Sizes::class)
     }
 }

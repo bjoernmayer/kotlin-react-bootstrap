@@ -141,14 +141,14 @@ open class Button : RComponent<Button.Props, Button.State>() {
             class WARNING internal constructor() : Variants(ClassNames.BTN_OUTLINE_WARNING)
 
             companion object {
-                val DANGER = Outline.DANGER()
-                val DARK = Outline.DARK()
-                val INFO = Outline.INFO()
-                val LIGHT = Outline.LIGHT()
-                val PRIMARY = Outline.PRIMARY()
-                val SECONDARY = Outline.SECONDARY()
-                val SUCCESS = Outline.SUCCESS()
-                val WARNING = Outline.WARNING()
+                val DANGER = DANGER()
+                val DARK = DARK()
+                val INFO = INFO()
+                val LIGHT = LIGHT()
+                val PRIMARY = PRIMARY()
+                val SECONDARY = SECONDARY()
+                val SUCCESS = SUCCESS()
+                val WARNING = WARNING()
             }
         }
     }
@@ -205,6 +205,7 @@ fun RBuilder.button(
     disabled: Boolean? = null,
     nowrap: Boolean? = null,
     type: Button.Types? = null,
+    sizes: Button.Sizes? = null,
     block: RHandler<Button.Props>
 ): ReactElement =
     child(Button::class) {
@@ -214,6 +215,7 @@ fun RBuilder.button(
             this.disabled = disabled
             this.nowrap = nowrap
             this.type = type
+            this.sizes = sizes
         }
 
         block()
@@ -225,16 +227,6 @@ fun RBuilder.button(
     disabled: Boolean? = null,
     nowrap: Boolean? = null,
     type: ButtonType,
+    sizes: Button.Sizes? = null,
     block: RHandler<Button.Props>
-): ReactElement =
-    child(Button::class) {
-        attrs {
-            this.variant = variant
-            this.active = active
-            this.disabled = disabled
-            this.nowrap = nowrap
-            this.type = Button.Types.Button(type = type)
-        }
-
-        block()
-    }
+): ReactElement = button(variant, active, disabled, nowrap, Button.Types.Button(type = type), sizes, block)

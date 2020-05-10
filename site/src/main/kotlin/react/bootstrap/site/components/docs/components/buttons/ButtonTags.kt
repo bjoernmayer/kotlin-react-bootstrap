@@ -5,8 +5,8 @@ import react.RBuilder
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.Button.Types.Input
 import react.bootstrap.components.button.Button.Types.Link
-import react.bootstrap.components.button.Button.Variants
 import react.bootstrap.components.button.button
+import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
@@ -29,23 +29,23 @@ classes on `a` or `input` elements (though some browsers may apply a slightly di
             """
         }
         liveExample {
-            button(variant = Variants.Solid.PRIMARY, type = Link(href = "#")) { +"Link" }
+            button(variant = Button.Variants.Solid.PRIMARY, type = Link(href = "#")) { +"Link" }
             +" "
-            button(variant = Variants.Solid.PRIMARY, type = ButtonType.submit) { +"Button" }
+            button(variant = Button.Variants.Solid.PRIMARY, type = ButtonType.submit) { +"Button" }
             +" "
-            button(variant = Variants.Solid.PRIMARY, type = Input(Input.Type.BUTTON, value = "Input")) { }
+            button(variant = Button.Variants.Solid.PRIMARY, type = Input(Input.Type.BUTTON, value = "Input")) { }
             +" "
-            button(variant = Variants.Solid.PRIMARY, type = Input(Input.Type.SUBMIT, value = "Submit")) { }
+            button(variant = Button.Variants.Solid.PRIMARY, type = Input(Input.Type.SUBMIT, value = "Submit")) { }
             +" "
-            button(variant = Variants.Solid.PRIMARY, type = Input(Input.Type.RESET, value = "Reset")) { }
+            button(variant = Button.Variants.Solid.PRIMARY, type = Input(Input.Type.RESET, value = "Reset")) { }
         }
         codeExample {
-            import("button.Button.${Button.Types::class.simpleName}.${Input::class.simpleName}")
-            import("button.Button.${Button.Types::class.simpleName}.${Link::class.simpleName}")
-            import("button.Button.${Variants::class.simpleName}")
+            import("button.Button")
+            import("button.${buildNestedName(Input::class, Button::class, Button.Types::class)}")
+            import("button.${buildNestedName(Link::class, Button::class, Button.Types::class)}")
             import("button.Button.button")
             ln { }
-            val prim = "${Variants.Solid.nestedName}.${Variants.Solid.Companion::PRIMARY.name}"
+            val prim = (Button.Variants.Solid.PRIMARY).kt
             val link = Link::class.simpleName!!
             val input = Input::class.simpleName!!
             ktIB(0, "button", "variant" to prim, "type" to "$link(href = \"#\")") { "+\"Link\"" }

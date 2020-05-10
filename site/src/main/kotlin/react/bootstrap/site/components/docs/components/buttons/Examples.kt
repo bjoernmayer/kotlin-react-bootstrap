@@ -1,8 +1,9 @@
 package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
-import react.bootstrap.components.button.Button.Variants
+import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.button
+import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
@@ -30,11 +31,16 @@ for more control.
             }
         }
         codeExample {
-            import("button.Button.${Variants::class.simpleName}")
-            import("button.button")
+            import("components.button.Button")
+            import("components.button.button")
             ln { }
             SolidVariant.all.forEach {
-                val variant = "${Variants.Solid.nestedName}.${it::class.simpleName}"
+                val variant = buildNestedName(
+                    it::class,
+                    Button::class,
+                    Button.Variants::class,
+                    Button.Variants.Solid::class
+                )
                 ktIB(0, "button", variant, "+\"${it::class.normalName}\"")
                 ln { +"+\" \"" }
             }
