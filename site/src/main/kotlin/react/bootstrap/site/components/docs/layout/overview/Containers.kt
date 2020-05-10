@@ -1,3 +1,5 @@
+@file:Suppress("DuplicatedCode")
+
 package react.bootstrap.site.components.docs.layout.overview
 
 import react.RBuilder
@@ -6,12 +8,15 @@ import react.bootstrap.content.typography.muted
 import react.bootstrap.layout.Container
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
+import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.formattedText
-import react.bootstrap.site.components.docs.layout.grid.containerFun
-import react.bootstrap.site.components.docs.layout.grid.ktBlock
-import react.bootstrap.site.components.docs.layout.grid.ktContainer
-import react.bootstrap.site.components.docs.ln
+import react.bootstrap.site.components.docs.layout.containerFun
+import react.bootstrap.site.components.docs.layout.importContainer
+import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.components.docs.layout.kt
+import react.bootstrap.site.components.docs.layout.ktContainer
 import react.dom.br
 import react.dom.code
 import react.dom.li
@@ -49,7 +54,7 @@ internal class Containers : SectionComponent() {
             }
             li {
                 code {
-                    +"container(viscosity = ${Container.Viscosities::class.simpleName}"
+                    +"$$containerFun(viscosity = ${Container.Viscosities::class.simpleName}"
                     +"{.${Container.Viscosities.SM.name}|.${Container.Viscosities.MD.name}"
                     +"|.${Container.Viscosities.LG.name}|.${Container.Viscosities.XL.name}|}) { }"
                 }; +", which is "
@@ -58,10 +63,10 @@ internal class Containers : SectionComponent() {
         }
         formattedText {
             """
-            The table below illustrates how each container’s <max-width|code> compares to the original <$containerFun
-            { }|code> and <$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }|code> accross each
-            breakpoint.
-        """.trimIndent()
+                The table below illustrates how each container’s <max-width|code> compares to the original
+                <$containerFun { }|code> and <$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }|code>
+                accross each breakpoint.
+            """.trimIndent()
         }
         p {
             +"See them in action and compare them in our Grid example." // Todo link to examples
@@ -126,49 +131,57 @@ internal class Containers : SectionComponent() {
         subSectionTitle("All-in-one", section)
         formattedText {
             """
-            Our default <$containerFun { }|code> is a responsive, fixed-width container, meaning its max-width changes
-             at each breakpoint.
-        """.trimIndent()
+                Our default <$containerFun { }|code> is a responsive, fixed-width container, meaning its max-width changes
+                 at each breakpoint.
+            """.trimIndent()
         }
-        codeBox {
-            ktContainer { il ->
-                ln(il) { +"// Content here" }
+        codeExample {
+            importContainerFun()
+            ln { }
+            ktContainer {
+                ln(it) { +"// Content here" }
             }
         }
         subSectionTitle("Fluid", section)
         formattedText {
             """
-            Use <$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }|code> for a full width container,
-            spanning the entire width of the viewport.
-        """.trimIndent()
+                Use <$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }|code> for a full width container,
+                spanning the entire width of the viewport.
+            """.trimIndent()
         }
-        codeBox {
-            ktBlock(0, "$containerFun(viscosity = ${Container.Viscosities.FLUID.kt})") { il ->
-                ln(il) { +"// Content here" }
+        codeExample {
+            importContainer()
+            importContainerFun()
+            ln { }
+            ktB(0, containerFun, "viscosity" to Container.Viscosities.FLUID.kt) {
+                ln(it) { +"// Content here" }
             }
         }
         subSectionTitle("Responsive", section)
         formattedText {
             """
-            Responsive containers are new in Bootstrap v4.4. They allow you to specify a class that is 100% wide until
-            the specified breakpoint is reached, after which we apply <max-width|code>s for each of the higher
-            breakpoints. For example, <$containerFun(viscosity = ${Container.Viscosities.SM.kt}) { }|code> is 100% wide
-            to start until the <sm|code> breakpoint is reached, where it will scale up with <md|code>, <lg|code>, and
-            <xl|code>.
-        """.trimIndent()
+                Responsive containers are new in Bootstrap v4.4. They allow you to specify a class that is 100% wide
+                until the specified breakpoint is reached, after which we apply <max-width|code>s for each of the higher
+                breakpoints. For example, <$containerFun(viscosity = ${Container.Viscosities.SM.kt}) { }|code> is 100%
+                wide to start until the <sm|code> breakpoint is reached, where it will scale up with <md|code>,
+                <lg|code>, and <xl|code>.
+            """.trimIndent()
         }
-        codeBox {
-            ktBlock(0, "$containerFun(viscosity = ${Container.Viscosities.SM.kt})") { il ->
-                ln(il) { +"+\"100% wide until small breakpoint\"" }
+        codeExample {
+            importContainer()
+            importContainerFun()
+            ln { }
+            ktB(0, containerFun, "viscosity" to Container.Viscosities.SM.kt) {
+                ln(it) { +"+\"100% wide until small breakpoint\"" }
             }
-            ktBlock(0, "$containerFun(viscosity = ${Container.Viscosities.MD.kt})") { il ->
-                ln(il) { +"+\"100% wide until medium breakpoint\"" }
+            ktB(0, containerFun, "viscosity" to Container.Viscosities.MD.kt) {
+                ln(it) { +"+\"100% wide until medium breakpoint\"" }
             }
-            ktBlock(0, "$containerFun(viscosity = ${Container.Viscosities.LG.kt})") { il ->
-                ln(il) { +"+\"100% wide until large breakpoint\"" }
+            ktB(0, containerFun, "viscosity" to Container.Viscosities.LG.kt) {
+                ln(it) { +"+\"100% wide until large breakpoint\"" }
             }
-            ktBlock(0, "$containerFun(viscosity = ${Container.Viscosities.XL.kt})") { il ->
-                ln(il) { +"+\"100% wide until extra large breakpoint\"" }
+            ktB(0, containerFun, "viscosity" to Container.Viscosities.XL.kt) {
+                ln(it) { +"+\"100% wide until extra large breakpoint\"" }
             }
         }
     }

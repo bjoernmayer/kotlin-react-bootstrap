@@ -1,21 +1,23 @@
-@file:Suppress("NAME_SHADOWING")
+@file:Suppress("NAME_SHADOWING", "NestedLambdaShadowedImplicitParameter")
 
 package react.bootstrap.site.components.docs.content
 
 import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
-import react.bootstrap.lib.ariaLabel
 import react.bootstrap.content.figures.figcaption
 import react.bootstrap.content.figures.figure
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.ariaLabel
 import react.bootstrap.site.components.docs.fixings.PageComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
-import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.components.docs.fixings.import
+import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.layout.grid.ktBlock
-import react.bootstrap.site.components.docs.ln
 import react.dom.svg
 
 internal class Figures : PageComponent() {
@@ -26,18 +28,18 @@ internal class Figures : PageComponent() {
         }
         formattedText {
             """
-            Anytime you need to display a piece of content—like an image with an optional caption, consider using a
-            <figure { }|code>.
-        """.trimIndent()
+                Anytime you need to display a piece of content—like an image with an optional caption, consider using a
+                <figure { }|code>.
+            """.trimIndent()
         }
         formattedText {
             """
-            Use the included <figure|code> , <img|code> and <figcaption|code> functions to provide some baseline styles
-            for the HTML5 elements. Images in figures have no explicit size, so be sure to add the <img(fluid)|code> to
-            <true|code> to make it responsive.
-        """.trimIndent()
+                Use the included <figure|code> , <img|code> and <figcaption|code> functions to provide some baseline
+                styles for the HTML5 elements. Images in figures have no explicit size, so be sure to add the
+                <img(fluid)|code> to <true|code> to make it responsive.
+            """.trimIndent()
         }
-        example {
+        liveExample {
             figure {
                 svg(classes = "bd-placeholder-img ${ClassNames.IMG_FLUID} ${ClassNames.FIGURE_IMG}") {
                     attrs {
@@ -60,17 +62,22 @@ internal class Figures : PageComponent() {
                 }
             }
         }
-        codeBox {
-            ln { +"import react.bootstrap.content.figures.figure" }
-            ln { +"import react.bootstrap.content.figures.figcaption" }
-            ln { +"import react.bootstrap.content.figures.img" }
+        codeExample {
+            import("content.figures.figure")
+            import("content.figures.figcaption")
+            import("content.figures.img")
             ln { }
-            ktBlock(0, "figure") { il ->
-                ln(il) {
-                    +"img(fluid = true, classes = \"\${${ClassNames.ROUNDED.kt}}\", src = \"...\", alt = \"...\") { }"
-                }
-                ktBlock(il, "figcaption") { il ->
-                    ln(il) { +"+\"A caption for the above image.\"" }
+            ktB(0, "figure") {
+                ktIB(
+                    it,
+                    "img",
+                    "fluid" to "true",
+                    "classes" to "\"\${${ClassNames.ROUNDED.kt}}\"",
+                    "src" to "...",
+                    "alt" to "..."
+                ) { "" }
+                ktB(it, "figcaption") {
+                    ln(it) { +"+\"A caption for the above image.\"" }
                 }
             }
         }

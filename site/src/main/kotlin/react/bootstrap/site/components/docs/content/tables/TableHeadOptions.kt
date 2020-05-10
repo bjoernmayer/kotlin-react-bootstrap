@@ -1,4 +1,4 @@
-@file:Suppress("DuplicatedCode", "NAME_SHADOWING")
+@file:Suppress("DuplicatedCode", "NAME_SHADOWING", "NestedLambdaShadowedImplicitParameter")
 
 package react.bootstrap.site.components.docs.content.tables
 
@@ -8,12 +8,14 @@ import react.bootstrap.content.tables.THeadStyles
 import react.bootstrap.content.tables.table
 import react.bootstrap.content.tables.thead
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
-import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.components.docs.fixings.import
+import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.layout.grid.ktBlock
-import react.bootstrap.site.components.docs.ln
 import react.dom.tbody
 import react.dom.td
 import react.dom.th
@@ -26,11 +28,11 @@ internal class TableHeadOptions : SectionComponent() {
         sectionTitle(section)
         formattedText {
             """
-            Similar to tables and dark tables, use the <thead(style)|code>-argument to make table headers appear light
-            or dark gray.
-        """.trimIndent()
+                Similar to tables and dark tables, use the <thead(style)|code>-argument to make table headers appear
+                light or dark gray.
+            """.trimIndent()
         }
-        example {
+        liveExample {
             table {
                 thead(THeadStyles.DARK) {
                     tr {
@@ -93,69 +95,69 @@ internal class TableHeadOptions : SectionComponent() {
                 }
             }
         }
-        codeBox {
-            ln { +"import react.bootstrap.content.tables.${THeadStyles::class.simpleName}" }
-            ln { +"import react.bootstrap.content.tables.table" }
-            ln { +"import react.bootstrap.content.tables.thead" }
+        codeExample {
+            import("content.tables.${THeadStyles::class.simpleName}")
+            import("content.tables.table")
+            import("content.tables.thead")
             ln { }
-            ktBlock(opener = "table") { il ->
-                ktBlock(il, "thead(${THeadStyles.DARK.kt})") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.col) { +\"#\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"First\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Last\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Handle\" }" }
+            ktB(opener = "table") {
+                ktB(it, "thead", THeadStyles.DARK.kt) {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.col", "+\"#\"")
+                        ktIB(it, "th", "ThScope.col", "+\"First\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Last\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Handle\"")
                     }
                 }
-                ktBlock(il, "tbody") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"1\" }" }
-                        ln(il) { +"td { +\"Mark\" }" }
-                        ln(il) { +"td { +\"Otto\" }" }
-                        ln(il) { +"td { +\"@mdo\" }" }
+                ktB(it, "tbody") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"1\"")
+                        ktIB(it, "td", "+\"Mark\"")
+                        ktIB(it, "td", "+\"Otto\"")
+                        ktIB(it, "td", "+\"@mdo\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"2\" }" }
-                        ln(il) { +"td { +\"Jacob\" }" }
-                        ln(il) { +"td { +\"Thornton\" }" }
-                        ln(il) { +"td { +\"@fat\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"2\"")
+                        ktIB(it, "td", "+\"Jacob\"")
+                        ktIB(it, "td", "+\"Thornton\"")
+                        ktIB(it, "td", "+\"@fat\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"3\" }" }
-                        ln(il) { +"td { +\"Larry\" }" }
-                        ln(il) { +"td { +\"the Bird\" }" }
-                        ln(il) { +"td { +\"@twitter\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"3\"")
+                        ktIB(it, "td", "+\"Larry\"")
+                        ktIB(it, "td", "+\"the Bird\"")
+                        ktIB(it, "td", "+\"@twitter\"")
                     }
                 }
             }
             ln { }
-            ktBlock(opener = "table") { il ->
-                ktBlock(il, "thead(${THeadStyles.LIGHT.kt})") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.col) { +\"#\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"First\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Last\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Handle\" }" }
+            ktB(opener = "table") {
+                ktB(it, "thead", THeadStyles.LIGHT.kt) {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.col", "+\"#\"")
+                        ktIB(it, "th", "ThScope.col", "+\"First\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Last\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Handle\"")
                     }
                 }
-                ktBlock(il, "tbody") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"1\" }" }
-                        ln(il) { +"td { +\"Mark\" }" }
-                        ln(il) { +"td { +\"Otto\" }" }
-                        ln(il) { +"td { +\"@mdo\" }" }
+                ktB(it, "tbody") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"1\"")
+                        ktIB(it, "td", "+\"Mark\"")
+                        ktIB(it, "td", "+\"Otto\"")
+                        ktIB(it, "td", "+\"@mdo\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"2\" }" }
-                        ln(il) { +"td { +\"Jacob\" }" }
-                        ln(il) { +"td { +\"Thornton\" }" }
-                        ln(il) { +"td { +\"@fat\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"2\"")
+                        ktIB(it, "td", "+\"Jacob\"")
+                        ktIB(it, "td", "+\"Thornton\"")
+                        ktIB(it, "td", "+\"@fat\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"3\" }" }
-                        ln(il) { +"td { +\"Larry\" }" }
-                        ln(il) { +"td { +\"the Bird\" }" }
-                        ln(il) { +"td { +\"@twitter\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"3\"")
+                        ktIB(it, "td", "+\"Larry\"")
+                        ktIB(it, "td", "+\"the Bird\"")
+                        ktIB(it, "td", "+\"@twitter\"")
                     }
                 }
             }

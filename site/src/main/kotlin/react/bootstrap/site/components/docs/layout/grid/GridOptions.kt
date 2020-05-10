@@ -7,7 +7,7 @@ import react.bootstrap.content.tables.table
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.formattedText
-import react.bootstrap.site.components.docs.ln
+import react.dom.br
 import react.dom.code
 import react.dom.p
 import react.dom.small
@@ -24,10 +24,10 @@ internal class GridOptions : SectionComponent() {
         sectionTitle(section)
         formattedText {
             """
-            While Bootstrap uses <em|code>s or <rem|code>s for defining most sizes, <px|code>s are used for grid
-            breakpoints and container widths. This is because the viewport width is in pixels and does not change with
-            the font size.
-        """.trimIndent()
+                While Bootstrap uses <em|code>s or <rem|code>s for defining most sizes, <px|code>s are used for grid
+                breakpoints and container widths. This is because the viewport width is in pixels and does not change
+                with the font size.
+            """.trimIndent()
         }
         p {
             +"See how aspects of the Bootstrap grid system work across multiple devices with a handy table."
@@ -37,23 +37,23 @@ internal class GridOptions : SectionComponent() {
                 tr {
                     th { }
                     th(classes = "${ClassNames.TEXT_CENTER}") {
-                        ln { +"Extra small" }
+                        +"Extra small"; br { }
                         small { +"<576px" }
                     }
                     th(classes = "${ClassNames.TEXT_CENTER}") {
-                        ln { +"Small" }
+                        +"Small"; br { }
                         small { +"≥576px" }
                     }
                     th(classes = "${ClassNames.TEXT_CENTER}") {
-                        ln { +"Medium" }
+                        +"Medium"; br { }
                         small { +"≥768px" }
                     }
                     th(classes = "${ClassNames.TEXT_CENTER}") {
-                        ln { +"Large" }
+                        +"Large"; br { }
                         small { +"≥992px" }
                     }
                     th(classes = "${ClassNames.TEXT_CENTER}") {
-                        ln { +"Extra Large" }
+                        +"Extra Large"; br { }
                         small { +"≥1200px" }
                     }
                 }

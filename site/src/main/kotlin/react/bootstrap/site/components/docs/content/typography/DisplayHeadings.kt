@@ -5,11 +5,12 @@ import react.bootstrap.content.tables.table
 import react.bootstrap.content.typography.Display
 import react.bootstrap.content.typography.display
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
-import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.components.docs.fixings.import
+import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.formattedText
-import react.bootstrap.site.components.docs.layout.grid.ktBlock
-import react.bootstrap.site.components.docs.ln
 import react.dom.span
 import react.dom.tbody
 import react.dom.td
@@ -22,12 +23,12 @@ internal class DisplayHeadings : SectionComponent() {
         sectionTitle(section)
         formattedText {
             """
-            Traditional heading elements are designed to work best in the meat of your page content. When you need a
-            heading to stand out, consider using a <display heading|strong> - a larger, slightly more opinionated
-            heading style.
-        """.trimIndent()
+                Traditional heading elements are designed to work best in the meat of your page content. When you need a
+                heading to stand out, consider using a <display heading|strong> - a larger, slightly more opinionated
+                heading style.
+            """.trimIndent()
         }
-        example {
+        liveExample {
             table {
                 tbody {
                     tr {
@@ -63,22 +64,22 @@ internal class DisplayHeadings : SectionComponent() {
                 }
             }
         }
-        codeBox {
-            ln { +"import react.bootstrap.content.typography.${Display::class.simpleName}" }
-            ln { +"import react.bootstrap.content.typography.${RBuilder::display.name}" }
+        codeExample {
+            import("content.typography.${Display::class.simpleName}")
+            import("content.typography.${RBuilder::display.name}")
             for (x in 1..3) {
-                ln { +"import react.bootstrap.content.typography.${RBuilder::display.name}$x" }
+                import("content.typography.${RBuilder::display.name}$x")
             }
             ln { }
 
             for (x in 1..3) {
-                ktBlock(0, "${RBuilder::display.name}$x") { il ->
-                    ln(il) { +"+\"Display $x\"" }
+                ktB(0, "${RBuilder::display.name}$x") {
+                    ln(it) { +"+\"Display $x\"" }
                 }
             }
             ln { +"// Or you use a more generic way" }
-            ktBlock(0, "${RBuilder::display.name}(${Display.Variants.DISPLAY_4.kt}, { span { } })") { il ->
-                ln(il) { +"+\"Display 4\"" }
+            ktB(0, RBuilder::display.name, "variant" to Display.Variants.DISPLAY_4.kt, "renderAs" to "{ span { } }") {
+                ln(it) { +"+\"Display 4\"" }
             }
         }
     }

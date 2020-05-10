@@ -2,7 +2,6 @@ package react.bootstrap.site.components.docs
 
 import react.RBuilder
 import react.ReactElement
-import react.bootstrap.lib.ClassNames
 import react.buildElements
 import react.cloneElement
 import react.dom.code
@@ -17,18 +16,6 @@ internal fun pageTitle(pagetitle: String) {
 
 internal val Enum<*>.kt: String
     get() = "${this::class.simpleName}.$name"
-
-internal fun RBuilder.classNamesImport() {
-    ln { +"import react.bootstrap.lib.${ClassNames::class.simpleName}" }
-}
-
-internal fun RBuilder.ln(indentationLevel: Int = 0, block: RBuilder.() -> Unit) {
-    for (x in 1..indentationLevel) {
-        +"    "
-    }
-    block()
-    +"\n"
-}
 
 internal fun RBuilder.formattedText(opener: Char = '<', closer: Char = '>', block: () -> String) {
     val text = block()

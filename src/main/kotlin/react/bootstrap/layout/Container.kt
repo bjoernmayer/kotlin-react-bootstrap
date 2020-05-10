@@ -38,8 +38,6 @@ class Container : RComponent<Container.Props, RState>() {
         MD(ClassNames.CONTAINER_MD),
         LG(ClassNames.CONTAINER_LG),
         XL(ClassNames.CONTAINER_XL);
-
-        val kt = "${Container::class.simpleName}.${Viscosities::class.simpleName}.$name"
     }
 
     interface Props : RProps {

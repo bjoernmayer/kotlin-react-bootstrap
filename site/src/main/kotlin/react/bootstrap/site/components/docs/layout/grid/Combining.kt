@@ -1,4 +1,4 @@
-@file:Suppress("NAME_SHADOWING")
+@file:Suppress("NAME_SHADOWING", "DuplicatedCode", "NestedLambdaShadowedImplicitParameter")
 
 package react.bootstrap.site.components.docs.layout.grid
 
@@ -23,13 +23,16 @@ import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
+import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
-import react.bootstrap.site.components.docs.fixings.example
-import react.bootstrap.site.components.docs.fixings.flexColsExampleRow
+import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.ln
+import react.bootstrap.site.components.docs.layout.gridImport
+import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.components.docs.layout.ktContainer
 import react.dom.h4
 import react.dom.p
 import kotlin.reflect.KFunction2
@@ -58,16 +61,16 @@ internal class Combining : SectionComponent() {
         sectionTitle(section)
         p {
             +"""
-            As you can see in the examples above, all col attributes are set using the same arguments. Custom pairing
-            functions are used to combine the values.
-        """.trimIndent()
+                As you can see in the examples above, all col attributes are set using the same arguments. Custom
+                pairing functions are used to combine the values.
+            """.trimIndent()
         }
         subSectionTitle("Combine with $sizes", section)
         formattedText {
             "Combine other attributes with <$sizes|code> by using <$sz|code>."
         }
         flexColsExampleRow {
-            example {
+            liveExample {
                 container {
                     row {
                         col(all = Offsets.OFF_1 sz Sizes.SZ_4) { +"all = $off1 $sz $sz4" }
@@ -83,26 +86,26 @@ internal class Combining : SectionComponent() {
                     }
                 }
             }
-            codeBox {
-                containerFunImport()
-                gridEnumImport(Offsets::class)
-                gridEnumImport(Orderings::class)
-                gridEnumImport(Sizes::class)
-                colFunImport()
-                rowFunImport()
+            codeExample {
+                importContainerFun()
+                importGridEnum(Offsets::class)
+                importGridEnum(Orderings::class)
+                importGridEnum(Sizes::class)
+                importColFun()
+                importRowFun()
                 ln { }
-                ktContainer { il ->
-                    ktRow(il) { il ->
-                        ln(il) { +"$colFun(all = $off1 $sz $sz4) { +\"all = $off1 $sz $sz4\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                ktContainer {
+                    ktRow(it) {
+                        ktIB(it, colFun, "all" to "$off1 $sz $sz4")
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
-                    ktRow(il) { il ->
-                        ln(il) { +"$colFun(all = $ord3 $sz $sz4) { +\"all = $ord3 $sz $sz4\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    ktRow(it) {
+                        ktIB(it, colFun, "all" to "$ord3 $sz $sz4")
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
-                    ktRow(il) { il ->
-                        ln(il) { +"$colFun(all = $end $sz $sz4) { +\"all = $end $sz $sz4\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    ktRow(it) {
+                        ktIB(it, colFun, "all" to "$end $sz $sz4")
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
             }
@@ -113,7 +116,7 @@ internal class Combining : SectionComponent() {
             "Combine other attributes with <$offsets|code> by using <$off|code>."
         }
         flexColsExampleRow {
-            example {
+            liveExample {
                 container {
                     row {
                         col(all = Sizes.SZ_4 off Offsets.OFF_1) { +"all = $sz4 $off $off1" }
@@ -129,26 +132,26 @@ internal class Combining : SectionComponent() {
                     }
                 }
             }
-            codeBox {
-                containerFunImport()
-                gridEnumImport(Offsets::class)
-                gridEnumImport(Orderings::class)
-                gridEnumImport(Sizes::class)
-                colFunImport()
-                rowFunImport()
+            codeExample {
+                importContainerFun()
+                importGridEnum(Offsets::class)
+                importGridEnum(Orderings::class)
+                importGridEnum(Sizes::class)
+                importColFun()
+                importRowFun()
                 ln { }
-                ktContainer { il ->
-                    ktRow(il) { il ->
-                        ln(il) { +"$colFun(all = $sz4 $off $off1) { +\"all = $sz4 $off $off1\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                ktContainer {
+                    ktRow(it) {
+                        ktIB(it, colFun, "all" to "$sz4 $off $off1")
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
-                    ktRow(il) { il ->
-                        ln(il) { +"$colFun(all = $ord3 $off $off1) { +\"all = $ord3 $off $off1\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    ktRow(it) {
+                        ktIB(it, colFun, "all" to "$ord3 $off $off1")
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
-                    ktRow(il) { il ->
-                        ln(il) { +"$colFun(all = $end $off $off1) { +\"all = $end $off $off1\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    ktRow(it) {
+                        ktIB(it, colFun, "all" to "$end $off $off1")
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
             }
@@ -159,7 +162,7 @@ internal class Combining : SectionComponent() {
             "Combine other attributes with <$orderings|code> by using <$ord|code>."
         }
         flexColsExampleRow {
-            example {
+            liveExample {
                 container {
                     row {
                         col(all = Sizes.SZ_4 ord Orderings.ORD_3) { +"all = $sz4 $ord $ord3" }
@@ -175,26 +178,26 @@ internal class Combining : SectionComponent() {
                     }
                 }
             }
-            codeBox {
-                containerFunImport()
-                gridEnumImport(Offsets::class)
-                gridEnumImport(Orderings::class)
-                gridEnumImport(Sizes::class)
-                colFunImport()
-                rowFunImport()
+            codeExample {
+                importContainerFun()
+                importGridEnum(Offsets::class)
+                importGridEnum(Orderings::class)
+                importGridEnum(Sizes::class)
+                importColFun()
+                importRowFun()
                 ln { }
-                ktContainer { il ->
-                    ktRow(il) { il ->
-                        ln(il) { +"$colFun(all = $sz4 $ord $ord3) { +\"all = $sz4 $ord $ord3\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                ktContainer {
+                    ktRow(it) {
+                        ktIB(it, colFun, "all" to "$sz4 $ord $ord3")
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
-                    ktRow(il) { il ->
-                        ln(il) { +"$colFun(all = $off1 $ord $ord3) { +\"all = $off1 $ord $ord3\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    ktRow(it) {
+                        ktIB(it, colFun, "all" to "$off1 $ord $ord3")
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
-                    ktRow(il) { il ->
-                        ln(il) { +"$colFun(all = $end $ord $ord3) { +\"all = $end $ord $ord3\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    ktRow(it) {
+                        ktIB(it, colFun, "all" to "$end $ord $ord3")
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
             }
@@ -205,7 +208,7 @@ internal class Combining : SectionComponent() {
             "Combine other attributes with <$alignments|code> by using <$align|code>."
         }
         flexColsExampleRow {
-            example {
+            liveExample {
                 container {
                     row {
                         col(all = Sizes.SZ_4 align Alignments.END) { +"all = $sz4 $align $end" }
@@ -221,26 +224,26 @@ internal class Combining : SectionComponent() {
                     }
                 }
             }
-            codeBox {
-                containerFunImport()
-                gridEnumImport(Offsets::class)
-                gridEnumImport(Orderings::class)
-                gridEnumImport(Sizes::class)
-                colFunImport()
-                rowFunImport()
+            codeExample {
+                importContainerFun()
+                importGridEnum(Offsets::class)
+                importGridEnum(Orderings::class)
+                importGridEnum(Sizes::class)
+                importColFun()
+                importRowFun()
                 ln { }
-                ktContainer { il ->
-                    ktRow(il) { il ->
-                        ln(il) { +"$colFun(all = $sz4 $align $end) { +\"all = $sz4 $align $end\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                ktContainer {
+                    ktRow(it) {
+                        ktIB(it, colFun, "all" to "$sz4 $align $end")
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
-                    ktRow(il) { il ->
-                        ln(il) { +"$colFun(all = $off1 $align $end) { +\"all = $off1 $align $end\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    ktRow(it) {
+                        ktIB(it, colFun, "all" to "$off1 $align $end")
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
-                    ktRow(il) { il ->
-                        ln(il) { +"$colFun(all = $ord3 $align $end) { +\"all = $ord3 $align $end\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    ktRow(it) {
+                        ktIB(it, colFun, "all" to "$ord3 $align $end")
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
             }
@@ -388,7 +391,7 @@ private fun RBuilder.allPossibleCombinations() {
     allPairings.toSet().forEach { pairing ->
         contentTitle(RBuilder::h4, "${pairing.thisClassName} + ${pairing.withClassName}")
         flexColsExampleRow {
-            example {
+            liveExample {
                 container {
                     row {
                         col(all = pairing.getPair()) { +"all = ${pairing.argString}" }
@@ -397,17 +400,17 @@ private fun RBuilder.allPossibleCombinations() {
                 }
             }
             val imports = listOf(pairing.thisClassName, pairing.withClassName).sortedBy { it }
-            codeBox {
-                containerFunImport()
+            codeExample {
+                importContainerFun()
                 imports.forEach {
                     gridImport(it!!)
                 }
-                colFunImport()
-                rowFunImport()
+                importColFun()
+                importRowFun()
                 ln { }
-                ktConRow { il ->
-                    ln(il) { +"$colFun(all = ${pairing.argString}) { +\"all = ${pairing.argString}\" }" }
-                    ln(il) { +"$colFun { +\"Reference\" }" }
+                ktConRow {
+                    ktIB(it, colFun, "all" to pairing.argString)
+                    ktIB(it, colFun, "+\"Reference\"")
                 }
             }
         }
@@ -427,7 +430,7 @@ private fun RBuilder.allPossibleCombinations() {
 
             contentTitle(RBuilder::h4, combination) { }
             flexColsExampleRow {
-                example {
+                liveExample {
                     container {
                         row {
                             col(all = tripling.getTriple()) { +"all = $argString" }
@@ -435,17 +438,17 @@ private fun RBuilder.allPossibleCombinations() {
                         }
                     }
                 }
-                codeBox {
-                    containerFunImport()
+                codeExample {
+                    importContainerFun()
                     enumNames.sortedBy { it }.forEach {
                         gridImport(it!!)
                     }
-                    colFunImport()
-                    rowFunImport()
+                    importColFun()
+                    importRowFun()
                     ln { }
-                    ktConRow { il ->
-                        ln(il) { +"$colFun(all = $argString) { +\"all = $argString\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    ktConRow {
+                        ktIB(it, colFun, "all" to argString)
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
             }
@@ -470,7 +473,7 @@ private fun RBuilder.allPossibleCombinations() {
 
                 contentTitle(RBuilder::h4, combination)
                 flexColsExampleRow {
-                    example {
+                    liveExample {
                         container {
                             row {
                                 col(all = quadruple.getQuadruple()) { +"all = $argString" }
@@ -479,18 +482,18 @@ private fun RBuilder.allPossibleCombinations() {
                         }
                     }
                 }
-                codeBox {
-                    containerFunImport()
-                    gridEnumImport(Alignments::class)
-                    gridEnumImport(Offsets::class)
-                    gridEnumImport(Orderings::class)
-                    gridEnumImport(Sizes::class)
-                    colFunImport()
-                    rowFunImport()
+                codeExample {
+                    importContainerFun()
+                    importGridEnum(Alignments::class)
+                    importGridEnum(Offsets::class)
+                    importGridEnum(Orderings::class)
+                    importGridEnum(Sizes::class)
+                    importColFun()
+                    importRowFun()
                     ln { }
-                    ktConRow { il ->
-                        ln(il) { +"$colFun(all = $argString) { +\"all = $argString\" }" }
-                        ln(il) { +"$colFun { +\"Reference\" }" }
+                    ktConRow {
+                        ktIB(it, colFun, "all" to argString)
+                        ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
             }

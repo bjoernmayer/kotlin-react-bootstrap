@@ -6,11 +6,13 @@ import react.bootstrap.content.tables.ContextualStyle
 import react.bootstrap.content.tables.table
 import react.bootstrap.content.tables.tr
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
-import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.components.docs.fixings.import
+import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.layout.grid.ktBlock
-import react.bootstrap.site.components.docs.ln
 import react.dom.p
 import react.dom.tbody
 import react.dom.td
@@ -25,7 +27,7 @@ internal class ContextualStyles : SectionComponent() {
         p {
             +"Use contextual styles to color table rows or individual cells."
         }
-        example {
+        liveExample {
             table {
                 thead {
                     tr {
@@ -88,36 +90,36 @@ internal class ContextualStyles : SectionComponent() {
                 }
             }
         }
-        codeBox {
-            ln { +"import react.bootstrap.content.tables.${ContextualStyle::class.simpleName}" }
-            ln { +"import react.bootstrap.content.tables.table" }
-            ln { +"import react.bootstrap.content.tables.td" }
-            ln { +"import react.bootstrap.content.tables.tr" }
+        codeExample {
+            import("content.tables.${ContextualStyle::class.simpleName}")
+            import("content.tables.table")
+            import("content.tables.td")
+            import("content.tables.tr")
             ln { }
             ln { +"// On rows" }
-            ln { +"tr(${ContextualStyle.ACTIVE.kt}) { ... }" }
+            ktIB(0, "tr", ContextualStyle.ACTIVE.kt, "...")
             ln { }
-            ln { +"tr(${ContextualStyle.PRIMARY.kt}) { ... }" }
-            ln { +"tr(${ContextualStyle.SECONDARY.kt}) { ... }" }
-            ln { +"tr(${ContextualStyle.SUCCESS.kt}) { ... }" }
-            ln { +"tr(${ContextualStyle.DANGER.kt}) { ... }" }
-            ln { +"tr(${ContextualStyle.WARNING.kt}) { ... }" }
-            ln { +"tr(${ContextualStyle.INFO.kt}) { ... }" }
-            ln { +"tr(${ContextualStyle.LIGHT.kt}) { ... }" }
-            ln { +"tr(${ContextualStyle.DARK.kt}) { ... }" }
+            ktIB(0, "tr", ContextualStyle.PRIMARY.kt, "...")
+            ktIB(0, "tr", ContextualStyle.SECONDARY.kt, "...")
+            ktIB(0, "tr", ContextualStyle.SUCCESS.kt, "...")
+            ktIB(0, "tr", ContextualStyle.DANGER.kt, "...")
+            ktIB(0, "tr", ContextualStyle.WARNING.kt, "...")
+            ktIB(0, "tr", ContextualStyle.INFO.kt, "...")
+            ktIB(0, "tr", ContextualStyle.LIGHT.kt, "...")
+            ktIB(0, "tr", ContextualStyle.DARK.kt, "...")
             ln { }
             ln { +"// On cells (`td` or `th`)" }
-            ktBlock(0, "tr") { il ->
-                ln(il) { +"td(${ContextualStyle.ACTIVE.kt}) { ... }" }
+            ktB(0, "tr") {
+                ktIB(it, "td", ContextualStyle.ACTIVE.kt, "...")
                 ln { }
-                ln(il) { +"td(${ContextualStyle.PRIMARY.kt}) { ... }" }
-                ln(il) { +"td(${ContextualStyle.SECONDARY.kt}) { ... }" }
-                ln(il) { +"td(${ContextualStyle.SUCCESS.kt}) { ... }" }
-                ln(il) { +"td(${ContextualStyle.DANGER.kt}) { ... }" }
-                ln(il) { +"td(${ContextualStyle.WARNING.kt}) { ... }" }
-                ln(il) { +"td(${ContextualStyle.INFO.kt}) { ... }" }
-                ln(il) { +"td(${ContextualStyle.LIGHT.kt}) { ... }" }
-                ln(il) { +"td(${ContextualStyle.DARK.kt}) { ... }" }
+                ktIB(it, "td", ContextualStyle.PRIMARY.kt, "...")
+                ktIB(it, "td", ContextualStyle.SECONDARY.kt, "...")
+                ktIB(it, "td", ContextualStyle.SUCCESS.kt, "...")
+                ktIB(it, "td", ContextualStyle.DANGER.kt, "...")
+                ktIB(it, "td", ContextualStyle.WARNING.kt, "...")
+                ktIB(it, "td", ContextualStyle.INFO.kt, "...")
+                ktIB(it, "td", ContextualStyle.LIGHT.kt, "...")
+                ktIB(it, "td", ContextualStyle.DARK.kt, "...")
             }
         }
         p {
