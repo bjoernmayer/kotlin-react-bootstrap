@@ -3,13 +3,15 @@ package react.bootstrap.site.components.docs.content.images
 import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
-import react.bootstrap.lib.ariaLabel
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.ariaLabel
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
-import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.components.docs.fixings.import
+import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.formattedText
-import react.bootstrap.site.components.docs.ln
 import react.dom.svg
 
 internal class ResponsiveImages : SectionComponent() {
@@ -20,7 +22,7 @@ internal class ResponsiveImages : SectionComponent() {
         formattedText {
             "Images in Bootstrap are made responsive with <img(fluid = true)|code>."
         }
-        example("bd-example-images") {
+        liveExample("bd-example-images") {
             svg(classes = "bd-placeholder-img bd-placeholder-img-lg ${ClassNames.IMG_FLUID}") {
                 attrs {
                     set("width", "100%")
@@ -38,10 +40,10 @@ internal class ResponsiveImages : SectionComponent() {
                 }
             }
         }
-        codeBox {
-            ln { +"import react.bootstrap.content.img" }
+        codeExample {
+            import("content.img")
             ln { }
-            ln { +"img(fluid = true, alt =\"Responsive image\", src = ...) { }" }
+            ktIB(0, "img", "fluid" to "true", "alt" to "Responsive image", "src" to "...") { "" }
         }
     }
 }

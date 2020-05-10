@@ -5,16 +5,16 @@ import react.RBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
-import react.dom.RDOMBuilder
+import react.bootstrap.lib.RDOMHandler
 
 fun <T : HTMLTag> RBuilder.small(
-    tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
+    tagFun: RBuilder.(classes: String?, block: RDOMHandler<T>) -> ReactElement,
     classes: String? = null,
-    block: RDOMBuilder<T>.() -> Unit
+    block: RDOMHandler<T>
 ): ReactElement = tagFun(classes.appendClass(ClassNames.SMALL), block)
 
 fun <T : HTMLTag> RBuilder.mark(
-    tagFun: RBuilder.(classes: String?, block: RDOMBuilder<T>.() -> Unit) -> ReactElement,
+    tagFun: RBuilder.(classes: String?, block: RDOMHandler<T>) -> ReactElement,
     classes: String? = null,
-    block: RDOMBuilder<T>.() -> Unit
+    block: RDOMHandler<T>
 ): ReactElement = tagFun(classes.appendClass(ClassNames.MARK), block)

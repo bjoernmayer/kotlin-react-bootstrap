@@ -1,13 +1,31 @@
 package react.bootstrap.site.components.docs.components.alerts
 
+import kotlinx.html.H1
+import kotlinx.html.H2
+import kotlinx.html.H3
+import kotlinx.html.H4
+import kotlinx.html.H5
+import kotlinx.html.H6
 import react.RBuilder
+import react.RElementBuilder
 import react.bootstrap.components.alert.Alert
 import react.bootstrap.components.alert.alert
+import react.bootstrap.components.alert.closingElement
+import react.bootstrap.components.alert.dismissibleAlert
+import react.bootstrap.components.alert.h1
+import react.bootstrap.components.alert.h2
+import react.bootstrap.components.alert.h3
+import react.bootstrap.components.alert.h4
+import react.bootstrap.components.alert.h5
+import react.bootstrap.components.alert.h6
+import react.bootstrap.components.alert.heading
+import react.bootstrap.components.alert.link
 import react.bootstrap.content.typography.Headings
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.WithOnClick
+import react.bootstrap.site.components.docs.FunReference
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
+import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.dom.p
@@ -20,35 +38,49 @@ internal class Reference : SectionComponent() {
         p {
             +"Adds an alert component."
         }
-        codeBox {
-            +"""
-                fun RBuilder.$alertName(
-                    variant: ${Alert.Variants::class.nestedName},
-                    classes: String? = null,
-                    block: RHandler<$alertPropsName>
-                ): ReactElement
-            """.trimIndent()
+        codeExample {
+            +FunReference(
+                RBuilder::alert,
+                setOf(RBuilder::class.simpleName!!),
+                setOf(
+                    FunReference.Argument("variant", Alert.Variants::class),
+                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("block", "RHandler<${Alert.Props::class.simpleName}>")
+                ),
+                "ReactElement"
+            ).print(false)
         }
         subSectionTitle(dismissibleAlertName, section)
         p {
             +"Adds an dismissible alert component."
         }
-        codeBox {
-            +"""
-                fun RBuilder.$dismissibleAlertName(
-                    variant: ${Alert.Variants::class.nestedName},
-                    fade: Boolean? = null,
-                    classes: String? = null,
-                    block: RHandler<${Alert.DismissibleProps::class.nestedName}>
-                ): ReactElement
-            """.trimIndent()
+
+        codeExample {
+            +FunReference(
+                RBuilder::dismissibleAlert,
+                setOf(RBuilder::class.simpleName!!),
+                setOf(
+                    FunReference.Argument("variant", Alert.Variants::class),
+                    FunReference.Argument("fade", Boolean::class, true, "null"),
+                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("block", "RHandler<${Alert.DismissibleProps::class.simpleName}>")
+                ),
+                "ReactElement"
+            ).print(false)
         }
         subSectionTitle(linkName, section)
         formattedText {
             "Adds <${ClassNames.ALERT_LINK.kt}|code> to the outer most <ReactElement|code> resulting from <block|code>."
         }
-        codeBox {
-            +"fun RElementBuilder<$alertPropsName>.link(block: ElementProvider): ReactElement"
+        codeExample {
+            +FunReference(
+                RElementBuilder<Alert.Props>::link,
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf(
+                    FunReference.Argument("block", "ElementProvider")
+                ),
+                "ReactElement"
+            ).print(true)
         }
         subSectionTitle(headingName, section)
         formattedText {
@@ -57,64 +89,107 @@ internal class Reference : SectionComponent() {
                 <block|code>."
             """.trimIndent()
         }
-        codeBox {
-            val funDef = "fun RElementBuilder<$alertPropsName>.heading(headings: ${Headings::class.simpleName}, " +
-                "block: ElementProvider): ReactElement"
-            +funDef
+        codeExample {
+            +FunReference(
+                RElementBuilder<Alert.Props>::heading,
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf(
+
+                    FunReference.Argument("headings", Headings::class),
+                    FunReference.Argument("block", "ElementProvider")
+                ),
+                "ReactElement"
+            ).print(true)
         }
         subSectionTitle("h1", section)
         formattedText {
             "Custom <h1|code> which behaves the same but adds <${ClassNames.ALERT_HEADING.kt}|code> to <classes|code>."
         }
-        codeBox {
-            val funDef = "fun RElementBuilder<$alertPropsName>.h1(classes: String? = null, block: RDOMBuilder<H1>.()" +
-                " -> Unit): ReactElement"
-            +funDef
+        codeExample {
+            +FunReference(
+                RElementBuilder<Alert.Props>::h1,
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf(
+                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("block", "RDOMHandler<${H1::class.simpleName}>")
+                ),
+                "ReactElement"
+            ).print(true)
         }
         subSectionTitle("h2", section)
         formattedText {
             "Custom <h2|code> which behaves the same but adds <${ClassNames.ALERT_HEADING.kt}|code> to <classes|code>."
         }
-        codeBox {
-            val funDef = "fun RElementBuilder<$alertPropsName>.h2(classes: String? = null, block: RDOMBuilder<H2>.()" +
-                " -> Unit): ReactElement"
-            +funDef
+        codeExample {
+            +FunReference(
+                RElementBuilder<Alert.Props>::h2,
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf(
+                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("block", "RDOMHandler<${H2::class.simpleName}>")
+                ),
+                "ReactElement"
+            ).print(true)
         }
         subSectionTitle("h3", section)
         formattedText {
             "Custom <h3|code> which behaves the same but adds <${ClassNames.ALERT_HEADING.kt}|code> to <classes|code>."
         }
-        codeBox {
-            val funDef = "fun RElementBuilder<$alertPropsName>.h3(classes: String? = null, block: RDOMBuilder<H3>.()" +
-                " -> Unit): ReactElement"
-            +funDef
+        codeExample {
+            +FunReference(
+                RElementBuilder<Alert.Props>::h3,
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf(
+                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("block", "RDOMHandler<${H3::class.simpleName}>")
+                ),
+                "ReactElement"
+            ).print(true)
         }
         subSectionTitle("h4", section)
         formattedText {
             "Custom <h4|code> which behaves the same but adds <${ClassNames.ALERT_HEADING.kt}|code> to <classes|code>."
         }
-        codeBox {
-            val funDef = "fun RElementBuilder<$alertPropsName>.h4(classes: String? = null, block: RDOMBuilder<H4>.()" +
-                " -> Unit): ReactElement"
-            +funDef
+        codeExample {
+            +FunReference(
+                RElementBuilder<Alert.Props>::h4,
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf(
+                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("block", "RDOMHandler<${H4::class.simpleName}>")
+                ),
+                "ReactElement"
+            ).print(true)
         }
         subSectionTitle("h5", section)
         formattedText {
             "Custom <h5|code> which behaves the same but adds <${ClassNames.ALERT_HEADING.kt}|code> to <classes|code>."
         }
-        codeBox {
-            val funDef = "fun RElementBuilder<$alertPropsName>.h5(classes: String? = null, block: RDOMBuilder<H5>.()" +
-                " -> Unit): ReactElement"
-            +funDef
+        codeExample {
+            +FunReference(
+                RElementBuilder<Alert.Props>::h5,
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf(
+                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("block", "RDOMHandler<${H5::class.simpleName}>")
+                ),
+                "ReactElement"
+            ).print(true)
         }
         subSectionTitle("h6", section)
         formattedText {
             "Custom <h6|code> which behaves the same but adds <${ClassNames.ALERT_HEADING.kt}|code> to <classes|code>."
         }
-        codeBox {
-            val funDef = "fun RElementBuilder<$alertPropsName>.h6(classes: String? = null, block: RDOMBuilder<H6>.()" +
-                " -> Unit): ReactElement"
-            +funDef
+        codeExample {
+            +FunReference(
+                RElementBuilder<Alert.Props>::h6,
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf(
+                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("block", "RDOMHandler<${H6::class.simpleName}>")
+                ),
+                "ReactElement"
+            ).print(true)
         }
         subSectionTitle(closingElementName, section)
         p {
@@ -126,10 +201,15 @@ internal class Reference : SectionComponent() {
                     "most element gets overwritten."
             }
         }
-        codeBox {
-            val funDef = "fun RElementBuilder<${Alert.DismissibleProps::class.nestedName}>.closingElement(block: Ele" +
-                "mentProvider): ReactElement"
-            +funDef
+        codeExample {
+            +FunReference(
+                RElementBuilder<Alert.DismissibleProps>::closingElement,
+                setOf("${RElementBuilder::class.simpleName}<${Alert.DismissibleProps::class.simpleName}>"),
+                setOf(
+                    FunReference.Argument("block", "ElementProvider")
+                ),
+                "ReactElement"
+            ).print(true)
         }
     }
 }

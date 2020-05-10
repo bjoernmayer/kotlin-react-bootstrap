@@ -8,27 +8,27 @@ import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.WithRDOMBuilderBlock
-import react.dom.RDOMBuilder
+import react.bootstrap.lib.RDOMHandler
+import react.bootstrap.lib.WithRDOMHandler
 import react.dom.WithClassName
 import react.dom.blockQuote
 import react.dom.div
 
-fun RBuilder.blockQuote(classes: String? = null, block: RDOMBuilder<BLOCKQUOTE>.() -> Unit): ReactElement =
+fun RBuilder.blockQuote(classes: String? = null, block: RDOMHandler<BLOCKQUOTE>): ReactElement =
     blockQuote(classes = classes.appendClass(ClassNames.BLOCKQUOTE), block = block)
 
-fun RBuilder.blockQuoteFooter(classes: String? = null, block: RDOMBuilder<DIV>.() -> Unit): ReactElement =
+fun RBuilder.blockQuoteFooter(classes: String? = null, block: RDOMHandler<DIV>): ReactElement =
     child(BlockQuoteFooter::class) {
         attrs {
             this.className = classes
-            this.block = block
+            this.handler = block
         }
     }
 
 class BlockQuoteFooter : RComponent<BlockQuoteFooter.Props, RState>() {
     override fun RBuilder.render() {
-        div(classes = props.className.appendClass(ClassNames.BLOCKQUOTE_FOOTER), block = props.block)
+        div(classes = props.className.appendClass(ClassNames.BLOCKQUOTE_FOOTER), block = props.handler)
     }
 
-    interface Props : WithClassName, WithRDOMBuilderBlock<DIV>
+    interface Props : WithClassName, WithRDOMHandler<DIV>
 }

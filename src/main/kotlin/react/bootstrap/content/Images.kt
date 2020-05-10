@@ -5,7 +5,7 @@ import react.RBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
-import react.dom.RDOMBuilder
+import react.bootstrap.lib.RDOMHandler
 import react.dom.img
 
 @Suppress("unused")
@@ -15,7 +15,7 @@ fun RBuilder.img(
     alt: String? = null,
     src: String? = null,
     classes: String? = null,
-    block: RDOMBuilder<IMG>.() -> Unit
+    block: RDOMHandler<IMG>
 ): ReactElement {
     val imageClasses = mutableSetOf<ClassNames>()
 

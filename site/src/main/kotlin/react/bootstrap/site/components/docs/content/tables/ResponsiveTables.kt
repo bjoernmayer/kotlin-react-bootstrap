@@ -7,13 +7,15 @@ import react.bootstrap.content.tables.td
 import react.bootstrap.content.tables.thead
 import react.bootstrap.content.tables.tr
 import react.bootstrap.lib.Breakpoints
+import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
-import react.bootstrap.site.components.docs.fixings.example
+import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.components.docs.fixings.import
+import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.layout.grid.ktBlock
-import react.bootstrap.site.components.docs.ln
 import react.dom.p
 import react.dom.strong
 import react.dom.tbody
@@ -26,88 +28,88 @@ internal class ResponsiveTables : SectionComponent() {
         sectionTitle(section)
         formattedText {
             """
-            Responsive tables allow tables to be scrolled horizontally with ease. Make any table responsive accross the
-            usual viewport breakpoints by setting the <table(responsive)|code>-argument.
-        """.trimIndent()
+                Responsive tables allow tables to be scrolled horizontally with ease. Make any table responsive accross
+                the usual viewport breakpoints by setting the <table(responsive)|code>-argument.
+            """.trimIndent()
         }
         subSectionTitle("Always responsive", section)
         formattedText {
             "Accross every breakpoint, set <table(responsive)|code> to <${Breakpoints.ALL.kt}|code>."
         }
-        example {
+        liveExample {
             table(responsive = Breakpoints.ALL) {
                 exampleTableBody()
             }
         }
-        codeBox {
+        codeExample {
             exampleImports()
-            ktBlock(0, "table(responsive = ${Breakpoints.ALL.kt}") { il ->
-                ln(il) { +"..." }
+            ktB(0, "table", "responsive" to Breakpoints.ALL.kt) {
+                ln(it) { +"..." }
             }
         }
         subSectionTitle("Breakpoint specific", section)
         formattedText {
             """
-            Use <${Breakpoints::class.simpleName}{.${Breakpoints.SM.name} |.${Breakpoints.MD.name}
-            |.${Breakpoints.LG.name} |.${Breakpoints.XL.name}}|code> as needed to create responsive tables up to a
-            particular breakpoint. From that breakpoint and up, the table will behave normally and not scroll
-            horizontally.
-        """.trimIndent()
+                Use <${Breakpoints::class.simpleName}{.${Breakpoints.SM.name} |.${Breakpoints.MD.name}
+                |.${Breakpoints.LG.name} |.${Breakpoints.XL.name}}|code> as needed to create responsive tables up to a
+                particular breakpoint. From that breakpoint and up, the table will behave normally and not scroll
+                horizontally.
+            """.trimIndent()
         }
         p {
             strong {
                 +"These tables may appear broken until their responsive styles apply at specific viewport widths."
             }
         }
-        example {
+        liveExample {
             table(responsive = Breakpoints.SM) {
                 exampleTableBody()
             }
         }
-        codeBox {
+        codeExample {
             exampleImports()
-            ktBlock(0, "table(responsive = ${Breakpoints.SM.kt})") { il ->
-                ln(il) { +"..." }
+            ktB(0, "table", "responsive" to Breakpoints.SM.kt) {
+                ln(it) { +"..." }
             }
         }
-        example {
+        liveExample {
             table(responsive = Breakpoints.MD) {
                 exampleTableBody()
             }
         }
-        codeBox {
+        codeExample {
             exampleImports()
-            ktBlock(0, "table(responsive = ${Breakpoints.MD.kt})") { il ->
-                ln(il) { +"..." }
+            ktB(0, "table", "responsive" to Breakpoints.MD.kt) {
+                ln(it) { +"..." }
             }
         }
-        example {
+        liveExample {
             table(responsive = Breakpoints.LG) {
                 exampleTableBody()
             }
         }
-        codeBox {
+        codeExample {
             exampleImports()
-            ktBlock(0, "table(responsive = ${Breakpoints.LG.kt})") { il ->
-                ln(il) { +"..." }
+            ktB(0, "table", "responsive" to Breakpoints.LG.kt) {
+                ln(it) { +"..." }
             }
         }
-        example {
+        liveExample {
             table(responsive = Breakpoints.XL) {
                 exampleTableBody()
             }
         }
-        codeBox {
+        codeExample {
             exampleImports()
-            ktBlock(0, "table(responsive = ${Breakpoints.XL.kt})") { il ->
-                ln(il) { +"..." }
+            ktB(0, "table", "responsive" to Breakpoints.XL.kt) {
+                ln(it) { +"..." }
             }
         }
     }
 
-    private fun RBuilder.exampleImports() {
-        ln { +"import react.bootstrap.content.tables.table" }
-        ln { +"import react.bootstrap.lib.${Breakpoints::class.simpleName}" }
+    private fun CodeExampleBuilder.exampleImports() {
+        import("content.tables.table")
+        import("lib.${Breakpoints::class.simpleName}")
         ln { }
     }
 

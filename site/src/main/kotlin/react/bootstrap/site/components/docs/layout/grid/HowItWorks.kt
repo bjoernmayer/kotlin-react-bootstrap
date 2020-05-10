@@ -1,4 +1,4 @@
-@file:Suppress("NAME_SHADOWING")
+@file:Suppress("NAME_SHADOWING", "NestedLambdaShadowedImplicitParameter")
 
 package react.bootstrap.site.components.docs.layout.grid
 
@@ -8,12 +8,14 @@ import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
-import react.bootstrap.site.components.docs.fixings.example
-import react.bootstrap.site.components.docs.fixings.exampleRow
+import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.ln
+import react.bootstrap.site.components.docs.layout.containerFun
+import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.dom.a
 import react.dom.p
 import react.dom.strong
@@ -25,10 +27,10 @@ internal class HowItWorks : SectionComponent() {
         sectionTitle(section)
         p {
             +"""
-            Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s
-            built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes
-            together.
-        """.trimIndent()
+                Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s
+                built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid
+                comes together.
+            """.trimIndent()
         }
         p {
             val link = "https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background"
@@ -36,7 +38,7 @@ internal class HowItWorks : SectionComponent() {
             +"  for background, terminology, guidelines, and code snippets."
         }
         exampleRow {
-            example {
+            liveExample {
                 container {
                     row {
                         for (x in 1..3) {
@@ -48,26 +50,26 @@ internal class HowItWorks : SectionComponent() {
                 }
             }
         }
-        codeBox {
-            containerFunImport()
-            gridEnumImport(Sizes::class)
-            colFunImport()
-            rowFunImport()
+        codeExample {
+            importContainerFun()
+            importGridEnum(Sizes::class)
+            importColFun()
+            importRowFun()
             ln { }
-            ktConRow { il ->
+            ktConRow {
                 for (x in 1..3) {
-                    ktBlock(il, "$colFun(sm = ${Sizes.EQ.kt})") { il ->
-                        ln(il) { +"+\"One of three columns\"" }
+                    ktB(it, colFun, "sm" to Sizes.EQ.kt) {
+                        ln(it) { +"+\"One of three columns\"" }
                     }
                 }
             }
         }
         formattedText {
             """
-            The above example creates three equal-width columns on small, medium, large, and extra large devices using
-            Bootstrap's predefined grid classes. Those columns are centered in the page with the parent <$containerFun
-            { }|code>.
-        """.trimIndent()
+                The above example creates three equal-width columns on small, medium, large, and extra large devices
+                using Bootstrap's predefined grid classes. Those columns are centered in the page with the parent
+                <$containerFun { }|code>.
+            """.trimIndent()
         }
         p {
             +"Be aware of the limitations and "

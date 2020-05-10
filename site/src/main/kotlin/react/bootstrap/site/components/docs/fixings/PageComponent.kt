@@ -7,9 +7,9 @@ import react.RHandler
 import react.RProps
 import react.RState
 import react.ReactElement
+import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.site.components.docs.Docs
 import react.bootstrap.site.components.docs.pageTitle
-import react.dom.RDOMBuilder
 import react.dom.h1
 import react.dom.p
 import kotlin.reflect.KClass
@@ -58,6 +58,6 @@ internal abstract class PageComponent : RComponent<Docs.SectionNavEvents, RState
         }
     }
 
-    protected fun RBuilder.pageLead(block: RDOMBuilder<P>.() -> Unit): ReactElement =
+    protected fun RBuilder.pageLead(block: RDOMHandler<P>): ReactElement =
         p("bd-lead", block)
 }

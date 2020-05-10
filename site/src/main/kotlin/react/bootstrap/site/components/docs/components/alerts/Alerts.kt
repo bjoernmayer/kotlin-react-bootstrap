@@ -8,9 +8,9 @@ internal class Alerts : PageComponent() {
         pageTitle("Alerts")
         pageLead {
             +"""
-            Provide contextual feedback messages for typical user actions with the handful of available and flexible
-            alert messages.
-        """.trimIndent()
+                Provide contextual feedback messages for typical user actions with the handful of available and flexible
+                alert messages.
+            """.trimIndent()
         }
         child(Examples::class)
         child(Reference::class)
