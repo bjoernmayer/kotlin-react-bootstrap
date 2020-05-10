@@ -67,7 +67,11 @@ internal fun CodeExampleBuilder.ktIB(
     opener: String,
     content: String
 ) {
-    ln(indentationLevel) { +"$opener { $content }" }
+    if (content.isEmpty()) {
+        ln(indentationLevel) { +"$opener { }" }
+    } else {
+        ln(indentationLevel) { +"$opener { $content }" }
+    }
 }
 
 internal fun CodeExampleBuilder.ktIB(
@@ -76,7 +80,7 @@ internal fun CodeExampleBuilder.ktIB(
     args: String,
     content: String
 ) {
-    ln(indentationLevel) { +"$opener($args) { $content }" }
+    ktIB(indentationLevel, "$opener($args)", content)
 }
 
 internal fun CodeExampleBuilder.ktIB(
