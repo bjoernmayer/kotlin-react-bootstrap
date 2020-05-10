@@ -11,8 +11,8 @@ import react.bootstrap.site.components.docs.fixings.importClassNames
 import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.external.Markdown
 import react.dom.cite
 
 internal class Blockquotes : SectionComponent() {
@@ -20,11 +20,12 @@ internal class Blockquotes : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+For quoting blocks of content from another source within your document. Wrap `${RBuilder::blockQuote.name} { }` around
+any HTML as the quote.
             """
-                For quoting blocks of content from another source within your document. Wrap
-                <${RBuilder::blockQuote.name} { }|code> around any HTML as the quote.
-            """.trimIndent()
         }
         liveExample {
             blockQuote("${ClassNames.MB_0}") {
@@ -40,11 +41,12 @@ internal class Blockquotes : SectionComponent() {
             }
         }
         subSectionTitle("Naming a source", section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Add a `${RBuilder::blockQuoteFooter.name} { }`  for identifying the source. Wrap the name of the source work in
+`cite { }`.
             """
-                Add a <${RBuilder::blockQuoteFooter.name} { }|code>  for identifying the source. Wrap the name of the
-                source work in <cite { }|code>.
-            """.trimIndent()
         }
         liveExample {
             blockQuote("${ClassNames.MB_0}") {

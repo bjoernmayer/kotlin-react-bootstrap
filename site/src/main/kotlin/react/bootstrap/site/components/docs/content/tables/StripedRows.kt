@@ -12,7 +12,7 @@ import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
+import react.bootstrap.site.external.Markdown
 import react.dom.tbody
 import react.dom.td
 import react.dom.th
@@ -24,8 +24,11 @@ internal class StripedRows : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
-            "Use the <table(striped)|code>-argument to add zebra-striping to any table row within the tbody."
+        Markdown {
+            //language=Markdown
+            +"""
+Use the `table(striped)`-argument to add zebra-striping to any table row within the tbody.
+            """
         }
         liveExample {
             table(striped = true) {

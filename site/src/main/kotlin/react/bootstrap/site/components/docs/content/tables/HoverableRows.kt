@@ -12,7 +12,7 @@ import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
+import react.bootstrap.site.external.Markdown
 import react.dom.tbody
 import react.dom.td
 import react.dom.th
@@ -24,11 +24,11 @@ internal class HoverableRows : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Set the `table(hoverable)`-argument to `true` to enable a hover state on table rows within a tbody.
             """
-                Set the <table(hoverable)|code>-argument to <true|code> to enable a hover state on table rows within a
-                tbody.
-            """.trimIndent()
         }
         liveExample {
             table(hoverable = true) {

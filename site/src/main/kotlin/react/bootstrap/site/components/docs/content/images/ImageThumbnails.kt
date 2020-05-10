@@ -11,7 +11,7 @@ import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
+import react.bootstrap.site.external.Markdown
 import react.dom.svg
 
 internal class ImageThumbnails : SectionComponent() {
@@ -19,11 +19,12 @@ internal class ImageThumbnails : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+You can set the `img(thumbnail)`-argument to `true` to give an image a rounded 1px border
+appearance.
             """
-            You can set the <img(thumbnail)|code>-argument to <true|code> to give an image a rounded 1px border
-            appearance.
-        """.trimIndent()
         }
         liveExample("bd-example-images") {
             svg(classes = "bd-placeholder-img bd-placeholder-img-lg ${ClassNames.IMG_THUMBNAIL}") {

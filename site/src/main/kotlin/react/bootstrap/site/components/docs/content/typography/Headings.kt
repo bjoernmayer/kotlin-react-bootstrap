@@ -15,7 +15,7 @@ import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
+import react.bootstrap.site.external.Markdown
 import react.dom.h3
 import react.dom.p
 import react.dom.small
@@ -25,11 +25,12 @@ internal class Headings : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Alternative implementation for `h1 { }` through `h6 { }` are provided, for when you want to match the font styling of a
+heading but cannot use the associated HTML element.
             """
-                Alternative implementation for <h1 { }|code> through <h6 { }|code> are provided, for when you want to
-                match the font styling of a heading but cannot use the associated HTML element.
-            """.trimIndent()
         }
         liveExample {
             h1(RBuilder::p) { +"h1. Bootstrap heading" }

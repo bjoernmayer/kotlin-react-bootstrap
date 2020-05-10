@@ -11,7 +11,7 @@ import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
+import react.bootstrap.site.external.Markdown
 import react.dom.svg
 
 internal class ResponsiveImages : SectionComponent() {
@@ -19,8 +19,11 @@ internal class ResponsiveImages : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
-            "Images in Bootstrap are made responsive with <img(fluid = true)|code>."
+        Markdown {
+            //language=Markdown
+            +"""
+Images in Bootstrap are made responsive with `img(fluid = true)`.
+            """
         }
         liveExample("bd-example-images") {
             svg(classes = "bd-placeholder-img bd-placeholder-img-lg ${ClassNames.IMG_FLUID}") {

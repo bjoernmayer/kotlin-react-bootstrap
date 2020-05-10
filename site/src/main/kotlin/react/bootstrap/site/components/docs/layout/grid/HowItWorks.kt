@@ -12,10 +12,10 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.containerFun
 import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.external.Markdown
 import react.dom.a
 import react.dom.p
 import react.dom.strong
@@ -27,10 +27,9 @@ internal class HowItWorks : SectionComponent() {
         sectionTitle(section)
         p {
             +"""
-                Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s
-                built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid
-                comes together.
-            """.trimIndent()
+Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with
+flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together.
+            """
         }
         p {
             val link = "https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background"
@@ -64,12 +63,12 @@ internal class HowItWorks : SectionComponent() {
                 }
             }
         }
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+The above example creates three equal-width columns on small, medium, large, and extra large devices using Bootstrap's
+predefined grid classes. Those columns are centered in the page with the parent `$containerFun { }`.
             """
-                The above example creates three equal-width columns on small, medium, large, and extra large devices
-                using Bootstrap's predefined grid classes. Those columns are centered in the page with the parent
-                <$containerFun { }|code>.
-            """.trimIndent()
         }
         p {
             +"Be aware of the limitations and "

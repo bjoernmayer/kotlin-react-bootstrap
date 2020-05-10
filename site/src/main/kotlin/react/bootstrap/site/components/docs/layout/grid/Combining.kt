@@ -28,11 +28,11 @@ import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.gridImport
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
+import react.bootstrap.site.external.Markdown
 import react.dom.h4
 import react.dom.p
 import kotlin.reflect.KFunction2
@@ -61,13 +61,16 @@ internal class Combining : SectionComponent() {
         sectionTitle(section)
         p {
             +"""
-                As you can see in the examples above, all col attributes are set using the same arguments. Custom
-                pairing functions are used to combine the values.
-            """.trimIndent()
+As you can see in the examples above, all col attributes are set using the same arguments. Custom
+pairing functions are used to combine the values.
+            """
         }
         subSectionTitle("Combine with $sizes", section)
-        formattedText {
-            "Combine other attributes with <$sizes|code> by using <$sz|code>."
+        Markdown {
+            //language=Markdown
+            +"""
+Combine other attributes with `$sizes` by using `$sz`.
+            """
         }
         flexColsExampleRow {
             liveExample {
@@ -112,8 +115,11 @@ internal class Combining : SectionComponent() {
         }
 
         subSectionTitle("Combine with $offsets", section)
-        formattedText {
-            "Combine other attributes with <$offsets|code> by using <$off|code>."
+        Markdown {
+            //language=Markdown
+            +"""
+Combine other attributes with `$offsets` by using `$off`.
+            """
         }
         flexColsExampleRow {
             liveExample {
@@ -158,8 +164,11 @@ internal class Combining : SectionComponent() {
         }
 
         subSectionTitle("Combine with $orderings", section)
-        formattedText {
-            "Combine other attributes with <$orderings|code> by using <$ord|code>."
+        Markdown {
+            //language=Markdown
+            +"""
+Combine other attributes with `$orderings` by using `$ord`.
+            """
         }
         flexColsExampleRow {
             liveExample {
@@ -204,8 +213,11 @@ internal class Combining : SectionComponent() {
         }
 
         subSectionTitle("Combine with $alignments", section)
-        formattedText {
-            "Combine other attributes with <$alignments|code> by using <$align|code>."
+        Markdown {
+            //language=Markdown
+            +"""
+Combine other attributes with `$alignments` by using `$align`.
+            """
         }
         flexColsExampleRow {
             liveExample {

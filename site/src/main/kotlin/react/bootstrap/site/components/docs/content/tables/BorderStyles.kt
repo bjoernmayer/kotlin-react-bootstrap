@@ -13,8 +13,8 @@ import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.external.Markdown
 import react.dom.tbody
 import react.dom.td
 import react.dom.th
@@ -26,12 +26,12 @@ internal class BorderStyles : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Use the `table(borderStyle)`-argument with the value `${BorderStyles.BORDERED.kt}` to get borders on all sides of the
+table and cells. Or set the value to `${BorderStyles.BORDERLESS.kt}` for a table without borders.
             """
-                Use the <table(borderStyle)|code>-argument with the value <${BorderStyles.BORDERED.kt}|code> to get
-                borders on all sides of the table and cells. Or set the value to <${BorderStyles.BORDERLESS.kt}|code>
-                for a table without borders.
-            """.trimIndent()
         }
         liveExample {
             table(borderStyle = BorderStyles.BORDERED) {

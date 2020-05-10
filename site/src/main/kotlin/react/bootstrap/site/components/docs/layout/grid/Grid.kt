@@ -8,9 +8,9 @@ internal class Grid : PageComponent() {
         pageTitle("Grid system")
         pageLead {
             +"""
-                Use Bootstrap's powerful mobile-first flexbox grid to build layouts of all shapes and sizes thanks to a
-                twelve column system, five default responsive tiers and dozens of predefined classes.
-            """.trimIndent()
+Use Bootstrap's powerful mobile-first flexbox grid to build layouts of all shapes and sizes thanks to a twelve column
+system, five default responsive tiers and dozens of predefined classes.
+            """
         }
         child(HowItWorks::class)
         child(GridOptions::class)

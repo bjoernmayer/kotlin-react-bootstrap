@@ -11,12 +11,12 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.layout.containerFun
 import react.bootstrap.site.components.docs.layout.importContainer
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.kt
 import react.bootstrap.site.components.docs.layout.ktContainer
+import react.bootstrap.site.external.Markdown
 import react.dom.br
 import react.dom.code
 import react.dom.li
@@ -33,12 +33,13 @@ internal class Containers : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Containers are the most basic layout element in Bootstrap and are __required when using our default grid system__.
+Containers are used to contain, pad, and (sometimes) center the content within them. While containers *can* be nested,
+most layouts do not require a nested container.
             """
-                Containers are the most basic layout element in Bootstrap and are <required when using our default grid
-                system|strong>. Containers are used to contain, pad, and (sometimes) center the content within them.
-                While containers <can|em> be nested, most layouts do not require a nested container.
-            """.trimIndent()
         }
         p {
             +"Bootstrap comes with three different containers:"
@@ -61,12 +62,12 @@ internal class Containers : SectionComponent() {
                 code { +"width: 100%" }; +" until the specified breakpoint"
             }
         }
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+The table below illustrates how each container’s `max-width` compares to the original `$containerFun { }` and
+`$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }` accross each breakpoint.
             """
-                The table below illustrates how each container’s <max-width|code> compares to the original
-                <$containerFun { }|code> and <$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }|code>
-                accross each breakpoint.
-            """.trimIndent()
         }
         p {
             +"See them in action and compare them in our Grid example." // Todo link to examples
@@ -129,11 +130,12 @@ internal class Containers : SectionComponent() {
             }
         }
         subSectionTitle("All-in-one", section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Our default `$containerFun { }` is a responsive, fixed-width container, meaning its max-width changes at each
+breakpoint.
             """
-                Our default <$containerFun { }|code> is a responsive, fixed-width container, meaning its max-width changes
-                 at each breakpoint.
-            """.trimIndent()
         }
         codeExample {
             importContainerFun()
@@ -143,11 +145,12 @@ internal class Containers : SectionComponent() {
             }
         }
         subSectionTitle("Fluid", section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Use `$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }` for a full width container,
+spanning the entire width of the viewport.
             """
-                Use <$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }|code> for a full width container,
-                spanning the entire width of the viewport.
-            """.trimIndent()
         }
         codeExample {
             importContainer()
@@ -158,14 +161,14 @@ internal class Containers : SectionComponent() {
             }
         }
         subSectionTitle("Responsive", section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Responsive containers are new in Bootstrap v4.4. They allow you to specify a class that is 100% wide until the specified
+breakpoint is reached, after which we apply `max-width`s for each of the higher breakpoints. For example,
+`$containerFun(viscosity = ${Container.Viscosities.SM.kt}) { }` is 100% wide to start until the `sm` breakpoint is
+reached, where it will scale up with `md`, `lg`, and `xl`.
             """
-                Responsive containers are new in Bootstrap v4.4. They allow you to specify a class that is 100% wide
-                until the specified breakpoint is reached, after which we apply <max-width|code>s for each of the higher
-                breakpoints. For example, <$containerFun(viscosity = ${Container.Viscosities.SM.kt}) { }|code> is 100%
-                wide to start until the <sm|code> breakpoint is reached, where it will scale up with <md|code>,
-                <lg|code>, and <xl|code>.
-            """.trimIndent()
         }
         codeExample {
             importContainer()

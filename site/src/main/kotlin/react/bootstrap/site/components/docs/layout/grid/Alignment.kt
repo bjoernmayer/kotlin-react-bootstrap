@@ -16,28 +16,23 @@ import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
-import react.dom.a
-import react.dom.p
+import react.bootstrap.site.external.Markdown
 
 internal class Alignment : SectionComponent() {
     override val title: String = "Alignment"
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Use flexbox alignment utilities to vertically and horizontally align columns. __Internet Explorer 10-11 do not support
+vertical alignment of flex items when the flex container has a `min-height` as shown below__. [See Flexbugs #3 for more
+details]("https://github.com/philipwalton/flexbugs#flexbug-3").
             """
-                Use flexbox alignment utilities to vertically and horizontally align columns. <Internet Explorer 10-11
-                do not support vertical alignment of flex items when the flex container has a |strong><min-height|code>
-                <as shown below|strong>.
-            """.trimIndent()
-        }
-        p {
-            a(href = "https://github.com/philipwalton/flexbugs#flexbug-3") { +" See Flexbugs #3 for more details" }
-            +"."
         }
         subSectionTitle("Vertical alignment", section)
         flexColsExampleRow {

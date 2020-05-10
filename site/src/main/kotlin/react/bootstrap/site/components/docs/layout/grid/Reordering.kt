@@ -15,10 +15,10 @@ import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
+import react.bootstrap.site.external.Markdown
 import react.dom.a
 import react.dom.code
 import react.dom.h4
@@ -33,12 +33,13 @@ internal class Reordering : SectionComponent() {
     override fun RBuilder.render() {
         sectionTitle(section)
         subSectionTitle("$orderingsName enum", section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Use `$orderingsName` values for controlling the __visual order__  of your content. The classes are responsive, so you
+can set the `order` by breakpoint (e.g., `all = ${Orderings.ORD_1.kt}, md = ${Orderings.ORD_2.kt}`). Includes support
+for 1 through 12 across all five grid tiers.
             """
-                Use <$orderingsName|code> values for controlling the <visual order|strong>  of your content. The classes
-                are responsive, so you can set the <order|code> by breakpoint (e.g., <all = ${Orderings.ORD_1.kt}, md =
-                ${Orderings.ORD_2.kt}|code>). Includes support for 1 through 12 across all five grid tiers.
-            """.trimIndent()
         }
         exampleRow {
             liveExample {

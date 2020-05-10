@@ -26,6 +26,7 @@ dependencies {
     implementation(npm("file-loader", "6.0.0"))
 
     implementation(npm("react-syntax-highlighter", "12.2.1"))
+    implementation(npm("markdown-to-jsx", "6.11.1"))
 }
 
 tasks.withType<KotlinJsCompile> {

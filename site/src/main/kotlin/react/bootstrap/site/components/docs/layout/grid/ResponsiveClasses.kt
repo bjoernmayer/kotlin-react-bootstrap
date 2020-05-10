@@ -15,10 +15,10 @@ import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
+import react.bootstrap.site.external.Markdown
 import react.dom.em
 import react.dom.p
 
@@ -29,19 +29,19 @@ internal class ResponsiveClasses : SectionComponent() {
         sectionTitle(section)
         p {
             +"""
-                Bootstrap’s grid includes five tiers of predefined classes for building complex responsive layouts.
-                Customize the size of your columns on extra small, small, medium, large, or extra large devices however
-                you see fit.
-            """.trimIndent()
+Bootstrap’s grid includes five tiers of predefined classes for building complex responsive layouts. Customize the size
+of your columns on extra small, small, medium, large, or extra large devices however you see fit.
+            """
         }
         subSectionTitle("All breakpoints", section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+For grids that are the same from the smallest of devices to the largest, set the `all =
+${ColAttributes::class.simpleName}?`-argument. Specify a numbered `${Sizes::class.simpleName}` enum value when you need
+a particularly sized column; otherwise, feel free to not set the argument at all, which defaults to `all =
+${Sizes.EQ.kt}`.
             """
-                For grids that are the same from the smallest of devices to the largest, set the <all =
-                ${ColAttributes::class.simpleName}?|code>-argument. Specify a numbered <${Sizes::class.simpleName}|code>
-                enum value when you need a particularly sized column; otherwise, feel free to not set the argument at
-                all, which defaults to <all = ${Sizes.EQ.kt}|code>.
-            """.trimIndent()
         }
         exampleRow {
             liveExample {
@@ -77,11 +77,12 @@ internal class ResponsiveClasses : SectionComponent() {
             }
         }
         subSectionTitle("Stacked to horizontal", section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+By setting the `sm = ${ColAttributes::class.simpleName}?`-argument, you can create a basic grid system that starts out
+stacked and becomes horizontal at the small breakpoint (`sm`).
             """
-                By setting the <sm = ${ColAttributes::class.simpleName}?|code>-argument, you can create a basic grid
-                system that starts out stacked and becomes horizontal at the small breakpoint (<sm|code>).
-            """.trimIndent()
         }
         exampleRow {
             liveExample {
@@ -119,9 +120,9 @@ internal class ResponsiveClasses : SectionComponent() {
         subSectionTitle("Mix and match", section)
         p {
             +"""
-                Don’t want your columns to simply stack in some grid tiers? Use a combination of different classes for
-                each tier as needed. See the example below for a better idea of how it all works.
-            """.trimIndent()
+Don’t want your columns to simply stack in some grid tiers? Use a combination of different classes for each tier as
+needed. See the example below for a better idea of how it all works.
+            """
         }
         exampleRow {
             liveExample {
@@ -170,12 +171,13 @@ internal class ResponsiveClasses : SectionComponent() {
             }
         }
         subSectionTitle("Row columns", section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Set the `${ColCounts::class.simpleName}`-argument to quickly set the number of columns that best
+render your content and layout. The row columns classes are set on the parent `$rowFun { }` as a
+shortcut.
             """
-                Set the <${ColCounts::class.simpleName}|code>-argument to quickly set the number of columns that best
-                render your content and layout. The row columns classes are set on the parent <$rowFun { }|code> as a
-                shortcut.
-            """.trimIndent()
         }
         exampleRow {
             liveExample {
@@ -311,18 +313,18 @@ internal class ResponsiveClasses : SectionComponent() {
             }
         }
         subSectionTitle("No gutters", section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+The gutters between columns in Bootstrap's predefined grid classes can be removed by setting `gutters = false`. This
+removes the negative `margin`s from `$rowFun { }` and the horizontal `padding` from all immediate children columns.
             """
-                The gutters between columns in Bootstrap's predefined grid classes can be removed by setting <gutters =
-                false|code>. This removes the negative <margin|code>s from <$rowFun { }|code> and the horizontal
-                <padding|code> from all immediate children columns.
-            """.trimIndent()
         }
         p {
             +"""
-                In practice, here’s how it looks. Note you can continue to use this with all other predefined grid
-                settings (including column widths, responsive tiers, reorders, and more).
-            """.trimIndent()
+In practice, here’s how it looks. Note you can continue to use this with all other predefined grid settings (including
+column widths, responsive tiers, reorders, and more).
+            """
         }
         exampleRow {
             liveExample {

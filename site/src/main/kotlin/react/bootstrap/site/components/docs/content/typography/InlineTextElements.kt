@@ -10,7 +10,7 @@ import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
+import react.bootstrap.site.external.Markdown
 import react.dom.p
 import react.dom.span
 
@@ -19,11 +19,12 @@ internal class InlineTextElements : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Alternative implementations of `mark { }` and `small { }` are provided to apply the same styles while avoiding any
+unwanted semantic implications that the tags would bring.
             """
-                Alternative implementations of <mark { }|code> and <small { }|code> are provided to apply the same
-                styles while avoiding any unwanted semantic implications that the tags would bring.
-            """.trimIndent()
         }
         liveExample {
             p {

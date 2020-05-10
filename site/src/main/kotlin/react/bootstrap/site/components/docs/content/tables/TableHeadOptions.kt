@@ -14,8 +14,8 @@ import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.external.Markdown
 import react.dom.tbody
 import react.dom.td
 import react.dom.th
@@ -26,11 +26,11 @@ internal class TableHeadOptions : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Similar to tables and dark tables, use the `thead(style)`-argument to make table headers appear light or dark gray.
             """
-                Similar to tables and dark tables, use the <thead(style)|code>-argument to make table headers appear
-                light or dark gray.
-            """.trimIndent()
         }
         liveExample {
             table {

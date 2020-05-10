@@ -16,8 +16,8 @@ import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.external.Markdown
 import react.dom.svg
 
 internal class Figures : PageComponent() {
@@ -26,18 +26,18 @@ internal class Figures : PageComponent() {
         pageLead {
             +"Documentation and examples for displaying related images and text with the figure component in Bootstrap."
         }
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Anytime you need to display a piece of content—like an image with an optional caption, consider using a `figure { }`.
             """
-                Anytime you need to display a piece of content—like an image with an optional caption, consider using a
-                <figure { }|code>.
-            """.trimIndent()
         }
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Use the included `figure` , `img` and `figcaption` functions to provide some baseline styles for the HTML5 elements.
+Images in figures have no explicit size, so be sure to add the `img(fluid)` to `true` to make it responsive.
             """
-                Use the included <figure|code> , <img|code> and <figcaption|code> functions to provide some baseline
-                styles for the HTML5 elements. Images in figures have no explicit size, so be sure to add the
-                <img(fluid)|code> to <true|code> to make it responsive.
-            """.trimIndent()
         }
         liveExample {
             figure {

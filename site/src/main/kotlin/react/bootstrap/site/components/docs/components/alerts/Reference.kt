@@ -26,8 +26,8 @@ import react.bootstrap.lib.WithOnClick
 import react.bootstrap.site.components.docs.FunReference
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.external.Markdown
 import react.dom.p
 
 internal class Reference : SectionComponent() {
@@ -69,8 +69,11 @@ internal class Reference : SectionComponent() {
             ).print(false)
         }
         subSectionTitle(linkName, section)
-        formattedText {
-            "Adds <${ClassNames.ALERT_LINK.kt}|code> to the outer most <ReactElement|code> resulting from <block|code>."
+        Markdown {
+            //language=Markdown
+            +"""
+Adds `${ClassNames.ALERT_LINK.kt}` to the outer most `ReactElement` resulting from `block`.
+            """
         }
         codeExample {
             +FunReference(
@@ -83,11 +86,11 @@ internal class Reference : SectionComponent() {
             ).print(true)
         }
         subSectionTitle(headingName, section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Adds `${ClassNames.ALERT_HEADING.kt}` to the outer most `ReactElement` resulting from `block`.
             """
-                Adds <${ClassNames.ALERT_HEADING.kt}|code> to the outer most <ReactElement|code> resulting from
-                <block|code>."
-            """.trimIndent()
         }
         codeExample {
             +FunReference(
@@ -102,8 +105,11 @@ internal class Reference : SectionComponent() {
             ).print(true)
         }
         subSectionTitle("h1", section)
-        formattedText {
-            "Custom <h1|code> which behaves the same but adds <${ClassNames.ALERT_HEADING.kt}|code> to <classes|code>."
+        Markdown {
+            //language=Markdown
+            +"""
+Custom `h1` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to `classes`.
+            """
         }
         codeExample {
             +FunReference(
@@ -117,8 +123,11 @@ internal class Reference : SectionComponent() {
             ).print(true)
         }
         subSectionTitle("h2", section)
-        formattedText {
-            "Custom <h2|code> which behaves the same but adds <${ClassNames.ALERT_HEADING.kt}|code> to <classes|code>."
+        Markdown {
+            //language=Markdown
+            +"""
+Custom `h2` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to `classes`.
+            """
         }
         codeExample {
             +FunReference(
@@ -132,8 +141,11 @@ internal class Reference : SectionComponent() {
             ).print(true)
         }
         subSectionTitle("h3", section)
-        formattedText {
-            "Custom <h3|code> which behaves the same but adds <${ClassNames.ALERT_HEADING.kt}|code> to <classes|code>."
+        Markdown {
+            //language=Markdown
+            +"""
+Custom `h3` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to `classes`.
+            """
         }
         codeExample {
             +FunReference(
@@ -147,8 +159,11 @@ internal class Reference : SectionComponent() {
             ).print(true)
         }
         subSectionTitle("h4", section)
-        formattedText {
-            "Custom <h4|code> which behaves the same but adds <${ClassNames.ALERT_HEADING.kt}|code> to <classes|code>."
+        Markdown {
+            //language=Markdown
+            +"""
+Custom `h4` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to `classes`.
+            """
         }
         codeExample {
             +FunReference(
@@ -162,8 +177,11 @@ internal class Reference : SectionComponent() {
             ).print(true)
         }
         subSectionTitle("h5", section)
-        formattedText {
-            "Custom <h5|code> which behaves the same but adds <${ClassNames.ALERT_HEADING.kt}|code> to <classes|code>."
+        Markdown {
+            //language=Markdown
+            +"""
+Custom `h5` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to `classes`.
+            """
         }
         codeExample {
             +FunReference(
@@ -177,8 +195,11 @@ internal class Reference : SectionComponent() {
             ).print(true)
         }
         subSectionTitle("h6", section)
-        formattedText {
-            "Custom <h6|code> which behaves the same but adds <${ClassNames.ALERT_HEADING.kt}|code> to <classes|code>."
+        Markdown {
+            //language=Markdown
+            +"""
+Custom `h6` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to `classes`.
+            """
         }
         codeExample {
             +FunReference(
@@ -196,9 +217,11 @@ internal class Reference : SectionComponent() {
             +"Wrapper for a custom alert closing element."
         }
         alert(Alert.Variants.INFO) {
-            formattedText {
-                "Be aware that the <${WithOnClick::class.simpleName}.${WithOnClick::onClick.name}|code> of the outer" +
-                    "most element gets overwritten."
+            Markdown {
+                //language=Markdown
+                +"""
+Be aware the `${WithOnClick::class.simpleName}.${WithOnClick::onClick.name}` of the outer most element gets overwritten.
+                """
             }
         }
         codeExample {

@@ -8,20 +8,24 @@ import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
+import react.bootstrap.site.external.Markdown
 
 internal class Lead : SectionComponent() {
     override val title: String = "Lead"
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText { "Make a paragraph stand out by using <lead { }|code> instead." }
+        Markdown {
+            //language=Markdown
+            +"""
+Make a paragraph stand out by using `lead { }` instead.
+            """
+        }
         liveExample {
             lead {
                 +"""
-                    Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo
-                    luctus.
-                """.trimIndent()
+Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus.
+                """
             }
         }
         codeExample {

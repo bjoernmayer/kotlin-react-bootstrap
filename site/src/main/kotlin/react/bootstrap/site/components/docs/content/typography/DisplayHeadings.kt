@@ -10,7 +10,7 @@ import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
+import react.bootstrap.site.external.Markdown
 import react.dom.span
 import react.dom.tbody
 import react.dom.td
@@ -21,12 +21,12 @@ internal class DisplayHeadings : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Traditional heading elements are designed to work best in the meat of your page content. When you need a heading to
+stand out, consider using a __display heading__ - a larger, slightly more opinionated heading style.
             """
-                Traditional heading elements are designed to work best in the meat of your page content. When you need a
-                heading to stand out, consider using a <display heading|strong> - a larger, slightly more opinionated
-                heading style.
-            """.trimIndent()
         }
         liveExample {
             table {

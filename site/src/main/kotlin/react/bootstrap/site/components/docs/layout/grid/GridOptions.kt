@@ -6,7 +6,7 @@ import react.bootstrap.content.tables.BorderStyles
 import react.bootstrap.content.tables.table
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.formattedText
+import react.bootstrap.site.external.Markdown
 import react.dom.br
 import react.dom.code
 import react.dom.p
@@ -22,12 +22,12 @@ internal class GridOptions : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+While Bootstrap uses *em*s or *rem*s for defining most sizes, `px`s are used for grid breakpoints and container widths.
+This is because the viewport width is in pixels and does not change with the font size.
             """
-                While Bootstrap uses <em|code>s or <rem|code>s for defining most sizes, <px|code>s are used for grid
-                breakpoints and container widths. This is because the viewport width is in pixels and does not change
-                with the font size.
-            """.trimIndent()
         }
         p {
             +"See how aspects of the Bootstrap grid system work across multiple devices with a handy table."

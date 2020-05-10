@@ -22,8 +22,8 @@ import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.formattedText
 import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.external.Markdown
 import react.child
 import react.dom.a
 import react.dom.button
@@ -39,11 +39,13 @@ internal class Examples : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        console.log(Markdown)
+        Markdown {
+            //language=Markdown
+            +"""
+Alerts are available for any length of text, as well as an optional dismiss button. For proper styling, use one of the
+eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.kt}`).
             """
-                Alerts are available for any length of text, as well as an optional dismiss button. For proper styling,
-                use one of the eight <required|strong> variants (e.g., <${Alert.Variants.SUCCESS.kt}|code>).
-            """.trimIndent()
         }
         liveExample {
             Alert.Variants.values().iterator().forEach { variant ->
@@ -63,11 +65,12 @@ internal class Examples : SectionComponent() {
             }
         }
         subSectionTitle("Link color", section)
-        formattedText('[', ']') {
+        Markdown {
+            //language=Markdown
+            +"""
+Use the `$linkName`-function (only available inside `RElementBuilder<$alertPropsName>` to quickly provide matching
+colored links within any alert.
             """
-                Use the [$linkName|code]-function (only available inside [RElementBuilder<Alert>|code] to quickly provide
-                matching colored links within any alert.
-            """.trimIndent()
         }
         liveExample {
             Alert.Variants.values().iterator().forEach { variant ->
@@ -95,17 +98,17 @@ internal class Examples : SectionComponent() {
         subSectionTitle("Additional content", section)
         p {
             +"""
-                Alerts can also contain additional HTML elements like headings, paragraphs and dividers.
-            """.trimIndent()
+Alerts can also contain additional HTML elements like headings, paragraphs and dividers.
+            """
         }
         liveExample {
             alert(Alert.Variants.SUCCESS) {
                 h4 { +"Well done!" }
                 p {
                     +"""
-                        Aww yeah, you successfully read this important alert message. This example text is going to run a
-                        bit longer so that you can see how spacing within an alert works with this kind of content.
-                    """.trimIndent()
+Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you
+ can see how spacing within an alert works with this kind of content.
+                    """
                 }
                 hr { }
                 p("${ClassNames.MB_0}") {
@@ -141,10 +144,11 @@ internal class Examples : SectionComponent() {
             }
         }
         subSectionTitle("Dismissing", section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Use `$dismissibleAlertName` to create a dismissible alert.
             """
-                Use <$dismissibleAlertName { }|code> to create a dismissible alert.
-            """.trimIndent()
         }
         liveExample {
             dismissibleAlert(variant = Alert.Variants.WARNING, fade = true) {
@@ -184,7 +188,12 @@ internal class Examples : SectionComponent() {
             }
         }
         contentTitle(RBuilder::h4, "Close element")
-        formattedText { "You can build your own custom close element, by using <$closingElementName { }|code>." }
+        Markdown {
+            //language=Markdown
+            +"""
+You can build your own custom close element, by using `$closingElementName { }`.
+            """
+        }
         liveExample {
             dismissibleAlert(variant = Alert.Variants.INFO) {
                 +"You want some cookies?"
