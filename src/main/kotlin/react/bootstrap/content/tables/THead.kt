@@ -5,13 +5,13 @@ import react.RBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
-import react.dom.RDOMBuilder
+import react.bootstrap.lib.RDOMHandler
 import react.dom.thead
 
 fun RBuilder.thead(
     style: THeadStyles? = null,
     classes: String? = null,
-    block: RDOMBuilder<THEAD>.() -> Unit
+    block: RDOMHandler<THEAD>
 ): ReactElement {
     val tHeadClasses = mutableSetOf<ClassNames>()
 

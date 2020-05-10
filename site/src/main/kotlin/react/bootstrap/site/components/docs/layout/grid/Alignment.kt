@@ -11,35 +11,32 @@ import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
-import react.bootstrap.site.components.docs.fixings.example
-import react.bootstrap.site.components.docs.fixings.exampleRow
-import react.bootstrap.site.components.docs.fixings.flexColsExampleRow
-import react.bootstrap.site.components.docs.formattedText
+import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.ln
-import react.dom.a
-import react.dom.p
+import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.components.docs.layout.ktContainer
+import react.bootstrap.site.external.Markdown
 
 internal class Alignment : SectionComponent() {
     override val title: String = "Alignment"
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Use flexbox alignment utilities to vertically and horizontally align columns. __Internet Explorer 10-11 do not support
+vertical alignment of flex items when the flex container has a `min-height` as shown below__. [See Flexbugs #3 for more
+details]("https://github.com/philipwalton/flexbugs#flexbug-3").
             """
-            Use flexbox alignment utilities to vertically and horizontally align columns. <Internet Explorer 10-11 do
-            not support vertical alignment of flex items when the flex container has a |strong><min-height|code>< as
-            shown below. |strong>
-        """.trimIndent()
-        }
-        p {
-            a(href = "https://github.com/philipwalton/flexbugs#flexbug-3") { +" See Flexbugs #3 for more details" }
-            +"."
         }
         subSectionTitle("Vertical alignment", section)
         flexColsExampleRow {
-            example {
+            liveExample {
                 container {
                     row(all = ItemsYs.START) {
                         for (x in 1..3) {
@@ -58,33 +55,33 @@ internal class Alignment : SectionComponent() {
                     }
                 }
             }
-            codeBox {
-                containerFunImport()
-                gridEnumImport(ItemsYs::class)
-                colFunImport()
-                rowFunImport()
+            codeExample {
+                importContainerFun()
+                importGridEnum(ItemsYs::class)
+                importColFun()
+                importRowFun()
                 ln { }
-                ktContainer { il ->
-                    ktBlock(il, "$rowFun(all = ${ItemsYs.START.kt})") { il ->
+                ktContainer {
+                    ktB(it, rowFun, "all" to ItemsYs.START.kt) {
                         for (x in 1..3) {
-                            ln(il) { +"$colFun { +\"One of three columns\" }" }
+                            ktIB(it, colFun) { "+\"One of three columns\"" }
                         }
                     }
-                    ktBlock(il, "$rowFun(all = ${ItemsYs.CENTER.kt})") { il ->
+                    ktB(it, rowFun, "all" to ItemsYs.CENTER.kt) {
                         for (x in 1..3) {
-                            ln(il) { +"$colFun { +\"One of three columns\" }" }
+                            ktIB(it, colFun) { "+\"One of three columns\"" }
                         }
                     }
-                    ktBlock(il, "$rowFun(all = ${ItemsYs.END.kt})") { il ->
+                    ktB(it, rowFun, "all" to ItemsYs.END.kt) {
                         for (x in 1..3) {
-                            ln(il) { +"$colFun { +\"One of three columns\" }" }
+                            ktIB(it, colFun) { "+\"One of three columns\"" }
                         }
                     }
                 }
             }
         }
         flexColsExampleRow {
-            example {
+            liveExample {
                 container {
                     row {
                         col(all = Alignments.START) { +"One of three columns" }
@@ -93,22 +90,22 @@ internal class Alignment : SectionComponent() {
                     }
                 }
             }
-            codeBox {
-                containerFunImport()
-                gridEnumImport(Alignments::class)
-                colFunImport()
-                rowFunImport()
+            codeExample {
+                importContainerFun()
+                importGridEnum(Alignments::class)
+                importColFun()
+                importRowFun()
                 ln { }
-                ktConRow { il ->
-                    ln(il) { +"$colFun(all = ${Alignments.START.kt}) { +\"One of three columns\" }" }
-                    ln(il) { +"$colFun(all = ${Alignments.CENTER.kt}) { +\"One of three columns\" }" }
-                    ln(il) { +"$colFun(all = ${Alignments.END.kt}) { +\"One of three columns\" }" }
+                ktConRow {
+                    ktIB(it, colFun, "all" to Alignments.START.kt) { "+\"One of three columns\"" }
+                    ktIB(it, colFun, "all" to Alignments.CENTER.kt) { "+\"One of three columns\"" }
+                    ktIB(it, colFun, "all" to Alignments.END.kt) { "+\"One of three columns\"" }
                 }
             }
         }
         subSectionTitle("Horizontal alignment", section)
         exampleRow {
-            example {
+            liveExample {
                 container {
                     row(all = ItemsXs.START) {
                         for (x in 1..2) {
@@ -137,37 +134,37 @@ internal class Alignment : SectionComponent() {
                     }
                 }
             }
-            codeBox {
-                containerFunImport()
-                gridEnumImport(ItemsXs::class)
-                gridEnumImport(Sizes::class)
-                colFunImport()
-                rowFunImport()
+            codeExample {
+                importContainerFun()
+                importGridEnum(ItemsXs::class)
+                importGridEnum(Sizes::class)
+                importColFun()
+                importRowFun()
                 ln { }
-                ktContainer { il ->
-                    ktBlock(il, "rowFun(all = ${ItemsXs.START.kt})") { il ->
+                ktContainer {
+                    ktB(it, rowFun, "all" to ItemsXs.START.kt) {
                         for (x in 1..2) {
-                            ln(il) { +"$colFun(all = ${Sizes.SZ_4.kt}) { +\"One of two columns\" }" }
+                            ktIB(it, colFun, "all" to Sizes.SZ_4.kt) { "+\"One of two columns\"" }
                         }
                     }
-                    ktBlock(il, "$rowFun(all = ${ItemsXs.CENTER.kt})") { il ->
+                    ktB(it, rowFun, "all" to ItemsXs.CENTER.kt) {
                         for (x in 1..2) {
-                            ln(il) { +"$colFun(all = ${Sizes.SZ_4.kt}) { +\"One of two columns\" }" }
+                            ktIB(it, colFun, "all" to Sizes.SZ_4.kt) { "+\"One of two columns\"" }
                         }
                     }
-                    ktBlock(il, "$rowFun(all = ${ItemsXs.END.kt})") { il ->
+                    ktB(it, rowFun, "all" to ItemsXs.END.kt) {
                         for (x in 1..2) {
-                            ln(il) { +"$colFun(all = ${Sizes.SZ_4.kt}) { +\"One of two columns\" }" }
+                            ktIB(it, colFun, "all" to Sizes.SZ_4.kt) { "+\"One of two columns\"" }
                         }
                     }
-                    ktBlock(il, "$rowFun(all = ${ItemsXs.AROUND.kt})") { il ->
+                    ktB(it, rowFun, "all" to ItemsXs.AROUND.kt) {
                         for (x in 1..2) {
-                            ln(il) { +"$colFun(all = ${Sizes.SZ_4.kt}) { +\"One of two columns\" }" }
+                            ktIB(it, colFun, "all" to Sizes.SZ_4.kt) { "+\"One of two columns\"" }
                         }
                     }
-                    ktBlock(il, "$rowFun(all = ${ItemsXs.BETWEEN.kt})") { il ->
+                    ktB(it, rowFun, "all" to ItemsXs.BETWEEN.kt) {
                         for (x in 1..2) {
-                            ln(il) { +"$colFun(all = ${Sizes.SZ_4.kt}) { +\"One of two columns\" }" }
+                            ktIB(it, colFun, "all" to Sizes.SZ_4.kt) { "+\"One of two columns\"" }
                         }
                     }
                 }

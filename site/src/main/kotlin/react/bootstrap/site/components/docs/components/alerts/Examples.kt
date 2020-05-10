@@ -1,4 +1,4 @@
-@file:Suppress("NAME_SHADOWING")
+@file:Suppress("NAME_SHADOWING", "NestedLambdaShadowedImplicitParameter")
 
 package react.bootstrap.site.components.docs.components.alerts
 
@@ -13,16 +13,17 @@ import react.bootstrap.components.alert.dismissibleAlert
 import react.bootstrap.components.alert.h4
 import react.bootstrap.components.alert.link
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.classNamesImport
-import react.bootstrap.site.components.docs.components.packageName
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
+import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
-import react.bootstrap.site.components.docs.fixings.example
-import react.bootstrap.site.components.docs.formattedText
+import react.bootstrap.site.components.docs.fixings.import
+import react.bootstrap.site.components.docs.fixings.importClassNames
+import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.layout.grid.ktBlock
-import react.bootstrap.site.components.docs.ln
+import react.bootstrap.site.external.Markdown
 import react.child
 import react.dom.a
 import react.dom.button
@@ -38,37 +39,40 @@ internal class Examples : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        console.log(Markdown)
+        Markdown {
+            //language=Markdown
+            +"""
+Alerts are available for any length of text, as well as an optional dismiss button. For proper styling, use one of the
+eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.kt}`).
             """
-            Alerts are available for any length of text, as well as an optional dismiss button. For proper styling, use
-            one of the eight <required|strong> variants (e.g., <${Alert.Variants.SUCCESS.kt}|code>).
-        """.trimIndent()
         }
-        example {
+        liveExample {
             Alert.Variants.values().iterator().forEach { variant ->
                 alert(variant) {
                     +"A simple ${variant.name.toLowerCase()} alert-check it out!"
                 }
             }
         }
-        codeBox {
-            ln { +"${packageName}alert.Alert" }
-            ln { +"${packageName}alert.alert" }
+        codeExample {
+            import("components.alert.Alert")
+            import("components.alert.$alertName")
             ln { }
             Alert.Variants.values().iterator().forEach { variant ->
-                ktBlock(0, "$alertName(${variant.kt})") { il ->
-                    ln(il) { +"+\"A simple ${variant.name.toLowerCase()} alert-check it out!\"" }
+                ktB(0, alertName, variant.kt) {
+                    ln(it) { +"+\"A simple ${variant.name.toLowerCase()} alert-check it out!\"" }
                 }
             }
         }
         subSectionTitle("Link color", section)
-        formattedText('[', ']') {
+        Markdown {
+            //language=Markdown
+            +"""
+Use the `$linkName`-function (only available inside `RElementBuilder<$alertPropsName>` to quickly provide matching
+colored links within any alert.
             """
-            Use the [$linkName|code]-function (only available inside %RElementBuilder<Alert>|code& to quickly provide
-            matching colored links within any alert.
-        """.trimIndent()
         }
-        example {
+        liveExample {
             Alert.Variants.values().iterator().forEach { variant ->
                 alert(variant) {
                     +"A simple ${variant.name.toLowerCase()} alert with "
@@ -76,15 +80,15 @@ internal class Examples : SectionComponent() {
                 }
             }
         }
-        codeBox {
-            ln { +"${packageName}alert.Alert" }
-            ln { +"${packageName}alert.$linkName" }
-            ln { +"${packageName}alert.alert" }
+        codeExample {
+            import("components.alert.Alert")
+            import("components.alert.$linkName")
+            import("components.alert.$alertName")
             ln { }
             Alert.Variants.values().iterator().forEach { variant ->
-                ktBlock(0, "$alertName(${variant.kt})") { il ->
-                    ln(il) { +"+\"A simple ${variant.name.toLowerCase()} alert with \"" }
-                    ln(il) {
+                ktB(0, alertName, variant.kt) {
+                    ln(it) { +"+\"A simple ${variant.name.toLowerCase()} alert with \"" }
+                    ln(it) {
                         +"$linkName { a(href = \"#\") { +\"another example link\" } }; +\". Give it a"
                         +"click if you like.\""
                     }
@@ -94,17 +98,17 @@ internal class Examples : SectionComponent() {
         subSectionTitle("Additional content", section)
         p {
             +"""
-            Alerts can also contain additional HTML elements like headings, paragraphs and dividers.
-        """.trimIndent()
+Alerts can also contain additional HTML elements like headings, paragraphs and dividers.
+            """
         }
-        example {
+        liveExample {
             alert(Alert.Variants.SUCCESS) {
                 h4 { +"Well done!" }
                 p {
                     +"""
-                    Aww yeah, you successfully read this important alert message. This example text is going to run a
-                    bit longer so that you can see how spacing within an alert works with this kind of content.
-                """.trimIndent()
+Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you
+ can see how spacing within an alert works with this kind of content.
+                    """
                 }
                 hr { }
                 p("${ClassNames.MB_0}") {
@@ -112,40 +116,41 @@ internal class Examples : SectionComponent() {
                 }
             }
         }
-        codeBox {
-            ln { +"${packageName}alert.Alert" }
-            ln { +"${packageName}alert.alert" }
-            ln { +"${packageName}alert.h4" }
-            classNamesImport()
+        codeExample {
+            import("components.alert.Alert")
+            import("components.alert.$alertName")
+            import("components.alert.h4")
+            importClassNames()
             ln { }
-            ktBlock(0, "alert(${Alert.Variants.SUCCESS.kt})") { il ->
-                ln(il) { +"h4 { +\"Well done!\" }" }
-                ktBlock(il, "p") { il ->
-                    ln(il) { +"+\"\"\"" }
-                    ln(il + 1) {
+            ktB(0, alertName, Alert.Variants.SUCCESS.kt) {
+                ktIB(it, "h4", "+\"Well done!\\")
+                ktB(it, "p") {
+                    ln(it) { +"+\"\"\"" }
+                    ln(it + 1) {
                         +"Aww yeah, you successfully read this important alert message. This example text is going to"
                         +" run a"
                     }
-                    ln(il + 1) {
+                    ln(it + 1) {
                         +"bit longer so that you can see how spacing within an alert works with this kind of content."
                     }
-                    ln(il) { +"\"\"\".trimIndent()" }
+                    ln(it) { +"\"\"\".trimIndent()" }
                 }
-                ln(il) { +"hr { }" }
-                ktBlock(il, "p(\"\${${ClassNames.MB_0.kt}})\"") { il ->
-                    ln(il) {
+                ktIB(it, "hr", "")
+                ktB(it, "p", "\"\${${ClassNames.MB_0.kt}}\"") {
+                    ln(it) {
                         +"+\"Whenever you need to, be sure to use margin utilities to keep things nice and tidy.\""
                     }
                 }
             }
         }
         subSectionTitle("Dismissing", section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Use `$dismissibleAlertName` to create a dismissible alert.
             """
-                Use <$dismissibleAlertName { }|code> to create a dismissible alert.
-            """.trimIndent()
         }
-        example {
+        liveExample {
             dismissibleAlert(variant = Alert.Variants.WARNING, fade = true) {
                 attrs {
                     dismissible?.apply {
@@ -160,34 +165,36 @@ internal class Examples : SectionComponent() {
                 strong { +"Holy guacamole!" }; +" You should check in on some of those fields below."
             }
         }
-        codeBox {
-            ln { +"${packageName}alert.Alert" }
-            ln { +"${packageName}alert.$dismissibleAlertName" }
+        codeExample {
+            import("components.alert.Alert")
+            import("components.alert.$dismissibleAlertName")
             ln { }
-            ktBlock(
-                0,
-                "$dismissibleAlertName(variant = ${Alert.Variants.WARNING.kt}, fade = true)"
-            ) { il ->
-                ktBlock(il, "attrs") { il ->
-                    ktBlock(il, "${Alert.Props::dismissible.name}?.apply") { il ->
-                        ktBlock(il, Alert.Props.Dismissible::onClose.name) { il ->
-                            ln(il) {
+            ktB(0, dismissibleAlertName, "variant" to Alert.Variants.WARNING.kt, "fade" to "true") {
+                ktB(it, "attrs") {
+                    ktB(it, "${Alert.Props::dismissible.name}?.apply") {
+                        ktB(it, Alert.Props.Dismissible::onClose.name) {
+                            ln(it) {
                                 +"console.log(\"Close on Alert was clicked. Timestamp: \${currentTimeMillis()}\")"
                             }
                         }
-                        ktBlock(il, Alert.Props.Dismissible::onClosed.name) { il ->
-                            ln(il) {
+                        ktB(it, Alert.Props.Dismissible::onClosed.name) {
+                            ln(it) {
                                 +"console.log(\"Close on Alert was clicked. Timestamp: \${currentTimeMillis()}\")"
                             }
                         }
                     }
                 }
-                ln(il) { +"strong { +\"Holy guacamole!\" }; +\" You should check in on some of those fields below.\"" }
+                ln(it) { +"strong { +\"Holy guacamole!\" }; +\" You should check in on some of those fields below.\"" }
             }
         }
         contentTitle(RBuilder::h4, "Close element")
-        formattedText { "You can build your own custom close element, by using <$closingElementName { }|code>." }
-        example {
+        Markdown {
+            //language=Markdown
+            +"""
+You can build your own custom close element, by using `$closingElementName { }`.
+            """
+        }
+        liveExample {
             dismissibleAlert(variant = Alert.Variants.INFO) {
                 +"You want some cookies?"
                 hr { }
@@ -198,21 +205,18 @@ internal class Examples : SectionComponent() {
                 }
             }
         }
-        codeBox {
-            ln { +"${packageName}alert.Alert" }
-            ln { +"${packageName}alert.$closingElementName" }
-            ln { +"${packageName}alert.$dismissibleAlertName" }
-            classNamesImport()
+        codeExample {
+            import("components.alert.Alert")
+            import("components.alert.$closingElementName")
+            import("components.alert.$dismissibleAlertName")
+            importClassNames()
             ln { }
-            ktBlock(
-                0,
-                "$dismissibleAlertName(variant = ${Alert.Variants.INFO.kt})"
-            ) { il ->
-                ln(il) { +" +\"You want some cookies?\"" }
-                ln(il) { +"hr { }" }
-                ktBlock(il, closingElementName) { il ->
-                    ktBlock(il, "button(classes = \"\${ClassNames.BTN} \${ClassNames.BTN_SUCCESS}\")") { il ->
-                        ln(il) { +"+\"Sure!\"" }
+            ktB(0, dismissibleAlertName, "variant" to Alert.Variants.INFO.kt) {
+                ln(it) { +" +\"You want some cookies?\"" }
+                ktIB(it, "hr", "")
+                ktB(it, closingElementName) {
+                    ktB(it, "button", "classes" to "\"\${${ClassNames.BTN.kt}} \${${ClassNames.BTN_SUCCESS.kt}}\"") {
+                        ln(it) { +"+\"Sure!\"" }
                     }
                 }
             }
@@ -221,42 +225,50 @@ internal class Examples : SectionComponent() {
         p {
             +"The callbacks can also be used for something like this:"
         }
-        example {
+        liveExample {
             child(dismissibleAlert)
         }
-        codeBox {
-            ln { +"${packageName}alert.Alert" }
-            ln { +"${packageName}alert.$closingElementName" }
-            ln { +"${packageName}alert.$dismissibleAlertName" }
-            classNamesImport()
+        codeExample {
+            import("components.alert.Alert")
+            import("components.alert.$closingElementName")
+            import("components.alert.$dismissibleAlertName")
+            importClassNames()
             ln { }
-            ktBlock(0, "private val dismissibleAlert = functionalComponent<RProps>") { il ->
-                ln(il) { +"val (show, setShow) = useState(false)" }
+            ktB(0, "private val dismissibleAlert = functionalComponent<RProps>") {
+                ln(it) { +"val (show, setShow) = useState(false)" }
                 ln { }
-                ktBlock(il, "if (show)") { il ->
-                    ktBlock(il, "$dismissibleAlertName(variant = ${Alert.Variants.DANGER.kt})") { il ->
-                        ktBlock(il, "attrs") { il ->
-                            ktBlock(il, "${Alert.Props::dismissible.name}?.apply") { il ->
-                                ktBlock(il, Alert.Props.Dismissible::onClosed.name) { il ->
-                                    ln(il) { +"setShow(false)" }
+                ktB(it, "if (show)") {
+                    ktB(it, dismissibleAlertName, "variant" to Alert.Variants.DANGER.kt) {
+                        ktB(it, "attrs") {
+                            ktB(it, "${Alert.Props::dismissible.name}?.apply") {
+                                ktB(it, Alert.Props.Dismissible::onClosed.name) {
+                                    ln(it) { +"setShow(false)" }
                                 }
                             }
                         }
-                        ln(il) { +"+\"You picked the wrong house, fool!\"" }
-                        ln(il) { +"hr { }" }
-                        ktBlock(il, closingElementName) { il ->
-                            ktBlock(il, "button(classes = \"\${ClassNames.BTN} \${ClassNames.BTN_INFO}\") ") { il ->
-                                ln(il) { +"+\"Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!\"" }
+                        ln(it) { +"+\"You picked the wrong house, fool!\"" }
+                        ktIB(it, "hr", "")
+                        ktB(it, closingElementName) {
+                            ktB(
+                                it,
+                                "button",
+                                "classes" to "\"\${${ClassNames.BTN.kt}} \${${ClassNames.BTN_INFO.kt}}\""
+                            ) {
+                                ln(it) { +"+\"Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!\"" }
                             }
                         }
                     }
                 }
-                ktBlock(il, "else") { il ->
-                    ktBlock(il, "button(classes = \"\${ClassNames.BTN} \${ClassNames.BTN_OUTLINE_DANGER}\")") { il ->
-                        ktBlock(il, "attrs") { il ->
-                            ln(il) { +"onClickFunction = { setShow(true) }" }
+                ktB(it, "else") {
+                    ktB(
+                        it,
+                        "button",
+                        "classes" to "\"\${${ClassNames.BTN.kt}} \${${ClassNames.BTN_OUTLINE_DANGER.kt}}\""
+                    ) {
+                        ktB(it, "attrs") {
+                            ln(it) { +"onClickFunction = { setShow(true) }" }
                         }
-                        ln(il) { +"+\"Open door & go in\"" }
+                        ln(it) { +"+\"Open door & go in\"" }
                     }
                 }
             }

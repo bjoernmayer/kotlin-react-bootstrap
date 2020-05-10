@@ -1,4 +1,4 @@
-@file:Suppress("DuplicatedCode", "NAME_SHADOWING")
+@file:Suppress("DuplicatedCode", "NAME_SHADOWING", "NestedLambdaShadowedImplicitParameter")
 
 package react.bootstrap.site.components.docs.content.tables
 
@@ -7,12 +7,14 @@ import react.RBuilder
 import react.bootstrap.content.tables.BorderStyles
 import react.bootstrap.content.tables.table
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
-import react.bootstrap.site.components.docs.fixings.example
-import react.bootstrap.site.components.docs.formattedText
+import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.components.docs.fixings.import
+import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.layout.grid.ktBlock
-import react.bootstrap.site.components.docs.ln
+import react.bootstrap.site.external.Markdown
 import react.dom.tbody
 import react.dom.td
 import react.dom.th
@@ -24,14 +26,14 @@ internal class BorderStyles : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Use the `table(borderStyle)`-argument with the value `${BorderStyles.BORDERED.kt}` to get borders on all sides of the
+table and cells. Or set the value to `${BorderStyles.BORDERLESS.kt}` for a table without borders.
             """
-            Use the <table(borderStyle)|code>-argument with the value <${BorderStyles.BORDERED.kt}|code> to get borders
-            on all sides of the table and cells. Or set the value to <${BorderStyles.BORDERLESS.kt}|code> for a table
-            without borders.
-        """.trimIndent()
         }
-        example {
+        liveExample {
             table(borderStyle = BorderStyles.BORDERED) {
                 thead {
                     tr {
@@ -156,130 +158,130 @@ internal class BorderStyles : SectionComponent() {
                 }
             }
         }
-        codeBox {
-            ln { +"import react.bootstrap.content.tables.${BorderStyles::class.simpleName}" }
-            ln { +"import react.bootstrap.content.tables.table" }
+        codeExample {
+            import("content.tables.${BorderStyles::class.simpleName}")
+            import("content.tables.table")
             ln { }
-            ktBlock(opener = "table(borderStyle = ${BorderStyles.BORDERED.kt})") { il ->
-                ktBlock(il, "thead") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.col) { +\"#\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"First\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Last\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Handle\" }" }
+            ktB(0, "table", "borderStyle" to BorderStyles.BORDERED.kt) {
+                ktB(it, "thead") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.col", "+\"#\"")
+                        ktIB(it, "th", "ThScope.col", "+\"First\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Last\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Handle\"")
                     }
                 }
-                ktBlock(il, "tbody") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"1\" }" }
-                        ln(il) { +"td { +\"Mark\" }" }
-                        ln(il) { +"td { +\"Otto\" }" }
-                        ln(il) { +"td { +\"@mdo\" }" }
+                ktB(it, "tbody") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"1\"")
+                        ktIB(it, "td", "+\"Mark\"")
+                        ktIB(it, "td", "+\"Otto\"")
+                        ktIB(it, "td", "+\"@mdo\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"2\" }" }
-                        ln(il) { +"td { +\"Jacob\" }" }
-                        ln(il) { +"td { +\"Thornton\" }" }
-                        ln(il) { +"td { +\"@fat\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"2\"")
+                        ktIB(it, "td", "+\"Jacob\"")
+                        ktIB(it, "td", "+\"Thornton\"")
+                        ktIB(it, "td", "+\"@fat\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"3\" }" }
-                        ln(il) { +"td { +\"Larry\" }" }
-                        ln(il) { +"td { +\"the Bird\" }" }
-                        ln(il) { +"td { +\"@twitter\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"3\"")
+                        ktIB(it, "td", "+\"Larry\"")
+                        ktIB(it, "td", "+\"the Bird\"")
+                        ktIB(it, "td", "+\"@twitter\"")
                     }
                 }
             }
             ln { }
-            ktBlock(opener = "table(borderStyle = ${BorderStyles.BORDERED.kt}, dark = true)") { il ->
-                ktBlock(il, "thead") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.col) { +\"#\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"First\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Last\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Handle\" }" }
+            ktB(0, "table", "borderStyle" to BorderStyles.BORDERED.kt, "dark" to "true") {
+                ktB(it, "thead") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.col", "+\"#\"")
+                        ktIB(it, "th", "ThScope.col", "+\"First\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Last\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Handle\"")
                     }
                 }
-                ktBlock(il, "tbody") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"1\" }" }
-                        ln(il) { +"td { +\"Mark\" }" }
-                        ln(il) { +"td { +\"Otto\" }" }
-                        ln(il) { +"td { +\"@mdo\" }" }
+                ktB(it, "tbody") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"1\"")
+                        ktIB(it, "td", "+\"Mark\"")
+                        ktIB(it, "td", "+\"Otto\"")
+                        ktIB(it, "td", "+\"@mdo\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"2\" }" }
-                        ln(il) { +"td { +\"Jacob\" }" }
-                        ln(il) { +"td { +\"Thornton\" }" }
-                        ln(il) { +"td { +\"@fat\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"2\"")
+                        ktIB(it, "td", "+\"Jacob\"")
+                        ktIB(it, "td", "+\"Thornton\"")
+                        ktIB(it, "td", "+\"@fat\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"3\" }" }
-                        ln(il) { +"td { +\"Larry\" }" }
-                        ln(il) { +"td { +\"the Bird\" }" }
-                        ln(il) { +"td { +\"@twitter\" }" }
-                    }
-                }
-            }
-            ln { }
-            ktBlock(opener = "table(borderStyle = ${BorderStyles.BORDERLESS.kt})") { il ->
-                ktBlock(il, "thead") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.col) { +\"#\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"First\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Last\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Handle\" }" }
-                    }
-                }
-                ktBlock(il, "tbody") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"1\" }" }
-                        ln(il) { +"td { +\"Mark\" }" }
-                        ln(il) { +"td { +\"Otto\" }" }
-                        ln(il) { +"td { +\"@mdo\" }" }
-                    }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"2\" }" }
-                        ln(il) { +"td { +\"Jacob\" }" }
-                        ln(il) { +"td { +\"Thornton\" }" }
-                        ln(il) { +"td { +\"@fat\" }" }
-                    }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"3\" }" }
-                        ln(il) { +"td { +\"Larry\" }" }
-                        ln(il) { +"td { +\"the Bird\" }" }
-                        ln(il) { +"td { +\"@twitter\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"3\"")
+                        ktIB(it, "td", "+\"Larry\"")
+                        ktIB(it, "td", "+\"the Bird\"")
+                        ktIB(it, "td", "+\"@twitter\"")
                     }
                 }
             }
             ln { }
-            ktBlock(opener = "table(borderStyle = ${BorderStyles.BORDERLESS.kt}, dark = true)") { il ->
-                ktBlock(il, "thead") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.col) { +\"#\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"First\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Last\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Handle\" }" }
+            ktB(0, "table", "borderStyle" to BorderStyles.BORDERLESS.kt) {
+                ktB(it, "thead") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.col", "+\"#\"")
+                        ktIB(it, "th", "ThScope.col", "+\"First\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Last\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Handle\"")
                     }
                 }
-                ktBlock(il, "tbody") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"1\" }" }
-                        ln(il) { +"td { +\"Mark\" }" }
-                        ln(il) { +"td { +\"Otto\" }" }
-                        ln(il) { +"td { +\"@mdo\" }" }
+                ktB(it, "tbody") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"1\"")
+                        ktIB(it, "td", "+\"Mark\"")
+                        ktIB(it, "td", "+\"Otto\"")
+                        ktIB(it, "td", "+\"@mdo\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"2\" }" }
-                        ln(il) { +"td { +\"Jacob\" }" }
-                        ln(il) { +"td { +\"Thornton\" }" }
-                        ln(il) { +"td { +\"@fat\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"2\"")
+                        ktIB(it, "td", "+\"Jacob\"")
+                        ktIB(it, "td", "+\"Thornton\"")
+                        ktIB(it, "td", "+\"@fat\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"3\" }" }
-                        ln(il) { +"td { +\"Larry\" }" }
-                        ln(il) { +"td { +\"the Bird\" }" }
-                        ln(il) { +"td { +\"@twitter\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"3\"")
+                        ktIB(it, "td", "+\"Larry\"")
+                        ktIB(it, "td", "+\"the Bird\"")
+                        ktIB(it, "td", "+\"@twitter\"")
+                    }
+                }
+            }
+            ln { }
+            ktB(0, "table", "borderStyle" to BorderStyles.BORDERLESS.kt, "dark" to "true") {
+                ktB(it, "thead") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.col", "+\"#\"")
+                        ktIB(it, "th", "ThScope.col", "+\"First\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Last\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Handle\"")
+                    }
+                }
+                ktB(it, "tbody") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"1\"")
+                        ktIB(it, "td", "+\"Mark\"")
+                        ktIB(it, "td", "+\"Otto\"")
+                        ktIB(it, "td", "+\"@mdo\"")
+                    }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"2\"")
+                        ktIB(it, "td", "+\"Jacob\"")
+                        ktIB(it, "td", "+\"Thornton\"")
+                        ktIB(it, "td", "+\"@fat\"")
+                    }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"3\"")
+                        ktIB(it, "td", "+\"Larry\"")
+                        ktIB(it, "td", "+\"the Bird\"")
+                        ktIB(it, "td", "+\"@twitter\"")
                     }
                 }
             }

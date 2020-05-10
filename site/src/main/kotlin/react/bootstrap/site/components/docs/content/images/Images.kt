@@ -8,9 +8,9 @@ internal class Images : PageComponent() {
         pageTitle("Images")
         pageLead {
             +"""
-            Documentation and examples for opting images into responsive behavior (so they never become larger than
-            their parent elements).
-        """.trimIndent()
+Documentation and examples for opting images into responsive behavior (so they never become larger than their parent
+elements).
+        """
         }
         child(ResponsiveImages::class)
         child(ImageThumbnails::class)

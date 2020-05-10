@@ -8,9 +8,8 @@ internal class Typography : PageComponent() {
         pageTitle("Typography")
         pageLead {
             +"""
-            Documentation and examples for Bootstrap typography, including global settings, headings, body text, lists,
-            and more.
-        """.trimIndent()
+Documentation and examples for Bootstrap typography, including global settings, headings, body text, lists, and more.
+            """
         }
         child(Headings::class)
         child(DisplayHeadings::class)

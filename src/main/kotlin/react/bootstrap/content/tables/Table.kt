@@ -7,7 +7,7 @@ import react.bootstrap.appendClass
 import react.bootstrap.lib.Breakpoints
 import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
-import react.dom.RDOMBuilder
+import react.bootstrap.lib.RDOMHandler
 import react.dom.div
 import react.dom.table
 
@@ -19,7 +19,7 @@ fun RBuilder.table(
     small: Boolean? = null,
     responsive: Breakpoints? = null,
     classes: String? = null,
-    block: RDOMBuilder<TABLE>.() -> Unit
+    block: RDOMHandler<TABLE>
 ): ReactElement {
     val tableClasses = mutableSetOf(ClassNames.TABLE)
 

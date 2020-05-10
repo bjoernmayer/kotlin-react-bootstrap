@@ -7,7 +7,7 @@ import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
-import react.dom.RDOMBuilder
+import react.bootstrap.lib.RDOMHandler
 import react.dom.li
 import react.dom.ul
 
@@ -19,7 +19,7 @@ enum class ListStyles(override val className: ClassNames) : ClassNameEnum {
 fun RBuilder.ul(
     listStyles: ListStyles,
     classes: String? = null,
-    block: RDOMBuilder<UL>.() -> Unit
+    block: RDOMHandler<UL>
 ): ReactElement =
     ul(classes = classes.appendClass(listStyles.className), block = block)
 
@@ -30,6 +30,6 @@ enum class ListItemStyles(override val className: ClassNames) : ClassNameEnum {
 fun RBuilder.li(
     listItemStyles: ListItemStyles,
     classes: String? = null,
-    block: RDOMBuilder<LI>.() -> Unit
+    block: RDOMHandler<LI>
 ): ReactElement =
     li(classes = classes.appendClass(listItemStyles.className), block = block)

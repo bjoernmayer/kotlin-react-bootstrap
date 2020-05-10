@@ -5,14 +5,14 @@ import kotlinx.html.ThScope
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.dom.RDOMBuilder
+import react.bootstrap.lib.RDOMHandler
 import react.dom.th
 
 fun RBuilder.th(
     contextualStyle: ContextualStyle? = null,
     scope: ThScope? = null,
     classes: String? = null,
-    block: RDOMBuilder<TH>.() -> Unit
+    block: RDOMHandler<TH>
 ): ReactElement =
     th(
         classes = contextualStyle?.let { classes.appendClass(it.className) } ?: classes,

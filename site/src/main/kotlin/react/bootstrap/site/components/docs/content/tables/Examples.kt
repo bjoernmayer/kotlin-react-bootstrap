@@ -1,4 +1,4 @@
-@file:Suppress("NAME_SHADOWING")
+@file:Suppress("NAME_SHADOWING", "DuplicatedCode", "NestedLambdaShadowedImplicitParameter")
 
 package react.bootstrap.site.components.docs.content.tables
 
@@ -6,11 +6,13 @@ import kotlinx.html.ThScope
 import react.RBuilder
 import react.bootstrap.content.tables.table
 import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeBox
-import react.bootstrap.site.components.docs.fixings.example
-import react.bootstrap.site.components.docs.formattedText
-import react.bootstrap.site.components.docs.layout.grid.ktBlock
-import react.bootstrap.site.components.docs.ln
+import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.components.docs.fixings.import
+import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.fixings.ln
+import react.bootstrap.site.external.Markdown
 import react.dom.tbody
 import react.dom.td
 import react.dom.th
@@ -22,21 +24,22 @@ internal class Examples : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Due to the widespread use of tables across third-party widgets like calendars and date pickers, Bootstrap has designed
+their tables to be __opt-in__. Just use the `table { }` extension function provided with this library with its various
+arguments to modify the table.
             """
-            Due to the widespread use of tables across third-party widgets like calendars and date pickers, Bootstrap
-            has designed their tables to be <opt-in|strong>. Just use the <table { }|code> extension function provided
-            with this library with its various arguments to modify the table.
-        """.trimIndent()
         }
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+Using the most basic table markup, here’s how `table { }`-based tables look in Bootstrap. __All table styles are
+inherited in Bootstrap 4__, meaning any nested tables will be styled in the same manner as the parent.
             """
-            Using the most basic table markup, here’s how <table { }|code>-based tables look in Bootstrap. <All table
-            styles are inherited in Bootstrap 4|strong>, meaning any nested tables will be styled in the same manner as
-            the parent.
-        """.trimIndent()
         }
-        example {
+        liveExample {
             table {
                 thead {
                     tr {
@@ -68,47 +71,47 @@ internal class Examples : SectionComponent() {
                 }
             }
         }
-        codeBox {
-            ln { +"import react.bootstrap.content.tables.table" }
+        codeExample {
+            import("content.tables.table")
             ln { }
-            ktBlock(opener = "table") { il ->
-                ktBlock(il, "thead") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.col) { +\"#\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"First\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Last\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Handle\" }" }
+            ktB(opener = "table") {
+                ktB(it, "thead") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.col", "+\"#\"")
+                        ktIB(it, "th", "ThScope.col", "+\"First\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Last\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Handle\"")
                     }
                 }
-                ktBlock(il, "tbody") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"1\" }" }
-                        ln(il) { +"td { +\"Mark\" }" }
-                        ln(il) { +"td { +\"Otto\" }" }
-                        ln(il) { +"td { +\"@mdo\" }" }
+                ktB(it, "tbody") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"1\"")
+                        ktIB(it, "td", "+\"Mark\"")
+                        ktIB(it, "td", "+\"Otto\"")
+                        ktIB(it, "td", "+\"@mdo\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"2\" }" }
-                        ln(il) { +"td { +\"Jacob\" }" }
-                        ln(il) { +"td { +\"Thornton\" }" }
-                        ln(il) { +"td { +\"@fat\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"2\"")
+                        ktIB(it, "td", "+\"Jacob\"")
+                        ktIB(it, "td", "+\"Thornton\"")
+                        ktIB(it, "td", "+\"@fat\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"3\" }" }
-                        ln(il) { +"td { +\"Larry\" }" }
-                        ln(il) { +"td { +\"the Bird\" }" }
-                        ln(il) { +"td { +\"@twitter\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"3\"")
+                        ktIB(it, "td", "+\"Larry\"")
+                        ktIB(it, "td", "+\"the Bird\"")
+                        ktIB(it, "td", "+\"@twitter\"")
                     }
                 }
             }
         }
-        formattedText {
+        Markdown {
+            //language=Markdown
+            +"""
+You can also invert the colors - with light text on dark background - by setting `table(dark = true)`.
             """
-                You can also invert the colors - with light text on dark background - by setting
-                <table(dark = true)|code>.
-            """.trimIndent()
         }
-        example {
+        liveExample {
             table(dark = true) {
                 thead {
                     tr {
@@ -140,36 +143,36 @@ internal class Examples : SectionComponent() {
                 }
             }
         }
-        codeBox {
-            ln { +"import react.bootstrap.content.tables.table" }
+        codeExample {
+            import("content.tables.table")
             ln { }
-            ktBlock(opener = "table(dark = true)") { il ->
-                ktBlock(il, "thead") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.col) { +\"#\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"First\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Last\" }" }
-                        ln(il) { +"th(ThScope.col) { +\"Handle\" }" }
+            ktB(0, "table", "dark" to "true") {
+                ktB(it, "thead") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.col", "+\"#\"")
+                        ktIB(it, "th", "ThScope.col", "+\"First\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Last\"")
+                        ktIB(it, "th", "ThScope.col", "+\"Handle\"")
                     }
                 }
-                ktBlock(il, "tbody") { il ->
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"1\" }" }
-                        ln(il) { +"td { +\"Mark\" }" }
-                        ln(il) { +"td { +\"Otto\" }" }
-                        ln(il) { +"td { +\"@mdo\" }" }
+                ktB(it, "tbody") {
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"1\"")
+                        ktIB(it, "td", "+\"Mark\"")
+                        ktIB(it, "td", "+\"Otto\"")
+                        ktIB(it, "td", "+\"@mdo\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"2\" }" }
-                        ln(il) { +"td { +\"Jacob\" }" }
-                        ln(il) { +"td { +\"Thornton\" }" }
-                        ln(il) { +"td { +\"@fat\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"2\"")
+                        ktIB(it, "td", "+\"Jacob\"")
+                        ktIB(it, "td", "+\"Thornton\"")
+                        ktIB(it, "td", "+\"@fat\"")
                     }
-                    ktBlock(il, "tr") { il ->
-                        ln(il) { +"th(ThScope.row) { +\"3\" }" }
-                        ln(il) { +"td { +\"Larry\" }" }
-                        ln(il) { +"td { +\"the Bird\" }" }
-                        ln(il) { +"td { +\"@twitter\" }" }
+                    ktB(it, "tr") {
+                        ktIB(it, "th", "ThScope.row", "+\"3\"")
+                        ktIB(it, "td", "+\"Larry\"")
+                        ktIB(it, "td", "+\"the Bird\"")
+                        ktIB(it, "td", "+\"@twitter\"")
                     }
                 }
             }

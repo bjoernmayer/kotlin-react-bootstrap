@@ -7,6 +7,7 @@ import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.ElementProvider
 import react.bootstrap.lib.RenderAsComponent
 import react.bootstrap.lib.WithRenderAs
 import react.dom.WithClassName
@@ -33,7 +34,7 @@ fun RBuilder.display4(classes: String? = null, block: RHandler<Display.Props>): 
 
 fun RBuilder.display(
     variant: Display.Variants,
-    renderAs: (RBuilder.() -> ReactElement)? = null,
+    renderAs: ElementProvider? = null,
     classes: String? = null,
     block: RHandler<Display.Props>
 ): ReactElement = child(Display::class) {
@@ -63,8 +64,6 @@ class Display : RenderAsComponent<Display.Props, WithClassName, RState>() {
         DISPLAY_2(ClassNames.DISPLAY_2),
         DISPLAY_3(ClassNames.DISPLAY_3),
         DISPLAY_4(ClassNames.DISPLAY_4);
-
-        val kt = "${Display::class.simpleName}.${this::class.simpleName}.$name"
     }
 
     interface Props : WithRenderAs, WithClassName {
