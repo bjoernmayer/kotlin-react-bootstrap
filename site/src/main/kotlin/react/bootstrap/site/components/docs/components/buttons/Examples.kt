@@ -41,7 +41,7 @@ for more control.
                     Button.Variants::class,
                     Button.Variants.Solid::class
                 )
-                ktIB(0, "button", variant, "+\"${it::class.normalName}\"")
+                ktIB(0, RBuilder::button, variant, "+\"${it::class.normalName}\"")
                 ln { +"+\" \"" }
             }
         }

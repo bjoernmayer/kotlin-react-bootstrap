@@ -16,5 +16,7 @@ and more.
         child(ButtonTags::class)
         child(OutlineButtons::class)
         child(Sizes::class)
+        child(ActiveState::class)
+        child(DisabledState::class)
     }
 }

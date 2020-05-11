@@ -5,10 +5,13 @@ package react.bootstrap.components.button
 import kotlinx.html.ButtonFormEncType
 import kotlinx.html.ButtonFormMethod
 import kotlinx.html.ButtonType
+import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.InputFormEncType
 import kotlinx.html.InputFormMethod
 import kotlinx.html.InputType
+import kotlinx.html.js.onClickFunction
 import kotlinx.html.role
+import kotlinx.html.tabIndex
 import react.RBuilder
 import react.RComponent
 import react.RHandler
@@ -17,6 +20,9 @@ import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.WithOnClick
+import react.bootstrap.lib.ariaDisabled
+import react.bootstrap.lib.ariaPressed
 import react.dom.WithClassName
 import react.dom.a
 import react.dom.button
@@ -46,6 +52,10 @@ open class Button : RComponent<Button.Props, Button.State>() {
             btnClasses.add(ClassNames.TEXT_NOWRAP)
         }
 
+        if (props.blockSized == true) {
+            btnClasses.add(ClassNames.BTN_BLOCK)
+        }
+
         props.sizes?.also {
             btnClasses.add(
                 when (it) {
@@ -60,7 +70,7 @@ open class Button : RComponent<Button.Props, Button.State>() {
         }
 
         if (props.type !== null) {
-            when (val type = props.type!!) {
+            when (val type = props.type) {
                 is Types.Button -> {
                     button(
                         formEncType = type.formEncType,
@@ -68,6 +78,12 @@ open class Button : RComponent<Button.Props, Button.State>() {
                         type = type.type,
                         classes = props.className.appendClass(btnClasses)
                     ) {
+                        attrs {
+                            handleAttrs()
+                            if (props.disabled == true) {
+                                attrs.disabled = true
+                            }
+                        }
                         children()
                     }
                 }
@@ -80,8 +96,14 @@ open class Button : RComponent<Button.Props, Button.State>() {
                         classes = props.className.appendClass(btnClasses)
                     ) {
                         attrs {
+                            handleAttrs()
                             defaultValue = type.value
+
+                            if (props.disabled == true) {
+                                disabled = true
+                            }
                         }
+                        // No children allowed
                     }
                 }
                 is Types.Link -> {
@@ -90,7 +112,10 @@ open class Button : RComponent<Button.Props, Button.State>() {
                         target = type.target,
                         classes = props.className.appendClass(btnClasses)
                     ) {
-                        attrs.role = "button"
+                        attrs {
+                            handleAttrs()
+                            role = "button"
+                        }
                         children()
                     }
                 }
@@ -100,8 +125,31 @@ open class Button : RComponent<Button.Props, Button.State>() {
                 type = ButtonType.button,
                 classes = props.className.appendClass(btnClasses)
             ) {
+                attrs {
+                    handleAttrs()
+                    if (props.disabled == true) {
+                        attrs.disabled = true
+                    }
+                }
                 children()
             }
+        }
+    }
+
+    private fun <T : CommonAttributeGroupFacade> T.handleAttrs() {
+        if (props.active == true) {
+            ariaPressed = true
+        }
+
+        if (props.disabled == true) {
+            if (props.type is Types.Link) {
+                tabIndex = "-1"
+            }
+            ariaDisabled = true
+        }
+
+        props.onClick?.also {
+            onClickFunction = it
         }
     }
 
@@ -185,13 +233,14 @@ open class Button : RComponent<Button.Props, Button.State>() {
         ) : Types()
     }
 
-    interface Props : WithClassName {
+    interface Props : WithClassName, WithOnClick {
         var active: Boolean?
         var disabled: Boolean?
         var nowrap: Boolean?
         var sizes: Sizes?
         var type: Types?
         var variant: Variants?
+        var blockSized: Boolean?
     }
 
     interface State : RState {
@@ -206,6 +255,7 @@ fun RBuilder.button(
     nowrap: Boolean? = null,
     type: Button.Types? = null,
     sizes: Button.Sizes? = null,
+    blockSized: Boolean? = null,
     block: RHandler<Button.Props>
 ): ReactElement =
     child(Button::class) {
@@ -216,17 +266,8 @@ fun RBuilder.button(
             this.nowrap = nowrap
             this.type = type
             this.sizes = sizes
+            this.blockSized = blockSized
         }
 
         block()
     }
-
-fun RBuilder.button(
-    variant: Button.Variants,
-    active: Boolean? = null,
-    disabled: Boolean? = null,
-    nowrap: Boolean? = null,
-    type: ButtonType,
-    sizes: Button.Sizes? = null,
-    block: RHandler<Button.Props>
-): ReactElement = button(variant, active, disabled, nowrap, Button.Types.Button(type = type), sizes, block)

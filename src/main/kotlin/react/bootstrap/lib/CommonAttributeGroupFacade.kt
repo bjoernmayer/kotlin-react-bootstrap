@@ -20,3 +20,15 @@ var CommonAttributeGroupFacade.ariaHidden: Boolean
     set(newValue) {
         this.attributes["aria-hidden"] = newValue.toString()
     }
+
+var CommonAttributeGroupFacade.ariaPressed: Boolean
+    get() = this.attributes["aria-pressed"]?.toBoolean() ?: false
+    set(newValue) {
+        this.attributes["aria-pressed"] = newValue.toString()
+    }
+
+var CommonAttributeGroupFacade.ariaDisabled: Boolean
+    get() = this.attributes["aria-disabled"]?.toBoolean() ?: false
+    set(newValue) {
+        this.attributes["aria-disabled"] = newValue.toString()
+    }

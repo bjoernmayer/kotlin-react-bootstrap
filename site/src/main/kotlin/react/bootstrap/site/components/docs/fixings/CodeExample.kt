@@ -11,6 +11,7 @@ import react.ReactElement
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.external.PrismLight
 import react.dom.figure
+import kotlin.reflect.KFunction
 
 internal typealias CodeExampleBuilder = RElementBuilder<CodeExample.Props>
 
@@ -22,10 +23,18 @@ external val coy: dynamic
 @JsModule("react-syntax-highlighter/dist/esm/languages/prism/kotlin")
 external val kotlin: dynamic
 
-internal fun CodeExampleBuilder.ln(indentationLevel: Int = 0, block: CodeExampleBuilder.() -> Unit) {
+private fun getIndent(indentationLevel: Int): String {
+    val indentBuilder = StringBuilder()
+
     for (x in 1..indentationLevel) {
-        +"    "
+        indentBuilder.append("    ")
     }
+
+    return indentBuilder.toString()
+}
+
+internal fun CodeExampleBuilder.ln(indentationLevel: Int = 0, block: CodeExampleBuilder.() -> Unit) {
+    +getIndent(indentationLevel)
     block()
     +"\n"
 }
@@ -58,9 +67,44 @@ internal fun CodeExampleBuilder.ktB(
 internal fun CodeExampleBuilder.ktB(
     indentationLevel: Int = 0,
     opener: String,
-    vararg args: Pair<String, String>,
+    vararg args: Pair<String, Any>,
     block: CodeExampleBuilder.(indentationLevel: Int) -> Unit
 ) = ktB(indentationLevel, opener, args.joinToString { "${it.first} = ${it.second}" }, block)
+
+internal fun CodeExampleBuilder.ktB(
+    indentationLevel: Int = 0,
+    opener: String,
+    breakDownArgs: Boolean = false,
+    vararg args: Pair<String, Any>,
+    block: CodeExampleBuilder.(indentationLevel: Int) -> Unit
+) {
+    val (separator, fix, valuePrefix) = if (breakDownArgs) {
+        Triple(",\n", "\n", getIndent(indentationLevel + 1))
+    } else {
+        Triple(", ", "", "")
+    }
+
+    ktB(
+        indentationLevel,
+        opener,
+        args.joinToString(separator, fix, fix) { "$valuePrefix${it.first} = ${it.second}" },
+        block
+    )
+}
+
+internal fun CodeExampleBuilder.ktB(
+    indentationLevel: Int = 0,
+    opener: KFunction<*>,
+    breakDownArgs: Boolean = false,
+    vararg args: Pair<String, Any>,
+    block: CodeExampleBuilder.(indentationLevel: Int) -> Unit
+) = ktB(
+    indentationLevel = indentationLevel,
+    opener = opener.name,
+    breakDownArgs = breakDownArgs,
+    block = block,
+    args = *args
+)
 
 internal fun CodeExampleBuilder.ktIB(
     indentationLevel: Int = 0,
@@ -85,16 +129,73 @@ internal fun CodeExampleBuilder.ktIB(
 
 internal fun CodeExampleBuilder.ktIB(
     indentationLevel: Int = 0,
+    opener: KFunction<*>,
+    args: String,
+    content: String
+) {
+    ktIB(indentationLevel, "${opener.name}($args)", content)
+}
+
+internal fun CodeExampleBuilder.ktIB(
+    indentationLevel: Int = 0,
     opener: String,
-    vararg args: Pair<String, String>,
+    vararg args: Pair<String, Any>,
     content: () -> String
 ) = ktIB(indentationLevel, opener, args.joinToString { "${it.first} = ${it.second}" }, content())
 
 internal fun CodeExampleBuilder.ktIB(
     indentationLevel: Int = 0,
     opener: String,
-    vararg args: Pair<String, String>
+    breakDownArgs: Boolean = false,
+    vararg args: Pair<String, Any>,
+    content: () -> String
+) {
+    val (separator, fix, valuePrefix) = if (breakDownArgs) {
+        Triple(",\n", "\n", getIndent(indentationLevel + 1))
+    } else {
+        Triple(", ", "", "")
+    }
+
+    ktIB(
+        indentationLevel,
+        opener,
+        args.joinToString(separator, fix, fix) { "$valuePrefix${it.first} = ${it.second}" },
+        content()
+    )
+}
+
+internal fun CodeExampleBuilder.ktIB(
+    indentationLevel: Int = 0,
+    opener: KFunction<*>,
+    vararg args: Pair<String, Any>,
+    content: () -> String
+) = ktIB(indentationLevel = indentationLevel, opener = opener.name, content = content, args = *args)
+
+internal fun CodeExampleBuilder.ktIB(
+    indentationLevel: Int = 0,
+    opener: KFunction<*>,
+    breakDownArgs: Boolean = false,
+    vararg args: Pair<String, Any>,
+    content: () -> String
+) = ktIB(
+    indentationLevel = indentationLevel,
+    opener = opener.name,
+    breakDownArgs = breakDownArgs,
+    content = content,
+    args = *args
+)
+
+internal fun CodeExampleBuilder.ktIB(
+    indentationLevel: Int = 0,
+    opener: String,
+    vararg args: Pair<String, Any>
 ) = ktIB(indentationLevel, opener, *args) { "+\"${args.joinToString { "${it.first} = ${it.second}" }}\"" }
+
+internal fun CodeExampleBuilder.ktIB(
+    indentationLevel: Int = 0,
+    opener: KFunction<*>,
+    vararg args: Pair<String, Any>
+) = ktIB(indentationLevel = indentationLevel, opener = opener.name, args = *args)
 
 internal class CodeExample : RComponent<CodeExample.Props, RState>() {
     override fun RBuilder.render() {

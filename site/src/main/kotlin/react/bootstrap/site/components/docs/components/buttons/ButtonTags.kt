@@ -3,10 +3,7 @@ package react.bootstrap.site.components.docs.components.buttons
 import kotlinx.html.ButtonType
 import react.RBuilder
 import react.bootstrap.components.button.Button
-import react.bootstrap.components.button.Button.Types.Input
-import react.bootstrap.components.button.Button.Types.Link
 import react.bootstrap.components.button.button
-import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
@@ -29,48 +26,82 @@ classes on `a` or `input` elements (though some browsers may apply a slightly di
             """
         }
         liveExample {
-            button(variant = Button.Variants.Solid.PRIMARY, type = Link(href = "#")) { +"Link" }
+            button(
+                variant = Button.Variants.Solid.PRIMARY,
+                type = Button.Types.Link(href = "#")
+            ) { +"Link" }
             +" "
-            button(variant = Button.Variants.Solid.PRIMARY, type = ButtonType.submit) { +"Button" }
+            button(
+                variant = Button.Variants.Solid.PRIMARY,
+                type = Button.Types.Button(type = ButtonType.submit)
+            ) { +"Button" }
             +" "
-            button(variant = Button.Variants.Solid.PRIMARY, type = Input(Input.Type.BUTTON, value = "Input")) { }
+            button(
+                variant = Button.Variants.Solid.PRIMARY,
+                type = Button.Types.Input(Button.Types.Input.Type.BUTTON, value = "Input")
+            ) { }
             +" "
-            button(variant = Button.Variants.Solid.PRIMARY, type = Input(Input.Type.SUBMIT, value = "Submit")) { }
+            button(
+                variant = Button.Variants.Solid.PRIMARY,
+                type = Button.Types.Input(Button.Types.Input.Type.SUBMIT, value = "Submit")
+            ) { }
             +" "
-            button(variant = Button.Variants.Solid.PRIMARY, type = Input(Input.Type.RESET, value = "Reset")) { }
+            button(
+                variant = Button.Variants.Solid.PRIMARY,
+                type = Button.Types.Input(Button.Types.Input.Type.RESET, value = "Reset")
+            ) { }
         }
         codeExample {
             import("button.Button")
-            import("button.${buildNestedName(Input::class, Button::class, Button.Types::class)}")
-            import("button.${buildNestedName(Link::class, Button::class, Button.Types::class)}")
             import("button.Button.button")
             ln { }
-            val prim = (Button.Variants.Solid.PRIMARY).kt
-            val link = Link::class.simpleName!!
-            val input = Input::class.simpleName!!
-            ktIB(0, "button", "variant" to prim, "type" to "$link(href = \"#\")") { "+\"Link\"" }
-            ln { +"+\" \"" }
-            ktIB(0, "button", "variant" to prim, "type" to ButtonType.submit.kt) { "+\"Button\"" }
-            ln { +"+\" \"" }
+            val prim = (Button.Variants.Solid.PRIMARY).ktN
+            val link = Button.Types.Link::class.nestedName
+            val input = Button.Types.Input::class.nestedName
+            val button = Button.Types.Button::class.nestedName
+
             ktIB(
                 0,
-                "button",
+                RBuilder::button,
+                true,
                 "variant" to prim,
-                "type" to "$input($input.${Input.Type.BUTTON.kt}, value = \"Input\")"
+                "type" to "$link(href = \"#\")"
+            ) { "+\"Link\"" }
+            ln { +"+\" \"" }
+
+            ktIB(
+                0,
+                RBuilder::button,
+                true,
+                "variant" to prim,
+                "type" to "$button(type = ${ButtonType.submit.kt})"
+            ) { "+\"Button\"" }
+            ln { +"+\" \"" }
+
+            ktIB(
+                0,
+                RBuilder::button,
+                true,
+                "variant" to prim,
+                "type" to "$input(${Button.Types.Input.Type.BUTTON.ktN}, value = \"Input\")"
             ) { "" }
             ln { +"+\" \"" }
+
             ktIB(
                 0,
-                "button",
+                RBuilder::button,
+                true,
                 "variant" to prim,
-                "type" to "$input($input.${Input.Type.SUBMIT.kt}, value = \"Submit\")"
+                "type" to "$input(${Button.Types.Input.Type.SUBMIT.ktN}, value = \"Submit\")"
             ) { "" }
             ln { +"+\" \"" }
+
             ktIB(
                 0,
-                "button",
+                RBuilder::button,
+                true,
                 "variant" to prim,
-                "type" to "$input($input.${Input.Type.RESET.kt}, value = \"Reset\")"
+                "type" to "$input(${Button.Types.Input.Type.RESET.ktN}, value = \"Reset\")"
             ) { "" }
         }
     }

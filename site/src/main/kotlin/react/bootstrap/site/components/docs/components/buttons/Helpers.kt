@@ -19,32 +19,32 @@ internal val Solid.Companion.all: Set<Variants>
         WARNING
     )
 
-internal val Solid.DANGER.kt: String
-    get() = buildNestedName(Solid.DANGER::class, Button::class, Variants::class, Solid::class)
+internal val Solid.DANGER.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Solid::class)
 
-internal val Solid.DARK.kt: String
-    get() = buildNestedName(Solid.DARK::class, Button::class, Variants::class, Solid::class)
+internal val Solid.DARK.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Solid::class)
 
-internal val Solid.INFO.kt: String
-    get() = buildNestedName(Solid.INFO::class, Button::class, Variants::class, Solid::class)
+internal val Solid.INFO.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Solid::class)
 
-internal val Solid.LIGHT.kt: String
-    get() = buildNestedName(Solid.LIGHT::class, Button::class, Variants::class, Solid::class)
+internal val Solid.LIGHT.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Solid::class)
 
-internal val Solid.LINK.kt: String
-    get() = buildNestedName(Solid.LINK::class, Button::class, Variants::class, Solid::class)
+internal val Solid.LINK.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Solid::class)
 
-internal val Solid.PRIMARY.kt: String
-    get() = buildNestedName(Solid.PRIMARY::class, Button::class, Variants::class, Solid::class)
+internal val Solid.PRIMARY.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Solid::class)
 
-internal val Solid.SECONDARY.kt: String
-    get() = buildNestedName(Solid.SECONDARY::class, Button::class, Variants::class, Solid::class)
+internal val Solid.SECONDARY.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Solid::class)
 
-internal val Solid.SUCCESS.kt: String
-    get() = buildNestedName(Solid.SUCCESS::class, Button::class, Variants::class, Solid::class)
+internal val Solid.SUCCESS.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Solid::class)
 
-internal val Solid.WARNING.kt: String
-    get() = buildNestedName(Solid.WARNING::class, Button::class, Variants::class, Solid::class)
+internal val Solid.WARNING.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Solid::class)
 
 internal val KClass<out Variants>.normalName
     get() = simpleName!!.toLowerCase().capitalize()
@@ -61,5 +61,17 @@ internal val Variants.Outline.Companion.all: Set<Variants>
         WARNING
     )
 
-internal val Button.Sizes.kt
-    get() = buildNestedName(name, Button::class, Button.Sizes::class)
+internal val Button.Sizes.ktN
+    get() = buildNestedName(name, Button::class, this::class)
+
+internal val KClass<Button.Types.Link>.nestedName
+    get() = buildNestedName(this, Button::class, Button.Types::class)
+
+internal val KClass<Button.Types.Input>.nestedName
+    get() = buildNestedName(this, Button::class, Button.Types::class)
+
+internal val KClass<Button.Types.Button>.nestedName
+    get() = buildNestedName(this, Button::class, Button.Types::class)
+
+internal val Button.Types.Input.Type.ktN
+    get() = buildNestedName(name, Button::class, Button.Types::class, Button.Types.Input::class)
