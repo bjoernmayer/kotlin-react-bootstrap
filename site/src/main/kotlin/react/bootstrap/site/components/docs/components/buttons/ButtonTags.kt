@@ -22,7 +22,8 @@ internal class ButtonTags : SectionComponent() {
             //language=Markdown
             +"""
 This library's `button` component is designed to be used with the HTML `button` element. However, you can also use these
-classes on `a` or `input` elements (though some browsers may apply a slightly different rendering).
+classes on `a` or `input` elements (though some browsers may apply a slightly different rendering). __Keep in mind, that
+the `input` element cannot have child elements.__
             """
         }
         liveExample {

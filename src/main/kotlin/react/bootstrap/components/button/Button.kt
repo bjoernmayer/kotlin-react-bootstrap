@@ -79,7 +79,7 @@ open class Button : RComponent<Button.Props, Button.State>() {
                         classes = props.className.appendClass(btnClasses)
                     ) {
                         attrs {
-                            handleAttrs()
+                            handleCommonAttrs()
                             if (props.disabled == true) {
                                 attrs.disabled = true
                             }
@@ -96,11 +96,12 @@ open class Button : RComponent<Button.Props, Button.State>() {
                         classes = props.className.appendClass(btnClasses)
                     ) {
                         attrs {
-                            handleAttrs()
+                            handleCommonAttrs()
                             defaultValue = type.value
 
                             if (props.disabled == true) {
                                 disabled = true
+                                tabIndex = "-1"
                             }
                         }
                         // No children allowed
@@ -113,7 +114,7 @@ open class Button : RComponent<Button.Props, Button.State>() {
                         classes = props.className.appendClass(btnClasses)
                     ) {
                         attrs {
-                            handleAttrs()
+                            handleCommonAttrs()
                             role = "button"
                         }
                         children()
@@ -126,7 +127,7 @@ open class Button : RComponent<Button.Props, Button.State>() {
                 classes = props.className.appendClass(btnClasses)
             ) {
                 attrs {
-                    handleAttrs()
+                    handleCommonAttrs()
                     if (props.disabled == true) {
                         attrs.disabled = true
                     }
@@ -136,15 +137,12 @@ open class Button : RComponent<Button.Props, Button.State>() {
         }
     }
 
-    private fun <T : CommonAttributeGroupFacade> T.handleAttrs() {
+    private fun <T : CommonAttributeGroupFacade> T.handleCommonAttrs() {
         if (props.active == true) {
             ariaPressed = true
         }
 
         if (props.disabled == true) {
-            if (props.type is Types.Link) {
-                tabIndex = "-1"
-            }
             ariaDisabled = true
         }
 

@@ -44,9 +44,9 @@ internal class Reference : SectionComponent() {
                 RBuilder::alert,
                 setOf(RBuilder::class.simpleName!!),
                 setOf(
-                    FunReference.Argument("variant", Alert.Variants::class),
+                    FunReference.Argument("variant", Alert.Variants::class.nestedName),
                     FunReference.Argument("classes", String::class, true, "null"),
-                    FunReference.Argument("block", "RHandler<${Alert.Props::class.simpleName}>")
+                    FunReference.Argument("block", "RHandler<${Alert.Props::class.nestedName}>")
                 ),
                 "ReactElement"
             ).print(false)
@@ -61,10 +61,10 @@ internal class Reference : SectionComponent() {
                 RBuilder::dismissibleAlert,
                 setOf(RBuilder::class.simpleName!!),
                 setOf(
-                    FunReference.Argument("variant", Alert.Variants::class),
+                    FunReference.Argument("variant", Alert.Variants::class.nestedName),
                     FunReference.Argument("fade", Boolean::class, true, "null"),
                     FunReference.Argument("classes", String::class, true, "null"),
-                    FunReference.Argument("block", "RHandler<${Alert.DismissibleProps::class.simpleName}>")
+                    FunReference.Argument("block", "RHandler<${Alert.DismissibleProps::class.nestedName}>")
                 ),
                 "ReactElement"
             ).print(false)
@@ -79,7 +79,7 @@ Adds `${ClassNames.ALERT_LINK.kt}` to the outer most `ReactElement` resulting fr
         codeExample {
             +FunReference(
                 RElementBuilder<Alert.Props>::link,
-                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
                     FunReference.Argument("block", "ElementProvider")
                 ),
@@ -96,7 +96,7 @@ Adds `${ClassNames.ALERT_HEADING.kt}` to the outer most `ReactElement` resulting
         codeExample {
             +FunReference(
                 RElementBuilder<Alert.Props>::heading,
-                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
 
                     FunReference.Argument("headings", Headings::class),
@@ -115,7 +115,7 @@ Custom `h1` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
         codeExample {
             +FunReference(
                 RElementBuilder<Alert.Props>::h1,
-                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
                     FunReference.Argument("classes", String::class, true, "null"),
                     FunReference.Argument("block", "RDOMHandler<${H1::class.simpleName}>")
@@ -133,7 +133,7 @@ Custom `h2` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
         codeExample {
             +FunReference(
                 RElementBuilder<Alert.Props>::h2,
-                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
                     FunReference.Argument("classes", String::class, true, "null"),
                     FunReference.Argument("block", "RDOMHandler<${H2::class.simpleName}>")
@@ -151,7 +151,7 @@ Custom `h3` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
         codeExample {
             +FunReference(
                 RElementBuilder<Alert.Props>::h3,
-                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
                     FunReference.Argument("classes", String::class, true, "null"),
                     FunReference.Argument("block", "RDOMHandler<${H3::class.simpleName}>")
@@ -169,7 +169,7 @@ Custom `h4` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
         codeExample {
             +FunReference(
                 RElementBuilder<Alert.Props>::h4,
-                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
                     FunReference.Argument("classes", String::class, true, "null"),
                     FunReference.Argument("block", "RDOMHandler<${H4::class.simpleName}>")
@@ -187,7 +187,7 @@ Custom `h5` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
         codeExample {
             +FunReference(
                 RElementBuilder<Alert.Props>::h5,
-                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
                     FunReference.Argument("classes", String::class, true, "null"),
                     FunReference.Argument("block", "RDOMHandler<${H5::class.simpleName}>")
@@ -205,7 +205,7 @@ Custom `h6` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
         codeExample {
             +FunReference(
                 RElementBuilder<Alert.Props>::h6,
-                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.simpleName}>"),
+                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
                     FunReference.Argument("classes", String::class, true, "null"),
                     FunReference.Argument("block", "RDOMHandler<${H6::class.simpleName}>")
@@ -229,7 +229,7 @@ overwritten.
         codeExample {
             +FunReference(
                 RElementBuilder<Alert.DismissibleProps>::closingElement,
-                setOf("${RElementBuilder::class.simpleName}<${Alert.DismissibleProps::class.simpleName}>"),
+                setOf("${RElementBuilder::class.simpleName}<${Alert.DismissibleProps::class.nestedName}>"),
                 setOf(
                     FunReference.Argument("block", "ElementProvider")
                 ),

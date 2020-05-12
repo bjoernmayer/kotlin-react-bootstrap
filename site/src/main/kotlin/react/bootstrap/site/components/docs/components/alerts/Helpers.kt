@@ -13,13 +13,13 @@ import react.bootstrap.site.components.docs.buildNestedName
 import kotlin.reflect.KClass
 
 internal val KClass<out Alert.Variants>.nestedName: String
-    get() = buildNestedName(this::class, Alert::class)
+    get() = buildNestedName(this, Alert::class)
 
 internal val KClass<out Alert.Props>.nestedName: String
-    get() = buildNestedName(this::class, Alert::class)
+    get() = buildNestedName(this, Alert::class)
 
 internal val KClass<out Alert.DismissibleProps>.nestedName: String
-    get() = buildNestedName(this::class, Alert::class)
+    get() = buildNestedName(this, Alert::class)
 
 internal val Alert.Variants.kt: String
     get() = buildNestedName(name, Alert::class, Button.Variants::class)
