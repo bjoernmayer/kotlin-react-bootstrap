@@ -14,8 +14,9 @@ import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.containerFun
 import react.bootstrap.site.components.docs.layout.importContainer
 import react.bootstrap.site.components.docs.layout.importContainerFun
-import react.bootstrap.site.components.docs.layout.kt
+import react.bootstrap.site.components.docs.layout.ktN
 import react.bootstrap.site.components.docs.layout.ktContainer
+import react.bootstrap.site.components.docs.layout.nestedName
 import react.bootstrap.site.external.Markdown
 import react.dom.br
 import react.dom.code
@@ -50,12 +51,12 @@ most layouts do not require a nested container.
                 +" at each responsive breakpoint"
             }
             li {
-                code { +"$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }" }; +", which is "
+                code { +"$containerFun(viscosity = ${Container.Viscosities.FLUID.ktN}) { }" }; +", which is "
                 code { +"width: 100%" }; +" at all breakpoints"
             }
             li {
                 code {
-                    +"$$containerFun(viscosity = ${Container.Viscosities::class.simpleName}"
+                    +"$$containerFun(viscosity = ${Container.Viscosities::class.nestedName}"
                     +"{.${Container.Viscosities.SM.name}|.${Container.Viscosities.MD.name}"
                     +"|.${Container.Viscosities.LG.name}|.${Container.Viscosities.XL.name}|}) { }"
                 }; +", which is "
@@ -66,7 +67,7 @@ most layouts do not require a nested container.
             //language=Markdown
             +"""
 The table below illustrates how each container’s `max-width` compares to the original `$containerFun { }` and
-`$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }` accross each breakpoint.
+`$containerFun(viscosity = ${Container.Viscosities.FLUID.ktN}) { }` accross each breakpoint.
             """
         }
         p {
@@ -91,7 +92,7 @@ The table below illustrates how each container’s `max-width` compares to the o
                     td { +"1140px" }
                 }
                 tr {
-                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.SM.kt}) { }" } }
+                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.SM.ktN}) { }" } }
                     muted(RBuilder::td) { +"100%" }
                     td { +"540px" }
                     td { +"720px" }
@@ -99,7 +100,7 @@ The table below illustrates how each container’s `max-width` compares to the o
                     td { +"1140px" }
                 }
                 tr {
-                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.MD.kt}) { }" } }
+                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.MD.ktN}) { }" } }
                     muted(RBuilder::td) { +"100%" }
                     muted(RBuilder::td) { +"100%" }
                     td { +"720px" }
@@ -107,7 +108,7 @@ The table below illustrates how each container’s `max-width` compares to the o
                     td { +"1140px" }
                 }
                 tr {
-                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.LG.kt}) { }" } }
+                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.LG.ktN}) { }" } }
                     for (x in 1..3) {
                         muted(RBuilder::td) { +"100%" }
                     }
@@ -115,14 +116,14 @@ The table below illustrates how each container’s `max-width` compares to the o
                     td { +"1140px" }
                 }
                 tr {
-                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.XL.kt}) { }" } }
+                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.XL.ktN}) { }" } }
                     for (x in 1..4) {
                         muted(RBuilder::td) { +"100%" }
                     }
                     td { +"1140px" }
                 }
                 tr {
-                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }" } }
+                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.FLUID.ktN}) { }" } }
                     for (x in 1..5) {
                         muted(RBuilder::td) { +"100%" }
                     }
@@ -148,7 +149,7 @@ breakpoint.
         Markdown {
             //language=Markdown
             +"""
-Use `$containerFun(viscosity = ${Container.Viscosities.FLUID.kt}) { }` for a full width container,
+Use `$containerFun(viscosity = ${Container.Viscosities.FLUID.ktN}) { }` for a full width container,
 spanning the entire width of the viewport.
             """
         }
@@ -156,7 +157,7 @@ spanning the entire width of the viewport.
             importContainer()
             importContainerFun()
             ln { }
-            ktB(0, containerFun, "viscosity" to Container.Viscosities.FLUID.kt) {
+            ktB(0, containerFun, "viscosity" to Container.Viscosities.FLUID.ktN) {
                 ln(it) { +"// Content here" }
             }
         }
@@ -166,7 +167,7 @@ spanning the entire width of the viewport.
             +"""
 Responsive containers are new in Bootstrap v4.4. They allow you to specify a class that is 100% wide until the specified
 breakpoint is reached, after which we apply `max-width`s for each of the higher breakpoints. For example,
-`$containerFun(viscosity = ${Container.Viscosities.SM.kt}) { }` is 100% wide to start until the `sm` breakpoint is
+`$containerFun(viscosity = ${Container.Viscosities.SM.ktN}) { }` is 100% wide to start until the `sm` breakpoint is
 reached, where it will scale up with `md`, `lg`, and `xl`.
             """
         }
@@ -174,16 +175,16 @@ reached, where it will scale up with `md`, `lg`, and `xl`.
             importContainer()
             importContainerFun()
             ln { }
-            ktB(0, containerFun, "viscosity" to Container.Viscosities.SM.kt) {
+            ktB(0, containerFun, "viscosity" to Container.Viscosities.SM.ktN) {
                 ln(it) { +"+\"100% wide until small breakpoint\"" }
             }
-            ktB(0, containerFun, "viscosity" to Container.Viscosities.MD.kt) {
+            ktB(0, containerFun, "viscosity" to Container.Viscosities.MD.ktN) {
                 ln(it) { +"+\"100% wide until medium breakpoint\"" }
             }
-            ktB(0, containerFun, "viscosity" to Container.Viscosities.LG.kt) {
+            ktB(0, containerFun, "viscosity" to Container.Viscosities.LG.ktN) {
                 ln(it) { +"+\"100% wide until large breakpoint\"" }
             }
-            ktB(0, containerFun, "viscosity" to Container.Viscosities.XL.kt) {
+            ktB(0, containerFun, "viscosity" to Container.Viscosities.XL.ktN) {
                 ln(it) { +"+\"100% wide until extra large breakpoint\"" }
             }
         }

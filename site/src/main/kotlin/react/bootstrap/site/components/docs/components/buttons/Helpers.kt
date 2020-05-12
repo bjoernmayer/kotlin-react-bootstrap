@@ -2,6 +2,7 @@ package react.bootstrap.site.components.docs.components.buttons
 
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.Button.Variants
+import react.bootstrap.components.button.Button.Variants.Outline
 import react.bootstrap.components.button.Button.Variants.Solid
 import react.bootstrap.site.components.docs.buildNestedName
 import kotlin.reflect.KClass
@@ -46,10 +47,7 @@ internal val Solid.SUCCESS.ktN: String
 internal val Solid.WARNING.ktN: String
     get() = buildNestedName(this::class, Button::class, Variants::class, Solid::class)
 
-internal val KClass<out Variants>.normalName
-    get() = simpleName!!.toLowerCase().capitalize()
-
-internal val Variants.Outline.Companion.all: Set<Variants>
+internal val Outline.Companion.all: Set<Variants>
     get() = setOf(
         DANGER,
         DARK,
@@ -60,6 +58,33 @@ internal val Variants.Outline.Companion.all: Set<Variants>
         SUCCESS,
         WARNING
     )
+
+internal val Outline.DANGER.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Outline::class)
+
+internal val Outline.DARK.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Outline::class)
+
+internal val Outline.INFO.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Outline::class)
+
+internal val Outline.LIGHT.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Outline::class)
+
+internal val Outline.PRIMARY.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Outline::class)
+
+internal val Outline.SECONDARY.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Outline::class)
+
+internal val Outline.SUCCESS.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Outline::class)
+
+internal val Outline.WARNING.ktN: String
+    get() = buildNestedName(this::class, Button::class, Variants::class, Outline::class)
+
+internal val KClass<out Variants>.normalName
+    get() = simpleName!!.toLowerCase().capitalize()
 
 internal val Button.Sizes.ktN
     get() = buildNestedName(name, Button::class, this::class)

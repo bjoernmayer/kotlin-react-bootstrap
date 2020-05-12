@@ -2,6 +2,7 @@ package react.bootstrap.content.typography
 
 import kotlinx.html.ABBR
 import react.RBuilder
+import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.RDOMHandler
@@ -12,4 +13,4 @@ fun RBuilder.abbr(
     @Suppress("UNUSED_PARAMETER") initialism: Boolean,
     classes: String? = null,
     block: RDOMHandler<ABBR>
-) = abbr(classes = classes.appendClass(ClassNames.INITIALISM), block = block)
+): ReactElement = abbr(classes = classes.appendClass(ClassNames.INITIALISM), block = block)

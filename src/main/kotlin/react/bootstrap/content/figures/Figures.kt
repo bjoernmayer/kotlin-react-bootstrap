@@ -25,7 +25,7 @@ fun RDOMBuilder<FIGURE>.img(
     src: String? = null,
     classes: String? = null,
     block: RDOMHandler<IMG>
-) = img(fluid, isThumbnail, alt, src, classes.appendClass(ClassNames.FIGURE_IMG), block)
+): ReactElement = img(fluid, isThumbnail, alt, src, classes.appendClass(ClassNames.FIGURE_IMG), block)
 
 fun RBuilder.figcaption(classes: String? = null, block: RDOMHandler<FIGCAPTION>): ReactElement =
     figcaption(classes.appendClass(ClassNames.FIGURE_CAPTION), block)

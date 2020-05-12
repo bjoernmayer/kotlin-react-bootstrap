@@ -3,7 +3,6 @@
 package react.bootstrap.site.components.docs.components.alerts
 
 import kotlinx.html.currentTimeMillis
-import kotlinx.html.js.onClickFunction
 import react.RBuilder
 import react.RProps
 import react.bootstrap.components.alert.Alert
@@ -12,7 +11,10 @@ import react.bootstrap.components.alert.closingElement
 import react.bootstrap.components.alert.dismissibleAlert
 import react.bootstrap.components.alert.h4
 import react.bootstrap.components.alert.link
+import react.bootstrap.components.button.Button
+import react.bootstrap.components.button.button
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.site.components.docs.components.buttons.ktN
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
@@ -26,7 +28,6 @@ import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.external.Markdown
 import react.child
 import react.dom.a
-import react.dom.button
 import react.dom.h4
 import react.dom.hr
 import react.dom.p
@@ -199,7 +200,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
                 +"You want some cookies?"
                 hr { }
                 closingElement {
-                    button(classes = "${ClassNames.BTN} ${ClassNames.BTN_SUCCESS}") {
+                    button(Button.Variants.Solid.SUCCESS) {
                         +"Sure!"
                     }
                 }
@@ -215,7 +216,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
                 ln(it) { +" +\"You want some cookies?\"" }
                 ktIB(it, "hr", "")
                 ktB(it, closingElementName) {
-                    ktB(it, "button", "classes" to "\"\${${ClassNames.BTN.kt}} \${${ClassNames.BTN_SUCCESS.kt}}\"") {
+                    ktB(it, RBuilder::button.name, (Button.Variants.Solid.SUCCESS).ktN) {
                         ln(it) { +"+\"Sure!\"" }
                     }
                 }
@@ -249,22 +250,14 @@ You can build your own custom close element, by using `$closingElementName { }`.
                         ln(it) { +"+\"You picked the wrong house, fool!\"" }
                         ktIB(it, "hr", "")
                         ktB(it, closingElementName) {
-                            ktB(
-                                it,
-                                "button",
-                                "classes" to "\"\${${ClassNames.BTN.kt}} \${${ClassNames.BTN_INFO.kt}}\""
-                            ) {
+                            ktB(it, RBuilder::button.name, (Button.Variants.Solid.INFO).ktN) {
                                 ln(it) { +"+\"Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!\"" }
                             }
                         }
                     }
                 }
                 ktB(it, "else") {
-                    ktB(
-                        it,
-                        "button",
-                        "classes" to "\"\${${ClassNames.BTN.kt}} \${${ClassNames.BTN_OUTLINE_DANGER.kt}}\""
-                    ) {
+                    ktB(it, RBuilder::button.name, (Button.Variants.Outline.DANGER).ktN) {
                         ktB(it, "attrs") {
                             ln(it) { +"onClickFunction = { setShow(true) }" }
                         }
@@ -278,7 +271,6 @@ You can build your own custom close element, by using `$closingElementName { }`.
     private val dismissibleAlert = functionalComponent<RProps> {
         val (show, setShow) = useState(false)
 
-        // Todo use button component
         if (show) {
             dismissibleAlert(variant = Alert.Variants.DANGER) {
                 attrs {
@@ -291,15 +283,15 @@ You can build your own custom close element, by using `$closingElementName { }`.
                 +"You picked the wrong house, fool!"
                 hr { }
                 closingElement {
-                    button(classes = "${ClassNames.BTN} ${ClassNames.BTN_INFO}") {
+                    button(Button.Variants.Solid.INFO) {
                         +"Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!"
                     }
                 }
             }
         } else {
-            button(classes = "${ClassNames.BTN} ${ClassNames.BTN_OUTLINE_DANGER}") {
+            button(Button.Variants.Outline.DANGER) {
                 attrs {
-                    onClickFunction = { setShow(true) }
+                    onClick = { setShow(true) }
                 }
                 +"Open door & go in"
             }
