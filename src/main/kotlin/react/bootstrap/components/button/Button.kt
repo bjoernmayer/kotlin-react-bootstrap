@@ -20,7 +20,7 @@ import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.WithOnClick
+import react.bootstrap.lib.WithDomEvents
 import react.bootstrap.lib.ariaDisabled
 import react.bootstrap.lib.ariaPressed
 import react.dom.WithClassName
@@ -233,7 +233,7 @@ open class Button : RComponent<Button.Props, Button.State>() {
         ) : Types()
     }
 
-    interface Props : WithClassName, WithOnClick {
+    interface Props : WithClassName, WithDomEvents {
         var active: Boolean?
         var disabled: Boolean?
         var nowrap: Boolean?

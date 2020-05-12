@@ -22,7 +22,7 @@ import react.bootstrap.components.alert.heading
 import react.bootstrap.components.alert.link
 import react.bootstrap.content.typography.Headings
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.WithOnClick
+import react.bootstrap.lib.WithDomEvents
 import react.bootstrap.site.components.docs.FunReference
 import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -221,7 +221,7 @@ Custom `h6` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
             Markdown {
                 //language=Markdown
                 +"""
-Be aware the `${buildNestedName(WithOnClick::onClick.name, WithOnClick::class)}` of the outer most element gets
+Be aware the `${buildNestedName(WithDomEvents::onClick.name, WithDomEvents::class)}` of the outer most element gets
 overwritten.
                 """
             }

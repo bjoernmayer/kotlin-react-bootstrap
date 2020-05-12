@@ -9,7 +9,7 @@ import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.WithOnClick
+import react.bootstrap.lib.WithDomEvents
 import react.bootstrap.lib.ariaHidden
 import react.bootstrap.lib.ariaLabel
 import react.dom.WithClassName
@@ -37,7 +37,7 @@ class Close : RComponent<Close.Props, RState>() {
         }
     }
 
-    interface Props : WithClassName, WithOnClick {
+    interface Props : WithClassName, WithDomEvents {
         var label: String?
         var symbol: String?
     }

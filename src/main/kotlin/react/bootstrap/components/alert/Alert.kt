@@ -18,7 +18,7 @@ import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.ElementProvider
 import react.bootstrap.lib.NoArgEventHandler
-import react.bootstrap.lib.WithOnClick
+import react.bootstrap.lib.WithDomEvents
 import react.bootstrap.lib.onTransitionEnd
 import react.bootstrap.utilities.close
 import react.children
@@ -94,7 +94,7 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
                     attrs.onTransitionEnd = this@Alert::onTransitionEnd
                 }
 
-                val closingElement = cloneElement<WithOnClick>(
+                val closingElement = cloneElement<WithDomEvents>(
                     dismissibleProps.closeElement ?: RBuilder().close { },
                     jsObject {
                         onClick = this@Alert::onDismiss
@@ -163,7 +163,7 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
             /**
              * This is the element the user can click on to dismiss the alert.
              *
-             * Be aware that [WithOnClick.onClick] gets overriden.
+             * Be aware that [WithDomEvents.onClick] gets overriden.
              *
              * Defaults [react.bootstrap.utilities.Close]
              */
@@ -259,7 +259,7 @@ fun RBuilder.dismissibleAlert(
  * Wrapper for a custom alert closing element.
  *
  * Build whatever close element you like.
- * Be aware that the [WithOnClick.onClick] of the outer most element gets overwritten.
+ * Be aware that the [WithDomEvents.onClick] of the outer most element gets overwritten.
  *
  * @param block [RBuilder] block function
  * @return The ceated ReactElement
