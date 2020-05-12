@@ -1,15 +1,22 @@
+@file:Suppress("NestedLambdaShadowedImplicitParameter")
+
 package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
+import react.RProps
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.button
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
+import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
+import react.child
+import react.functionalComponent
+import react.useState
 
 internal class ActiveState : SectionComponent() {
     override val title: String = "Active state"
@@ -72,6 +79,48 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
                 "type" to "${Button.Types.Link::class.nestedName}(\"#\")",
                 "active" to true
             ) { "+\"Link\"" }
+        }
+        subSectionTitle("Toggleable button", section)
+        Markdown {
+            //language=Markdown
+            +"""
+ Since we are working with react here, implementing a toggleable button is quite easy.
+            """
+        }
+        liveExample {
+            child(toggleableButton)
+        }
+        codeExample {
+            import("components.button.Button")
+            import("components.button.button")
+            ln { }
+            ktB(0, "private val toggleableButton = functionalComponent<RProps>") {
+                ln(it) { +"val (active, setActive) = useState(false)" }
+                ln { }
+                ktB(
+                    it,
+                    RBuilder::button,
+                    false,
+                    "variants" to (Button.Variants.Solid.PRIMARY).ktN,
+                    "active" to "active"
+                ) {
+                    ktB(it, "attrs") {
+                        ln(it) { +"onClick = { setActive(!active) }" }
+                    }
+                    ln(it) { +"+\"Single toggle\"" }
+                }
+            }
+        }
+    }
+
+    private val toggleableButton = functionalComponent<RProps> {
+        val (active, setActive) = useState(false)
+
+        button(variant = Button.Variants.Solid.PRIMARY, active = active) {
+            attrs {
+                onClick = { setActive(!active) }
+            }
+            +"Single toggle"
         }
     }
 }
