@@ -19,7 +19,8 @@ import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.ElementProvider
 import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.lib.WithDomEvents
-import react.bootstrap.lib.onTransitionEnd
+import react.bootstrap.lib.transferDomEvents
+import react.bootstrap.lib.onTransitionEndFunction
 import react.bootstrap.utilities.close
 import react.children
 import react.cloneElement
@@ -91,7 +92,7 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
 
                 if (dismissibleProps.fade == true) {
                     alertClasses.add(ClassNames.FADE)
-                    attrs.onTransitionEnd = this@Alert::onTransitionEnd
+                    attrs.onTransitionEndFunction = this@Alert::onTransitionEnd
                 }
 
                 val closingElement = cloneElement<WithDomEvents>(
@@ -109,6 +110,7 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
             }
 
             attrs {
+                transferDomEvents(props, props::onTransitionEnd)
                 role = "alert"
                 classes = alertClasses.map { it.className }.toSet()
             }
@@ -155,7 +157,7 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
         var random: Int?
     }
 
-    interface Props : WithClassName {
+    interface Props : WithClassName, WithDomEvents {
         var dismissible: Dismissible?
         var variant: Variants?
 
