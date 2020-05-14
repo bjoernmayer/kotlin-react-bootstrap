@@ -9,7 +9,10 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
-import react.bootstrap.layout.grid.Sizes
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_2
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_3
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_8
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_9
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
@@ -51,7 +54,7 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
 
     override fun RBuilder.render() {
         row(classes = "${ClassNames.FLEX_XL_NOWRAP}") {
-            col(md = Sizes.SZ_3, xl = Sizes.SZ_2, classes = "bd-sidebar") {
+            col(md = SZ_3, xl = SZ_2, classes = "bd-sidebar") {
                 route<RProps>(props.location.pathname) {
                     child(Navigation::class) {
                         attrs {
@@ -60,7 +63,7 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
                     }
                 }
             }
-            col(xl = Sizes.SZ_2, classes = "${ClassNames.D_NONE} ${ClassNames.D_XL_BLOCK} bd-toc") {
+            col(xl = SZ_2, classes = "${ClassNames.D_NONE} ${ClassNames.D_XL_BLOCK} bd-toc") {
                 child(SectionNav::class) {
                     attrs {
                         sections = state.sections
@@ -68,8 +71,8 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
                 }
             }
             col(
-                md = Sizes.SZ_9,
-                xl = Sizes.SZ_8,
+                md = SZ_9,
+                xl = SZ_8,
                 classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content",
                 renderAs = { main { } }
             ) {

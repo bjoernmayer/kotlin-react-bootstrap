@@ -4,7 +4,11 @@ package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
 import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.Sizes
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.AUTO
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.EQ
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_2
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_5
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_6
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
@@ -30,7 +34,7 @@ internal class AutoLayoutColumns : SectionComponent() {
             //language=Markdown
             +"""
 Utilize breakpoint-specific equal-size enum values for easy column sizing without an explicit numbered enum value like
-`${Sizes.SZ_6.kt}`.
+`${SZ_6.name}`.
             """
         }
         subSectionTitle("Equal-width", section)
@@ -58,7 +62,7 @@ equal-size enums for each breakpoint you need and every column will be the same 
             }
             codeExample {
                 importContainerFun()
-                importGridEnum(Sizes::class)
+                //importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 ln { }
@@ -66,7 +70,7 @@ equal-size enums for each breakpoint you need and every column will be the same 
                     ktRow(it) {
                         ktIB(it, colFun, "+\"1 of 2\"")
                         ktIB(it, colFun, "+\"2 of 2\"")
-                        ln(it) { +"// Same as: col(all = ${Sizes.EQ.kt}) { +\"x of 2\" }" }
+                        ln(it) { +"// Same as: col(all = ${EQ.name}) { +\"x of 2\" }" }
                     }
                     ktRow(it) {
                         ktIB(it, colFun, "+\"1 of 3\"")
@@ -89,31 +93,31 @@ Note that the other columns will resize no matter the width of the center column
                 container {
                     row {
                         col { +"1 of 3" }
-                        col(all = Sizes.SZ_6) { +"2 of 3 (wider)" }
+                        col(all = SZ_6) { +"2 of 3 (wider)" }
                         col { +"3 of 3" }
                     }
                     row {
                         col { +"1 of 3" }
-                        col(all = Sizes.SZ_5) { +"2 of 3 (wider)" }
+                        col(all = SZ_5) { +"2 of 3 (wider)" }
                         col { +"3 of 3" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-                importGridEnum(Sizes::class)
+//                importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 ln { }
                 ktContainer {
                     ktRow(it) {
                         ktIB(it, colFun, "+\"1 of 3\"")
-                        ktIB(it, colFun, "all" to Sizes.SZ_6.kt) { "+\"2 of 3 (wider)\"" }
+                        ktIB(it, colFun, "all" to SZ_6.name) { "+\"2 of 3 (wider)\"" }
                         ktIB(it, colFun, "+\"3 of 3\"")
                     }
                     ktRow(it) {
                         ktIB(it, colFun, "+\"1 of 3\"")
-                        ktIB(it, colFun, "all" to Sizes.SZ_5.kt) { "+\"2 of 3 (wider)\"" }
+                        ktIB(it, colFun, "all" to SZ_5.name) { "+\"2 of 3 (wider)\"" }
                         ktIB(it, colFun, "+\"3 of 3\"")
                     }
                 }
@@ -123,42 +127,42 @@ Note that the other columns will resize no matter the width of the center column
         Markdown {
             //language=Markdown
             +"""
-Use the `${Sizes.AUTO.kt}` enum value to size columns based on the natural width of their content.
+Use the `${AUTO.name}` enum value to size columns based on the natural width of their content.
             """
         }
         exampleRow {
             liveExample {
                 container {
                     row(classes = "${ClassNames.JUSTIFY_CONTENT_MD_CENTER}") {
-                        col(all = Sizes.EQ, lg = Sizes.SZ_2) { +"1 of 3" }
-                        col(md = Sizes.AUTO) { +"Variable width content" }
-                        col(all = Sizes.EQ, lg = Sizes.SZ_2) { +"3 of 3" }
+                        col(all = EQ, lg = SZ_2) { +"1 of 3" }
+                        col(md = AUTO) { +"Variable width content" }
+                        col(all = EQ, lg = SZ_2) { +"3 of 3" }
                     }
                     row {
                         col { +"1 of 3" }
-                        col(md = Sizes.AUTO) { +"Variable width content" }
-                        col(all = Sizes.EQ, lg = Sizes.SZ_2) { +"3 of 3" }
+                        col(md = AUTO) { +"Variable width content" }
+                        col(all = EQ, lg = SZ_2) { +"3 of 3" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-                importGridEnum(Sizes::class)
+//                importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 importClassNames()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "classes" to "\"\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.kt}}\"") {
-                        ktIB(it, colFun, "all" to Sizes.EQ.kt, "lg" to Sizes.SZ_2.kt) { "+\"1 of 3\"" }
+                    ktB(it, rowFun, "classes" to "\"\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.name}}\"") {
+                        ktIB(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"1 of 3\"" }
                         @Suppress("DuplicatedCode")
-                        ktIB(it, colFun, "md" to Sizes.AUTO.kt) { "+\"Variable width content\"" }
-                        ktIB(it, colFun, "all" to Sizes.EQ.kt, "lg" to Sizes.SZ_2.kt) { "+\"3 of 3\"" }
+                        ktIB(it, colFun, "md" to AUTO.name) { "+\"Variable width content\"" }
+                        ktIB(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"3 of 3\"" }
                     }
                     ktRow(it) {
                         ktIB(it, colFun, "+\"1 of 3\"")
-                        ktIB(it, colFun, "md" to Sizes.AUTO.kt) { "+\"Variable width content\"" }
-                        ktIB(it, colFun, "all" to Sizes.EQ.kt, "lg" to Sizes.SZ_2.kt) { "+\"3 of 3\"" }
+                        ktIB(it, colFun, "md" to AUTO.name) { "+\"Variable width content\"" }
+                        ktIB(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"3 of 3\"" }
                     }
                 }
             }

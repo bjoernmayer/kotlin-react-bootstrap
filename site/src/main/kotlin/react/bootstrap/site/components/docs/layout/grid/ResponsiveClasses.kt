@@ -5,8 +5,11 @@ package react.bootstrap.site.components.docs.layout.grid
 import react.RBuilder
 import react.bootstrap.layout.container
 import react.bootstrap.layout.grid.ColAttributes
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.EQ
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_4
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_6
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_8
 import react.bootstrap.layout.grid.ColCounts
-import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -15,7 +18,6 @@ import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
@@ -38,9 +40,9 @@ of your columns on extra small, small, medium, large, or extra large devices how
             //language=Markdown
             +"""
 For grids that are the same from the smallest of devices to the largest, set the `all =
-${ColAttributes::class.simpleName}?`-argument. Specify a numbered `${Sizes::class.simpleName}` enum value when you need
+${ColAttributes::class.simpleName}?`-argument. Specify a numbered `${ColAttributes.Sizes::class.simpleName}` enum value when you need
 a particularly sized column; otherwise, feel free to not set the argument at all, which defaults to `all =
-${Sizes.EQ.kt}`.
+${EQ.name}`.
             """
         }
         exampleRow {
@@ -48,30 +50,30 @@ ${Sizes.EQ.kt}`.
                 container {
                     row {
                         for (x in 1..4) {
-                            col { em { +"all = ${Sizes.EQ.kt}" } }
+                            col { em { +"all = ${EQ.name}" } }
                         }
                     }
                     row {
-                        col(all = Sizes.SZ_8) { +"all = ${Sizes.SZ_8.kt}" }
-                        col(all = Sizes.SZ_4) { +"all = ${Sizes.SZ_4.kt}" }
+                        col(all = SZ_8) { +"all = ${SZ_8.name}" }
+                        col(all = SZ_4) { +"all = ${SZ_4.name}" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-                importGridEnum(Sizes::class)
+//                importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 ln { }
                 ktContainer {
                     ktRow(it) {
                         for (x in 1..4) {
-                            ktIB(it, colFun) { "em { +\"all = ${Sizes.EQ.kt}\" }" }
+                            ktIB(it, colFun) { "em { +\"all = ${EQ.name}\" }" }
                         }
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to Sizes.SZ_8.kt)
-                        ktIB(it, colFun, "all" to Sizes.SZ_4.kt)
+                        ktIB(it, colFun, "all" to SZ_8.name)
+                        ktIB(it, colFun, "all" to SZ_4.name)
                     }
                 }
             }
@@ -88,30 +90,30 @@ stacked and becomes horizontal at the small breakpoint (`sm`).
             liveExample {
                 container {
                     row {
-                        col(sm = Sizes.SZ_8) { +"sm = ${Sizes.SZ_8.kt}" }
-                        col(sm = Sizes.SZ_4) { +"sm = ${Sizes.SZ_4.kt}" }
+                        col(sm = SZ_8) { +"sm = ${SZ_8.name}" }
+                        col(sm = SZ_4) { +"sm = ${SZ_4.name}" }
                     }
                     row {
                         for (x in 1..3) {
-                            col(sm = Sizes.EQ) { +"sm = ${Sizes.EQ.kt}" }
+                            col(sm = EQ) { +"sm = ${EQ.name}" }
                         }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-                importGridEnum(Sizes::class)
+//                importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 ln { }
                 ktContainer {
                     ktRow(it) {
-                        ktIB(it, colFun, "sm" to Sizes.SZ_8.kt)
-                        ktIB(it, colFun, "sm" to Sizes.SZ_4.kt)
+                        ktIB(it, colFun, "sm" to SZ_8.name)
+                        ktIB(it, colFun, "sm" to SZ_4.name)
                     }
                     ktRow(it) {
                         for (x in 1..3) {
-                            ktIB(it, colFun, "sm" to Sizes.EQ.kt)
+                            ktIB(it, colFun, "sm" to EQ.name)
                         }
                     }
                 }
@@ -128,43 +130,43 @@ needed. See the example below for a better idea of how it all works.
             liveExample {
                 container {
                     row {
-                        col(md = Sizes.SZ_8) { +"md = ${Sizes.SZ_8.kt}" }
-                        col(all = Sizes.SZ_6, md = Sizes.SZ_4) { +"all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}" }
+                        col(md = SZ_8) { +"md = ${SZ_8.name}" }
+                        col(all = SZ_6, md = SZ_4) { +"all = ${SZ_6.name}, md = ${SZ_4.name}" }
                     }
                     row {
                         for (x in 1..3) {
-                            col(all = Sizes.SZ_6, md = Sizes.SZ_4) { +"all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}" }
+                            col(all = SZ_6, md = SZ_4) { +"all = ${SZ_6.name}, md = ${SZ_4.name}" }
                         }
                     }
                     row {
                         for (x in 1..2) {
-                            col(all = Sizes.SZ_6) { +"all = ${Sizes.SZ_6.kt}" }
+                            col(all = SZ_6) { +"all = ${SZ_6.name}" }
                         }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-                importGridEnum(Sizes::class)
+//                importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 ln { }
                 ktContainer {
                     ktRow(it) {
                         ln(it) { +"// Stack the columns on mobile by making one full-width and the other half-width" }
-                        ktIB(it, colFun, "md" to Sizes.SZ_8.kt) { "+\"md = ${Sizes.SZ_8.kt}\"" }
-                        ktIB(it, colFun, "all" to Sizes.SZ_6.kt, "md" to Sizes.SZ_4.kt)
+                        ktIB(it, colFun, "md" to SZ_8.name) { "+\"md = ${SZ_8.name}\"" }
+                        ktIB(it, colFun, "all" to SZ_6.name, "md" to SZ_4.name)
                     }
                     ktRow(it) {
                         ln(it) { +"// Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop" }
                         for (x in 1..3) {
-                            ktIB(it, colFun, "all" to Sizes.SZ_6.kt, "md" to Sizes.SZ_4.kt)
+                            ktIB(it, colFun, "all" to SZ_6.name, "md" to SZ_4.name)
                         }
                     }
                     ktRow(it) {
                         ln(2) { +"// Columns are always 50% wide, on mobile and desktop" }
                         for (x in 1..2) {
-                            ktIB(it, colFun, "all" to Sizes.SZ_6.kt)
+                            ktIB(it, colFun, "all" to SZ_6.name)
                         }
                     }
                 }
@@ -196,7 +198,7 @@ shortcut.
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to ColCounts.CNT_2.kt) {
+                    ktB(it, rowFun, "all" to ColCounts.CNT_2.name) {
                         for (x in 1..4) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
@@ -221,7 +223,7 @@ shortcut.
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to ColCounts.CNT_3.kt) {
+                    ktB(it, rowFun, "all" to ColCounts.CNT_3.name) {
                         for (x in 1..4) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
@@ -246,7 +248,7 @@ shortcut.
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to ColCounts.CNT_4.kt) {
+                    ktB(it, rowFun, "all" to ColCounts.CNT_4.name) {
                         for (x in 1..4) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
@@ -261,7 +263,7 @@ shortcut.
                         for (x in 1..2) {
                             col { +"Column" }
                         }
-                        col(all = Sizes.SZ_6) { +"Colum" }
+                        col(all = SZ_6) { +"Colum" }
                         col { +"Column" }
                     }
                 }
@@ -269,18 +271,18 @@ shortcut.
             codeExample {
                 importContainerFun()
                 importGridEnum(ColCounts::class)
-                importGridEnum(Sizes::class)
+//                importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to ColCounts.CNT_4.kt) {
+                    ktB(it, rowFun, "all" to ColCounts.CNT_4.name) {
                         for (x in 1..2) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
                     }
-                    ktB(it, rowFun, "all" to ColCounts.CNT_4.kt) {
-                        ktIB(it, colFun, "all" to Sizes.SZ_6.kt) { "+\"Column\"" }
+                    ktB(it, rowFun, "all" to ColCounts.CNT_4.name) {
+                        ktIB(it, colFun, "all" to SZ_6.name) { "+\"Column\"" }
                     }
                 }
             }
@@ -303,7 +305,7 @@ shortcut.
                 ln { }
                 ktContainer {
                     ktB(
-                        it, rowFun, "all" to ColCounts.CNT_1.kt, "sm" to ColCounts.CNT_2.kt, "md" to ColCounts.CNT_4.kt
+                        it, rowFun, "all" to ColCounts.CNT_1.name, "sm" to ColCounts.CNT_2.name, "md" to ColCounts.CNT_4.name
                     ) {
                         for (x in 1..4) {
                             ktIB(it, colFun, "+\"Column\"")
@@ -330,21 +332,21 @@ column widths, responsive tiers, reorders, and more).
             liveExample {
                 container {
                     row(gutters = false) {
-                        col(sm = Sizes.SZ_6, md = Sizes.SZ_8) { +"sm = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_8.kt}" }
-                        col(all = Sizes.SZ_6, md = Sizes.SZ_4) { +"all = ${Sizes.SZ_6.kt}, md = ${Sizes.SZ_4.kt}" }
+                        col(sm = SZ_6, md = SZ_8) { +"sm = ${SZ_6.name}, md = ${SZ_8.name}" }
+                        col(all = SZ_6, md = SZ_4) { +"all = ${SZ_6.name}, md = ${SZ_4.name}" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-                importGridEnum(Sizes::class)
+//                importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 ln { }
                 ktContainer {
                     ktB(it, rowFun, "gutters" to "false") {
-                        ktIB(it, colFun, "sm" to Sizes.SZ_6.kt, "md" to Sizes.SZ_8.kt)
-                        ktIB(it, colFun, "all" to Sizes.SZ_6.kt, "md" to Sizes.SZ_4.kt)
+                        ktIB(it, colFun, "sm" to SZ_6.name, "md" to SZ_8.name)
+                        ktIB(it, colFun, "all" to SZ_6.name, "md" to SZ_4.name)
                     }
                 }
             }

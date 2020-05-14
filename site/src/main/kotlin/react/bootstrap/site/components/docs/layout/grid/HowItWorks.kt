@@ -4,7 +4,7 @@ package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
 import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.Sizes
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.EQ
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -12,7 +12,6 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.containerFun
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.external.Markdown
@@ -41,7 +40,7 @@ flexbox and is fully responsive. Below is an example and an in-depth look at how
                 container {
                     row {
                         for (x in 1..3) {
-                            col(sm = Sizes.EQ) {
+                            col(sm = EQ) {
                                 +"One of three columns"
                             }
                         }
@@ -51,13 +50,13 @@ flexbox and is fully responsive. Below is an example and an in-depth look at how
         }
         codeExample {
             importContainerFun()
-            importGridEnum(Sizes::class)
+//            importGridEnum(Sizes::class)
             importColFun()
             importRowFun()
             ln { }
             ktConRow {
                 for (x in 1..3) {
-                    ktB(it, colFun, "sm" to Sizes.EQ.kt) {
+                    ktB(it, colFun, "sm" to EQ.name) {
                         ln(it) { +"+\"One of three columns\"" }
                     }
                 }

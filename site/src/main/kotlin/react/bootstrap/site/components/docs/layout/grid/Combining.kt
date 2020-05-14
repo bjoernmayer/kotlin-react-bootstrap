@@ -4,22 +4,11 @@ package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
 import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.Alignments
 import react.bootstrap.layout.grid.ColAttributes
-import react.bootstrap.layout.grid.OffsetAlignmentPair
-import react.bootstrap.layout.grid.OffsetOrderAlignmentTriple
-import react.bootstrap.layout.grid.OffsetOrderPair
-import react.bootstrap.layout.grid.Offsets
-import react.bootstrap.layout.grid.OrderAlignmentPair
-import react.bootstrap.layout.grid.Orderings
-import react.bootstrap.layout.grid.SizeAlignmentPair
-import react.bootstrap.layout.grid.SizeOffsetAlignmentTriple
-import react.bootstrap.layout.grid.SizeOffsetOrderAlignmentQuadruple
-import react.bootstrap.layout.grid.SizeOffsetOrderTriple
-import react.bootstrap.layout.grid.SizeOffsetPair
-import react.bootstrap.layout.grid.SizeOrderAlignmentTriple
-import react.bootstrap.layout.grid.SizeOrderPair
-import react.bootstrap.layout.grid.Sizes
+import react.bootstrap.layout.grid.ColAttributes.Alignment.Companion.END
+import react.bootstrap.layout.grid.ColAttributes.Offset.Companion.OFF_1
+import react.bootstrap.layout.grid.ColAttributes.Order.Companion.ORD_3
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_4
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -28,7 +17,6 @@ import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.gridImport
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
@@ -38,22 +26,22 @@ import react.dom.p
 import kotlin.reflect.KFunction2
 
 internal class Combining : SectionComponent() {
-    private val sz = Offsets::sz.name
-    private val ord = Sizes::ord.name
-    private val off = Sizes::off.name
-    private val align = Sizes::align.name
+    private val sz = ColAttributes.Offsets::sz.name
+    private val ord = ColAttributes.Sizes::ord.name
+    private val off = ColAttributes.Sizes::off.name
+    private val align = ColAttributes.Sizes::align.name
 
-    private val sizes = Sizes::class.simpleName
-    private val sz4 = Sizes.SZ_4.kt
+    private val sizes = ColAttributes.Sizes::class.simpleName
+    private val sz4 = SZ_4.name
 
-    private val offsets = Offsets::class.simpleName
-    private val off1 = Offsets.OFF_1.kt
+    private val offsets = ColAttributes.Offsets::class.simpleName
+    private val off1 = OFF_1.name
 
-    private val orderings = Orderings::class.simpleName
-    private val ord3 = Orderings.ORD_3.kt
+    private val orderings = ColAttributes.Orderings::class.simpleName
+    private val ord3 = ORD_3.name
 
-    private val alignments = Alignments::class.simpleName
-    private val end = Alignments.END.kt
+    private val alignments = ColAttributes.Alignments::class.simpleName
+    private val end = END.name
 
     override val title: String = "$sizes, $offsets, $orderings, $alignments"
 
@@ -76,24 +64,24 @@ Combine other attributes with `$sizes` by using `$sz`.
             liveExample {
                 container {
                     row {
-                        col(all = Offsets.OFF_1 sz Sizes.SZ_4) { +"all = $off1 $sz $sz4" }
+                        col(all = OFF_1 sz SZ_4) { +"all = $off1 $sz $sz4" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = Orderings.ORD_3 sz Sizes.SZ_4) { +"all = $ord3 $sz $sz4" }
+                        col(all = ORD_3 sz SZ_4) { +"all = $ord3 $sz $sz4" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = Alignments.END sz Sizes.SZ_4) { +"all = $end $sz $sz4" }
+                        col(all = END sz SZ_4) { +"all = $end $sz $sz4" }
                         col { +"Reference" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-                importGridEnum(Offsets::class)
-                importGridEnum(Orderings::class)
-                importGridEnum(Sizes::class)
+//                importGridEnum(Offsets::class)
+//                importGridEnum(Orderings::class)
+//                importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 ln { }
@@ -125,24 +113,24 @@ Combine other attributes with `$offsets` by using `$off`.
             liveExample {
                 container {
                     row {
-                        col(all = Sizes.SZ_4 off Offsets.OFF_1) { +"all = $sz4 $off $off1" }
+                        col(all = SZ_4 off OFF_1) { +"all = $sz4 $off $off1" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = Orderings.ORD_3 off Offsets.OFF_1) { +"all = $ord3 $off $off1" }
+                        col(all = ORD_3 off OFF_1) { +"all = $ord3 $off $off1" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = Alignments.END off Offsets.OFF_1) { +"all = $end $off $off1" }
+                        col(all = END off OFF_1) { +"all = $end $off $off1" }
                         col { +"Reference" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-                importGridEnum(Offsets::class)
-                importGridEnum(Orderings::class)
-                importGridEnum(Sizes::class)
+//                importGridEnum(Offsets::class)
+//                importGridEnum(Orderings::class)
+//                importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 ln { }
@@ -174,24 +162,24 @@ Combine other attributes with `$orderings` by using `$ord`.
             liveExample {
                 container {
                     row {
-                        col(all = Sizes.SZ_4 ord Orderings.ORD_3) { +"all = $sz4 $ord $ord3" }
+                        col(all = SZ_4 ord ORD_3) { +"all = $sz4 $ord $ord3" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = Offsets.OFF_1 ord Orderings.ORD_3) { +"all = $off1 $ord $ord3" }
+                        col(all = OFF_1 ord ORD_3) { +"all = $off1 $ord $ord3" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = Alignments.END ord Orderings.ORD_3) { +"all = $end $ord $ord3" }
+                        col(all = END ord ORD_3) { +"all = $end $ord $ord3" }
                         col { +"Reference" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-                importGridEnum(Offsets::class)
-                importGridEnum(Orderings::class)
-                importGridEnum(Sizes::class)
+//                importGridEnum(Offsets::class)
+//                importGridEnum(Orderings::class)
+//                importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 ln { }
@@ -223,24 +211,24 @@ Combine other attributes with `$alignments` by using `$align`.
             liveExample {
                 container {
                     row {
-                        col(all = Sizes.SZ_4 align Alignments.END) { +"all = $sz4 $align $end" }
+                        col(all = SZ_4 align END) { +"all = $sz4 $align $end" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = Offsets.OFF_1 align Alignments.END) { +"all = $off1 $align $end" }
+                        col(all = OFF_1 align END) { +"all = $off1 $align $end" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = Orderings.ORD_3 align Alignments.END) { +"all = $ord3 $align $end" }
+                        col(all = ORD_3 align END) { +"all = $ord3 $align $end" }
                         col { +"Reference" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-                importGridEnum(Offsets::class)
-                importGridEnum(Orderings::class)
-                importGridEnum(Sizes::class)
+//                importGridEnum(Offsets::class)
+//                importGridEnum(Orderings::class)
+//                importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 ln { }
@@ -270,120 +258,120 @@ Combine other attributes with `$alignments` by using `$align`.
 }
 
 private fun RBuilder.allPossibleCombinations() {
-    val sizeToOffset = Pairing(Sizes.SZ_4, Offsets.OFF_1, Sizes::off)
-    val sizeToOrder = Pairing(Sizes.SZ_4, Orderings.ORD_3, Sizes::ord)
-    val sizeToAlignment = Pairing(Sizes.SZ_4, Alignments.END, Sizes::align)
+    val sizeToOffset = Pairing(SZ_4, OFF_1, ColAttributes.Sizes::off)
+    val sizeToOrder = Pairing(SZ_4, ORD_3, ColAttributes.Sizes::ord)
+    val sizeToAlignment = Pairing(SZ_4, END, ColAttributes.Sizes::align)
 
-    val offsetToOrder = Pairing(Offsets.OFF_1, Orderings.ORD_3, Offsets::ord)
-    val offsetToAlignment = Pairing(Offsets.OFF_1, Alignments.END, Offsets::align)
-    val offsetToSize = Pairing(Offsets.OFF_1, Sizes.SZ_4, Offsets::sz)
+    val offsetToOrder = Pairing(OFF_1, ORD_3, ColAttributes.Offsets::ord)
+    val offsetToAlignment = Pairing(OFF_1, END, ColAttributes.Offsets::align)
+    val offsetToSize = Pairing(OFF_1, SZ_4, ColAttributes.Offsets::sz)
 
-    val orderToSize = Pairing(Orderings.ORD_3, Sizes.SZ_4, Orderings::sz)
-    val orderToOffset = Pairing(Orderings.ORD_3, Offsets.OFF_1, Orderings::off)
-    val orderToAlignment = Pairing(Orderings.ORD_3, Alignments.END, Orderings::align)
+    val orderToSize = Pairing(ORD_3, SZ_4, ColAttributes.Orderings::sz)
+    val orderToOffset = Pairing(ORD_3, OFF_1, ColAttributes.Orderings::off)
+    val orderToAlignment = Pairing(ORD_3, END, ColAttributes.Orderings::align)
 
-    val alignmentToSize = Pairing(Alignments.END, Sizes.SZ_4, Alignments::sz)
-    val alignmentToOffset = Pairing(Alignments.END, Offsets.OFF_1, Alignments::off)
-    val alignmentToOrder = Pairing(Alignments.END, Orderings.ORD_3, Alignments::ord)
+    val alignmentToSize = Pairing(END, SZ_4, ColAttributes.Alignments::sz)
+    val alignmentToOffset = Pairing(END, OFF_1, ColAttributes.Alignments::off)
+    val alignmentToOrder = Pairing(END, ORD_3, ColAttributes.Alignments::ord)
 
-    val sizeOffsetOrderFun = SizeOffsetPair::ord
-    val sizeOffsetAlignmentFun = SizeOffsetPair::align
+    val sizeOffsetOrderFun = ColAttributes.SizeOffsetPair::ord
+    val sizeOffsetAlignmentFun = ColAttributes.SizeOffsetPair::align
 
-    val sizeOrderOffsetFun = SizeOrderPair::off
-    val sizeOrderAlignmentFun = SizeOrderPair::align
+    val sizeOrderOffsetFun = ColAttributes.SizeOrderPair::off
+    val sizeOrderAlignmentFun = ColAttributes.SizeOrderPair::align
 
-    val sizeAlignmentOffsetFun = SizeAlignmentPair::off
-    val sizeAlignmentOrderFun = SizeAlignmentPair::ord
+    val sizeAlignmentOffsetFun = ColAttributes.SizeAlignmentPair::off
+    val sizeAlignmentOrderFun = ColAttributes.SizeAlignmentPair::ord
 
-    val offsetOrderSizeFun = OffsetOrderPair::sz
-    val offsetOrderAlignmentFun = OffsetOrderPair::align
+    val offsetOrderSizeFun = ColAttributes.OffsetOrderPair::sz
+    val offsetOrderAlignmentFun = ColAttributes.OffsetOrderPair::align
 
-    val offsetAlignmentSizeFun = OffsetAlignmentPair::sz
-    val offsetAlignmentOrderFun = OffsetAlignmentPair::ord
+    val offsetAlignmentSizeFun = ColAttributes.OffsetAlignmentPair::sz
+    val offsetAlignmentOrderFun = ColAttributes.OffsetAlignmentPair::ord
 
-    val orderAlignmentSizeFun = OrderAlignmentPair::sz
-    val orderAlignmentOffsetFun = OrderAlignmentPair::off
+    val orderAlignmentSizeFun = ColAttributes.OrderAlignmentPair::sz
+    val orderAlignmentOffsetFun = ColAttributes.OrderAlignmentPair::off
 
-    val sizeOffsetToOrder = Tripling(Orderings.ORD_3, sizeToOffset, offsetToSize, sizeOffsetOrderFun)
-    val sizeOffsetToAlignment = Tripling(Alignments.END, sizeToOffset, offsetToSize, sizeOffsetAlignmentFun)
+    val sizeOffsetToOrder = Tripling(ORD_3, sizeToOffset, offsetToSize, sizeOffsetOrderFun)
+    val sizeOffsetToAlignment = Tripling(END, sizeToOffset, offsetToSize, sizeOffsetAlignmentFun)
 
-    val sizeOrderToOffset = Tripling(Offsets.OFF_1, sizeToOrder, orderToSize, sizeOrderOffsetFun)
-    val sizeOrderToAlignment = Tripling(Alignments.END, sizeToOrder, orderToSize, sizeOrderAlignmentFun)
+    val sizeOrderToOffset = Tripling(OFF_1, sizeToOrder, orderToSize, sizeOrderOffsetFun)
+    val sizeOrderToAlignment = Tripling(END, sizeToOrder, orderToSize, sizeOrderAlignmentFun)
 
-    val sizeAlignmentToOffset = Tripling(Offsets.OFF_1, sizeToAlignment, alignmentToSize, sizeAlignmentOffsetFun)
-    val sizeAlignmentToOrder = Tripling(Orderings.ORD_3, sizeToAlignment, alignmentToSize, sizeAlignmentOrderFun)
+    val sizeAlignmentToOffset = Tripling(OFF_1, sizeToAlignment, alignmentToSize, sizeAlignmentOffsetFun)
+    val sizeAlignmentToOrder = Tripling(ORD_3, sizeToAlignment, alignmentToSize, sizeAlignmentOrderFun)
 
-    val offsetSizeToOrder = Tripling(Orderings.ORD_3, offsetToSize, sizeToOffset, sizeOffsetOrderFun)
-    val offsetSizeToAlignment = Tripling(Alignments.END, offsetToSize, sizeToOffset, sizeOffsetAlignmentFun)
+    val offsetSizeToOrder = Tripling(ORD_3, offsetToSize, sizeToOffset, sizeOffsetOrderFun)
+    val offsetSizeToAlignment = Tripling(END, offsetToSize, sizeToOffset, sizeOffsetAlignmentFun)
 
-    val offsetOrderToSize = Tripling(Sizes.SZ_4, offsetToOrder, orderToOffset, offsetOrderSizeFun)
-    val offsetOrderToAlignment = Tripling(Alignments.END, offsetToOrder, orderToOffset, offsetOrderAlignmentFun)
+    val offsetOrderToSize = Tripling(SZ_4, offsetToOrder, orderToOffset, offsetOrderSizeFun)
+    val offsetOrderToAlignment = Tripling(END, offsetToOrder, orderToOffset, offsetOrderAlignmentFun)
 
-    val offsetAlignmentToSize = Tripling(Sizes.SZ_4, offsetToAlignment, alignmentToOffset, offsetAlignmentSizeFun)
+    val offsetAlignmentToSize = Tripling(SZ_4, offsetToAlignment, alignmentToOffset, offsetAlignmentSizeFun)
     val offsetAlignmentToOrder =
-        Tripling(Orderings.ORD_3, offsetToAlignment, alignmentToOffset, offsetAlignmentOrderFun)
+        Tripling(ORD_3, offsetToAlignment, alignmentToOffset, offsetAlignmentOrderFun)
 
-    val orderSizeToOffset = Tripling(Offsets.OFF_1, orderToSize, sizeToOrder, sizeOrderOffsetFun)
-    val orderSizeToAlignment = Tripling(Alignments.END, orderToSize, sizeToOrder, sizeOrderAlignmentFun)
+    val orderSizeToOffset = Tripling(OFF_1, orderToSize, sizeToOrder, sizeOrderOffsetFun)
+    val orderSizeToAlignment = Tripling(END, orderToSize, sizeToOrder, sizeOrderAlignmentFun)
 
-    val orderOffsetToSize = Tripling(Sizes.SZ_4, orderToOffset, offsetToOrder, offsetOrderSizeFun)
-    val orderOffsetToAlignment = Tripling(Alignments.END, orderToOffset, offsetToOrder, offsetOrderAlignmentFun)
+    val orderOffsetToSize = Tripling(SZ_4, orderToOffset, offsetToOrder, offsetOrderSizeFun)
+    val orderOffsetToAlignment = Tripling(END, orderToOffset, offsetToOrder, offsetOrderAlignmentFun)
 
-    val orderAlignmentToSize = Tripling(Sizes.SZ_4, orderToAlignment, alignmentToOrder, orderAlignmentSizeFun)
-    val orderAlignmentToOffset = Tripling(Offsets.OFF_1, orderToAlignment, alignmentToOrder, orderAlignmentOffsetFun)
+    val orderAlignmentToSize = Tripling(SZ_4, orderToAlignment, alignmentToOrder, orderAlignmentSizeFun)
+    val orderAlignmentToOffset = Tripling(OFF_1, orderToAlignment, alignmentToOrder, orderAlignmentOffsetFun)
 
-    val alignmentSizeToOffset = Tripling(Offsets.OFF_1, alignmentToSize, sizeToAlignment, sizeAlignmentOffsetFun)
-    val alignmentSizeToOrder = Tripling(Orderings.ORD_3, alignmentToSize, sizeToAlignment, sizeAlignmentOrderFun)
+    val alignmentSizeToOffset = Tripling(OFF_1, alignmentToSize, sizeToAlignment, sizeAlignmentOffsetFun)
+    val alignmentSizeToOrder = Tripling(ORD_3, alignmentToSize, sizeToAlignment, sizeAlignmentOrderFun)
 
-    val alignmentOffsetToSize = Tripling(Sizes.SZ_4, alignmentToOffset, offsetToAlignment, offsetAlignmentSizeFun)
+    val alignmentOffsetToSize = Tripling(SZ_4, alignmentToOffset, offsetToAlignment, offsetAlignmentSizeFun)
     val alignmentOffsetToOrder =
-        Tripling(Orderings.ORD_3, alignmentToOffset, offsetToAlignment, offsetAlignmentOrderFun)
+        Tripling(ORD_3, alignmentToOffset, offsetToAlignment, offsetAlignmentOrderFun)
 
-    val alignmentOrderToSize = Tripling(Sizes.SZ_4, alignmentToOrder, orderToAlignment, orderAlignmentSizeFun)
-    val alignmentOrderToOffset = Tripling(Offsets.OFF_1, alignmentToOrder, orderToAlignment, orderAlignmentOffsetFun)
+    val alignmentOrderToSize = Tripling(SZ_4, alignmentToOrder, orderToAlignment, orderAlignmentSizeFun)
+    val alignmentOrderToOffset = Tripling(OFF_1, alignmentToOrder, orderToAlignment, orderAlignmentOffsetFun)
 
     val sizeQuadruple = Quadruple(
-        quadrupleThis = Sizes.SZ_4,
+        quadrupleThis = SZ_4,
         quadrupleWith1 = offsetOrderToAlignment,
         quadrupleWith2 = offsetAlignmentToOrder,
         quadrupleWith3 = orderAlignmentToOffset,
         quadrupleWith4 = orderOffsetToAlignment,
         quadrupleWith5 = alignmentOffsetToOrder,
         quadrupleWith6 = alignmentOrderToOffset,
-        quadrupleUsing = OffsetOrderAlignmentTriple::sz
+        quadrupleUsing = ColAttributes.OffsetOrderAlignmentTriple::sz
     )
 
     val offsetQuadruple = Quadruple(
-        quadrupleThis = Offsets.OFF_1,
+        quadrupleThis = OFF_1,
         quadrupleWith1 = sizeOrderToAlignment,
         quadrupleWith2 = sizeAlignmentToOrder,
         quadrupleWith3 = orderAlignmentToSize,
         quadrupleWith4 = orderSizeToAlignment,
         quadrupleWith5 = alignmentSizeToOrder,
         quadrupleWith6 = alignmentOrderToSize,
-        quadrupleUsing = SizeOrderAlignmentTriple::off
+        quadrupleUsing = ColAttributes.SizeOrderAlignmentTriple::off
     )
 
     val orderQuadruple = Quadruple(
-        quadrupleThis = Orderings.ORD_3,
+        quadrupleThis = ORD_3,
         quadrupleWith1 = sizeOffsetToAlignment,
         quadrupleWith2 = sizeAlignmentToOffset,
         quadrupleWith3 = offsetAlignmentToSize,
         quadrupleWith4 = offsetSizeToAlignment,
         quadrupleWith5 = alignmentSizeToOffset,
         quadrupleWith6 = alignmentOffsetToSize,
-        quadrupleUsing = SizeOffsetAlignmentTriple::ord
+        quadrupleUsing = ColAttributes.SizeOffsetAlignmentTriple::ord
     )
 
     val alignmentQuadruple = Quadruple(
-        quadrupleThis = Alignments.END,
+        quadrupleThis = END,
         quadrupleWith1 = sizeOffsetToOrder,
         quadrupleWith2 = sizeOrderToOffset,
         quadrupleWith3 = offsetOrderToSize,
         quadrupleWith4 = offsetSizeToOrder,
         quadrupleWith5 = orderSizeToOffset,
         quadrupleWith6 = orderOffsetToSize,
-        quadrupleUsing = SizeOffsetOrderTriple::align
+        quadrupleUsing = ColAttributes.SizeOffsetOrderTriple::align
     )
 
     val quadruples = listOf(sizeQuadruple, offsetQuadruple, orderQuadruple, alignmentQuadruple)
@@ -496,10 +484,10 @@ private fun RBuilder.allPossibleCombinations() {
                 }
                 codeExample {
                     importContainerFun()
-                    importGridEnum(Alignments::class)
-                    importGridEnum(Offsets::class)
-                    importGridEnum(Orderings::class)
-                    importGridEnum(Sizes::class)
+//                    importGridEnum(Alignments::class)
+//                    importGridEnum(Offsets::class)
+//                    importGridEnum(Orderings::class)
+//                    importGridEnum(Sizes::class)
                     importColFun()
                     importRowFun()
                     ln { }
@@ -519,34 +507,34 @@ private data class Pairing<TA : ColAttributes, TB : ColAttributes, TP : ColAttri
     val pairUsing: KFunction2<TA, TB, TP>
 ) {
     val thisClassName = when (pairThis) {
-        is Sizes -> Sizes::class.simpleName
-        is Offsets -> Offsets::class.simpleName
-        is Orderings -> Orderings::class.simpleName
-        is Alignments -> Alignments::class.simpleName
+        is ColAttributes.Sizes -> ColAttributes.Sizes::class.simpleName
+        is ColAttributes.Offsets -> ColAttributes.Offsets::class.simpleName
+        is ColAttributes.Orderings -> ColAttributes.Orderings::class.simpleName
+        is ColAttributes.Alignments -> ColAttributes.Alignments::class.simpleName
         else -> error("will never happen")
     }
 
     private val thisValueName = when (pairThis) {
-        is Sizes -> pairThis.name
-        is Offsets -> pairThis.name
-        is Orderings -> pairThis.name
-        is Alignments -> pairThis.name
+        is ColAttributes.Sizes -> pairThis.name
+        is ColAttributes.Offsets -> pairThis.name
+        is ColAttributes.Orderings -> pairThis.name
+        is ColAttributes.Alignments -> pairThis.name
         else -> error("will never happen")
     }
 
     val withClassName = when (pairWith) {
-        is Sizes -> Sizes::class.simpleName
-        is Offsets -> Offsets::class.simpleName
-        is Orderings -> Orderings::class.simpleName
-        is Alignments -> Alignments::class.simpleName
+        is ColAttributes.Sizes -> ColAttributes.Sizes::class.simpleName
+        is ColAttributes.Offsets -> ColAttributes.Offsets::class.simpleName
+        is ColAttributes.Orderings -> ColAttributes.Orderings::class.simpleName
+        is ColAttributes.Alignments -> ColAttributes.Alignments::class.simpleName
         else -> error("will never happen")
     }
 
     private val withValueName = when (pairWith) {
-        is Sizes -> pairWith.name
-        is Offsets -> pairWith.name
-        is Orderings -> pairWith.name
-        is Alignments -> pairWith.name
+        is ColAttributes.Sizes -> pairWith.name
+        is ColAttributes.Offsets -> pairWith.name
+        is ColAttributes.Orderings -> pairWith.name
+        is ColAttributes.Alignments -> pairWith.name
         else -> error("will never happen")
     }
 
@@ -576,18 +564,18 @@ private data class Tripling<
     )
 
     val thisClassName = when (tripleThis) {
-        is Sizes -> Sizes::class.simpleName
-        is Offsets -> Offsets::class.simpleName
-        is Orderings -> Orderings::class.simpleName
-        is Alignments -> Alignments::class.simpleName
+        is ColAttributes.Sizes -> ColAttributes.Sizes::class.simpleName
+        is ColAttributes.Offsets -> ColAttributes.Offsets::class.simpleName
+        is ColAttributes.Orderings -> ColAttributes.Orderings::class.simpleName
+        is ColAttributes.Alignments -> ColAttributes.Alignments::class.simpleName
         else -> error("will never happen")
     }
 
     private val thisValueName = when (tripleThis) {
-        is Sizes -> tripleThis.name
-        is Offsets -> tripleThis.name
-        is Orderings -> tripleThis.name
-        is Alignments -> tripleThis.name
+        is ColAttributes.Sizes -> tripleThis.name
+        is ColAttributes.Offsets -> tripleThis.name
+        is ColAttributes.Orderings -> tripleThis.name
+        is ColAttributes.Alignments -> tripleThis.name
         else -> error("will never happen")
     }
 
@@ -613,7 +601,7 @@ private data class Quadruple<
         val quadrupleWith4: Tripling<TD, TC, TB, TP1, TTT>,
         val quadrupleWith5: Tripling<TC, TD, TB, TP2, TTT>,
         val quadrupleWith6: Tripling<TB, TD, TC, TP3, TTT>,
-        val quadrupleUsing: KFunction2<TTT, TA, SizeOffsetOrderAlignmentQuadruple>
+        val quadrupleUsing: KFunction2<TTT, TA, ColAttributes.SizeOffsetOrderAlignmentQuadruple>
     ) {
     val withList = listOf(
         quadrupleWith1,
@@ -625,18 +613,18 @@ private data class Quadruple<
     )
 
     val thisClassName = when (quadrupleThis) {
-        is Sizes -> Sizes::class.simpleName
-        is Offsets -> Offsets::class.simpleName
-        is Orderings -> Orderings::class.simpleName
-        is Alignments -> Alignments::class.simpleName
+        is ColAttributes.Sizes -> ColAttributes.Sizes::class.simpleName
+        is ColAttributes.Offsets -> ColAttributes.Offsets::class.simpleName
+        is ColAttributes.Orderings -> ColAttributes.Orderings::class.simpleName
+        is ColAttributes.Alignments -> ColAttributes.Alignments::class.simpleName
         else -> error("will never happen")
     }
 
     private val thisValueName = when (quadrupleThis) {
-        is Sizes -> quadrupleThis.name
-        is Offsets -> quadrupleThis.name
-        is Orderings -> quadrupleThis.name
-        is Alignments -> quadrupleThis.name
+        is ColAttributes.Sizes -> quadrupleThis.name
+        is ColAttributes.Offsets -> quadrupleThis.name
+        is ColAttributes.Orderings -> quadrupleThis.name
+        is ColAttributes.Alignments -> quadrupleThis.name
         else -> error("will never happen")
     }
 

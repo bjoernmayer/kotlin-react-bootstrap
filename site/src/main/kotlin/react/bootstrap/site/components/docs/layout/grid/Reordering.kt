@@ -4,9 +4,15 @@ package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
 import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.Offsets
-import react.bootstrap.layout.grid.Orderings
-import react.bootstrap.layout.grid.Sizes
+import react.bootstrap.layout.grid.ColAttributes
+import react.bootstrap.layout.grid.ColAttributes.Offset.Companion.OFF_3
+import react.bootstrap.layout.grid.ColAttributes.Offset.Companion.OFF_4
+import react.bootstrap.layout.grid.ColAttributes.Order.Companion.ORD_1
+import react.bootstrap.layout.grid.ColAttributes.Order.Companion.ORD_12
+import react.bootstrap.layout.grid.ColAttributes.Order.Companion.ORD_2
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_3
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_4
+import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_6
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -27,8 +33,8 @@ import react.dom.p
 internal class Reordering : SectionComponent() {
     override val title: String = "Reordering"
 
-    private val offsetsName = Offsets::class.simpleName!!
-    private val orderingsName = Orderings::class.simpleName!!
+    private val offsetsName = ColAttributes.Offsets::class.simpleName!!
+    private val orderingsName = ColAttributes.Orderings::class.simpleName!!
 
     override fun RBuilder.render() {
         sectionTitle(section)
@@ -37,7 +43,7 @@ internal class Reordering : SectionComponent() {
             //language=Markdown
             +"""
 Use `$orderingsName` values for controlling the __visual order__  of your content. The classes are responsive, so you
-can set the `order` by breakpoint (e.g., `all = ${Orderings.ORD_1.kt}, md = ${Orderings.ORD_2.kt}`). Includes support
+can set the `order` by breakpoint (e.g., `all = ${ORD_1.name}, md = ${ORD_2.name}`). Includes support
 for 1 through 12 across all five grid tiers.
             """
         }
@@ -46,21 +52,21 @@ for 1 through 12 across all five grid tiers.
                 container {
                     row {
                         col { +"First in DOM, no order applied" }
-                        col(all = Orderings.ORD_12) { +" Second in DOM, with a larger order" }
-                        col(all = Orderings.ORD_1) { +"Third in DOM, with an order of 1" }
+                        col(all = ORD_12) { +" Second in DOM, with a larger order" }
+                        col(all = ORD_1) { +"Third in DOM, with an order of 1" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-                importGridEnum(Orderings::class)
+//                importGridEnum(ColAttributes.Orderings::class)
                 importColFun()
                 importRowFun()
                 ln { }
                 ktConRow {
                     ktIB(it, colFun, "+\"First in DOM, no order applied\"")
-                    ktIB(it, colFun, "all" to Orderings.ORD_12.kt) { "+\" Second in DOM, with a larger order\"" }
-                    ktIB(it, colFun, "all" to Orderings.ORD_1.kt) { "+\"Third in DOM, with an order of 1\"" }
+                    ktIB(it, colFun, "all" to ORD_12.name) { "+\" Second in DOM, with a larger order\"" }
+                    ktIB(it, colFun, "all" to ORD_1.name) { "+\"Third in DOM, with an order of 1\"" }
                 }
             }
         }
@@ -76,47 +82,47 @@ for 1 through 12 across all five grid tiers.
             +"Move columns to the right by setting "; code { +offsetsName }; +" enum values. These increase the left"
             +" margin of a column by "; code { +"*" }; +" columns. For example, "
             code {
-                +"md = ${Sizes.SZ_4.kt} off ${Offsets.OFF_4.kt}"
+                +"md = ${SZ_4.name} off ${OFF_4.name}"
             }
-            +" moves "; code { +"$colFun(md = ${Sizes.SZ_4.kt}) { }" }; +" over four columns."
+            +" moves "; code { +"$colFun(md = ${SZ_4.name}) { }" }; +" over four columns."
         }
-        val off = Sizes::off.name
+        val off = ColAttributes.Sizes::off.name
         exampleRow {
             liveExample {
                 container {
                     row {
-                        col(md = Sizes.SZ_4) { +"md = ${Sizes.SZ_4.kt}" }
-                        col(md = Sizes.SZ_4 off Offsets.OFF_4) { +"md = ${Sizes.SZ_4.kt} $off ${Offsets.OFF_4.kt}" }
+                        col(md = SZ_4) { +"md = ${SZ_4.name}" }
+                        col(md = SZ_4 off OFF_4) { +"md = ${SZ_4.name} $off ${OFF_4.name}" }
                     }
                     row {
                         for (x in 1..2) {
-                            col(md = Sizes.SZ_3 off Offsets.OFF_3) { +"md = ${Sizes.SZ_3.kt} $off ${Offsets.OFF_3.kt}" }
+                            col(md = SZ_3 off OFF_3) { +"md = ${SZ_3.name} $off ${OFF_3.name}" }
                         }
                     }
                     row {
-                        col(md = Sizes.SZ_6 off Offsets.OFF_3) { +"md = ${Sizes.SZ_6.kt} $off ${Offsets.OFF_3.kt}" }
+                        col(md = SZ_6 off OFF_3) { +"md = ${SZ_6.name} $off ${OFF_3.name}" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-                importGridEnum(Offsets::class)
-                importGridEnum(Sizes::class)
+//                importGridEnum(Offsets::class)
+//                importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 ln { }
                 ktContainer {
                     ktRow(it) {
-                        ktIB(it, colFun, "md" to Sizes.SZ_4.kt)
-                        ktIB(it, colFun, "md" to "${Sizes.SZ_4.kt} $off ${Offsets.OFF_4.kt}")
+                        ktIB(it, colFun, "md" to SZ_4.name)
+                        ktIB(it, colFun, "md" to "${SZ_4.name} $off ${OFF_4.name}")
                     }
                     ktRow(it) {
                         for (x in 1..2) {
-                            ktIB(it, colFun, "md" to "${Sizes.SZ_3.kt} $off ${Offsets.OFF_3.kt}")
+                            ktIB(it, colFun, "md" to "${SZ_3.name} $off ${OFF_3.name}")
                         }
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "md" to "${Sizes.SZ_6.kt} $off ${Offsets.OFF_3.kt}")
+                        ktIB(it, colFun, "md" to "${SZ_6.name} $off ${OFF_3.name}")
                     }
                 }
             }
