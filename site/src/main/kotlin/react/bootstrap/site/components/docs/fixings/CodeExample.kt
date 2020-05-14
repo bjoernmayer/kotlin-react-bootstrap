@@ -73,6 +73,14 @@ internal fun CodeExampleBuilder.ktIB(
 internal fun CodeExampleBuilder.ktIB(
     indentationLevel: Int = 0,
     opener: String,
+    content: () -> String
+) {
+    ln(indentationLevel) { +"$opener { ${content()} }" }
+}
+
+internal fun CodeExampleBuilder.ktIB(
+    indentationLevel: Int = 0,
+    opener: String,
     args: String,
     content: String
 ) {
@@ -82,15 +90,22 @@ internal fun CodeExampleBuilder.ktIB(
 internal fun CodeExampleBuilder.ktIB(
     indentationLevel: Int = 0,
     opener: String,
+    arg: Pair<String, String>,
     vararg args: Pair<String, String>,
     content: () -> String
-) = ktIB(indentationLevel, opener, args.joinToString { "${it.first} = ${it.second}" }, content())
+) = ktIB(indentationLevel, opener, listOf(arg, *args).joinToString { "${it.first} = ${it.second}" }, content())
 
 internal fun CodeExampleBuilder.ktIB(
     indentationLevel: Int = 0,
     opener: String,
+    arg: Pair<String, String>,
     vararg args: Pair<String, String>
-) = ktIB(indentationLevel, opener, *args) { "+\"${args.joinToString { "${it.first} = ${it.second}" }}\"" }
+) = ktIB(
+    indentationLevel,
+    opener,
+    arg,
+    *args
+) { "+\"${listOf(arg, *args).joinToString { "${it.first} = ${it.second}" }}\"" }
 
 internal class CodeExample : RComponent<CodeExample.Props, RState>() {
     override fun RBuilder.render() {
