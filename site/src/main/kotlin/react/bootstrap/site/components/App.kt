@@ -6,8 +6,9 @@ import react.RProps
 import react.bootstrap.layout.Container
 import react.bootstrap.layout.container
 import react.bootstrap.site.components.docs.Docs
-import react.bootstrap.site.from
 import react.bootstrap.site.external.BrowserRouterProps
+import react.bootstrap.site.from
+import react.bootstrap.site.scrollToTop
 import react.child
 import react.router.dom.browserRouter
 import react.router.dom.route
@@ -21,6 +22,7 @@ fun RBuilder.app() =
             @Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
             (this as BrowserRouterProps).basename = "/kotlin-react-bootstrap"
         }
+        child(scrollToTop)
         Fragment {
             header()
             container(viscosity = Container.Viscosities.FLUID) {
