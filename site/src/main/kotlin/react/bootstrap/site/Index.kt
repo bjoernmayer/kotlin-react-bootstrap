@@ -14,6 +14,9 @@ import kotlin.browser.document
 inline fun RBuilder.main(classes: String? = null, block: RDOMBuilder<MAIN>.() -> Unit): ReactElement =
     tag(block) { MAIN(attributesMapOf("class", classes), it) }
 
+@JsModule("favicon.ico")
+external val favicon: dynamic
+
 fun main() {
     kotlinext.js.require("docs.min.css")
     kotlinext.js.require("style.css")
@@ -21,5 +24,9 @@ fun main() {
     val rootDiv = document.getElementById("root")
     render(rootDiv) {
         app()
+    }
+
+    document.querySelector("link[rel=\"shortcut icon\"]")?.apply {
+        setAttribute("href", favicon.default as String)
     }
 }
