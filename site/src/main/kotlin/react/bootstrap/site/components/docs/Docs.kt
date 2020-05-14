@@ -32,13 +32,13 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
         state.sections = mutableSetOf()
     }
 
-    fun onClearSections() {
+    private fun onClearSections() {
         setState {
             sections.clear()
         }
     }
 
-    fun onAddSection(section: Section) {
+    private fun onAddSection(section: Section) {
         setState {
             if (section in sections) {
                 // Todo: Use a Map or something

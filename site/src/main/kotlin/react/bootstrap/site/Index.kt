@@ -12,7 +12,7 @@ import kotlin.browser.document
 
 // Todo: remove as soon as it is available in kotlin-react ...
 inline fun RBuilder.main(classes: String? = null, block: RDOMBuilder<MAIN>.() -> Unit): ReactElement =
-    tag(block) { MAIN( attributesMapOf("class", classes), it) }
+    tag(block) { MAIN(attributesMapOf("class", classes), it) }
 
 fun main() {
     kotlinext.js.require("docs.min.css")
