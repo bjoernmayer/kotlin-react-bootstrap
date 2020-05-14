@@ -12,15 +12,15 @@ import react.bootstrap.layout.grid.Sizes
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.site.main
 import react.dom.br
-import react.dom.div
 import react.dom.h1
 import react.dom.p
 import react.functionalComponent
 import react.router.dom.routeLink
 
 val Home = functionalComponent<RProps> {
-    div("bd-masthead") {
+    main("bd-masthead") {
         container {
             row(all = ItemsXs.CENTER) {
                 col(all = Sizes.SZ_6, md = Sizes.SZ_6 ord Orderings.ORD_2, classes = "${ClassNames.MX_AUTO}") {

@@ -40,7 +40,6 @@ internal class Examples : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        console.log(Markdown)
         Markdown {
             //language=Markdown
             +"""

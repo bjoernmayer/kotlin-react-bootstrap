@@ -1,13 +1,9 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackOutput.Target.AMD
-
 plugins {
     kotlin("js")
     id("org.jlleitschuh.gradle.ktlint")
 }
 
 repositories {
-    maven("https://kotlin.bintray.com/kotlin-js-wrappers/")
     jcenter()
     mavenCentral()
 }
@@ -29,13 +25,11 @@ dependencies {
     implementation(npm("markdown-to-jsx", "6.11.1"))
 }
 
-tasks.withType<KotlinJsCompile> {
-    // See https://github.com/amdjs/amdjs-api/blob/master/AMD.md
-    kotlinOptions.moduleKind = AMD
-}
-
-kotlin.target.browser {
-    distribution {
-        directory = File("$rootDir/docs/")
+kotlin.target {
+    browser {
+        distribution {
+            directory = File("$rootDir/docs/")
+        }
     }
+    useCommonJs()
 }
