@@ -1,14 +1,14 @@
-@file:Suppress("NAME_SHADOWING", "NestedLambdaShadowedImplicitParameter")
+@file:Suppress("NAME_SHADOWING", "NestedLambdaShadowedImplicitParameter", "DuplicatedCode")
 
 package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
 import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.AUTO
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.EQ
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_2
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_5
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_6
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.AUTO
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.EQ
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_2
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_5
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_6
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames
@@ -21,6 +21,7 @@ import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.components.docs.layout.importFromGrid
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
 import react.dom.p
@@ -62,7 +63,7 @@ equal-size enums for each breakpoint you need and every column will be the same 
             }
             codeExample {
                 importContainerFun()
-                //importGridEnum(Sizes::class)
+                importFromGrid(EQ.import)
                 importColFun()
                 importRowFun()
                 ln { }
@@ -105,7 +106,8 @@ Note that the other columns will resize no matter the width of the center column
             }
             codeExample {
                 importContainerFun()
-//                importGridEnum(Sizes::class)
+                importFromGrid(SZ_5.import)
+                importFromGrid(SZ_6.import)
                 importColFun()
                 importRowFun()
                 ln { }
@@ -147,15 +149,16 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
             }
             codeExample {
                 importContainerFun()
-//                importGridEnum(Sizes::class)
+                importFromGrid(AUTO.import)
+                importFromGrid(EQ.import)
+                importFromGrid(SZ_2.import)
                 importColFun()
                 importRowFun()
                 importClassNames()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "classes" to "\"\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.name}}\"") {
+                    ktB(it, rowFun, "classes" to "\"\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.kt}}\"") {
                         ktIB(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"1 of 3\"" }
-                        @Suppress("DuplicatedCode")
                         ktIB(it, colFun, "md" to AUTO.name) { "+\"Variable width content\"" }
                         ktIB(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"3 of 3\"" }
                     }

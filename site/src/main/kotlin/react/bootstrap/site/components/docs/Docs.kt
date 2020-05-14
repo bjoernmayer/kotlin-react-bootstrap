@@ -9,10 +9,10 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_2
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_3
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_8
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_9
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_2
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_3
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_8
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_9
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.lib.ClassNames

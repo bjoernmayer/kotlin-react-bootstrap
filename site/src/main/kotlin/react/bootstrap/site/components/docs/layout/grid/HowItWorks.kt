@@ -4,7 +4,7 @@ package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
 import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.EQ
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.EQ
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -14,6 +14,7 @@ import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.containerFun
 import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.components.docs.layout.importFromGrid
 import react.bootstrap.site.external.Markdown
 import react.dom.a
 import react.dom.p
@@ -50,7 +51,7 @@ flexbox and is fully responsive. Below is an example and an in-depth look at how
         }
         codeExample {
             importContainerFun()
-//            importGridEnum(Sizes::class)
+            importFromGrid(EQ.import)
             importColFun()
             importRowFun()
             ln { }

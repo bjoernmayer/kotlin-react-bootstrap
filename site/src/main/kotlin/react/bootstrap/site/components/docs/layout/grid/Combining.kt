@@ -5,10 +5,10 @@ package react.bootstrap.site.components.docs.layout.grid
 import react.RBuilder
 import react.bootstrap.layout.container
 import react.bootstrap.layout.grid.ColAttributes
-import react.bootstrap.layout.grid.ColAttributes.Alignment.Companion.END
-import react.bootstrap.layout.grid.ColAttributes.Offset.Companion.OFF_1
-import react.bootstrap.layout.grid.ColAttributes.Order.Companion.ORD_3
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_4
+import react.bootstrap.layout.grid.ColAttributes.Alignments.Companion.END
+import react.bootstrap.layout.grid.ColAttributes.Offsets.Companion.OFF_1
+import react.bootstrap.layout.grid.ColAttributes.Orderings.Companion.ORD_3
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_4
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -17,7 +17,7 @@ import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.layout.gridImport
+import react.bootstrap.site.components.docs.layout.importFromGrid
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
@@ -32,16 +32,9 @@ internal class Combining : SectionComponent() {
     private val align = ColAttributes.Sizes::align.name
 
     private val sizes = ColAttributes.Sizes::class.simpleName
-    private val sz4 = SZ_4.name
-
     private val offsets = ColAttributes.Offsets::class.simpleName
-    private val off1 = OFF_1.name
-
     private val orderings = ColAttributes.Orderings::class.simpleName
-    private val ord3 = ORD_3.name
-
     private val alignments = ColAttributes.Alignments::class.simpleName
-    private val end = END.name
 
     override val title: String = "$sizes, $offsets, $orderings, $alignments"
 
@@ -64,38 +57,39 @@ Combine other attributes with `$sizes` by using `$sz`.
             liveExample {
                 container {
                     row {
-                        col(all = OFF_1 sz SZ_4) { +"all = $off1 $sz $sz4" }
+                        col(all = OFF_1 sz SZ_4) { +"all = ${OFF_1.name} $sz ${SZ_4.name}" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = ORD_3 sz SZ_4) { +"all = $ord3 $sz $sz4" }
+                        col(all = ORD_3 sz SZ_4) { +"all = ${ORD_3.name} $sz ${SZ_4.name}" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = END sz SZ_4) { +"all = $end $sz $sz4" }
+                        col(all = END sz SZ_4) { +"all = ${END.name} $sz ${SZ_4.name}" }
                         col { +"Reference" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-//                importGridEnum(Offsets::class)
-//                importGridEnum(Orderings::class)
-//                importGridEnum(Sizes::class)
+                importFromGrid(END.import)
+                importFromGrid(OFF_1.import)
+                importFromGrid(ORD_3.import)
+                importFromGrid(SZ_4.import)
                 importColFun()
                 importRowFun()
                 ln { }
                 ktContainer {
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "$off1 $sz $sz4")
+                        ktIB(it, colFun, "all" to "${OFF_1.name} $sz ${SZ_4.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "$ord3 $sz $sz4")
+                        ktIB(it, colFun, "all" to "${ORD_3.name} $sz ${SZ_4.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "$end $sz $sz4")
+                        ktIB(it, colFun, "all" to "${END.name} $sz ${SZ_4.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
@@ -113,38 +107,39 @@ Combine other attributes with `$offsets` by using `$off`.
             liveExample {
                 container {
                     row {
-                        col(all = SZ_4 off OFF_1) { +"all = $sz4 $off $off1" }
+                        col(all = SZ_4 off OFF_1) { +"all = ${SZ_4.name} $off ${OFF_1.name}" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = ORD_3 off OFF_1) { +"all = $ord3 $off $off1" }
+                        col(all = ORD_3 off OFF_1) { +"all = ${ORD_3.name} $off ${OFF_1.name}" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = END off OFF_1) { +"all = $end $off $off1" }
+                        col(all = END off OFF_1) { +"all = ${END.name} $off ${OFF_1.name}" }
                         col { +"Reference" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-//                importGridEnum(Offsets::class)
-//                importGridEnum(Orderings::class)
-//                importGridEnum(Sizes::class)
+                importFromGrid(END.import)
+                importFromGrid(OFF_1.import)
+                importFromGrid(ORD_3.import)
+                importFromGrid(SZ_4.import)
                 importColFun()
                 importRowFun()
                 ln { }
                 ktContainer {
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "$sz4 $off $off1")
+                        ktIB(it, colFun, "all" to "${SZ_4.name} $off ${OFF_1.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "$ord3 $off $off1")
+                        ktIB(it, colFun, "all" to "${ORD_3.name} $off ${OFF_1.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "$end $off $off1")
+                        ktIB(it, colFun, "all" to "${END.name} $off ${OFF_1.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
@@ -162,38 +157,39 @@ Combine other attributes with `$orderings` by using `$ord`.
             liveExample {
                 container {
                     row {
-                        col(all = SZ_4 ord ORD_3) { +"all = $sz4 $ord $ord3" }
+                        col(all = SZ_4 ord ORD_3) { +"all = ${SZ_4.name} $ord ${ORD_3.name}" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = OFF_1 ord ORD_3) { +"all = $off1 $ord $ord3" }
+                        col(all = OFF_1 ord ORD_3) { +"all = ${OFF_1.name} $ord ${ORD_3.name}" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = END ord ORD_3) { +"all = $end $ord $ord3" }
+                        col(all = END ord ORD_3) { +"all = ${END.name} $ord ${ORD_3.name}" }
                         col { +"Reference" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-//                importGridEnum(Offsets::class)
-//                importGridEnum(Orderings::class)
-//                importGridEnum(Sizes::class)
+                importFromGrid(END.import)
+                importFromGrid(OFF_1.import)
+                importFromGrid(ORD_3.import)
+                importFromGrid(SZ_4.import)
                 importColFun()
                 importRowFun()
                 ln { }
                 ktContainer {
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "$sz4 $ord $ord3")
+                        ktIB(it, colFun, "all" to "${SZ_4.name} $ord ${ORD_3.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "$off1 $ord $ord3")
+                        ktIB(it, colFun, "all" to "${OFF_1.name} $ord ${ORD_3.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "$end $ord $ord3")
+                        ktIB(it, colFun, "all" to "${END.name} $ord ${ORD_3.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
@@ -211,38 +207,39 @@ Combine other attributes with `$alignments` by using `$align`.
             liveExample {
                 container {
                     row {
-                        col(all = SZ_4 align END) { +"all = $sz4 $align $end" }
+                        col(all = SZ_4 align END) { +"all = ${SZ_4.name} $align ${END.name}" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = OFF_1 align END) { +"all = $off1 $align $end" }
+                        col(all = OFF_1 align END) { +"all = ${OFF_1.name} $align ${END.name}" }
                         col { +"Reference" }
                     }
                     row {
-                        col(all = ORD_3 align END) { +"all = $ord3 $align $end" }
+                        col(all = ORD_3 align END) { +"all = ${ORD_3.name} $align ${END.name}" }
                         col { +"Reference" }
                     }
                 }
             }
             codeExample {
                 importContainerFun()
-//                importGridEnum(Offsets::class)
-//                importGridEnum(Orderings::class)
-//                importGridEnum(Sizes::class)
+                importFromGrid(END.import)
+                importFromGrid(OFF_1.import)
+                importFromGrid(ORD_3.import)
+                importFromGrid(SZ_4.import)
                 importColFun()
                 importRowFun()
                 ln { }
                 ktContainer {
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "$sz4 $align $end")
+                        ktIB(it, colFun, "all" to "${SZ_4.name} $align ${END.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "$off1 $align $end")
+                        ktIB(it, colFun, "all" to "${OFF_1.name} $align ${END.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "$ord3 $align $end")
+                        ktIB(it, colFun, "all" to "${ORD_3.name} $align ${END.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
@@ -399,11 +396,11 @@ private fun RBuilder.allPossibleCombinations() {
                     }
                 }
             }
-            val imports = listOf(pairing.thisClassName, pairing.withClassName).sortedBy { it }
+            val imports = listOf(pairing.thisImport, pairing.withImport).sortedBy { it }
             codeExample {
                 importContainerFun()
                 imports.forEach {
-                    gridImport(it!!)
+                    importFromGrid(it)
                 }
                 importColFun()
                 importRowFun()
@@ -438,10 +435,11 @@ private fun RBuilder.allPossibleCombinations() {
                         }
                     }
                 }
+                val imports = listOf(pairing.thisImport, pairing.withImport, tripling.thisImport).sortedBy { it }
                 codeExample {
                     importContainerFun()
-                    enumNames.sortedBy { it }.forEach {
-                        gridImport(it!!)
+                    imports.forEach {
+                        importFromGrid(it)
                     }
                     importColFun()
                     importRowFun()
@@ -484,10 +482,10 @@ private fun RBuilder.allPossibleCombinations() {
                 }
                 codeExample {
                     importContainerFun()
-//                    importGridEnum(Alignments::class)
-//                    importGridEnum(Offsets::class)
-//                    importGridEnum(Orderings::class)
-//                    importGridEnum(Sizes::class)
+                    importFromGrid(END.import)
+                    importFromGrid(OFF_1.import)
+                    importFromGrid(ORD_3.import)
+                    importFromGrid(SZ_4.import)
                     importColFun()
                     importRowFun()
                     ln { }
@@ -522,6 +520,14 @@ private data class Pairing<TA : ColAttributes, TB : ColAttributes, TP : ColAttri
         else -> error("will never happen")
     }
 
+    val thisImport = when (pairThis) {
+        is ColAttributes.Sizes -> pairThis.import
+        is ColAttributes.Offsets -> pairThis.import
+        is ColAttributes.Orderings -> pairThis.import
+        is ColAttributes.Alignments -> pairThis.import
+        else -> error("will never happen")
+    }
+
     val withClassName = when (pairWith) {
         is ColAttributes.Sizes -> ColAttributes.Sizes::class.simpleName
         is ColAttributes.Offsets -> ColAttributes.Offsets::class.simpleName
@@ -538,10 +544,15 @@ private data class Pairing<TA : ColAttributes, TB : ColAttributes, TP : ColAttri
         else -> error("will never happen")
     }
 
-    val thisString = "$thisClassName.$thisValueName"
-    val withString = "$withClassName.$withValueName"
+    val withImport = when (pairWith) {
+        is ColAttributes.Sizes -> pairWith.import
+        is ColAttributes.Offsets -> pairWith.import
+        is ColAttributes.Orderings -> pairWith.import
+        is ColAttributes.Alignments -> pairWith.import
+        else -> error("will never happen")
+    }
 
-    val argString = "$thisString ${pairUsing.name} $withString"
+    val argString = "$thisValueName ${pairUsing.name} $withValueName"
 
     fun getPair() = pairUsing(pairThis, pairWith)
 }
@@ -579,7 +590,15 @@ private data class Tripling<
         else -> error("will never happen")
     }
 
-    val thisString = "$thisClassName.$thisValueName"
+    val thisImport = when (tripleThis) {
+        is ColAttributes.Sizes -> tripleThis.import
+        is ColAttributes.Offsets -> tripleThis.import
+        is ColAttributes.Orderings -> tripleThis.import
+        is ColAttributes.Alignments -> tripleThis.import
+        else -> error("will never happen")
+    }
+
+    val thisString = thisValueName
 
     fun getTriple() = tripleUsing(tripleWith1.getPair(), tripleThis)
 }
@@ -628,7 +647,7 @@ private data class Quadruple<
         else -> error("will never happen")
     }
 
-    val thisString = "$thisClassName.$thisValueName"
+    val thisString = thisValueName
 
     fun getQuadruple() = quadrupleUsing(quadrupleWith1.getTriple(), quadrupleThis)
 }

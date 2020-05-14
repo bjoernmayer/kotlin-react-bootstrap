@@ -106,7 +106,7 @@ enum class ItemsYs : ItemsY {
 data class ColCountItemXsPair(
     override val first: ColCounts,
     override val second: ItemsXs
-) : ColCount, ItemsX, AttributePair<ColCount, ItemsX> {
+) : ColCount, ItemsX, AttributePair {
     override val colCount: ColCounts = first
     override val itemsX: ItemsXs = second
     override val itemsY: ItemsYs? = null
@@ -121,7 +121,7 @@ data class ColCountItemXsPair(
 data class ColCountItemYsPair(
     override val first: ColCounts,
     override val second: ItemsYs
-) : ColCount, ItemsY, AttributePair<ColCount, ItemsY> {
+) : ColCount, ItemsY, AttributePair {
     override val colCount: ColCounts = first
     override val itemsX: ItemsXs? = null
     override val itemsY: ItemsYs = second
@@ -136,7 +136,7 @@ data class ColCountItemYsPair(
 data class ItemsXsItemsYsPair(
     override val first: ItemsXs,
     override val second: ItemsYs
-) : ItemsX, ItemsY, AttributePair<ItemsX, ItemsY> {
+) : ItemsX, ItemsY, AttributePair {
     override val colCount: ColCounts? = null
     override val itemsX: ItemsXs = first
     override val itemsY: ItemsYs = second
@@ -149,7 +149,7 @@ data class ColCountItemXsItemYsTriple(
     override val first: ColCounts,
     override val second: ItemsXs,
     override val third: ItemsYs
-) : ColCount, ItemsX, ItemsY, AttributeTriple<ColCount, ItemsX, ItemsY> {
+) : ColCount, ItemsX, ItemsY, AttributeTriple {
     override val colCount: ColCounts = first
     override val itemsX: ItemsXs = second
     override val itemsY: ItemsYs = third

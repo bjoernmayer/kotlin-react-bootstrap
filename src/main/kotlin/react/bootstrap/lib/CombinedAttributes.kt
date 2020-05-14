@@ -19,9 +19,9 @@ interface CombinedAttributes {
     }
 }
 
-interface AttributePair<T1 : CombinedAttributes, T2 : CombinedAttributes> : CombinedAttributes {
-    val first: T1
-    val second: T2
+interface AttributePair : CombinedAttributes {
+    val first: CombinedAttributes
+    val second: CombinedAttributes
 
     override fun getClassNames(breakpoints: Breakpoints?): Set<ClassNames> = listOf(
         first.getClassNames(breakpoints),
@@ -29,9 +29,8 @@ interface AttributePair<T1 : CombinedAttributes, T2 : CombinedAttributes> : Comb
     ).flatten().toSet()
 }
 
-interface AttributeTriple<T1 : CombinedAttributes, T2 : CombinedAttributes, T3 : CombinedAttributes> :
-    AttributePair<T1, T2> {
-    val third: T3
+interface AttributeTriple : AttributePair {
+    val third: CombinedAttributes
 
     override fun getClassNames(breakpoints: Breakpoints?): Set<ClassNames> = super.getClassNames(breakpoints)
         .toMutableList().apply { addAll(third.getClassNames(breakpoints)) }
@@ -43,8 +42,8 @@ interface AttributeQuadruple<
     T2 : CombinedAttributes,
     T3 : CombinedAttributes,
     T4 : CombinedAttributes
-    > : AttributeTriple<T1, T2, T3> {
-    val fourth: T4
+    > : AttributeTriple {
+    val fourth: CombinedAttributes
 
     override fun getClassNames(breakpoints: Breakpoints?): Set<ClassNames> = super.getClassNames(breakpoints)
         .toMutableList().apply { addAll(fourth.getClassNames(breakpoints)) }

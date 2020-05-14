@@ -4,22 +4,22 @@ package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
 import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.ColAttributes.Alignment.Companion.CENTER
-import react.bootstrap.layout.grid.ColAttributes.Alignment.Companion.END
-import react.bootstrap.layout.grid.ColAttributes.Alignment.Companion.START
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_4
+import react.bootstrap.layout.grid.ColAttributes.Alignments.Companion.CENTER
+import react.bootstrap.layout.grid.ColAttributes.Alignments.Companion.END
+import react.bootstrap.layout.grid.ColAttributes.Alignments.Companion.START
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_4
 import react.bootstrap.layout.grid.ItemsXs
 import react.bootstrap.layout.grid.ItemsYs
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.components.docs.layout.importFromGrid
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
@@ -95,9 +95,9 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
             }
             codeExample {
                 importContainerFun()
-                import("layout.grid.ColAttributes.Alignment.Companion.CENTER")
-                import("layout.grid.ColAttributes.Alignment.Companion.END")
-                import("layout.grid.ColAttributes.Alignment.Companion.START")
+                importFromGrid(CENTER.import)
+                importFromGrid(END.import)
+                importFromGrid(START.import)
                 importColFun()
                 importRowFun()
                 ln { }
@@ -141,7 +141,7 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
             }
             codeExample {
                 importContainerFun()
-                import("layout.grid.ColAttributes.Size.Companion.SZ_4")
+                importFromGrid(SZ_4.import)
                 importGridEnum(ItemsXs::class)
                 importColFun()
                 importRowFun()

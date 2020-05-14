@@ -10,7 +10,7 @@ import react.bootstrap.site.components.docs.fixings.ktB
 internal val RBuilder.containerFun: String
     get() = RBuilder::container.name
 
-internal val Container.Viscosities.kt: String
+internal val Container.Viscosities.ktN: String
     get() = "${Container::class.simpleName}.${Container.Viscosities::class.simpleName}.$name"
 
 internal fun CodeExampleBuilder.ktContainer(block: CodeExampleBuilder.(indentationLevel: Int) -> Unit) {
@@ -19,12 +19,12 @@ internal fun CodeExampleBuilder.ktContainer(block: CodeExampleBuilder.(indentati
     }
 }
 
-internal fun CodeExampleBuilder.gridImport(className: String) {
+internal fun CodeExampleBuilder.importFromGrid(className: String) {
     import("layout.grid.$className")
 }
 
 internal fun CodeExampleBuilder.importContainerFun() {
-    gridImport(containerFun)
+    importFromGrid(containerFun)
 }
 
 internal fun CodeExampleBuilder.importContainer() {

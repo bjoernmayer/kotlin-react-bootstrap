@@ -6,10 +6,9 @@ import react.bootstrap.content.img
 import react.bootstrap.content.typography.lead
 import react.bootstrap.content.typography.muted
 import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.ColAttributes
-import react.bootstrap.layout.grid.ColAttributes.Order.Companion.ORD_2
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.EQ
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_6
+import react.bootstrap.layout.grid.ColAttributes.Orderings.Companion.ORD_2
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.EQ
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_6
 import react.bootstrap.layout.grid.ItemsXs
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row

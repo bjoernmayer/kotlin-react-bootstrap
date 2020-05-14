@@ -5,10 +5,10 @@ package react.bootstrap.site.components.docs.layout.grid
 import react.RBuilder
 import react.bootstrap.layout.container
 import react.bootstrap.layout.grid.ColAttributes
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.EQ
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_4
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_6
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_8
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.EQ
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_4
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_6
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_8
 import react.bootstrap.layout.grid.ColCounts
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
@@ -19,6 +19,7 @@ import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.components.docs.layout.importFromGrid
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
 import react.dom.em
@@ -61,7 +62,9 @@ ${EQ.name}`.
             }
             codeExample {
                 importContainerFun()
-//                importGridEnum(Sizes::class)
+                importFromGrid(EQ.import)
+                importFromGrid(SZ_4.import)
+                importFromGrid(SZ_8.import)
                 importColFun()
                 importRowFun()
                 ln { }
@@ -102,7 +105,9 @@ stacked and becomes horizontal at the small breakpoint (`sm`).
             }
             codeExample {
                 importContainerFun()
-//                importGridEnum(Sizes::class)
+                importFromGrid(EQ.import)
+                importFromGrid(SZ_4.import)
+                importFromGrid(SZ_8.import)
                 importColFun()
                 importRowFun()
                 ln { }
@@ -147,14 +152,16 @@ needed. See the example below for a better idea of how it all works.
             }
             codeExample {
                 importContainerFun()
-//                importGridEnum(Sizes::class)
+                importFromGrid(SZ_4.import)
+                importFromGrid(SZ_6.import)
+                importFromGrid(SZ_8.import)
                 importColFun()
                 importRowFun()
                 ln { }
                 ktContainer {
                     ktRow(it) {
                         ln(it) { +"// Stack the columns on mobile by making one full-width and the other half-width" }
-                        ktIB(it, colFun, "md" to SZ_8.name) { "+\"md = ${SZ_8.name}\"" }
+                        ktIB(it, colFun, "md" to SZ_8.name)
                         ktIB(it, colFun, "all" to SZ_6.name, "md" to SZ_4.name)
                     }
                     ktRow(it) {
@@ -270,8 +277,8 @@ shortcut.
             }
             codeExample {
                 importContainerFun()
+                importFromGrid(SZ_6.import)
                 importGridEnum(ColCounts::class)
-//                importGridEnum(Sizes::class)
                 importColFun()
                 importRowFun()
                 ln { }
@@ -305,7 +312,11 @@ shortcut.
                 ln { }
                 ktContainer {
                     ktB(
-                        it, rowFun, "all" to ColCounts.CNT_1.name, "sm" to ColCounts.CNT_2.name, "md" to ColCounts.CNT_4.name
+                        it,
+                        rowFun,
+                        "all" to ColCounts.CNT_1.name,
+                        "sm" to ColCounts.CNT_2.name,
+                        "md" to ColCounts.CNT_4.name
                     ) {
                         for (x in 1..4) {
                             ktIB(it, colFun, "+\"Column\"")
@@ -339,7 +350,9 @@ column widths, responsive tiers, reorders, and more).
             }
             codeExample {
                 importContainerFun()
-//                importGridEnum(Sizes::class)
+                importFromGrid(SZ_4.import)
+                importFromGrid(SZ_6.import)
+                importFromGrid(SZ_8.import)
                 importColFun()
                 importRowFun()
                 ln { }

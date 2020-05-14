@@ -5,14 +5,14 @@ package react.bootstrap.site.components.docs.layout.grid
 import react.RBuilder
 import react.bootstrap.layout.container
 import react.bootstrap.layout.grid.ColAttributes
-import react.bootstrap.layout.grid.ColAttributes.Offset.Companion.OFF_3
-import react.bootstrap.layout.grid.ColAttributes.Offset.Companion.OFF_4
-import react.bootstrap.layout.grid.ColAttributes.Order.Companion.ORD_1
-import react.bootstrap.layout.grid.ColAttributes.Order.Companion.ORD_12
-import react.bootstrap.layout.grid.ColAttributes.Order.Companion.ORD_2
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_3
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_4
-import react.bootstrap.layout.grid.ColAttributes.Size.Companion.SZ_6
+import react.bootstrap.layout.grid.ColAttributes.Offsets.Companion.OFF_3
+import react.bootstrap.layout.grid.ColAttributes.Offsets.Companion.OFF_4
+import react.bootstrap.layout.grid.ColAttributes.Orderings.Companion.ORD_1
+import react.bootstrap.layout.grid.ColAttributes.Orderings.Companion.ORD_12
+import react.bootstrap.layout.grid.ColAttributes.Orderings.Companion.ORD_2
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_3
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_4
+import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_6
 import react.bootstrap.layout.grid.col
 import react.bootstrap.layout.grid.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -21,20 +21,18 @@ import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.components.docs.layout.importFromGrid
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
-import react.dom.a
-import react.dom.code
 import react.dom.h4
-import react.dom.p
 
 internal class Reordering : SectionComponent() {
     override val title: String = "Reordering"
 
     private val offsetsName = ColAttributes.Offsets::class.simpleName!!
     private val orderingsName = ColAttributes.Orderings::class.simpleName!!
+    private val off = ColAttributes.Sizes::off.name
 
     override fun RBuilder.render() {
         sectionTitle(section)
@@ -59,7 +57,8 @@ for 1 through 12 across all five grid tiers.
             }
             codeExample {
                 importContainerFun()
-//                importGridEnum(ColAttributes.Orderings::class)
+                importFromGrid(ORD_1.import)
+                importFromGrid(ORD_12.import)
                 importColFun()
                 importRowFun()
                 ln { }
@@ -71,22 +70,22 @@ for 1 through 12 across all five grid tiers.
             }
         }
         subSectionTitle("Offsetting columns", section)
-        p {
-            +"You can offset grid columns in two ways: our "; code { +offsetsName }; +" values and Bootstrap's "
-            a("https://getbootstrap.com/docs/4.4/utilities/spacing/") { +"margin utilities" }; +". Grid classes "
-            +"are sized to match columns while margins are more useful for quick layouts where the width of the offset "
-            +"is variable."
+        Markdown {
+            //language=Markdown
+            +"""
+You can offset grid columns in two ways: our `$offsetsName` values and Bootstrap's
+[margin utilities](https://getbootstrap.com/docs/4.4/utilities/spacing/). Grid classes are sized to match columns while
+margins are more useful for quick layouts where the width of the offset is variable.
+            """
         }
         contentTitle(RBuilder::h4, "$offsetsName enum")
-        p {
-            +"Move columns to the right by setting "; code { +offsetsName }; +" enum values. These increase the left"
-            +" margin of a column by "; code { +"*" }; +" columns. For example, "
-            code {
-                +"md = ${SZ_4.name} off ${OFF_4.name}"
-            }
-            +" moves "; code { +"$colFun(md = ${SZ_4.name}) { }" }; +" over four columns."
+        Markdown {
+            //language=Markdown
+            +"""
+Move columns to the right by setting `$offsetsName` enum values. These increase the left margin of a column by `*`
+columns. For example, `md = ${SZ_4.name} $off ${OFF_4.name}` moves `$colFun(md = ${SZ_4.name}) { }` over four columns.
+            """
         }
-        val off = ColAttributes.Sizes::off.name
         exampleRow {
             liveExample {
                 container {
@@ -106,8 +105,11 @@ for 1 through 12 across all five grid tiers.
             }
             codeExample {
                 importContainerFun()
-//                importGridEnum(Offsets::class)
-//                importGridEnum(Sizes::class)
+                importFromGrid(OFF_4.import)
+                importFromGrid(OFF_3.import)
+                importFromGrid(SZ_3.import)
+                importFromGrid(SZ_4.import)
+                importFromGrid(SZ_6.import)
                 importColFun()
                 importRowFun()
                 ln { }
