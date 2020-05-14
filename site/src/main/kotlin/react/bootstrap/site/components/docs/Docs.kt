@@ -18,6 +18,7 @@ import react.bootstrap.site.components.docs.content.Content
 import react.bootstrap.site.components.docs.fixings.CategoryComponent
 import react.bootstrap.site.components.docs.layout.Layout
 import react.bootstrap.site.from
+import react.bootstrap.site.main
 import react.router.dom.RouteResultProps
 import react.router.dom.redirect
 import react.router.dom.route
@@ -67,7 +68,10 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
                 }
             }
             col(
-                md = Sizes.SZ_9, xl = Sizes.SZ_8, classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content"
+                md = Sizes.SZ_9,
+                xl = Sizes.SZ_8,
+                classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content",
+                renderAs = { main { } }
             ) {
                 switch {
                     Pages.categories.forEach { category ->
