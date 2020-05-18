@@ -10,7 +10,8 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktB
-import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktF
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
@@ -60,7 +61,7 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
             import("components.button.Button")
             import("components.button.button")
             ln { }
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 true,
@@ -70,7 +71,7 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
                 "active" to true
             ) { "+\"Primary link\"" }
             ln { +"+\" \"" }
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 true,
@@ -97,7 +98,7 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
             ktB(0, "private val toggleableButton = functionalComponent<RProps>") {
                 ln(it) { +"val (active, setActive) = useState(false)" }
                 ln { }
-                ktB(
+                ktF(
                     it,
                     RBuilder::button,
                     false,

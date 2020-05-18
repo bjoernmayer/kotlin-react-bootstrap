@@ -23,18 +23,18 @@ external val coy: dynamic
 @JsModule("react-syntax-highlighter/dist/esm/languages/prism/kotlin")
 external val kotlin: dynamic
 
-private fun getIndent(indentationLevel: Int): String {
+private fun getIndent(indentation: Int): String {
     val indentBuilder = StringBuilder()
 
-    for (x in 1..indentationLevel) {
+    for (x in 1..indentation) {
         indentBuilder.append("    ")
     }
 
     return indentBuilder.toString()
 }
 
-internal fun CodeExampleBuilder.ln(indentationLevel: Int = 0, block: CodeExampleBuilder.() -> Unit) {
-    +getIndent(indentationLevel)
+internal fun CodeExampleBuilder.ln(indentation: Int = 0, block: CodeExampleBuilder.() -> Unit) {
+    +getIndent(indentation)
     block()
     +"\n"
 }
@@ -48,174 +48,213 @@ internal fun CodeExampleBuilder.importClassNames() {
 }
 
 internal fun CodeExampleBuilder.ktB(
-    indentationLevel: Int = 0,
+    indentation: Int = 0,
     opener: String,
-    block: CodeExampleBuilder.(indentationLevel: Int) -> Unit
+    block: CodeExampleBuilder.(indentation: Int) -> Unit
 ) {
-    ln(indentationLevel) { +"$opener {" }
-    block(indentationLevel + 1)
-    ln(indentationLevel) { +"}" }
+    ln(indentation) { +"$opener {" }
+    block(indentation + 1)
+    ln(indentation) { +"}" }
 }
 
-internal fun CodeExampleBuilder.ktB(
-    indentationLevel: Int = 0,
-    opener: String,
-    args: String,
-    block: CodeExampleBuilder.(indentationLevel: Int) -> Unit
-) = ktB(indentationLevel, "$opener($args)", block)
+internal fun CodeExampleBuilder.ktF(
+    indentation: Int = 0,
+    function: KFunction<*>,
+    block: CodeExampleBuilder.(indentation: Int) -> Unit
+) = ktB(indentation, function.name, block)
 
-internal fun CodeExampleBuilder.ktB(
-    indentationLevel: Int = 0,
-    opener: String,
+internal fun CodeExampleBuilder.ktF(
+    indentation: Int = 0,
+    functionName: String,
+    argString: String,
+    block: CodeExampleBuilder.(indentation: Int) -> Unit
+) = ktB(indentation, "$functionName($argString)", block)
+
+internal fun CodeExampleBuilder.ktF(
+    indentation: Int = 0,
+    function: KFunction<*>,
+    argString: String,
+    block: CodeExampleBuilder.(indentation: Int) -> Unit
+) = ktF(indentation, function.name, argString, block)
+
+internal fun CodeExampleBuilder.ktF(
+    indentation: Int = 0,
+    functionName: String,
+    arg: Pair<String, Any>,
     vararg args: Pair<String, Any>,
-    block: CodeExampleBuilder.(indentationLevel: Int) -> Unit
-) = ktB(indentationLevel, opener, args.joinToString { "${it.first} = ${it.second}" }, block)
+    block: CodeExampleBuilder.(indentation: Int) -> Unit
+) = ktF(indentation, functionName, listOf(arg, *args).joinToString { "${it.first} = ${it.second}" }, block)
 
-internal fun CodeExampleBuilder.ktB(
-    indentationLevel: Int = 0,
-    opener: String,
+internal fun CodeExampleBuilder.ktF(
+    indentation: Int = 0,
+    function: KFunction<*>,
+    arg: Pair<String, Any>,
+    vararg args: Pair<String, Any>,
+    block: CodeExampleBuilder.(indentation: Int) -> Unit
+) = ktF(indentation = indentation, functionName = function.name, arg = arg, block = block, args = *args)
+
+internal fun CodeExampleBuilder.ktF(
+    indentation: Int = 0,
+    functionName: String,
     breakDownArgs: Boolean = false,
+    arg: Pair<String, Any>,
     vararg args: Pair<String, Any>,
-    block: CodeExampleBuilder.(indentationLevel: Int) -> Unit
+    block: CodeExampleBuilder.(indentation: Int) -> Unit
 ) {
     val (separator, fix, valuePrefix) = if (breakDownArgs) {
-        Triple(",\n", "\n", getIndent(indentationLevel + 1))
+        Triple(",\n", "\n", getIndent(indentation + 1))
     } else {
         Triple(", ", "", "")
     }
 
-    ktB(
-        indentationLevel,
-        opener,
-        args.joinToString(separator, fix, fix) { "$valuePrefix${it.first} = ${it.second}" },
+    ktF(
+        indentation,
+        functionName,
+        listOf(arg, *args).joinToString(separator, fix, fix) { "$valuePrefix${it.first} = ${it.second}" },
         block
     )
 }
 
-internal fun CodeExampleBuilder.ktB(
-    indentationLevel: Int = 0,
-    opener: KFunction<*>,
+internal fun CodeExampleBuilder.ktF(
+    indentation: Int = 0,
+    function: KFunction<*>,
     breakDownArgs: Boolean = false,
+    arg: Pair<String, Any>,
     vararg args: Pair<String, Any>,
     block: CodeExampleBuilder.(indentationLevel: Int) -> Unit
-) = ktB(
-    indentationLevel = indentationLevel,
-    opener = opener.name,
+) = ktF(
+    indentation = indentation,
+    functionName = function.name,
     breakDownArgs = breakDownArgs,
+    arg = arg,
     block = block,
     args = *args
 )
 
 internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
+    indentation: Int = 0,
     opener: String,
     content: String
 ) {
     if (content.isEmpty()) {
-        ln(indentationLevel) { +"$opener { }" }
+        ln(indentation) { +"$opener { }" }
     } else {
-        ln(indentationLevel) { +"$opener { $content }" }
+        ln(indentation) { +"$opener { $content }" }
     }
 }
 
 internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
+    indentation: Int = 0,
     opener: String,
     content: () -> String
-) {
-    ln(indentationLevel) { +"$opener { ${content()} }" }
-}
+) = ktIB(indentation, opener, content())
 
-internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
-    opener: String,
-    args: String,
+internal fun CodeExampleBuilder.ktIF(
+    indentation: Int = 0,
+    function: KFunction<*>,
     content: String
-) {
-    ktIB(indentationLevel, "$opener($args)", content)
-}
+) = ktIB(indentation, function.name, content)
 
-internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
-    opener: KFunction<*>,
-    args: String,
+internal fun CodeExampleBuilder.ktIF(
+    indentation: Int = 0,
+    function: KFunction<*>,
+    content: () -> String
+) = ktIB(indentation, function.name, content)
+
+internal fun CodeExampleBuilder.ktIF(
+    indentation: Int = 0,
+    functionName: String,
+    argString: String,
     content: String
-) {
-    ktIB(indentationLevel, "${opener.name}($args)", content)
-}
+) = ktIB(indentation, "$functionName($argString)", content)
 
-internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
-    opener: String,
-    arg: Pair<String, String>,
+internal fun CodeExampleBuilder.ktIF(
+    indentation: Int = 0,
+    function: KFunction<*>,
+    argString: String,
+    content: String
+) = ktIF(indentation, function.name, argString, content)
+
+internal fun CodeExampleBuilder.ktIF(
+    indentation: Int = 0,
+    functionName: String,
+    arg: Pair<String, Any>,
     vararg args: Pair<String, Any>,
     content: () -> String
-) = ktIB(indentationLevel, opener, listOf(arg, *args).joinToString { "${it.first} = ${it.second}" }, content())
+) = ktIF(
+    indentation,
+    functionName,
+    listOf(arg, *args).joinToString { "${it.first} = ${it.second}" },
+    content()
+)
 
-internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
-    opener: String,
-    arg: Pair<String, String>,
-    vararg args: Pair<String, String>
-) = ktIB(
-    indentationLevel,
-    opener,
-    arg,
-    *args
-) { "+\"${listOf(arg, *args).joinToString { "${it.first} = ${it.second}" }}\"" }
+internal fun CodeExampleBuilder.ktIF(
+    indentation: Int = 0,
+    functionName: String,
+    arg: Pair<String, Any>,
+    vararg args: Pair<String, Any>
+) = ktIF(indentation, functionName, arg, *args) {
+    "+\"${listOf(arg, *args).joinToString { "${it.first} = ${it.second}" }}\""
+}
 
-internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
-    opener: String,
+internal fun CodeExampleBuilder.ktIF(
+    indentation: Int = 0,
+    function: KFunction<*>,
+    arg: Pair<String, Any>,
+    vararg args: Pair<String, Any>
+) = ktIF(indentation = indentation, functionName = function.name, arg = arg, args = *args)
+
+internal fun CodeExampleBuilder.ktIF(
+    indentation: Int = 0,
+    functionName: String,
     breakDownArgs: Boolean = false,
-    arg: Pair<String, String>,
+    arg: Pair<String, Any>,
     vararg args: Pair<String, Any>,
     content: () -> String
 ) {
     val (separator, fix, valuePrefix) = if (breakDownArgs) {
-        Triple(",\n", "\n", getIndent(indentationLevel + 1))
+        Triple(",\n", "\n", getIndent(indentation + 1))
     } else {
         Triple(", ", "", "")
     }
 
-    ktIB(
-        indentationLevel,
-        opener,
+    ktIF(
+        indentation,
+        functionName,
         listOf(arg, *args).joinToString(separator, fix, fix) { "$valuePrefix${it.first} = ${it.second}" },
         content()
     )
 }
 
-internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
-    opener: KFunction<*>,
-    arg: Pair<String, String>,
+internal fun CodeExampleBuilder.ktIF(
+    indentation: Int = 0,
+    function: KFunction<*>,
+    arg: Pair<String, Any>,
     vararg args: Pair<String, Any>,
     content: () -> String
-) = ktIB(indentationLevel = indentationLevel, opener = opener.name, content = content, arg = arg, args = *args)
-
-internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
-    opener: KFunction<*>,
-    breakDownArgs: Boolean = false,
-    arg: Pair<String, String>,
-    vararg args: Pair<String, Any>,
-    content: () -> String
-) = ktIB(
-    indentationLevel = indentationLevel,
-    opener = opener.name,
-    breakDownArgs = breakDownArgs,
+) = ktIF(
+    indentation = indentation,
+    functionName = function.name,
     content = content,
     arg = arg,
     args = *args
 )
 
-internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
-    opener: KFunction<*>,
-    arg: Pair<String, String>,
-    vararg args: Pair<String, Any>
-) = ktIB(indentationLevel = indentationLevel, opener = opener.name, arg = arg, args = *args)
+internal fun CodeExampleBuilder.ktIF(
+    indentation: Int = 0,
+    function: KFunction<*>,
+    breakDownArgs: Boolean = false,
+    arg: Pair<String, Any>,
+    vararg args: Pair<String, Any>,
+    content: () -> String
+) = ktIF(
+    indentation = indentation,
+    functionName = function.name,
+    breakDownArgs = breakDownArgs,
+    content = content,
+    arg = arg,
+    args = *args
+)
 
 internal class CodeExample : RComponent<CodeExample.Props, RState>() {
     override fun RBuilder.render() {

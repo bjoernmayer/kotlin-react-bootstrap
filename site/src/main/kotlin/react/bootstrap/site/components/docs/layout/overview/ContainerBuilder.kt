@@ -1,3 +1,5 @@
+@file:Suppress("DuplicatedCode")
+
 package react.bootstrap.site.components.docs.layout.overview
 
 import react.RBuilder

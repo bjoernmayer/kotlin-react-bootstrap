@@ -8,8 +8,8 @@ import react.bootstrap.content.tables.tr
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktB
-import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktF
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
@@ -97,29 +97,29 @@ internal class ContextualStyles : SectionComponent() {
             import("content.tables.tr")
             ln { }
             ln { +"// On rows" }
-            ktIB(0, "tr", ContextualStyle.ACTIVE.kt, "...")
+            ktIF(0, RBuilder::tr, ContextualStyle.ACTIVE.kt, "...")
             ln { }
-            ktIB(0, "tr", ContextualStyle.PRIMARY.kt, "...")
-            ktIB(0, "tr", ContextualStyle.SECONDARY.kt, "...")
-            ktIB(0, "tr", ContextualStyle.SUCCESS.kt, "...")
-            ktIB(0, "tr", ContextualStyle.DANGER.kt, "...")
-            ktIB(0, "tr", ContextualStyle.WARNING.kt, "...")
-            ktIB(0, "tr", ContextualStyle.INFO.kt, "...")
-            ktIB(0, "tr", ContextualStyle.LIGHT.kt, "...")
-            ktIB(0, "tr", ContextualStyle.DARK.kt, "...")
+            ktIF(0, RBuilder::tr, ContextualStyle.PRIMARY.kt, "...")
+            ktIF(0, RBuilder::tr, ContextualStyle.SECONDARY.kt, "...")
+            ktIF(0, RBuilder::tr, ContextualStyle.SUCCESS.kt, "...")
+            ktIF(0, RBuilder::tr, ContextualStyle.DANGER.kt, "...")
+            ktIF(0, RBuilder::tr, ContextualStyle.WARNING.kt, "...")
+            ktIF(0, RBuilder::tr, ContextualStyle.INFO.kt, "...")
+            ktIF(0, RBuilder::tr, ContextualStyle.LIGHT.kt, "...")
+            ktIF(0, RBuilder::tr, ContextualStyle.DARK.kt, "...")
             ln { }
             ln { +"// On cells (`td` or `th`)" }
-            ktB(0, "tr") {
-                ktIB(it, "td", ContextualStyle.ACTIVE.kt, "...")
+            ktF(0, RBuilder::tr) {
+                ktIF(it, RBuilder::td, ContextualStyle.ACTIVE.kt, "...")
                 ln { }
-                ktIB(it, "td", ContextualStyle.PRIMARY.kt, "...")
-                ktIB(it, "td", ContextualStyle.SECONDARY.kt, "...")
-                ktIB(it, "td", ContextualStyle.SUCCESS.kt, "...")
-                ktIB(it, "td", ContextualStyle.DANGER.kt, "...")
-                ktIB(it, "td", ContextualStyle.WARNING.kt, "...")
-                ktIB(it, "td", ContextualStyle.INFO.kt, "...")
-                ktIB(it, "td", ContextualStyle.LIGHT.kt, "...")
-                ktIB(it, "td", ContextualStyle.DARK.kt, "...")
+                ktIF(it, RBuilder::td, ContextualStyle.PRIMARY.kt, "...")
+                ktIF(it, RBuilder::td, ContextualStyle.SECONDARY.kt, "...")
+                ktIF(it, RBuilder::td, ContextualStyle.SUCCESS.kt, "...")
+                ktIF(it, RBuilder::td, ContextualStyle.DANGER.kt, "...")
+                ktIF(it, RBuilder::td, ContextualStyle.WARNING.kt, "...")
+                ktIF(it, RBuilder::td, ContextualStyle.INFO.kt, "...")
+                ktIF(it, RBuilder::td, ContextualStyle.LIGHT.kt, "...")
+                ktIF(it, RBuilder::td, ContextualStyle.DARK.kt, "...")
             }
         }
         p {

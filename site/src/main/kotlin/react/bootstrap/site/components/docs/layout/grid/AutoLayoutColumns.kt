@@ -15,8 +15,9 @@ import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.importClassNames
-import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktF
 import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
@@ -113,12 +114,12 @@ Note that the other columns will resize no matter the width of the center column
                 ktContainer {
                     ktRow(it) {
                         ktIB(it, colFun, "+\"1 of 3\"")
-                        ktIB(it, colFun, "all" to SZ_6.name) { "+\"2 of 3 (wider)\"" }
+                        ktIF(it, colFun, "all" to SZ_6.name) { "+\"2 of 3 (wider)\"" }
                         ktIB(it, colFun, "+\"3 of 3\"")
                     }
                     ktRow(it) {
                         ktIB(it, colFun, "+\"1 of 3\"")
-                        ktIB(it, colFun, "all" to SZ_5.name) { "+\"2 of 3 (wider)\"" }
+                        ktIF(it, colFun, "all" to SZ_5.name) { "+\"2 of 3 (wider)\"" }
                         ktIB(it, colFun, "+\"3 of 3\"")
                     }
                 }
@@ -156,15 +157,15 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
                 importClassNames()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "classes" to "\"\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.kt}}\"") {
-                        ktIB(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"1 of 3\"" }
-                        ktIB(it, colFun, "md" to AUTO.name) { "+\"Variable width content\"" }
-                        ktIB(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"3 of 3\"" }
+                    ktF(it, rowFun, "classes" to "\"\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.kt}}\"") {
+                        ktIF(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"1 of 3\"" }
+                        ktIF(it, colFun, "md" to AUTO.name) { "+\"Variable width content\"" }
+                        ktIF(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"3 of 3\"" }
                     }
                     ktRow(it) {
                         ktIB(it, colFun, "+\"1 of 3\"")
-                        ktIB(it, colFun, "md" to AUTO.name) { "+\"Variable width content\"" }
-                        ktIB(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"3 of 3\"" }
+                        ktIF(it, colFun, "md" to AUTO.name) { "+\"Variable width content\"" }
+                        ktIF(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"3 of 3\"" }
                     }
                 }
             }

@@ -12,8 +12,9 @@ import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktF
 import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.importContainerFun
@@ -71,17 +72,17 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to rySTART.name) {
+                    ktF(it, rowFun, "all" to rySTART.name) {
                         for (x in 1..3) {
                             ktIB(it, colFun) { "+\"One of three columns\"" }
                         }
                     }
-                    ktB(it, rowFun, "all" to ryCENTER.name) {
+                    ktF(it, rowFun, "all" to ryCENTER.name) {
                         for (x in 1..3) {
                             ktIB(it, colFun) { "+\"One of three columns\"" }
                         }
                     }
-                    ktB(it, rowFun, "all" to ryEND.name) {
+                    ktF(it, rowFun, "all" to ryEND.name) {
                         for (x in 1..3) {
                             ktIB(it, colFun) { "+\"One of three columns\"" }
                         }
@@ -108,9 +109,9 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importRowFun()
                 ln { }
                 ktConRow {
-                    ktIB(it, colFun, "all" to START.name) { "+\"One of three columns\"" }
-                    ktIB(it, colFun, "all" to CENTER.name) { "+\"One of three columns\"" }
-                    ktIB(it, colFun, "all" to END.name) { "+\"One of three columns\"" }
+                    ktIF(it, colFun, "all" to START.name) { "+\"One of three columns\"" }
+                    ktIF(it, colFun, "all" to CENTER.name) { "+\"One of three columns\"" }
+                    ktIF(it, colFun, "all" to END.name) { "+\"One of three columns\"" }
                 }
             }
         }
@@ -157,29 +158,29 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to rxSTART.name) {
+                    ktF(it, rowFun, "all" to rxSTART.name) {
                         for (x in 1..2) {
-                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
+                            ktIF(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
                         }
                     }
-                    ktB(it, rowFun, "all" to rxCENTER.name) {
+                    ktF(it, rowFun, "all" to rxCENTER.name) {
                         for (x in 1..2) {
-                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
+                            ktIF(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
                         }
                     }
-                    ktB(it, rowFun, "all" to rxEND.name) {
+                    ktF(it, rowFun, "all" to rxEND.name) {
                         for (x in 1..2) {
-                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
+                            ktIF(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
                         }
                     }
-                    ktB(it, rowFun, "all" to rxAROUND.name) {
+                    ktF(it, rowFun, "all" to rxAROUND.name) {
                         for (x in 1..2) {
-                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
+                            ktIF(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
                         }
                     }
-                    ktB(it, rowFun, "all" to rxBETWEEN.name) {
+                    ktF(it, rowFun, "all" to rxBETWEEN.name) {
                         for (x in 1..2) {
-                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
+                            ktIF(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
                         }
                     }
                 }

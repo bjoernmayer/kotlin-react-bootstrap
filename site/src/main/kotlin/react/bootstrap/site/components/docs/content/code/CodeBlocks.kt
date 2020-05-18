@@ -5,7 +5,7 @@ import react.bootstrap.content.pre
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
@@ -72,7 +72,7 @@ provide a y-axis scrollbar.
         codeExample {
             import("content.pre")
             ln { }
-            ktB(0, "pre", "scrollable" to "true") {
+            ktF(0, "pre", "scrollable" to true) {
                 ln(it) { +"// Kotlin Code was here" }
             }
         }

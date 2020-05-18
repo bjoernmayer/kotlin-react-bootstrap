@@ -56,7 +56,6 @@ import kotlinx.html.js.onTouchStartFunction
 import kotlinx.html.js.onVolumeChangeFunction
 import kotlinx.html.js.onWaitingFunction
 import kotlinx.html.js.onWheelFunction
-import org.w3c.dom.events.Event
 import kotlin.reflect.KProperty
 
 fun CommonAttributeGroupFacade.transferDomEvents(props: WithDomEvents, vararg excludes: KProperty<EventHandler?>) {

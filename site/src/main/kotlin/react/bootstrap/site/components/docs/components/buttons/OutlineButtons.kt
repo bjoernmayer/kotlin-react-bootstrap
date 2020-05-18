@@ -8,7 +8,7 @@ import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
@@ -42,7 +42,7 @@ variants!
                     Variants::class,
                     Variants.Outline::class
                 )
-                ktIB(0, RBuilder::button, variant, "+\"${it::class.normalName}\"")
+                ktIF(0, RBuilder::button, variant, "+\"${it::class.normalName}\"")
                 ln { +"+\" \"" }
             }
         }

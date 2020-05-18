@@ -15,6 +15,7 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.importContainerFun
@@ -80,15 +81,15 @@ Combine other attributes with `$sizes` by using `$sz`.
                 ln { }
                 ktContainer {
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "${OFF_1.name} $sz ${SZ_4.name}")
+                        ktIF(it, colFun, "all" to "${OFF_1.name} $sz ${SZ_4.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "${ORD_3.name} $sz ${SZ_4.name}")
+                        ktIF(it, colFun, "all" to "${ORD_3.name} $sz ${SZ_4.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "${END.name} $sz ${SZ_4.name}")
+                        ktIF(it, colFun, "all" to "${END.name} $sz ${SZ_4.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
@@ -130,15 +131,15 @@ Combine other attributes with `$offsets` by using `$off`.
                 ln { }
                 ktContainer {
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "${SZ_4.name} $off ${OFF_1.name}")
+                        ktIF(it, colFun, "all" to "${SZ_4.name} $off ${OFF_1.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "${ORD_3.name} $off ${OFF_1.name}")
+                        ktIF(it, colFun, "all" to "${ORD_3.name} $off ${OFF_1.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "${END.name} $off ${OFF_1.name}")
+                        ktIF(it, colFun, "all" to "${END.name} $off ${OFF_1.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
@@ -180,15 +181,15 @@ Combine other attributes with `$orderings` by using `$ord`.
                 ln { }
                 ktContainer {
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "${SZ_4.name} $ord ${ORD_3.name}")
+                        ktIF(it, colFun, "all" to "${SZ_4.name} $ord ${ORD_3.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "${OFF_1.name} $ord ${ORD_3.name}")
+                        ktIF(it, colFun, "all" to "${OFF_1.name} $ord ${ORD_3.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "${END.name} $ord ${ORD_3.name}")
+                        ktIF(it, colFun, "all" to "${END.name} $ord ${ORD_3.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
@@ -230,15 +231,15 @@ Combine other attributes with `$alignments` by using `$align`.
                 ln { }
                 ktContainer {
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "${SZ_4.name} $align ${END.name}")
+                        ktIF(it, colFun, "all" to "${SZ_4.name} $align ${END.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "${OFF_1.name} $align ${END.name}")
+                        ktIF(it, colFun, "all" to "${OFF_1.name} $align ${END.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to "${ORD_3.name} $align ${END.name}")
+                        ktIF(it, colFun, "all" to "${ORD_3.name} $align ${END.name}")
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
@@ -405,7 +406,7 @@ private fun RBuilder.allPossibleCombinations() {
                 importRowFun()
                 ln { }
                 ktConRow {
-                    ktIB(it, colFun, "all" to pairing.argString)
+                    ktIF(it, colFun, "all" to pairing.argString)
                     ktIB(it, colFun, "+\"Reference\"")
                 }
             }
@@ -444,7 +445,7 @@ private fun RBuilder.allPossibleCombinations() {
                     importRowFun()
                     ln { }
                     ktConRow {
-                        ktIB(it, colFun, "all" to argString)
+                        ktIF(it, colFun, "all" to argString)
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                 }
@@ -489,7 +490,7 @@ private fun RBuilder.allPossibleCombinations() {
                     importRowFun()
                     ln { }
                     ktConRow {
-                        ktIB(it, colFun, "all" to argString)
+                        ktIF(it, colFun, "all" to argString)
                         ktIB(it, colFun, "+\"Reference\"")
                     }
                 }

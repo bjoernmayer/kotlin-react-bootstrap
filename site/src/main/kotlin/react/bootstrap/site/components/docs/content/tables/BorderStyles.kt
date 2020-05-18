@@ -9,8 +9,8 @@ import react.bootstrap.content.tables.table
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktB
-import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktF
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
@@ -162,126 +162,126 @@ table and cells. Or set the value to `${BorderStyles.BORDERLESS.kt}` for a table
             import("content.tables.${BorderStyles::class.simpleName}")
             import("content.tables.table")
             ln { }
-            ktB(0, "table", "borderStyle" to BorderStyles.BORDERED.kt) {
-                ktB(it, "thead") {
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.col", "+\"#\"")
-                        ktIB(it, "th", "ThScope.col", "+\"First\"")
-                        ktIB(it, "th", "ThScope.col", "+\"Last\"")
-                        ktIB(it, "th", "ThScope.col", "+\"Handle\"")
+            ktF(0, RBuilder::table, "borderStyle" to BorderStyles.BORDERED.kt) {
+                ktF(it, RBuilder::thead) {
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"#\"")
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"First\"")
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"Last\"")
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"Handle\"")
                     }
                 }
-                ktB(it, "tbody") {
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.row", "+\"1\"")
-                        ktIB(it, "td", "+\"Mark\"")
-                        ktIB(it, "td", "+\"Otto\"")
-                        ktIB(it, "td", "+\"@mdo\"")
+                ktF(it, RBuilder::tbody) {
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.row.kt, "+\"1\"")
+                        ktIF(it, RBuilder::td, "+\"Mark\"")
+                        ktIF(it, RBuilder::td, "+\"Otto\"")
+                        ktIF(it, RBuilder::td, "+\"@mdo\"")
                     }
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.row", "+\"2\"")
-                        ktIB(it, "td", "+\"Jacob\"")
-                        ktIB(it, "td", "+\"Thornton\"")
-                        ktIB(it, "td", "+\"@fat\"")
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.row.kt, "+\"2\"")
+                        ktIF(it, RBuilder::td, "+\"Jacob\"")
+                        ktIF(it, RBuilder::td, "+\"Thornton\"")
+                        ktIF(it, RBuilder::td, "+\"@fat\"")
                     }
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.row", "+\"3\"")
-                        ktIB(it, "td", "+\"Larry\"")
-                        ktIB(it, "td", "+\"the Bird\"")
-                        ktIB(it, "td", "+\"@twitter\"")
-                    }
-                }
-            }
-            ln { }
-            ktB(0, "table", "borderStyle" to BorderStyles.BORDERED.kt, "dark" to "true") {
-                ktB(it, "thead") {
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.col", "+\"#\"")
-                        ktIB(it, "th", "ThScope.col", "+\"First\"")
-                        ktIB(it, "th", "ThScope.col", "+\"Last\"")
-                        ktIB(it, "th", "ThScope.col", "+\"Handle\"")
-                    }
-                }
-                ktB(it, "tbody") {
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.row", "+\"1\"")
-                        ktIB(it, "td", "+\"Mark\"")
-                        ktIB(it, "td", "+\"Otto\"")
-                        ktIB(it, "td", "+\"@mdo\"")
-                    }
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.row", "+\"2\"")
-                        ktIB(it, "td", "+\"Jacob\"")
-                        ktIB(it, "td", "+\"Thornton\"")
-                        ktIB(it, "td", "+\"@fat\"")
-                    }
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.row", "+\"3\"")
-                        ktIB(it, "td", "+\"Larry\"")
-                        ktIB(it, "td", "+\"the Bird\"")
-                        ktIB(it, "td", "+\"@twitter\"")
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.row.kt, "+\"3\"")
+                        ktIF(it, RBuilder::td, "+\"Larry\"")
+                        ktIF(it, RBuilder::td, "+\"the Bird\"")
+                        ktIF(it, RBuilder::td, "+\"@twitter\"")
                     }
                 }
             }
             ln { }
-            ktB(0, "table", "borderStyle" to BorderStyles.BORDERLESS.kt) {
-                ktB(it, "thead") {
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.col", "+\"#\"")
-                        ktIB(it, "th", "ThScope.col", "+\"First\"")
-                        ktIB(it, "th", "ThScope.col", "+\"Last\"")
-                        ktIB(it, "th", "ThScope.col", "+\"Handle\"")
+            ktF(0, RBuilder::table, "borderStyle" to BorderStyles.BORDERED.kt, "dark" to true) {
+                ktF(it, RBuilder::thead) {
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"#\"")
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"First\"")
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"Last\"")
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"Handle\"")
                     }
                 }
-                ktB(it, "tbody") {
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.row", "+\"1\"")
-                        ktIB(it, "td", "+\"Mark\"")
-                        ktIB(it, "td", "+\"Otto\"")
-                        ktIB(it, "td", "+\"@mdo\"")
+                ktF(it, RBuilder::tbody) {
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.row.kt, "+\"1\"")
+                        ktIF(it, RBuilder::td, "+\"Mark\"")
+                        ktIF(it, RBuilder::td, "+\"Otto\"")
+                        ktIF(it, RBuilder::td, "+\"@mdo\"")
                     }
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.row", "+\"2\"")
-                        ktIB(it, "td", "+\"Jacob\"")
-                        ktIB(it, "td", "+\"Thornton\"")
-                        ktIB(it, "td", "+\"@fat\"")
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.row.kt, "+\"2\"")
+                        ktIF(it, RBuilder::td, "+\"Jacob\"")
+                        ktIF(it, RBuilder::td, "+\"Thornton\"")
+                        ktIF(it, RBuilder::td, "+\"@fat\"")
                     }
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.row", "+\"3\"")
-                        ktIB(it, "td", "+\"Larry\"")
-                        ktIB(it, "td", "+\"the Bird\"")
-                        ktIB(it, "td", "+\"@twitter\"")
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.row.kt, "+\"3\"")
+                        ktIF(it, RBuilder::td, "+\"Larry\"")
+                        ktIF(it, RBuilder::td, "+\"the Bird\"")
+                        ktIF(it, RBuilder::td, "+\"@twitter\"")
                     }
                 }
             }
             ln { }
-            ktB(0, "table", "borderStyle" to BorderStyles.BORDERLESS.kt, "dark" to "true") {
-                ktB(it, "thead") {
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.col", "+\"#\"")
-                        ktIB(it, "th", "ThScope.col", "+\"First\"")
-                        ktIB(it, "th", "ThScope.col", "+\"Last\"")
-                        ktIB(it, "th", "ThScope.col", "+\"Handle\"")
+            ktF(0, RBuilder::table, "borderStyle" to BorderStyles.BORDERLESS.kt) {
+                ktF(it, RBuilder::thead) {
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"#\"")
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"First\"")
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"Last\"")
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"Handle\"")
                     }
                 }
-                ktB(it, "tbody") {
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.row", "+\"1\"")
-                        ktIB(it, "td", "+\"Mark\"")
-                        ktIB(it, "td", "+\"Otto\"")
-                        ktIB(it, "td", "+\"@mdo\"")
+                ktF(it, RBuilder::tbody) {
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.row.kt, "+\"1\"")
+                        ktIF(it, RBuilder::td, "+\"Mark\"")
+                        ktIF(it, RBuilder::td, "+\"Otto\"")
+                        ktIF(it, RBuilder::td, "+\"@mdo\"")
                     }
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.row", "+\"2\"")
-                        ktIB(it, "td", "+\"Jacob\"")
-                        ktIB(it, "td", "+\"Thornton\"")
-                        ktIB(it, "td", "+\"@fat\"")
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.row.kt, "+\"2\"")
+                        ktIF(it, RBuilder::td, "+\"Jacob\"")
+                        ktIF(it, RBuilder::td, "+\"Thornton\"")
+                        ktIF(it, RBuilder::td, "+\"@fat\"")
                     }
-                    ktB(it, "tr") {
-                        ktIB(it, "th", "ThScope.row", "+\"3\"")
-                        ktIB(it, "td", "+\"Larry\"")
-                        ktIB(it, "td", "+\"the Bird\"")
-                        ktIB(it, "td", "+\"@twitter\"")
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.row.kt, "+\"3\"")
+                        ktIF(it, RBuilder::td, "+\"Larry\"")
+                        ktIF(it, RBuilder::td, "+\"the Bird\"")
+                        ktIF(it, RBuilder::td, "+\"@twitter\"")
+                    }
+                }
+            }
+            ln { }
+            ktF(0, RBuilder::table, "borderStyle" to BorderStyles.BORDERLESS.kt, "dark" to true) {
+                ktF(it, RBuilder::thead) {
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"#\"")
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"First\"")
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"Last\"")
+                        ktIF(it, RBuilder::th, ThScope.col.kt, "+\"Handle\"")
+                    }
+                }
+                ktF(it, RBuilder::tbody) {
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.row.kt, "+\"1\"")
+                        ktIF(it, RBuilder::td, "+\"Mark\"")
+                        ktIF(it, RBuilder::td, "+\"Otto\"")
+                        ktIF(it, RBuilder::td, "+\"@mdo\"")
+                    }
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.row.kt, "+\"2\"")
+                        ktIF(it, RBuilder::td, "+\"Jacob\"")
+                        ktIF(it, RBuilder::td, "+\"Thornton\"")
+                        ktIF(it, RBuilder::td, "+\"@fat\"")
+                    }
+                    ktF(it, RBuilder::tr) {
+                        ktIF(it, RBuilder::th, ThScope.row.kt, "+\"3\"")
+                        ktIF(it, RBuilder::td, "+\"Larry\"")
+                        ktIF(it, RBuilder::td, "+\"the Bird\"")
+                        ktIF(it, RBuilder::td, "+\"@twitter\"")
                     }
                 }
             }

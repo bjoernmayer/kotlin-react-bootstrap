@@ -7,7 +7,7 @@ import react.bootstrap.components.button.button
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
@@ -33,14 +33,14 @@ Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)
             import("components.button.Button")
             import("components.button.button")
             ln { }
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 "variant" to (Variants.Solid.PRIMARY).ktN,
                 "sizes" to Sizes.LG.ktN
             ) { "+\"Large button\"" }
             ln { +"+\" \"" }
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 "variant" to (Variants.Solid.SECONDARY).ktN,
@@ -56,14 +56,14 @@ Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)
             import("components.button.Button")
             import("components.button.button")
             ln { }
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 "variant" to (Variants.Solid.PRIMARY).ktN,
                 "sizes" to Sizes.SM.ktN
             ) { "+\"Small button\"" }
             ln { +"+\" \"" }
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 "variant" to (Variants.Solid.SECONDARY).ktN,
@@ -86,7 +86,7 @@ Create block level buttons—those that span the full width of a parent—by add
             import("components.button.Button")
             import("components.button.button")
             ln { }
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 "variant" to (Variants.Solid.PRIMARY).ktN,
@@ -94,7 +94,7 @@ Create block level buttons—those that span the full width of a parent—by add
                 "blockSized" to true
             ) { "+\"Block level button\"" }
             ln { +"+\" \"" }
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 "variant" to (Variants.Solid.SECONDARY).ktN,

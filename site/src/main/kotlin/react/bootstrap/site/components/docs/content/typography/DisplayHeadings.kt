@@ -8,6 +8,7 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
@@ -78,7 +79,7 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
                 }
             }
             ln { +"// Or you use a more generic way" }
-            ktB(0, RBuilder::display.name, "variant" to Display.Variants.DISPLAY_4.kt, "renderAs" to "{ span { } }") {
+            ktF(0, RBuilder::display, "variant" to Display.Variants.DISPLAY_4.kt, "renderAs" to "{ span { } }") {
                 ln(it) { +"+\"Display 4\"" }
             }
         }

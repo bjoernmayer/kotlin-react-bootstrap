@@ -9,7 +9,7 @@ import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.containerFun
@@ -56,7 +56,7 @@ flexbox and is fully responsive. Below is an example and an in-depth look at how
             ln { }
             ktConRow {
                 for (x in 1..3) {
-                    ktB(it, colFun, "sm" to EQ.name) {
+                    ktF(it, colFun, "sm" to EQ.name) {
                         ln(it) { +"+\"One of three columns\"" }
                     }
                 }

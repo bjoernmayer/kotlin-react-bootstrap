@@ -12,7 +12,7 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktB
-import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
@@ -47,7 +47,7 @@ heading but cannot use the associated HTML element.
             }
             ln { }
             for (x in 1..6) {
-                ktIB(0, "h$x", "RBuilder::p", "+\"h$x. Bootstrap heading\"")
+                ktIF(0, "h$x", "RBuilder::p", "+\"h$x. Bootstrap heading\"")
             }
         }
         subSectionTitle("Customizing headings", section)
@@ -65,7 +65,7 @@ heading but cannot use the associated HTML element.
             ln { }
             ktB(0, "h3") {
                 ln(it) { +"+\"Fancy display heading \"" }
-                ktIB(it, "muted", "RBuilder::small", "+\"With faded secondary text\"")
+                ktIF(it, "muted", "RBuilder::small", "+\"With faded secondary text\"")
             }
         }
     }

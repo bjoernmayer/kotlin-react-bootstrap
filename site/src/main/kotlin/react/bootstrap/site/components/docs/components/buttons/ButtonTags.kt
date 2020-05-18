@@ -7,7 +7,7 @@ import react.bootstrap.components.button.button
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
@@ -61,7 +61,7 @@ the `input` element cannot have child elements.__
             val input = Button.Types.Input::class.nestedName
             val button = Button.Types.Button::class.nestedName
 
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 true,
@@ -70,7 +70,7 @@ the `input` element cannot have child elements.__
             ) { "+\"Link\"" }
             ln { +"+\" \"" }
 
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 true,
@@ -79,7 +79,7 @@ the `input` element cannot have child elements.__
             ) { "+\"Button\"" }
             ln { +"+\" \"" }
 
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 true,
@@ -88,7 +88,7 @@ the `input` element cannot have child elements.__
             ) { "" }
             ln { +"+\" \"" }
 
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 true,
@@ -97,7 +97,7 @@ the `input` element cannot have child elements.__
             ) { "" }
             ln { +"+\" \"" }
 
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 true,

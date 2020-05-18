@@ -18,8 +18,9 @@ import react.bootstrap.layout.grid.row.RowAttributes.ColCounts.Companion.CNT_4
 import react.bootstrap.layout.grid.row.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktF
 import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.importContainerFun
@@ -78,8 +79,8 @@ ${EQ.name}`.
                         }
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "all" to SZ_8.name)
-                        ktIB(it, colFun, "all" to SZ_4.name)
+                        ktIF(it, colFun, "all" to SZ_8.name)
+                        ktIF(it, colFun, "all" to SZ_4.name)
                     }
                 }
             }
@@ -116,12 +117,12 @@ stacked and becomes horizontal at the small breakpoint (`sm`).
                 ln { }
                 ktContainer {
                     ktRow(it) {
-                        ktIB(it, colFun, "sm" to SZ_8.name)
-                        ktIB(it, colFun, "sm" to SZ_4.name)
+                        ktIF(it, colFun, "sm" to SZ_8.name)
+                        ktIF(it, colFun, "sm" to SZ_4.name)
                     }
                     ktRow(it) {
                         for (x in 1..3) {
-                            ktIB(it, colFun, "sm" to EQ.name)
+                            ktIF(it, colFun, "sm" to EQ.name)
                         }
                     }
                 }
@@ -164,19 +165,19 @@ needed. See the example below for a better idea of how it all works.
                 ktContainer {
                     ktRow(it) {
                         ln(it) { +"// Stack the columns on mobile by making one full-width and the other half-width" }
-                        ktIB(it, colFun, "md" to SZ_8.name)
-                        ktIB(it, colFun, "all" to SZ_6.name, "md" to SZ_4.name)
+                        ktIF(it, colFun, "md" to SZ_8.name)
+                        ktIF(it, colFun, "all" to SZ_6.name, "md" to SZ_4.name)
                     }
                     ktRow(it) {
                         ln(it) { +"// Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop" }
                         for (x in 1..3) {
-                            ktIB(it, colFun, "all" to SZ_6.name, "md" to SZ_4.name)
+                            ktIF(it, colFun, "all" to SZ_6.name, "md" to SZ_4.name)
                         }
                     }
                     ktRow(it) {
                         ln(2) { +"// Columns are always 50% wide, on mobile and desktop" }
                         for (x in 1..2) {
-                            ktIB(it, colFun, "all" to SZ_6.name)
+                            ktIF(it, colFun, "all" to SZ_6.name)
                         }
                     }
                 }
@@ -207,7 +208,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to CNT_2.name) {
+                    ktF(it, rowFun, "all" to CNT_2.name) {
                         for (x in 1..4) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
@@ -232,7 +233,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to CNT_3.name) {
+                    ktF(it, rowFun, "all" to CNT_3.name) {
                         for (x in 1..4) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
@@ -257,7 +258,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to CNT_4.name) {
+                    ktF(it, rowFun, "all" to CNT_4.name) {
                         for (x in 1..4) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
@@ -285,13 +286,13 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to CNT_4.name) {
+                    ktF(it, rowFun, "all" to CNT_4.name) {
                         for (x in 1..2) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
                     }
-                    ktB(it, rowFun, "all" to CNT_4.name) {
-                        ktIB(it, colFun, "all" to SZ_6.name) { "+\"Column\"" }
+                    ktF(it, rowFun, "all" to CNT_4.name) {
+                        ktIF(it, colFun, "all" to SZ_6.name) { "+\"Column\"" }
                     }
                 }
             }
@@ -315,7 +316,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to CNT_1.name, "sm" to CNT_2.name, "md" to CNT_4.name) {
+                    ktF(it, rowFun, "all" to CNT_1.name, "sm" to CNT_2.name, "md" to CNT_4.name) {
                         for (x in 1..4) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
@@ -355,9 +356,9 @@ column widths, responsive tiers, reorders, and more).
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "gutters" to "false") {
-                        ktIB(it, colFun, "sm" to SZ_6.name, "md" to SZ_8.name)
-                        ktIB(it, colFun, "all" to SZ_6.name, "md" to SZ_4.name)
+                    ktF(it, rowFun, "gutters" to false) {
+                        ktIF(it, colFun, "sm" to SZ_6.name, "md" to SZ_8.name)
+                        ktIF(it, colFun, "all" to SZ_6.name, "md" to SZ_4.name)
                     }
                 }
             }

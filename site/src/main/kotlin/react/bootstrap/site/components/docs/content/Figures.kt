@@ -13,7 +13,7 @@ import react.bootstrap.site.components.docs.fixings.PageComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktB
-import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
@@ -68,7 +68,7 @@ Images in figures have no explicit size, so be sure to add the `img(fluid)` to `
             import("content.figures.img")
             ln { }
             ktB(0, "figure") {
-                ktIB(
+                ktIF(
                     it,
                     "img",
                     "fluid" to "true",

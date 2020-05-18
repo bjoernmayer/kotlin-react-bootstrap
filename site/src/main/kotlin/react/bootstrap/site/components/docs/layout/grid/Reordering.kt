@@ -19,6 +19,7 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.importContainerFun
@@ -63,8 +64,8 @@ for 1 through 12 across all five grid tiers.
                 ln { }
                 ktConRow {
                     ktIB(it, colFun, "+\"First in DOM, no order applied\"")
-                    ktIB(it, colFun, "all" to ORD_12.name) { "+\" Second in DOM, with a larger order\"" }
-                    ktIB(it, colFun, "all" to ORD_1.name) { "+\"Third in DOM, with an order of 1\"" }
+                    ktIF(it, colFun, "all" to ORD_12.name) { "+\" Second in DOM, with a larger order\"" }
+                    ktIF(it, colFun, "all" to ORD_1.name) { "+\"Third in DOM, with an order of 1\"" }
                 }
             }
         }
@@ -114,16 +115,16 @@ columns. For example, `md = ${SZ_4.name} $off ${OFF_4.name}` moves `$colFun(md =
                 ln { }
                 ktContainer {
                     ktRow(it) {
-                        ktIB(it, colFun, "md" to SZ_4.name)
-                        ktIB(it, colFun, "md" to "${SZ_4.name} $off ${OFF_4.name}")
+                        ktIF(it, colFun, "md" to SZ_4.name)
+                        ktIF(it, colFun, "md" to "${SZ_4.name} $off ${OFF_4.name}")
                     }
                     ktRow(it) {
                         for (x in 1..2) {
-                            ktIB(it, colFun, "md" to "${SZ_3.name} $off ${OFF_3.name}")
+                            ktIF(it, colFun, "md" to "${SZ_3.name} $off ${OFF_3.name}")
                         }
                     }
                     ktRow(it) {
-                        ktIB(it, colFun, "md" to "${SZ_6.name} $off ${OFF_3.name}")
+                        ktIF(it, colFun, "md" to "${SZ_6.name} $off ${OFF_3.name}")
                     }
                 }
             }

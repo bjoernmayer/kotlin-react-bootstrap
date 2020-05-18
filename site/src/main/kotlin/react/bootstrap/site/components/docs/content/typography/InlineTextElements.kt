@@ -7,7 +7,7 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktB
-import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
@@ -42,7 +42,7 @@ unwanted semantic implications that the tags would bring.
                 ln(it) { +"+\"You can use the mark tag to \";  mark(RBuilder::span) { +\"highlight\" }; +\" text.\"" }
             }
             ktB(0, "p") {
-                ktIB(it, "small", "RBuilder::span", "+\"This line of text is meant to be treated as fine print.\"")
+                ktIF(it, "small", "RBuilder::span", "+\"This line of text is meant to be treated as fine print.\"")
             }
         }
     }

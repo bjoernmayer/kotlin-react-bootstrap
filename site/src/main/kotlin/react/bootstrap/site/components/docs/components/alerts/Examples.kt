@@ -21,7 +21,9 @@ import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.importClassNames
 import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktF
 import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
@@ -59,7 +61,7 @@ eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.kt}`).
             import("components.alert.$alertName")
             ln { }
             Alert.Variants.values().iterator().forEach { variant ->
-                ktB(0, alertName, variant.kt) {
+                ktF(0, alertName, variant.kt) {
                     ln(it) { +"+\"A simple ${variant.name.toLowerCase()} alert-check it out!\"" }
                 }
             }
@@ -86,7 +88,7 @@ colored links within any alert.
             import("components.alert.$alertName")
             ln { }
             Alert.Variants.values().iterator().forEach { variant ->
-                ktB(0, alertName, variant.kt) {
+                ktF(0, alertName, variant.kt) {
                     ln(it) { +"+\"A simple ${variant.name.toLowerCase()} alert with \"" }
                     ln(it) {
                         +"$linkName { a(href = \"#\") { +\"another example link\" } }; +\". Give it a"
@@ -122,7 +124,7 @@ Aww yeah, you successfully read this important alert message. This example text 
             import("components.alert.h4")
             importClassNames()
             ln { }
-            ktB(0, alertName, Alert.Variants.SUCCESS.kt) {
+            ktF(0, alertName, Alert.Variants.SUCCESS.kt) {
                 ktIB(it, "h4", "+\"Well done!\\")
                 ktB(it, "p") {
                     ln(it) { +"+\"\"\"" }
@@ -135,8 +137,8 @@ Aww yeah, you successfully read this important alert message. This example text 
                     }
                     ln(it) { +"\"\"\".trimIndent()" }
                 }
-                ktIB(it, "hr", "")
-                ktB(it, "p", "\"\${${ClassNames.MB_0.kt}}\"") {
+                ktIF(it, RBuilder::hr, "")
+                ktF(it, "p", "\"\${${ClassNames.MB_0.kt}}\"") {
                     ln(it) {
                         +"+\"Whenever you need to, be sure to use margin utilities to keep things nice and tidy.\""
                     }
@@ -169,7 +171,7 @@ Use `$dismissibleAlertName` to create a dismissible alert.
             import("components.alert.Alert")
             import("components.alert.$dismissibleAlertName")
             ln { }
-            ktB(0, dismissibleAlertName, "variant" to Alert.Variants.WARNING.kt, "fade" to "true") {
+            ktF(0, dismissibleAlertName, "variant" to Alert.Variants.WARNING.kt, "fade" to "true") {
                 ktB(it, "attrs") {
                     ktB(it, "${Alert.Props::dismissible.name}?.apply") {
                         ktB(it, Alert.Props.Dismissible::onClose.name) {
@@ -211,11 +213,11 @@ You can build your own custom close element, by using `$closingElementName { }`.
             import("components.alert.$dismissibleAlertName")
             importClassNames()
             ln { }
-            ktB(0, dismissibleAlertName, "variant" to Alert.Variants.INFO.kt) {
+            ktF(0, dismissibleAlertName, "variant" to Alert.Variants.INFO.kt) {
                 ln(it) { +" +\"You want some cookies?\"" }
-                ktIB(it, "hr", "")
+                ktIF(it, RBuilder::hr, "")
                 ktB(it, closingElementName) {
-                    ktB(it, RBuilder::button.name, (Button.Variants.Solid.SUCCESS).ktN) {
+                    ktF(it, RBuilder::button, (Button.Variants.Solid.SUCCESS).ktN) {
                         ln(it) { +"+\"Sure!\"" }
                     }
                 }
@@ -238,7 +240,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
                 ln(it) { +"val (show, setShow) = useState(false)" }
                 ln { }
                 ktB(it, "if (show)") {
-                    ktB(it, dismissibleAlertName, "variant" to Alert.Variants.DANGER.kt) {
+                    ktF(it, dismissibleAlertName, "variant" to Alert.Variants.DANGER.kt) {
                         ktB(it, "attrs") {
                             ktB(it, "${Alert.Props::dismissible.name}?.apply") {
                                 ktB(it, Alert.Props.Dismissible::onClosed.name) {
@@ -247,16 +249,16 @@ You can build your own custom close element, by using `$closingElementName { }`.
                             }
                         }
                         ln(it) { +"+\"You picked the wrong house, fool!\"" }
-                        ktIB(it, "hr", "")
+                        ktIF(it, RBuilder::hr, "")
                         ktB(it, closingElementName) {
-                            ktB(it, RBuilder::button.name, (Button.Variants.Solid.INFO).ktN) {
+                            ktF(it, RBuilder::button, (Button.Variants.Solid.INFO).ktN) {
                                 ln(it) { +"+\"Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!\"" }
                             }
                         }
                     }
                 }
                 ktB(it, "else") {
-                    ktB(it, RBuilder::button.name, (Button.Variants.Outline.DANGER).ktN) {
+                    ktF(it, RBuilder::button, (Button.Variants.Outline.DANGER).ktN) {
                         ktB(it, "attrs") {
                             ln(it) { +"onClickFunction = { setShow(true) }" }
                         }

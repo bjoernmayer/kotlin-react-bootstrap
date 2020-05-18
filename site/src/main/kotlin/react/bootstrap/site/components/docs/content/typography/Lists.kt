@@ -11,7 +11,9 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktF
 import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
@@ -56,7 +58,7 @@ immediate children list items__, meaning you will need to add the class for any 
             import("content.typography.${ListStyles::class.simpleName}")
             import("content.typography.ul")
             ln { }
-            ktB(0, "ul", ListStyles.UNSTYLED.kt) {
+            ktF(0, "ul", ListStyles.UNSTYLED.kt) {
                 ktIB(it, "li", "+\"Lorem ipsum dolor sit amet\"")
                 ktIB(it, "li", "+\"Consectetur adipiscing elit\"")
                 ktIB(it, "li", "+\"Integer molestie lorem at massa\"")
@@ -96,10 +98,10 @@ Remove a list’s bullets and apply some light `margin` with a combination of tw
             import("content.typography.li")
             import("content.typography.ul")
             ln { }
-            ktB(0, "ul", ListStyles.INLINE.kt) {
-                ktIB(it, "li", ListItemStyles.INLINE.kt, "Lorem ipsum")
-                ktIB(it, "li", ListItemStyles.INLINE.kt, "Phasellus iaculis")
-                ktIB(it, "li", ListItemStyles.INLINE.kt, "Nulla volutpat")
+            ktF(0, "ul", ListStyles.INLINE.kt) {
+                ktIF(it, "li", ListItemStyles.INLINE.kt, "Lorem ipsum")
+                ktIF(it, "li", ListItemStyles.INLINE.kt, "Phasellus iaculis")
+                ktIF(it, "li", ListItemStyles.INLINE.kt, "Nulla volutpat")
             }
         }
     }

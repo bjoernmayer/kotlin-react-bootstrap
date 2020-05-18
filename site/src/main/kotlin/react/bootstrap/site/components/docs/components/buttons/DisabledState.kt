@@ -6,7 +6,7 @@ import react.bootstrap.components.button.button
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktIB
+import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
@@ -39,7 +39,7 @@ Make buttons look inactive by setting the `disabled` boolean attribute to any `b
             import("components.button.Button")
             import("components.button.button")
             ln { }
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 true,
@@ -49,7 +49,7 @@ Make buttons look inactive by setting the `disabled` boolean attribute to any `b
             ) { "+\"Primary button\"" }
             ln { +"+\" \"" }
 
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 true,
@@ -84,7 +84,7 @@ Usage for you stays the same, though:
             import("components.button.Button")
             import("components.button.button")
             ln { }
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 true,
@@ -95,7 +95,7 @@ Usage for you stays the same, though:
             ) { "+\"Primary button\"" }
             ln { +"+\" \"" }
 
-            ktIB(
+            ktIF(
                 0,
                 RBuilder::button,
                 true,

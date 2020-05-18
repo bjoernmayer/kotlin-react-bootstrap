@@ -1,7 +1,6 @@
 package react.bootstrap.site.components.docs.layout
 
 import react.RBuilder
-import react.bootstrap.layout.Container
 import react.bootstrap.layout.grid.container.Container
 import react.bootstrap.layout.grid.container.container
 import react.bootstrap.site.components.docs.buildNestedName

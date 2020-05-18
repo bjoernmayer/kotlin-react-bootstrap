@@ -5,11 +5,11 @@ package react.bootstrap.site.components.docs.layout.overview
 import react.RBuilder
 import react.bootstrap.content.tables.table
 import react.bootstrap.content.typography.muted
-import react.bootstrap.layout.container.Container
+import react.bootstrap.layout.grid.container.Container
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.fixings.ktF
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.containerFun
 import react.bootstrap.site.components.docs.layout.importContainer
@@ -157,7 +157,7 @@ spanning the entire width of the viewport.
             importContainer()
             importContainerFun()
             ln { }
-            ktB(0, containerFun, "viscosity" to Container.Viscosities.FLUID.ktN) {
+            ktF(0, containerFun, "viscosity" to Container.Viscosities.FLUID.ktN) {
                 ln(it) { +"// Content here" }
             }
         }
@@ -175,16 +175,16 @@ reached, where it will scale up with `md`, `lg`, and `xl`.
             importContainer()
             importContainerFun()
             ln { }
-            ktB(0, containerFun, "viscosity" to Container.Viscosities.SM.ktN) {
+            ktF(0, containerFun, "viscosity" to Container.Viscosities.SM.ktN) {
                 ln(it) { +"+\"100% wide until small breakpoint\"" }
             }
-            ktB(0, containerFun, "viscosity" to Container.Viscosities.MD.ktN) {
+            ktF(0, containerFun, "viscosity" to Container.Viscosities.MD.ktN) {
                 ln(it) { +"+\"100% wide until medium breakpoint\"" }
             }
-            ktB(0, containerFun, "viscosity" to Container.Viscosities.LG.ktN) {
+            ktF(0, containerFun, "viscosity" to Container.Viscosities.LG.ktN) {
                 ln(it) { +"+\"100% wide until large breakpoint\"" }
             }
-            ktB(0, containerFun, "viscosity" to Container.Viscosities.XL.ktN) {
+            ktF(0, containerFun, "viscosity" to Container.Viscosities.XL.ktN) {
                 ln(it) { +"+\"100% wide until extra large breakpoint\"" }
             }
         }
