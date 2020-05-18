@@ -60,7 +60,7 @@ provide a y-axis scrollbar.
         codeExample {
             import("content.pre")
             ln { }
-            ktB(0, "pre", "scrollable" to "true") {
+            ktF(0, RBuilder::pre, "scrollable" to true) {
                 ln(it) { +"// Kotlin Code was here" }
             }
         }
@@ -72,7 +72,7 @@ provide a y-axis scrollbar.
         codeExample {
             import("content.pre")
             ln { }
-            ktF(0, "pre", "scrollable" to true) {
+            ktF(0, RBuilder::pre, "scrollable" to true) {
                 ln(it) { +"// Kotlin Code was here" }
             }
         }
