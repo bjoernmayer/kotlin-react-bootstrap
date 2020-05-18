@@ -49,35 +49,3 @@ interface AttributeQuadruple<
         .toMutableList().apply { addAll(fourth.getClassNames(breakpoints)) }
         .toSet()
 }
-
-inline fun <reified T : CombinedAttributes> resolveAttributeClassNames(
-    all: CombinedAttributes? = null,
-    sm: CombinedAttributes? = null,
-    md: CombinedAttributes? = null,
-    lg: CombinedAttributes? = null,
-    xl: CombinedAttributes? = null
-): Set<ClassNames> {
-    val classes = mutableSetOf<ClassNames>()
-
-    if (all is T) {
-        all.getClassNames(null).let(classes::addAll)
-    }
-
-    if (sm is T) {
-        sm.getClassNames(Breakpoints.SM).let(classes::addAll)
-    }
-
-    if (md is T) {
-        md.getClassNames(Breakpoints.MD).let(classes::addAll)
-    }
-
-    if (lg is T) {
-        lg.getClassNames(Breakpoints.LG).let(classes::addAll)
-    }
-
-    if (xl is T) {
-        xl.getClassNames(Breakpoints.XL).let(classes::addAll)
-    }
-
-    return classes
-}

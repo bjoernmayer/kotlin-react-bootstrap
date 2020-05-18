@@ -3,14 +3,14 @@
 package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
-import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.AUTO
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.EQ
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_2
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_5
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_6
-import react.bootstrap.layout.grid.col
-import react.bootstrap.layout.grid.row
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.AUTO
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.EQ
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_2
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_5
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_6
+import react.bootstrap.layout.grid.col.col
+import react.bootstrap.layout.grid.container.container
+import react.bootstrap.layout.grid.row.row
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
@@ -21,7 +21,6 @@ import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.importContainerFun
-import react.bootstrap.site.components.docs.layout.importFromGrid
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
 import react.dom.p
@@ -62,9 +61,9 @@ equal-size enums for each breakpoint you need and every column will be the same 
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(EQ.import)
+                importFromGrid("col", EQ.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktContainer {
@@ -105,10 +104,10 @@ Note that the other columns will resize no matter the width of the center column
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(SZ_5.import)
-                importFromGrid(SZ_6.import)
+                importFromGrid("col", SZ_5.import)
+                importFromGrid("col", SZ_6.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktContainer {
@@ -148,11 +147,11 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(AUTO.import)
-                importFromGrid(EQ.import)
-                importFromGrid(SZ_2.import)
+                importFromGrid("col", AUTO.import)
+                importFromGrid("col", EQ.import)
+                importFromGrid("col", SZ_2.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 importClassNames()
                 ln { }

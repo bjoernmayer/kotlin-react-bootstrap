@@ -5,7 +5,7 @@ package react.bootstrap.site.components.docs.layout.overview
 import react.RBuilder
 import react.bootstrap.content.tables.table
 import react.bootstrap.content.typography.muted
-import react.bootstrap.layout.Container
+import react.bootstrap.layout.grid.container.Container
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
@@ -14,8 +14,8 @@ import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.containerFun
 import react.bootstrap.site.components.docs.layout.importContainer
 import react.bootstrap.site.components.docs.layout.importContainerFun
-import react.bootstrap.site.components.docs.layout.ktN
 import react.bootstrap.site.components.docs.layout.ktContainer
+import react.bootstrap.site.components.docs.layout.ktN
 import react.bootstrap.site.external.Markdown
 import react.dom.br
 import react.dom.code
@@ -55,7 +55,7 @@ most layouts do not require a nested container.
             }
             li {
                 code {
-                    +"$$containerFun(viscosity = ${Container.Viscosities::class.simpleName}"
+                    +"$containerFun(viscosity = ${Container.Viscosities::class.simpleName}"
                     +"{.${Container.Viscosities.SM.name}|.${Container.Viscosities.MD.name}"
                     +"|.${Container.Viscosities.LG.name}|.${Container.Viscosities.XL.name}|}) { }"
                 }; +", which is "

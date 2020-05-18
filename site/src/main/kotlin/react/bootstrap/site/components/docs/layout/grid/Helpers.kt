@@ -4,24 +4,17 @@ import kotlinx.html.DIV
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.bootstrap.layout.grid.ColAttributes
-import react.bootstrap.layout.grid.col
-import react.bootstrap.layout.grid.row
+import react.bootstrap.layout.grid.col.ColAttributes
+import react.bootstrap.layout.grid.col.col
+import react.bootstrap.layout.grid.row.RowAttributes
+import react.bootstrap.layout.grid.row.row
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
+import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktB
-import react.bootstrap.site.components.docs.layout.importFromGrid
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.dom.div
-import kotlin.reflect.KClass
-
-private val colFunFun = RBuilder::col
-internal val RBuilder.colFun: String
-    get() = colFunFun.name
-private val rowFunFun = RBuilder::row
-internal val RBuilder.rowFun: String
-    get() = rowFunFun.name
 
 internal val ColAttributes.Sizes.name
     get() = this::class.simpleName!!
@@ -67,6 +60,46 @@ internal val ColAttributes.Alignments.import
         ColAttributes.Alignments.Companion::class
     )
 
+internal val RowAttributes.ColCounts.name
+    get() = this::class.simpleName!!
+
+internal val RowAttributes.ColCounts.import
+    get() = buildNestedName(
+        this::class,
+        RowAttributes::class,
+        RowAttributes.ColCounts::class,
+        RowAttributes.ColCounts.Companion::class
+    )
+
+internal val RowAttributes.ItemsXs.name
+    get() = this::class.simpleName!!
+
+internal val RowAttributes.ItemsXs.import
+    get() = buildNestedName(
+        this::class,
+        RowAttributes::class,
+        RowAttributes.ItemsXs::class,
+        RowAttributes.ItemsXs.Companion::class
+    )
+
+internal val RowAttributes.ItemsYs.name
+    get() = this::class.simpleName!!
+
+internal val RowAttributes.ItemsYs.import
+    get() = buildNestedName(
+        this::class,
+        RowAttributes::class,
+        RowAttributes.ItemsYs::class,
+        RowAttributes.ItemsYs.Companion::class
+    )
+
+private val colFunFun = RBuilder::col
+internal val RBuilder.colFun: String
+    get() = colFunFun.name
+private val rowFunFun = RBuilder::row
+internal val RBuilder.rowFun: String
+    get() = rowFunFun.name
+
 internal fun CodeExampleBuilder.ktRow(
     indentationLevel: Int = 1,
     block: CodeExampleBuilder.(indentationLevel: Int) -> Unit
@@ -85,15 +118,15 @@ internal fun CodeExampleBuilder.ktConRow(block: CodeExampleBuilder.(indentationL
 }
 
 internal fun CodeExampleBuilder.importColFun() {
-    importFromGrid(colFun)
+    importFromGrid("col", colFun)
 }
 
 internal fun CodeExampleBuilder.importRowFun() {
-    importFromGrid(rowFun)
+    importFromGrid("row", rowFun)
 }
 
-internal fun <T : Enum<*>> CodeExampleBuilder.importGridEnum(clazz: KClass<T>) {
-    importFromGrid(clazz.simpleName!!)
+internal fun CodeExampleBuilder.importFromGrid(`package`: String, className: String) {
+    import("layout.grid.${`package`}.$className")
 }
 
 internal fun RBuilder.exampleRow(classes: String? = null, block: RDOMHandler<DIV>): ReactElement =

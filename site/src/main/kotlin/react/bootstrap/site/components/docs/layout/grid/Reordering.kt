@@ -3,18 +3,18 @@
 package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
-import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.ColAttributes
-import react.bootstrap.layout.grid.ColAttributes.Offsets.Companion.OFF_3
-import react.bootstrap.layout.grid.ColAttributes.Offsets.Companion.OFF_4
-import react.bootstrap.layout.grid.ColAttributes.Orderings.Companion.ORD_1
-import react.bootstrap.layout.grid.ColAttributes.Orderings.Companion.ORD_12
-import react.bootstrap.layout.grid.ColAttributes.Orderings.Companion.ORD_2
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_3
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_4
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_6
-import react.bootstrap.layout.grid.col
-import react.bootstrap.layout.grid.row
+import react.bootstrap.layout.grid.col.ColAttributes
+import react.bootstrap.layout.grid.col.ColAttributes.Offsets.Companion.OFF_3
+import react.bootstrap.layout.grid.col.ColAttributes.Offsets.Companion.OFF_4
+import react.bootstrap.layout.grid.col.ColAttributes.Orderings.Companion.ORD_1
+import react.bootstrap.layout.grid.col.ColAttributes.Orderings.Companion.ORD_12
+import react.bootstrap.layout.grid.col.ColAttributes.Orderings.Companion.ORD_2
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_3
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_4
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_6
+import react.bootstrap.layout.grid.col.col
+import react.bootstrap.layout.grid.container.container
+import react.bootstrap.layout.grid.row.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
@@ -22,7 +22,6 @@ import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.importContainerFun
-import react.bootstrap.site.components.docs.layout.importFromGrid
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
 import react.dom.h4
@@ -56,10 +55,10 @@ for 1 through 12 across all five grid tiers.
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(ORD_1.import)
-                importFromGrid(ORD_12.import)
+                importFromGrid("col", ORD_1.import)
+                importFromGrid("col", ORD_12.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktConRow {
@@ -104,13 +103,13 @@ columns. For example, `md = ${SZ_4.name} $off ${OFF_4.name}` moves `$colFun(md =
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(OFF_4.import)
-                importFromGrid(OFF_3.import)
-                importFromGrid(SZ_3.import)
-                importFromGrid(SZ_4.import)
-                importFromGrid(SZ_6.import)
+                importFromGrid("col", OFF_4.import)
+                importFromGrid("col", OFF_3.import)
+                importFromGrid("col", SZ_3.import)
+                importFromGrid("col", SZ_4.import)
+                importFromGrid("col", SZ_6.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktContainer {

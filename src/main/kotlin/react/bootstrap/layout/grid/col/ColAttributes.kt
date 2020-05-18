@@ -1,23 +1,11 @@
-@file:Suppress("unused", "ClassName")
+@file:Suppress("ClassName")
 
-package react.bootstrap.layout.grid
+package react.bootstrap.layout.grid.col
 
-import react.RBuilder
-import react.RHandler
-import react.RState
-import react.ReactElement
-import react.bootstrap.appendClass
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.EQ
 import react.bootstrap.lib.AttributePair
 import react.bootstrap.lib.AttributeQuadruple
 import react.bootstrap.lib.AttributeTriple
-import react.bootstrap.lib.Breakpoints
-import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.CombinedAttributes
-import react.bootstrap.lib.RenderAsComponent
-import react.bootstrap.lib.WithRenderAs
-import react.dom.WithClassName
-import react.dom.div
 
 sealed class ColAttributes : CombinedAttributes {
     abstract val size: Sizes?
@@ -42,14 +30,14 @@ sealed class ColAttributes : CombinedAttributes {
         class AUTO internal constructor() : Sizes("AUTO")
         class EQ internal constructor() : Sizes(null)
 
-        override val classNamePrefix: String? = "COL"
+        final override val classNamePrefix: String = "COL"
 
-        override val size: Sizes
+        final override val size: Sizes
             get() = this
 
-        override val offset: Offsets? = null
-        override val order: Orderings? = null
-        override val alignment: Alignments? = null
+        final override val offset: Offsets? = null
+        final override val order: Orderings? = null
+        final override val alignment: Alignments? = null
 
         infix fun off(that: Offsets) = SizeOffsetPair(this, that)
 
@@ -58,20 +46,20 @@ sealed class ColAttributes : CombinedAttributes {
         infix fun align(that: Alignments) = SizeAlignmentPair(this, that)
 
         companion object {
-            val SZ_1 = Sizes.SZ_1()
-            val SZ_2 = Sizes.SZ_2()
-            val SZ_3 = Sizes.SZ_3()
-            val SZ_4 = Sizes.SZ_4()
-            val SZ_5 = Sizes.SZ_5()
-            val SZ_6 = Sizes.SZ_6()
-            val SZ_7 = Sizes.SZ_7()
-            val SZ_8 = Sizes.SZ_8()
-            val SZ_9 = Sizes.SZ_9()
-            val SZ_10 = Sizes.SZ_10()
-            val SZ_11 = Sizes.SZ_11()
-            val SZ_12 = Sizes.SZ_12()
-            val AUTO = Sizes.AUTO()
-            val EQ = Sizes.EQ()
+            val SZ_1 = SZ_1()
+            val SZ_2 = SZ_2()
+            val SZ_3 = SZ_3()
+            val SZ_4 = SZ_4()
+            val SZ_5 = SZ_5()
+            val SZ_6 = SZ_6()
+            val SZ_7 = SZ_7()
+            val SZ_8 = SZ_8()
+            val SZ_9 = SZ_9()
+            val SZ_10 = SZ_10()
+            val SZ_11 = SZ_11()
+            val SZ_12 = SZ_12()
+            val AUTO = AUTO()
+            val EQ = EQ()
         }
     }
 
@@ -90,15 +78,14 @@ sealed class ColAttributes : CombinedAttributes {
         class OFF_11 internal constructor() : Offsets(11)
         class OFF_12 internal constructor() : Offsets(12)
 
-        override val classNamePrefix: String? = "OFFSET"
-        override val classNamePostfix: String?
-            get() = offset.value.toString()
+        final override val classNamePrefix: String = "OFFSET"
+        final override val classNamePostfix: String = offset.value.toString()
 
-        override val size: Sizes? = null
-        override val offset: Offsets
+        final override val size: Sizes? = null
+        final override val offset: Offsets
             get() = this
-        override val order: Orderings? = null
-        override val alignment: Alignments? = null
+        final override val order: Orderings? = null
+        final override val alignment: Alignments? = null
 
         infix fun sz(that: Sizes) = SizeOffsetPair(that, this)
 
@@ -107,18 +94,18 @@ sealed class ColAttributes : CombinedAttributes {
         infix fun align(that: Alignments) = OffsetAlignmentPair(this, that)
 
         companion object {
-            val OFF_1 = Offsets.OFF_1()
-            val OFF_2 = Offsets.OFF_2()
-            val OFF_3 = Offsets.OFF_3()
-            val OFF_4 = Offsets.OFF_4()
-            val OFF_5 = Offsets.OFF_5()
-            val OFF_6 = Offsets.OFF_6()
-            val OFF_7 = Offsets.OFF_7()
-            val OFF_8 = Offsets.OFF_8()
-            val OFF_9 = Offsets.OFF_9()
-            val OFF_10 = Offsets.OFF_10()
-            val OFF_11 = Offsets.OFF_11()
-            val OFF_12 = Offsets.OFF_12()
+            val OFF_1 = OFF_1()
+            val OFF_2 = OFF_2()
+            val OFF_3 = OFF_3()
+            val OFF_4 = OFF_4()
+            val OFF_5 = OFF_5()
+            val OFF_6 = OFF_6()
+            val OFF_7 = OFF_7()
+            val OFF_8 = OFF_8()
+            val OFF_9 = OFF_9()
+            val OFF_10 = OFF_10()
+            val OFF_11 = OFF_11()
+            val OFF_12 = OFF_12()
         }
     }
 
@@ -140,13 +127,13 @@ sealed class ColAttributes : CombinedAttributes {
         class FIRST internal constructor() : Orderings("FIRST")
         class LAST internal constructor() : Orderings("LAST")
 
-        override val classNamePrefix: String? = "ORDER"
+        final override val classNamePrefix: String = "ORDER"
 
-        override val size: Sizes? = null
-        override val offset: Offsets? = null
-        override val order: Orderings
+        final override val size: Sizes? = null
+        final override val offset: Offsets? = null
+        final override val order: Orderings
             get() = this
-        override val alignment: Alignments? = null
+        final override val alignment: Alignments? = null
 
         infix fun sz(that: Sizes) = SizeOrderPair(that, this)
 
@@ -155,21 +142,21 @@ sealed class ColAttributes : CombinedAttributes {
         infix fun align(that: Alignments) = OrderAlignmentPair(this, that)
 
         companion object {
-            val ORD_0 = Orderings.ORD_0()
-            val ORD_1 = Orderings.ORD_1()
-            val ORD_2 = Orderings.ORD_2()
-            val ORD_3 = Orderings.ORD_3()
-            val ORD_4 = Orderings.ORD_4()
-            val ORD_5 = Orderings.ORD_5()
-            val ORD_6 = Orderings.ORD_6()
-            val ORD_7 = Orderings.ORD_7()
-            val ORD_8 = Orderings.ORD_8()
-            val ORD_9 = Orderings.ORD_9()
-            val ORD_10 = Orderings.ORD_10()
-            val ORD_11 = Orderings.ORD_11()
-            val ORD_12 = Orderings.ORD_12()
-            val FIRST = Orderings.FIRST()
-            val LAST = Orderings.LAST()
+            val ORD_0 = ORD_0()
+            val ORD_1 = ORD_1()
+            val ORD_2 = ORD_2()
+            val ORD_3 = ORD_3()
+            val ORD_4 = ORD_4()
+            val ORD_5 = ORD_5()
+            val ORD_6 = ORD_6()
+            val ORD_7 = ORD_7()
+            val ORD_8 = ORD_8()
+            val ORD_9 = ORD_9()
+            val ORD_10 = ORD_10()
+            val ORD_11 = ORD_11()
+            val ORD_12 = ORD_12()
+            val FIRST = FIRST()
+            val LAST = LAST()
         }
     }
 
@@ -182,14 +169,13 @@ sealed class ColAttributes : CombinedAttributes {
         class START internal constructor() : Alignments()
         class STRETCH internal constructor() : Alignments()
 
-        override val classNamePrefix: String? = "ALIGN_SELF"
-        override val classNamePostfix: String?
-            get() = alignment::class.simpleName!!
+        final override val classNamePrefix: String = "ALIGN_SELF"
+        final override val classNamePostfix: String = this::class.simpleName!!
 
-        override val size: Sizes? = null
-        override val offset: Offsets? = null
-        override val order: Orderings? = null
-        override val alignment: Alignments
+        final override val size: Sizes? = null
+        final override val offset: Offsets? = null
+        final override val order: Orderings? = null
+        final override val alignment: Alignments
             get() = this
 
         infix fun sz(that: Sizes) = SizeAlignmentPair(that, this)
@@ -199,19 +185,20 @@ sealed class ColAttributes : CombinedAttributes {
         infix fun ord(that: Orderings) = OrderAlignmentPair(that, this)
 
         companion object {
-            val AUTO = Alignments.AUTO()
-            val BASELINE = Alignments.BASELINE()
-            val CENTER = Alignments.CENTER()
-            val END = Alignments.END()
-            val START = Alignments.START()
-            val STRETCH = Alignments.STRETCH()
+            val AUTO = AUTO()
+            val BASELINE = BASELINE()
+            val CENTER = CENTER()
+            val END = END()
+            val START = START()
+            val STRETCH = STRETCH()
         }
     }
 
     data class SizeOffsetPair internal constructor(
         override val first: Sizes,
         override val second: Offsets
-    ) : ColAttributes(), AttributePair {
+    ) : ColAttributes(),
+        AttributePair {
         override val size: Sizes = first
         override val offset: Offsets = second
         override val order: Orderings? = null
@@ -225,10 +212,11 @@ sealed class ColAttributes : CombinedAttributes {
         infix fun align(that: Alignments): SizeOffsetAlignmentTriple = SizeOffsetAlignmentTriple(first, second, that)
     }
 
-    data class SizeOrderPair(
+    data class SizeOrderPair internal constructor(
         override val first: Sizes,
         override val second: Orderings
-    ) : ColAttributes(), AttributePair {
+    ) : ColAttributes(),
+        AttributePair {
         override val size: Sizes = first
         override val offset: Offsets? = null
         override val order: Orderings = second
@@ -242,10 +230,11 @@ sealed class ColAttributes : CombinedAttributes {
         infix fun align(that: Alignments): SizeOrderAlignmentTriple = SizeOrderAlignmentTriple(first, second, that)
     }
 
-    data class SizeAlignmentPair(
+    data class SizeAlignmentPair internal constructor(
         override val first: Sizes,
         override val second: Alignments
-    ) : ColAttributes(), AttributePair {
+    ) : ColAttributes(),
+        AttributePair {
         override val size: Sizes = first
         override val offset: Offsets? = null
         override val order: Orderings? = null
@@ -259,10 +248,11 @@ sealed class ColAttributes : CombinedAttributes {
         infix fun ord(that: Orderings): SizeOrderAlignmentTriple = SizeOrderAlignmentTriple(first, that, second)
     }
 
-    data class OffsetOrderPair(
+    data class OffsetOrderPair internal constructor(
         override val first: Offsets,
         override val second: Orderings
-    ) : ColAttributes(), AttributePair {
+    ) : ColAttributes(),
+        AttributePair {
         override val size: Sizes? = null
         override val offset: Offsets = first
         override val order: Orderings = second
@@ -276,10 +266,11 @@ sealed class ColAttributes : CombinedAttributes {
         infix fun align(that: Alignments): OffsetOrderAlignmentTriple = OffsetOrderAlignmentTriple(first, second, that)
     }
 
-    data class OffsetAlignmentPair(
+    data class OffsetAlignmentPair internal constructor(
         override val first: Offsets,
         override val second: Alignments
-    ) : ColAttributes(), AttributePair {
+    ) : ColAttributes(),
+        AttributePair {
         override val size: Sizes? = null
         override val offset: Offsets = first
         override val order: Orderings? = null
@@ -293,10 +284,11 @@ sealed class ColAttributes : CombinedAttributes {
         infix fun ord(that: Orderings): OffsetOrderAlignmentTriple = OffsetOrderAlignmentTriple(first, that, second)
     }
 
-    data class OrderAlignmentPair(
+    data class OrderAlignmentPair internal constructor(
         override val first: Orderings,
         override val second: Alignments
-    ) : ColAttributes(), AttributePair {
+    ) : ColAttributes(),
+        AttributePair {
         override val size: Sizes? = null
         override val offset: Offsets? = null
         override val order: Orderings = first
@@ -310,11 +302,12 @@ sealed class ColAttributes : CombinedAttributes {
         infix fun off(that: Offsets): OffsetOrderAlignmentTriple = OffsetOrderAlignmentTriple(that, first, second)
     }
 
-    data class SizeOffsetOrderTriple(
+    data class SizeOffsetOrderTriple internal constructor(
         override val first: Sizes,
         override val second: Offsets,
         override val third: Orderings
-    ) : ColAttributes(), AttributeTriple {
+    ) : ColAttributes(),
+        AttributeTriple {
         override val size: Sizes = first
         override val offset: Offsets = second
         override val order: Orderings = third
@@ -327,11 +320,12 @@ sealed class ColAttributes : CombinedAttributes {
             SizeOffsetOrderAlignmentQuadruple(first, second, third, that)
     }
 
-    data class SizeOffsetAlignmentTriple(
+    data class SizeOffsetAlignmentTriple internal constructor(
         override val first: Sizes,
         override val second: Offsets,
         override val third: Alignments
-    ) : ColAttributes(), AttributeTriple {
+    ) : ColAttributes(),
+        AttributeTriple {
         override val size: Sizes = first
         override val offset: Offsets = second
         override val order: Orderings? = null
@@ -344,11 +338,12 @@ sealed class ColAttributes : CombinedAttributes {
             SizeOffsetOrderAlignmentQuadruple(first, second, that, third)
     }
 
-    data class SizeOrderAlignmentTriple(
+    data class SizeOrderAlignmentTriple internal constructor(
         override val first: Sizes,
         override val second: Orderings,
         override val third: Alignments
-    ) : ColAttributes(), AttributeTriple {
+    ) : ColAttributes(),
+        AttributeTriple {
         override val size: Sizes = first
         override val offset: Offsets? = null
         override val order: Orderings = second
@@ -361,11 +356,12 @@ sealed class ColAttributes : CombinedAttributes {
             SizeOffsetOrderAlignmentQuadruple(first, that, second, third)
     }
 
-    data class OffsetOrderAlignmentTriple(
+    data class OffsetOrderAlignmentTriple internal constructor(
         override val first: Offsets,
         override val second: Orderings,
         override val third: Alignments
-    ) : ColAttributes(), AttributeTriple {
+    ) : ColAttributes(),
+        AttributeTriple {
         override val size: Sizes? = null
         override val offset: Offsets = first
         override val order: Orderings = second
@@ -378,12 +374,13 @@ sealed class ColAttributes : CombinedAttributes {
             SizeOffsetOrderAlignmentQuadruple(that, first, second, third)
     }
 
-    data class SizeOffsetOrderAlignmentQuadruple(
+    data class SizeOffsetOrderAlignmentQuadruple internal constructor(
         override val first: Sizes,
         override val second: Offsets,
         override val third: Orderings,
         override val fourth: Alignments
-    ) : ColAttributes(), AttributeQuadruple<Sizes, Offsets, Orderings, Alignments> {
+    ) : ColAttributes(),
+        AttributeQuadruple<Sizes, Offsets, Orderings, Alignments> {
         override val size: Sizes = first
         override val offset: Offsets = second
         override val order: Orderings = third
@@ -391,59 +388,5 @@ sealed class ColAttributes : CombinedAttributes {
 
         override val classNamePrefix: String? = null
         override val classNamePostfix: String? = null
-    }
-}
-
-fun RBuilder.col(
-    all: ColAttributes? = null,
-    sm: ColAttributes? = null,
-    md: ColAttributes? = null,
-    lg: ColAttributes? = null,
-    xl: ColAttributes? = null,
-    renderAs: (RBuilder.() -> ReactElement)? = null,
-    classes: String? = null,
-    block: RHandler<Col.Props>
-): ReactElement = child(Col::class) {
-    attrs {
-        this.all = all
-        this.sm = sm
-        this.md = md
-        this.lg = lg
-        this.xl = xl
-        this.renderAs = renderAs
-        this.className = classes
-    }
-
-    block()
-}
-
-class Col : RenderAsComponent<Col.Props, WithClassName, RState>() {
-    override fun WithClassName.handleProps() {
-        // Pairs and Triples match in multiple of those. That's why we need a Set
-        val colClasses = mutableSetOf<ClassNames>()
-
-        with(props) {
-            if (all?.size == null && sm?.size == null && md?.size == null && lg?.size == null && xl?.size == null) {
-                EQ.getClassNames(null).let(colClasses::addAll)
-            }
-
-            all?.getClassNames(null)?.let(colClasses::addAll)
-            sm?.getClassNames(Breakpoints.SM)?.let(colClasses::addAll)
-            md?.getClassNames(Breakpoints.MD)?.let(colClasses::addAll)
-            lg?.getClassNames(Breakpoints.LG)?.let(colClasses::addAll)
-            xl?.getClassNames(Breakpoints.XL)?.let(colClasses::addAll)
-        }
-
-        className = props.className.appendClass(colClasses)
-    }
-
-    override fun RBuilder.getDefaultRenderer(): ReactElement = div { }
-
-    interface Props : WithRenderAs, WithClassName {
-        var all: ColAttributes?
-        var sm: ColAttributes?
-        var md: ColAttributes?
-        var lg: ColAttributes?
-        var xl: ColAttributes?
     }
 }

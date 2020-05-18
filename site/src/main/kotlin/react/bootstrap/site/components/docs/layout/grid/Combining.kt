@@ -3,21 +3,20 @@
 package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
-import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.ColAttributes
-import react.bootstrap.layout.grid.ColAttributes.Alignments.Companion.END
-import react.bootstrap.layout.grid.ColAttributes.Offsets.Companion.OFF_1
-import react.bootstrap.layout.grid.ColAttributes.Orderings.Companion.ORD_3
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_4
-import react.bootstrap.layout.grid.col
-import react.bootstrap.layout.grid.row
+import react.bootstrap.layout.grid.col.ColAttributes
+import react.bootstrap.layout.grid.col.ColAttributes.Alignments.Companion.END
+import react.bootstrap.layout.grid.col.ColAttributes.Offsets.Companion.OFF_1
+import react.bootstrap.layout.grid.col.ColAttributes.Orderings.Companion.ORD_3
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_4
+import react.bootstrap.layout.grid.col.col
+import react.bootstrap.layout.grid.container.container
+import react.bootstrap.layout.grid.row.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.layout.importFromGrid
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
@@ -71,12 +70,12 @@ Combine other attributes with `$sizes` by using `$sz`.
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(END.import)
-                importFromGrid(OFF_1.import)
-                importFromGrid(ORD_3.import)
-                importFromGrid(SZ_4.import)
+                importFromGrid("col", END.import)
+                importFromGrid("col", OFF_1.import)
+                importFromGrid("col", ORD_3.import)
+                importFromGrid("col", SZ_4.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktContainer {
@@ -121,12 +120,12 @@ Combine other attributes with `$offsets` by using `$off`.
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(END.import)
-                importFromGrid(OFF_1.import)
-                importFromGrid(ORD_3.import)
-                importFromGrid(SZ_4.import)
+                importFromGrid("col", END.import)
+                importFromGrid("col", OFF_1.import)
+                importFromGrid("col", ORD_3.import)
+                importFromGrid("col", SZ_4.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktContainer {
@@ -171,12 +170,12 @@ Combine other attributes with `$orderings` by using `$ord`.
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(END.import)
-                importFromGrid(OFF_1.import)
-                importFromGrid(ORD_3.import)
-                importFromGrid(SZ_4.import)
+                importFromGrid("col", END.import)
+                importFromGrid("col", OFF_1.import)
+                importFromGrid("col", ORD_3.import)
+                importFromGrid("col", SZ_4.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktContainer {
@@ -221,12 +220,12 @@ Combine other attributes with `$alignments` by using `$align`.
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(END.import)
-                importFromGrid(OFF_1.import)
-                importFromGrid(ORD_3.import)
-                importFromGrid(SZ_4.import)
+                importFromGrid("col", END.import)
+                importFromGrid("col", OFF_1.import)
+                importFromGrid("col", ORD_3.import)
+                importFromGrid("col", SZ_4.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktContainer {
@@ -398,11 +397,11 @@ private fun RBuilder.allPossibleCombinations() {
             }
             val imports = listOf(pairing.thisImport, pairing.withImport).sortedBy { it }
             codeExample {
-                importContainerFun()
                 imports.forEach {
-                    importFromGrid(it)
+                    importFromGrid("col", it)
                 }
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktConRow {
@@ -437,11 +436,11 @@ private fun RBuilder.allPossibleCombinations() {
                 }
                 val imports = listOf(pairing.thisImport, pairing.withImport, tripling.thisImport).sortedBy { it }
                 codeExample {
-                    importContainerFun()
                     imports.forEach {
-                        importFromGrid(it)
+                        importFromGrid("col", it)
                     }
                     importColFun()
+                    importContainerFun()
                     importRowFun()
                     ln { }
                     ktConRow {
@@ -481,12 +480,12 @@ private fun RBuilder.allPossibleCombinations() {
                     }
                 }
                 codeExample {
-                    importContainerFun()
-                    importFromGrid(END.import)
-                    importFromGrid(OFF_1.import)
-                    importFromGrid(ORD_3.import)
-                    importFromGrid(SZ_4.import)
+                    importFromGrid("col", END.import)
+                    importFromGrid("col", OFF_1.import)
+                    importFromGrid("col", ORD_3.import)
+                    importFromGrid("col", SZ_4.import)
                     importColFun()
+                    importContainerFun()
                     importRowFun()
                     ln { }
                     ktConRow {

@@ -3,15 +3,19 @@
 package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
-import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.ColAttributes
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.EQ
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_4
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_6
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_8
-import react.bootstrap.layout.grid.ColCounts
-import react.bootstrap.layout.grid.col
-import react.bootstrap.layout.grid.row
+import react.bootstrap.layout.grid.col.ColAttributes
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.EQ
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_4
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_6
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_8
+import react.bootstrap.layout.grid.col.col
+import react.bootstrap.layout.grid.container.container
+import react.bootstrap.layout.grid.row.RowAttributes
+import react.bootstrap.layout.grid.row.RowAttributes.ColCounts.Companion.CNT_1
+import react.bootstrap.layout.grid.row.RowAttributes.ColCounts.Companion.CNT_2
+import react.bootstrap.layout.grid.row.RowAttributes.ColCounts.Companion.CNT_3
+import react.bootstrap.layout.grid.row.RowAttributes.ColCounts.Companion.CNT_4
+import react.bootstrap.layout.grid.row.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.ktB
@@ -19,7 +23,6 @@ import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.importContainerFun
-import react.bootstrap.site.components.docs.layout.importFromGrid
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
 import react.dom.em
@@ -61,11 +64,11 @@ ${EQ.name}`.
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(EQ.import)
-                importFromGrid(SZ_4.import)
-                importFromGrid(SZ_8.import)
+                importFromGrid("col", EQ.import)
+                importFromGrid("col", SZ_4.import)
+                importFromGrid("col", SZ_8.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktContainer {
@@ -104,11 +107,11 @@ stacked and becomes horizontal at the small breakpoint (`sm`).
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(EQ.import)
-                importFromGrid(SZ_4.import)
-                importFromGrid(SZ_8.import)
+                importFromGrid("col", EQ.import)
+                importFromGrid("col", SZ_4.import)
+                importFromGrid("col", SZ_8.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktContainer {
@@ -151,11 +154,11 @@ needed. See the example below for a better idea of how it all works.
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(SZ_4.import)
-                importFromGrid(SZ_6.import)
-                importFromGrid(SZ_8.import)
+                importFromGrid("col", SZ_4.import)
+                importFromGrid("col", SZ_6.import)
+                importFromGrid("col", SZ_8.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktContainer {
@@ -183,15 +186,14 @@ needed. See the example below for a better idea of how it all works.
         Markdown {
             //language=Markdown
             +"""
-Set the `${ColCounts::class.simpleName}`-argument to quickly set the number of columns that best
-render your content and layout. The row columns classes are set on the parent `$rowFun { }` as a
-shortcut.
+Set the `${RowAttributes.ColCounts::class.simpleName}`-argument to quickly set the number of columns that best render
+your content and layout. The row columns classes are set on the parent `$rowFun { }` as a shortcut.
             """
         }
         exampleRow {
             liveExample {
                 container {
-                    row(all = ColCounts.CNT_2) {
+                    row(all = CNT_2) {
                         for (x in 1..4) {
                             col { +"Column" }
                         }
@@ -199,13 +201,13 @@ shortcut.
                 }
             }
             codeExample {
-                importContainerFun()
-                importGridEnum(ColCounts::class)
                 importColFun()
+                importContainerFun()
+                importFromGrid("row", CNT_2.import)
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to ColCounts.CNT_2.name) {
+                    ktB(it, rowFun, "all" to CNT_2.name) {
                         for (x in 1..4) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
@@ -216,7 +218,7 @@ shortcut.
         exampleRow {
             liveExample {
                 container {
-                    row(all = ColCounts.CNT_3) {
+                    row(all = CNT_3) {
                         for (x in 1..4) {
                             col { +"Column" }
                         }
@@ -224,13 +226,13 @@ shortcut.
                 }
             }
             codeExample {
-                importContainerFun()
-                importGridEnum(ColCounts::class)
                 importColFun()
+                importContainerFun()
+                importFromGrid("row", CNT_3.import)
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to ColCounts.CNT_3.name) {
+                    ktB(it, rowFun, "all" to CNT_3.name) {
                         for (x in 1..4) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
@@ -241,7 +243,7 @@ shortcut.
         exampleRow {
             liveExample {
                 container {
-                    row(all = ColCounts.CNT_4) {
+                    row(all = CNT_4) {
                         for (x in 1..4) {
                             col { +"Column" }
                         }
@@ -249,13 +251,13 @@ shortcut.
                 }
             }
             codeExample {
-                importContainerFun()
-                importGridEnum(ColCounts::class)
                 importColFun()
+                importContainerFun()
+                importFromGrid("row", CNT_4.import)
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to ColCounts.CNT_4.name) {
+                    ktB(it, rowFun, "all" to CNT_4.name) {
                         for (x in 1..4) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
@@ -266,7 +268,7 @@ shortcut.
         exampleRow {
             liveExample {
                 container {
-                    row(all = ColCounts.CNT_4) {
+                    row(all = CNT_4) {
                         for (x in 1..2) {
                             col { +"Column" }
                         }
@@ -276,19 +278,19 @@ shortcut.
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(SZ_6.import)
-                importGridEnum(ColCounts::class)
+                importFromGrid("col", SZ_6.import)
                 importColFun()
+                importContainerFun()
+                importFromGrid("row", CNT_4.import)
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to ColCounts.CNT_4.name) {
+                    ktB(it, rowFun, "all" to CNT_4.name) {
                         for (x in 1..2) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
                     }
-                    ktB(it, rowFun, "all" to ColCounts.CNT_4.name) {
+                    ktB(it, rowFun, "all" to CNT_4.name) {
                         ktIB(it, colFun, "all" to SZ_6.name) { "+\"Column\"" }
                     }
                 }
@@ -297,7 +299,7 @@ shortcut.
         exampleRow {
             liveExample {
                 container {
-                    row(all = ColCounts.CNT_1, sm = ColCounts.CNT_2, md = ColCounts.CNT_4) {
+                    row(all = CNT_1, sm = CNT_2, md = CNT_4) {
                         for (x in 1..4) {
                             col { +"Column" }
                         }
@@ -305,19 +307,15 @@ shortcut.
                 }
             }
             codeExample {
-                importContainerFun()
-                importGridEnum(ColCounts::class)
                 importColFun()
+                importContainerFun()
+                importFromGrid("row", CNT_1.import)
+                importFromGrid("row", CNT_2.import)
+                importFromGrid("row", CNT_4.import)
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(
-                        it,
-                        rowFun,
-                        "all" to ColCounts.CNT_1.name,
-                        "sm" to ColCounts.CNT_2.name,
-                        "md" to ColCounts.CNT_4.name
-                    ) {
+                    ktB(it, rowFun, "all" to CNT_1.name, "sm" to CNT_2.name, "md" to CNT_4.name) {
                         for (x in 1..4) {
                             ktIB(it, colFun, "+\"Column\"")
                         }
@@ -349,11 +347,11 @@ column widths, responsive tiers, reorders, and more).
                 }
             }
             codeExample {
-                importContainerFun()
-                importFromGrid(SZ_4.import)
-                importFromGrid(SZ_6.import)
-                importFromGrid(SZ_8.import)
+                importFromGrid("col", SZ_4.import)
+                importFromGrid("col", SZ_6.import)
+                importFromGrid("col", SZ_8.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktContainer {

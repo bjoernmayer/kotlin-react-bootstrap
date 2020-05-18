@@ -5,13 +5,13 @@ import react.RProps
 import react.bootstrap.content.img
 import react.bootstrap.content.typography.lead
 import react.bootstrap.content.typography.muted
-import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.ColAttributes.Orderings.Companion.ORD_2
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.EQ
-import react.bootstrap.layout.grid.ColAttributes.Sizes.Companion.SZ_6
-import react.bootstrap.layout.grid.ItemsXs
-import react.bootstrap.layout.grid.col
-import react.bootstrap.layout.grid.row
+import react.bootstrap.layout.grid.col.ColAttributes.Orderings.Companion.ORD_2
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.EQ
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_6
+import react.bootstrap.layout.grid.col.col
+import react.bootstrap.layout.grid.container.container
+import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.CENTER
+import react.bootstrap.layout.grid.row.row
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.main
 import react.dom.br
@@ -23,7 +23,7 @@ import react.router.dom.routeLink
 val Home = functionalComponent<RProps> {
     main("bd-masthead") {
         container {
-            row(all = ItemsXs.CENTER) {
+            row(all = CENTER) {
                 col(all = SZ_6, md = SZ_6 ord ORD_2, classes = "${ClassNames.MX_AUTO}") {
                     img(
                         src = logo.default as? String,

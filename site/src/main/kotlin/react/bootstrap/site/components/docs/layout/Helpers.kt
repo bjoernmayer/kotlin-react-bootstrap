@@ -1,11 +1,12 @@
 package react.bootstrap.site.components.docs.layout
 
 import react.RBuilder
-import react.bootstrap.layout.Container
-import react.bootstrap.layout.container
+import react.bootstrap.layout.grid.container.Container
+import react.bootstrap.layout.grid.container.container
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktB
+import react.bootstrap.site.components.docs.layout.grid.importFromGrid
 
 internal val RBuilder.containerFun: String
     get() = RBuilder::container.name
@@ -19,12 +20,8 @@ internal fun CodeExampleBuilder.ktContainer(block: CodeExampleBuilder.(indentati
     }
 }
 
-internal fun CodeExampleBuilder.importFromGrid(className: String) {
-    import("layout.grid.$className")
-}
-
 internal fun CodeExampleBuilder.importContainerFun() {
-    importFromGrid(containerFun)
+    importFromGrid("container", containerFun)
 }
 
 internal fun CodeExampleBuilder.importContainer() {

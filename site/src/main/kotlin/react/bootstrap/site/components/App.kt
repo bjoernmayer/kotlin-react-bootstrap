@@ -3,8 +3,7 @@ package react.bootstrap.site.components
 import react.Fragment
 import react.RBuilder
 import react.RProps
-import react.bootstrap.layout.Container
-import react.bootstrap.layout.container
+import react.bootstrap.layout.grid.container.Containers
 import react.bootstrap.site.components.docs.Docs
 import react.bootstrap.site.external.BrowserRouterProps
 import react.bootstrap.site.from
@@ -25,7 +24,7 @@ fun RBuilder.app() =
         child(scrollToTop)
         Fragment {
             header()
-            container(viscosity = Container.Viscosities.FLUID) {
+            Containers.fluid {
                 switch {
                     route<RProps>(PATH_DOCS) {
                         child(Docs::class) {
