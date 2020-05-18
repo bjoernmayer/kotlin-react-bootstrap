@@ -13,5 +13,6 @@ flexible media object, and responsive utility classes.
             """
         }
         child(Containers::class)
+        child(ContainerBuilder::class)
     }
 }

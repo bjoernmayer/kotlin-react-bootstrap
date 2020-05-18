@@ -4,8 +4,8 @@ import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
 import react.RProps
-import react.bootstrap.lib.ariaLabel
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.ariaLabel
 import react.dom.a
 import react.dom.div
 import react.dom.header
@@ -15,7 +15,6 @@ import react.dom.svg
 import react.dom.ul
 import react.router.dom.navLink
 
-@JsNonModule
 @JsModule("logo.png")
 external val logo: dynamic
 
