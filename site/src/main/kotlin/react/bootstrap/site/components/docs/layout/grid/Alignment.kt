@@ -1,25 +1,32 @@
-@file:Suppress("NAME_SHADOWING")
+@file:Suppress("NAME_SHADOWING", "NestedLambdaShadowedImplicitParameter", "DuplicatedCode")
 
 package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
-import react.bootstrap.layout.container
-import react.bootstrap.layout.grid.Alignments
-import react.bootstrap.layout.grid.ItemsXs
-import react.bootstrap.layout.grid.ItemsYs
-import react.bootstrap.layout.grid.Sizes
-import react.bootstrap.layout.grid.col
-import react.bootstrap.layout.grid.row
+import react.bootstrap.layout.grid.col.ColAttributes.Alignments.Companion.CENTER
+import react.bootstrap.layout.grid.col.ColAttributes.Alignments.Companion.END
+import react.bootstrap.layout.grid.col.ColAttributes.Alignments.Companion.START
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_4
+import react.bootstrap.layout.grid.col.col
+import react.bootstrap.layout.grid.container.container
+import react.bootstrap.layout.grid.row.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.AROUND as rxAROUND
+import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.BETWEEN as rxBETWEEN
+import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.CENTER as rxCENTER
+import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.END as rxEND
+import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.START as rxSTART
+import react.bootstrap.layout.grid.row.RowAttributes.ItemsYs.Companion.CENTER as ryCENTER
+import react.bootstrap.layout.grid.row.RowAttributes.ItemsYs.Companion.END as ryEND
+import react.bootstrap.layout.grid.row.RowAttributes.ItemsYs.Companion.START as rySTART
 
 internal class Alignment : SectionComponent() {
     override val title: String = "Alignment"
@@ -38,17 +45,17 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
         flexColsExampleRow {
             liveExample {
                 container {
-                    row(all = ItemsYs.START) {
+                    row(all = rySTART) {
                         for (x in 1..3) {
                             col { +"One of three columns" }
                         }
                     }
-                    row(all = ItemsYs.CENTER) {
+                    row(all = ryCENTER) {
                         for (x in 1..3) {
                             col { +"One of three columns" }
                         }
                     }
-                    row(all = ItemsYs.END) {
+                    row(all = ryEND) {
                         for (x in 1..3) {
                             col { +"One of three columns" }
                         }
@@ -56,23 +63,25 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 }
             }
             codeExample {
-                importContainerFun()
-                importGridEnum(ItemsYs::class)
                 importColFun()
+                importContainerFun()
+                importFromGrid("row", ryCENTER.import)
+                importFromGrid("row", ryEND.import)
+                importFromGrid("row", rySTART.import)
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to ItemsYs.START.kt) {
+                    ktB(it, rowFun, "all" to rySTART.name) {
                         for (x in 1..3) {
                             ktIB(it, colFun) { "+\"One of three columns\"" }
                         }
                     }
-                    ktB(it, rowFun, "all" to ItemsYs.CENTER.kt) {
+                    ktB(it, rowFun, "all" to ryCENTER.name) {
                         for (x in 1..3) {
                             ktIB(it, colFun) { "+\"One of three columns\"" }
                         }
                     }
-                    ktB(it, rowFun, "all" to ItemsYs.END.kt) {
+                    ktB(it, rowFun, "all" to ryEND.name) {
                         for (x in 1..3) {
                             ktIB(it, colFun) { "+\"One of three columns\"" }
                         }
@@ -84,22 +93,24 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
             liveExample {
                 container {
                     row {
-                        col(all = Alignments.START) { +"One of three columns" }
-                        col(all = Alignments.CENTER) { +"One of three columns" }
-                        col(all = Alignments.END) { +"One of three columns" }
+                        col(all = START) { +"One of three columns" }
+                        col(all = CENTER) { +"One of three columns" }
+                        col(all = END) { +"One of three columns" }
                     }
                 }
             }
             codeExample {
-                importContainerFun()
-                importGridEnum(Alignments::class)
+                importFromGrid("col", CENTER.import)
+                importFromGrid("col", END.import)
+                importFromGrid("col", START.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktConRow {
-                    ktIB(it, colFun, "all" to Alignments.START.kt) { "+\"One of three columns\"" }
-                    ktIB(it, colFun, "all" to Alignments.CENTER.kt) { "+\"One of three columns\"" }
-                    ktIB(it, colFun, "all" to Alignments.END.kt) { "+\"One of three columns\"" }
+                    ktIB(it, colFun, "all" to START.name) { "+\"One of three columns\"" }
+                    ktIB(it, colFun, "all" to CENTER.name) { "+\"One of three columns\"" }
+                    ktIB(it, colFun, "all" to END.name) { "+\"One of three columns\"" }
                 }
             }
         }
@@ -107,64 +118,68 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
         exampleRow {
             liveExample {
                 container {
-                    row(all = ItemsXs.START) {
+                    row(all = rxSTART) {
                         for (x in 1..2) {
-                            col(all = Sizes.SZ_4) { +"One of two columns" }
+                            col(all = SZ_4) { +"One of two columns" }
                         }
                     }
-                    row(all = ItemsXs.CENTER) {
+                    row(all = rxCENTER) {
                         for (x in 1..2) {
-                            col(all = Sizes.SZ_4) { +"One of two columns" }
+                            col(all = SZ_4) { +"One of two columns" }
                         }
                     }
-                    row(all = ItemsXs.END) {
+                    row(all = rxEND) {
                         for (x in 1..2) {
-                            col(all = Sizes.SZ_4) { +"One of two columns" }
+                            col(all = SZ_4) { +"One of two columns" }
                         }
                     }
-                    row(all = ItemsXs.AROUND) {
+                    row(all = rxAROUND) {
                         for (x in 1..2) {
-                            col(all = Sizes.SZ_4) { +"One of two columns" }
+                            col(all = SZ_4) { +"One of two columns" }
                         }
                     }
-                    row(all = ItemsXs.BETWEEN) {
+                    row(all = rxBETWEEN) {
                         for (x in 1..2) {
-                            col(all = Sizes.SZ_4) { +"One of two columns" }
+                            col(all = SZ_4) { +"One of two columns" }
                         }
                     }
                 }
             }
             codeExample {
-                importContainerFun()
-                importGridEnum(ItemsXs::class)
-                importGridEnum(Sizes::class)
+                importFromGrid("col", SZ_4.import)
+                importFromGrid("row", rxAROUND.import)
+                importFromGrid("row", rxBETWEEN.import)
+                importFromGrid("row", rxCENTER.import)
+                importFromGrid("row", rxEND.import)
+                importFromGrid("row", rxSTART.import)
                 importColFun()
+                importContainerFun()
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to ItemsXs.START.kt) {
+                    ktB(it, rowFun, "all" to rxSTART.name) {
                         for (x in 1..2) {
-                            ktIB(it, colFun, "all" to Sizes.SZ_4.kt) { "+\"One of two columns\"" }
+                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
                         }
                     }
-                    ktB(it, rowFun, "all" to ItemsXs.CENTER.kt) {
+                    ktB(it, rowFun, "all" to rxCENTER.name) {
                         for (x in 1..2) {
-                            ktIB(it, colFun, "all" to Sizes.SZ_4.kt) { "+\"One of two columns\"" }
+                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
                         }
                     }
-                    ktB(it, rowFun, "all" to ItemsXs.END.kt) {
+                    ktB(it, rowFun, "all" to rxEND.name) {
                         for (x in 1..2) {
-                            ktIB(it, colFun, "all" to Sizes.SZ_4.kt) { "+\"One of two columns\"" }
+                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
                         }
                     }
-                    ktB(it, rowFun, "all" to ItemsXs.AROUND.kt) {
+                    ktB(it, rowFun, "all" to rxAROUND.name) {
                         for (x in 1..2) {
-                            ktIB(it, colFun, "all" to Sizes.SZ_4.kt) { "+\"One of two columns\"" }
+                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
                         }
                     }
-                    ktB(it, rowFun, "all" to ItemsXs.BETWEEN.kt) {
+                    ktB(it, rowFun, "all" to rxBETWEEN.name) {
                         for (x in 1..2) {
-                            ktIB(it, colFun, "all" to Sizes.SZ_4.kt) { "+\"One of two columns\"" }
+                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
                         }
                     }
                 }

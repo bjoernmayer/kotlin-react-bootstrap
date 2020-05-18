@@ -19,9 +19,9 @@ interface CombinedAttributes {
     }
 }
 
-interface AttributePair<T1 : CombinedAttributes, T2 : CombinedAttributes> : CombinedAttributes {
-    val first: T1
-    val second: T2
+interface AttributePair : CombinedAttributes {
+    val first: CombinedAttributes
+    val second: CombinedAttributes
 
     override fun getClassNames(breakpoints: Breakpoints?): Set<ClassNames> = listOf(
         first.getClassNames(breakpoints),
@@ -29,9 +29,8 @@ interface AttributePair<T1 : CombinedAttributes, T2 : CombinedAttributes> : Comb
     ).flatten().toSet()
 }
 
-interface AttributeTriple<T1 : CombinedAttributes, T2 : CombinedAttributes, T3 : CombinedAttributes> :
-    AttributePair<T1, T2> {
-    val third: T3
+interface AttributeTriple : AttributePair {
+    val third: CombinedAttributes
 
     override fun getClassNames(breakpoints: Breakpoints?): Set<ClassNames> = super.getClassNames(breakpoints)
         .toMutableList().apply { addAll(third.getClassNames(breakpoints)) }
@@ -43,42 +42,10 @@ interface AttributeQuadruple<
     T2 : CombinedAttributes,
     T3 : CombinedAttributes,
     T4 : CombinedAttributes
-    > : AttributeTriple<T1, T2, T3> {
-    val fourth: T4
+    > : AttributeTriple {
+    val fourth: CombinedAttributes
 
     override fun getClassNames(breakpoints: Breakpoints?): Set<ClassNames> = super.getClassNames(breakpoints)
         .toMutableList().apply { addAll(fourth.getClassNames(breakpoints)) }
         .toSet()
-}
-
-inline fun <reified T : CombinedAttributes> resolveAttributeClassNames(
-    all: CombinedAttributes? = null,
-    sm: CombinedAttributes? = null,
-    md: CombinedAttributes? = null,
-    lg: CombinedAttributes? = null,
-    xl: CombinedAttributes? = null
-): Set<ClassNames> {
-    val classes = mutableSetOf<ClassNames>()
-
-    if (all is T) {
-        all.getClassNames(null).let(classes::addAll)
-    }
-
-    if (sm is T) {
-        sm.getClassNames(Breakpoints.SM).let(classes::addAll)
-    }
-
-    if (md is T) {
-        md.getClassNames(Breakpoints.MD).let(classes::addAll)
-    }
-
-    if (lg is T) {
-        lg.getClassNames(Breakpoints.LG).let(classes::addAll)
-    }
-
-    if (xl is T) {
-        xl.getClassNames(Breakpoints.XL).let(classes::addAll)
-    }
-
-    return classes
 }
