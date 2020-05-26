@@ -3,6 +3,7 @@
 package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
+import react.RElementBuilder
 import react.RProps
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.ButtonGroup
@@ -15,7 +16,6 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktF
-import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
@@ -113,7 +113,7 @@ Since we are working with react here, implementing a toggleable button is quite 
                     "variants" to (Button.Variants.Solid.PRIMARY).ktN,
                     "active" to "active"
                 ) {
-                    ktB(it, "attrs") {
+                    ktF(it, RElementBuilder<*>::attrs) {
                         ln(it) { +"onClick = { active = !active }" }
                     }
                     ktB(it, "if (active)") {
@@ -171,13 +171,13 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
                         buildNestedName(Buttons.solid::secondary.name, RBuilder::Buttons.name, Buttons::solid.name),
                         args
                     ) {
-                        ktB(it, "attrs") {
+                        ktF(it, RElementBuilder<*>::attrs) {
                             ln(it) { +"onActive = { console.log(\"Radio$x\") }" }
                         }
                     }
                 }
             }
-            ktIB(0, "br", "")
+            ktIF(0, RBuilder::br, "")
             ktF(0, RBuilder::buttonGroup, ButtonGroup.Behaviours.CHECKBOXES.ktN) {
                 for (x in 1..3) {
                     ktF(
@@ -185,7 +185,7 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
                         buildNestedName(Buttons.solid::secondary.name, RBuilder::Buttons.name, Buttons::solid.name),
                         ""
                     ) {
-                        ktB(it, "attrs") {
+                        ktF(it, RElementBuilder<*>::attrs) {
                             ln(it) { +"onActive = { console.log(\"Checkbox$x\") }" }
                         }
                     }
