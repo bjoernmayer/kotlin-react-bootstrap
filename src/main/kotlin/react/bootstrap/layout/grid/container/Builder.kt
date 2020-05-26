@@ -3,6 +3,7 @@ package react.bootstrap.layout.grid.container
 import react.RBuilder
 import react.RHandler
 import react.ReactElement
+import react.bootstrap.lib.Builder
 
 fun RBuilder.container(
     viscosity: Container.Viscosities? = null,
@@ -16,7 +17,7 @@ fun RBuilder.container(
     block()
 }
 
-class ContainerBuilder(private val builder: RBuilder) {
+class ContainerBuilder(override val builder: RBuilder) : Builder {
     fun fluid(classes: String? = null, block: RHandler<Container.Props>): ReactElement =
         builder.container(viscosity = Container.Viscosities.FLUID, classes = classes, block = block)
 

@@ -5,18 +5,26 @@ package react.bootstrap.site.components.docs.components.buttons
 import react.RBuilder
 import react.RProps
 import react.bootstrap.components.button.Button
+import react.bootstrap.components.button.ButtonGroup
+import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.button
+import react.bootstrap.components.button.buttonGroup
+import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.ktF
+import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
 import react.child
+import react.dom.br
 import react.functionalComponent
+import react.getValue
+import react.setValue
 import react.useState
 
 internal class ActiveState : SectionComponent() {
@@ -85,7 +93,7 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
         Markdown {
             //language=Markdown
             +"""
- Since we are working with react here, implementing a toggleable button is quite easy.
+Since we are working with react here, implementing a toggleable button is quite easy.
             """
         }
         liveExample {
@@ -96,7 +104,7 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
             import("components.button.button")
             ln { }
             ktB(0, "private val toggleableButton = functionalComponent<RProps>") {
-                ln(it) { +"val (active, setActive) = useState(false)" }
+                ln(it) { +"var active by useState(false)" }
                 ln { }
                 ktF(
                     it,
@@ -106,22 +114,98 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
                     "active" to "active"
                 ) {
                     ktB(it, "attrs") {
-                        ln(it) { +"onClick = { setActive(!active) }" }
+                        ln(it) { +"onClick = { active = !active }" }
                     }
-                    ln(it) { +"+\"Single toggle\"" }
+                    ktB(it, "if (active)") {
+                        ln(it) { +"+\"I am toggled\"" }
+                    }
+                    ktB(it, "else") {
+                        ln(it) { +"+\"Toggle me!\"" }
+                    }
+                }
+            }
+        }
+        subSectionTitle("Radio- and Checkbox Behaviour", section)
+        Markdown {
+            //language=Markdown
+            +"""
+When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or checkboxes.
+            """
+        }
+        liveExample {
+            buttonGroup(ButtonGroup.Behaviours.RADIOS) {
+                for (x in 1..3) {
+                    Buttons.solid.secondary(x == 1) {
+                        attrs {
+                            onActive = { console.log("Radio$x") }
+                        }
+                        +"Radio$x"
+                    }
+                }
+            }
+            br { }
+            buttonGroup(ButtonGroup.Behaviours.CHECKBOXES) {
+                for (x in 1..3) {
+                    Buttons.solid.secondary {
+                        attrs {
+                            onActive = { console.log("Checkbox$x") }
+                        }
+                        +"Checkbox$x"
+                    }
+                }
+            }
+        }
+        codeExample {
+            import("components.button.ButtonGroup")
+            import("components.button.Buttons")
+            ln { }
+            ktF(0, RBuilder::buttonGroup, ButtonGroup.Behaviours.RADIOS.ktN) {
+                for (x in 1..3) {
+                    val args = if (x == 1) {
+                        "true"
+                    } else {
+                        ""
+                    }
+                    ktF(
+                        it,
+                        buildNestedName(Buttons.solid::secondary.name, RBuilder::Buttons.name, Buttons::solid.name),
+                        args
+                    ) {
+                        ktB(it, "attrs") {
+                            ln(it) { +"onActive = { console.log(\"Radio$x\") }" }
+                        }
+                    }
+                }
+            }
+            ktIB(0, "br", "")
+            ktF(0, RBuilder::buttonGroup, ButtonGroup.Behaviours.CHECKBOXES.ktN) {
+                for (x in 1..3) {
+                    ktF(
+                        it,
+                        buildNestedName(Buttons.solid::secondary.name, RBuilder::Buttons.name, Buttons::solid.name),
+                        ""
+                    ) {
+                        ktB(it, "attrs") {
+                            ln(it) { +"onActive = { console.log(\"Checkbox$x\") }" }
+                        }
+                    }
                 }
             }
         }
     }
 
     private val toggleableButton = functionalComponent<RProps> {
-        val (active, setActive) = useState(false)
+        var active by useState(false)
 
-        button(variant = Button.Variants.Solid.PRIMARY, active = active) {
+        Buttons.solid.primary(active = active) {
             attrs {
-                onClick = { setActive(!active) }
+                onClick = { active = !active }
             }
-            +"Single toggle"
+            if (active) {
+                +"I am toggled"
+            } else {
+                +"Toggle me!"
+            }
         }
     }
 }

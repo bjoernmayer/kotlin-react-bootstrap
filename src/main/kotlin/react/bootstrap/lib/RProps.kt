@@ -1,8 +1,15 @@
 package react.bootstrap.lib
 
+import kotlinext.js.Object
+import kotlinext.js.jsObject
 import kotlinx.html.HTMLTag
 import react.RHandler
 import react.RProps
+import kotlin.reflect.KClass
+
+interface WithTypeFlag<T : Any> : RProps {
+    var krbType: KClass<T>
+}
 
 interface WithRDOMHandler<T : HTMLTag> : RProps {
     var handler: RDOMHandler<T>
@@ -94,3 +101,8 @@ interface WithDomEvents : RProps {
     var onWaiting: EventHandler?
     var onWheel: EventHandler?
 }
+
+/**
+ * @return a mutable copy
+ */
+fun <T : RProps> T.toMutable(): T = Object.assign(jsObject(), this)

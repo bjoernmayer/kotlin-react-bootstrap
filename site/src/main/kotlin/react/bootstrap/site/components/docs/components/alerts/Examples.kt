@@ -35,6 +35,8 @@ import react.dom.hr
 import react.dom.p
 import react.dom.strong
 import react.functionalComponent
+import react.getValue
+import react.setValue
 import react.useState
 
 internal class Examples : SectionComponent() {
@@ -237,15 +239,13 @@ You can build your own custom close element, by using `$closingElementName { }`.
             importClassNames()
             ln { }
             ktB(0, "private val dismissibleAlert = functionalComponent<RProps>") {
-                ln(it) { +"val (show, setShow) = useState(false)" }
+                ln(it) { +"var show by useState(false)" }
                 ln { }
                 ktB(it, "if (show)") {
                     ktF(it, dismissibleAlertName, "variant" to Alert.Variants.DANGER.kt) {
                         ktB(it, "attrs") {
                             ktB(it, "${Alert.Props::dismissible.name}?.apply") {
-                                ktB(it, Alert.Props.Dismissible::onClosed.name) {
-                                    ln(it) { +"setShow(false)" }
-                                }
+                                ln(it) { +"${Alert.Props.Dismissible::onClose.name} = { show = false }" }
                             }
                         }
                         ln(it) { +"+\"You picked the wrong house, fool!\"" }
@@ -260,7 +260,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
                 ktB(it, "else") {
                     ktF(it, RBuilder::button, (Button.Variants.Outline.DANGER).ktN) {
                         ktB(it, "attrs") {
-                            ln(it) { +"onClickFunction = { setShow(true) }" }
+                            ln(it) { +"${Alert.Props.Dismissible::onClose.name} = { show = true }" }
                         }
                         ln(it) { +"+\"Open door & go in\"" }
                     }
@@ -270,15 +270,13 @@ You can build your own custom close element, by using `$closingElementName { }`.
     }
 
     private val dismissibleAlert = functionalComponent<RProps> {
-        val (show, setShow) = useState(false)
+        var show by useState(false)
 
         if (show) {
             dismissibleAlert(variant = Alert.Variants.DANGER) {
                 attrs {
                     dismissible?.apply {
-                        onClosed = {
-                            setShow(false)
-                        }
+                        onClosed = { show = false }
                     }
                 }
                 +"You picked the wrong house, fool!"
@@ -292,7 +290,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
         } else {
             button(Button.Variants.Outline.DANGER) {
                 attrs {
-                    onClick = { setShow(true) }
+                    onClick = { show = true }
                 }
                 +"Open door & go in"
             }

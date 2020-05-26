@@ -19,8 +19,8 @@ import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.ElementProvider
 import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.lib.WithDomEvents
-import react.bootstrap.lib.transferDomEvents
 import react.bootstrap.lib.onTransitionEndFunction
+import react.bootstrap.lib.transferDomEvents
 import react.bootstrap.utilities.close
 import react.children
 import react.cloneElement
@@ -77,7 +77,7 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
         }
 
         div {
-            props.children()
+            children()
 
             val alertClasses = mutableSetOf(ClassNames.ALERT)
 
@@ -127,7 +127,8 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
 
                 if (props.hasOwnProperty(CloseElementMarkerProps::random.name)) {
                     @Suppress("UnsafeCastFromDynamic")
-                    props.asDynamic().random == newClosingElement.props.asDynamic().random
+                    props.unsafeCast<CloseElementMarkerProps>().random ==
+                        newClosingElement.props.unsafeCast<CloseElementMarkerProps>().random
                 } else {
                     false
                 }

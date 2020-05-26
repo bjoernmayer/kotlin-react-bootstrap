@@ -4,6 +4,7 @@ import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.Button.Variants
 import react.bootstrap.components.button.Button.Variants.Outline
 import react.bootstrap.components.button.Button.Variants.Solid
+import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.site.components.docs.buildNestedName
 import kotlin.reflect.KClass
 
@@ -100,3 +101,6 @@ internal val KClass<Button.Types.Button>.nestedName
 
 internal val Button.Types.Input.Type.ktN
     get() = buildNestedName(name, Button::class, Button.Types::class, Button.Types.Input::class)
+
+internal val ButtonGroup.Behaviours.ktN
+    get() = buildNestedName(name, ButtonGroup::class, this::class)
