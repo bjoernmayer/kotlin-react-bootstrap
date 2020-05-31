@@ -9,14 +9,20 @@ import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.InputFormEncType
 import kotlinx.html.InputFormMethod
 import kotlinx.html.InputType
+import kotlinx.html.js.onChangeFunction
 import kotlinx.html.role
+import kotlinx.html.style
 import kotlinx.html.tabIndex
+import kotlinx.html.title
+import org.w3c.dom.HTMLInputElement
+import org.w3c.dom.events.Event
 import react.RBuilder
 import react.RComponent
 import react.RState
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.lib.WithDomEvents
 import react.bootstrap.lib.WithTypeFlag
@@ -28,29 +34,47 @@ import react.dom.a
 import react.dom.button
 import react.dom.defaultValue
 import react.dom.input
+import react.dom.label
 import react.setState
 
-class Button : RComponent<Button.Props, Button.State>() {
-    override fun componentDidMount() {
-        setState {
-            active = props.active
-        }
+class Button(props: Props) : RComponent<Button.Props, Button.State>(props) {
+    override fun State.init(props: Props) {
+        active = props.active == true
+    }
 
-        if (props.active == true) {
+    override fun componentDidMount() {
+        if (state.active == true) {
             props.onActive?.invoke()
         }
     }
 
     override fun componentDidUpdate(prevProps: Props, prevState: State, snapshot: Any) {
-        if (prevProps.active == false && props.active == true) {
+        if (prevProps !== props) {
+            setState {
+                active = props.active == true
+            }
+        }
+        if (prevState.active == false && props.active == true) {
             props.onActive?.invoke()
         }
     }
 
+    private fun handleChange(event: Event, originalEventHandler: EventHandler?) {
+        if (originalEventHandler is EventHandler) {
+            originalEventHandler.invoke(event)
+        }
+        val target = event.target as HTMLInputElement
+
+        setState {
+            active = target.checked
+        }
+    }
+
+    @Suppress("UnsafeCastFromDynamic")
     override fun RBuilder.render() {
         val btnClasses = mutableSetOf(ClassNames.BTN)
 
-        if (props.active == true) {
+        if (state.active == true) {
             btnClasses.add(ClassNames.ACTIVE)
         }
 
@@ -79,51 +103,85 @@ class Button : RComponent<Button.Props, Button.State>() {
             btnClasses.add(it.className)
         }
 
+        val classes = props.className.appendClass(btnClasses)
         if (props.type !== null) {
-            // todo rework this
             when (val type = props.type) {
                 is Types.Button -> {
                     button(
-                        formEncType = type.formEncType,
-                        formMethod = type.formMethod,
-                        type = type.type,
-                        classes = props.className.appendClass(btnClasses)
+                        formEncType = type.buttonFormEncType,
+                        formMethod = type.buttonFormMethod,
+                        type = type.buttonType,
+                        classes = classes
                     ) {
                         attrs {
                             handleCommonAttrs()
-                            if (props.disabled == true) {
-                                attrs.disabled = true
-                            }
+                            attrs.disabled = props.disabled == true
                         }
                         children()
                     }
                 }
                 is Types.Input -> {
-                    input(
-                        type = type.type.inputType,
-                        formEncType = type.formEncType,
-                        formMethod = type.formMethod,
-                        name = type.name,
-                        classes = props.className.appendClass(btnClasses)
-                    ) {
-                        attrs {
-                            handleCommonAttrs()
-                            defaultValue = type.value
+                    if (type.type == Types.Input.Type.CHECKBOX || type.type == Types.Input.Type.RADIO) {
+                        label(classes = classes) {
+                            input(
+                                type = type.type.inputType,
+                                formEncType = type.inputFormEncType,
+                                formMethod = type.inputFormMethod,
+                                name = type.name
+                            ) {
+                                attrs {
+                                    handleCommonAttrs()
+                                    onChangeFunction = {
+                                        handleChange(it, props.onChange)
+                                    }
 
-                            if (props.disabled == true) {
-                                disabled = true
-                                tabIndex = "-1"
+                                    value = type.value
+
+                                    style = kotlinext.js.js {
+                                        position = "absolute"
+                                        clip = "rect(0,0,0,0)"
+                                        pointerEvents = "none"
+                                    }
+
+                                    if (props.disabled == true) {
+                                        disabled = true
+                                        tabIndex = "-1"
+                                    }
+
+                                    defaultChecked = state.active == true
+                                }
+                                // No children allowed
                             }
+                            +" "
+                            type.title?.let { +it } ?: +type.value
                         }
-                        // No children allowed
+                    } else {
+                        input(
+                            type = type.type.inputType,
+                            formEncType = type.inputFormEncType,
+                            formMethod = type.inputFormMethod,
+                            name = type.name,
+                            classes = classes
+                        ) {
+                            attrs {
+                                handleCommonAttrs()
+                                value = type.value
+
+                                type.title?.let {
+                                    title = it
+                                }
+
+                                if (props.disabled == true) {
+                                    disabled = true
+                                    tabIndex = "-1"
+                                }
+                            }
+                            // No children allowed
+                        }
                     }
                 }
                 is Types.Link -> {
-                    a(
-                        href = type.href,
-                        target = type.target,
-                        classes = props.className.appendClass(btnClasses)
-                    ) {
+                    a(href = type.href, target = type.target, classes = classes) {
                         attrs {
                             handleCommonAttrs()
                             role = "button"
@@ -133,15 +191,10 @@ class Button : RComponent<Button.Props, Button.State>() {
                 }
             }
         } else {
-            button(
-                type = ButtonType.button,
-                classes = props.className.appendClass(btnClasses)
-            ) {
+            button(type = ButtonType.button, classes = classes) {
                 attrs {
                     handleCommonAttrs()
-                    if (props.disabled == true) {
-                        attrs.disabled = true
-                    }
+                    attrs.disabled = props.disabled == true
                 }
                 children()
             }
@@ -149,13 +202,8 @@ class Button : RComponent<Button.Props, Button.State>() {
     }
 
     private fun <T : CommonAttributeGroupFacade> T.handleCommonAttrs() {
-        if (props.active == true) {
-            ariaPressed = true
-        }
-
-        if (props.disabled == true) {
-            ariaDisabled = true
-        }
+        ariaPressed = state.active == true
+        ariaDisabled = props.disabled == true
 
         transferDomEvents(props)
     }
@@ -215,22 +263,25 @@ class Button : RComponent<Button.Props, Button.State>() {
 
     sealed class Types {
         class Button(
-            val formEncType: ButtonFormEncType? = null,
-            val formMethod: ButtonFormMethod? = null,
-            val type: ButtonType = ButtonType.button
+            val buttonFormEncType: ButtonFormEncType? = null,
+            val buttonFormMethod: ButtonFormMethod? = null,
+            val buttonType: ButtonType = ButtonType.button
         ) : Types()
 
         class Input(
             val type: Type = Type.BUTTON,
-            val formEncType: InputFormEncType? = null,
-            val formMethod: InputFormMethod? = null,
+            val inputFormEncType: InputFormEncType? = null,
+            val inputFormMethod: InputFormMethod? = null,
             val name: String? = null,
-            val value: String
+            val value: String,
+            val title: String? = null
         ) : Types() {
             enum class Type(val inputType: InputType) {
                 BUTTON(InputType.button),
                 RESET(InputType.reset),
-                SUBMIT(InputType.submit);
+                SUBMIT(InputType.submit),
+                RADIO(InputType.radio),
+                CHECKBOX(InputType.checkBox);
             }
         }
 

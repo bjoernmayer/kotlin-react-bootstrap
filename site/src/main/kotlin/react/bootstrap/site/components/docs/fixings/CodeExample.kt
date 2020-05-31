@@ -149,6 +149,13 @@ internal fun CodeExampleBuilder.ktIB(
     content: () -> String
 ) = ktIB(indentation, opener, content())
 
+internal fun CodeExampleBuilder.ktNestedInlineFun(
+    indentation: Int = 0,
+    function: KFunction<*>,
+    parents: List<String>,
+    content: () -> String
+) = ktIB(indentation, "${parents.joinToString(".")}.${function.name}", content)
+
 internal fun CodeExampleBuilder.ktIF(
     indentation: Int = 0,
     function: KFunction<*>,

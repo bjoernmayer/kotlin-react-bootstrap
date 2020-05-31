@@ -12,7 +12,7 @@ import react.bootstrap.components.alert.dismissibleAlert
 import react.bootstrap.components.alert.h4
 import react.bootstrap.components.alert.link
 import react.bootstrap.components.button.Button
-import react.bootstrap.components.button.button
+import react.bootstrap.components.button.Buttons
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.components.buttons.ktN
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -203,7 +203,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
                 +"You want some cookies?"
                 hr { }
                 closingElement {
-                    button(Button.Variants.Solid.SUCCESS) {
+                    Buttons.solid.success {
                         +"Sure!"
                     }
                 }
@@ -219,9 +219,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
                 ln(it) { +" +\"You want some cookies?\"" }
                 ktIF(it, RBuilder::hr, "")
                 ktB(it, closingElementName) {
-                    ktF(it, RBuilder::button, (Button.Variants.Solid.SUCCESS).ktN) {
-                        ln(it) { +"+\"Sure!\"" }
-                    }
+                    // todo button code example
                 }
             }
         }
@@ -251,19 +249,12 @@ You can build your own custom close element, by using `$closingElementName { }`.
                         ln(it) { +"+\"You picked the wrong house, fool!\"" }
                         ktIF(it, RBuilder::hr, "")
                         ktB(it, closingElementName) {
-                            ktF(it, RBuilder::button, (Button.Variants.Solid.INFO).ktN) {
-                                ln(it) { +"+\"Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!\"" }
-                            }
+                            // todo button code example
                         }
                     }
                 }
                 ktB(it, "else") {
-                    ktF(it, RBuilder::button, (Button.Variants.Outline.DANGER).ktN) {
-                        ktB(it, "attrs") {
-                            ln(it) { +"${Alert.Props.Dismissible::onClose.name} = { show = true }" }
-                        }
-                        ln(it) { +"+\"Open door & go in\"" }
-                    }
+                    // todo button code example
                 }
             }
         }
@@ -282,13 +273,13 @@ You can build your own custom close element, by using `$closingElementName { }`.
                 +"You picked the wrong house, fool!"
                 hr { }
                 closingElement {
-                    button(Button.Variants.Solid.INFO) {
+                    Buttons.solid.info {
                         +"Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!"
                     }
                 }
             }
         } else {
-            button(Button.Variants.Outline.DANGER) {
+            Buttons.outline.danger {
                 attrs {
                     onClick = { show = true }
                 }

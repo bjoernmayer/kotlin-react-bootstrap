@@ -2,13 +2,10 @@ package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
 import react.bootstrap.components.button.Button
-import react.bootstrap.components.button.Button.Variants
-import react.bootstrap.components.button.button
-import react.bootstrap.site.components.docs.buildNestedName
+import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
@@ -21,30 +18,33 @@ internal class OutlineButtons : SectionComponent() {
         Markdown {
             //language=Markdown
             +"""
-In need of a button, but not the hefty background colors they bring? Use the `${Variants.Outline::class.simpleName}`
-variants!
+In need of a button, but not the hefty background colors they bring? Use the
+`${Button.Variants.Outline::class.nestedName}` variants!
             """
         }
         liveExample {
-            Variants.Outline.all.forEach {
-                button(it) { +it::class.normalName }
-                +" "
-            }
+            Buttons.outline.danger { +Button.Variants.Outline.DANGER::class.normalName }
+            +" "
+            Buttons.outline.dark { +Button.Variants.Outline.DARK::class.normalName }
+            +" "
+            Buttons.outline.info { +Button.Variants.Outline.INFO::class.normalName }
+            +" "
+            Buttons.outline.light { +Button.Variants.Outline.LIGHT::class.normalName }
+            +" "
+            Buttons.outline.primary { +Button.Variants.Outline.PRIMARY::class.normalName }
+            +" "
+            Buttons.outline.secondary { +Button.Variants.Outline.SECONDARY::class.normalName }
+            +" "
+            Buttons.outline.success { +Button.Variants.Outline.SUCCESS::class.normalName }
+            +" "
+            Buttons.outline.warning { +Button.Variants.Outline.WARNING::class.normalName }
+            +" "
         }
         codeExample {
             import("button.Button")
             import("button.button")
             ln { }
-            Variants.Outline.all.forEach {
-                val variant = buildNestedName(
-                    it::class,
-                    Button::class,
-                    Variants::class,
-                    Variants.Outline::class
-                )
-                ktIF(0, RBuilder::button, variant, "+\"${it::class.normalName}\"")
-                ln { +"+\" \"" }
-            }
+            // todo code example
         }
     }
 }

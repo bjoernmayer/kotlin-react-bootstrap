@@ -29,14 +29,12 @@ import react.dom.div
 import react.setState
 import kotlin.random.Random
 
-class Alert : RComponent<Alert.Props, Alert.State>() {
-    override fun componentDidMount() {
-        setState {
-            state = States.SHOWN
-        }
+class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
+    override fun State.init(props: Props) {
+        state = States.SHOWN
     }
 
-    private fun onDismiss(@Suppress("UNUSED_PARAMETER") event: Event) {
+    private fun handleDismissle(@Suppress("UNUSED_PARAMETER") event: Event) {
         props.dismissible?.onClose?.apply {
             invoke()
         }
@@ -58,7 +56,7 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
         }
     }
 
-    private fun onTransitionEnd(@Suppress("UNUSED_PARAMETER") event: Event) {
+    private fun handleTransitionEnd(@Suppress("UNUSED_PARAMETER") event: Event) {
         // Only react, under the right circumstances
         if (props.dismissible?.fade == true && state.state == States.DISMISSING) {
             props.dismissible?.onClosed?.apply {
@@ -92,13 +90,13 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
 
                 if (dismissibleProps.fade == true) {
                     alertClasses.add(ClassNames.FADE)
-                    attrs.onTransitionEndFunction = this@Alert::onTransitionEnd
+                    attrs.onTransitionEndFunction = this@Alert::handleTransitionEnd
                 }
 
                 val closingElement = cloneElement<WithDomEvents>(
                     dismissibleProps.closeElement ?: RBuilder().close { },
                     jsObject {
-                        onClick = this@Alert::onDismiss
+                        onClick = this@Alert::handleDismissle
                     }
                 )
 
@@ -180,7 +178,7 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
             var fade: Boolean?
 
             /**
-             * This handler is called immediately when the [onDismiss] handler was called.
+             * This handler is called immediately when the [handleDismissle] handler was called.
              */
             var onClose: NoArgEventHandler?
 

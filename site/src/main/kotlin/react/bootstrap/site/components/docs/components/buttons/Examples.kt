@@ -2,16 +2,13 @@ package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
 import react.bootstrap.components.button.Button
-import react.bootstrap.components.button.button
-import react.bootstrap.site.components.docs.buildNestedName
+import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.dom.p
-import react.bootstrap.components.button.Button.Variants.Solid.Companion as SolidVariant
 
 internal class Examples : SectionComponent() {
     override val title: String = "Examples"
@@ -25,25 +22,30 @@ for more control.
             """
         }
         liveExample {
-            SolidVariant.all.forEach {
-                button(it) { +it::class.normalName }
-                +" "
-            }
+            Buttons.solid.danger { +Button.Variants.Solid.DANGER::class.normalName }
+            +" "
+            Buttons.solid.dark { +Button.Variants.Solid.DARK::class.normalName }
+            +" "
+            Buttons.solid.info { +Button.Variants.Solid.INFO::class.normalName }
+            +" "
+            Buttons.solid.light { +Button.Variants.Solid.LIGHT::class.normalName }
+            +" "
+            Buttons.solid.link { +Button.Variants.Solid.LINK::class.normalName }
+            +" "
+            Buttons.solid.primary { +Button.Variants.Solid.PRIMARY::class.normalName }
+            +" "
+            Buttons.solid.secondary { +Button.Variants.Solid.SECONDARY::class.normalName }
+            +" "
+            Buttons.solid.success { +Button.Variants.Solid.SUCCESS::class.normalName }
+            +" "
+            Buttons.solid.warning { +Button.Variants.Solid.WARNING::class.normalName }
+            +" "
         }
+        val parents = listOf(Buttons::class.simpleName!!, Buttons::solid.name)
         codeExample {
-            import("components.button.Button")
-            import("components.button.button")
+            import("components.button.Buttons")
             ln { }
-            SolidVariant.all.forEach {
-                val variant = buildNestedName(
-                    it::class,
-                    Button::class,
-                    Button.Variants::class,
-                    Button.Variants.Solid::class
-                )
-                ktIF(0, RBuilder::button, variant, "+\"${it::class.normalName}\"")
-                ln { +"+\" \"" }
-            }
+            // todo: code example
         }
     }
 }

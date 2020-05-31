@@ -8,7 +8,6 @@ import react.RProps
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.components.button.button
 import react.bootstrap.components.button.buttonGroup
 import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -22,6 +21,7 @@ import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
 import react.child
 import react.dom.br
+import react.dom.form
 import react.functionalComponent
 import react.getValue
 import react.setValue
@@ -41,24 +41,14 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
             """
         }
         liveExample {
-            button(
-                variant = Button.Variants.Solid.PRIMARY,
-                sizes = Button.Sizes.LG,
-                type = Button.Types.Link("#"),
-                active = true
-            ) {
+            Buttons.solid.primary(href = "#", active = true, sizes = Button.Sizes.LG) {
                 attrs {
                     onClick = { e -> e.preventDefault() }
                 }
                 +"Primary link"
             }
             +" "
-            button(
-                variant = Button.Variants.Solid.SECONDARY,
-                sizes = Button.Sizes.LG,
-                type = Button.Types.Link("#"),
-                active = true
-            ) {
+            Buttons.solid.secondary(href = "#", active = true, sizes = Button.Sizes.LG) {
                 attrs {
                     onClick = { e -> e.preventDefault() }
                 }
@@ -69,25 +59,7 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
             import("components.button.Button")
             import("components.button.button")
             ln { }
-            ktIF(
-                0,
-                RBuilder::button,
-                true,
-                "variant" to (Button.Variants.Solid.PRIMARY).ktN,
-                "sizes" to Button.Sizes.LG.ktN,
-                "type" to "${Button.Types.Link::class.nestedName}(\"#\")",
-                "active" to true
-            ) { "+\"Primary link\"" }
-            ln { +"+\" \"" }
-            ktIF(
-                0,
-                RBuilder::button,
-                true,
-                "variant" to (Button.Variants.Solid.SECONDARY).ktN,
-                "sizes" to Button.Sizes.LG.ktN,
-                "type" to "${Button.Types.Link::class.nestedName}(\"#\")",
-                "active" to true
-            ) { "+\"Link\"" }
+            // todo code eample
         }
         subSectionTitle("Toggleable button", section)
         Markdown {
@@ -106,23 +78,7 @@ Since we are working with react here, implementing a toggleable button is quite 
             ktB(0, "private val toggleableButton = functionalComponent<RProps>") {
                 ln(it) { +"var active by useState(false)" }
                 ln { }
-                ktF(
-                    it,
-                    RBuilder::button,
-                    false,
-                    "variants" to (Button.Variants.Solid.PRIMARY).ktN,
-                    "active" to "active"
-                ) {
-                    ktF(it, RElementBuilder<*>::attrs) {
-                        ln(it) { +"onClick = { active = !active }" }
-                    }
-                    ktB(it, "if (active)") {
-                        ln(it) { +"+\"I am toggled\"" }
-                    }
-                    ktB(it, "else") {
-                        ln(it) { +"+\"Toggle me!\"" }
-                    }
-                }
+                // todo code example
             }
         }
         subSectionTitle("Radio- and Checkbox Behaviour", section)
@@ -135,7 +91,7 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
         liveExample {
             buttonGroup(ButtonGroup.Behaviours.RADIOS) {
                 for (x in 1..3) {
-                    Buttons.solid.secondary(x == 1) {
+                    Buttons.solid.secondary(active = x == 1) {
                         attrs {
                             onActive = { console.log("Radio$x") }
                         }
@@ -166,9 +122,10 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
                     } else {
                         ""
                     }
+                    // todo replace "secondary" with reference (needs explicit type)
                     ktF(
                         it,
-                        buildNestedName(Buttons.solid::secondary.name, RBuilder::Buttons.name, Buttons::solid.name),
+                        buildNestedName("secondary", RBuilder::Buttons.name, Buttons::solid.name),
                         args
                     ) {
                         ktF(it, RElementBuilder<*>::attrs) {
@@ -182,12 +139,45 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
                 for (x in 1..3) {
                     ktF(
                         it,
-                        buildNestedName(Buttons.solid::secondary.name, RBuilder::Buttons.name, Buttons::solid.name),
+                        buildNestedName("secondary", RBuilder::Buttons.name, Buttons::solid.name),
                         ""
                     ) {
                         ktF(it, RElementBuilder<*>::attrs) {
                             ln(it) { +"onActive = { console.log(\"Checkbox$x\") }" }
                         }
+                    }
+                }
+            }
+        }
+        Markdown {
+            //language=Markdown
+            +"""
+Or you use actual checkboxes and radios and display them as buttons.
+            """
+        }
+        liveExample {
+            form() {
+                buttonGroup {
+                    for (x in 1..3) {
+                        Buttons.solid.secondary(
+                            value = "$x",
+                            title = "Radio$x",
+                            name = "radios",
+                            active = x == 1,
+                            type = Button.Types.Input.Type.RADIO
+                        ) { }
+                    }
+                }
+                // maybe have the inputs uncontrolled on piurpose
+                br { }
+                buttonGroup {
+                    for (x in 1..3) {
+                        Buttons.solid.secondary(
+                            value = "$x",
+                            title = "Checkbox$x",
+                            name = "checkboxes",
+                            type = Button.Types.Input.Type.CHECKBOX
+                        ) { }
                     }
                 }
             }

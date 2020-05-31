@@ -2,11 +2,10 @@ package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
 import react.bootstrap.components.button.Button
-import react.bootstrap.components.button.button
+import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
@@ -23,40 +22,15 @@ Make buttons look inactive by setting the `disabled` boolean attribute to any `b
             """
         }
         liveExample {
-            button(
-                variant = Button.Variants.Solid.PRIMARY,
-                sizes = Button.Sizes.LG,
-                disabled = true
-            ) { +"Primary button" }
+            Buttons.solid.primary(disabled = true, sizes = Button.Sizes.LG) { +"Primary Button" }
             +" "
-            button(
-                variant = Button.Variants.Solid.SECONDARY,
-                sizes = Button.Sizes.LG,
-                disabled = true
-            ) { +"Button" }
+            Buttons.solid.secondary(disabled = true, sizes = Button.Sizes.LG) { +"Button" }
         }
         codeExample {
             import("components.button.Button")
             import("components.button.button")
             ln { }
-            ktIF(
-                0,
-                RBuilder::button,
-                true,
-                "variant" to (Button.Variants.Solid.PRIMARY).ktN,
-                "sizes" to Button.Sizes.LG.ktN,
-                "disabled" to true
-            ) { "+\"Primary button\"" }
-            ln { +"+\" \"" }
-
-            ktIF(
-                0,
-                RBuilder::button,
-                true,
-                "variant" to (Button.Variants.Solid.SECONDARY).ktN,
-                "sizes" to Button.Sizes.LG.ktN,
-                "disabled" to true
-            ) { "+\"Button\"" }
+            // todo code example
         }
         Markdown {
             //language=Markdown
@@ -66,44 +40,15 @@ Usage for you stays the same, though:
             """
         }
         liveExample {
-            button(
-                variant = Button.Variants.Solid.PRIMARY,
-                sizes = Button.Sizes.LG,
-                type = Button.Types.Link("#"),
-                disabled = true
-            ) { +"Primary button" }
+            Buttons.solid.primary(href = "#", disabled = true, sizes = Button.Sizes.LG) { +"Primary Button" }
             +" "
-            button(
-                variant = Button.Variants.Solid.SECONDARY,
-                sizes = Button.Sizes.LG,
-                type = Button.Types.Link("#"),
-                disabled = true
-            ) { +"Button" }
+            Buttons.solid.secondary(href = "#", disabled = true, sizes = Button.Sizes.LG) { +"Button" }
         }
         codeExample {
             import("components.button.Button")
             import("components.button.button")
             ln { }
-            ktIF(
-                0,
-                RBuilder::button,
-                true,
-                "variant" to (Button.Variants.Solid.PRIMARY).ktN,
-                "sizes" to Button.Sizes.LG.ktN,
-                "type" to "${Button.Types.Link::class.nestedName}(\"#\")",
-                "disabled" to true
-            ) { "+\"Primary button\"" }
-            ln { +"+\" \"" }
-
-            ktIF(
-                0,
-                RBuilder::button,
-                true,
-                "variant" to (Button.Variants.Solid.SECONDARY).ktN,
-                "sizes" to Button.Sizes.LG.ktN,
-                "type" to "${Button.Types.Link::class.nestedName}(\"#\")",
-                "disabled" to true
-            ) { "+\"Button\"" }
+            // todo code example
         }
     }
 }

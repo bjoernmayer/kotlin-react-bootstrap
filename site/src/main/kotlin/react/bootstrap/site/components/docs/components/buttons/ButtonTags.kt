@@ -3,14 +3,12 @@ package react.bootstrap.site.components.docs.components.buttons
 import kotlinx.html.ButtonType
 import react.RBuilder
 import react.bootstrap.components.button.Button
-import react.bootstrap.components.button.button
+import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
-import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.external.Markdown
 
 internal class ButtonTags : SectionComponent() {
@@ -27,83 +25,26 @@ the `input` element cannot have child elements.__
             """
         }
         liveExample {
-            button(
-                variant = Button.Variants.Solid.PRIMARY,
-                type = Button.Types.Link(href = "#")
-            ) { +"Link" }
+            Buttons.solid.primary(href = "#") { +"Link" }
             +" "
-            button(
-                variant = Button.Variants.Solid.PRIMARY,
-                type = Button.Types.Button(type = ButtonType.submit)
-            ) { +"Button" }
+            Buttons.solid.primary(buttonType = ButtonType.submit) { +"Button" }
             +" "
-            button(
-                variant = Button.Variants.Solid.PRIMARY,
-                type = Button.Types.Input(Button.Types.Input.Type.BUTTON, value = "Input")
-            ) { }
+            Buttons.solid.primary(value = "Input") { +"Input" }
             +" "
-            button(
-                variant = Button.Variants.Solid.PRIMARY,
-                type = Button.Types.Input(Button.Types.Input.Type.SUBMIT, value = "Submit")
-            ) { }
+            Buttons.solid.primary(value = "Submit", type = Button.Types.Input.Type.SUBMIT) { }
             +" "
-            button(
-                variant = Button.Variants.Solid.PRIMARY,
-                type = Button.Types.Input(Button.Types.Input.Type.RESET, value = "Reset")
-            ) { }
+            Buttons.solid.primary(value = "Reset", type = Button.Types.Input.Type.RESET) { }
+            +" "
+            Buttons.solid.primary(value = "true", title="Checkbox", type = Button.Types.Input.Type.CHECKBOX) { }
+            +" "
+            Buttons.solid.primary(value = "true", title="Radio", type = Button.Types.Input.Type.RADIO) { }
         }
         codeExample {
             import("button.Button")
             import("button.Button.button")
             ln { }
-            val prim = (Button.Variants.Solid.PRIMARY).ktN
-            val link = Button.Types.Link::class.nestedName
-            val input = Button.Types.Input::class.nestedName
-            val button = Button.Types.Button::class.nestedName
 
-            ktIF(
-                0,
-                RBuilder::button,
-                true,
-                "variant" to prim,
-                "type" to "$link(href = \"#\")"
-            ) { "+\"Link\"" }
-            ln { +"+\" \"" }
-
-            ktIF(
-                0,
-                RBuilder::button,
-                true,
-                "variant" to prim,
-                "type" to "$button(type = ${ButtonType.submit.kt})"
-            ) { "+\"Button\"" }
-            ln { +"+\" \"" }
-
-            ktIF(
-                0,
-                RBuilder::button,
-                true,
-                "variant" to prim,
-                "type" to "$input(${Button.Types.Input.Type.BUTTON.ktN}, value = \"Input\")"
-            ) { "" }
-            ln { +"+\" \"" }
-
-            ktIF(
-                0,
-                RBuilder::button,
-                true,
-                "variant" to prim,
-                "type" to "$input(${Button.Types.Input.Type.SUBMIT.ktN}, value = \"Submit\")"
-            ) { "" }
-            ln { +"+\" \"" }
-
-            ktIF(
-                0,
-                RBuilder::button,
-                true,
-                "variant" to prim,
-                "type" to "$input(${Button.Types.Input.Type.RESET.ktN}, value = \"Reset\")"
-            ) { "" }
+           // todo add code example
         }
     }
 }

@@ -1,11 +1,14 @@
 package react.bootstrap.components.button
 
+import kotlinext.js.clone
 import kotlinx.html.role
+import org.w3c.dom.events.Event
 import react.RBuilder
 import react.RComponent
 import react.RState
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.ariaLabel
 import react.dom.WithClassName
 import react.dom.div
@@ -23,7 +26,11 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
         } ?: emptySet()
     }
 
-    private fun buttonClicked(index: Int) {
+    private fun handleButtonClick(index: Int, event: Event, originalEventHandler: EventHandler?) {
+        if (originalEventHandler is EventHandler) {
+            originalEventHandler.invoke(event)
+        }
+
         setState {
             if (props.behaviour == Behaviours.CHECKBOXES) {
                 // Already checked. Remove from active Buttons
@@ -52,15 +59,17 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
                 }
             }
             props.buttons?.forEachIndexed { index, buttonProps ->
-                child(Button::class.rClass, buttonProps) {
+                // The clone is important, as otherwise the buttonProps inside the props get modified
+                child(Button::class.rClass, clone(buttonProps)) {
                     attrs {
                         onClick = {
-                            buttonClicked(index)
+                            handleButtonClick(index, it, buttonProps.onClick)
                         }
                         active = state.activeButtons?.contains(index)
                     }
                 }
             }
+            children()
         }
     }
 

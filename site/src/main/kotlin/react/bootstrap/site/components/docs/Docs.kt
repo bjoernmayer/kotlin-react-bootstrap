@@ -35,13 +35,13 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
         state.sections = mutableSetOf()
     }
 
-    private fun onClearSections() {
+    private fun handleClearSections() {
         setState {
             sections.clear()
         }
     }
 
-    private fun onAddSection(section: Section) {
+    private fun handleAddSection(section: Section) {
         setState {
             if (section in sections) {
                 // Todo: Use a Map or something
@@ -83,8 +83,8 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
                                 attrs {
                                     from(it)
                                     match.params.category = category
-                                    match.params.onNewPage = this@Docs::onClearSections
-                                    match.params.onNewSection = this@Docs::onAddSection
+                                    match.params.onNewPage = this@Docs::handleClearSections
+                                    match.params.onNewSection = this@Docs::handleAddSection
                                 }
                             }
                         }

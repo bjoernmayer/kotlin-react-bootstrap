@@ -2,12 +2,10 @@ package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
 import react.bootstrap.components.button.Button.Sizes
-import react.bootstrap.components.button.Button.Variants
-import react.bootstrap.components.button.button
+import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
@@ -25,50 +23,26 @@ Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)
             """
         }
         liveExample {
-            button(variant = Variants.Solid.PRIMARY, sizes = Sizes.LG) { +"Large button" }
+            Buttons.solid.primary(sizes = Sizes.LG) { +"Large button" }
             +" "
-            button(variant = Variants.Solid.SECONDARY, sizes = Sizes.LG) { +"Large button" }
+            Buttons.solid.secondary(sizes = Sizes.LG) { +"Large button" }
         }
         codeExample {
             import("components.button.Button")
             import("components.button.button")
             ln { }
-            ktIF(
-                0,
-                RBuilder::button,
-                "variant" to (Variants.Solid.PRIMARY).ktN,
-                "sizes" to Sizes.LG.ktN
-            ) { "+\"Large button\"" }
-            ln { +"+\" \"" }
-            ktIF(
-                0,
-                RBuilder::button,
-                "variant" to (Variants.Solid.SECONDARY).ktN,
-                "sizes" to Sizes.LG.ktN
-            ) { "+\"Large button\"" }
+            // todo code example
         }
         liveExample {
-            button(variant = Variants.Solid.PRIMARY, sizes = Sizes.SM) { +"Small button" }
+            Buttons.solid.primary(sizes = Sizes.SM) { +"Small button" }
             +" "
-            button(variant = Variants.Solid.SECONDARY, sizes = Sizes.SM) { +"Small button" }
+            Buttons.solid.secondary(sizes = Sizes.SM) { +"Small button" }
         }
         codeExample {
             import("components.button.Button")
             import("components.button.button")
             ln { }
-            ktIF(
-                0,
-                RBuilder::button,
-                "variant" to (Variants.Solid.PRIMARY).ktN,
-                "sizes" to Sizes.SM.ktN
-            ) { "+\"Small button\"" }
-            ln { +"+\" \"" }
-            ktIF(
-                0,
-                RBuilder::button,
-                "variant" to (Variants.Solid.SECONDARY).ktN,
-                "sizes" to Sizes.SM.ktN
-            ) { "+\"Small button\"" }
+            // todo code example
         }
         Markdown {
             //language=Markdown
@@ -78,29 +52,15 @@ Create block level buttons—those that span the full width of a parent—by add
             """
         }
         liveExample {
-            button(variant = Variants.Solid.PRIMARY, sizes = Sizes.LG, blockSized = true) { +"Block level button" }
+            Buttons.solid.primary(sizes = Sizes.LG, blockSized = true) { +"Block level button" }
             +" "
-            button(variant = Variants.Solid.SECONDARY, sizes = Sizes.LG, blockSized = true) { +"Block level button" }
+            Buttons.solid.secondary(sizes = Sizes.LG, blockSized = true) { +"Block level button" }
         }
         codeExample {
             import("components.button.Button")
             import("components.button.button")
             ln { }
-            ktIF(
-                0,
-                RBuilder::button,
-                "variant" to (Variants.Solid.PRIMARY).ktN,
-                "sizes" to Sizes.LG.ktN,
-                "blockSized" to true
-            ) { "+\"Block level button\"" }
-            ln { +"+\" \"" }
-            ktIF(
-                0,
-                RBuilder::button,
-                "variant" to (Variants.Solid.SECONDARY).ktN,
-                "sizes" to Sizes.LG.ktN,
-                "blockSized" to true
-            ) { "+\"Block level button\"" }
+            // todo code example
         }
     }
 }

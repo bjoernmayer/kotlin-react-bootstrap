@@ -8,19 +8,6 @@ import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.site.components.docs.buildNestedName
 import kotlin.reflect.KClass
 
-internal val Solid.Companion.all: Set<Variants>
-    get() = setOf(
-        DANGER,
-        DARK,
-        INFO,
-        LIGHT,
-        LINK,
-        PRIMARY,
-        SECONDARY,
-        SUCCESS,
-        WARNING
-    )
-
 internal val Solid.DANGER.ktN: String
     get() = buildNestedName(this::class, Button::class, Variants::class, Solid::class)
 
@@ -83,6 +70,9 @@ internal val Outline.SUCCESS.ktN: String
 
 internal val Outline.WARNING.ktN: String
     get() = buildNestedName(this::class, Button::class, Variants::class, Outline::class)
+
+internal val KClass<out Outline>.nestedName
+    get() = buildNestedName(this.simpleName!!, Button::class, Variants::class)
 
 internal val KClass<out Variants>.normalName
     get() = simpleName!!.toLowerCase().capitalize()
