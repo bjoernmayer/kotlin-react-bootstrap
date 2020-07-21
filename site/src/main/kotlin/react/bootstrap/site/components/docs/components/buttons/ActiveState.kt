@@ -21,7 +21,6 @@ import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
 import react.child
 import react.dom.br
-import react.dom.form
 import react.functionalComponent
 import react.getValue
 import react.setValue
@@ -152,35 +151,39 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
         Markdown {
             //language=Markdown
             +"""
-Or you use actual checkboxes and radios and display them as buttons.
+Or you use actual checkboxes and radios and display them as buttons. If you do not like the looks of a `buttonGroup` you
+can set `${ButtonGroup.Props::renderAsGroup.name}` to `false`.
             """
         }
         liveExample {
-            form() {
-                buttonGroup {
-                    for (x in 1..3) {
+            buttonGroup(renderAsGroup = false) {
+                for (x in 1..6) {
+                    if (x % 2 == 0) {
                         Buttons.solid.secondary(
-                            value = "$x",
-                            title = "Radio$x",
+                            value = "${x / 2}",
+                            title = "Actual Checkbox${x / 2}",
+                            name = "checkboxes",
+                            type = Button.Types.Input.Type.CHECKBOX
+                        ) { }
+                        +" "
+                    } else {
+                        Buttons.solid.secondary(
+                            value = "${(x+1) / 2}",
+                            title = "Actual Radio${(x+1) / 2}",
                             name = "radios",
                             active = x == 1,
                             type = Button.Types.Input.Type.RADIO
                         ) { }
-                    }
-                }
-                // maybe have the inputs uncontrolled on piurpose
-                br { }
-                buttonGroup {
-                    for (x in 1..3) {
-                        Buttons.solid.secondary(
-                            value = "$x",
-                            title = "Checkbox$x",
-                            name = "checkboxes",
-                            type = Button.Types.Input.Type.CHECKBOX
-                        ) { }
+                        +" "
                     }
                 }
             }
+        }
+        codeExample {
+            import("components.button.ButtonGroup")
+            import("components.button.Buttons")
+            ln { }
+            // todo code example
         }
     }
 

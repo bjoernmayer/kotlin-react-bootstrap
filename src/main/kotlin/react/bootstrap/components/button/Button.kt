@@ -32,7 +32,6 @@ import react.bootstrap.lib.transferDomEvents
 import react.dom.WithClassName
 import react.dom.a
 import react.dom.button
-import react.dom.defaultValue
 import react.dom.input
 import react.dom.label
 import react.setState
@@ -137,6 +136,7 @@ class Button(props: Props) : RComponent<Button.Props, Button.State>(props) {
 
                                     value = type.value
 
+                                    // Hide the box/circle
                                     style = kotlinext.js.js {
                                         position = "absolute"
                                         clip = "rect(0,0,0,0)"

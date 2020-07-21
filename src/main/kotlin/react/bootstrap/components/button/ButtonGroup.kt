@@ -37,23 +37,77 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
             originalEventHandler.invoke(event)
         }
 
-        setState {
-            if (props.behaviour == Behaviours.CHECKBOXES) {
-                // Already checked. Remove from active Buttons
-                if (activeButtons?.contains(index) == true) {
-                    activeButtons = activeButtons?.filterNot { it == index } ?: emptySet()
-
-                    return@setState
-                }
-
-                activeButtons = activeButtons?.toMutableSet()?.apply {
-                    add(index)
-                } ?: setOf(index)
-            }
-
-            if (props.behaviour == Behaviours.RADIOS) {
+        if (props.behaviour == Behaviours.RADIOS) {
+            setState {
                 activeButtons = setOf(index)
             }
+        }
+
+        if (props.behaviour == Behaviours.CHECKBOXES) {
+            handleCheckboxClick(index)
+        }
+
+        // Behaviour was not given. Buttons might be of type Radio or Checkbox
+        if (props.behaviour == null) {
+            (props.buttons?.get(index) ?: error("Button props not found.")).also { clickedButtonProps ->
+                if (clickedButtonProps.type !is Button.Types.Input) {
+                    return@also
+                }
+
+                val inputType = (clickedButtonProps.type as Button.Types.Input).type
+                if (inputType != Button.Types.Input.Type.RADIO && inputType != Button.Types.Input.Type.CHECKBOX) {
+                    return@also
+                }
+
+                if (inputType == Button.Types.Input.Type.CHECKBOX) {
+                    handleCheckboxClick(index)
+                    return@also
+                }
+
+                setState {
+                    // Behaviour is not given. Gather already checked Checkboxes and Radios that do not have the same
+                    // name as the clicked one. Then add the clicked on to set of active buttons
+                    activeButtons = props.buttons!!.mapNotNull { (key, buttonProps) ->
+                        if (activeButtons?.contains(key) != true) {
+                            return@mapNotNull null
+                        }
+
+                        if (buttonProps.type !is Button.Types.Input) {
+                            return@mapNotNull key
+                        }
+
+                        if ((buttonProps.type as Button.Types.Input).type != Button.Types.Input.Type.RADIO) {
+                            return@mapNotNull key
+                        }
+
+                        if (
+                            (clickedButtonProps.type as Button.Types.Input).name !=
+                            (buttonProps.type as Button.Types.Input).name
+                        ) {
+                            return@mapNotNull key
+                        }
+
+                        null
+                    }.toMutableSet().apply {
+                        add(index)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun handleCheckboxClick(index: Int) {
+        setState {
+            // Already checked. Remove from active Buttons
+            if (activeButtons?.contains(index) == true) {
+                activeButtons = activeButtons?.filterNot { it == index } ?: emptySet()
+
+                return@setState
+            }
+
+            activeButtons = activeButtons?.toMutableSet()?.apply {
+                add(index)
+            } ?: setOf(index)
         }
     }
 
@@ -80,13 +134,13 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
                     return@forEachIndexed
                 }
 
-                props.buttons?.let {
-                    val buttonProps = it[index] ?: error("Button props not found.")
+                props.buttons?.let { buttonPropsMap ->
+                    val buttonProps = buttonPropsMap[index] ?: error("Button props not found.")
 
                     child(Button::class.rClass, clone(buttonProps)) {
                         attrs {
-                            onClick = {
-                                handleButtonClick(index, it, buttonProps.onClick)
+                            onClick = { event ->
+                                handleButtonClick(index, event, buttonProps.onClick)
                             }
                             active = state.activeButtons?.contains(index)
                         }
