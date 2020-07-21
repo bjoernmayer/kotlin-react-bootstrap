@@ -841,37 +841,34 @@ fun RBuilder.buttonGroup(
     behaviour: ButtonGroup.Behaviours? = null,
     label: String? = null,
     classes: String? = null,
+    renderAsGroup: Boolean = true,
     block: RHandler<ButtonGroup.Props>
 ): ReactElement {
-    val buttons: List<Button.Props>? = if (behaviour !== null) {
+    val builder = RElementBuilder<ButtonGroup.Props>(jsObject())
 
-        val builder = RElementBuilder<ButtonGroup.Props>(jsObject())
+    builder.block()
 
-        builder.block()
+    // Gather buttons. They are rendered in a custom way
+    val buttons: Map<Int, Button.Props> = builder.childList.mapIndexedNotNull { index, child ->
+        val element = child.asJsObject()
 
-        builder.childList.mapNotNull { child ->
-            val element = child.asJsObject()
-
-            if (!element.hasOwnProperty(ReactElement::props.name)) {
-                return@mapNotNull null
-            }
-
-            val reactElement = element.unsafeCast<ReactElement>()
-            val elProps = reactElement.props.asJsObject()
-
-            if (!elProps.hasOwnProperty(WithTypeFlag<*>::krbType.name)) {
-                return@mapNotNull null
-            }
-
-            if (elProps.unsafeCast<WithTypeFlag<*>>().krbType == Button::class) {
-                elProps.unsafeCast<Button.Props>().toMutable()
-            } else {
-                null
-            }
+        if (!element.hasOwnProperty(ReactElement::props.name)) {
+            return@mapIndexedNotNull null
         }
-    } else {
-        null
-    }
+
+        val reactElement = element.unsafeCast<ReactElement>()
+        val elProps = reactElement.props.asJsObject()
+
+        if (!elProps.hasOwnProperty(WithTypeFlag<*>::krbType.name)) {
+            return@mapIndexedNotNull null
+        }
+
+        if (elProps.unsafeCast<WithTypeFlag<*>>().krbType == Button::class) {
+            index to elProps.unsafeCast<Button.Props>().toMutable()
+        } else {
+            null
+        }
+    }.toMap()
 
     return child(ButtonGroup::class) {
         attrs {
@@ -879,9 +876,8 @@ fun RBuilder.buttonGroup(
             this.label = label
             this.className = classes
             this.buttons = buttons
+            this.renderAsGroup = renderAsGroup
         }
-        if (behaviour === null) {
-            block()
-        }
+        block()
     }
 }

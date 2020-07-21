@@ -1,15 +1,21 @@
 package react.bootstrap.components.button
 
+import kotlinext.js.asJsObject
 import kotlinext.js.clone
 import kotlinx.html.role
 import org.w3c.dom.events.Event
+import react.Child
+import react.Children
 import react.RBuilder
 import react.RComponent
 import react.RState
+import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.EventHandler
+import react.bootstrap.lib.WithTypeFlag
 import react.bootstrap.lib.ariaLabel
+import react.children
 import react.dom.WithClassName
 import react.dom.div
 import react.rClass
@@ -17,7 +23,7 @@ import react.setState
 
 class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.State>(props) {
     override fun State.init(props: Props) {
-        activeButtons = props.buttons?.mapIndexedNotNull { index, buttonProps ->
+        activeButtons = props.buttons?.mapNotNull { (index, buttonProps) ->
             if (buttonProps.active == true) {
                 index
             } else {
@@ -43,14 +49,22 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
                 activeButtons = activeButtons?.toMutableSet()?.apply {
                     add(index)
                 } ?: setOf(index)
-            } else {
+            }
+
+            if (props.behaviour == Behaviours.RADIOS) {
                 activeButtons = setOf(index)
             }
         }
     }
 
     override fun RBuilder.render() {
-        div(classes = props.className.appendClass(ClassNames.BTN_GROUP)) {
+        val classes = if (props.renderAsGroup == true) {
+            props.className.appendClass(ClassNames.BTN_GROUP)
+        } else {
+            props.className
+        }
+
+        div(classes = classes) {
             attrs {
                 role = "group"
 
@@ -58,25 +72,52 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
                     ariaLabel = it
                 }
             }
-            props.buttons?.forEachIndexed { index, buttonProps ->
-                // The clone is important, as otherwise the buttonProps inside the props get modified
-                child(Button::class.rClass, clone(buttonProps)) {
-                    attrs {
-                        onClick = {
-                            handleButtonClick(index, it, buttonProps.onClick)
+
+            Children.toArray(props.children).forEachIndexed { index, child ->
+                if (child.isButton().not()) {
+                    childList.add(child)
+
+                    return@forEachIndexed
+                }
+
+                props.buttons?.let {
+                    val buttonProps = it[index] ?: error("Button props not found.")
+
+                    child(Button::class.rClass, clone(buttonProps)) {
+                        attrs {
+                            onClick = {
+                                handleButtonClick(index, it, buttonProps.onClick)
+                            }
+                            active = state.activeButtons?.contains(index)
                         }
-                        active = state.activeButtons?.contains(index)
                     }
                 }
             }
-            children()
         }
+    }
+
+    private fun Child.isButton(): Boolean {
+        val element = this.asJsObject()
+
+        if (!element.hasOwnProperty(ReactElement::props.name)) {
+            return false
+        }
+
+        val reactElement = element.unsafeCast<ReactElement>()
+        val elProps = reactElement.props.asJsObject()
+
+        if (!elProps.hasOwnProperty(WithTypeFlag<*>::krbType.name)) {
+            return false
+        }
+
+        return elProps.unsafeCast<WithTypeFlag<*>>().krbType == Button::class
     }
 
     interface Props : WithClassName {
         var label: String?
         var behaviour: Behaviours?
-        var buttons: List<Button.Props>?
+        var buttons: Map<Int, Button.Props>?
+        var renderAsGroup: Boolean?
     }
 
     interface State : RState {
