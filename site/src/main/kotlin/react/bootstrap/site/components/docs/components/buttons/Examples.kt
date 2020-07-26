@@ -3,11 +3,10 @@ package react.bootstrap.site.components.docs.components.buttons
 import react.RBuilder
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.Buttons
+import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.dom.p
 
 internal class Examples : SectionComponent() {
@@ -41,11 +40,26 @@ for more control.
             Buttons.solid.warning { +Button.Variants.Solid.WARNING::class.normalName }
             +" "
         }
-        val parents = listOf(Buttons::class.simpleName!!, Buttons::solid.name)
+
         codeExample {
-            import("components.button.Buttons")
+            importButtonsBuilder()
             ln { }
-            // todo: code example
+            mapOf(
+                solidDangerFun to Button.Variants.Solid.DANGER,
+                solidDarkFun to Button.Variants.Solid.DARK,
+                solidInfoFun to Button.Variants.Solid.INFO,
+                solidLightFun to Button.Variants.Solid.LIGHT,
+                solidLinkFun to Button.Variants.Solid.LINK,
+                solidPrimaryFun to Button.Variants.Solid.PRIMARY,
+                solidSecondaryFun to Button.Variants.Solid.SECONDARY,
+                solidSuccessFun to Button.Variants.Solid.SUCCESS,
+                solidWarningFun to Button.Variants.Solid.WARNING
+            ).forEach {
+                ktFun(it.key, solidButtonBuilderParents, style = FunStyle.INLINE_BLOCK) {
+                    string(it.value::class.normalName)
+                }
+                ln(" ")
+            }
         }
     }
 }
