@@ -3,11 +3,10 @@ package react.bootstrap.site.components.docs.components.buttons
 import react.RBuilder
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.Buttons
+import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
 
 internal class OutlineButtons : SectionComponent() {
@@ -40,11 +39,25 @@ In need of a button, but not the hefty background colors they bring? Use the
             Buttons.outline.warning { +Button.Variants.Outline.WARNING::class.normalName }
             +" "
         }
+
         codeExample {
-            import("button.Button")
-            import("button.button")
+            importButtonsBuilder()
             ln { }
-            // todo code example
+            mapOf(
+                outlineDangerFun to Button.Variants.Outline.DANGER,
+                outlineDarkFun to Button.Variants.Outline.DARK,
+                outlineInfoFun to Button.Variants.Outline.INFO,
+                outlineLightFun to Button.Variants.Outline.LIGHT,
+                outlinePrimaryFun to Button.Variants.Outline.PRIMARY,
+                outlineSecondaryFun to Button.Variants.Outline.SECONDARY,
+                outlineSuccessFun to Button.Variants.Outline.SUCCESS,
+                outlineWarningFun to Button.Variants.Outline.WARNING
+            ).forEach {
+                ktFun(it.key, outlineButtonBuilderParents, style = FunStyle.INLINE_BLOCK) {
+                    string(it.value::class.normalName)
+                }
+                ln(" ")
+            }
         }
     }
 }
