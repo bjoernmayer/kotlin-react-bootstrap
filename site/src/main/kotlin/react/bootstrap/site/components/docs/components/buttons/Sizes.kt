@@ -27,6 +27,7 @@ Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)
             Buttons.solid.secondary(sizes = Sizes.LG) { +"Large button" }
         }
         codeExample {
+            import("components.button.Button")
             importButtonsBuilder()
             ln { }
             ktFun(
@@ -53,6 +54,7 @@ Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)
             Buttons.solid.secondary(sizes = Sizes.SM) { +"Small button" }
         }
         codeExample {
+            import("components.button.Button")
             importButtonsBuilder()
             ln { }
             ktFun(
@@ -86,6 +88,7 @@ Create block level buttons—those that span the full width of a parent—by add
             Buttons.solid.secondary(sizes = Sizes.LG, blockSized = true) { +"Block level button" }
         }
         codeExample {
+            import("components.button.Button")
             importButtonsBuilder()
             ln { }
             ktFun(
