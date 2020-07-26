@@ -3,11 +3,10 @@ package react.bootstrap.site.components.docs.components.buttons
 import react.RBuilder
 import react.bootstrap.components.button.Button.Sizes
 import react.bootstrap.components.button.Buttons
+import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
 
 internal class Sizes : SectionComponent() {
@@ -28,10 +27,25 @@ Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)
             Buttons.solid.secondary(sizes = Sizes.LG) { +"Large button" }
         }
         codeExample {
-            import("components.button.Button")
-            import("components.button.button")
+            importButtonsBuilder()
             ln { }
-            // todo code example
+            ktFun(
+                solidPrimaryFun,
+                parents = solidButtonBuilderParents,
+                style = FunStyle.INLINE_BLOCK,
+                args = mapOf("sizes" to Sizes.LG.ktN)
+            ) {
+                string("Large button")
+            }
+            ln(" ")
+            ktFun(
+                solidSecondaryFun,
+                parents = solidButtonBuilderParents,
+                style = FunStyle.INLINE_BLOCK,
+                args = mapOf("sizes" to Sizes.LG.ktN)
+            ) {
+                string("Large button")
+            }
         }
         liveExample {
             Buttons.solid.primary(sizes = Sizes.SM) { +"Small button" }
@@ -39,10 +53,25 @@ Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)
             Buttons.solid.secondary(sizes = Sizes.SM) { +"Small button" }
         }
         codeExample {
-            import("components.button.Button")
-            import("components.button.button")
+            importButtonsBuilder()
             ln { }
-            // todo code example
+            ktFun(
+                solidPrimaryFun,
+                parents = solidButtonBuilderParents,
+                style = FunStyle.INLINE_BLOCK,
+                args = mapOf("sizes" to Sizes.SM.ktN)
+            ) {
+                string("Small button")
+            }
+            ln(" ")
+            ktFun(
+                solidSecondaryFun,
+                parents = solidButtonBuilderParents,
+                style = FunStyle.INLINE_BLOCK,
+                args = mapOf("sizes" to Sizes.SM.ktN)
+            ) {
+                string("Small button")
+            }
         }
         Markdown {
             //language=Markdown
@@ -57,10 +86,25 @@ Create block level buttons—those that span the full width of a parent—by add
             Buttons.solid.secondary(sizes = Sizes.LG, blockSized = true) { +"Block level button" }
         }
         codeExample {
-            import("components.button.Button")
-            import("components.button.button")
+            importButtonsBuilder()
             ln { }
-            // todo code example
+            ktFun(
+                solidPrimaryFun,
+                parents = solidButtonBuilderParents,
+                style = FunStyle.INLINE_BLOCK,
+                args = mapOf("sizes" to Sizes.LG.ktN, "blockSized" to true)
+            ) {
+                string("Block level button")
+            }
+            ln(" ")
+            ktFun(
+                solidSecondaryFun,
+                parents = solidButtonBuilderParents,
+                style = FunStyle.INLINE_BLOCK,
+                args = mapOf("sizes" to Sizes.LG.ktN, "blockSized" to true)
+            ) {
+                string("Block level button")
+            }
         }
     }
 }
