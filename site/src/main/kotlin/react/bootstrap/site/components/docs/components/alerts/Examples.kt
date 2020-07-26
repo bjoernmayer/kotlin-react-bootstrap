@@ -4,6 +4,7 @@ package react.bootstrap.site.components.docs.components.alerts
 
 import kotlinx.html.currentTimeMillis
 import react.RBuilder
+import react.RElementBuilder
 import react.RProps
 import react.bootstrap.components.alert.Alert
 import react.bootstrap.components.alert.alert
@@ -11,21 +12,20 @@ import react.bootstrap.components.alert.closingElement
 import react.bootstrap.components.alert.dismissibleAlert
 import react.bootstrap.components.alert.h4
 import react.bootstrap.components.alert.link
-import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.components.buttons.ktN
+import react.bootstrap.lib.WithDomEvents
+import react.bootstrap.site.components.docs.components.buttons.outlineButtonBuilderParents
+import react.bootstrap.site.components.docs.components.buttons.outlineDangerFun
+import react.bootstrap.site.components.docs.components.buttons.solidButtonBuilderParents
+import react.bootstrap.site.components.docs.components.buttons.solidInfoFun
+import react.bootstrap.site.components.docs.components.buttons.solidSuccessFun
+import react.bootstrap.site.components.docs.fixings.FunStyle
+import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
-import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.importClassNames
-import react.bootstrap.site.components.docs.fixings.ktB
-import react.bootstrap.site.components.docs.fixings.ktF
-import react.bootstrap.site.components.docs.fixings.ktIB
-import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.external.Markdown
 import react.child
@@ -38,6 +38,7 @@ import react.functionalComponent
 import react.getValue
 import react.setValue
 import react.useState
+import kotlin.js.Console
 
 internal class Examples : SectionComponent() {
     override val title: String = "Examples"
@@ -63,8 +64,8 @@ eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.kt}`).
             import("components.alert.$alertName")
             ln { }
             Alert.Variants.values().iterator().forEach { variant ->
-                ktF(0, alertName, variant.kt) {
-                    ln(it) { +"+\"A simple ${variant.name.toLowerCase()} alert-check it out!\"" }
+                ktFun(RBuilder::alert, args = mapOf(null to variant.kt)) {
+                    ln("A simple ${variant.name.toLowerCase()} alert-check it out!")
                 }
             }
         }
@@ -90,11 +91,17 @@ colored links within any alert.
             import("components.alert.$alertName")
             ln { }
             Alert.Variants.values().iterator().forEach { variant ->
-                ktF(0, alertName, variant.kt) {
-                    ln(it) { +"+\"A simple ${variant.name.toLowerCase()} alert with \"" }
-                    ln(it) {
-                        +"$linkName { a(href = \"#\") { +\"another example link\" } }; +\". Give it a"
-                        +"click if you like.\""
+                ktFun(RBuilder::alert, args = mapOf(null to variant.kt)) {
+                    ln("A simple ${variant.name.toLowerCase()} alert with ")
+                    ktFun(RElementBuilder<Alert.Props>::link, style = FunStyle.INLINE) {
+                        ktFun(
+                            RBuilder::a,
+                            style = FunStyle.INLINE,
+                            args = mapOf("href" to Quoted("#"))
+                        ) {
+                            string("an example link")
+                        }
+                        +"; +\". Give it a click if you like.\""
                     }
                 }
             }
@@ -126,24 +133,20 @@ Aww yeah, you successfully read this important alert message. This example text 
             import("components.alert.h4")
             importClassNames()
             ln { }
-            ktF(0, alertName, Alert.Variants.SUCCESS.kt) {
-                ktIB(it, "h4", "+\"Well done!\\")
-                ktB(it, "p") {
-                    ln(it) { +"+\"\"\"" }
-                    ln(it + 1) {
-                        +"Aww yeah, you successfully read this important alert message. This example text is going to"
-                        +" run a"
-                    }
-                    ln(it + 1) {
-                        +"bit longer so that you can see how spacing within an alert works with this kind of content."
-                    }
-                    ln(it) { +"\"\"\".trimIndent()" }
+            ktFun(RBuilder::alert, args = mapOf(null to Alert.Variants.SUCCESS.kt)) {
+                ktFun(RBuilder::h4, style = FunStyle.INLINE_BLOCK) {
+                    string("Well done!")
                 }
-                ktIF(it, RBuilder::hr, "")
-                ktF(it, "p", "\"\${${ClassNames.MB_0.kt}}\"") {
-                    ln(it) {
-                        +"+\"Whenever you need to, be sure to use margin utilities to keep things nice and tidy.\""
-                    }
+                ktFun(RBuilder::p) {
+                    multiline(
+                        "Aww yeah, you successfully read this important alert message. This example text is going to " +
+                            "run a bit longer ",
+                        "so that you can see how spacing within an alert works with this kind of content."
+                    )
+                }
+                ktFun(RBuilder::hr, style = FunStyle.INLINE_BLOCK) { }
+                ktFun(RBuilder::p, args = mapOf(null to Quoted("\${${ClassNames.MB_0.kt}}"))) {
+                    ln("Whenever you need to, be sure to use margin utilities to keep things nice and tidy.")
                 }
             }
         }
@@ -173,22 +176,42 @@ Use `$dismissibleAlertName` to create a dismissible alert.
             import("components.alert.Alert")
             import("components.alert.$dismissibleAlertName")
             ln { }
-            ktF(0, dismissibleAlertName, "variant" to Alert.Variants.WARNING.kt, "fade" to "true") {
-                ktB(it, "attrs") {
-                    ktB(it, "${Alert.Props::dismissible.name}?.apply") {
-                        ktB(it, Alert.Props.Dismissible::onClose.name) {
-                            ln(it) {
-                                +"console.log(\"Close on Alert was clicked. Timestamp: \${currentTimeMillis()}\")"
-                            }
+            ktFun(RBuilder::dismissibleAlert, args = mapOf("variant" to Alert.Variants.WARNING.kt, "fade" to "true")) {
+                ktFun(RElementBuilder<RProps>::attrs) {
+                    ktFun(Any::apply, listOf("${Alert.Props::dismissible.name}?")) {
+                        ktBlock("${Alert.Props.Dismissible::onClose.name} =") {
+                            ktFun(
+                                Console::log,
+                                listOf("console"),
+                                style = FunStyle.INLINE,
+                                args = mapOf(
+                                    null to Quoted(
+                                        "Close on Alert was clicked. Timestamp: \${currentTimeMillis()}"
+                                    )
+                                )
+                            )
                         }
-                        ktB(it, Alert.Props.Dismissible::onClosed.name) {
-                            ln(it) {
-                                +"console.log(\"Close on Alert was clicked. Timestamp: \${currentTimeMillis()}\")"
-                            }
+                        ktBlock("${Alert.Props.Dismissible::onClosed.name} =") {
+                            ktFun(
+                                Console::log,
+                                listOf("console"),
+                                style = FunStyle.INLINE,
+                                args = mapOf(
+                                    null to Quoted(
+                                        "Alert was dismissed. Timestamp: \${currentTimeMillis()}"
+                                    )
+                                )
+                            )
                         }
                     }
                 }
-                ln(it) { +"strong { +\"Holy guacamole!\" }; +\" You should check in on some of those fields below.\"" }
+                ktFun(
+                    RBuilder::strong,
+                    style = FunStyle.INLINE
+                ) {
+                    string("Holy guacamole!")
+                }
+                +"; +\" You should check in on some of those fields below.\""
             }
         }
         contentTitle(RBuilder::h4, "Close element")
@@ -196,7 +219,7 @@ Use `$dismissibleAlertName` to create a dismissible alert.
             //language=Markdown
             +"""
 You can build your own custom close element, by using `$closingElementName { }`.
-            """
+        """
         }
         liveExample {
             dismissibleAlert(variant = Alert.Variants.INFO) {
@@ -213,13 +236,16 @@ You can build your own custom close element, by using `$closingElementName { }`.
             import("components.alert.Alert")
             import("components.alert.$closingElementName")
             import("components.alert.$dismissibleAlertName")
+            import("components.button.Buttons")
             importClassNames()
             ln { }
-            ktF(0, dismissibleAlertName, "variant" to Alert.Variants.INFO.kt) {
-                ln(it) { +" +\"You want some cookies?\"" }
-                ktIF(it, RBuilder::hr, "")
-                ktB(it, closingElementName) {
-                    // todo button code example
+            ktFun(RBuilder::dismissibleAlert, args = mapOf("variant" to Alert.Variants.INFO.kt)) {
+                ln("You want some cookies")
+                ktFun(RBuilder::hr, style = FunStyle.INLINE_BLOCK) { }
+                ktFun(RElementBuilder<Alert.DismissibleProps>::closingElement) {
+                    ktFun(solidSuccessFun, parents = solidButtonBuilderParents) {
+                        ln("Sure!")
+                    }
                 }
             }
         }
@@ -234,27 +260,34 @@ You can build your own custom close element, by using `$closingElementName { }`.
             import("components.alert.Alert")
             import("components.alert.$closingElementName")
             import("components.alert.$dismissibleAlertName")
-            importClassNames()
+            import("components.button.Buttons")
             ln { }
-            ktB(0, "private val dismissibleAlert = functionalComponent<RProps>") {
-                ln(it) { +"var show by useState(false)" }
+            ktBlock("private val dismissibleAlert = functionalComponent<RProps>") {
+                ln { +"var show by useState(false)" }
                 ln { }
-                ktB(it, "if (show)") {
-                    ktF(it, dismissibleAlertName, "variant" to Alert.Variants.DANGER.kt) {
-                        ktB(it, "attrs") {
-                            ktB(it, "${Alert.Props::dismissible.name}?.apply") {
-                                ln(it) { +"${Alert.Props.Dismissible::onClose.name} = { show = false }" }
+                ktBlock("if (show)") {
+                    ktFun(RBuilder::dismissibleAlert, args = mapOf("variant" to Alert.Variants.DANGER.kt)) {
+                        ktFun(RElementBuilder<RProps>::attrs) {
+                            ktFun(Any::apply, listOf("${Alert.Props::dismissible.name}?")) {
+                                ln { +"${Alert.Props.Dismissible::onClosed.name} = { show = false }" }
                             }
                         }
-                        ln(it) { +"+\"You picked the wrong house, fool!\"" }
-                        ktIF(it, RBuilder::hr, "")
-                        ktB(it, closingElementName) {
-                            // todo button code example
+                        ln("You picked the wrong house, fool!")
+                        ktFun(RBuilder::hr, style = FunStyle.INLINE_BLOCK) { }
+                        ktFun(RElementBuilder<Alert.DismissibleProps>::closingElement) {
+                            ktFun(solidInfoFun, parents = solidButtonBuilderParents) {
+                                ln("Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!")
+                            }
                         }
                     }
                 }
-                ktB(it, "else") {
-                    // todo button code example
+                ktBlock("else") {
+                    ktFun(outlineDangerFun, parents = outlineButtonBuilderParents) {
+                        ktFun(RElementBuilder<RProps>::attrs) {
+                            ln { +"${WithDomEvents::onClick.name} = { show = true }" }
+                        }
+                        ln("Open door & go in")
+                    }
                 }
             }
         }
