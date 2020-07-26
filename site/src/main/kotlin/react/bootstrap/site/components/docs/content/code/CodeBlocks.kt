@@ -4,10 +4,7 @@ import react.RBuilder
 import react.bootstrap.content.pre
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktF
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
 
 internal class CodeBlocks : SectionComponent() {
@@ -60,8 +57,8 @@ provide a y-axis scrollbar.
         codeExample {
             import("content.pre")
             ln { }
-            ktF(0, RBuilder::pre, "scrollable" to true) {
-                ln(it) { +"// Kotlin Code was here" }
+            ktF(RBuilder::pre, args = mapOf("scrollable" to true)) {
+                ln { +"// Kotlin Code was here" }
             }
         }
     }
@@ -72,8 +69,8 @@ provide a y-axis scrollbar.
         codeExample {
             import("content.pre")
             ln { }
-            ktF(0, RBuilder::pre, "scrollable" to true) {
-                ln(it) { +"// Kotlin Code was here" }
+            ktFun(RBuilder::pre, args = mapOf("scrollable" to true)) {
+                ln { +"// Kotlin Code was here" }
             }
         }
     }
