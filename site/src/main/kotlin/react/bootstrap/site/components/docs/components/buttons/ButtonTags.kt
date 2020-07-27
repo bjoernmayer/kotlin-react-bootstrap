@@ -41,6 +41,7 @@ __Keep in mind, that the `input` element cannot have child elements.__
             Buttons.solid.primary(value = "true", title = "Radio", type = Button.Types.Input.Type.RADIO) { }
         }
         codeExample {
+            importButton()
             importButtonsBuilder()
             ln { }
             ktFun(

@@ -41,6 +41,7 @@ In need of a button, but not the hefty background colors they bring? Use the
         }
 
         codeExample {
+            importButton()
             importButtonsBuilder()
             ln { }
             mapOf(

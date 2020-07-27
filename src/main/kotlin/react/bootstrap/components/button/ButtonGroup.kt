@@ -66,7 +66,7 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
 
                 setState {
                     // Behaviour is not given. Gather already checked Checkboxes and Radios that do not have the same
-                    // name as the clicked one. Then add the clicked on to set of active buttons
+                    // name as the clicked one. Then add the clicked one to set of active buttons
                     activeButtons = props.buttons!!.mapNotNull { (key, buttonProps) ->
                         if (activeButtons?.contains(key) != true) {
                             return@mapNotNull null

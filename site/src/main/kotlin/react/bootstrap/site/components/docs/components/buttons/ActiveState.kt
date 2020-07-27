@@ -9,15 +9,11 @@ import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
-import react.bootstrap.site.components.docs.buildNestedName
+import react.bootstrap.site.components.docs.fixings.FunStyle
+import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktB
-import react.bootstrap.site.components.docs.fixings.ktF
-import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
 import react.child
 import react.dom.br
@@ -25,6 +21,7 @@ import react.functionalComponent
 import react.getValue
 import react.setValue
 import react.useState
+import kotlin.js.Console
 
 internal class ActiveState : SectionComponent() {
     override val title: String = "Active state"
@@ -55,10 +52,36 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
             }
         }
         codeExample {
-            import("components.button.Button")
-            import("components.button.button")
+            importButton()
+            importButtonsBuilder()
             ln { }
-            // todo code eample
+            ktFun(
+                solidPrimaryFun,
+                parents = solidButtonBuilderParents,
+                style = FunStyle.BLOCK,
+                args = mapOf("href" to Quoted("#"), "active" to true, "sizes" to Button.Sizes.LG.ktN)
+            ) {
+                ktFun(RElementBuilder<RProps>::attrs) {
+                    ln {
+                        +"onClick = { e -> e.preventDefault() }"
+                    }
+                }
+                ln("Primary link")
+            }
+            ln(" ")
+            ktFun(
+                solidSecondaryFun,
+                parents = solidButtonBuilderParents,
+                style = FunStyle.BLOCK,
+                args = mapOf("href" to Quoted("#"), "active" to true, "sizes" to Button.Sizes.LG.ktN)
+            ) {
+                ktFun(RElementBuilder<RProps>::attrs) {
+                    ln {
+                        +"onClick = { e -> e.preventDefault() }"
+                    }
+                }
+                ln("Link")
+            }
         }
         subSectionTitle("Toggleable button", section)
         Markdown {
@@ -71,13 +94,29 @@ Since we are working with react here, implementing a toggleable button is quite 
             child(toggleableButton)
         }
         codeExample {
-            import("components.button.Button")
-            import("components.button.button")
+            importButton()
+            importButtonsBuilder()
             ln { }
-            ktB(0, "private val toggleableButton = functionalComponent<RProps>") {
-                ln(it) { +"var active by useState(false)" }
+            ktBlock("private val toggleableButton = functionalComponent<RProps> {") {
+                ln {
+                    +"var active by useState(false)"
+                }
                 ln { }
-                // todo code example
+                ktFun(
+                    solidPrimaryFun,
+                    parents = solidButtonBuilderParents,
+                    args = mapOf("active" to "active")
+                ) {
+                    ktFun(RElementBuilder<RProps>::attrs) {
+                        ln { +"onClick = { active = !active }" }
+                    }
+                    ktBlock("if (active)") {
+                        ln("I am toggled")
+                    }
+                    ktBlock("else") {
+                        ln("Toggle me!")
+                    }
+                }
             }
         }
         subSectionTitle("Radio- and Checkbox Behaviour", section)
@@ -111,39 +150,54 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
             }
         }
         codeExample {
-            import("components.button.ButtonGroup")
-            import("components.button.Buttons")
+            importButton()
+            importButtonsBuilder()
             ln { }
-            ktF(0, RBuilder::buttonGroup, ButtonGroup.Behaviours.RADIOS.ktN) {
+            ktFun(RBuilder::buttonGroup, args = mapOf(null to ButtonGroup.Behaviours.RADIOS.ktN)) {
                 for (x in 1..3) {
                     val args = if (x == 1) {
-                        "true"
+                        mapOf<String?, Any>("active" to true)
                     } else {
-                        ""
+                        emptyMap()
                     }
-                    // todo replace "secondary" with reference (needs explicit type)
-                    ktF(
-                        it,
-                        buildNestedName("secondary", RBuilder::Buttons.name, Buttons::solid.name),
-                        args
-                    ) {
-                        ktF(it, RElementBuilder<*>::attrs) {
-                            ln(it) { +"onActive = { console.log(\"Radio$x\") }" }
+                    ktFun(solidSecondaryFun, solidButtonBuilderParents, args = args) {
+                        ktFun(RElementBuilder<RProps>::attrs) {
+                            ktBlock("${Button.Props::onActive.name} =") {
+                                ktFun(
+                                    Console::log,
+                                    listOf("console"),
+                                    style = FunStyle.INLINE,
+                                    args = mapOf(
+                                        null to Quoted(
+                                            "Radio$x"
+                                        )
+                                    )
+                                )
+                            }
                         }
+                        ln("Radio$x")
                     }
                 }
             }
-            ktIF(0, RBuilder::br, "")
-            ktF(0, RBuilder::buttonGroup, ButtonGroup.Behaviours.CHECKBOXES.ktN) {
+            ktFun(RBuilder::br, style = FunStyle.INLINE)
+            ktFun(RBuilder::buttonGroup, args = mapOf(null to ButtonGroup.Behaviours.CHECKBOXES.ktN)) {
                 for (x in 1..3) {
-                    ktF(
-                        it,
-                        buildNestedName("secondary", RBuilder::Buttons.name, Buttons::solid.name),
-                        ""
-                    ) {
-                        ktF(it, RElementBuilder<*>::attrs) {
-                            ln(it) { +"onActive = { console.log(\"Checkbox$x\") }" }
+                    ktFun(solidSecondaryFun, solidButtonBuilderParents) {
+                        ktFun(RElementBuilder<RProps>::attrs) {
+                            ktBlock("${Button.Props::onActive.name} =") {
+                                ktFun(
+                                    Console::log,
+                                    listOf("console"),
+                                    style = FunStyle.INLINE,
+                                    args = mapOf(
+                                        null to Quoted(
+                                            "Checkbox$x"
+                                        )
+                                    )
+                                )
+                            }
                         }
+                        ln("Checkbox$x")
                     }
                 }
             }
@@ -168,8 +222,8 @@ can set `${ButtonGroup.Props::renderAsGroup.name}` to `false`.
                         +" "
                     } else {
                         Buttons.solid.secondary(
-                            value = "${(x+1) / 2}",
-                            title = "Actual Radio${(x+1) / 2}",
+                            value = "${(x + 1) / 2}",
+                            title = "Actual Radio${(x + 1) / 2}",
                             name = "radios",
                             active = x == 1,
                             type = Button.Types.Input.Type.RADIO
@@ -180,10 +234,49 @@ can set `${ButtonGroup.Props::renderAsGroup.name}` to `false`.
             }
         }
         codeExample {
-            import("components.button.ButtonGroup")
-            import("components.button.Buttons")
+            importButton()
+            importButtonsBuilder()
             ln { }
-            // todo code example
+            ktFun(RBuilder::buttonGroup, args = mapOf("renderAsGroup" to false)) {
+                for (x in 1..6) {
+                    if (x % 2 == 0) {
+                        ktFun(
+                            solidSecondaryFun,
+                            solidButtonBuilderParents,
+                            breakDownArgs = true,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf(
+                                "value" to Quoted("${x / 2}"),
+                                "title" to Quoted("Actual Checkbox${x / 2}"),
+                                "name" to Quoted("checkboxes"),
+                                "type" to Button.Types.Input.Type.CHECKBOX.ktN
+                            )
+                        ) { }
+                    } else {
+                        ktFun(
+                            solidSecondaryFun,
+                            solidButtonBuilderParents,
+                            breakDownArgs = true,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf<String?, Any>(
+                                "value" to Quoted("${(x + 1) / 2}"),
+                                "title" to Quoted("Actual Radio${(x + 1) / 2}"),
+                                "name" to Quoted("radios"),
+                                "type" to Button.Types.Input.Type.RADIO.ktN
+                            ).run {
+                                if (x == 1) {
+                                    val map = toMutableMap()
+                                    map["active"] = true
+                                    map
+                                } else {
+                                    this
+                                }
+                            }
+                        ) { }
+                    }
+                    ln(" ")
+                }
+            }
         }
     }
 

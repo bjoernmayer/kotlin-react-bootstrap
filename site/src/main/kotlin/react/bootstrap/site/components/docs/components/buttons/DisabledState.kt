@@ -3,11 +3,11 @@ package react.bootstrap.site.components.docs.components.buttons
 import react.RBuilder
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.Buttons
+import react.bootstrap.site.components.docs.fixings.FunStyle
+import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
 
 internal class DisabledState : SectionComponent() {
@@ -27,10 +27,26 @@ Make buttons look inactive by setting the `disabled` boolean attribute to any `b
             Buttons.solid.secondary(disabled = true, sizes = Button.Sizes.LG) { +"Button" }
         }
         codeExample {
-            import("components.button.Button")
-            import("components.button.button")
+            importButton()
+            importButtonsBuilder()
             ln { }
-            // todo code example
+            ktFun(
+                solidPrimaryFun,
+                parents = solidButtonBuilderParents,
+                style = FunStyle.INLINE_BLOCK,
+                args = mapOf("disabled" to true, "sizes" to Button.Sizes.LG.ktN)
+            ) {
+                string("Primary Button")
+            }
+            ln(" ")
+            ktFun(
+                solidSecondaryFun,
+                parents = solidButtonBuilderParents,
+                style = FunStyle.INLINE_BLOCK,
+                args = mapOf("disabled" to true, "sizes" to Button.Sizes.LG.ktN)
+            ) {
+                string("Button")
+            }
         }
         Markdown {
             //language=Markdown
@@ -45,10 +61,26 @@ Usage for you stays the same, though:
             Buttons.solid.secondary(href = "#", disabled = true, sizes = Button.Sizes.LG) { +"Button" }
         }
         codeExample {
-            import("components.button.Button")
-            import("components.button.button")
+            importButton()
+            importButtonsBuilder()
             ln { }
-            // todo code example
+            ktFun(
+                solidPrimaryFun,
+                parents = solidButtonBuilderParents,
+                style = FunStyle.INLINE_BLOCK,
+                args = mapOf("href" to Quoted("#"), "disabled" to true, "sizes" to Button.Sizes.LG.ktN)
+            ) {
+                string("Primary Button")
+            }
+            ln(" ")
+            ktFun(
+                solidSecondaryFun,
+                parents = solidButtonBuilderParents,
+                style = FunStyle.INLINE_BLOCK,
+                args = mapOf("href" to Quoted("#"), "disabled" to true, "sizes" to Button.Sizes.LG.ktN)
+            ) {
+                string("Button")
+            }
         }
     }
 }
