@@ -8,9 +8,6 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
-import react.dom.tbody
-import react.dom.thead
-import react.dom.tr
 
 internal class Examples : SectionComponent() {
     override val title: String = "Examples"

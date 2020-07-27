@@ -58,13 +58,13 @@ internal class ContextualStyles : SectionComponent() {
             ln { }
             ln { +"// On rows" }
             ContextualStyle.values().forEach {
-                ktFun(RBuilder::tr, style = FunStyle.INLINE_BLOCK, args = mapOf( null to it.kt)) { string("...") }
+                ktFun(RBuilder::tr, style = FunStyle.INLINE_BLOCK, args = mapOf(null to it.kt)) { string("...") }
             }
             ln { }
             ln { +"// On cells (`td` or `th`)" }
             ktFun(RBuilder::tr) {
                 ContextualStyle.values().forEach {
-                    ktFun(RBuilder::td, style = FunStyle.INLINE_BLOCK, args = mapOf( null to it.kt)) { string("...") }
+                    ktFun(RBuilder::td, style = FunStyle.INLINE_BLOCK, args = mapOf(null to it.kt)) { string("...") }
                 }
             }
         }

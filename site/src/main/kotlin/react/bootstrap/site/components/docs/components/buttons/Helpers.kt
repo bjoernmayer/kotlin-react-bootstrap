@@ -9,7 +9,6 @@ import react.ReactElement
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.Button.Variants
 import react.bootstrap.components.button.Button.Variants.Outline
-import react.bootstrap.components.button.Button.Variants.Solid
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.buildNestedName

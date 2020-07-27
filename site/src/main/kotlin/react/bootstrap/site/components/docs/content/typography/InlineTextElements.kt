@@ -43,8 +43,7 @@ unwanted semantic implications that the tags would bring.
             ktBlock("p") {
                 ln { +"+\"You can use the mark tag to \";  mark(RBuilder::span) { +\"highlight\" }; +\" text.\"" }
             }
-            val smallFun: KFunction3<RBuilder,  String?,  (RDOMBuilder<SMALL>.() -> Unit), ReactElement>
-                = RBuilder::small
+            val smallFun: KFunction3<RBuilder, String?, (RDOMBuilder<SMALL>.() -> Unit), ReactElement> = RBuilder::small
             ktBlock("p") {
                 ktFun(smallFun, style = FunStyle.INLINE, args = mapOf(null to "RBuilder::span")) {
                     string("This line of text is meant to be treated as fine print.")

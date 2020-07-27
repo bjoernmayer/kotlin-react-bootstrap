@@ -51,7 +51,7 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
             }
         }
         codeExample {
-            import("content.typog3raphy.${Display::class.simpleName}")
+            import("content.typography.${Display::class.simpleName}")
             import("content.typography.${RBuilder::display.name}")
             for (x in 1..3) {
                 import("content.typography.${RBuilder::display.name}$x")
