@@ -8,17 +8,20 @@ import react.bootstrap.content.typography.h4
 import react.bootstrap.content.typography.h5
 import react.bootstrap.content.typography.h6
 import react.bootstrap.content.typography.muted
+import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktB
-import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
+import react.dom.h1
+import react.dom.h2
 import react.dom.h3
+import react.dom.h4
+import react.dom.h5
+import react.dom.h6
 import react.dom.p
 import react.dom.small
+import kotlin.reflect.KFunction3
 
 internal class Headings : SectionComponent() {
     override val title: String = "Headings"
@@ -46,8 +49,17 @@ heading but cannot use the associated HTML element.
                 import("content.typography.h$x")
             }
             ln { }
-            for (x in 1..6) {
-                ktIF(0, "h$x", "RBuilder::p", "+\"h$x. Bootstrap heading\"")
+            listOf<KFunction3<*, *, *, *>>(
+                RBuilder::h1,
+                RBuilder::h2,
+                RBuilder::h3,
+                RBuilder::h4,
+                RBuilder::h5,
+                RBuilder::h6
+            ).forEachIndexed() { index, function ->
+                ktFun(function, style = FunStyle.INLINE_BLOCK, args = mapOf(null to "RBuilder::p")) {
+                    ln("h${index + 1}. Bootstrap heading")
+                }
             }
         }
         subSectionTitle("Customizing headings", section)
@@ -63,9 +75,11 @@ heading but cannot use the associated HTML element.
         codeExample {
             import("content.typography.muted")
             ln { }
-            ktB(0, "h3") {
-                ln(it) { +"+\"Fancy display heading \"" }
-                ktIF(it, "muted", "RBuilder::small", "+\"With faded secondary text\"")
+            val h3: KFunction3<*, *, *, *> = RBuilder::h3
+            ktFun(h3) {
+                ln("Fancy display heading ")
+                // There is probably a nicer way to display this. I am just to lazy right now
+                ln { +"muted(RBuilder::small) { +\"With faded secondary text\" }" }
             }
         }
     }
