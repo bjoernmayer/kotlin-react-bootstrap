@@ -152,6 +152,7 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
         codeExample {
             importButton()
             importButtonsBuilder()
+            import("components.button.${RBuilder::buttonGroup.name}")
             ln { }
             ktFun(RBuilder::buttonGroup, args = mapOf(null to ButtonGroup.Behaviours.RADIOS.ktN)) {
                 for (x in 1..3) {
@@ -236,6 +237,7 @@ can set `${ButtonGroup.Props::renderAsGroup.name}` to `false`.
         codeExample {
             importButton()
             importButtonsBuilder()
+            import("components.button.${RBuilder::buttonGroup.name}")
             ln { }
             ktFun(RBuilder::buttonGroup, args = mapOf("renderAsGroup" to false)) {
                 for (x in 1..6) {
