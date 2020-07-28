@@ -10,10 +10,7 @@ import react.bootstrap.lib.Breakpoints
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.external.Markdown
 import react.dom.p
@@ -47,8 +44,8 @@ Accross every breakpoint, set `table(responsive)` to `${Breakpoints.ALL.kt}`.
         }
         codeExample {
             exampleImports()
-            ktB(0, "table", "responsive" to Breakpoints.ALL.kt) {
-                ln(it) { +"..." }
+            ktFun(RBuilder::table, args = mapOf("responsive" to Breakpoints.ALL.kt)) {
+                ln { +"..." }
             }
         }
         subSectionTitle("Breakpoint specific", section)
@@ -72,8 +69,8 @@ up, the table will behave normally and not scroll horizontally.
         }
         codeExample {
             exampleImports()
-            ktB(0, "table", "responsive" to Breakpoints.SM.kt) {
-                ln(it) { +"..." }
+            ktFun(RBuilder::table, args = mapOf("responsive" to Breakpoints.SM.kt)) {
+                ln { +"..." }
             }
         }
         liveExample {
@@ -83,8 +80,8 @@ up, the table will behave normally and not scroll horizontally.
         }
         codeExample {
             exampleImports()
-            ktB(0, "table", "responsive" to Breakpoints.MD.kt) {
-                ln(it) { +"..." }
+            ktFun(RBuilder::table, args = mapOf("responsive" to Breakpoints.MD.kt)) {
+                ln { +"..." }
             }
         }
         liveExample {
@@ -94,8 +91,8 @@ up, the table will behave normally and not scroll horizontally.
         }
         codeExample {
             exampleImports()
-            ktB(0, "table", "responsive" to Breakpoints.LG.kt) {
-                ln(it) { +"..." }
+            ktFun(RBuilder::table, args = mapOf("responsive" to Breakpoints.LG.kt)) {
+                ln { +"..." }
             }
         }
         liveExample {
@@ -105,8 +102,8 @@ up, the table will behave normally and not scroll horizontally.
         }
         codeExample {
             exampleImports()
-            ktB(0, "table", "responsive" to Breakpoints.XL.kt) {
-                ln(it) { +"..." }
+            ktFun(RBuilder::table, args = mapOf("responsive" to Breakpoints.XL.kt)) {
+                ln { +"..." }
             }
         }
     }

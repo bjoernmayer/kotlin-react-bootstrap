@@ -18,8 +18,9 @@ import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.ElementProvider
 import react.bootstrap.lib.NoArgEventHandler
-import react.bootstrap.lib.WithOnClick
-import react.bootstrap.lib.onTransitionEnd
+import react.bootstrap.lib.WithDomEvents
+import react.bootstrap.lib.onTransitionEndFunction
+import react.bootstrap.lib.transferDomEvents
 import react.bootstrap.utilities.close
 import react.children
 import react.cloneElement
@@ -28,14 +29,12 @@ import react.dom.div
 import react.setState
 import kotlin.random.Random
 
-class Alert : RComponent<Alert.Props, Alert.State>() {
-    override fun componentDidMount() {
-        setState {
-            state = States.SHOWN
-        }
+class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
+    override fun State.init(props: Props) {
+        state = States.SHOWN
     }
 
-    private fun onDismiss(@Suppress("UNUSED_PARAMETER") event: Event) {
+    private fun handleDismissle(@Suppress("UNUSED_PARAMETER") event: Event) {
         props.dismissible?.onClose?.apply {
             invoke()
         }
@@ -57,7 +56,7 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
         }
     }
 
-    private fun onTransitionEnd(@Suppress("UNUSED_PARAMETER") event: Event) {
+    private fun handleTransitionEnd(@Suppress("UNUSED_PARAMETER") event: Event) {
         // Only react, under the right circumstances
         if (props.dismissible?.fade == true && state.state == States.DISMISSING) {
             props.dismissible?.onClosed?.apply {
@@ -76,7 +75,7 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
         }
 
         div {
-            props.children()
+            children()
 
             val alertClasses = mutableSetOf(ClassNames.ALERT)
 
@@ -91,13 +90,13 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
 
                 if (dismissibleProps.fade == true) {
                     alertClasses.add(ClassNames.FADE)
-                    attrs.onTransitionEnd = this@Alert::onTransitionEnd
+                    attrs.onTransitionEndFunction = this@Alert::handleTransitionEnd
                 }
 
-                val closingElement = cloneElement<WithOnClick>(
+                val closingElement = cloneElement<WithDomEvents>(
                     dismissibleProps.closeElement ?: RBuilder().close { },
                     jsObject {
-                        onClick = this@Alert::onDismiss
+                        onClick = this@Alert::handleDismissle
                     }
                 )
 
@@ -109,6 +108,7 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
             }
 
             attrs {
+                transferDomEvents(props, props::onTransitionEnd)
                 role = "alert"
                 classes = alertClasses.map { it.className }.toSet()
             }
@@ -125,7 +125,8 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
 
                 if (props.hasOwnProperty(CloseElementMarkerProps::random.name)) {
                     @Suppress("UnsafeCastFromDynamic")
-                    props.asDynamic().random == newClosingElement.props.asDynamic().random
+                    props.unsafeCast<CloseElementMarkerProps>().random ==
+                        newClosingElement.props.unsafeCast<CloseElementMarkerProps>().random
                 } else {
                     false
                 }
@@ -141,25 +142,34 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
 
     @Suppress("unused")
     enum class Variants(override val className: ClassNames) : ClassNameEnum {
+        DANGER(ClassNames.ALERT_DANGER),
+        DARK(ClassNames.ALERT_DARK),
+        INFO(ClassNames.ALERT_INFO),
+        LIGHT(ClassNames.ALERT_LIGHT),
         PRIMARY(ClassNames.ALERT_PRIMARY),
         SECONDARY(ClassNames.ALERT_SECONDARY),
         SUCCESS(ClassNames.ALERT_SUCCESS),
-        INFO(ClassNames.ALERT_INFO),
-        WARNING(ClassNames.ALERT_WARNING),
-        DANGER(ClassNames.ALERT_DANGER),
-        LIGHT(ClassNames.ALERT_LIGHT),
-        DARK(ClassNames.ALERT_DARK);
+        WARNING(ClassNames.ALERT_WARNING);
     }
 
     internal interface CloseElementMarkerProps : RProps {
         var random: Int?
     }
 
-    interface Props : WithClassName {
-        var variant: Variants?
+    interface Props : WithClassName, WithDomEvents {
         var dismissible: Dismissible?
+        var variant: Variants?
 
         interface Dismissible {
+            /**
+             * This is the element the user can click on to dismiss the alert.
+             *
+             * Be aware that [WithDomEvents.onClick] gets overriden.
+             *
+             * Defaults [react.bootstrap.utilities.Close]
+             */
+            var closeElement: ReactElement?
+
             /**
              * When set to *true* the alert fades out, when dismissed.
              *
@@ -168,16 +178,7 @@ class Alert : RComponent<Alert.Props, Alert.State>() {
             var fade: Boolean?
 
             /**
-             * This is the element the user can click on to dismiss the alert.
-             *
-             * Be aware that [WithOnClick.onClick] gets overriden.
-             *
-             * Defaults [react.bootstrap.utilities.Close]
-             */
-            var closeElement: ReactElement?
-
-            /**
-             * This handler is called immediately when the [onDismiss] handler was called.
+             * This handler is called immediately when the [handleDismissle] handler was called.
              */
             var onClose: NoArgEventHandler?
 
@@ -259,7 +260,7 @@ fun RBuilder.dismissibleAlert(
  * Wrapper for a custom alert closing element.
  *
  * Build whatever close element you like.
- * Be aware that the [WithOnClick.onClick] of the outer most element gets overwritten.
+ * Be aware that the [WithDomEvents.onClick] of the outer most element gets overwritten.
  *
  * @param block [RBuilder] block function
  * @return The ceated ReactElement

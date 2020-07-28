@@ -3,14 +3,14 @@ package react.bootstrap.site.components.docs.content.images
 import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
+import react.bootstrap.content.img
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.ariaLabel
+import react.bootstrap.site.components.docs.fixings.FunStyle
+import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
 import react.dom.svg
 
@@ -49,7 +49,15 @@ appearance.
         codeExample {
             import("content.img")
             ln { }
-            ktIB(0, "img", "thumbnail" to "true", "alt" to "Responsive image", "src" to "...") { "" }
+            ktFun(
+                RBuilder::img,
+                style = FunStyle.INLINE,
+                args = mapOf(
+                    "thumbnail" to true,
+                    "alt" to Quoted("Responsive image"),
+                    "src" to Quoted("...")
+                )
+            ) { }
         }
     }
 }

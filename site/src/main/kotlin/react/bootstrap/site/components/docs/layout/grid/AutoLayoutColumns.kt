@@ -1,4 +1,4 @@
-@file:Suppress("NAME_SHADOWING", "NestedLambdaShadowedImplicitParameter", "DuplicatedCode")
+@file:Suppress("DuplicatedCode")
 
 package react.bootstrap.site.components.docs.layout.grid
 
@@ -12,13 +12,11 @@ import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.row
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.site.components.docs.fixings.FunStyle
+import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.importClassNames
-import react.bootstrap.site.components.docs.fixings.ktB
-import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
@@ -67,15 +65,25 @@ equal-size enums for each breakpoint you need and every column will be the same 
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktRow(it) {
-                        ktIB(it, colFun, "+\"1 of 2\"")
-                        ktIB(it, colFun, "+\"2 of 2\"")
-                        ln(it) { +"// Same as: col(all = ${EQ.name}) { +\"x of 2\" }" }
+                    ktRow {
+                        for (x in 1..2) {
+                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) {
+                                string("$x of 2")
+                            }
+                        }
+                        ln { +"// Same as: " }
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE,
+                            args = mapOf(null to EQ.name)
+                        ) { string("x of 2") }
                     }
-                    ktRow(it) {
-                        ktIB(it, colFun, "+\"1 of 3\"")
-                        ktIB(it, colFun, "+\"2 of 3\"")
-                        ktIB(it, colFun, "+\"3 of 3\"")
+                    ktRow {
+                        for (x in 1..3) {
+                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) {
+                                string("$x of 2")
+                            }
+                        }
                     }
                 }
             }
@@ -111,15 +119,23 @@ Note that the other columns will resize no matter the width of the center column
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktRow(it) {
-                        ktIB(it, colFun, "+\"1 of 3\"")
-                        ktIB(it, colFun, "all" to SZ_6.name) { "+\"2 of 3 (wider)\"" }
-                        ktIB(it, colFun, "+\"3 of 3\"")
+                    ktRow {
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("1 of 3") }
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to SZ_6.name)
+                        ) { string("2 of 3 (wider)") }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("3 of 3") }
                     }
-                    ktRow(it) {
-                        ktIB(it, colFun, "+\"1 of 3\"")
-                        ktIB(it, colFun, "all" to SZ_5.name) { "+\"2 of 3 (wider)\"" }
-                        ktIB(it, colFun, "+\"3 of 3\"")
+                    ktRow {
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("1 of 3") }
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to SZ_5.name)
+                        ) { string("2 of 3 (wider)") }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("3 of 3") }
                     }
                 }
             }
@@ -156,15 +172,41 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
                 importClassNames()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "classes" to "\"\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.kt}}\"") {
-                        ktIB(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"1 of 3\"" }
-                        ktIB(it, colFun, "md" to AUTO.name) { "+\"Variable width content\"" }
-                        ktIB(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"3 of 3\"" }
+                    ktFun(
+                        RBuilder::row,
+                        args = mapOf("classes" to Quoted("\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.kt}}"))
+                    ) {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to EQ.name, "lg" to SZ_2.name)
+                        ) { string("1 of 3") }
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("md" to AUTO.name)
+                        ) { string("Variable width content") }
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to EQ.name, "lg" to SZ_2.name)
+                        ) { string("3 of 3") }
                     }
-                    ktRow(it) {
-                        ktIB(it, colFun, "+\"1 of 3\"")
-                        ktIB(it, colFun, "md" to AUTO.name) { "+\"Variable width content\"" }
-                        ktIB(it, colFun, "all" to EQ.name, "lg" to SZ_2.name) { "+\"3 of 3\"" }
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK
+                        ) { string("1 of 3") }
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("md" to AUTO.name)
+                        ) { string("Variable width content") }
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to EQ.name, "lg" to SZ_2.name)
+                        ) { string("3 of 3") }
                     }
                 }
             }

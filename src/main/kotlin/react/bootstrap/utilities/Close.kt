@@ -1,7 +1,6 @@
 package react.bootstrap.utilities
 
 import kotlinx.html.ButtonType
-import kotlinx.html.js.onClickFunction
 import react.RBuilder
 import react.RComponent
 import react.RHandler
@@ -9,9 +8,10 @@ import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.WithOnClick
+import react.bootstrap.lib.WithDomEvents
 import react.bootstrap.lib.ariaHidden
 import react.bootstrap.lib.ariaLabel
+import react.bootstrap.lib.transferDomEvents
 import react.dom.WithClassName
 import react.dom.button
 import react.dom.span
@@ -22,9 +22,7 @@ class Close : RComponent<Close.Props, RState>() {
             attrs {
                 ariaLabel = props.label ?: "Close"
 
-                props.onClick?.also {
-                    attrs.onClickFunction = it
-                }
+                transferDomEvents(props)
             }
 
             span {
@@ -37,7 +35,7 @@ class Close : RComponent<Close.Props, RState>() {
         }
     }
 
-    interface Props : WithClassName, WithOnClick {
+    interface Props : WithClassName, WithDomEvents {
         var label: String?
         var symbol: String?
     }

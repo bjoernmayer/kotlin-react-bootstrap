@@ -10,6 +10,9 @@ internal fun pageTitle(pagetitle: String) {
 internal val Enum<*>.kt: String
     get() = buildNestedName(name, this::class)
 
+internal fun buildNestedName(target: String, vararg parents: String): String =
+    "${parents.joinToString(".")}.$target"
+
 internal fun buildNestedName(target: String, vararg parents: KClass<*>): String =
     "${parents.joinToString(".") { it.simpleName!! }}.$target"
 

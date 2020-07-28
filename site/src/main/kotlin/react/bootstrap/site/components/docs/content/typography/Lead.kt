@@ -4,10 +4,7 @@ import react.RBuilder
 import react.bootstrap.content.typography.lead
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
 
 internal class Lead : SectionComponent() {
@@ -31,14 +28,11 @@ Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis moll
         codeExample {
             import("content.typography.${RBuilder::lead.name}")
             ln { }
-            ktB(0, RBuilder::lead.name) {
-                ln(it) { +"+\"\"\"" }
-                ln(it + 1) {
-                    +"Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non "
-                    +"commodo"
-                }
-                ln(it + 1) { +"luctus." }
-                ln(it) { +"\"\"\".trimIndent()" }
+            ktFun(RBuilder::lead) {
+                multiline(
+                    "Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non comm" +
+                        "odo luctus."
+                )
             }
         }
     }

@@ -4,15 +4,14 @@ import kotlinext.js.jsObject
 import react.RBuilder
 import react.RComponent
 import react.RElementBuilder
-import react.RHandler
 import react.RProps
 import react.RState
 import react.ReactElement
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.external.PrismLight
 import react.dom.figure
-
-internal typealias CodeExampleBuilder = RElementBuilder<CodeExample.Props>
+import kotlin.reflect.KFunction
 
 @JsNonModule
 @JsModule("react-syntax-highlighter/dist/esm/styles/prism/coy")
@@ -21,91 +20,6 @@ external val coy: dynamic
 @JsNonModule
 @JsModule("react-syntax-highlighter/dist/esm/languages/prism/kotlin")
 external val kotlin: dynamic
-
-internal fun CodeExampleBuilder.ln(indentationLevel: Int = 0, block: CodeExampleBuilder.() -> Unit) {
-    for (x in 1..indentationLevel) {
-        +"    "
-    }
-    block()
-    +"\n"
-}
-
-internal fun CodeExampleBuilder.import(afterReactBootstrap: String) {
-    ln { +"import react.bootstrap.$afterReactBootstrap" }
-}
-
-internal fun CodeExampleBuilder.importClassNames() {
-    import("lib.${ClassNames::class.simpleName}")
-}
-
-internal fun CodeExampleBuilder.ktB(
-    indentationLevel: Int = 0,
-    opener: String,
-    block: CodeExampleBuilder.(indentationLevel: Int) -> Unit
-) {
-    ln(indentationLevel) { +"$opener {" }
-    block(indentationLevel + 1)
-    ln(indentationLevel) { +"}" }
-}
-
-internal fun CodeExampleBuilder.ktB(
-    indentationLevel: Int = 0,
-    opener: String,
-    args: String,
-    block: CodeExampleBuilder.(indentationLevel: Int) -> Unit
-) = ktB(indentationLevel, "$opener($args)", block)
-
-internal fun CodeExampleBuilder.ktB(
-    indentationLevel: Int = 0,
-    opener: String,
-    vararg args: Pair<String, String>,
-    block: CodeExampleBuilder.(indentationLevel: Int) -> Unit
-) = ktB(indentationLevel, opener, args.joinToString { "${it.first} = ${it.second}" }, block)
-
-internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
-    opener: String,
-    content: String
-) {
-    ln(indentationLevel) { +"$opener { $content }" }
-}
-
-internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
-    opener: String,
-    content: () -> String
-) {
-    ln(indentationLevel) { +"$opener { ${content()} }" }
-}
-
-internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
-    opener: String,
-    args: String,
-    content: String
-) {
-    ln(indentationLevel) { +"$opener($args) { $content }" }
-}
-
-internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
-    opener: String,
-    arg: Pair<String, String>,
-    vararg args: Pair<String, String>,
-    content: () -> String
-) = ktIB(indentationLevel, opener, listOf(arg, *args).joinToString { "${it.first} = ${it.second}" }, content())
-
-internal fun CodeExampleBuilder.ktIB(
-    indentationLevel: Int = 0,
-    opener: String,
-    arg: Pair<String, String>,
-    vararg args: Pair<String, String>
-) = ktIB(
-    indentationLevel,
-    opener,
-    arg,
-    *args
-) { "+\"${listOf(arg, *args).joinToString { "${it.first} = ${it.second}" }}\"" }
 
 internal class CodeExample : RComponent<CodeExample.Props, RState>() {
     override fun RBuilder.render() {
@@ -129,12 +43,179 @@ internal class CodeExample : RComponent<CodeExample.Props, RState>() {
     }
 }
 
-internal fun RBuilder.codeExample(block: RHandler<CodeExample.Props>): ReactElement {
-    val code = CodeExampleBuilder(jsObject()).apply {
+internal data class Quoted(
+    val value: String
+)
+
+internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<CodeExample.Props>(jsObject()) {
+    internal fun joinToString(): String = childList.joinToString("")
+
+    internal fun string(content: String) {
+        +"+\"$content\""
+    }
+
+    internal fun multiline(vararg contents: String) {
+        ln { +"+\"\"\"" }
+        // no ln to not have indent
+        +contents.joinToString("\n", postfix = "\n")
+        ln { +"\"\"\"" }
+    }
+
+    internal fun ln(block: CodeExampleBuilder.() -> Unit) {
+        +getIndent(indent)
+        block()
+        +"\n"
+    }
+
+    internal fun ln(content: String) {
+        ln {
+            string(content)
+        }
+    }
+
+    internal fun import(afterReactBootstrap: String) {
+        ln { +"import react.bootstrap.$afterReactBootstrap" }
+    }
+
+    internal fun importClassNames() {
+        import("lib.${ClassNames::class.simpleName}")
+    }
+
+    internal fun ktFun(
+        function: KFunction<*>,
+        parents: List<String> = emptyList(),
+        breakDownArgs: Boolean = false,
+        style: FunStyle = FunStyle.BLOCK,
+        args: Map<String?, Any> = emptyMap(),
+        block: (CodeExampleBuilder.() -> Unit)? = null
+    ) {
+        +buildString {
+            append(getIndent(indent))
+
+            if (parents.isEmpty()) {
+                append(function.name)
+            } else {
+                append(buildNestedName(function.name, *parents.toTypedArray()))
+            }
+
+            // print args or () if there is no block
+            if (args.isNotEmpty() || block == null) {
+                append("(")
+
+                if (args.isNotEmpty()) {
+                    if (breakDownArgs) {
+                        append(
+                            args.toArgString(
+                                ",\n",
+                                "\n",
+                                "\n${getIndent(indent)}",
+                                getIndent(indent + 1)
+                            )
+                        )
+                    } else {
+                        append(args.toArgString())
+                    }
+                }
+
+                append(")")
+            }
+
+            if (block != null) {
+                // apply new level of indent only for block style
+                val newIndent = if (style == FunStyle.INLINE || style == FunStyle.INLINE_BLOCK) {
+                    indent - 2
+                } else {
+                    indent + 1
+                }
+
+                val content = CodeExampleBuilder(newIndent).apply {
+                    block()
+                }.joinToString()
+
+                if (style == FunStyle.INLINE || style == FunStyle.INLINE_BLOCK) {
+                    if (content.isEmpty()) {
+                        append(" { }")
+                    } else {
+                        append(" { $content }")
+                    }
+                }
+
+                if (style == FunStyle.BLOCK) {
+                    val strippedContent =
+                        if (content.endsWith("\n")) {
+                            content.substringBeforeLast("\n")
+                        } else {
+                            content
+                        }
+
+                    append(" {\n$strippedContent\n${getIndent(indent)}}")
+                }
+            }
+
+            if (style == FunStyle.BLOCK || style == FunStyle.INLINE_BLOCK) {
+                append("\n")
+            }
+        }
+    }
+
+    internal fun ktBlock(opener: String, block: (CodeExampleBuilder.() -> Unit)) {
+        val content = CodeExampleBuilder(indent + 1).apply {
+            block()
+        }.joinToString()
+
+        val strippedContent =
+            if (content.endsWith("\n")) {
+                content.substringBeforeLast("\n")
+            } else {
+                content
+            }
+
+        ln {
+            +"$opener {\n$strippedContent\n${getIndent(indent)}}"
+        }
+    }
+
+    private fun getIndent(level: Int): String =
+        buildString {
+            for (x in 1..level) {
+                append("    ")
+            }
+        }
+
+    private fun Map<String?, Any>.toArgString(
+        separator: CharSequence = ", ",
+        prefix: CharSequence = "",
+        postfix: CharSequence = "",
+        linePrefix: CharSequence = ""
+    ): String = entries.joinToString(separator, prefix, postfix) {
+        buildString {
+            append(linePrefix)
+
+            it.key?.apply {
+                append("$this = ")
+            }
+
+            if (it.value is Quoted) {
+                append("\"${(it.value as Quoted).value}\"")
+            } else {
+                append(it.value)
+            }
+        }
+    }
+}
+
+internal fun RBuilder.codeExample(block: CodeExampleBuilder.() -> Unit): ReactElement {
+    val code = CodeExampleBuilder(0).apply {
         block()
     }
 
     return child(CodeExample::class) {
-        attrs.code = code.childList.joinToString("")
+        attrs.code = code.joinToString()
     }
+}
+
+internal enum class FunStyle {
+    INLINE,
+    INLINE_BLOCK,
+    BLOCK
 }

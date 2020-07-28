@@ -78,3 +78,14 @@ figure.highlight {
 figure.highlight > pre {
     overflow-x: auto !important;
 }
+
+figure.highlight > pre:before {
+    background-color: #eee;
+    bottom: 0;
+    content: ' ';
+    display: block;
+    left: 120ex;
+    position: absolute;
+    top: 0;
+    width: 1px;
+}

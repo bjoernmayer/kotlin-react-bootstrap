@@ -74,10 +74,10 @@ internal data class FunReference(
 
         val returnTypeString = returnType?.let { ": $it" }
 
-        if (oneLine) {
-            return "fun $receiverString${kFunction.name}(${argsStrings.joinToString()})$returnTypeString"
+        return if (oneLine) {
+            "fun $receiverString${kFunction.name}(${argsStrings.joinToString()})$returnTypeString"
         } else {
-            return """
+            """
 fun $receiverString${kFunction.name}(
     ${argsStrings.joinToString(",\n    ")}
 )$returnTypeString

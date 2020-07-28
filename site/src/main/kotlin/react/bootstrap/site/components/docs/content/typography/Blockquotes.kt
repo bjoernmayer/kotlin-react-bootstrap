@@ -4,13 +4,11 @@ import react.RBuilder
 import react.bootstrap.content.typography.blockQuote
 import react.bootstrap.content.typography.blockQuoteFooter
 import react.bootstrap.lib.ClassNames
+import react.bootstrap.site.components.docs.fixings.FunStyle
+import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.importClassNames
-import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.external.Markdown
 import react.dom.cite
@@ -36,8 +34,8 @@ any HTML as the quote.
             import("content.typography.${RBuilder::blockQuote.name}")
             importClassNames()
             ln { }
-            ktB(0, RBuilder::blockQuote.name, ClassNames.MB_0.kt) {
-                ln(it) { +"+\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.\"" }
+            ktFun(RBuilder::blockQuote, args = mapOf(null to Quoted("\${${ClassNames.MB_0.kt}}"))) {
+                ln("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.")
             }
         }
         subSectionTitle("Naming a source", section)
@@ -59,9 +57,15 @@ Add a `${RBuilder::blockQuoteFooter.name} { }`  for identifying the source. Wrap
             import("content.typography.${RBuilder::blockQuote.name}")
             importClassNames()
             ln { }
-            ktB(0, RBuilder::blockQuote.name, ClassNames.MB_0.kt) {
-                ln(it) { +"+\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.\"" }
-                ln(it) { +"${RBuilder::blockQuoteFooter.name} { +\"Someone famous in \"; cite { +\"Source Title\" } }" }
+            ktFun(RBuilder::blockQuote, args = mapOf(null to Quoted("\${${ClassNames.MB_0.kt}}"))) {
+                ln("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.")
+                ktFun(RBuilder::blockQuoteFooter, style = FunStyle.INLINE) {
+                    string("Someone famous in ")
+                    +"; "
+                    ktFun(RBuilder::cite, style = FunStyle.INLINE) {
+                        string("Source Title")
+                    }
+                }
             }
         }
     }

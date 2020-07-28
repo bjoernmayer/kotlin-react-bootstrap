@@ -9,15 +9,14 @@ import react.bootstrap.content.figures.figcaption
 import react.bootstrap.content.figures.figure
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.ariaLabel
+import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.PageComponent
+import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktB
-import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.external.Markdown
+import react.dom.img
 import react.dom.svg
 
 internal class Figures : PageComponent() {
@@ -66,18 +65,21 @@ Images in figures have no explicit size, so be sure to add the `img(fluid)` to `
             import("content.figures.figure")
             import("content.figures.figcaption")
             import("content.figures.img")
+            importClassNames()
             ln { }
-            ktB(0, "figure") {
-                ktIB(
-                    it,
-                    "img",
-                    "fluid" to "true",
-                    "classes" to "\"\${${ClassNames.ROUNDED.kt}}\"",
-                    "src" to "...",
-                    "alt" to "..."
-                ) { "" }
-                ktB(it, "figcaption") {
-                    ln(it) { +"+\"A caption for the above image.\"" }
+            ktFun(RBuilder::figure) {
+                ktFun(
+                    RBuilder::img,
+                    style = FunStyle.INLINE_BLOCK,
+                    args = mapOf(
+                        "fluid" to true,
+                        "classes" to Quoted("\${${ClassNames.ROUNDED.kt}}"),
+                        "src" to Quoted("..."),
+                        "alt" to Quoted("...")
+                    )
+                ) { }
+                ktFun(RBuilder::figcaption) {
+                    ln("A caption for the above image.")
                 }
             }
         }

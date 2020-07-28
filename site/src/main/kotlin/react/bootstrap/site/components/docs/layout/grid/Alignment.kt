@@ -1,4 +1,4 @@
-@file:Suppress("NAME_SHADOWING", "NestedLambdaShadowedImplicitParameter", "DuplicatedCode")
+@file:Suppress("DuplicatedCode")
 
 package react.bootstrap.site.components.docs.layout.grid
 
@@ -10,12 +10,10 @@ import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_4
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.row
+import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.ktB
-import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
@@ -71,19 +69,19 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to rySTART.name) {
+                    ktFun(RBuilder::row, args = mapOf("all" to rySTART.name)) {
                         for (x in 1..3) {
-                            ktIB(it, colFun) { "+\"One of three columns\"" }
+                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("One of three columns") }
                         }
                     }
-                    ktB(it, rowFun, "all" to ryCENTER.name) {
+                    ktFun(RBuilder::row, args = mapOf("all" to ryCENTER.name)) {
                         for (x in 1..3) {
-                            ktIB(it, colFun) { "+\"One of three columns\"" }
+                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("One of three columns") }
                         }
                     }
-                    ktB(it, rowFun, "all" to ryEND.name) {
+                    ktFun(RBuilder::row, args = mapOf("all" to ryEND.name)) {
                         for (x in 1..3) {
-                            ktIB(it, colFun) { "+\"One of three columns\"" }
+                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("One of three columns") }
                         }
                     }
                 }
@@ -108,9 +106,21 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importRowFun()
                 ln { }
                 ktConRow {
-                    ktIB(it, colFun, "all" to START.name) { "+\"One of three columns\"" }
-                    ktIB(it, colFun, "all" to CENTER.name) { "+\"One of three columns\"" }
-                    ktIB(it, colFun, "all" to END.name) { "+\"One of three columns\"" }
+                    ktFun(
+                        RBuilder::col,
+                        style = FunStyle.INLINE_BLOCK,
+                        args = mapOf("all" to START.name)
+                    ) { string("One of three columns") }
+                    ktFun(
+                        RBuilder::col,
+                        style = FunStyle.INLINE_BLOCK,
+                        args = mapOf("all" to CENTER.name)
+                    ) { string("One of three columns") }
+                    ktFun(
+                        RBuilder::col,
+                        style = FunStyle.INLINE_BLOCK,
+                        args = mapOf("all" to END.name)
+                    ) { string("One of three columns") }
                 }
             }
         }
@@ -118,29 +128,11 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
         exampleRow {
             liveExample {
                 container {
-                    row(all = rxSTART) {
-                        for (x in 1..2) {
-                            col(all = SZ_4) { +"One of two columns" }
-                        }
-                    }
-                    row(all = rxCENTER) {
-                        for (x in 1..2) {
-                            col(all = SZ_4) { +"One of two columns" }
-                        }
-                    }
-                    row(all = rxEND) {
-                        for (x in 1..2) {
-                            col(all = SZ_4) { +"One of two columns" }
-                        }
-                    }
-                    row(all = rxAROUND) {
-                        for (x in 1..2) {
-                            col(all = SZ_4) { +"One of two columns" }
-                        }
-                    }
-                    row(all = rxBETWEEN) {
-                        for (x in 1..2) {
-                            col(all = SZ_4) { +"One of two columns" }
+                    listOf(rxSTART, rxCENTER, rxEND, rxAROUND, rxBETWEEN).forEach {
+                        row(all = it) {
+                            for (x in 1..2) {
+                                col(all = SZ_4) { +"One of two columns" }
+                            }
                         }
                     }
                 }
@@ -157,29 +149,15 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktB(it, rowFun, "all" to rxSTART.name) {
-                        for (x in 1..2) {
-                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
-                        }
-                    }
-                    ktB(it, rowFun, "all" to rxCENTER.name) {
-                        for (x in 1..2) {
-                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
-                        }
-                    }
-                    ktB(it, rowFun, "all" to rxEND.name) {
-                        for (x in 1..2) {
-                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
-                        }
-                    }
-                    ktB(it, rowFun, "all" to rxAROUND.name) {
-                        for (x in 1..2) {
-                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
-                        }
-                    }
-                    ktB(it, rowFun, "all" to rxBETWEEN.name) {
-                        for (x in 1..2) {
-                            ktIB(it, colFun, "all" to SZ_4.name) { "+\"One of two columns\"" }
+                    listOf(rxSTART.name, rxCENTER.name, rxEND.name, rxAROUND.name, rxBETWEEN.name).forEach {
+                        ktFun(RBuilder::row, args = mapOf("all" to it)) {
+                            for (x in 1..2) {
+                                ktFun(
+                                    RBuilder::col,
+                                    style = FunStyle.INLINE_BLOCK,
+                                    args = mapOf("all" to SZ_4.name)
+                                ) { string("One of two columns") }
+                            }
                         }
                     }
                 }

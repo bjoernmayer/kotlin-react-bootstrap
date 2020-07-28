@@ -11,12 +11,11 @@ import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_4
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.row
+import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
-import react.bootstrap.site.components.docs.fixings.ktIB
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
@@ -79,17 +78,35 @@ Combine other attributes with `$sizes` by using `$sz`.
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktRow(it) {
-                        ktIB(it, colFun, "all" to "${OFF_1.name} $sz ${SZ_4.name}")
-                        ktIB(it, colFun, "+\"Reference\"")
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to "${OFF_1.name} $sz ${SZ_4.name}")
+                        ) {
+                            string("all = ${OFF_1.name} $sz ${SZ_4.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
-                    ktRow(it) {
-                        ktIB(it, colFun, "all" to "${ORD_3.name} $sz ${SZ_4.name}")
-                        ktIB(it, colFun, "+\"Reference\"")
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to "${ORD_3.name} $sz ${SZ_4.name}")
+                        ) {
+                            string("all = ${ORD_3.name} $sz ${SZ_4.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
-                    ktRow(it) {
-                        ktIB(it, colFun, "all" to "${END.name} $sz ${SZ_4.name}")
-                        ktIB(it, colFun, "+\"Reference\"")
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to "${END.name} $sz ${SZ_4.name}")
+                        ) {
+                            string("all = ${END.name} $sz ${SZ_4.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
                 }
             }
@@ -129,17 +146,35 @@ Combine other attributes with `$offsets` by using `$off`.
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktRow(it) {
-                        ktIB(it, colFun, "all" to "${SZ_4.name} $off ${OFF_1.name}")
-                        ktIB(it, colFun, "+\"Reference\"")
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to "${SZ_4.name} $off ${OFF_1.name}")
+                        ) {
+                            string("all = ${SZ_4.name} $off ${OFF_1.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
-                    ktRow(it) {
-                        ktIB(it, colFun, "all" to "${ORD_3.name} $off ${OFF_1.name}")
-                        ktIB(it, colFun, "+\"Reference\"")
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to "${ORD_3.name} $off ${OFF_1.name}")
+                        ) {
+                            string("all = ${ORD_3.name} $off ${OFF_1.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
-                    ktRow(it) {
-                        ktIB(it, colFun, "all" to "${END.name} $off ${OFF_1.name}")
-                        ktIB(it, colFun, "+\"Reference\"")
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to "${END.name} $off ${OFF_1.name}")
+                        ) {
+                            string("all = ${END.name} $off ${OFF_1.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
                 }
             }
@@ -179,17 +214,35 @@ Combine other attributes with `$orderings` by using `$ord`.
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktRow(it) {
-                        ktIB(it, colFun, "all" to "${SZ_4.name} $ord ${ORD_3.name}")
-                        ktIB(it, colFun, "+\"Reference\"")
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to "${SZ_4.name} $ord ${ORD_3.name}")
+                        ) {
+                            string("all = ${SZ_4.name} $ord ${ORD_3.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
-                    ktRow(it) {
-                        ktIB(it, colFun, "all" to "${OFF_1.name} $ord ${ORD_3.name}")
-                        ktIB(it, colFun, "+\"Reference\"")
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to "${OFF_1.name} $ord ${ORD_3.name}")
+                        ) {
+                            string("all = ${OFF_1.name} $ord ${ORD_3.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
-                    ktRow(it) {
-                        ktIB(it, colFun, "all" to "${END.name} $ord ${ORD_3.name}")
-                        ktIB(it, colFun, "+\"Reference\"")
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to "${END.name} $ord ${ORD_3.name}")
+                        ) {
+                            string("all = ${END.name} $ord ${ORD_3.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
                 }
             }
@@ -229,17 +282,35 @@ Combine other attributes with `$alignments` by using `$align`.
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktRow(it) {
-                        ktIB(it, colFun, "all" to "${SZ_4.name} $align ${END.name}")
-                        ktIB(it, colFun, "+\"Reference\"")
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to "${SZ_4.name} $align ${END.name}")
+                        ) {
+                            string("all = ${SZ_4.name} $align ${END.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
-                    ktRow(it) {
-                        ktIB(it, colFun, "all" to "${OFF_1.name} $align ${END.name}")
-                        ktIB(it, colFun, "+\"Reference\"")
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to "${OFF_1.name} $align ${END.name}")
+                        ) {
+                            string("all = ${OFF_1.name} $align ${END.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
-                    ktRow(it) {
-                        ktIB(it, colFun, "all" to "${ORD_3.name} $align ${END.name}")
-                        ktIB(it, colFun, "+\"Reference\"")
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to "${ORD_3.name} $align ${END.name}")
+                        ) {
+                            string("all = ${ORD_3.name} $align ${END.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
                 }
             }
@@ -405,8 +476,10 @@ private fun RBuilder.allPossibleCombinations() {
                 importRowFun()
                 ln { }
                 ktConRow {
-                    ktIB(it, colFun, "all" to pairing.argString)
-                    ktIB(it, colFun, "+\"Reference\"")
+                    ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("all" to pairing.argString)) {
+                        string("all = ${pairing.argString}")
+                    }
+                    ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                 }
             }
         }
@@ -444,8 +517,10 @@ private fun RBuilder.allPossibleCombinations() {
                     importRowFun()
                     ln { }
                     ktConRow {
-                        ktIB(it, colFun, "all" to argString)
-                        ktIB(it, colFun, "+\"Reference\"")
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("all" to argString)) {
+                            string("all = $argString")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
                 }
             }
@@ -489,8 +564,10 @@ private fun RBuilder.allPossibleCombinations() {
                     importRowFun()
                     ln { }
                     ktConRow {
-                        ktIB(it, colFun, "all" to argString)
-                        ktIB(it, colFun, "+\"Reference\"")
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("all" to argString)) {
+                            string("all = $argString")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
                 }
             }
