@@ -18,7 +18,7 @@ internal val KClass<Container.Viscosities>.nestedName: String
     get() = buildNestedName(this, Container::class)
 
 internal fun CodeExampleBuilder.ktContainer(block: CodeExampleBuilder.() -> Unit) {
-    ktBlock(opener = containerFun) {
+    ktFun(RBuilder::container) {
         block()
     }
 }

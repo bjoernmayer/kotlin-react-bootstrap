@@ -108,7 +108,7 @@ internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<Cod
                             args.toArgString(
                                 ",\n",
                                 "\n",
-                                "\n",
+                                "\n${getIndent(indent)}",
                                 getIndent(indent + 1)
                             )
                         )
@@ -123,7 +123,7 @@ internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<Cod
             if (block != null) {
                 // apply new level of indent only for block style
                 val newIndent = if (style == FunStyle.INLINE || style == FunStyle.INLINE_BLOCK) {
-                    indent - 1
+                    indent - 2
                 } else {
                     indent + 1
                 }
