@@ -17,6 +17,7 @@ import react.asElementOrNull
 import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.ElementProvider
+import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.lib.WithDomEvents
 import react.bootstrap.lib.onTransitionEndFunction
@@ -34,7 +35,14 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
         state = States.SHOWN
     }
 
-    private fun handleDismissle(@Suppress("UNUSED_PARAMETER") event: Event) {
+    private fun handleDismissle(
+        @Suppress("UNUSED_PARAMETER") event: Event,
+        originalEventHandler: EventHandler?
+    ) {
+        if (originalEventHandler is EventHandler) {
+            originalEventHandler.invoke(event)
+        }
+
         props.dismissible?.onClose?.apply {
             invoke()
         }
@@ -96,7 +104,21 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
                 val closingElement = cloneElement<WithDomEvents>(
                     dismissibleProps.closeElement ?: RBuilder().close { },
                     jsObject {
-                        onClick = this@Alert::handleDismissle
+                        val origEventHandler = dismissibleProps
+                            .closeElement
+                            ?.run {
+                                val props = this.props.asJsObject()
+
+                                if (props.hasOwnProperty(WithDomEvents::onClick.name)) {
+                                    props.unsafeCast<WithDomEvents>().onClick
+                                } else {
+                                    null
+                                }
+                            }
+
+                        onClick = {
+                            handleDismissle(it, origEventHandler)
+                        }
                     }
                 )
 
@@ -163,8 +185,6 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
         interface Dismissible {
             /**
              * This is the element the user can click on to dismiss the alert.
-             *
-             * Be aware that [WithDomEvents.onClick] gets overriden.
              *
              * Defaults [react.bootstrap.utilities.Close]
              */
@@ -260,7 +280,6 @@ fun RBuilder.dismissibleAlert(
  * Wrapper for a custom alert closing element.
  *
  * Build whatever close element you like.
- * Be aware that the [WithDomEvents.onClick] of the outer most element gets overwritten.
  *
  * @param block [RBuilder] block function
  * @return The ceated ReactElement

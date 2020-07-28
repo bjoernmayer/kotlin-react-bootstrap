@@ -276,6 +276,21 @@ You can build your own custom close element, by using `$closingElementName { }`.
                         ktFun(RBuilder::hr, style = FunStyle.INLINE_BLOCK) { }
                         ktFun(RElementBuilder<Alert.DismissibleProps>::closingElement) {
                             ktFun(solidInfoFun, parents = solidButtonBuilderParents) {
+                                ktFun(RElementBuilder<RProps>::attrs) {
+                                    ln { +"// The onClick event on the closing element can still be set" }
+                                    ktBlock("${Alert.Props::onClick.name} =") {
+                                        ktFun(
+                                            Console::log,
+                                            listOf("console"),
+                                            style = FunStyle.INLINE,
+                                            args = mapOf(
+                                                null to Quoted(
+                                                    "Phew. Good, that this worked out."
+                                                )
+                                            )
+                                        )
+                                    }
+                                }
                                 ln("Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!")
                             }
                         }
@@ -307,6 +322,12 @@ You can build your own custom close element, by using `$closingElementName { }`.
                 hr { }
                 closingElement {
                     Buttons.solid.info {
+                        attrs {
+                            // a onClick event on the closing element can still be set
+                            onClick = {
+                                console.log("Phew. Good, that this worked out.")
+                            }
+                        }
                         +"Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!"
                     }
                 }
