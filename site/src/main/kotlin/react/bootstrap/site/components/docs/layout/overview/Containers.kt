@@ -174,16 +174,16 @@ reached, where it will scale up with `md`, `lg`, and `xl`.
             importContainer()
             importContainerFun()
             ln { }
-            ktFun(RBuilder::container, args = mapOf( "viscosity" to Container.Viscosities.SM.ktN)) {
+            ktFun(RBuilder::container, args = mapOf("viscosity" to Container.Viscosities.SM.ktN)) {
                 ln("100% wide until small breakpoint")
             }
-            ktFun(RBuilder::container, args = mapOf( "viscosity" to Container.Viscosities.MD.ktN)) {
+            ktFun(RBuilder::container, args = mapOf("viscosity" to Container.Viscosities.MD.ktN)) {
                 ln("100% wide until medium breakpoint")
             }
-            ktFun(RBuilder::container, args = mapOf( "viscosity" to Container.Viscosities.LG.ktN)) {
+            ktFun(RBuilder::container, args = mapOf("viscosity" to Container.Viscosities.LG.ktN)) {
                 ln("100% wide until large breakpoint")
             }
-            ktFun(RBuilder::container, args = mapOf( "viscosity" to Container.Viscosities.XL.ktN)) {
+            ktFun(RBuilder::container, args = mapOf("viscosity" to Container.Viscosities.XL.ktN)) {
                 ln("100% wide until extra large breakpoint")
             }
         }

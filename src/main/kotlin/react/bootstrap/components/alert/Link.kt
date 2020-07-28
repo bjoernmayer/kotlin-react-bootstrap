@@ -1,7 +1,6 @@
 package react.bootstrap.components.alert
 
 import react.RElementBuilder
-import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.ElementProvider
