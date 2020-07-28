@@ -1,5 +1,3 @@
-@file:Suppress("NAME_SHADOWING", "NestedLambdaShadowedImplicitParameter")
-
 package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
@@ -16,13 +14,10 @@ import react.bootstrap.layout.grid.row.RowAttributes.ColCounts.Companion.CNT_2
 import react.bootstrap.layout.grid.row.RowAttributes.ColCounts.Companion.CNT_3
 import react.bootstrap.layout.grid.row.RowAttributes.ColCounts.Companion.CNT_4
 import react.bootstrap.layout.grid.row.row
+import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.ktF
-import react.bootstrap.site.components.docs.fixings.ktIB
-import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
@@ -45,8 +40,8 @@ of your columns on extra small, small, medium, large, or extra large devices how
             //language=Markdown
             +"""
 For grids that are the same from the smallest of devices to the largest, set the `all =
-${ColAttributes::class.simpleName}?`-argument. Specify a numbered `${ColAttributes.Sizes::class.simpleName}` enum value when you need
-a particularly sized column; otherwise, feel free to not set the argument at all, which defaults to `all =
+${ColAttributes::class.simpleName}?`-argument. Specify a numbered `${ColAttributes.Sizes::class.simpleName}` enum value
+when you need a particularly sized column; otherwise, feel free to not set the argument at all, which defaults to `all =
 ${EQ.name}`.
             """
         }
@@ -73,14 +68,22 @@ ${EQ.name}`.
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktRow(it) {
+                    ktRow {
                         for (x in 1..4) {
-                            ktIB(it, colFun) { "em { +\"all = ${EQ.name}\" }" }
+                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) {
+                                ktFun(RBuilder::em, style = FunStyle.INLINE) {
+                                    string("all = ${EQ.name}")
+                                }
+                            }
                         }
                     }
-                    ktRow(it) {
-                        ktIF(it, colFun, "all" to SZ_8.name)
-                        ktIF(it, colFun, "all" to SZ_4.name)
+                    ktRow {
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("all" to SZ_8.name)) {
+                            string("all = ${SZ_8.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("all" to SZ_4.name)) {
+                            string("all = ${SZ_4.name}")
+                        }
                     }
                 }
             }
@@ -116,13 +119,19 @@ stacked and becomes horizontal at the small breakpoint (`sm`).
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktRow(it) {
-                        ktIF(it, colFun, "sm" to SZ_8.name)
-                        ktIF(it, colFun, "sm" to SZ_4.name)
+                    ktRow {
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("sm" to SZ_8.name)) {
+                            string("sm = ${SZ_8.name}")
+                        }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("sm" to SZ_4.name)) {
+                            string("sm = ${SZ_4.name}")
+                        }
                     }
-                    ktRow(it) {
+                    ktRow {
                         for (x in 1..3) {
-                            ktIF(it, colFun, "sm" to EQ.name)
+                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("sm" to EQ.name)) {
+                                string("sm = ${EQ.name}")
+                            }
                         }
                     }
                 }
@@ -163,21 +172,41 @@ needed. See the example below for a better idea of how it all works.
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktRow(it) {
-                        ln(it) { +"// Stack the columns on mobile by making one full-width and the other half-width" }
-                        ktIF(it, colFun, "md" to SZ_8.name)
-                        ktIF(it, colFun, "all" to SZ_6.name, "md" to SZ_4.name)
-                    }
-                    ktRow(it) {
-                        ln(it) { +"// Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop" }
-                        for (x in 1..3) {
-                            ktIF(it, colFun, "all" to SZ_6.name, "md" to SZ_4.name)
+                    ktRow {
+                        ln { +"// Stack the columns on mobile by making one full-width and the other half-width" }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("md" to SZ_8.name)) {
+                            string("md = ${SZ_8.name}")
+                        }
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to SZ_6.name, "md" to SZ_4.name)
+                        ) {
+                            string("all = ${SZ_6.name}, md = ${SZ_4.name}")
                         }
                     }
-                    ktRow(it) {
-                        ln(2) { +"// Columns are always 50% wide, on mobile and desktop" }
+                    ktRow {
+                        ln { +"// Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop" }
+                        for (x in 1..3) {
+                            ktFun(
+                                RBuilder::col,
+                                style = FunStyle.INLINE_BLOCK,
+                                args = mapOf("all" to SZ_6.name, "md" to SZ_4.name)
+                            ) {
+                                string("all = ${SZ_6.name}, md = ${SZ_4.name}")
+                            }
+                        }
+                    }
+                    ktRow {
+                        ln { +"// Columns are always 50% wide, on mobile and desktop" }
                         for (x in 1..2) {
-                            ktIF(it, colFun, "all" to SZ_6.name)
+                            ktFun(
+                                RBuilder::col,
+                                style = FunStyle.INLINE_BLOCK,
+                                args = mapOf("all" to SZ_6.name)
+                            ) {
+                                string("all = ${SZ_6.name}")
+                            }
                         }
                     }
                 }
@@ -208,9 +237,9 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktF(it, rowFun, "all" to CNT_2.name) {
+                    ktFun(RBuilder::row, args = mapOf("all" to CNT_2.name)) {
                         for (x in 1..4) {
-                            ktIB(it, colFun, "+\"Column\"")
+                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Column") }
                         }
                     }
                 }
@@ -233,9 +262,9 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktF(it, rowFun, "all" to CNT_3.name) {
+                    ktFun(RBuilder::row, args = mapOf("all" to CNT_3.name)) {
                         for (x in 1..4) {
-                            ktIB(it, colFun, "+\"Column\"")
+                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Column") }
                         }
                     }
                 }
@@ -258,9 +287,9 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktF(it, rowFun, "all" to CNT_4.name) {
+                    ktFun(RBuilder::row, args = mapOf("all" to CNT_4.name)) {
                         for (x in 1..4) {
-                            ktIB(it, colFun, "+\"Column\"")
+                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Column") }
                         }
                     }
                 }
@@ -286,13 +315,16 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktF(it, rowFun, "all" to CNT_4.name) {
+                    ktFun(RBuilder::row, args = mapOf("all" to CNT_4.name)) {
                         for (x in 1..2) {
-                            ktIB(it, colFun, "+\"Column\"")
+                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Column") }
                         }
-                    }
-                    ktF(it, rowFun, "all" to CNT_4.name) {
-                        ktIF(it, colFun, "all" to SZ_6.name) { "+\"Column\"" }
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to SZ_6.name)
+                        ) { string("Column") }
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Column") }
                     }
                 }
             }
@@ -316,9 +348,9 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktF(it, rowFun, "all" to CNT_1.name, "sm" to CNT_2.name, "md" to CNT_4.name) {
+                    ktFun(RBuilder::row, args = mapOf("all" to CNT_1.name, "sm" to CNT_2.name, "md" to CNT_4.name)) {
                         for (x in 1..4) {
-                            ktIB(it, colFun, "+\"Column\"")
+                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Column") }
                         }
                     }
                 }
@@ -356,9 +388,21 @@ column widths, responsive tiers, reorders, and more).
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktF(it, rowFun, "gutters" to false) {
-                        ktIF(it, colFun, "sm" to SZ_6.name, "md" to SZ_8.name)
-                        ktIF(it, colFun, "all" to SZ_6.name, "md" to SZ_4.name)
+                    ktFun(RBuilder::row, args = mapOf("gutters" to false)) {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("sm" to SZ_6.name, "md" to SZ_8.name)
+                        ) {
+                            string("sm = ${SZ_6.name}, md = ${SZ_8.name}")
+                        }
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("all" to SZ_6.name, "md" to SZ_4.name)
+                        ) {
+                            string("all = ${SZ_6.name}, md = ${SZ_4.name}")
+                        }
                     }
                 }
             }
