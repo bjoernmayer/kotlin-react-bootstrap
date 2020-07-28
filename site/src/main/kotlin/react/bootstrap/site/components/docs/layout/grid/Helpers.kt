@@ -11,8 +11,6 @@ import react.bootstrap.layout.grid.row.row
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
-import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.dom.div
 
@@ -93,19 +91,14 @@ internal val RowAttributes.ItemsYs.import
         RowAttributes.ItemsYs.Companion::class
     )
 
-private val colFunFun = RBuilder::col
 internal val RBuilder.colFun: String
-    get() = colFunFun.name
-private val rowFunFun = RBuilder::row
+    get() = RBuilder::col.name
 internal val RBuilder.rowFun: String
-    get() = rowFunFun.name
+    get() = RBuilder::row.name
 
-internal fun CodeExampleBuilder.ktRow(
-    indentationLevel: Int = 1,
-    block: CodeExampleBuilder.(indentationLevel: Int) -> Unit
-) {
-    ktB(indentationLevel, rowFun) {
-        block(indentationLevel + 1)
+internal fun CodeExampleBuilder.ktRow(block: CodeExampleBuilder.() -> Unit) {
+    ktFun(RBuilder::row) {
+        block()
     }
 }
 
