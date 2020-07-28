@@ -15,13 +15,11 @@ import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_6
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.row
+import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
-import react.bootstrap.site.components.docs.fixings.ktIB
-import react.bootstrap.site.components.docs.fixings.ktIF
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
@@ -63,9 +61,17 @@ for 1 through 12 across all five grid tiers.
                 importRowFun()
                 ln { }
                 ktConRow {
-                    ktIB(it, colFun, "+\"First in DOM, no order applied\"")
-                    ktIF(it, colFun, "all" to ORD_12.name) { "+\" Second in DOM, with a larger order\"" }
-                    ktIF(it, colFun, "all" to ORD_1.name) { "+\"Third in DOM, with an order of 1\"" }
+                    ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("First in DOM, no order applied") }
+                    ktFun(
+                        RBuilder::col,
+                        style = FunStyle.INLINE_BLOCK,
+                        args = mapOf("all" to ORD_12.name)
+                    ) { string(" Second in DOM, with a larger order") }
+                    ktFun(
+                        RBuilder::col,
+                        style = FunStyle.INLINE_BLOCK,
+                        args = mapOf("all" to ORD_1.name)
+                    ) { string("Third in DOM, with an order of 1") }
                 }
             }
         }
@@ -114,17 +120,37 @@ columns. For example, `md = ${SZ_4.name} $off ${OFF_4.name}` moves `$colFun(md =
                 importRowFun()
                 ln { }
                 ktContainer {
-                    ktRow(it) {
-                        ktIF(it, colFun, "md" to SZ_4.name)
-                        ktIF(it, colFun, "md" to "${SZ_4.name} $off ${OFF_4.name}")
-                    }
-                    ktRow(it) {
-                        for (x in 1..2) {
-                            ktIF(it, colFun, "md" to "${SZ_3.name} $off ${OFF_3.name}")
+                    ktRow {
+                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("md" to SZ_4.name)) {
+                            string("md = ${SZ_4.name}")
+                        }
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("md" to "${SZ_4.name} $off ${OFF_4.name}")
+                        ) {
+                            string("md = ${SZ_4.name} $off ${OFF_4.name}")
                         }
                     }
-                    ktRow(it) {
-                        ktIF(it, colFun, "md" to "${SZ_6.name} $off ${OFF_3.name}")
+                    ktRow {
+                        for (x in 1..2) {
+                            ktFun(
+                                RBuilder::col,
+                                style = FunStyle.INLINE_BLOCK,
+                                args = mapOf("md" to "${SZ_3.name} $off ${OFF_3.name}")
+                            ) {
+                                string("md = ${SZ_3.name} $off ${OFF_3.name}")
+                            }
+                        }
+                    }
+                    ktRow {
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = mapOf("md" to "${SZ_6.name} $off ${OFF_3.name}")
+                        ) {
+                            string("md = ${SZ_6.name} $off ${OFF_3.name}")
+                        }
                     }
                 }
             }
