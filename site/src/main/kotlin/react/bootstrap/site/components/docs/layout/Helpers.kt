@@ -5,8 +5,6 @@ import react.bootstrap.layout.grid.container.Container
 import react.bootstrap.layout.grid.container.container
 import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
-import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.layout.grid.importFromGrid
 import kotlin.reflect.KClass
 
@@ -19,9 +17,9 @@ internal val Container.Viscosities.ktN: String
 internal val KClass<Container.Viscosities>.nestedName: String
     get() = buildNestedName(this, Container::class)
 
-internal fun CodeExampleBuilder.ktContainer(block: CodeExampleBuilder.(indentationLevel: Int) -> Unit) {
-    ktB(opener = containerFun) {
-        block(1)
+internal fun CodeExampleBuilder.ktContainer(block: CodeExampleBuilder.() -> Unit) {
+    ktBlock(opener = containerFun) {
+        block()
     }
 }
 

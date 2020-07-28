@@ -6,11 +6,10 @@ import react.RBuilder
 import react.bootstrap.content.tables.table
 import react.bootstrap.content.typography.muted
 import react.bootstrap.layout.grid.container.Container
+import react.bootstrap.layout.grid.container.container
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.ktF
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.components.docs.layout.containerFun
 import react.bootstrap.site.components.docs.layout.importContainer
 import react.bootstrap.site.components.docs.layout.importContainerFun
@@ -56,7 +55,7 @@ most layouts do not require a nested container.
             }
             li {
                 code {
-                    +"$$containerFun(viscosity = ${Container.Viscosities::class.nestedName}"
+                    +"$containerFun(viscosity = ${Container.Viscosities::class.nestedName}"
                     +"{.${Container.Viscosities.SM.name}|.${Container.Viscosities.MD.name}"
                     +"|.${Container.Viscosities.LG.name}|.${Container.Viscosities.XL.name}|}) { }"
                 }; +", which is "
@@ -142,7 +141,7 @@ breakpoint.
             importContainerFun()
             ln { }
             ktContainer {
-                ln(it) { +"// Content here" }
+                ln { +"// Content here" }
             }
         }
         subSectionTitle("Fluid", section)
@@ -157,8 +156,8 @@ spanning the entire width of the viewport.
             importContainer()
             importContainerFun()
             ln { }
-            ktF(0, containerFun, "viscosity" to Container.Viscosities.FLUID.ktN) {
-                ln(it) { +"// Content here" }
+            ktFun(RBuilder::container, args = mapOf("viscosity" to Container.Viscosities.FLUID.ktN)) {
+                ln { +"// Content here" }
             }
         }
         subSectionTitle("Responsive", section)
@@ -175,17 +174,17 @@ reached, where it will scale up with `md`, `lg`, and `xl`.
             importContainer()
             importContainerFun()
             ln { }
-            ktF(0, containerFun, "viscosity" to Container.Viscosities.SM.ktN) {
-                ln(it) { +"+\"100% wide until small breakpoint\"" }
+            ktFun(RBuilder::container, args = mapOf( "viscosity" to Container.Viscosities.SM.ktN)) {
+                ln("100% wide until small breakpoint")
             }
-            ktF(0, containerFun, "viscosity" to Container.Viscosities.MD.ktN) {
-                ln(it) { +"+\"100% wide until medium breakpoint\"" }
+            ktFun(RBuilder::container, args = mapOf( "viscosity" to Container.Viscosities.MD.ktN)) {
+                ln("100% wide until medium breakpoint")
             }
-            ktF(0, containerFun, "viscosity" to Container.Viscosities.LG.ktN) {
-                ln(it) { +"+\"100% wide until large breakpoint\"" }
+            ktFun(RBuilder::container, args = mapOf( "viscosity" to Container.Viscosities.LG.ktN)) {
+                ln("100% wide until large breakpoint")
             }
-            ktF(0, containerFun, "viscosity" to Container.Viscosities.XL.ktN) {
-                ln(it) { +"+\"100% wide until extra large breakpoint\"" }
+            ktFun(RBuilder::container, args = mapOf( "viscosity" to Container.Viscosities.XL.ktN)) {
+                ln("100% wide until extra large breakpoint")
             }
         }
     }
