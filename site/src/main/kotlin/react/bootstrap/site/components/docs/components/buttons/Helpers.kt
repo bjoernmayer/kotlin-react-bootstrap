@@ -16,6 +16,15 @@ import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction10
 
+internal val KClass<out Button.Types.Input.Type>.nestedName
+    get() = buildNestedName(this.simpleName!!, Button::class, Button.Types::class, Button.Types.Input::class)
+
+internal val KClass<out Button.Props>.nestedName
+    get() = buildNestedName(this.simpleName!!, Button::class)
+
+internal val KClass<out Button.Sizes>.nestedName
+    get() = buildNestedName(this.simpleName!!, Button::class)
+
 internal val KClass<out Outline>.nestedName
     get() = buildNestedName(this.simpleName!!, Button::class, Variants::class)
 

@@ -18,5 +18,6 @@ and more.
         child(Sizes::class)
         child(ActiveState::class)
         child(DisabledState::class)
+        child(Reference::class)
     }
 }
