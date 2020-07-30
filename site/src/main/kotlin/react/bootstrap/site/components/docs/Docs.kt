@@ -21,7 +21,7 @@ import react.bootstrap.site.components.docs.content.Content
 import react.bootstrap.site.components.docs.fixings.CategoryComponent
 import react.bootstrap.site.components.docs.layout.Layout
 import react.bootstrap.site.from
-import react.bootstrap.site.main
+import react.dom.main
 import react.router.dom.RouteResultProps
 import react.router.dom.redirect
 import react.router.dom.route

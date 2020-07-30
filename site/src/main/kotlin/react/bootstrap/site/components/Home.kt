@@ -16,6 +16,7 @@ import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.main
 import react.dom.br
 import react.dom.h1
+import react.dom.main
 import react.dom.p
 import react.functionalComponent
 import react.router.dom.routeLink
