@@ -8,7 +8,7 @@ internal class ButtonGroup : PageComponent() {
         pageTitle("Button group")
         pageLead {
             +"""
-Group a series of buttons together on a single line with the button group, and super-power them with JavaScript.
+Group a series of buttons together on a single line with the button group, and super-power them with Kotlin JavaScript.
             """.trimIndent()
         }
         child(BasicExample::class)
