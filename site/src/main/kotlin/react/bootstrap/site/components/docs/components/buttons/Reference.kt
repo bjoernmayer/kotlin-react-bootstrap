@@ -18,6 +18,7 @@ internal class Reference : SectionComponent() {
     override val title: String = "Reference"
 
     override fun RBuilder.render() {
+        sectionTitle(section)
         mapOf(
             Button.Variants.Solid.DANGER to (solidDangerFun to outlineDangerFun),
             Button.Variants.Solid.DARK to (solidDarkFun to outlineDarkFun),
@@ -48,49 +49,49 @@ internal class Reference : SectionComponent() {
                     "buttonFormEncType",
                     ButtonFormEncType::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "buttonFormMethod",
                     ButtonFormMethod::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "active",
                     Boolean::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "disabled",
                     Boolean::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "nowrap",
                     Boolean::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "sizes",
                     Button.Sizes::class.nestedName,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "blockSized",
                     Boolean::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "classes",
                     String::class,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "block",
@@ -129,43 +130,43 @@ internal class Reference : SectionComponent() {
                     "target",
                     String::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "active",
                     Boolean::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "disabled",
                     Boolean::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "nowrap",
                     Boolean::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "sizes",
                     Button.Sizes::class.nestedName,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "blockSized",
                     Boolean::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "classes",
                     String::class,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "block",
@@ -202,13 +203,13 @@ internal class Reference : SectionComponent() {
                     "name",
                     String::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "title",
                     String::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "type",
@@ -220,49 +221,49 @@ internal class Reference : SectionComponent() {
                     "inputFormEncType",
                     InputFormEncType::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "inputFormMethod",
                     InputFormMethod::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "active",
                     Boolean::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "disabled",
                     Boolean::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "nowrap",
                     Boolean::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "sizes",
                     Button.Sizes::class.nestedName,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "blockSized",
                     Boolean::class.simpleName!!,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "classes",
                     String::class,
                     true,
-                    "null"
+                    FunReference.Argument.NULL
                 ),
                 FunReference.Argument(
                     "block",

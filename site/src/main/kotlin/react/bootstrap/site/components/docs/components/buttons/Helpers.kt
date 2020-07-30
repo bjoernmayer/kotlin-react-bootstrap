@@ -11,7 +11,6 @@ import react.bootstrap.components.button.Button.Variants
 import react.bootstrap.components.button.Button.Variants.Outline
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.components.button.buttonGroup
 import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import kotlin.reflect.KClass

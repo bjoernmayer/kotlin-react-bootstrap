@@ -35,6 +35,7 @@ internal class Reference : SectionComponent() {
     override val title: String = "Reference"
 
     override fun RBuilder.render() {
+        sectionTitle(section)
         subSectionTitle(alertName, section)
         p {
             +"Adds an alert component."
@@ -45,7 +46,7 @@ internal class Reference : SectionComponent() {
                 setOf(RBuilder::class.simpleName!!),
                 setOf(
                     FunReference.Argument("variant", Alert.Variants::class.nestedName),
-                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
                     FunReference.Argument("block", "RHandler<${Alert.Props::class.nestedName}>")
                 ),
                 "ReactElement"
@@ -62,8 +63,8 @@ internal class Reference : SectionComponent() {
                 setOf(RBuilder::class.simpleName!!),
                 setOf(
                     FunReference.Argument("variant", Alert.Variants::class.nestedName),
-                    FunReference.Argument("fade", Boolean::class, true, "null"),
-                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("fade", Boolean::class, true, FunReference.Argument.NULL),
+                    FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
                     FunReference.Argument("block", "RHandler<${Alert.DismissibleProps::class.nestedName}>")
                 ),
                 "ReactElement"
@@ -117,7 +118,7 @@ Custom `h1` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
                 RElementBuilder<Alert.Props>::h1,
                 setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
-                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
                     FunReference.Argument("block", "RDOMHandler<${H1::class.simpleName}>")
                 ),
                 "ReactElement"
@@ -135,7 +136,7 @@ Custom `h2` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
                 RElementBuilder<Alert.Props>::h2,
                 setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
-                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
                     FunReference.Argument("block", "RDOMHandler<${H2::class.simpleName}>")
                 ),
                 "ReactElement"
@@ -153,7 +154,7 @@ Custom `h3` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
                 RElementBuilder<Alert.Props>::h3,
                 setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
-                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
                     FunReference.Argument("block", "RDOMHandler<${H3::class.simpleName}>")
                 ),
                 "ReactElement"
@@ -171,7 +172,7 @@ Custom `h4` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
                 RElementBuilder<Alert.Props>::h4,
                 setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
-                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
                     FunReference.Argument("block", "RDOMHandler<${H4::class.simpleName}>")
                 ),
                 "ReactElement"
@@ -189,7 +190,7 @@ Custom `h5` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
                 RElementBuilder<Alert.Props>::h5,
                 setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
-                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
                     FunReference.Argument("block", "RDOMHandler<${H5::class.simpleName}>")
                 ),
                 "ReactElement"
@@ -207,7 +208,7 @@ Custom `h6` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
                 RElementBuilder<Alert.Props>::h6,
                 setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
                 setOf(
-                    FunReference.Argument("classes", String::class, true, "null"),
+                    FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
                     FunReference.Argument("block", "RDOMHandler<${H6::class.simpleName}>")
                 ),
                 "ReactElement"
