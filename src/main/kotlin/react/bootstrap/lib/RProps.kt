@@ -19,6 +19,10 @@ interface WithRHandlerBlock<T : RProps> : RProps {
     var handler: RHandler<T>
 }
 
+interface WithAriaLabel : RProps {
+    var ariaLabel: String?
+}
+
 interface WithDomEvents : RProps {
     var onAbort: EventHandler?
     var onAnimationEnd: EventHandler?

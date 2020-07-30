@@ -40,6 +40,9 @@ internal val Button.Types.Input.Type.ktN
 internal val ButtonGroup.Behaviours.ktN
     get() = buildNestedName(name, ButtonGroup::class, this::class)
 
+internal val ButtonGroup.Appearance.ktN
+    get() = buildNestedName(name, ButtonGroup::class, this::class)
+
 internal val RBuilder.solidButtonBuilderParents
     get() = listOf(RBuilder::Buttons.name, this.Buttons::solid.name)
 internal val RBuilder.outlineButtonBuilderParents
@@ -83,10 +86,6 @@ internal val RBuilder.solidWarningFun: ButtonFun
 internal val RBuilder.outlineWarningFun: ButtonFun
     get() = Buttons.outline::warning
 
-internal fun CodeExampleBuilder.importButtonsBuilder() {
-    import(buildNestedName(RBuilder::Buttons.name, "button", "components"))
-}
-
 internal fun CodeExampleBuilder.importButton() {
-    import(buildNestedName(Button::class.simpleName!!, "button", "components"))
+    import(buildNestedName(Button::class.simpleName!!, "components", "button"))
 }

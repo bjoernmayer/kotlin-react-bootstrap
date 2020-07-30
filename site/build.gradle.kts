@@ -22,7 +22,8 @@ dependencies {
     implementation(npm("file-loader", "6.0.0"))
 
     implementation(npm("react-syntax-highlighter", "12.2.1"))
-    implementation(npm("markdown-to-jsx", "6.11.1"))
+    implementation(npm("markdown-to-jsx", "6.11.4"))
+    testImplementation(npm("karma", "5.1.1"))
 }
 
 kotlin.target {

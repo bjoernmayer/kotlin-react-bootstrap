@@ -53,6 +53,10 @@ internal data class FunReference(
             nullable: Boolean,
             default: String
         ) : this(name, type.simpleName!!, nullable, default)
+
+        companion object {
+            const val NULL = "null"
+        }
     }
 
     fun print(oneLine: Boolean): String {
@@ -72,7 +76,7 @@ internal data class FunReference(
             argStringBuilder.toString()
         }
 
-        val returnTypeString = returnType?.let { ": $it" }
+        val returnTypeString = ": ${(returnType ?: Unit::class.simpleName!!)}"
 
         return if (oneLine) {
             "fun $receiverString${kFunction.name}(${argsStrings.joinToString()})$returnTypeString"

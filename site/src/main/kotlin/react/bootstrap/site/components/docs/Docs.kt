@@ -107,7 +107,7 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
     }
 
     internal object Pages {
-        var categories: List<Category> = listOf<Category>(
+        var categories: List<Category> = listOf(
 //            Category(
 //                "Getting started",
 //                "getting-started",

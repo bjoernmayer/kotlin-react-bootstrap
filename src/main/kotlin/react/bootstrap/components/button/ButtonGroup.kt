@@ -11,6 +11,7 @@ import react.RComponent
 import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
+import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.WithTypeFlag
@@ -112,11 +113,26 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
     }
 
     override fun RBuilder.render() {
-        val classes = if (props.renderAsGroup == true) {
-            props.className.appendClass(ClassNames.BTN_GROUP)
-        } else {
-            props.className
+        val btnGroupClasses = mutableSetOf<ClassNames>()
+
+        if (props.appearance == Appearance.DEFAULT || props.appearance == null) {
+            btnGroupClasses.add(ClassNames.BTN_GROUP)
         }
+
+        if (props.appearance == Appearance.VERTICAL) {
+            btnGroupClasses.add(ClassNames.BTN_GROUP_VERTICAL)
+        }
+
+        props.sizes?.also {
+            btnGroupClasses.add(
+                when (it) {
+                    Sizes.SM -> ClassNames.BTN_GROUP_SM
+                    Sizes.LG -> ClassNames.BTN_GROUP_LG
+                }
+            )
+        }
+
+        val classes = props.className.appendClass(btnGroupClasses)
 
         div(classes = classes) {
             attrs {
@@ -168,18 +184,30 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
     }
 
     interface Props : WithClassName {
-        var label: String?
+        var appearance: Appearance?
         var behaviour: Behaviours?
         var buttons: Map<Int, Button.Props>?
-        var renderAsGroup: Boolean?
+        var label: String?
+        var sizes: Sizes?
     }
 
     interface State : RState {
         var activeButtons: Collection<Int>?
     }
 
+    enum class Appearance {
+        DEFAULT,
+        NONE,
+        VERTICAL
+    }
+
     enum class Behaviours {
         CHECKBOXES,
         RADIOS;
+    }
+
+    enum class Sizes(override val className: ClassNames) : ClassNameEnum {
+        SM(ClassNames.BTN_GROUP_SM),
+        LG(ClassNames.BTN_GROUP_LG);
     }
 }

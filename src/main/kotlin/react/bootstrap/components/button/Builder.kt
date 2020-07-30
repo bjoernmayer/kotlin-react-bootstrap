@@ -838,10 +838,11 @@ val RBuilder.Buttons
     get() = ButtonBuilder(this)
 
 fun RBuilder.buttonGroup(
+    appearance: ButtonGroup.Appearance = ButtonGroup.Appearance.DEFAULT,
     behaviour: ButtonGroup.Behaviours? = null,
-    label: String? = null,
     classes: String? = null,
-    renderAsGroup: Boolean = true,
+    label: String? = null,
+    sizes: ButtonGroup.Sizes? = null,
     block: RHandler<ButtonGroup.Props>
 ): ReactElement {
     val builder = RElementBuilder<ButtonGroup.Props>(jsObject())
@@ -872,12 +873,27 @@ fun RBuilder.buttonGroup(
 
     return child(ButtonGroup::class) {
         attrs {
+            this.appearance = appearance
             this.behaviour = behaviour
-            this.label = label
-            this.className = classes
             this.buttons = buttons
-            this.renderAsGroup = renderAsGroup
+            this.className = classes
+            this.label = label
+            this.sizes = sizes
         }
         block()
     }
 }
+
+fun RBuilder.buttonToolbar(
+    classes: String? = null,
+    label: String? = null,
+    block: RHandler<ButtonToolbar.Props>
+): ReactElement =
+    child(ButtonToolbar::class) {
+        attrs {
+            className = classes
+            ariaLabel = label
+        }
+
+        block()
+    }

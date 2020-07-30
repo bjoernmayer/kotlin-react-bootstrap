@@ -9,6 +9,9 @@ import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
+import react.bootstrap.site.components.docs.components.importButtonGroup
+import react.bootstrap.site.components.docs.components.importButtonGroupBuilder
+import react.bootstrap.site.components.docs.components.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -127,7 +130,7 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
             """
         }
         liveExample {
-            buttonGroup(ButtonGroup.Behaviours.RADIOS) {
+            buttonGroup(behaviour = ButtonGroup.Behaviours.RADIOS) {
                 for (x in 1..3) {
                     Buttons.solid.secondary(active = x == 1) {
                         attrs {
@@ -138,7 +141,7 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
                 }
             }
             br { }
-            buttonGroup(ButtonGroup.Behaviours.CHECKBOXES) {
+            buttonGroup(behaviour = ButtonGroup.Behaviours.CHECKBOXES) {
                 for (x in 1..3) {
                     Buttons.solid.secondary {
                         attrs {
@@ -151,9 +154,11 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
         }
         codeExample {
             importButton()
+            importButtonGroup()
             importButtonsBuilder()
+            importButtonGroupBuilder()
             ln { }
-            ktFun(RBuilder::buttonGroup, args = mapOf(null to ButtonGroup.Behaviours.RADIOS.ktN)) {
+            ktFun(RBuilder::buttonGroup, args = mapOf("behaviour" to ButtonGroup.Behaviours.RADIOS.ktN)) {
                 for (x in 1..3) {
                     val args = if (x == 1) {
                         mapOf<String?, Any>("active" to true)
@@ -180,7 +185,7 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
                 }
             }
             ktFun(RBuilder::br, style = FunStyle.INLINE)
-            ktFun(RBuilder::buttonGroup, args = mapOf(null to ButtonGroup.Behaviours.CHECKBOXES.ktN)) {
+            ktFun(RBuilder::buttonGroup, args = mapOf("behaviour" to ButtonGroup.Behaviours.CHECKBOXES.ktN)) {
                 for (x in 1..3) {
                     ktFun(solidSecondaryFun, solidButtonBuilderParents) {
                         ktFun(RElementBuilder<RProps>::attrs) {
@@ -206,11 +211,11 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
             //language=Markdown
             +"""
 Or you use actual checkboxes and radios and display them as buttons. If you do not like the looks of a `buttonGroup` you
-can set `${ButtonGroup.Props::renderAsGroup.name}` to `false`.
+can set `${ButtonGroup.Props::appearance.name}` to `${ButtonGroup.Appearance.NONE.ktN}`.
             """
         }
         liveExample {
-            buttonGroup(renderAsGroup = false) {
+            buttonGroup(appearance = ButtonGroup.Appearance.NONE) {
                 for (x in 1..6) {
                     if (x % 2 == 0) {
                         Buttons.solid.secondary(
@@ -235,9 +240,11 @@ can set `${ButtonGroup.Props::renderAsGroup.name}` to `false`.
         }
         codeExample {
             importButton()
+            importButtonGroup()
             importButtonsBuilder()
+            importButtonGroupBuilder()
             ln { }
-            ktFun(RBuilder::buttonGroup, args = mapOf("renderAsGroup" to false)) {
+            ktFun(RBuilder::buttonGroup, args = mapOf("appearance" to ButtonGroup.Appearance.NONE.ktN)) {
                 for (x in 1..6) {
                     if (x % 2 == 0) {
                         ktFun(
