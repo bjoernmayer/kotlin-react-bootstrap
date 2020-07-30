@@ -40,7 +40,9 @@ Images in figures have no explicit size, so be sure to add the `img(fluid)` to `
         }
         liveExample {
             figure {
-                svg(classes = "bd-placeholder-img ${ClassNames.IMG_FLUID} ${ClassNames.FIGURE_IMG}") {
+                svg(
+                    "bd-placeholder-img ${ClassNames.IMG_FLUID} ${ClassNames.FIGURE_IMG} ${ClassNames.ROUNDED}"
+                ) {
                     attrs {
                         set("width", "400")
                         set("height", "300")
