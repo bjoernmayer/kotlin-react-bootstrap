@@ -5,9 +5,10 @@ import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
 import react.bootstrap.components.button.buttonToolbar
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.components.buttons.importButtonsBuilder
 import react.bootstrap.site.components.docs.components.buttons.solidButtonBuilderParents
 import react.bootstrap.site.components.docs.components.buttons.solidSecondaryFun
+import react.bootstrap.site.components.docs.components.importButtonGroupBuilder
+import react.bootstrap.site.components.docs.components.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -46,7 +47,7 @@ out groups, buttons, and more.
         }
         codeExample {
             importButtonsBuilder()
-            import("components.button.${RBuilder::buttonGroup.name}")
+            importButtonGroupBuilder()
             import("components.button.${RBuilder::buttonToolbar.name}")
             ln { }
             ktFun(RBuilder::buttonToolbar, args = mapOf("label" to Quoted("Toolbar with button groups"))) {

@@ -115,8 +115,12 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
     override fun RBuilder.render() {
         val btnGroupClasses = mutableSetOf<ClassNames>()
 
-        if (props.renderAsGroup == true) {
+        if (props.appearance == Appearance.DEFAULT || props.appearance == null) {
             btnGroupClasses.add(ClassNames.BTN_GROUP)
+        }
+
+        if (props.appearance == Appearance.VERTICAL) {
+            btnGroupClasses.add(ClassNames.BTN_GROUP_VERTICAL)
         }
 
         props.sizes?.also {
@@ -180,15 +184,21 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
     }
 
     interface Props : WithClassName {
-        var label: String?
+        var appearance: Appearance?
         var behaviour: Behaviours?
         var buttons: Map<Int, Button.Props>?
-        var renderAsGroup: Boolean? // todo add change to enum with: DEFAULT, NO_GROUP, VERTICAL
+        var label: String?
         var sizes: Sizes?
     }
 
     interface State : RState {
         var activeButtons: Collection<Int>?
+    }
+
+    enum class Appearance {
+        DEFAULT,
+        NONE,
+        VERTICAL
     }
 
     enum class Behaviours {

@@ -15,5 +15,6 @@ Group a series of buttons together on a single line with the button group, and s
         child(ButtonToolbar::class)
         child(Sizing::class)
         // Todo add Nesting when Dropdown component is done
+        child(VerticalVariation::class)
     }
 }

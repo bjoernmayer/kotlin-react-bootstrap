@@ -4,7 +4,9 @@ import react.RBuilder
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
-import react.bootstrap.site.components.docs.components.buttons.importButtonsBuilder
+import react.bootstrap.site.components.docs.components.importButtonGroup
+import react.bootstrap.site.components.docs.components.importButtonGroupBuilder
+import react.bootstrap.site.components.docs.components.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -47,16 +49,9 @@ Instead of applying button sizing classes to every button in a group, just set `
             br { }
         }
         codeExample {
-            import("components.button.ButtonGroup")
+            importButtonGroup()
             importButtonsBuilder()
-            import("components.button.${RBuilder::buttonGroup.name}")
-            ln { }
-            ktFun(
-                RBuilder::buttonGroup,
-                args = mapOf("sizes" to ButtonGroup.Sizes.LG.ktN, "label" to Quoted("..."))
-            ) {
-                ln { +"..." }
-            }
+            importButtonGroupBuilder()
             ktFun(RBuilder::br, style = FunStyle.INLINE_BLOCK) { }
             ktFun(
                 RBuilder::buttonGroup,

@@ -11,6 +11,7 @@ import react.bootstrap.components.button.Button.Variants
 import react.bootstrap.components.button.Button.Variants.Outline
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
+import react.bootstrap.components.button.buttonGroup
 import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import kotlin.reflect.KClass
@@ -38,6 +39,9 @@ internal val Button.Types.Input.Type.ktN
     get() = buildNestedName(name, Button::class, Button.Types::class, Button.Types.Input::class)
 
 internal val ButtonGroup.Behaviours.ktN
+    get() = buildNestedName(name, ButtonGroup::class, this::class)
+
+internal val ButtonGroup.Appearance.ktN
     get() = buildNestedName(name, ButtonGroup::class, this::class)
 
 internal val RBuilder.solidButtonBuilderParents
@@ -83,10 +87,6 @@ internal val RBuilder.solidWarningFun: ButtonFun
 internal val RBuilder.outlineWarningFun: ButtonFun
     get() = Buttons.outline::warning
 
-internal fun CodeExampleBuilder.importButtonsBuilder() {
-    import(buildNestedName(RBuilder::Buttons.name, "button", "components"))
-}
-
 internal fun CodeExampleBuilder.importButton() {
-    import(buildNestedName(Button::class.simpleName!!, "button", "components"))
+    import(buildNestedName(Button::class.simpleName!!, "components", "button"))
 }

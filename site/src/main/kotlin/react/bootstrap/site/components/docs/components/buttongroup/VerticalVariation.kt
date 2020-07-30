@@ -1,47 +1,48 @@
 package react.bootstrap.site.components.docs.components.buttongroup
 
 import react.RBuilder
+import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
-import react.bootstrap.site.components.docs.components.buttons.solidButtonBuilderParents
-import react.bootstrap.site.components.docs.components.buttons.solidSecondaryFun
+import react.bootstrap.site.components.docs.components.buttons.ktN
+import react.bootstrap.site.components.docs.components.importButtonGroup
 import react.bootstrap.site.components.docs.components.importButtonGroupBuilder
 import react.bootstrap.site.components.docs.components.importButtonsBuilder
-import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 
-internal class BasicExample : SectionComponent() {
-    override val title: String = "Basic example"
+internal class VerticalVariation : SectionComponent() {
+    override val title: String = "Vertical variation"
 
     override fun RBuilder.render() {
         sectionTitle(section)
         Markdown {
             //language=Markdown
             +"""
-Wrap a series of buttons in `${RBuilder::buttonGroup.name}`.
+Make a set of buttons appear vertically stacked rather than horizontally. __Split button dropdowns are not supported
+here.__
             """
         }
-        val leftMiddleRight = listOf("Left", "Middle", "Right")
         liveExample {
-            buttonGroup {
-                leftMiddleRight.forEach {
-                    Buttons.solid.secondary { +it }
+            buttonGroup(ButtonGroup.Appearance.VERTICAL) {
+                for (x in 1..6) {
+                    Buttons.solid.secondary { +"Button" }
                 }
             }
         }
+        // Todo add second liveExample featuring Dropdowns
         codeExample {
+            importButtonGroup()
             importButtonsBuilder()
             importButtonGroupBuilder()
             ln { }
-            ktFun(RBuilder::buttonGroup) {
-                leftMiddleRight.forEach {
-                    ktFun(solidSecondaryFun, solidButtonBuilderParents, style = FunStyle.INLINE_BLOCK) {
-                        string(it)
-                    }
-                }
+            ktFun(
+                RBuilder::buttonGroup,
+                args = mapOf(null to ButtonGroup.Appearance.VERTICAL.ktN)
+            ) {
+                ln { +"..." }
             }
         }
     }

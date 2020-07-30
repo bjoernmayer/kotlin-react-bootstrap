@@ -5,6 +5,7 @@ import react.RBuilder
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.buildNestedName
+import react.bootstrap.site.components.docs.components.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent

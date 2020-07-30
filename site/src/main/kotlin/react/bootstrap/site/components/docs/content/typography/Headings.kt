@@ -56,7 +56,7 @@ heading but cannot use the associated HTML element.
                 RBuilder::h4,
                 RBuilder::h5,
                 RBuilder::h6
-            ).forEachIndexed() { index, function ->
+            ).forEachIndexed { index, function ->
                 ktFun(function, style = FunStyle.INLINE_BLOCK, args = mapOf(null to "RBuilder::p")) {
                     string("h${index + 1}. Bootstrap heading")
                 }
