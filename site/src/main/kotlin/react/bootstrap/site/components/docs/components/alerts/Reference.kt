@@ -1,3 +1,5 @@
+@file:Suppress("DuplicatedCode")
+
 package react.bootstrap.site.components.docs.components.alerts
 
 import kotlinx.html.H1
@@ -9,9 +11,8 @@ import kotlinx.html.H6
 import react.RBuilder
 import react.RElementBuilder
 import react.bootstrap.components.alert.Alert
-import react.bootstrap.components.alert.alert
+import react.bootstrap.components.alert.Alerts
 import react.bootstrap.components.alert.closingElement
-import react.bootstrap.components.alert.dismissibleAlert
 import react.bootstrap.components.alert.h1
 import react.bootstrap.components.alert.h2
 import react.bootstrap.components.alert.h3
@@ -22,9 +23,7 @@ import react.bootstrap.components.alert.heading
 import react.bootstrap.components.alert.link
 import react.bootstrap.content.typography.Headings
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.WithDomEvents
 import react.bootstrap.site.components.docs.FunReference
-import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.kt
@@ -36,40 +35,45 @@ internal class Reference : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        subSectionTitle(alertName, section)
-        p {
-            +"Adds an alert component."
-        }
-        codeExample {
-            +FunReference(
-                RBuilder::alert,
-                setOf(RBuilder::class.simpleName!!),
-                setOf(
-                    FunReference.Argument("variant", Alert.Variants::class.nestedName),
-                    FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
-                    FunReference.Argument("block", "RHandler<${Alert.Props::class.nestedName}>")
-                ),
-                "ReactElement"
-            ).print(false)
-        }
-        subSectionTitle(dismissibleAlertName, section)
-        p {
-            +"Adds an dismissible alert component."
+        mapOf(
+            Alert.Variants.DANGER to Alerts::danger,
+            Alert.Variants.DARK to Alerts::dark,
+            Alert.Variants.INFO to Alerts::info,
+            Alert.Variants.LIGHT to Alerts::light,
+            Alert.Variants.PRIMARY to Alerts::primary,
+            Alert.Variants.SECONDARY to Alerts::secondary,
+            Alert.Variants.SUCCESS to Alerts::success,
+            Alert.Variants.WARNING to Alerts::warning
+        ).forEach { (variant, function) ->
+            val variantName = variant::class.simpleName!!.toLowerCase().capitalize()
+            subSectionTitle(function.name, section)
+            p {
+                +"Adds an alert component with the $variantName context."
+            }
+            codeExample {
+                +FunReference(
+                    function,
+                    alertBuilderParents.toSet(),
+                    setOf(
+                        FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
+                        FunReference.Argument("block", "RHandler<${Alert.Props::class.nestedName}>")
+                    ),
+                    "ReactElement"
+                ).print(false)
+                ln { }
+                +FunReference(
+                    function,
+                    dismissibleAlertBuilderParents.toSet(),
+                    setOf(
+                        FunReference.Argument("fade", Boolean::class, true, FunReference.Argument.NULL),
+                        FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
+                        FunReference.Argument("block", "RHandler<${Alert.DismissibleProps::class.nestedName}>")
+                    ),
+                    "ReactElement"
+                ).print(false)
+            }
         }
 
-        codeExample {
-            +FunReference(
-                RBuilder::dismissibleAlert,
-                setOf(RBuilder::class.simpleName!!),
-                setOf(
-                    FunReference.Argument("variant", Alert.Variants::class.nestedName),
-                    FunReference.Argument("fade", Boolean::class, true, FunReference.Argument.NULL),
-                    FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
-                    FunReference.Argument("block", "RHandler<${Alert.DismissibleProps::class.nestedName}>")
-                ),
-                "ReactElement"
-            ).print(false)
-        }
         subSectionTitle(linkName, section)
         Markdown {
             //language=Markdown
@@ -217,15 +221,6 @@ Custom `h6` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to 
         subSectionTitle(closingElementName, section)
         p {
             +"Wrapper for a custom alert closing element."
-        }
-        alert(Alert.Variants.INFO) {
-            Markdown {
-                //language=Markdown
-                +"""
-Be aware the `${buildNestedName(WithDomEvents::onClick.name, WithDomEvents::class)}` of the outer most element gets
-overwritten.
-                """
-            }
         }
         codeExample {
             +FunReference(

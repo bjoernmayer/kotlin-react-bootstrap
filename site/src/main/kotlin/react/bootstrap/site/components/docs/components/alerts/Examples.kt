@@ -7,14 +7,13 @@ import react.RBuilder
 import react.RElementBuilder
 import react.RProps
 import react.bootstrap.components.alert.Alert
-import react.bootstrap.components.alert.alert
+import react.bootstrap.components.alert.Alerts
 import react.bootstrap.components.alert.closingElement
-import react.bootstrap.components.alert.dismissibleAlert
-import react.bootstrap.components.alert.h4
 import react.bootstrap.components.alert.link
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.WithDomEvents
+import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.components.buttons.outlineButtonBuilderParents
 import react.bootstrap.site.components.docs.components.buttons.outlineDangerFun
 import react.bootstrap.site.components.docs.components.buttons.solidButtonBuilderParents
@@ -52,19 +51,29 @@ Alerts are available for any length of text, as well as an optional dismiss butt
 eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.kt}`).
             """
         }
+        val variants = mapOf(
+            Alert.Variants.DANGER to Alerts::danger,
+            Alert.Variants.DARK to Alerts::dark,
+            Alert.Variants.INFO to Alerts::info,
+            Alert.Variants.LIGHT to Alerts::light,
+            Alert.Variants.PRIMARY to Alerts::primary,
+            Alert.Variants.SECONDARY to Alerts::secondary,
+            Alert.Variants.SUCCESS to Alerts::success,
+            Alert.Variants.WARNING to Alerts::warning
+        )
+
         liveExample {
-            Alert.Variants.values().iterator().forEach { variant ->
-                alert(variant) {
+            variants.forEach { (variant, function) ->
+                child(function.invoke(null) {
                     +"A simple ${variant.name.toLowerCase()} alert-check it out!"
-                }
+                })
             }
         }
         codeExample {
-            import("components.alert.Alert")
-            import("components.alert.$alertName")
+            import("components.alert.Alerts")
             ln { }
-            Alert.Variants.values().iterator().forEach { variant ->
-                ktFun(RBuilder::alert, args = mapOf(null to variant.kt)) {
+            variants.forEach { (variant, function) ->
+                ktFun(function, alertBuilderParents) {
                     ln("A simple ${variant.name.toLowerCase()} alert-check it out!")
                 }
             }
@@ -78,20 +87,19 @@ colored links within any alert.
             """
         }
         liveExample {
-            Alert.Variants.values().iterator().forEach { variant ->
-                alert(variant) {
+            variants.forEach { (variant, function) ->
+                child(function.invoke(null) {
                     +"A simple ${variant.name.toLowerCase()} alert with "
                     link { a(href = "#") { +"an example link" } }; +". Give it a click if you like."
-                }
+                })
             }
         }
         codeExample {
-            import("components.alert.Alert")
+            import("components.alert.Alerts")
             import("components.alert.$linkName")
-            import("components.alert.$alertName")
             ln { }
-            Alert.Variants.values().iterator().forEach { variant ->
-                ktFun(RBuilder::alert, args = mapOf(null to variant.kt)) {
+            variants.forEach { (variant, function) ->
+                ktFun(function, alertBuilderParents) {
                     ln("A simple ${variant.name.toLowerCase()} alert with ")
                     ktFun(RElementBuilder<Alert.Props>::link, style = FunStyle.INLINE) {
                         ktFun(
@@ -113,7 +121,7 @@ Alerts can also contain additional HTML elements like headings, paragraphs and d
             """
         }
         liveExample {
-            alert(Alert.Variants.SUCCESS) {
+            Alerts.success {
                 h4 { +"Well done!" }
                 p {
                     +"""
@@ -128,12 +136,11 @@ Aww yeah, you successfully read this important alert message. This example text 
             }
         }
         codeExample {
-            import("components.alert.Alert")
-            import("components.alert.$alertName")
+            import("components.alert.Alerts")
             import("components.alert.h4")
             importClassNames()
             ln { }
-            ktFun(RBuilder::alert, args = mapOf(null to Alert.Variants.SUCCESS.kt)) {
+            ktFun(Alerts::success, alertBuilderParents) {
                 ktFun(RBuilder::h4, style = FunStyle.INLINE_BLOCK) {
                     string("Well done!")
                 }
@@ -154,11 +161,12 @@ Aww yeah, you successfully read this important alert message. This example text 
         Markdown {
             //language=Markdown
             +"""
-Use `$dismissibleAlertName` to create a dismissible alert.
+Use the builders under `${buildNestedName(Alerts::dismissible.name, RBuilder::Alerts.name)}` to create dismissible
+alerts.
             """
         }
         liveExample {
-            dismissibleAlert(variant = Alert.Variants.WARNING, fade = true) {
+            Alerts.dismissible.warning(fade = true) {
                 attrs {
                     dismissible?.apply {
                         onClose = {
@@ -173,10 +181,9 @@ Use `$dismissibleAlertName` to create a dismissible alert.
             }
         }
         codeExample {
-            import("components.alert.Alert")
-            import("components.alert.$dismissibleAlertName")
+            import("components.alert.Alerts")
             ln { }
-            ktFun(RBuilder::dismissibleAlert, args = mapOf("variant" to Alert.Variants.WARNING.kt, "fade" to "true")) {
+            ktFun(Alerts.dismissible::warning, dismissibleAlertBuilderParents, args = mapOf("fade" to "true")) {
                 ktFun(RElementBuilder<RProps>::attrs) {
                     ktFun(Any::apply, listOf("${Alert.Props::dismissible.name}?")) {
                         ktBlock("${Alert.Props.Dismissible::onClose.name} =") {
@@ -222,7 +229,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
         """
         }
         liveExample {
-            dismissibleAlert(variant = Alert.Variants.INFO) {
+            Alerts.dismissible.info {
                 +"You want some cookies?"
                 hr { }
                 closingElement {
@@ -233,13 +240,12 @@ You can build your own custom close element, by using `$closingElementName { }`.
             }
         }
         codeExample {
-            import("components.alert.Alert")
+            import("components.alert.Alerts")
             import("components.alert.$closingElementName")
-            import("components.alert.$dismissibleAlertName")
             import("components.button.Buttons")
             importClassNames()
             ln { }
-            ktFun(RBuilder::dismissibleAlert, args = mapOf("variant" to Alert.Variants.INFO.kt)) {
+            ktFun(Alerts.dismissible::info, dismissibleAlertBuilderParents) {
                 ln("You want some cookies")
                 ktFun(RBuilder::hr, style = FunStyle.INLINE_BLOCK) { }
                 ktFun(RElementBuilder<Alert.DismissibleProps>::closingElement) {
@@ -257,16 +263,15 @@ You can build your own custom close element, by using `$closingElementName { }`.
             child(dismissibleAlert)
         }
         codeExample {
-            import("components.alert.Alert")
+            import("components.alert.Alerts")
             import("components.alert.$closingElementName")
-            import("components.alert.$dismissibleAlertName")
             import("components.button.Buttons")
             ln { }
             ktBlock("private val dismissibleAlert = functionalComponent<RProps>") {
                 ln { +"var show by useState(false)" }
                 ln { }
                 ktBlock("if (show)") {
-                    ktFun(RBuilder::dismissibleAlert, args = mapOf("variant" to Alert.Variants.DANGER.kt)) {
+                    ktFun(Alerts.dismissible::danger, dismissibleAlertBuilderParents) {
                         ktFun(RElementBuilder<RProps>::attrs) {
                             ktFun(Any::apply, listOf("${Alert.Props::dismissible.name}?")) {
                                 ln { +"${Alert.Props.Dismissible::onClosed.name} = { show = false }" }
@@ -312,7 +317,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
         var show by useState(false)
 
         if (show) {
-            dismissibleAlert(variant = Alert.Variants.DANGER) {
+            Alerts.dismissible.danger {
                 attrs {
                     dismissible?.apply {
                         onClosed = { show = false }
