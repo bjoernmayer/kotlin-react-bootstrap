@@ -86,7 +86,7 @@ internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<Cod
         parents: List<String> = emptyList(),
         breakDownArgs: Boolean = false,
         style: FunStyle = FunStyle.BLOCK,
-        args: Map<String?, Any> = emptyMap(),
+        args: Map<out String?, Any> = emptyMap(),
         block: (CodeExampleBuilder.() -> Unit)? = null
     ) {
         +buildString {
@@ -182,7 +182,7 @@ internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<Cod
             }
         }
 
-    private fun Map<String?, Any>.toArgString(
+    private fun Map<out String?, Any>.toArgString(
         separator: CharSequence = ", ",
         prefix: CharSequence = "",
         postfix: CharSequence = "",
