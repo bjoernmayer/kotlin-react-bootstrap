@@ -97,7 +97,6 @@ Since we are working with react here, implementing a toggleable button is quite 
             child(toggleableButton)
         }
         codeExample {
-            importButton()
             importButtonsBuilder()
             ln { }
             ktBlock("private val toggleableButton = functionalComponent<RProps> {") {
@@ -153,7 +152,6 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
             }
         }
         codeExample {
-            importButton()
             importButtonGroup()
             importButtonsBuilder()
             importButtonGroupBuilder()
@@ -184,7 +182,7 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
                     }
                 }
             }
-            ktFun(RBuilder::br, style = FunStyle.INLINE)
+            ktFun(RBuilder::br, style = FunStyle.INLINE_BLOCK) { }
             ktFun(RBuilder::buttonGroup, args = mapOf("behaviour" to ButtonGroup.Behaviours.CHECKBOXES.ktN)) {
                 for (x in 1..3) {
                     ktFun(solidSecondaryFun, solidButtonBuilderParents) {

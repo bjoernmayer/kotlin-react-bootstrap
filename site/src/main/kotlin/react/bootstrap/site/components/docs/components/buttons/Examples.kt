@@ -43,7 +43,6 @@ for more control.
         }
 
         codeExample {
-            importButton()
             importButtonsBuilder()
             ln { }
             mapOf(
