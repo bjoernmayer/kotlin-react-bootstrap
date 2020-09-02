@@ -13,7 +13,7 @@ import react.dom.WithClassName
 import react.dom.fixAttributeName
 
 interface WithRenderAs : RProps {
-    var renderAs: (RBuilder.() -> ReactElement)?
+    var renderAs: ElementProvider?
 }
 
 abstract class RenderAsComponent<P : WithRenderAs, RP : WithClassName, S : RState> : RComponent<P, S> {

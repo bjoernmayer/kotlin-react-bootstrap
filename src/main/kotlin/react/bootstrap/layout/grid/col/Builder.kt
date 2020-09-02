@@ -3,6 +3,7 @@ package react.bootstrap.layout.grid.col
 import react.RBuilder
 import react.RHandler
 import react.ReactElement
+import react.bootstrap.lib.ElementProvider
 
 fun RBuilder.col(
     all: ColAttributes? = null,
@@ -10,7 +11,7 @@ fun RBuilder.col(
     md: ColAttributes? = null,
     lg: ColAttributes? = null,
     xl: ColAttributes? = null,
-    renderAs: (RBuilder.() -> ReactElement)? = null,
+    renderAs: ElementProvider? = null,
     classes: String? = null,
     block: RHandler<Col.Props>
 ): ReactElement = child(Col::class) {

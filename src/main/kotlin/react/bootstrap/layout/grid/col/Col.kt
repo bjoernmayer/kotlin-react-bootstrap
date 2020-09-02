@@ -1,4 +1,4 @@
-@file:Suppress("unused", "ClassName")
+@file:Suppress("unused", "ClassName", "DuplicatedCode")
 
 package react.bootstrap.layout.grid.col
 

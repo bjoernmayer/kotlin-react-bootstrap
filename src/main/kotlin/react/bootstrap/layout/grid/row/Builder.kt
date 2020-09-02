@@ -3,6 +3,7 @@ package react.bootstrap.layout.grid.row
 import react.RBuilder
 import react.RHandler
 import react.ReactElement
+import react.bootstrap.lib.ElementProvider
 
 fun RBuilder.row(
     all: RowAttributes? = null,
@@ -11,7 +12,7 @@ fun RBuilder.row(
     lg: RowAttributes? = null,
     xl: RowAttributes? = null,
     gutters: Boolean = true,
-    renderAs: (RBuilder.() -> ReactElement)? = null,
+    renderAs: ElementProvider? = null,
     classes: String? = null,
     block: RHandler<Row.Props>
 ): ReactElement = child(Row::class) {

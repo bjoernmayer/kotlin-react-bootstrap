@@ -4,6 +4,7 @@ import react.bootstrap.site.components.docs.Category
 import react.bootstrap.site.components.docs.components.alerts.Alerts
 import react.bootstrap.site.components.docs.components.buttongroup.ButtonGroup
 import react.bootstrap.site.components.docs.components.buttons.Buttons
+import react.bootstrap.site.components.docs.components.navs.Navs
 import react.bootstrap.site.components.docs.fixings.CategoryComponent
 
 internal class Components : CategoryComponent() {
@@ -28,7 +29,7 @@ internal class Components : CategoryComponent() {
 //                addSubCategory("List group", "list-group")
 //                addSubCategory("Media object", "media-object")
 //                addSubCategory("Modal", "modal")
-//                addSubCategory("Navs", "navs")
+            addCategory("Navs", "navs", Navs::class)
 //                addSubCategory("Navbar", "navbar")
 //                addSubCategory("Pagination", "pagination")
 //                addSubCategory("Popovers", "popovers")
