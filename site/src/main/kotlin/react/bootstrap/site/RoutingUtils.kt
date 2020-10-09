@@ -1,5 +1,6 @@
 package react.bootstrap.site
 
+import kotlinx.browser.window
 import react.RProps
 import react.bootstrap.site.external.MatchProps
 import react.bootstrap.site.external.matchPath
@@ -7,7 +8,6 @@ import react.functionalComponent
 import react.router.dom.RouteResultProps
 import react.router.dom.useLocation
 import react.useEffect
-import kotlin.browser.window
 
 internal fun <T : RProps> RouteResultProps<T>.from(props: RouteResultProps<T>) {
     history = props.history

@@ -235,28 +235,36 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                 ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = dtArgs) { string("Nesting") }
                 ktFun(RBuilder::col, style = FunStyle.BLOCK, args = ddArgs) {
                     ktFun(RBuilder::row, args = mapOf(renderDl)) {
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = dtArgs.toMutableMap().apply {
-                            put(
-                                "sm",
-                                buildNestedName(
-                                    ColAttributes.Sizes.SZ_4::class,
-                                    ColAttributes::class,
-                                    ColAttributes.Sizes::class
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.INLINE_BLOCK,
+                            args = dtArgs.toMutableMap().apply {
+                                put(
+                                    "sm",
+                                    buildNestedName(
+                                        ColAttributes.Sizes.SZ_4::class,
+                                        ColAttributes::class,
+                                        ColAttributes.Sizes::class
+                                    )
                                 )
-                            )
-                        }) {
+                            }
+                        ) {
                             string("Nested definition list")
                         }
-                        ktFun(RBuilder::col, style = FunStyle.BLOCK, args = ddArgs.toMutableMap().apply {
-                            put(
-                                "sm",
-                                buildNestedName(
-                                    ColAttributes.Sizes.SZ_8::class,
-                                    ColAttributes::class,
-                                    ColAttributes.Sizes::class
+                        ktFun(
+                            RBuilder::col,
+                            style = FunStyle.BLOCK,
+                            args = ddArgs.toMutableMap().apply {
+                                put(
+                                    "sm",
+                                    buildNestedName(
+                                        ColAttributes.Sizes.SZ_8::class,
+                                        ColAttributes::class,
+                                        ColAttributes.Sizes::class
+                                    )
                                 )
-                            )
-                        }) {
+                            }
+                        ) {
                             ln("Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc.")
                         }
                     }
