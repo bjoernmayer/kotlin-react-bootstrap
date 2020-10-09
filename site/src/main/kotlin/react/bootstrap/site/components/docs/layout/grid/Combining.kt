@@ -23,6 +23,7 @@ import react.dom.h4
 import react.dom.p
 import kotlin.reflect.KFunction2
 
+/* ktlint-disable parameter-list-wrapping */
 internal class Combining : SectionComponent() {
     private val sz = ColAttributes.Offsets::sz.name
     private val ord = ColAttributes.Sizes::ord.name
@@ -640,11 +641,11 @@ private data class Tripling<
     TP : ColAttributes,
     TT : ColAttributes
     >(
-        val tripleThis: TA,
-        val tripleWith1: Pairing<TB, TC, TP>,
-        val tripleWith2: Pairing<TC, TB, TP>,
-        val tripleUsing: KFunction2<TP, TA, TT>
-    ) {
+    val tripleThis: TA,
+    val tripleWith1: Pairing<TB, TC, TP>,
+    val tripleWith2: Pairing<TC, TB, TP>,
+    val tripleUsing: KFunction2<TP, TA, TT>
+) {
     val withList = listOf(
         tripleWith1,
         tripleWith2
@@ -689,15 +690,15 @@ private data class Quadruple<
     TP3 : ColAttributes,
     TTT : ColAttributes
     >(
-        val quadrupleThis: TA,
-        val quadrupleWith1: Tripling<TD, TB, TC, TP1, TTT>,
-        val quadrupleWith2: Tripling<TC, TB, TD, TP2, TTT>,
-        val quadrupleWith3: Tripling<TB, TC, TD, TP3, TTT>,
-        val quadrupleWith4: Tripling<TD, TC, TB, TP1, TTT>,
-        val quadrupleWith5: Tripling<TC, TD, TB, TP2, TTT>,
-        val quadrupleWith6: Tripling<TB, TD, TC, TP3, TTT>,
-        val quadrupleUsing: KFunction2<TTT, TA, ColAttributes.SizeOffsetOrderAlignmentQuadruple>
-    ) {
+    val quadrupleThis: TA,
+    val quadrupleWith1: Tripling<TD, TB, TC, TP1, TTT>,
+    val quadrupleWith2: Tripling<TC, TB, TD, TP2, TTT>,
+    val quadrupleWith3: Tripling<TB, TC, TD, TP3, TTT>,
+    val quadrupleWith4: Tripling<TD, TC, TB, TP1, TTT>,
+    val quadrupleWith5: Tripling<TC, TD, TB, TP2, TTT>,
+    val quadrupleWith6: Tripling<TB, TD, TC, TP3, TTT>,
+    val quadrupleUsing: KFunction2<TTT, TA, ColAttributes.SizeOffsetOrderAlignmentQuadruple>
+) {
     val withList = listOf(
         quadrupleWith1,
         quadrupleWith2,
@@ -727,3 +728,4 @@ private data class Quadruple<
 
     fun getQuadruple() = quadrupleUsing(quadrupleWith1.getTriple(), quadrupleThis)
 }
+/* ktlint-disable parameter-list-wrapping */

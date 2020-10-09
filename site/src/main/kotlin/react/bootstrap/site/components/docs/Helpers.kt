@@ -1,6 +1,6 @@
 package react.bootstrap.site.components.docs
 
-import kotlin.browser.document
+import kotlinx.browser.document
 import kotlin.reflect.KClass
 
 internal fun pageTitle(pagetitle: String) {

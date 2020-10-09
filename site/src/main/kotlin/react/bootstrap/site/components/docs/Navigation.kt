@@ -26,11 +26,7 @@ class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
 
             Docs.Pages.categories.forEach { category ->
                 div("bd-toc-item") {
-                    if (pathMatches(
-                            props.location.pathname,
-                            category.matchProps
-                        )
-                    ) {
+                    if (pathMatches(props.location.pathname, category.matchProps)) {
                         addClass("active")
                     }
 
@@ -44,11 +40,7 @@ class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
                     ul("nav bd-sidenav") {
                         category.pages.forEach { subCategory ->
                             li {
-                                if (pathMatches(
-                                        props.location.pathname,
-                                        subCategory.matchProps
-                                    )
-                                ) {
+                                if (pathMatches(props.location.pathname, subCategory.matchProps)) {
                                     markActive()
                                 }
                                 navLink<RProps>(subCategory.link) {
