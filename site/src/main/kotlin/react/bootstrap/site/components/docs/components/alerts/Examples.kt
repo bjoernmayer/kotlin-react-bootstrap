@@ -64,9 +64,11 @@ eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.kt}`).
 
         liveExample {
             variants.forEach { (variant, function) ->
-                child(function.invoke(null) {
-                    +"A simple ${variant.name.toLowerCase()} alert-check it out!"
-                })
+                child(
+                    function.invoke(null) {
+                        +"A simple ${variant.name.toLowerCase()} alert-check it out!"
+                    }
+                )
             }
         }
         codeExample {
@@ -88,10 +90,12 @@ colored links within any alert.
         }
         liveExample {
             variants.forEach { (variant, function) ->
-                child(function.invoke(null) {
-                    +"A simple ${variant.name.toLowerCase()} alert with "
-                    link { a(href = "#") { +"an example link" } }; +". Give it a click if you like."
-                })
+                child(
+                    function.invoke(null) {
+                        +"A simple ${variant.name.toLowerCase()} alert with "
+                        link { a(href = "#") { +"an example link" } }; +". Give it a click if you like."
+                    }
+                )
             }
         }
         codeExample {

@@ -1,4 +1,5 @@
 # Kotlin-React-Bootstrap
+[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 
 > [Bootstrap 4][bootstrap] components built with [Kotlin React][kotlin-react].
 
