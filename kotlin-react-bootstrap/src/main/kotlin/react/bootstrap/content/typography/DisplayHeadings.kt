@@ -8,7 +8,7 @@ import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.ElementProvider
-import react.bootstrap.lib.RenderAsComponent
+import react.bootstrap.lib.CustomisableComponent
 import react.bootstrap.lib.WithRenderAs
 import react.dom.WithClassName
 import react.dom.h1
@@ -16,7 +16,7 @@ import react.dom.h2
 import react.dom.h3
 import react.dom.h4
 
-class Display : RenderAsComponent<Display.Props, WithClassName, RState>() {
+class Display : CustomisableComponent<WithClassName, Display.Props, RState>() {
     override fun WithClassName.handleProps() {
         className = props.className.appendClass(props.variant.className)
     }

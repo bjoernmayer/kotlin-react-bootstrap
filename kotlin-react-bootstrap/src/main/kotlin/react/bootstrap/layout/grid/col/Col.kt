@@ -9,12 +9,12 @@ import react.bootstrap.appendClass
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.EQ
 import react.bootstrap.lib.Breakpoints
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.RenderAsComponent
+import react.bootstrap.lib.CustomisableComponent
 import react.bootstrap.lib.WithRenderAs
 import react.dom.WithClassName
 import react.dom.div
 
-class Col : RenderAsComponent<Col.Props, WithClassName, RState>() {
+class Col : CustomisableComponent<WithClassName, Col.Props, RState>() {
     override fun WithClassName.handleProps() {
         // Pairs and Triples match in multiple of those. That's why we need a Set
         val colClasses = mutableSetOf<ClassNames>()

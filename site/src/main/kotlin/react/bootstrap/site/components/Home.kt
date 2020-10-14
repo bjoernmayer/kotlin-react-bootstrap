@@ -13,7 +13,6 @@ import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.CENTER
 import react.bootstrap.layout.grid.row.row
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.main
 import react.dom.br
 import react.dom.h1
 import react.dom.main

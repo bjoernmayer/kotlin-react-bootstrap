@@ -6,3 +6,7 @@ dependencies {
     api(kotlinJsWrapper("react"))
     api(kotlinJsWrapper("react-dom"))
 }
+
+kotlin {
+    explicitApi()
+}

@@ -8,12 +8,12 @@ import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.Breakpoints
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.RenderAsComponent
+import react.bootstrap.lib.CustomisableComponent
 import react.bootstrap.lib.WithRenderAs
 import react.dom.WithClassName
 import react.dom.div
 
-class Row : RenderAsComponent<Row.Props, WithClassName, RState>() {
+class Row : CustomisableComponent<WithClassName, Row.Props, RState>() {
     override fun WithClassName.handleProps() {
         // Pairs and Triples match in multiple of those. That's why we need a Set
         val rowClasses = mutableSetOf(ClassNames.ROW)

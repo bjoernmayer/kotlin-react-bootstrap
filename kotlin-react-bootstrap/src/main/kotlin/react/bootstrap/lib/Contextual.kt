@@ -13,7 +13,7 @@ class Contextual {
         WARNING(ClassNames.BG_WARNING),
         WHITE(ClassNames.BG_WHITE);
 
-        // this should be moved into documentation
+        // Todo: this should be moved into documentation
         val kt = "${Contextual::class.simpleName}.${Background::class.simpleName}.$name"
     }
 }

@@ -23,7 +23,8 @@ import react.bootstrap.appendClass
 import react.bootstrap.lib.ClassNameEnum
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.EventHandler
-import react.bootstrap.lib.NoArgEventHandler
+import react.bootstrap.lib.WithActive
+import react.bootstrap.lib.WithDisabled
 import react.bootstrap.lib.WithDomEvents
 import react.bootstrap.lib.WithTypeFlag
 import react.bootstrap.lib.ariaDisabled
@@ -291,10 +292,7 @@ class Button(props: Props) : RComponent<Button.Props, Button.State>(props) {
         ) : Types()
     }
 
-    interface Props : WithClassName, WithDomEvents, WithTypeFlag<Button> {
-        var active: Boolean?
-        var onActive: NoArgEventHandler?
-        var disabled: Boolean?
+    interface Props : WithClassName, WithActive, WithDisabled, WithDomEvents, WithTypeFlag<Button> {
         var nowrap: Boolean?
         var sizes: Sizes?
         var type: Types?
