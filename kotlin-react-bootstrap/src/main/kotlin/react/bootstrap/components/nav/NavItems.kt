@@ -7,11 +7,24 @@ import react.bootstrap.appendClass
 import react.bootstrap.lib.AbstractComponent
 import react.bootstrap.lib.ClassNames
 import react.dom.WithClassName
+import react.dom.div
 import react.dom.li
 
 sealed class NavItems<P : NavItems.Props> : AbstractComponent<P, P, RState>() {
     class Li : NavItems<Li.Props>() {
         override fun RBuilder.getRenderer(): ReactElement = li { }
+
+        interface Props : NavItems.Props
+    }
+
+    class NavItem : NavItems<NavItem.Props>() {
+        override fun RBuilder.getRenderer(): ReactElement = div { }
+
+        interface Props : NavItems.Props
+    }
+
+    class DivItem : NavItems<DivItem.Props>() {
+        override fun RBuilder.getRenderer(): ReactElement = div { }
 
         interface Props : NavItems.Props
     }

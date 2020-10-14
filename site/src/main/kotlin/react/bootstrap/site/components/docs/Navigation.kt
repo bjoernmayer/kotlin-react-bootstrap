@@ -6,6 +6,7 @@ import react.RComponent
 import react.RProps
 import react.RState
 import react.bootstrap.addClass
+import react.bootstrap.components.nav.Navs
 import react.bootstrap.lib.ariaLabel
 import react.bootstrap.site.components.PATH_DOCS
 import react.bootstrap.site.pathMatches
@@ -37,7 +38,7 @@ class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
                         +category.name
                     }
 
-                    ul("nav bd-sidenav") {
+                    Navs.ul(classes = "bd-sidenav") {
                         category.pages.forEach { subCategory ->
                             li {
                                 if (pathMatches(props.location.pathname, subCategory.matchProps)) {

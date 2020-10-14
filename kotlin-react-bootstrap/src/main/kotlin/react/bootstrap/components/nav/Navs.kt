@@ -12,6 +12,9 @@ import react.dom.nav
 import react.dom.ol
 import react.dom.ul
 
+/**
+ * This is designed as a sealed class in order to differiante between different Props in the builder extension functions
+ */
 sealed class Navs<P : Navs.Props> : AbstractComponent<P, P, RState>() {
     class Ul : Navs<Ul.Props>() {
         override fun RBuilder.getRenderer(): ReactElement = ul { }

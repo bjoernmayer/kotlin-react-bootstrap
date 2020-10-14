@@ -1,6 +1,5 @@
 package react.bootstrap.lib
 
-import kotlinext.js.jsObject
 import react.Child
 import react.Children
 import react.RBuilder
@@ -56,7 +55,10 @@ abstract class AbstractComponent<RP : RProps, ACP : RProps, ACS : RState> : RCom
     /**
      * @return A clone of [ReactElement] with given children
      */
-    private fun <P : RProps> ReactElement.injectChildren(children: Array<out Child>, propHandler: P.() -> Unit): ReactElement =
+    private fun <P : RProps> ReactElement.injectChildren(
+        children: Array<out Child>,
+        propHandler: P.() -> Unit
+    ): ReactElement =
         cloneElement<P>(this, *children) {
             propHandler()
         }

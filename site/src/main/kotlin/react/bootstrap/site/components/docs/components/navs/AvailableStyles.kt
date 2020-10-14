@@ -3,6 +3,7 @@ package react.bootstrap.site.components.docs.components.navs
 import react.RBuilder
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.Navs.Appearance
+import react.bootstrap.components.nav.Navs.WidthHandling
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
 import react.bootstrap.lib.ClassNames
@@ -141,6 +142,55 @@ internal class AvailableStyles : SectionComponent() {
                 navItem {
                     navLink(href = "#") {
                         +"Link"
+                    }
+                }
+                navItem {
+                    navLink(href = "#") {
+                        +"Link"
+                    }
+                }
+                navItem {
+                    navLink(href = "#", disabled = true) {
+                        +"Link"
+                    }
+                }
+            }
+        }
+        subSectionTitle("Fill and justify", section)
+        liveExample {
+            Navs.ul(appearance = Appearance.PILLS, widthHandling = WidthHandling.FILL) {
+                navItem {
+                    navLink(href = "#", active = true) {
+                        +"Active"
+                    }
+                }
+                navItem {
+                    navLink(href = "#") {
+                        +"Much longer nav link"
+                    }
+                }
+                navItem {
+                    navLink(href = "#") {
+                        +"Link"
+                    }
+                }
+                navItem {
+                    navLink(href = "#", disabled = true) {
+                        +"Link"
+                    }
+                }
+            }
+        }
+        liveExample {
+            Navs.ul(appearance = Appearance.PILLS, widthHandling = WidthHandling.JUSTIFY) {
+                navItem {
+                    navLink(href = "#", active = true) {
+                        +"Active"
+                    }
+                }
+                navItem {
+                    navLink(href = "#") {
+                        +"Much longer nav link"
                     }
                 }
                 navItem {
