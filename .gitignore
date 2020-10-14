@@ -6,3 +6,8 @@ build
 
 # Ignore Coverage outputs
 out
+
+# Jetbrains
+**/.idea/*
+!.idea/icon.png
+!.idea/vcs.xml
