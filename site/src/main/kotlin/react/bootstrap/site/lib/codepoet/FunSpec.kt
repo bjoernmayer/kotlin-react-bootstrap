@@ -1,5 +1,6 @@
 package react.bootstrap.site.lib.codepoet
 
+import react.bootstrap.site.components.docs.nestedName
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.KProperty
@@ -32,60 +33,56 @@ internal class FunSpec private constructor(
         return this
     }
 
-    fun addParameter(
-        parameterName: String,
-        type: KClass<*>,
-        nullable: Boolean = false,
-        default: String? = null
-    ): FunSpec {
-        parameters.add(
-            Parameter(
-                parameterName,
-                type.simpleName!!,
-                nullable,
-                default
-            )
-        )
-
+    fun addParameter(parameter: Parameter): FunSpec {
+        parameters.add(parameter)
         return this
     }
+
+//    fun addParameter(
+//        parameterName: String,
+//        type: KClass<*>,
+//        nullable: Boolean = false,
+//        default: String? = null
+//    ): FunSpec {
+//        parameters.add(
+//            Parameter(
+//                parameterName,
+//                type,
+//                nullable,
+//                default
+//            )
+//        )
+//
+//        return this
+//    }
 
     fun addParameter(
         parameterName: String,
         type: String,
         nullable: Boolean = false,
         default: String? = null
-    ): FunSpec {
-        parameters.add(
-            Parameter(
-                parameterName,
-                type,
-                nullable,
-                default
-            )
-        )
+    ): FunSpec = addParameter(Parameter(parameterName, type, nullable, default))
 
-        return this
-    }
+    fun <T : Enum<*>> addParameter(
+        parameterName: String,
+        type: KClass<T>,
+        nullable: Boolean = false,
+        default: T? = null
+    ): FunSpec = addParameter(parameterName, type.nestedName, nullable, default?.nestedName)
 
+    fun addParameter(
+        parameterName: String,
+        type: KClass<*>,
+        nullable: Boolean = false,
+        default: String? = null
+    ): FunSpec = addParameter(parameterName, type.nestedName, nullable, default)
 
     fun addParameter(
         parameterName: String,
         type: Generic,
         nullable: Boolean = false,
         default: String? = null
-    ): FunSpec {
-        parameters.add(
-            Parameter(
-                parameterName,
-                type.simpleName,
-                nullable,
-                default
-            )
-        )
-
-        return this
-    }
+    ): FunSpec = addParameter(Parameter(parameterName, type.simpleName, nullable, default))
 
     fun returns(type: KClass<*>): FunSpec {
         returns = type.simpleName!!
@@ -112,27 +109,17 @@ internal class FunSpec private constructor(
             append("(")
         }
         append(
-            parameters.map {
-                buildString {
-                    append("${it.name}: ${it.type}")
-
-                    if (it.nullable) {
-                        append("?")
-                    }
-
-                    if (it.default !== null) {
-                        append(" = ${it.default}")
+            parameters
+                .map(Parameter::build)
+                .run {
+                    if (putParametersOnSeparateLines) {
+                        joinToString(",\n", postfix = "\n") {
+                            "    $it"
+                        }
+                    } else {
+                        joinToString(", ")
                     }
                 }
-            }.run {
-                if (putParametersOnSeparateLines) {
-                    joinToString(",\n", postfix = "\n") {
-                        "    $it"
-                    }
-                } else {
-                    joinToString(", ")
-                }
-            }
         )
         appendLine(
             buildString {
@@ -151,6 +138,39 @@ internal class FunSpec private constructor(
         val nullable: Boolean = false,
         val default: String? = null
     ) {
+        constructor(
+            name: String,
+            type: KClass<*>,
+            nullable: Boolean = false,
+            default: String? = null
+        ) : this(name, type.nestedName, nullable, default)
+
+        constructor(
+            name: String,
+            type: KClass<out Enum<*>>,
+            nullable: Boolean = false,
+            default: Enum<*>? = null
+        ) : this(name, type.nestedName, nullable, default?.nestedName)
+
+        constructor(
+            name: String,
+            type: Generic,
+            nullable: Boolean = false,
+            default: String? = null
+        ) : this(name, type.simpleName, nullable, default)
+
+        fun build() = buildString {
+            append("${name}: ${type}")
+
+            if (nullable) {
+                append("?")
+            }
+
+            if (default !== null) {
+                append(" = ${default}")
+            }
+        }
+
         companion object {
             const val NULL = "null"
         }

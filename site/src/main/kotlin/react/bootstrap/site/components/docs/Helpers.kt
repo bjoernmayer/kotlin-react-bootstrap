@@ -3,6 +3,12 @@ package react.bootstrap.site.components.docs
 import kotlinx.browser.document
 import kotlin.reflect.KClass
 
+internal val KClass<*>.nestedName: String
+    get() = this.js.name.replace("$", ".")
+
+internal val Enum<*>.nestedName: String
+    get() = this::class.nestedName + ".$name"
+
 internal fun pageTitle(pagetitle: String) {
     document.title = "$pagetitle · Kotlin React Bootstrap"
 }

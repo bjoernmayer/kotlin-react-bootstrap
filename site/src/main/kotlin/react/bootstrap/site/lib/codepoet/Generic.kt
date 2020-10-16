@@ -1,11 +1,21 @@
 package react.bootstrap.site.lib.codepoet
 
-import react.bootstrap.site.components.docs.components.alerts.nestedName
+import react.bootstrap.site.components.docs.nestedName
 import kotlin.reflect.KClass
 
 data class Generic(
-    private val clazz: KClass<*>,
-    private val type: KClass<*>
+    private val className: String,
+    private val typeName: String
 ) {
-    val simpleName = "${clazz.nestedName}<${type.nestedName}>"
+    constructor(
+        clazz: KClass<*>,
+        type: KClass<*>
+    ) : this(clazz.nestedName, type.nestedName)
+
+    constructor(
+        className: String,
+        type: KClass<*>
+    ) : this(className, type.nestedName)
+
+    val simpleName = "$className<$typeName>"
 }

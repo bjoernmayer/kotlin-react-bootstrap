@@ -58,7 +58,7 @@ out groups, buttons, and more.
                         .setLambdaArgument(
                             buildString {
                                 for (x in 1..4) {
-                                    append(
+                                    appendLine(
                                         FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
                                             .nestedBy(RBuilder::Buttons)
                                             .nestedBy(ButtonBuilder::solid)
@@ -74,7 +74,7 @@ out groups, buttons, and more.
                         .setLambdaArgument(
                             buildString {
                                 for (x in 5..7) {
-                                    append(
+                                    appendLine(
                                         FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
                                             .nestedBy(RBuilder::Buttons)
                                             .nestedBy(ButtonBuilder::solid)

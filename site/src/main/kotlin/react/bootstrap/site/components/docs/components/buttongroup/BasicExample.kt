@@ -40,7 +40,7 @@ Wrap a series of buttons in `${RBuilder::buttonGroup.name}`.
                 .setLambdaArgument(
                     buildString {
                         leftMiddleRight.forEach {
-                            append(
+                            appendLine(
                                 FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
                                     .nestedBy(RBuilder::Buttons)
                                     .nestedBy(ButtonBuilder::solid)
