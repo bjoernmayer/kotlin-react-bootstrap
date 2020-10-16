@@ -1,6 +1,7 @@
 package react.bootstrap.site.components.docs.components.buttongroup
 
 import react.RBuilder
+import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
 import react.bootstrap.site.components.docs.components.buttons.solidButtonBuilderParents
@@ -36,13 +37,18 @@ Wrap a series of buttons in `${RBuilder::buttonGroup.name}`.
             importButtonsBuilder()
             importButtonGroupBuilder()
             ln { }
-            ktFun(RBuilder::buttonGroup) {
-                leftMiddleRight.forEach {
-                    ktFun(solidSecondaryFun, solidButtonBuilderParents, style = FunStyle.INLINE_BLOCK) {
-                        string(it)
-                    }
+            +functionCall(RBuilder::buttonGroup)
+                .lambdaCalls {
+                   leftMiddleRight.forEach {
+                       add(
+                           functionCall(solidSecondaryFun)
+                               .nestedBy(RBuilder::Buttons)
+                               .nestedBy(ButtonBuilder::solid)
+                               .inline()
+                               .lambdaContent(plusString(it))
+                       )
+                   }
                 }
-            }
         }
     }
 }

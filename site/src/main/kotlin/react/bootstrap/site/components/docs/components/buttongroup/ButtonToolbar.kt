@@ -1,16 +1,14 @@
 package react.bootstrap.site.components.docs.components.buttongroup
 
 import react.RBuilder
+import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
 import react.bootstrap.components.button.buttonToolbar
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.components.buttons.solidButtonBuilderParents
 import react.bootstrap.site.components.docs.components.buttons.solidSecondaryFun
 import react.bootstrap.site.components.docs.components.importButtonGroupBuilder
 import react.bootstrap.site.components.docs.components.importButtonsBuilder
-import react.bootstrap.site.components.docs.fixings.FunStyle
-import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -50,36 +48,52 @@ out groups, buttons, and more.
             importButtonGroupBuilder()
             import("components.button.${RBuilder::buttonToolbar.name}")
             ln { }
-            ktFun(RBuilder::buttonToolbar, args = mapOf("label" to Quoted("Toolbar with button groups"))) {
-                ktFun(
-                    RBuilder::buttonGroup,
-                    args = mapOf("classes" to Quoted("\${${ClassNames.MR_2.kt}}"), "label" to Quoted("First group"))
-                ) {
-                    for (x in 1..4) {
-                        ktFun(solidSecondaryFun, solidButtonBuilderParents, style = FunStyle.INLINE_BLOCK) {
-                            string(x.toString())
-                        }
-                    }
-                }
-                ktFun(
-                    RBuilder::buttonGroup,
-                    args = mapOf("classes" to Quoted("\${${ClassNames.MR_2.kt}}"), "label" to Quoted("Second group"))
-                ) {
-                    for (x in 5..7) {
-                        ktFun(solidSecondaryFun, solidButtonBuilderParents, style = FunStyle.INLINE_BLOCK) {
-                            string(x.toString())
-                        }
-                    }
-                }
-                ktFun(
-                    RBuilder::buttonGroup,
-                    args = mapOf("label" to Quoted("Third group"))
-                ) {
-                    ktFun(solidSecondaryFun, solidButtonBuilderParents, style = FunStyle.INLINE_BLOCK) {
-                        string("8")
-                    }
-                }
-            }
+            +functionCall(RBuilder::buttonToolbar)
+                .arg("label", "Toolbar with button groups")
+                .block()
+                .lambdaCalls(
+                    functionCall(RBuilder::buttonGroup)
+                        .arg("classes", "\${${ClassNames.MR_2.kt}}")
+                        .arg("label", "First group")
+                        .block()
+                        .lambdaCalls {
+                            for (x in 1..4) {
+                                add(
+                                    functionCall(solidSecondaryFun)
+                                        .nestedBy(RBuilder::Buttons)
+                                        .nestedBy(ButtonBuilder::solid)
+                                        .inline()
+                                        .lambdaContent(plusString(x.toString()))
+                                )
+                            }
+                        },
+                    functionCall(RBuilder::buttonGroup)
+                        .arg("classes", "\${${ClassNames.MR_2.kt}}")
+                        .arg("label", "Second group")
+                        .block()
+                        .lambdaCalls {
+                            for (x in 5..7) {
+                                add(
+                                    functionCall(solidSecondaryFun)
+                                        .nestedBy(RBuilder::Buttons)
+                                        .nestedBy(ButtonBuilder::solid)
+                                        .inline()
+                                        .lambdaContent(plusString(x.toString()))
+                                )
+                            }
+                        },
+                    functionCall(RBuilder::buttonGroup)
+                        .arg("classes", "\${${ClassNames.MR_2.kt}}")
+                        .arg("label", "Third group")
+                        .block()
+                        .lambdaCalls(
+                            functionCall(solidSecondaryFun)
+                                .nestedBy(RBuilder::Buttons)
+                                .nestedBy(ButtonBuilder::solid)
+                                .inline()
+                                .lambdaContent(plusString("8"))
+                        )
+                )
         }
         // Todo Add Mixing with Input Groups
     }
