@@ -11,6 +11,7 @@ import kotlinx.html.H6
 import react.RBuilder
 import react.RElementBuilder
 import react.bootstrap.components.alert.Alert
+import react.bootstrap.components.alert.AlertBuilder
 import react.bootstrap.components.alert.Alerts
 import react.bootstrap.components.alert.closingElement
 import react.bootstrap.components.alert.h1
@@ -28,6 +29,8 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunSpec
+import react.bootstrap.site.lib.codepoet.Generic
 import react.dom.p
 
 internal class Reference : SectionComponent() {
@@ -51,26 +54,21 @@ internal class Reference : SectionComponent() {
                 +"Adds an alert component with the $variantName context."
             }
             codeExample {
-                +FunReference(
-                    function,
-                    alertBuilderParents.toSet(),
-                    setOf(
-                        FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
-                        FunReference.Argument("block", "RHandler<${Alert.Props::class.nestedName}>")
-                    ),
-                    "ReactElement"
-                ).print(false)
+                +FunSpec.builder(function)
+                    .nestedBy(RBuilder::Alerts)
+                    .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                    .addParameter("block", "RHandler<${Alert.Props::class.nestedName}>")
+                    .returns("ReactElement")
+                    .build()
                 ln { }
-                +FunReference(
-                    function,
-                    dismissibleAlertBuilderParents.toSet(),
-                    setOf(
-                        FunReference.Argument("fade", Boolean::class, true, FunReference.Argument.NULL),
-                        FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
-                        FunReference.Argument("block", "RHandler<${Alert.DismissibleProps::class.nestedName}>")
-                    ),
-                    "ReactElement"
-                ).print(false)
+                +FunSpec.builder(function)
+                    .nestedBy(RBuilder::Alerts)
+                    .nestedBy(AlertBuilder::dismissible)
+                    .addParameter("fade", Boolean::class, true, FunSpec.Parameter.NULL)
+                    .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                    .addParameter("block", "RHandler<${Alert.DismissibleProps::class.nestedName}>")
+                    .returns("ReactElement")
+                    .build()
             }
         }
 
@@ -82,14 +80,11 @@ Adds `${ClassNames.ALERT_LINK.kt}` to the outer most `ReactElement` resulting fr
             """
         }
         codeExample {
-            +FunReference(
-                RElementBuilder<Alert.Props>::link,
-                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
-                setOf(
-                    FunReference.Argument("block", "ElementProvider")
-                ),
-                "ReactElement"
-            ).print(true)
+            +FunSpec.builder(RElementBuilder<Alert.Props>::link, false)
+                .nestedBy(Generic(RElementBuilder::class, Alert.Props::class))
+                .addParameter("block", "ElementProvider")
+                .returns("ReactElement")
+                .build()
         }
         subSectionTitle(headingName, section)
         Markdown {
@@ -99,16 +94,12 @@ Adds `${ClassNames.ALERT_HEADING.kt}` to the outer most `ReactElement` resulting
             """
         }
         codeExample {
-            +FunReference(
-                RElementBuilder<Alert.Props>::heading,
-                setOf("${RElementBuilder::class.simpleName}<${Alert.Props::class.nestedName}>"),
-                setOf(
-
-                    FunReference.Argument("headings", Headings::class),
-                    FunReference.Argument("block", "ElementProvider")
-                ),
-                "ReactElement"
-            ).print(true)
+            +FunSpec.builder(RElementBuilder<Alert.Props>::heading, false)
+                .nestedBy(Generic(RElementBuilder::class, Alert.Props::class))
+                .addParameter("headings", Headings::class)
+                .addParameter("block", "ElementProvider")
+                .returns("ReactElement")
+                .build()
         }
         subSectionTitle("h1", section)
         Markdown {

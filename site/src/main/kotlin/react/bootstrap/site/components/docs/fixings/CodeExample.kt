@@ -8,7 +8,6 @@ import react.RProps
 import react.RState
 import react.ReactElement
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.FunctionCallCodeBuilder
 import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.external.PrismLight
 import react.dom.figure
@@ -59,10 +58,6 @@ internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<Cod
 
     internal fun plusMultiLineString(content: String): String = "+\"\"\"\n$content\"\"\""
 
-    operator fun FunctionCallCodeBuilder.unaryPlus() {
-        +this.build()
-    }
-
     internal fun multiline(vararg contents: String) {
         ln { +"+\"\"\"" }
         // no ln to not have indent
@@ -89,10 +84,6 @@ internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<Cod
     internal fun importClassNames() {
         import("lib.${ClassNames::class.simpleName}")
     }
-
-    internal fun functionCall(function: KFunction<*>): FunctionCallCodeBuilder =
-        FunctionCallCodeBuilder()
-            .function(function)
 
     internal fun ktFun(
         function: KFunction<*>,

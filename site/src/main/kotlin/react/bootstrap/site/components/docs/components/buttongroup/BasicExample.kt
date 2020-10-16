@@ -4,11 +4,10 @@ import react.RBuilder
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
-import react.bootstrap.site.components.docs.components.buttons.solidButtonBuilderParents
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.components.docs.components.buttons.solidSecondaryFun
 import react.bootstrap.site.components.docs.components.importButtonGroupBuilder
 import react.bootstrap.site.components.docs.components.importButtonsBuilder
-import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -37,18 +36,21 @@ Wrap a series of buttons in `${RBuilder::buttonGroup.name}`.
             importButtonsBuilder()
             importButtonGroupBuilder()
             ln { }
-            +functionCall(RBuilder::buttonGroup)
-                .lambdaCalls {
-                   leftMiddleRight.forEach {
-                       add(
-                           functionCall(solidSecondaryFun)
-                               .nestedBy(RBuilder::Buttons)
-                               .nestedBy(ButtonBuilder::solid)
-                               .inline()
-                               .lambdaContent(plusString(it))
-                       )
-                   }
-                }
+            +FunCall.builder(RBuilder::buttonGroup)
+                .setLambdaArgument(
+                    buildString {
+                        leftMiddleRight.forEach {
+                            append(
+                                FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
+                                    .nestedBy(RBuilder::Buttons)
+                                    .nestedBy(ButtonBuilder::solid)
+                                    .setLambdaArgument(plusString(it))
+                                    .build()
+                            )
+                        }
+                    }
+                )
+                .build()
         }
     }
 }

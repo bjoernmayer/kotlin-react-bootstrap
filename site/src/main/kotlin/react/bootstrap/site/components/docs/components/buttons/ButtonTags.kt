@@ -5,7 +5,7 @@ import react.RBuilder
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.site.components.docs.FunctionCallCodeBuilder
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.components.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.FunStyle
@@ -47,26 +47,12 @@ __Keep in mind, that the `input` element cannot have child elements.__
             importButton()
             importButtonsBuilder()
             ln { }
-            +FunctionCallCodeBuilder()
-                .function(solidPrimaryFun)
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
-                .arg("href", "#")
-                .lambdaCalls {
-                    plusString("Link")
-                }
-                .inline()
+                .addArgument("href", "#")
+                .setLambdaArgument(plusString("Link"))
                 .build()
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "href" to Quoted("#")
-                )
-            ) {
-                string("Link")
-            }
             ln(" ")
             ktFun(
                 solidPrimaryFun,
