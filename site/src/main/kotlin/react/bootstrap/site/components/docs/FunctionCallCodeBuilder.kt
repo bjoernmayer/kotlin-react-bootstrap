@@ -1,5 +1,6 @@
 package react.bootstrap.site.components.docs
 
+import react.bootstrap.lib.ClassNames
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.KProperty
@@ -18,6 +19,7 @@ internal class FunctionCallCodeBuilder {
     private var putArgumentsOnSeparteLine: Boolean = false
     private var style: Style = Style.BLOCK
     private var indent: Int = 0
+    private var semicolon: Boolean = false
 
     fun function(function: KFunction<*>): FunctionCallCodeBuilder {
         this.function = function
@@ -44,6 +46,11 @@ internal class FunctionCallCodeBuilder {
         return this
     }
 
+    fun arg(parameterName: String, value: ClassNames): FunctionCallCodeBuilder {
+        args.add(parameterName to "\${${value.kt}}")
+        return this
+    }
+
     fun putArgumentsOnSeparteLine(): FunctionCallCodeBuilder {
         putArgumentsOnSeparteLine = true
         return this
@@ -54,8 +61,18 @@ internal class FunctionCallCodeBuilder {
         return this
     }
 
-    fun lambdaContent(content: String): FunctionCallCodeBuilder {
-        lambda = content
+    fun semicolon(): FunctionCallCodeBuilder {
+        semicolon = true
+        return this
+    }
+
+    fun semicolon(value: Boolean): FunctionCallCodeBuilder {
+        semicolon = value
+        return this
+    }
+
+    fun lambdaContent(vararg contents: String): FunctionCallCodeBuilder {
+        lambda = contents.joinToString("")
         return this
     }
 
@@ -139,19 +156,28 @@ internal class FunctionCallCodeBuilder {
                 } else {
                     append(" { $content }")
                 }
+
+                if (semicolon) {
+                    append(";")
+                }
             }
 
             if (style == Style.BLOCK) {
-//                val strippedContent =
-//                    if (content.endsWith("\n")) {
-//                        content.substringBeforeLast("\n")
-//                    } else {
-//                        content
-//                    }
+                val strippedContent =
+                    if (content.endsWith("\n")) {
+                        content.substringBeforeLast("\n")
+                    } else {
+                        content
+                    }
 
                 appendLine(" {")
-                appendLine(content.addIndentForEachLine())
-                append("}")
+                appendLine(strippedContent.addIndentForEachLine())
+
+                if (semicolon) {
+                    appendLine("};")
+                } else {
+                    appendLine("}")
+                }
             }
         }
 

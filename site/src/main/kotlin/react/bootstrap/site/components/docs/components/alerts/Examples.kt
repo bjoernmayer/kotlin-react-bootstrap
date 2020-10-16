@@ -75,9 +75,9 @@ eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.kt}`).
             import("components.alert.Alerts")
             ln { }
             variants.forEach { (variant, function) ->
-                ktFun(function, alertBuilderParents) {
-                    ln("A simple ${variant.name.toLowerCase()} alert-check it out!")
-                }
+                +functionCall(function)
+                    .nestedBy(RBuilder::Alerts)
+                    .lambdaContent(plusString("A simple ${variant.name.toLowerCase()} alert-check it out!"))
             }
         }
         subSectionTitle("Link color", section)
@@ -103,19 +103,23 @@ colored links within any alert.
             import("components.alert.$linkName")
             ln { }
             variants.forEach { (variant, function) ->
-                ktFun(function, alertBuilderParents) {
-                    ln("A simple ${variant.name.toLowerCase()} alert with ")
-                    ktFun(RElementBuilder<Alert.Props>::link, style = FunStyle.INLINE) {
-                        ktFun(
-                            RBuilder::a,
-                            style = FunStyle.INLINE,
-                            args = mapOf("href" to Quoted("#"))
-                        ) {
-                            string("an example link")
-                        }
-                        +"; +\". Give it a click if you like.\""
-                    }
-                }
+                +functionCall(function)
+                    .nestedBy(RBuilder::Alerts)
+                    .lambdaContent(
+                        plusString("A simple ${variant.name.toLowerCase()} alert with") + " \n" +
+                            functionCall(RElementBuilder<Alert.Props>::link)
+                                .inline()
+                                .lambdaContent(
+                                    functionCall(RBuilder::a)
+                                        .inline()
+                                        .arg("href", "#")
+                                        .lambdaContent(plusString("an example link"))
+                                        .semicolon()
+                                        .build(),
+                                    " ${plusString(". Give it a click if you like.")}"
+                                ).build()
+
+                    )
             }
         }
         subSectionTitle("Additional content", section)
@@ -134,7 +138,7 @@ Aww yeah, you successfully read this important alert message. This example text 
                     """
                 }
                 hr { }
-                p("${ClassNames.MB_0}") {
+                p(classes = "${ClassNames.MB_0}") {
                     +"Whenever you need to, be sure to use margin utilities to keep things nice and tidy."
                 }
             }
@@ -144,6 +148,30 @@ Aww yeah, you successfully read this important alert message. This example text 
             import("components.alert.h4")
             importClassNames()
             ln { }
+            +functionCall(Alerts::success)
+                .nestedBy(RBuilder::Alerts)
+                .lambdaCalls(
+                    functionCall(RBuilder::h4)
+                        .inline()
+                        .lambdaContent(plusString("Well done!")),
+                    functionCall(RBuilder::p)
+                        .lambdaContent(
+                            // this is formatted wrong currently. the multi line string should not have indention
+                            plusMultiLineString("""
+Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you
+ can see how spacing within an alert works with this kind of content.
+                    """
+                            )
+                        ),
+                    functionCall(RBuilder::hr)
+                        .emptyLambda(),
+                    functionCall(RBuilder::p)
+                        .arg("classes", ClassNames.MB_0)
+                        .block()
+                        .lambdaContent(
+                            plusString("Whenever you need to, be sure to use margin utilities to keep things nice and tidy.")
+                        )
+                )
             ktFun(Alerts::success, alertBuilderParents) {
                 ktFun(RBuilder::h4, style = FunStyle.INLINE_BLOCK) {
                     string("Well done!")

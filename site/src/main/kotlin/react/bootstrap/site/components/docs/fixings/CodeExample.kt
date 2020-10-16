@@ -54,7 +54,10 @@ internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<Cod
     internal fun string(content: String) {
         +"+\"$content\""
     }
+
     internal fun plusString(content: String): String = "+\"$content\""
+
+    internal fun plusMultiLineString(content: String): String = "+\"\"\"\n$content\"\"\""
 
     operator fun FunctionCallCodeBuilder.unaryPlus() {
         +this.build()
