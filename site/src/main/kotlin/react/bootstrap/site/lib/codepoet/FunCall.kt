@@ -2,8 +2,9 @@ package react.bootstrap.site.lib.codepoet
 
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.lib.codepoet.IndentTool.indentLines
+import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.lib.codepoet.IndentTool.getIndent
+import react.bootstrap.site.lib.codepoet.IndentTool.indentLines
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.KProperty
@@ -16,7 +17,7 @@ internal class FunCall private constructor(
 ) {
     private val parents = mutableSetOf<Parent>()
 
-    private val arguments = mutableListOf<Pair<String?, Any>>()
+    private val arguments = mutableSetOf<Argument>()
 
     private var lambdaArgumentContent: String? = null
 
@@ -31,17 +32,12 @@ internal class FunCall private constructor(
     }
 
     fun addArgument(argumentName: String, value: Any): FunCall {
-        arguments.add(argumentName to value)
+        arguments.add(Argument(argumentName, value))
         return this
     }
 
     fun addArgument(value: Any): FunCall {
-        arguments.add(null to value)
-        return this
-    }
-
-    fun addArgument(parameterName: String, value: ClassNames): FunCall {
-        arguments.add(parameterName to "\${${value.kt}}")
+        arguments.add(Argument(value = value))
         return this
     }
 
@@ -80,7 +76,7 @@ internal class FunCall private constructor(
                 if (arguments.isNotEmpty()) {
                     if (putArgumentsOnSeparateLine) {
                         append(
-                            arguments.toArgString(
+                            arguments.buildArgString(
                                 ",\n",
                                 "\n",
                                 "\n",
@@ -88,7 +84,7 @@ internal class FunCall private constructor(
                             )
                         )
                     } else {
-                        append(arguments.toArgString())
+                        append(arguments.buildArgString())
                     }
                 }
 
@@ -114,9 +110,6 @@ internal class FunCall private constructor(
             }
 
             if (style == Style.BLOCK) {
-                console.log(content)
-                console.log(content.endsWith("\n    "))
-
                 appendLine(" {")
                 appendLine(content)
 
@@ -128,29 +121,15 @@ internal class FunCall private constructor(
             }
         }
 
-    private fun List<Pair<String?, Any>>.toArgString(
+    private fun Collection<Argument>.buildArgString(
         separator: CharSequence = ", ",
         prefix: CharSequence = "",
         postfix: CharSequence = "",
         linePrefix: CharSequence = ""
-    ): String = joinToString(separator, prefix, postfix) { (key, value) ->
+    ): String = joinToString(separator, prefix, postfix) { arg ->
         buildString {
             append(linePrefix)
-
-            key?.apply {
-                append("$this = ")
-            }
-
-            if (value is String) {
-                append("\"$value\"")
-            } else {
-                append(value)
-            }
-//            if (value is Quoted) {
-//                append("\"${(value).value}\"")
-//            } else {
-//                append(value)
-//            }
+            append(arg.build())
         }
     }
 
@@ -169,6 +148,26 @@ internal class FunCall private constructor(
             if (nullable) {
                 append("?")
             }
+        }
+    }
+
+    internal data class Argument constructor(
+        val name: String? = null,
+        val value: Any
+    ) {
+        fun build() = buildString {
+            name?.apply {
+                append("$this = ")
+            }
+
+            append(
+                when (value) {
+                    is ClassNames -> "\${${value.kt}}"
+                    is Enum<*> -> value.nestedName
+                    is String -> "\"$value\""
+                    else -> value
+                }
+            )
         }
     }
 
