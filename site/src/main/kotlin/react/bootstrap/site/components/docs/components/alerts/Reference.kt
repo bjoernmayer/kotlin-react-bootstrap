@@ -21,7 +21,6 @@ import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.kt
-import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunSpec
 import react.bootstrap.site.lib.codepoet.Generic

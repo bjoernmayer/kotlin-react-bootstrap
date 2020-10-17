@@ -109,8 +109,8 @@ provide matching colored links within any alert.
                 +FunCall.builder(function)
                     .nestedBy(RBuilder::Alerts)
                     .setLambdaArgument(
-                        plusString("A simple ${variant.name.toLowerCase()} alert with"),
-                        " \n",
+                        plusString("A simple ${variant.name.toLowerCase()} alert with "),
+                        "\n",
                         FunCall.builder(RElementBuilder<Alert.Props>::link, FunCall.Style.INLINE)
                             .setLambdaArgument(
                                 FunCall.builder(RBuilder::a, FunCall.Style.INLINE, appendSemicolon = true)
@@ -121,7 +121,6 @@ provide matching colored links within any alert.
                             ).build()
                     ).build()
             }
-
         }
         subSectionTitle("Additional content", section)
         p {
