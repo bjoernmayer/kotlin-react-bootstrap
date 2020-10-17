@@ -80,7 +80,7 @@ Adds `${ClassNames.ALERT_LINK.kt}` to the outer most `ReactElement` resulting fr
                 .returns("ReactElement")
                 .build()
         }
-        subSectionTitle(headingName, section)
+        subSectionTitle(RElementBuilder<Alert.Props>::heading.name, section)
         Markdown {
             //language=Markdown
             +"""

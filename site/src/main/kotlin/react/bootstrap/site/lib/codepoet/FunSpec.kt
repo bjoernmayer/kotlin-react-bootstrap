@@ -38,24 +38,6 @@ internal class FunSpec private constructor(
         return this
     }
 
-//    fun addParameter(
-//        parameterName: String,
-//        type: KClass<*>,
-//        nullable: Boolean = false,
-//        default: String? = null
-//    ): FunSpec {
-//        parameters.add(
-//            Parameter(
-//                parameterName,
-//                type,
-//                nullable,
-//                default
-//            )
-//        )
-//
-//        return this
-//    }
-
     fun addParameter(
         parameterName: String,
         type: String,
@@ -160,14 +142,14 @@ internal class FunSpec private constructor(
         ) : this(name, type.simpleName, nullable, default)
 
         fun build() = buildString {
-            append("${name}: ${type}")
+            append("$name: $type")
 
             if (nullable) {
                 append("?")
             }
 
             if (default !== null) {
-                append(" = ${default}")
+                append(" = $default")
             }
         }
 

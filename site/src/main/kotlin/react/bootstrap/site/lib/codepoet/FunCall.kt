@@ -2,31 +2,31 @@ package react.bootstrap.site.lib.codepoet
 
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.lib.codepoet.IndentTool.indentLines
+import react.bootstrap.site.lib.codepoet.IndentTool.getIndent
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.KProperty
 
 internal class FunCall private constructor(
-    private val function: KFunction<*>,
+    private val functionName: String,
     private val style: Style,
     private val putArgumentsOnSeparateLine: Boolean,
     private val appendSemicolon: Boolean
 ) {
-    private val parents = mutableSetOf<String>()
+    private val parents = mutableSetOf<Parent>()
 
     private val arguments = mutableListOf<Pair<String?, Any>>()
 
     private var lambdaArgumentContent: String? = null
 
-    private var lambda: String? = null
-
-    fun nestedBy(klazz: KClass<*>): FunCall {
-        parents.add(klazz.simpleName!!)
+    fun nestedBy(klazz: KClass<*>, nullable: Boolean = false): FunCall {
+        parents.add(Parent(klazz.simpleName!!, nullable))
         return this
     }
 
-    fun nestedBy(property: KProperty<*>): FunCall {
-        parents.add(property.name)
+    fun nestedBy(property: KProperty<*>, nullable: Boolean = false): FunCall {
+        parents.add(Parent(property.name, nullable))
         return this
     }
 
@@ -45,17 +45,12 @@ internal class FunCall private constructor(
         return this
     }
 
-    fun setLambdaArgument(vararg contents: String): FunCall {
-        lambdaArgumentContent = contents
+    fun setLambdaArgument(content: String, vararg contents: String): FunCall {
+        lambdaArgumentContent = listOf(content, *contents)
             .joinToString("")
             .run {
-                // Cut last newline
                 if (style == Style.BLOCK) {
-                    if (endsWith("\n")) {
-                        substringBeforeLast("\n")
-                    } else {
-                        this
-                    }.addIndentForEachLine()
+                    indentLines(this)
                 } else {
                     this
                 }
@@ -69,10 +64,14 @@ internal class FunCall private constructor(
     fun build(): String =
         buildString {
             if (parents.isEmpty()) {
-                append(function.name)
+                append(functionName)
             } else {
-                append(parents.joinToString("."))
-                append(".${function.name}")
+                append(
+                    parents.joinToString(".") {
+                        it.build()
+                    }
+                )
+                append(".$functionName")
             }
 
             if (arguments.isNotEmpty() || lambdaArgumentContent == null) {
@@ -84,7 +83,7 @@ internal class FunCall private constructor(
                             arguments.toArgString(
                                 ",\n",
                                 "\n",
-                                "\n${getIndent(0)}",
+                                "\n",
                                 getIndent(1)
                             )
                         )
@@ -102,7 +101,6 @@ internal class FunCall private constructor(
 
             val content = lambdaArgumentContent!!
 
-            //  || style == Style.INLINE_BLOCK
             if (style == Style.INLINE) {
                 if (content.isEmpty()) {
                     append(" { }")
@@ -116,6 +114,9 @@ internal class FunCall private constructor(
             }
 
             if (style == Style.BLOCK) {
+                console.log(content)
+                console.log(content.endsWith("\n    "))
+
                 appendLine(" {")
                 appendLine(content)
 
@@ -153,27 +154,41 @@ internal class FunCall private constructor(
         }
     }
 
-    private fun String.addIndentForEachLine() =
-        split("\n").joinToString("\n") {
-            "${getIndent(1)}$it"
-        }
-
-    private fun getIndent(level: Int): String =
-        buildString {
-            for (x in 1..level) {
-                append("    ")
-            }
-        }
-
     internal enum class Style {
         INLINE,
-        //        INLINE_BLOCK,
         BLOCK
+    }
+
+    internal data class Parent(
+        private val name: String,
+        private val nullable: Boolean = false
+    ) {
+        fun build() = buildString {
+            append(name)
+
+            if (nullable) {
+                append("?")
+            }
+        }
     }
 
     companion object {
         fun builder(
             function: KFunction<*>,
+            style: Style = Style.BLOCK,
+            putArgumentsOnSeparateLine: Boolean = false,
+            appendSemicolon: Boolean = false,
+        ) = FunCall(function.name, style, putArgumentsOnSeparateLine, appendSemicolon)
+
+        fun builder(
+            function: Generic,
+            style: Style = Style.BLOCK,
+            putArgumentsOnSeparateLine: Boolean = false,
+            appendSemicolon: Boolean = false,
+        ) = FunCall(function.simpleName, style, putArgumentsOnSeparateLine, appendSemicolon)
+
+        fun builder(
+            function: String,
             style: Style = Style.BLOCK,
             putArgumentsOnSeparateLine: Boolean = false,
             appendSemicolon: Boolean = false,
