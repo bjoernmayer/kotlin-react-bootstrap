@@ -8,49 +8,14 @@ import react.RElementBuilder
 import react.ReactElement
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.Button.Variants
-import react.bootstrap.components.button.Button.Variants.Outline
-import react.bootstrap.components.button.ButtonBuilder
-import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction10
-import kotlin.reflect.KProperty1
-
-internal val KClass<out Button.Types.Input.Type>.nestedName
-    get() = buildNestedName(this.simpleName!!, Button::class, Button.Types::class, Button.Types.Input::class)
-
-internal val KClass<out Button.Props>.nestedName
-    get() = buildNestedName(this.simpleName!!, Button::class)
-
-internal val KClass<out Button.Sizes>.nestedName
-    get() = buildNestedName(this.simpleName!!, Button::class)
-
-internal val KClass<out Outline>.nestedName
-    get() = buildNestedName(this.simpleName!!, Button::class, Variants::class)
 
 internal val KClass<out Variants>.normalName
     get() = simpleName!!.toLowerCase().capitalize()
-
-internal val Button.Sizes.ktN
-    get() = buildNestedName(name, Button::class, this::class)
-
-internal val Button.Types.Input.Type.ktN
-    get() = buildNestedName(name, Button::class, Button.Types::class, Button.Types.Input::class)
-
-internal val ButtonGroup.Behaviours.ktN
-    get() = buildNestedName(name, ButtonGroup::class, this::class)
-
-internal val ButtonGroup.Appearance.ktN
-    get() = buildNestedName(name, ButtonGroup::class, this::class)
-
-internal val RBuilder.solidButtonBuilderParents
-    get() = listOf(RBuilder::Buttons.name, this.Buttons::solid.name)
-internal val RBuilder.outlineButtonBuilderParents
-    get() = listOf(RBuilder::Buttons.name, this.Buttons::outline.name)
-
-val test: KProperty1<RBuilder, ButtonBuilder> = RBuilder::Buttons
 
 internal typealias ButtonFun = KFunction10<ButtonType, ButtonFormEncType?, ButtonFormMethod?, Boolean?, Boolean?,
     Boolean?, Button.Sizes?, Boolean?, String?, (RElementBuilder<Button.Props>.() -> Unit), ReactElement>

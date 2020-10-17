@@ -155,6 +155,8 @@ internal class FunCall private constructor(
         val name: String? = null,
         val value: Any
     ) {
+        internal data class PureValue(val value: String)
+
         fun build() = buildString {
             name?.apply {
                 append("$this = ")
@@ -164,6 +166,7 @@ internal class FunCall private constructor(
                 when (value) {
                     is ClassNames -> "\${${value.kt}}"
                     is Enum<*> -> value.nestedName
+                    is PureValue -> value.value
                     is String -> "\"$value\""
                     else -> value
                 }

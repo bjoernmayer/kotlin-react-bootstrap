@@ -5,15 +5,12 @@ import react.RBuilder
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.site.lib.codepoet.FunCall
-import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.components.importButtonsBuilder
-import react.bootstrap.site.components.docs.fixings.FunStyle
-import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 
 internal class ButtonTags : SectionComponent() {
     override val title: String = "Button tags"
@@ -53,70 +50,60 @@ __Keep in mind, that the `input` element cannot have child elements.__
                 .addArgument("href", "#")
                 .setLambdaArgument(plusString("Link"))
                 .build()
+            +"\n"
             ln(" ")
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "buttonType" to buildNestedName(ButtonType.submit.name, ButtonType::class.simpleName!!)
-                )
-            ) {
-                string("Button")
-            }
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("buttonType", ButtonType.submit)
+                .setLambdaArgument(plusString("Button"))
+                .build()
+            +"\n"
             ln(" ")
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "value" to Quoted("Input")
-                )
-            ) {
-                string("Input")
-            }
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("value", "Input")
+                .setLambdaArgument(plusString("Input"))
+                .build()
+            +"\n"
             ln(" ")
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "value" to Quoted("Submit"),
-                    "type" to Button.Types.Input.Type.SUBMIT.ktN
-                )
-            )
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("value", "Submit")
+                .addArgument("type", Button.Types.Input.Type.SUBMIT)
+                .setEmptyLambdaArgument()
+                .build()
+            +"\n"
             ln(" ")
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "value" to Quoted("Reset"),
-                    "type" to Button.Types.Input.Type.RESET.ktN
-                )
-            )
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("value", "Reset")
+                .addArgument("type", Button.Types.Input.Type.RESET)
+                .setEmptyLambdaArgument()
+                .build()
+            +"\n"
             ln(" ")
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "value" to Quoted("true"),
-                    "title" to Quoted("Checkbox"),
-                    "type" to Button.Types.Input.Type.CHECKBOX.ktN
-                )
-            )
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("value", "true")
+                .addArgument("title", "Checkbox")
+                .addArgument("type", Button.Types.Input.Type.CHECKBOX)
+                .setEmptyLambdaArgument()
+                .build()
+            +"\n"
             ln(" ")
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "value" to Quoted("true"),
-                    "title" to Quoted("Radio"),
-                    "type" to Button.Types.Input.Type.RADIO.ktN
-                )
-            )
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("value", "true")
+                .addArgument("title", "Radio")
+                .addArgument("type", Button.Types.Input.Type.RADIO)
+                .setEmptyLambdaArgument()
+                .build()
         }
     }
 }

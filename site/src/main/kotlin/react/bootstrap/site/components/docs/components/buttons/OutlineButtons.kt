@@ -2,13 +2,15 @@ package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
 import react.bootstrap.components.button.Button
+import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.components.importButtonsBuilder
-import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 
 internal class OutlineButtons : SectionComponent() {
     override val title: String = "Outline buttons"
@@ -54,9 +56,12 @@ In need of a button, but not the hefty background colors they bring? Use the
                 outlineSuccessFun to Button.Variants.Outline.SUCCESS,
                 outlineWarningFun to Button.Variants.Outline.WARNING
             ).forEach {
-                ktFun(it.key, outlineButtonBuilderParents, style = FunStyle.INLINE_BLOCK) {
-                    string(it.value::class.normalName)
-                }
+                +FunCall.builder(it.key, FunCall.Style.INLINE)
+                    .nestedBy(RBuilder::Buttons)
+                    .nestedBy(ButtonBuilder::outline)
+                    .setLambdaArgument(plusString(it.value::class.normalName))
+                    .build()
+                +"\n"
                 ln(" ")
             }
         }

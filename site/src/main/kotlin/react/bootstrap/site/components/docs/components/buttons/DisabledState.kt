@@ -2,14 +2,14 @@ package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
 import react.bootstrap.components.button.Button
+import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.components.importButtonsBuilder
-import react.bootstrap.site.components.docs.fixings.FunStyle
-import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 
 internal class DisabledState : SectionComponent() {
     override val title: String = "Disabled state"
@@ -31,23 +31,22 @@ Make buttons look inactive by setting the `disabled` boolean attribute to any `b
             importButton()
             importButtonsBuilder()
             ln { }
-            ktFun(
-                solidPrimaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("disabled" to true, "sizes" to Button.Sizes.LG.ktN)
-            ) {
-                string("Primary Button")
-            }
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("disabled", true)
+                .addArgument("sizes", Button.Sizes.LG)
+                .setLambdaArgument(plusString("Primary Button"))
+                .build()
+            +"\n"
             ln(" ")
-            ktFun(
-                solidSecondaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("disabled" to true, "sizes" to Button.Sizes.LG.ktN)
-            ) {
-                string("Button")
-            }
+            +FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("disabled", true)
+                .addArgument("sizes", Button.Sizes.LG)
+                .setLambdaArgument(plusString("Button"))
+                .build()
         }
         Markdown {
             //language=Markdown
@@ -65,23 +64,24 @@ Usage for you stays the same, though:
             importButton()
             importButtonsBuilder()
             ln { }
-            ktFun(
-                solidPrimaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("href" to Quoted("#"), "disabled" to true, "sizes" to Button.Sizes.LG.ktN)
-            ) {
-                string("Primary Button")
-            }
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("href", "#")
+                .addArgument("disabled", true)
+                .addArgument("sizes", Button.Sizes.LG)
+                .setLambdaArgument(plusString("Primary Button"))
+                .build()
+            +"\n"
             ln(" ")
-            ktFun(
-                solidSecondaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("href" to Quoted("#"), "disabled" to true, "sizes" to Button.Sizes.LG.ktN)
-            ) {
-                string("Button")
-            }
+            +FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("href", "#")
+                .addArgument("disabled", true)
+                .addArgument("sizes", Button.Sizes.LG)
+                .setLambdaArgument(plusString("Button"))
+                .build()
         }
     }
 }
