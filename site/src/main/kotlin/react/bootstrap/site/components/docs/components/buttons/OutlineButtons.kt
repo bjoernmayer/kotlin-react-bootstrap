@@ -45,7 +45,7 @@ In need of a button, but not the hefty background colors they bring? Use the
 
         codeExample {
             importButtonsBuilder()
-            ln { }
+            appendLine { }
             mapOf(
                 outlineDangerFun to Button.Variants.Outline.DANGER,
                 outlineDarkFun to Button.Variants.Outline.DARK,
@@ -61,7 +61,7 @@ In need of a button, but not the hefty background colors they bring? Use the
                     .nestedBy(ButtonBuilder::outline)
                     .setLambdaArgument(plusString(it.value::class.normalName))
                     .build()
-                ln(" ")
+                appendLine(" ")
             }
         }
     }

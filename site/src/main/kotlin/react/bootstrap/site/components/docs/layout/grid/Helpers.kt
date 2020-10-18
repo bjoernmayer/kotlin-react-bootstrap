@@ -104,7 +104,7 @@ internal fun CodeExampleBuilder.importRowFun() {
 }
 
 internal fun CodeExampleBuilder.importFromGrid(`package`: String, className: String) {
-    import("layout.grid.${`package`}.$className")
+    addImport("layout.grid.${`package`}.$className")
 }
 
 internal fun RBuilder.exampleRow(classes: String? = null, block: RDOMHandler<DIV>): ReactElement =

@@ -52,12 +52,12 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
             }
         }
         codeExample {
-            import("content.typography.${Display::class.simpleName}")
-            import("content.typography.${RBuilder::display.name}")
+            addImport("content.typography.${Display::class.simpleName}")
+            addImport("content.typography.${RBuilder::display.name}")
             for (x in 1..3) {
-                import("content.typography.${RBuilder::display.name}$x")
+                addImport("content.typography.${RBuilder::display.name}$x")
             }
-            ln { }
+            appendLine { }
 
             listOf(
                 RBuilder::display1,
@@ -70,7 +70,7 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
                     )
                     .build()
             }
-            ln { +"// Or you use a more generic way" }
+            appendLine { +"// Or you use a more generic way" }
             +FunCall.builder(RBuilder::display4)
                 .addArgument("variant", Display.Variants.DISPLAY_4)
                 .addArgument(

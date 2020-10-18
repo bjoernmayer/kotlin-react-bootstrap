@@ -66,7 +66,7 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importFromGrid("row", ryEND.import)
                 importFromGrid("row", rySTART.import)
                 importRowFun()
-                ln { }
+                appendLine { }
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -111,7 +111,7 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -155,7 +155,7 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         buildString {

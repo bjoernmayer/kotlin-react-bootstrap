@@ -37,7 +37,7 @@ here.__
             importButtonGroup()
             importButtonsBuilder()
             importButtonGroupBuilder()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::buttonGroup)
                 .addArgument(ButtonGroup.Appearance.VERTICAL)
                 .setLambdaArgument("...")

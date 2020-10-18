@@ -69,8 +69,8 @@ provide a y-axis scrollbar.
             }
         }
         codeExample {
-            import("content.pre")
-            ln { }
+            addImport("content.pre")
+            appendLine { }
             +FunCall.builder(RBuilder::pre)
                 .addArgument("scrollable", true)
                 .setLambdaArgument("// Kotlin Code was here")

@@ -50,24 +50,25 @@ internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<Cod
 
     internal fun plusString(content: String): String = "+\"$content\""
 
-    internal fun ln(block: CodeExampleBuilder.() -> Unit) {
+    internal fun appendLine(block: CodeExampleBuilder.() -> Unit) {
         +getIndent(indent)
         block()
         +"\n"
     }
 
-    internal fun ln(content: String) {
-        ln {
+    internal fun appendLine(content: String) {
+
+        appendLine {
             string(content)
         }
     }
 
-    internal fun import(afterReactBootstrap: String) {
-        ln { +"import react.bootstrap.$afterReactBootstrap" }
+    internal fun addImport(afterReactBootstrap: String) {
+        appendLine { +"import react.bootstrap.$afterReactBootstrap" }
     }
 
     internal fun importClassNames() {
-        import("lib.${ClassNames::class.simpleName}")
+        addImport("lib.${ClassNames::class.simpleName}")
     }
 
     private fun getIndent(level: Int): String =

@@ -53,7 +53,7 @@ internal class Reference : SectionComponent() {
                     .addParameter("block", Generic("RHandler", Alert.Props::class))
                     .returns("ReactElement")
                     .build()
-                ln { }
+                +"\n"
                 +FunSpec.builder(function)
                     .nestedBy(RBuilder::Alerts)
                     .nestedBy(AlertBuilder::dismissible)

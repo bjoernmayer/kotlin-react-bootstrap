@@ -16,5 +16,5 @@ internal fun CodeExampleBuilder.importContainerFun() {
 }
 
 internal fun CodeExampleBuilder.importContainer() {
-    import("layout.${Container::class.simpleName}")
+    addImport("layout.${Container::class.simpleName}")
 }

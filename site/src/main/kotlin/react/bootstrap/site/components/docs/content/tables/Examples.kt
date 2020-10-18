@@ -36,8 +36,8 @@ inherited in Bootstrap 4__, meaning any nested tables will be styled in the same
             }
         }
         codeExample {
-            import("content.tables.table")
-            ln { }
+            addImport("content.tables.table")
+            appendLine { }
             +FunCall.builder(RBuilder::table)
                 .setLambdaArgument(defaultExample())
                 .build()
@@ -54,8 +54,8 @@ You can also invert the colors - with light text on dark background - by setting
             }
         }
         codeExample {
-            import("content.tables.table")
-            ln { }
+            addImport("content.tables.table")
+            appendLine { }
             +FunCall.builder(RBuilder::table)
                 .addArgument("dark", true)
                 .setLambdaArgument(defaultExample())

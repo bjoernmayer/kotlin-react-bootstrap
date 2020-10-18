@@ -46,8 +46,8 @@ out groups, buttons, and more.
         codeExample {
             importButtonsBuilder()
             importButtonGroupBuilder()
-            import("components.button.${RBuilder::buttonToolbar.name}")
-            ln { }
+            addImport("components.button.${RBuilder::buttonToolbar.name}")
+            appendLine { }
             +FunCall.builder(RBuilder::buttonToolbar)
                 .addArgument("label", "Toolbar with button groups")
                 .setLambdaArgument(

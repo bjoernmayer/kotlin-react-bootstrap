@@ -50,20 +50,20 @@ internal class ContextualStyles : SectionComponent() {
             }
         }
         codeExample {
-            import("content.tables.${ContextualStyle::class.simpleName}")
-            import("content.tables.table")
-            import("content.tables.td")
-            import("content.tables.tr")
-            ln { }
-            ln { +"// On rows" }
+            addImport("content.tables.${ContextualStyle::class.simpleName}")
+            addImport("content.tables.table")
+            addImport("content.tables.td")
+            addImport("content.tables.tr")
+            appendLine { }
+            appendLine { +"// On rows" }
             ContextualStyle.values().forEach {
                 +FunCall.builder(RBuilder::tr, FunCall.Style.NEW_INLINE)
                     .addArgument(it)
                     .setLambdaArgument(plusString("..."))
                     .build()
             }
-            ln { }
-            ln { +"// On cells (`td` or `th`)" }
+            appendLine { }
+            appendLine { +"// On cells (`td` or `th`)" }
             +FunCall.builder(RBuilder::tr)
                 .setLambdaArgument(
                     ContextualStyle.values().joinToString("\n") {

@@ -37,9 +37,9 @@ unwanted semantic implications that the tags would bring.
             }
         }
         codeExample {
-            import("content.typography.mark")
-            import("content.typography.small")
-            ln { }
+            addImport("content.typography.mark")
+            addImport("content.typography.small")
+            appendLine { }
             +FunCall.builder(RBuilder::p)
                 .setLambdaArgument(
                     plusString("You can use the alternative mark to "),

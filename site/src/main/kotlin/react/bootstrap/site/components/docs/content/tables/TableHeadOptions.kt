@@ -53,10 +53,10 @@ Similar to tables and dark tables, use the `thead(style)`-argument to make table
             }
         }
         codeExample {
-            import("content.tables.${THeadStyles::class.simpleName}")
-            import("content.tables.table")
-            import("content.tables.thead")
-            ln { }
+            addImport("content.tables.${THeadStyles::class.simpleName}")
+            addImport("content.tables.table")
+            addImport("content.tables.thead")
+            appendLine { }
             +listOf(THeadStyles.DARK, THeadStyles.LIGHT).joinToString("\n") { tHeadStyles ->
                 FunCall.builder(RBuilder::table)
                     .setLambdaArgument(

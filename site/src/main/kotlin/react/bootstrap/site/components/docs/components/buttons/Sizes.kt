@@ -32,14 +32,14 @@ Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)
         codeExample {
             importButton()
             importButtonsBuilder()
-            ln { }
+            appendLine { }
             +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
                 .addArgument("sizes", Sizes.LG)
                 .setLambdaArgument(plusString("Large button"))
                 .build()
-            ln(" ")
+            appendLine(" ")
             +FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
@@ -55,14 +55,14 @@ Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)
         codeExample {
             importButton()
             importButtonsBuilder()
-            ln { }
+            appendLine { }
             +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
                 .addArgument("sizes", Sizes.SM)
                 .setLambdaArgument(plusString("Small button"))
                 .build()
-            ln(" ")
+            appendLine(" ")
             +FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
@@ -85,7 +85,7 @@ Create block level buttons—those that span the full width of a parent—by add
         codeExample {
             importButton()
             importButtonsBuilder()
-            ln { }
+            appendLine { }
             +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
@@ -93,7 +93,7 @@ Create block level buttons—those that span the full width of a parent—by add
                 .addArgument("blockSized", true)
                 .setLambdaArgument(plusString("Block level button"))
                 .build()
-            ln(" ")
+            appendLine(" ")
             +FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)

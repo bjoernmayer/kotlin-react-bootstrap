@@ -62,11 +62,11 @@ Images in figures have no explicit size, so be sure to add the `img(fluid)` to `
             }
         }
         codeExample {
-            import("content.figures.figure")
-            import("content.figures.figcaption")
-            import("content.figures.img")
+            addImport("content.figures.figure")
+            addImport("content.figures.figcaption")
+            addImport("content.figures.img")
             importClassNames()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::figure)
                 .setLambdaArgument(
                     FunCall.builder(RBuilder::img, FunCall.Style.NEW_INLINE)

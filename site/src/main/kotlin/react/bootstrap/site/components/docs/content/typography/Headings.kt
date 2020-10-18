@@ -46,9 +46,9 @@ heading but cannot use the associated HTML element.
 
         codeExample {
             for (x in 1..6) {
-                import("content.typography.h$x")
+                addImport("content.typography.h$x")
             }
-            ln { }
+            appendLine { }
             +listOf<KFunction3<*, *, *, *>>(
                 RBuilder::h1,
                 RBuilder::h2,
@@ -74,8 +74,8 @@ heading but cannot use the associated HTML element.
             }
         }
         codeExample {
-            import("content.typography.muted")
-            ln { }
+            addImport("content.typography.muted")
+            appendLine { }
             val h3: KFunction3<*, *, *, *> = RBuilder::h3
             +FunCall.builder(h3)
                 .setLambdaArgument(

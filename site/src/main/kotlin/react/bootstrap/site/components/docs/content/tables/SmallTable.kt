@@ -31,13 +31,13 @@ Set the `table(hoverable)`-argument to `true` to make tables more compact by cut
             }
         }
         codeExample {
-            import("content.tables.table")
-            ln { }
+            addImport("content.tables.table")
+            appendLine { }
             +FunCall.builder(RBuilder::table)
                 .addArgument("small", true)
                 .setLambdaArgument(defaultExample())
                 .build()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::table)
                 .addArgument("small", true)
                 .addArgument("dark", true)

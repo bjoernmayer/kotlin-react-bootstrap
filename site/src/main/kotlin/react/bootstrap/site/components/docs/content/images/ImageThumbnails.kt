@@ -46,8 +46,8 @@ appearance.
             }
         }
         codeExample {
-            import("content.img")
-            ln { }
+            addImport("content.img")
+            appendLine { }
             +FunCall.builder(RBuilder::img, FunCall.Style.INLINE)
                 .addArgument("thumbnail", true)
                 .addArgument("alt", "Responsive image")

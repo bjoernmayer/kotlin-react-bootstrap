@@ -27,8 +27,8 @@ Use the `table(striped)`-argument to add zebra-striping to any table row within 
             }
         }
         codeExample {
-            import("content.tables.table")
-            ln { }
+            addImport("content.tables.table")
+            appendLine { }
             +FunCall.builder(RBuilder::table)
                 .addArgument("striped", true)
                 .setLambdaArgument(defaultExample())

@@ -27,8 +27,8 @@ Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis moll
             }
         }
         codeExample {
-            import("content.typography.${RBuilder::lead.name}")
-            ln { }
+            addImport("content.typography.${RBuilder::lead.name}")
+            appendLine { }
             +FunCall.builder(RBuilder::lead)
                 .setLambdaArgument(
                     plusString(

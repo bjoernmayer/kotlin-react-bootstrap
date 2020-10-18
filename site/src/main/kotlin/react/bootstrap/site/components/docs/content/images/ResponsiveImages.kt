@@ -43,8 +43,8 @@ Images in Bootstrap are made responsive with `img(fluid = true)`.
             }
         }
         codeExample {
-            import("content.img")
-            ln { }
+            addImport("content.img")
+            appendLine { }
             +FunCall.builder(RBuilder::img, FunCall.Style.INLINE)
                 .addArgument("fluid", true)
                 .addArgument("alt", "Responsive image")

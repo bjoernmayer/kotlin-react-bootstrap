@@ -42,25 +42,25 @@ table and cells. Or set the value to `${BorderStyles.BORDERLESS.nestedName}` for
             }
         }
         codeExample {
-            import("content.tables.${BorderStyles::class.simpleName}")
-            import("content.tables.table")
-            ln { }
+            addImport("content.tables.${BorderStyles::class.simpleName}")
+            addImport("content.tables.table")
+            appendLine { }
             +FunCall.builder(RBuilder::table)
                 .addArgument("borderStyle", BorderStyles.BORDERED)
                 .setLambdaArgument(defaultExample())
                 .build()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::table)
                 .addArgument("borderStyle", BorderStyles.BORDERED)
                 .addArgument("dark", true)
                 .setLambdaArgument(defaultExample())
                 .build()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::table)
                 .addArgument("borderStyle", BorderStyles.BORDERLESS)
                 .setLambdaArgument(defaultExample())
                 .build()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::table)
                 .addArgument("borderStyle", BorderStyles.BORDERLESS)
                 .addArgument("dark", true)

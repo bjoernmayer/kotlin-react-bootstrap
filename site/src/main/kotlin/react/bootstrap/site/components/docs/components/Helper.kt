@@ -8,13 +8,13 @@ import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 
 internal fun CodeExampleBuilder.importButtonsBuilder() {
-    import(buildNestedName(RBuilder::Buttons.name, "components", "button"))
+    addImport(buildNestedName(RBuilder::Buttons.name, "components", "button"))
 }
 
 internal fun CodeExampleBuilder.importButtonGroup() {
-    import(buildNestedName(ButtonGroup::class.simpleName!!, "components", "button"))
+    addImport(buildNestedName(ButtonGroup::class.simpleName!!, "components", "button"))
 }
 
 internal fun CodeExampleBuilder.importButtonGroupBuilder() {
-    import(buildNestedName(RBuilder::buttonGroup.name, "components", "button"))
+    addImport(buildNestedName(RBuilder::buttonGroup.name, "components", "button"))
 }

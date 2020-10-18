@@ -62,7 +62,7 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
         codeExample {
             importButton()
             importButtonsBuilder()
-            ln { }
+            appendLine { }
             +FunCall.builder(solidPrimaryFun)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
@@ -84,7 +84,7 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
                     plusString("Primary link")
                 )
                 .build()
-            ln(" ")
+            appendLine(" ")
             +FunCall.builder(solidSecondaryFun)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
@@ -119,7 +119,7 @@ Since we are working with react here, implementing a toggleable button is quite 
         }
         codeExample {
             importButtonsBuilder()
-            ln { }
+            appendLine { }
             +Assignment.builder("toggleableButton")
                 .addModifier("private")
                 .valType()
@@ -198,7 +198,7 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
             importButtonGroup()
             importButtonsBuilder()
             importButtonGroupBuilder()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::buttonGroup)
                 .addArgument("behaviour", ButtonGroup.Behaviours.RADIOS)
                 .setLambdaArgument(
@@ -308,7 +308,7 @@ can set `${ButtonGroup.Props::appearance.name}` to `${ButtonGroup.Appearance.NON
             importButtonGroup()
             importButtonsBuilder()
             importButtonGroupBuilder()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::buttonGroup)
                 .addArgument("appearance", ButtonGroup.Appearance.NONE)
                 .setLambdaArgument(

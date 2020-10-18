@@ -190,7 +190,7 @@ breakpoint.
         }
         codeExample {
             importContainerFun()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::container)
                 .setLambdaArgument("// Content here")
                 .build()
@@ -206,7 +206,7 @@ spanning the entire width of the viewport.
         codeExample {
             importContainer()
             importContainerFun()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::container)
                 .addArgument("viscosity", Container.Viscosities.FLUID)
                 .setLambdaArgument("// Content here")
@@ -229,7 +229,7 @@ reached, where it will scale up with `md`, `lg`, and `xl`.
         codeExample {
             importContainer()
             importContainerFun()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::container)
                 .addArgument("viscosity", Container.Viscosities.SM)
                 .setLambdaArgument("// 100% wide until small breakpoint")

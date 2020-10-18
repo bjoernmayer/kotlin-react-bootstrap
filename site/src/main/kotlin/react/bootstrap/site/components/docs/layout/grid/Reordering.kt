@@ -58,7 +58,7 @@ for 1 through 12 across all five grid tiers.
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -123,7 +123,7 @@ columns. For example, `md = ${SZ_4.name} $off ${OFF_4.name}` moves `$colFun(md =
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(

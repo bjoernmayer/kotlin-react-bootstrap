@@ -23,7 +23,7 @@ The `RBuilder` also offers a builder to make creating containers a bit simpler.
         }
         codeExample {
             importFromGrid("container", "Containers")
-            ln { }
+            appendLine { }
             +listOf(Containers::fluid, Containers::sm, Containers::md, Containers::lg, Containers::xl)
                 .joinToString("") { function ->
                     FunCall.builder(function)

@@ -31,13 +31,13 @@ Set the `table(hoverable)`-argument to `true` to enable a hover state on table r
             }
         }
         codeExample {
-            import("content.tables.table")
-            ln { }
+            addImport("content.tables.table")
+            appendLine { }
             +FunCall.builder(RBuilder::table)
                 .addArgument("hoverable", true)
                 .setLambdaArgument(defaultExample())
                 .build()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::table)
                 .addArgument("hoverable", true)
                 .addArgument("dark", true)

@@ -65,7 +65,7 @@ ${EQ.name}`.
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -131,7 +131,7 @@ stacked and becomes horizontal at the small breakpoint (`sm`).
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -197,7 +197,7 @@ needed. See the example below for a better idea of how it all works.
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -272,7 +272,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importContainerFun()
                 importFromGrid("row", CNT_2.import)
                 importRowFun()
-                ln { }
+                appendLine { }
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -309,7 +309,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importContainerFun()
                 importFromGrid("row", CNT_3.import)
                 importRowFun()
-                ln { }
+                appendLine { }
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -346,7 +346,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importContainerFun()
                 importFromGrid("row", CNT_4.import)
                 importRowFun()
-                ln { }
+                appendLine { }
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -385,7 +385,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importContainerFun()
                 importFromGrid("row", CNT_4.import)
                 importRowFun()
-                ln { }
+                appendLine { }
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -435,7 +435,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importFromGrid("row", CNT_2.import)
                 importFromGrid("row", CNT_4.import)
                 importRowFun()
-                ln { }
+                appendLine { }
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -489,7 +489,7 @@ column widths, responsive tiers, reorders, and more).
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(

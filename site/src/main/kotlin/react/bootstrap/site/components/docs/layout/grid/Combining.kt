@@ -76,7 +76,7 @@ Combine other attributes with `$sizes` by using `$sz`.
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         listOf(
@@ -133,7 +133,7 @@ Combine other attributes with `$offsets` by using `$off`.
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         listOf(
@@ -190,7 +190,7 @@ Combine other attributes with `$orderings` by using `$ord`.
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         listOf(
@@ -247,7 +247,7 @@ Combine other attributes with `$alignments` by using `$align`.
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -431,7 +431,7 @@ private fun RBuilder.allPossibleCombinations() {
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -481,7 +481,7 @@ private fun RBuilder.allPossibleCombinations() {
                     importColFun()
                     importContainerFun()
                     importRowFun()
-                    ln { }
+                    appendLine { }
                     +FunCall.builder(RBuilder::container)
                         .setLambdaArgument(
                             FunCall.builder(RBuilder::row)
@@ -537,7 +537,7 @@ private fun RBuilder.allPossibleCombinations() {
                     importColFun()
                     importContainerFun()
                     importRowFun()
-                    ln { }
+                    appendLine { }
                     +FunCall.builder(RBuilder::container)
                         .setLambdaArgument(
                             FunCall.builder(RBuilder::row)

@@ -28,6 +28,7 @@ import react.bootstrap.site.lib.codepoet.Assignment
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Generic
 import react.bootstrap.site.lib.codepoet.If
+import react.bootstrap.site.lib.codepoet.Imports
 import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.child
 import react.dom.a
@@ -74,8 +75,9 @@ eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.nestedName}`).
             }
         }
         codeExample {
-            import("components.alert.Alerts")
-            ln { }
+            +Imports.builder()
+                .addImport("components.alert.Alerts")
+                .build()
             variants.forEach { (variant, function) ->
                 +FunCall.builder(function)
                     .nestedBy(RBuilder::Alerts)
@@ -102,9 +104,10 @@ provide matching colored links within any alert.
             }
         }
         codeExample {
-            import("components.alert.Alerts")
-            import("components.alert.$linkName")
-            ln { }
+            +Imports.builder()
+                .addImport("components.alert.$linkName")
+                .addImport("components.alert.Alerts")
+                .build()
             variants.forEach { (variant, function) ->
                 +FunCall.builder(function)
                     .nestedBy(RBuilder::Alerts)
@@ -144,10 +147,11 @@ Aww yeah, you successfully read this important alert message. This example text 
             }
         }
         codeExample {
-            import("components.alert.Alerts")
-            import("components.alert.h4")
-            importClassNames()
-            ln { }
+            +Imports.builder()
+                .addImport("components.alert.Alerts")
+                .addImport("components.alert.h4")
+                .importClassNames()
+                .build()
             +FunCall.builder(Alerts::success)
                 .nestedBy(RBuilder::Alerts)
                 .setLambdaArgument(
@@ -203,8 +207,9 @@ alerts.
         }
 
         codeExample {
-            import("components.alert.Alerts")
-            ln { }
+            +Imports.builder()
+                .addImport("components.alert.Alerts")
+                .build()
             +FunCall.builder(Alerts.dismissible::warning)
                 .nestedBy(RBuilder::Alerts)
                 .nestedBy(AlertBuilder::dismissible)
@@ -271,11 +276,12 @@ You can build your own custom close element, by using `$closingElementName { }`.
             }
         }
         codeExample {
-            import("components.alert.Alerts")
-            import("components.alert.$closingElementName")
-            import("components.button.Buttons")
-            importClassNames()
-            ln { }
+            +Imports.builder()
+                .addImport("components.alert.Alerts")
+                .addImport("components.alert.$closingElementName")
+                .addImport("components.button.Buttons")
+                .importClassNames()
+                .build()
             +FunCall.builder(Alerts.dismissible::info)
                 .nestedBy(RBuilder::Alerts)
                 .nestedBy(AlertBuilder::dismissible)
@@ -305,10 +311,11 @@ You can build your own custom close element, by using `$closingElementName { }`.
             child(dismissibleAlert)
         }
         codeExample {
-            import("components.alert.Alerts")
-            import("components.alert.$closingElementName")
-            import("components.button.Buttons")
-            ln { }
+            +Imports.builder()
+                .addImport("components.alert.Alerts")
+                .addImport("components.alert.$closingElementName")
+                .addImport("components.button.Buttons")
+                .build()
             +Assignment.builder("dismissibleAlert")
                 .addModifier("private")
                 .valType()

@@ -81,9 +81,9 @@ up, the table will behave normally and not scroll horizontally.
     }
 
     private fun CodeExampleBuilder.exampleImports() {
-        import("content.tables.table")
-        import("lib.${Breakpoints::class.simpleName}")
-        ln { }
+        addImport("content.tables.table")
+        addImport("lib.${Breakpoints::class.simpleName}")
+        appendLine { }
     }
 
     private fun RBuilder.exampleTableBody() {

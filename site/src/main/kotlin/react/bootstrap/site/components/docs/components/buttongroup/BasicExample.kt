@@ -35,7 +35,7 @@ Wrap a series of buttons in `${RBuilder::buttonGroup.name}`.
         codeExample {
             importButtonsBuilder()
             importButtonGroupBuilder()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::buttonGroup)
                 .setLambdaArgument(
                     buildString {

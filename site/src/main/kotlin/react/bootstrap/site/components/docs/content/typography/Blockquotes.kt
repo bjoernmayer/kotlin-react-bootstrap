@@ -29,9 +29,9 @@ any HTML as the quote.
             }
         }
         codeExample {
-            import("content.typography.${RBuilder::blockQuote.name}")
+            addImport("content.typography.${RBuilder::blockQuote.name}")
             importClassNames()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::blockQuote)
                 .addArgument(ClassNames.MB_0)
                 .setLambdaArgument(
@@ -54,10 +54,10 @@ Add a `${RBuilder::blockQuoteFooter.name} { }`  for identifying the source. Wrap
             }
         }
         codeExample {
-            import("content.typography.${RBuilder::blockQuoteFooter.name}")
-            import("content.typography.${RBuilder::blockQuote.name}")
+            addImport("content.typography.${RBuilder::blockQuoteFooter.name}")
+            addImport("content.typography.${RBuilder::blockQuote.name}")
             importClassNames()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::blockQuote)
                 .addArgument(ClassNames.MB_0)
                 .setLambdaArgument(

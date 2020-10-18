@@ -60,7 +60,7 @@ equal-size enums for each breakpoint you need and every column will be the same 
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -127,7 +127,7 @@ Note that the other columns will resize no matter the width of the center column
                 importColFun()
                 importContainerFun()
                 importRowFun()
-                ln { }
+                appendLine { }
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         listOf(SZ_5, SZ_6).joinToString("") { size ->
@@ -180,7 +180,7 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
                 importContainerFun()
                 importRowFun()
                 importClassNames()
-                ln { }
+                appendLine { }
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)

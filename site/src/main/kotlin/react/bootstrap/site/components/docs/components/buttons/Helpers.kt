@@ -56,5 +56,5 @@ internal val RBuilder.outlineWarningFun: ButtonFun
     get() = Buttons.outline::warning
 
 internal fun CodeExampleBuilder.importButton() {
-    import(buildNestedName(Button::class.simpleName!!, "components", "button"))
+    addImport(buildNestedName(Button::class.simpleName!!, "components", "button"))
 }

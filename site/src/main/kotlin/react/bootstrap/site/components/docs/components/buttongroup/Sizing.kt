@@ -51,7 +51,7 @@ Instead of applying button sizing classes to every button in a group, just set `
             importButtonGroup()
             importButtonsBuilder()
             importButtonGroupBuilder()
-            ln { }
+            appendLine { }
             +FunCall.builder(RBuilder::buttonGroup)
                 .addArgument("label", "...")
                 .setLambdaArgument("...")
