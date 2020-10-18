@@ -11,12 +11,6 @@ import kotlin.reflect.KClass
 internal val KClass<Container.Viscosities>.nestedName: String
     get() = buildNestedName(this, Container::class)
 
-internal fun CodeExampleBuilder.ktContainer(block: CodeExampleBuilder.() -> Unit) {
-    ktFun(RBuilder::container) {
-        block()
-    }
-}
-
 internal fun CodeExampleBuilder.importContainerFun() {
     importFromGrid("container", RBuilder::container.name)
 }

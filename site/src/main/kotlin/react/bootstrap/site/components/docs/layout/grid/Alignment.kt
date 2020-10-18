@@ -10,13 +10,12 @@ import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_4
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.row
-import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.layout.importContainerFun
-import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.AROUND as rxAROUND
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.BETWEEN as rxBETWEEN
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.CENTER as rxCENTER
@@ -69,23 +68,30 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importRowFun()
                 ln { }
 
-                ktContainer {
-                    ktFun(RBuilder::row, args = mapOf("all" to rySTART.name)) {
-                        for (x in 1..3) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("One of three columns") }
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        buildString {
+                            listOf(rySTART, ryCENTER, ryEND).joinToString("") {
+                                append(
+                                    FunCall.builder(RBuilder::row)
+                                        .addArgument("all", FunCall.Argument.PureValue(it.name))
+                                        .setLambdaArgument(
+                                            buildString {
+                                                for (x in 1..3) {
+                                                    append(
+                                                        FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                                            .setLambdaArgument(plusString("One of three columns"))
+                                                            .build()
+                                                    )
+                                                }
+                                            }
+                                        )
+                                        .build()
+                                )
+                            }
                         }
-                    }
-                    ktFun(RBuilder::row, args = mapOf("all" to ryCENTER.name)) {
-                        for (x in 1..3) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("One of three columns") }
-                        }
-                    }
-                    ktFun(RBuilder::row, args = mapOf("all" to ryEND.name)) {
-                        for (x in 1..3) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("One of three columns") }
-                        }
-                    }
-                }
+                    )
+                    .build()
             }
         }
         flexColsExampleRow {
@@ -106,23 +112,24 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importContainerFun()
                 importRowFun()
                 ln { }
-                ktConRow {
-                    ktFun(
-                        RBuilder::col,
-                        style = FunStyle.INLINE_BLOCK,
-                        args = mapOf("all" to START.name)
-                    ) { string("One of three columns") }
-                    ktFun(
-                        RBuilder::col,
-                        style = FunStyle.INLINE_BLOCK,
-                        args = mapOf("all" to CENTER.name)
-                    ) { string("One of three columns") }
-                    ktFun(
-                        RBuilder::col,
-                        style = FunStyle.INLINE_BLOCK,
-                        args = mapOf("all" to END.name)
-                    ) { string("One of three columns") }
-                }
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                buildString {
+                                    listOf(START, CENTER, END).joinToString("") {
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                                .addArgument("all", FunCall.Argument.PureValue(it.name))
+                                                .setLambdaArgument(plusString("One of three columns"))
+                                                .build()
+                                        )
+                                    }
+                                }
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
         subSectionTitle("Horizontal alignment", section)
@@ -149,20 +156,31 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importContainerFun()
                 importRowFun()
                 ln { }
-
-                ktContainer {
-                    listOf(rxSTART.name, rxCENTER.name, rxEND.name, rxAROUND.name, rxBETWEEN.name).forEach {
-                        ktFun(RBuilder::row, args = mapOf("all" to it)) {
-                            for (x in 1..2) {
-                                ktFun(
-                                    RBuilder::col,
-                                    style = FunStyle.INLINE_BLOCK,
-                                    args = mapOf("all" to SZ_4.name)
-                                ) { string("One of two columns") }
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        buildString {
+                            listOf(rxSTART, rxCENTER, rxEND, rxAROUND, rxBETWEEN).joinToString("") {
+                                append(
+                                    FunCall.builder(RBuilder::row)
+                                        .addArgument("all", FunCall.Argument.PureValue(it.name))
+                                        .setLambdaArgument(
+                                            buildString {
+                                                for (x in 1..2) {
+                                                    append(
+                                                        FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                                            .addArgument("all", FunCall.Argument.PureValue(SZ_4.name))
+                                                            .setLambdaArgument(plusString("One of two columns"))
+                                                            .build()
+                                                    )
+                                                }
+                                            }
+                                        )
+                                        .build()
+                                )
                             }
                         }
-                    }
-                }
+                    )
+                    .build()
             }
         }
     }

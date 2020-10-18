@@ -11,7 +11,6 @@ import react.bootstrap.layout.grid.row.row
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
-import react.bootstrap.site.components.docs.layout.ktContainer
 import react.dom.div
 
 internal val ColAttributes.Sizes.name
@@ -95,20 +94,6 @@ internal val RBuilder.colFun: String
     get() = RBuilder::col.name
 internal val RBuilder.rowFun: String
     get() = RBuilder::row.name
-
-internal fun CodeExampleBuilder.ktRow(block: CodeExampleBuilder.() -> Unit) {
-    ktFun(RBuilder::row) {
-        block()
-    }
-}
-
-internal fun CodeExampleBuilder.ktConRow(block: CodeExampleBuilder.(indentationLevel: Int) -> Unit) {
-    ktContainer {
-        ktRow {
-            block(2)
-        }
-    }
-}
 
 internal fun CodeExampleBuilder.importColFun() {
     importFromGrid("col", colFun)
