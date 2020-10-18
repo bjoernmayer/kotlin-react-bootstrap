@@ -8,12 +8,6 @@ import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import react.bootstrap.site.components.docs.layout.grid.importFromGrid
 import kotlin.reflect.KClass
 
-internal val RBuilder.containerFun: String
-    get() = RBuilder::container.name
-
-internal val Container.Viscosities.ktN: String
-    get() = buildNestedName(name, Container::class, this::class)
-
 internal val KClass<Container.Viscosities>.nestedName: String
     get() = buildNestedName(this, Container::class)
 
@@ -24,7 +18,7 @@ internal fun CodeExampleBuilder.ktContainer(block: CodeExampleBuilder.() -> Unit
 }
 
 internal fun CodeExampleBuilder.importContainerFun() {
-    importFromGrid("container", containerFun)
+    importFromGrid("container", RBuilder::container.name)
 }
 
 internal fun CodeExampleBuilder.importContainer() {
