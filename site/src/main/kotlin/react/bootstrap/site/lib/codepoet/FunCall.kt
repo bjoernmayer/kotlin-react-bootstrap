@@ -166,6 +166,7 @@ internal class FunCall private constructor(
                     is ClassNames -> "\"\${${value.nestedName}}\""
                     is Enum<*> -> value.nestedName
                     is PureValue -> value.value
+                    is LambdaValue -> value.build()
                     is String -> "\"$value\""
                     else -> value
                 }

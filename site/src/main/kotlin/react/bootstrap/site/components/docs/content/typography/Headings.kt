@@ -8,11 +8,11 @@ import react.bootstrap.content.typography.h4
 import react.bootstrap.content.typography.h5
 import react.bootstrap.content.typography.h6
 import react.bootstrap.content.typography.muted
-import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.h1
 import react.dom.h2
 import react.dom.h3
@@ -49,18 +49,19 @@ heading but cannot use the associated HTML element.
                 import("content.typography.h$x")
             }
             ln { }
-            listOf<KFunction3<*, *, *, *>>(
+            +listOf<KFunction3<*, *, *, *>>(
                 RBuilder::h1,
                 RBuilder::h2,
                 RBuilder::h3,
                 RBuilder::h4,
                 RBuilder::h5,
                 RBuilder::h6
-            ).forEachIndexed { index, function ->
-                ktFun(function, style = FunStyle.INLINE_BLOCK, args = mapOf(null to "RBuilder::p")) {
-                    string("h${index + 1}. Bootstrap heading")
-                }
-            }
+            ).mapIndexed { index, function ->
+                FunCall.builder(function, FunCall.Style.INLINE)
+                    .addArgument(FunCall.Argument.PureValue("RBuilder::p"))
+                    .setLambdaArgument(plusString("h${index + 1}. Bootstrap heading"))
+                    .build()
+            }.joinToString("\n")
         }
         subSectionTitle("Customizing headings", section)
         p {
@@ -76,11 +77,16 @@ heading but cannot use the associated HTML element.
             import("content.typography.muted")
             ln { }
             val h3: KFunction3<*, *, *, *> = RBuilder::h3
-            ktFun(h3) {
-                ln("Fancy display heading ")
-                // There is probably a nicer way to display this. I am just to lazy right now
-                ln { +"muted(RBuilder::small) { +\"With faded secondary text\" }" }
-            }
+            +FunCall.builder(h3)
+                .setLambdaArgument(
+                    plusString("Fancy display heading "),
+                    "\n",
+                    FunCall.builder("muted", FunCall.Style.INLINE)
+                        .addArgument(FunCall.Argument.PureValue("RBuilder::small"))
+                        .setLambdaArgument(plusString("With faded secondary text"))
+                        .build()
+                )
+                .build()
         }
     }
 }

@@ -28,6 +28,7 @@ import react.bootstrap.site.lib.codepoet.Assignment
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Generic
 import react.bootstrap.site.lib.codepoet.If
+import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.child
 import react.dom.a
 import react.dom.h4
@@ -218,7 +219,7 @@ alerts.
                                 .setLambdaArgument(
                                     Assignment.builder(Alert.Props.Dismissible::onClose)
                                         .value(
-                                            Assignment.LambdaValue(
+                                            LambdaValue(
                                                 FunCall.builder(Console::log, FunCall.Style.INLINE)
                                                     .nestedBy(::console)
                                                     .addArgument(
@@ -231,7 +232,7 @@ alerts.
                                         .build(),
                                     Assignment.builder(Alert.Props.Dismissible::onClosed)
                                         .value(
-                                            Assignment.LambdaValue(
+                                            LambdaValue(
                                                 FunCall.builder(Console::log, FunCall.Style.INLINE)
                                                     .nestedBy(::console)
                                                     .addArgument(
@@ -340,11 +341,11 @@ You can build your own custom close element, by using `$closingElementName { }`.
                                                         .setLambdaArgument(
                                                             Assignment.builder(Alert.Props.Dismissible::onClosed)
                                                                 .value(
-                                                                    Assignment.LambdaValue(
+                                                                    LambdaValue(
                                                                         Assignment.builder("show")
                                                                             .value(false)
                                                                             .build(),
-                                                                        Assignment.LambdaValue.Style.INLINE
+                                                                        LambdaValue.Style.INLINE
                                                                     )
                                                                 )
                                                                 .build()
@@ -371,7 +372,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
                                                                     "\n",
                                                                     Assignment.builder(Alert.Props::onClick)
                                                                         .value(
-                                                                            Assignment.LambdaValue(
+                                                                            LambdaValue(
                                                                                 FunCall.builder(
                                                                                     Console::log,
                                                                                     FunCall.Style.INLINE
@@ -406,11 +407,11 @@ You can build your own custom close element, by using `$closingElementName { }`.
                                                 .setLambdaArgument(
                                                     Assignment.builder(Alert.Props::onClick)
                                                         .value(
-                                                            Assignment.LambdaValue(
+                                                            LambdaValue(
                                                                 Assignment.builder("show")
                                                                     .value(true)
                                                                     .build(),
-                                                                Assignment.LambdaValue.Style.INLINE
+                                                                LambdaValue.Style.INLINE
                                                             )
                                                         )
                                                         .build()

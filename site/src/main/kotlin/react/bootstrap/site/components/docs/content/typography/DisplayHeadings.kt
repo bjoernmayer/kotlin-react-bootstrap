@@ -11,8 +11,9 @@ import react.bootstrap.content.typography.display4
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.dom.span
 import react.dom.tbody
 import react.dom.td
@@ -63,17 +64,26 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
                 RBuilder::display2,
                 RBuilder::display3
             ).forEachIndexed { index, kFunction3 ->
-                ktFun(kFunction3) {
-                    ln("Display ${index + 1}")
-                }
+                +FunCall.builder(kFunction3)
+                    .setLambdaArgument(
+                        plusString("Display ${index + 1}")
+                    )
+                    .build()
             }
             ln { +"// Or you use a more generic way" }
-            ktFun(
-                RBuilder::display4,
-                args = mapOf("variant" to Display.Variants.DISPLAY_4.nestedName, "renderAs" to "{ span { } }")
-            ) {
-                ln("Display 4")
-            }
+            +FunCall.builder(RBuilder::display4)
+                .addArgument("variant", Display.Variants.DISPLAY_4)
+                .addArgument(
+                    "renderAs",
+                    LambdaValue(
+                        FunCall.builder(RBuilder::span, FunCall.Style.INLINE)
+                            .setEmptyLambdaArgument()
+                            .build(),
+                        LambdaValue.Style.INLINE
+                    )
+                )
+                .setLambdaArgument(plusString("Display 4"))
+                .build()
         }
     }
 }

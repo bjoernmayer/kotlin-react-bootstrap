@@ -1,6 +1,5 @@
 package react.bootstrap.site.lib.codepoet
 
-import react.bootstrap.site.lib.codepoet.IndentTool.indentLines
 import kotlin.reflect.KProperty
 
 internal class Assignment private constructor(
@@ -79,26 +78,6 @@ internal class Assignment private constructor(
                 else -> "= $value"
             }
         )
-    }
-
-    data class LambdaValue(val content: String, val style: Style = Style.BLOCK) {
-        internal fun build(): String = buildString {
-            if (style == Style.INLINE) {
-                append("{ ")
-                append(content)
-                append(" }")
-            }
-            if (style == Style.BLOCK) {
-                appendLine("{")
-                appendLine(indentLines(content))
-                appendLine("}")
-            }
-        }
-
-        internal enum class Style {
-            INLINE,
-            BLOCK
-        }
     }
 
     data class FunCallDelegate(val funCall: FunCall)

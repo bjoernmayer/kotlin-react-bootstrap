@@ -5,11 +5,11 @@ import react.RBuilder
 import react.ReactElement
 import react.bootstrap.content.typography.mark
 import react.bootstrap.content.typography.small
-import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.RDOMBuilder
 import react.dom.p
 import react.dom.small
@@ -40,15 +40,29 @@ unwanted semantic implications that the tags would bring.
             import("content.typography.mark")
             import("content.typography.small")
             ln { }
-            ktBlock("p") {
-                ln { +"+\"You can use the mark tag to \";  mark(RBuilder::span) { +\"highlight\" }; +\" text.\"" }
-            }
+            +FunCall.builder(RBuilder::p)
+                .setLambdaArgument(
+                    plusString("You can use the alternative mark to "),
+                    "; ",
+                    FunCall.builder("mark", FunCall.Style.INLINE, appendSemicolon = true)
+                        .addArgument(FunCall.Argument.PureValue("RBuilder::span"))
+                        .setLambdaArgument(plusString("highlight"))
+                        .build(),
+                    " ",
+                    plusString(" text.")
+                )
+                .build()
             val smallFun: KFunction3<RBuilder, String?, (RDOMBuilder<SMALL>.() -> Unit), ReactElement> = RBuilder::small
-            ktBlock("p") {
-                ktFun(smallFun, style = FunStyle.INLINE, args = mapOf(null to "RBuilder::span")) {
-                    string("This line of text is meant to be treated as fine print.")
-                }
-            }
+            +FunCall.builder(RBuilder::p)
+                .setLambdaArgument(
+                    FunCall.builder(smallFun, FunCall.Style.INLINE)
+                        .addArgument(FunCall.Argument.PureValue("RBuilder::span"))
+                        .setLambdaArgument(
+                            plusString("This line of text is meant to be treated as fine print.")
+                        )
+                        .build()
+                )
+                .build()
         }
     }
 }

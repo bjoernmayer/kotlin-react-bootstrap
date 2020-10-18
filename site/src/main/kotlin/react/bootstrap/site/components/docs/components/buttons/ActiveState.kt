@@ -22,6 +22,7 @@ import react.bootstrap.site.lib.codepoet.Assignment
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Generic
 import react.bootstrap.site.lib.codepoet.If
+import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.child
 import react.dom.br
 import react.functionalComponent
@@ -73,9 +74,9 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
                         .setLambdaArgument(
                             Assignment.builder(Button.Props::onClick)
                                 .value(
-                                    Assignment.LambdaValue(
+                                    LambdaValue(
                                         "e -> e.preventDefault()",
-                                        Assignment.LambdaValue.Style.INLINE
+                                        LambdaValue.Style.INLINE
                                     )
                                 )
                                 .build()
@@ -95,9 +96,9 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
                         .setLambdaArgument(
                             Assignment.builder(Button.Props::onClick)
                                 .value(
-                                    Assignment.LambdaValue(
+                                    LambdaValue(
                                         "e -> e.preventDefault()",
-                                        Assignment.LambdaValue.Style.INLINE
+                                        LambdaValue.Style.INLINE
                                     )
                                 )
                                 .build()
@@ -144,9 +145,9 @@ Since we are working with react here, implementing a toggleable button is quite 
                                         .setLambdaArgument(
                                             Assignment.builder(Button.Props::onClick)
                                                 .value(
-                                                    Assignment.LambdaValue(
+                                                    LambdaValue(
                                                         "active = !active",
-                                                        Assignment.LambdaValue.Style.INLINE
+                                                        LambdaValue.Style.INLINE
                                                     )
                                                 )
                                                 .build()
@@ -217,7 +218,7 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
                                             .setLambdaArgument(
                                                 Assignment.builder(Button.Props::onActive)
                                                     .value(
-                                                        Assignment.LambdaValue(
+                                                        LambdaValue(
                                                             FunCall.builder(Console::log, FunCall.Style.INLINE)
                                                                 .nestedBy(::console)
                                                                 .addArgument("Radio$x")
@@ -253,7 +254,7 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
                                             .setLambdaArgument(
                                                 Assignment.builder(Button.Props::onActive)
                                                     .value(
-                                                        Assignment.LambdaValue(
+                                                        LambdaValue(
                                                             FunCall.builder(Console::log, FunCall.Style.INLINE)
                                                                 .nestedBy(::console)
                                                                 .addArgument("Checkbox$x")

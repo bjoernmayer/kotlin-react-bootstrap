@@ -14,9 +14,6 @@ import react.bootstrap.layout.grid.col.ColAttributes
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.row.row
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.buildNestedName
-import react.bootstrap.site.components.docs.fixings.FunStyle
-import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -24,6 +21,8 @@ import react.bootstrap.site.components.docs.layout.grid.colFun
 import react.bootstrap.site.components.docs.layout.grid.rowFun
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.dom.RDOMBuilder
 import react.dom.dd
 import react.dom.dl
@@ -46,24 +45,39 @@ Remove the default `list-style` and left margin on list items (immediate childre
 immediate children list items__, meaning you will need to add the class for any nested lists as well.
             """
         }
+        val loremList = listOf(
+            null to "Lorem ipsum dolor sit amet",
+            null to "Consectetur adipiscing elit",
+            null to "Integer molestie lorem at massa",
+            null to "Facilisis in pretium nisl aliquet",
+            "Nulla volutpat aliquam " to listOf(
+                "Phasellus iaculis neque",
+                "Purus sodales ultricies",
+                "Vestibulum laoreet porttitor sem",
+                "Ac tristique libero volutpat at",
+            ),
+            null to "Faucibus porta lacus fringilla vel",
+            null to "Aenean sit amet erat nunc",
+            null to "Eget porttitor lorem",
+        )
         liveExample {
             ul(ListStyles.UNSTYLED) {
-                li { +"Lorem ipsum dolor sit amet" }
-                li { +"Consectetur adipiscing elit" }
-                li { +"Integer molestie lorem at massa" }
-                li { +"Facilisis in pretium nisl aliquet" }
-                li {
-                    +"Nulla volutpat aliquam "
-                    ul {
-                        li { +"Phasellus iaculis neque" }
-                        li { +"Purus sodales ultricies" }
-                        li { +"Vestibulum laoreet porttitor sem" }
-                        li { +"Ac tristique libero volutpat at" }
+                loremList.forEach { (key, value) ->
+                    if (value is String) {
+                        li { +value }
+                    }
+
+                    if (value is List<*>) {
+                        li {
+                            +key!!
+                            ul {
+                                value.forEach {
+                                    li { +(it as String) }
+                                }
+                            }
+                        }
                     }
                 }
-                li { +"Faucibus porta lacus fringilla vel" }
-                li { +"Aenean sit amet erat nunc" }
-                li { +"Eget porttitor lorem" }
             }
         }
         val ulFun: KFunction3<RBuilder, String?, (RDOMBuilder<UL>.() -> Unit), ReactElement> = RBuilder::ul
@@ -72,30 +86,35 @@ immediate children list items__, meaning you will need to add the class for any 
             import("content.typography.${ListStyles::class.simpleName}")
             import("content.typography.ul")
             ln { }
-            ktFun(ulFun, args = mapOf(null to ListStyles.UNSTYLED.nestedName)) {
-                ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Lorem ipsum dolor sit amet") }
-                ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Consectetur adipiscing elit") }
-                ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Integer molestie lorem at massa") }
-                ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Facilisis in pretium nisl aliquet") }
-                ktFun(liFun) {
-                    ln("Nulla volutpat aliquam ")
-                    ktFun(ulFun) {
-                        ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Phasellus iaculis neque") }
-                        ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Purus sodales ultricies") }
-                        ktFun(
-                            liFun,
-                            style = FunStyle.INLINE_BLOCK
-                        ) { string("Vestibulum laoreet porttitor sem") }
-                        ktFun(
-                            liFun,
-                            style = FunStyle.INLINE_BLOCK
-                        ) { string("Ac tristique libero volutpat at") }
+            +FunCall.builder(ulFun)
+                .addArgument(ListStyles.UNSTYLED)
+                .setLambdaArgument(
+                    loremList.joinToString("\n") { (key, value) ->
+                        if (value is String) {
+                            FunCall.builder(liFun, FunCall.Style.INLINE)
+                                .setLambdaArgument(plusString(value))
+                                .build()
+                        } else {
+                            FunCall.builder(liFun)
+                                .setLambdaArgument(
+                                    plusString(key!!),
+                                    "\n",
+                                    FunCall.builder(ulFun)
+                                        .setLambdaArgument(
+                                            (value as List<*>).joinToString("\n") {
+                                                FunCall.builder(liFun, FunCall.Style.INLINE)
+                                                    .setLambdaArgument(plusString(it as String))
+                                                    .build()
+                                            }
+                                        )
+                                        .build()
+                                )
+                                .build()
+                                .substringBeforeLast("\n")
+                        }
                     }
-                }
-                ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Faucibus porta lacus fringilla vel") }
-                ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Aenean sit amet erat nunc") }
-                ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Eget porttitor lorem") }
-            }
+                )
+                .build()
         }
         subSectionTitle("Inline", section)
         Markdown {
@@ -118,11 +137,16 @@ Remove a list’s bullets and apply some light `margin` with a combination of tw
             import("content.typography.li")
             import("content.typography.ul")
             ln { }
-            ktFun(ulFun, args = mapOf(null to ListStyles.INLINE.nestedName)) {
-                ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Lorem ipsum") }
-                ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Phasellus iaculis") }
-                ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Nulla volutpat") }
-            }
+            +FunCall.builder(ulFun)
+                .addArgument(ListStyles.INLINE)
+                .setLambdaArgument(
+                    listOf("Lorem ipsum", "Phasellus iaculis", "Nulla volutpat").joinToString("\n") {
+                        FunCall.builder(liFun, FunCall.Style.INLINE)
+                            .setLambdaArgument(plusString(it))
+                            .build()
+                    }
+                )
+                .build()
         }
         subSectionTitle("Description list alignment", section)
         Markdown {
@@ -171,105 +195,194 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
             }
         }
         codeExample {
-            val sz3 = buildNestedName(
-                ColAttributes.Sizes.SZ_3::class,
-                ColAttributes::class,
-                ColAttributes.Sizes::class
-            )
-            val sz9 = buildNestedName(
-                ColAttributes.Sizes.SZ_9::class,
-                ColAttributes::class,
-                ColAttributes.Sizes::class
-            )
+            val sz3 = buildString {
+                append(ColAttributes.Sizes::class.nestedName)
+                append(".")
+                append(ColAttributes.Sizes.Companion::SZ_3.name)
+            }
+            val sz9 = buildString {
+                append(ColAttributes.Sizes::class.nestedName)
+                append(".")
+                append(ColAttributes.Sizes.Companion::SZ_9.name)
+            }
 
-            val renderDl = "renderAs" to "{ dl { } }"
-            val renderDt = "renderAs" to "{ dt { } }"
-            val renderDd = "renderAs" to "{ dd { } }"
-            val dtArgs = mapOf("sm" to sz3, renderDt)
-            val ddArgs = mapOf("sm" to sz9, renderDd)
+            fun FunCall.addSz3Argument(): FunCall {
+                addArgument("sm", FunCall.Argument.PureValue(sz3))
+                return this
+            }
+
+            fun FunCall.addSz9Argument(): FunCall {
+                addArgument("sm", FunCall.Argument.PureValue(sz9))
+                return this
+            }
+
+            fun FunCall.addDtArgument(): FunCall {
+                addArgument(
+                    "renderAs",
+                    LambdaValue(
+                        FunCall.builder(RBuilder::dt, FunCall.Style.INLINE)
+                            .setEmptyLambdaArgument()
+                            .build(),
+                        LambdaValue.Style.INLINE
+                    )
+                )
+                return this
+            }
+
+            fun FunCall.addDdArgument(): FunCall {
+                addArgument(
+                    "renderAs",
+                    LambdaValue(
+                        FunCall.builder(RBuilder::dd, FunCall.Style.INLINE)
+                            .setEmptyLambdaArgument()
+                            .build(),
+                        LambdaValue.Style.INLINE
+                    )
+                )
+                return this
+            }
 
             import("layout.grid.col.${ColAttributes::class.simpleName!!}")
             import("layout.grid.col.$colFun")
             import("layout.grid.row.$rowFun")
             ln { }
-            ktFun(RBuilder::row, args = mapOf(renderDl)) {
-                ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = dtArgs) {
-                    string("Description lists")
-                }
-                ktFun(RBuilder::col, style = FunStyle.BLOCK, args = ddArgs) {
-                    ln("A description list is perfect for defining terms.")
-                }
-                ln { }
-                ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = dtArgs) { string("Euismod") }
-                ktFun(RBuilder::col, style = FunStyle.BLOCK, args = ddArgs) {
-                    ktFun(RBuilder::p, style = FunStyle.INLINE_BLOCK) {
-                        string("Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.")
-                    }
-                    ktFun(RBuilder::p, style = FunStyle.INLINE_BLOCK) {
-                        string("Donec id elit non mi porta gravida at eget metus.")
-                    }
-                }
-                ln { }
-                ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = dtArgs) { string("Malesuada porta") }
-                ktFun(RBuilder::col, style = FunStyle.BLOCK, args = ddArgs) {
-                    ln("Etiam porta sem malesuada magna mollis euismod.")
-                }
-                ln { }
-                ktFun(
-                    RBuilder::col,
-                    style = FunStyle.BLOCK,
-                    args = mutableMapOf<String, Any>(
-                        "classes" to Quoted("\${${ClassNames.TEXT_TRUNCATE.nestedName}}")
-                    ).apply {
-                        putAll(dtArgs)
-                    }
-                ) { ln("Truncated term is truncated") }
-                ktFun(RBuilder::col, style = FunStyle.BLOCK, args = ddArgs) {
-                    multiline(
-                        "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum" +
-                            "massajustosit amet risus",
-                        "."
+            +FunCall.builder(RBuilder::row)
+                .addArgument(
+                    "renderAs",
+                    LambdaValue(
+                        FunCall.builder(RBuilder::dl, FunCall.Style.INLINE)
+                            .setEmptyLambdaArgument()
+                            .build(),
+                        LambdaValue.Style.INLINE
                     )
-                }
-                ln { }
-                ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = dtArgs) { string("Nesting") }
-                ktFun(RBuilder::col, style = FunStyle.BLOCK, args = ddArgs) {
-                    ktFun(RBuilder::row, args = mapOf(renderDl)) {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = dtArgs.toMutableMap().apply {
-                                put(
-                                    "sm",
-                                    buildNestedName(
-                                        ColAttributes.Sizes.SZ_4::class,
-                                        ColAttributes::class,
-                                        ColAttributes.Sizes::class
+                )
+                .setLambdaArgument(
+                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                        .addSz3Argument()
+                        .addDtArgument()
+                        .setLambdaArgument(plusString("Description lists"))
+                        .build(),
+                    "\n",
+                    FunCall.builder(RBuilder::col)
+                        .addSz9Argument()
+                        .addDdArgument()
+                        .setLambdaArgument(plusString("A description list is perfect for defining terms."))
+                        .build(),
+                    "\n",
+                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                        .addSz3Argument()
+                        .addDtArgument()
+                        .setLambdaArgument(plusString("Euismod"))
+                        .build(),
+                    "\n",
+                    FunCall.builder(RBuilder::col)
+                        .addSz9Argument()
+                        .addDdArgument()
+                        .setLambdaArgument(
+                            FunCall.builder(RBuilder::p, FunCall.Style.INLINE)
+                                .setLambdaArgument(
+                                    plusString(
+                                        "Vestibulum id ligula porta felis euismod semper eget lacinia odio " +
+                                            "sem nec elit."
                                     )
                                 )
-                            }
-                        ) {
-                            string("Nested definition list")
-                        }
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.BLOCK,
-                            args = ddArgs.toMutableMap().apply {
-                                put(
-                                    "sm",
-                                    buildNestedName(
-                                        ColAttributes.Sizes.SZ_8::class,
-                                        ColAttributes::class,
-                                        ColAttributes.Sizes::class
+                                .build(),
+                            "\n",
+                            FunCall.builder(RBuilder::p, FunCall.Style.INLINE)
+                                .setLambdaArgument(plusString("Donec id elit non mi porta gravida at eget metus."))
+                                .build()
+                        )
+                        .build(),
+                    "\n",
+                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                        .addSz3Argument()
+                        .addDtArgument()
+                        .setLambdaArgument(plusString("Malesuada porta"))
+                        .build(),
+                    "\n",
+                    FunCall.builder(RBuilder::col)
+                        .addSz9Argument()
+                        .addDdArgument()
+                        .setLambdaArgument(plusString("Etiam porta sem malesuada magna mollis euismod."))
+                        .build(),
+                    "\n",
+                    FunCall.builder(RBuilder::col)
+                        .addArgument("classes", ClassNames.TEXT_TRUNCATE)
+                        .addSz3Argument()
+                        .addDtArgument()
+                        .setLambdaArgument(plusString("Truncated term is truncated"))
+                        .build(),
+                    FunCall.builder(RBuilder::col)
+                        .addSz9Argument()
+                        .addDdArgument()
+                        .setLambdaArgument(
+                            plusString(
+                                "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut " +
+                                    "fermentum "
+                            ),
+                            "\n",
+                            plusString("massajustosit amet risus.")
+                        )
+                        .build(),
+                    "\n",
+                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                        .addSz3Argument()
+                        .addDtArgument()
+                        .setLambdaArgument(plusString("Nesting"))
+                        .build(),
+                    "\n",
+                    FunCall.builder(RBuilder::col)
+                        .addSz9Argument()
+                        .addDdArgument()
+                        .setLambdaArgument(
+                            FunCall.builder(RBuilder::row)
+                                .addArgument(
+                                    "renderAs",
+                                    LambdaValue(
+                                        FunCall.builder(RBuilder::dl, FunCall.Style.INLINE)
+                                            .setEmptyLambdaArgument()
+                                            .build(),
+                                        LambdaValue.Style.INLINE
                                     )
                                 )
-                            }
-                        ) {
-                            ln("Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc.")
-                        }
-                    }
-                }
-            }
+                                .setLambdaArgument(
+                                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                        .addArgument(
+                                            "sm",
+                                            FunCall.Argument.PureValue(
+                                                buildString {
+                                                    append(ColAttributes.Sizes::class.nestedName)
+                                                    append(".")
+                                                    append(ColAttributes.Sizes.Companion::SZ_4.name)
+                                                }
+                                            )
+                                        )
+                                        .addDtArgument()
+                                        .setLambdaArgument(plusString("Nested definition list"))
+                                        .build(),
+                                    "\n",
+                                    FunCall.builder(RBuilder::col)
+                                        .addArgument(
+                                            "sm",
+                                            FunCall.Argument.PureValue(
+                                                buildString {
+                                                    append(ColAttributes.Sizes::class.nestedName)
+                                                    append(".")
+                                                    append(ColAttributes.Sizes.Companion::SZ_8.name)
+                                                }
+                                            )
+                                        )
+                                        .addDdArgument()
+                                        .setLambdaArgument(
+                                            plusString("Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc."),
+                                        )
+                                        .build(),
+                                )
+                                .build()
+                        )
+                        .build(),
+                )
+                .build()
         }
     }
 }
