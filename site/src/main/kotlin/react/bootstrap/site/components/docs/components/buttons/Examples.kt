@@ -57,12 +57,11 @@ for more control.
                 solidSuccessFun to Button.Variants.Solid.SUCCESS,
                 solidWarningFun to Button.Variants.Solid.WARNING
             ).forEach {
-                +FunCall.builder(it.key, FunCall.Style.INLINE)
+                +FunCall.builder(it.key, FunCall.Style.NEW_INLINE)
                     .nestedBy(RBuilder::Buttons)
                     .nestedBy(ButtonBuilder::solid)
                     .setLambdaArgument(plusString(it.value::class.normalName))
                     .build()
-                +"\n"
                 ln(" ")
             }
         }

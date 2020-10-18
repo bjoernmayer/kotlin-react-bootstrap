@@ -67,8 +67,8 @@ equal-size enums for each breakpoint you need and every column will be the same 
                             .setLambdaArgument(
                                 buildString {
                                     for (x in 1..2) {
-                                        appendLine(
-                                            FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                                 .setLambdaArgument(plusString("$x of 2"))
                                                 .build()
                                         )
@@ -85,8 +85,8 @@ equal-size enums for each breakpoint you need and every column will be the same 
                             .setLambdaArgument(
                                 buildString {
                                     for (x in 1..3) {
-                                        appendLine(
-                                            FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                                 .setLambdaArgument(plusString("$x of 3"))
                                                 .build()
                                         )
@@ -133,20 +133,17 @@ Note that the other columns will resize no matter the width of the center column
                         listOf(SZ_5, SZ_6).joinToString("") { size ->
                             FunCall.builder(RBuilder::row)
                                 .setLambdaArgument(
-                                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                         .setLambdaArgument(plusString("1 of 3"))
                                         .build(),
-                                    "\n",
-                                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                         .addArgument("all", FunCall.Argument.PureValue(size.name))
                                         .setLambdaArgument(plusString("2 of 3 (wider)"))
                                         .build(),
-                                    "\n",
                                     FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
                                         .setLambdaArgument(plusString("3 of 3"))
                                         .build(),
-
-                                    )
+                                )
                                 .build()
                         }
                     )
@@ -189,17 +186,15 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
                         FunCall.builder(RBuilder::row)
                             .addArgument("classes", ClassNames.JUSTIFY_CONTENT_MD_CENTER)
                             .setLambdaArgument(
-                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                     .addArgument("all", FunCall.Argument.PureValue(EQ.name))
                                     .addArgument("lg", FunCall.Argument.PureValue(SZ_2.name))
                                     .setLambdaArgument(plusString("1 of 3"))
                                     .build(),
-                                "\n",
-                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                     .addArgument("md", FunCall.Argument.PureValue(AUTO.name))
                                     .setLambdaArgument(plusString("Variable width content"))
                                     .build(),
-                                "\n",
                                 FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
                                     .addArgument("all", FunCall.Argument.PureValue(EQ.name))
                                     .addArgument("lg", FunCall.Argument.PureValue(SZ_2.name))
@@ -209,15 +204,13 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
                             .build(),
                         FunCall.builder(RBuilder::row)
                             .setLambdaArgument(
-                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                     .setLambdaArgument(plusString("1 of 3"))
                                     .build(),
-                                "\n",
-                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                     .addArgument("md", FunCall.Argument.PureValue(AUTO.name))
                                     .setLambdaArgument(plusString("Variable width content"))
                                     .build(),
-                                "\n",
                                 FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
                                     .addArgument("all", FunCall.Argument.PureValue(EQ.name))
                                     .addArgument("lg", FunCall.Argument.PureValue(SZ_2.name))

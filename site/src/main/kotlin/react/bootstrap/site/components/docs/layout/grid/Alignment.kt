@@ -17,7 +17,6 @@ import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
-import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.AROUND as rxAROUND
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.BETWEEN as rxBETWEEN
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.CENTER as rxCENTER

@@ -89,9 +89,9 @@ immediate children list items__, meaning you will need to add the class for any 
             +FunCall.builder(ulFun)
                 .addArgument(ListStyles.UNSTYLED)
                 .setLambdaArgument(
-                    loremList.joinToString("\n") { (key, value) ->
+                    loremList.joinToString("") { (key, value) ->
                         if (value is String) {
-                            FunCall.builder(liFun, FunCall.Style.INLINE)
+                            FunCall.builder(liFun, FunCall.Style.NEW_INLINE)
                                 .setLambdaArgument(plusString(value))
                                 .build()
                         } else {
@@ -101,8 +101,8 @@ immediate children list items__, meaning you will need to add the class for any 
                                     "\n",
                                     FunCall.builder(ulFun)
                                         .setLambdaArgument(
-                                            (value as List<*>).joinToString("\n") {
-                                                FunCall.builder(liFun, FunCall.Style.INLINE)
+                                            (value as List<*>).joinToString("") {
+                                                FunCall.builder(liFun, FunCall.Style.NEW_INLINE)
                                                     .setLambdaArgument(plusString(it as String))
                                                     .build()
                                             }
@@ -110,7 +110,6 @@ immediate children list items__, meaning you will need to add the class for any 
                                         .build()
                                 )
                                 .build()
-                                .substringBeforeLast("\n")
                         }
                     }
                 )
@@ -257,29 +256,27 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                     )
                 )
                 .setLambdaArgument(
-                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                         .addSz3Argument()
                         .addDtArgument()
                         .setLambdaArgument(plusString("Description lists"))
                         .build(),
-                    "\n",
                     FunCall.builder(RBuilder::col)
                         .addSz9Argument()
                         .addDdArgument()
                         .setLambdaArgument(plusString("A description list is perfect for defining terms."))
                         .build(),
                     "\n",
-                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                         .addSz3Argument()
                         .addDtArgument()
                         .setLambdaArgument(plusString("Euismod"))
                         .build(),
-                    "\n",
                     FunCall.builder(RBuilder::col)
                         .addSz9Argument()
                         .addDdArgument()
                         .setLambdaArgument(
-                            FunCall.builder(RBuilder::p, FunCall.Style.INLINE)
+                            FunCall.builder(RBuilder::p, FunCall.Style.NEW_INLINE)
                                 .setLambdaArgument(
                                     plusString(
                                         "Vestibulum id ligula porta felis euismod semper eget lacinia odio " +
@@ -287,19 +284,17 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                                     )
                                 )
                                 .build(),
-                            "\n",
                             FunCall.builder(RBuilder::p, FunCall.Style.INLINE)
                                 .setLambdaArgument(plusString("Donec id elit non mi porta gravida at eget metus."))
                                 .build()
                         )
                         .build(),
                     "\n",
-                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                         .addSz3Argument()
                         .addDtArgument()
                         .setLambdaArgument(plusString("Malesuada porta"))
                         .build(),
-                    "\n",
                     FunCall.builder(RBuilder::col)
                         .addSz9Argument()
                         .addDdArgument()
@@ -325,12 +320,11 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                         )
                         .build(),
                     "\n",
-                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                         .addSz3Argument()
                         .addDtArgument()
                         .setLambdaArgument(plusString("Nesting"))
                         .build(),
-                    "\n",
                     FunCall.builder(RBuilder::col)
                         .addSz9Argument()
                         .addDdArgument()
@@ -346,7 +340,7 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                                     )
                                 )
                                 .setLambdaArgument(
-                                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                         .addArgument(
                                             "sm",
                                             FunCall.Argument.PureValue(
@@ -360,7 +354,6 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                                         .addDtArgument()
                                         .setLambdaArgument(plusString("Nested definition list"))
                                         .build(),
-                                    "\n",
                                     FunCall.builder(RBuilder::col)
                                         .addArgument(
                                             "sm",

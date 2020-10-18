@@ -96,7 +96,7 @@ internal class FunCall private constructor(
 
             val content = lambdaArgumentContent!!
 
-            if (style == Style.INLINE) {
+            if (style == Style.INLINE || style == Style.NEW_INLINE) {
                 if (content.isEmpty()) {
                     append(" { }")
                 } else {
@@ -105,6 +105,10 @@ internal class FunCall private constructor(
 
                 if (appendSemicolon) {
                     append(";")
+                }
+
+                if (style == Style.NEW_INLINE) {
+                    append("\n")
                 }
             }
 
@@ -134,7 +138,8 @@ internal class FunCall private constructor(
 
     internal enum class Style {
         INLINE,
-        BLOCK
+        BLOCK,
+        NEW_INLINE
     }
 
     internal data class Parent(

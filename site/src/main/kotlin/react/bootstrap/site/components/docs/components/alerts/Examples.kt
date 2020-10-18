@@ -151,10 +151,9 @@ Aww yeah, you successfully read this important alert message. This example text 
             +FunCall.builder(Alerts::success)
                 .nestedBy(RBuilder::Alerts)
                 .setLambdaArgument(
-                    FunCall.builder(RBuilder::h4, FunCall.Style.INLINE)
+                    FunCall.builder(RBuilder::h4, FunCall.Style.NEW_INLINE)
                         .setLambdaArgument(plusString("Well done!"))
                         .build(),
-                    "\n",
                     FunCall.builder(RBuilder::p)
                         .setLambdaArgument(
                             plusString(
@@ -167,10 +166,9 @@ Aww yeah, you successfully read this important alert message. This example text 
                                     " content."
                             )
                         ).build(),
-                    FunCall.builder(RBuilder::hr, FunCall.Style.INLINE)
+                    FunCall.builder(RBuilder::hr, FunCall.Style.NEW_INLINE)
                         .setEmptyLambdaArgument()
                         .build(),
-                    "\n",
                     FunCall.builder(RBuilder::p)
                         .addArgument("classes", ClassNames.MB_0)
                         .setLambdaArgument(
@@ -284,10 +282,9 @@ You can build your own custom close element, by using `$closingElementName { }`.
                 .setLambdaArgument(
                     plusString("You want some cookies"),
                     "\n",
-                    FunCall.builder(RBuilder::hr, FunCall.Style.INLINE)
+                    FunCall.builder(RBuilder::hr, FunCall.Style.NEW_INLINE)
                         .setEmptyLambdaArgument()
                         .build(),
-                    "\n",
                     FunCall.builder(RElementBuilder<Alert.DismissibleProps>::closingElement)
                         .setLambdaArgument(
                             FunCall.builder(solidSuccessFun)
@@ -355,10 +352,9 @@ You can build your own custom close element, by using `$closingElementName { }`.
                                                 .build(),
                                             plusString("You picked the wrong house, fool!"),
                                             "\n",
-                                            FunCall.builder(RBuilder::hr, FunCall.Style.INLINE)
+                                            FunCall.builder(RBuilder::hr, FunCall.Style.NEW_INLINE)
                                                 .setEmptyLambdaArgument()
                                                 .build(),
-                                            "\n",
                                             FunCall.builder(RElementBuilder<Alert.DismissibleProps>::closingElement)
                                                 .setLambdaArgument(
                                                     FunCall.builder(solidInfoFun)

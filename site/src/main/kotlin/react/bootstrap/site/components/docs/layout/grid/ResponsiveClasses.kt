@@ -76,7 +76,7 @@ ${EQ.name}`.
                                 buildString {
                                     repeat(4) {
                                         append(
-                                            FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                                 .setLambdaArgument(
                                                     FunCall.builder(RBuilder::em, FunCall.Style.INLINE)
                                                         .setLambdaArgument(plusString("all = ${EQ.name}"))
@@ -84,18 +84,16 @@ ${EQ.name}`.
                                                 )
                                                 .build()
                                         )
-                                        append("\n")
                                     }
                                 }
                             )
                             .build(),
                         FunCall.builder(RBuilder::row)
                             .setLambdaArgument(
-                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                     .addArgument("all", FunCall.Argument.PureValue(SZ_8.name))
                                     .setLambdaArgument(plusString("all = ${SZ_8.name}"))
                                     .build(),
-                                "\n",
                                 FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
                                     .addArgument("all", FunCall.Argument.PureValue(SZ_4.name))
                                     .setLambdaArgument(plusString("all = ${SZ_4.name}"))
@@ -140,11 +138,10 @@ stacked and becomes horizontal at the small breakpoint (`sm`).
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
                             .setLambdaArgument(
-                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                     .addArgument("sm", FunCall.Argument.PureValue(SZ_8.name))
                                     .setLambdaArgument(plusString("sm = ${SZ_8.name}"))
                                     .build(),
-                                "\n",
                                 FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
                                     .addArgument("sm", FunCall.Argument.PureValue(SZ_4.name))
                                     .setLambdaArgument(plusString("sm = ${SZ_4.name}"))
@@ -156,12 +153,11 @@ stacked and becomes horizontal at the small breakpoint (`sm`).
                                 buildString {
                                     repeat(3) {
                                         append(
-                                            FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                                 .addArgument("sm", FunCall.Argument.PureValue(EQ.name))
                                                 .setLambdaArgument(plusString("sm = ${EQ.name}"))
                                                 .build()
                                         )
-                                        append("\n")
                                     }
                                 }
                             )
@@ -204,6 +200,20 @@ needed. See the example below for a better idea of how it all works.
                 importContainerFun()
                 importRowFun()
                 ln { }
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                "// Stack the columns on mobile by making one full-width and the other half-width",
+                                "\n",
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                    .addArgument("md", FunCall.Argument.PureValue(SZ_8.name))
+                                    .setLambdaArgument(plusString("md = ${SZ_8.name}"))
+                                    .build(),
+                                )
+                            .build()
+                    )
+                    .build()
                 ktContainer {
                     ktRow {
                         ln { +"// Stack the columns on mobile by making one full-width and the other half-width" }

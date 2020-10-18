@@ -69,14 +69,13 @@ Images in figures have no explicit size, so be sure to add the `img(fluid)` to `
             ln { }
             +FunCall.builder(RBuilder::figure)
                 .setLambdaArgument(
-                    FunCall.builder(RBuilder::img, FunCall.Style.INLINE)
+                    FunCall.builder(RBuilder::img, FunCall.Style.NEW_INLINE)
                         .addArgument("fluid", true)
                         .addArgument("classes", ClassNames.ROUNDED)
                         .addArgument("src", "...")
                         .addArgument("alt", "...")
                         .setEmptyLambdaArgument()
                         .build(),
-                    "\n",
                     FunCall.builder(RBuilder::figcaption)
                         .setLambdaArgument(plusString("A caption for the above image."))
                         .build()

@@ -57,11 +57,11 @@ heading but cannot use the associated HTML element.
                 RBuilder::h5,
                 RBuilder::h6
             ).mapIndexed { index, function ->
-                FunCall.builder(function, FunCall.Style.INLINE)
+                FunCall.builder(function, FunCall.Style.NEW_INLINE)
                     .addArgument(FunCall.Argument.PureValue("RBuilder::p"))
                     .setLambdaArgument(plusString("h${index + 1}. Bootstrap heading"))
                     .build()
-            }.joinToString("\n")
+            }.joinToString("")
         }
         subSectionTitle("Customizing headings", section)
         p {

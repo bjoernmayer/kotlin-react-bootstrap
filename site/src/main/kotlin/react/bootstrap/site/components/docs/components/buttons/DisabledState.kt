@@ -31,14 +31,13 @@ Make buttons look inactive by setting the `disabled` boolean attribute to any `b
             importButton()
             importButtonsBuilder()
             ln { }
-            +FunCall.builder(solidPrimaryFun, FunCall.Style.INLINE)
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
                 .addArgument("disabled", true)
                 .addArgument("sizes", Button.Sizes.LG)
                 .setLambdaArgument(plusString("Primary Button"))
                 .build()
-            +"\n"
             ln(" ")
             +FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
                 .nestedBy(RBuilder::Buttons)
@@ -64,7 +63,7 @@ Usage for you stays the same, though:
             importButton()
             importButtonsBuilder()
             ln { }
-            +FunCall.builder(solidPrimaryFun, FunCall.Style.INLINE)
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
                 .addArgument("href", "#")
@@ -72,7 +71,6 @@ Usage for you stays the same, though:
                 .addArgument("sizes", Button.Sizes.LG)
                 .setLambdaArgument(plusString("Primary Button"))
                 .build()
-            +"\n"
             ln(" ")
             +FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
                 .nestedBy(RBuilder::Buttons)

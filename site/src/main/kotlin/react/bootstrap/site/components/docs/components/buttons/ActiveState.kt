@@ -236,10 +236,9 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
                     }
                 )
                 .build()
-            +FunCall.builder(RBuilder::br, FunCall.Style.INLINE)
+            +FunCall.builder(RBuilder::br, FunCall.Style.NEW_INLINE)
                 .setEmptyLambdaArgument()
                 .build()
-            +"\n"
             +FunCall.builder(RBuilder::buttonGroup)
                 .addArgument("behaviour", ButtonGroup.Behaviours.CHECKBOXES)
                 .setLambdaArgument(

@@ -57,11 +57,10 @@ internal class ContextualStyles : SectionComponent() {
             ln { }
             ln { +"// On rows" }
             ContextualStyle.values().forEach {
-                +FunCall.builder(RBuilder::tr, FunCall.Style.INLINE)
+                +FunCall.builder(RBuilder::tr, FunCall.Style.NEW_INLINE)
                     .addArgument(it)
                     .setLambdaArgument(plusString("..."))
                     .build()
-                +"\n"
             }
             ln { }
             ln { +"// On cells (`td` or `th`)" }

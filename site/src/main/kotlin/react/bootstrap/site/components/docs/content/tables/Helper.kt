@@ -93,11 +93,10 @@ internal fun RBuilder.exampleRow(exampleRow: ExampleRow, index: Int) {
 internal fun CodeExampleBuilder.exampleRow(exampleRow: ExampleRow, index: Int) =
     FunCall.builder(RBuilder::tr)
         .setLambdaArgument(
-            FunCall.builder(RBuilder::th, FunCall.Style.INLINE)
+            FunCall.builder(RBuilder::th, FunCall.Style.NEW_INLINE)
                 .addArgument(ThScope.row)
                 .setLambdaArgument(plusString((index + 1).toString()))
                 .build(),
-            "\n",
             listOf(exampleRow.first, exampleRow.last, exampleRow.handle).joinToString("\n") { content ->
                 FunCall.builder(RBuilder::td, FunCall.Style.INLINE)
                     .setLambdaArgument(plusString(content))

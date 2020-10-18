@@ -56,12 +56,11 @@ In need of a button, but not the hefty background colors they bring? Use the
                 outlineSuccessFun to Button.Variants.Outline.SUCCESS,
                 outlineWarningFun to Button.Variants.Outline.WARNING
             ).forEach {
-                +FunCall.builder(it.key, FunCall.Style.INLINE)
+                +FunCall.builder(it.key, FunCall.Style.NEW_INLINE)
                     .nestedBy(RBuilder::Buttons)
                     .nestedBy(ButtonBuilder::outline)
                     .setLambdaArgument(plusString(it.value::class.normalName))
                     .build()
-                +"\n"
                 ln(" ")
             }
         }
