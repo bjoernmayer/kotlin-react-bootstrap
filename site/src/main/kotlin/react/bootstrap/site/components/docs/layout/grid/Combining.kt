@@ -11,14 +11,13 @@ import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_4
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.row
-import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.layout.importContainerFun
-import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.h4
 import react.dom.p
 import kotlin.reflect.KFunction2
@@ -78,42 +77,27 @@ Combine other attributes with `$sizes` by using `$sz`.
                 importContainerFun()
                 importRowFun()
                 ln { }
-
-                ktContainer {
-
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to "${OFF_1.name} $sz ${SZ_4.name}")
-                        ) {
-                            string("all = ${OFF_1.name} $sz ${SZ_4.name}")
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        listOf(
+                            "${OFF_1.name} $sz ${SZ_4.name}",
+                            "${ORD_3.name} $sz ${SZ_4.name}",
+                            "${END.name} $sz ${SZ_4.name}"
+                        ).joinToString("") {
+                            FunCall.builder(RBuilder::row)
+                                .setLambdaArgument(
+                                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                        .addArgument("all", FunCall.Argument.PureValue(it))
+                                        .setLambdaArgument(plusString("all = $it"))
+                                        .build(),
+                                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                        .setLambdaArgument(plusString("Reference"))
+                                        .build()
+                                )
+                                .build()
                         }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
-
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to "${ORD_3.name} $sz ${SZ_4.name}")
-                        ) {
-                            string("all = ${ORD_3.name} $sz ${SZ_4.name}")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
-
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to "${END.name} $sz ${SZ_4.name}")
-                        ) {
-                            string("all = ${END.name} $sz ${SZ_4.name}")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
-                }
+                    )
+                    .build()
             }
         }
 
@@ -150,42 +134,27 @@ Combine other attributes with `$offsets` by using `$off`.
                 importContainerFun()
                 importRowFun()
                 ln { }
-
-                ktContainer {
-
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to "${SZ_4.name} $off ${OFF_1.name}")
-                        ) {
-                            string("all = ${SZ_4.name} $off ${OFF_1.name}")
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        listOf(
+                            "${SZ_4.name} $off ${OFF_1.name}",
+                            "${ORD_3.name} $off ${OFF_1.name}",
+                            "${END.name} $off ${OFF_1.name}"
+                        ).joinToString("") {
+                            FunCall.builder(RBuilder::row)
+                                .setLambdaArgument(
+                                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                        .addArgument("all", FunCall.Argument.PureValue(it))
+                                        .setLambdaArgument(plusString("all = $it"))
+                                        .build(),
+                                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                        .setLambdaArgument(plusString("Reference"))
+                                        .build()
+                                )
+                                .build()
                         }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
-
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to "${ORD_3.name} $off ${OFF_1.name}")
-                        ) {
-                            string("all = ${ORD_3.name} $off ${OFF_1.name}")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
-
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to "${END.name} $off ${OFF_1.name}")
-                        ) {
-                            string("all = ${END.name} $off ${OFF_1.name}")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
-                }
+                    )
+                    .build()
             }
         }
 
@@ -222,42 +191,27 @@ Combine other attributes with `$orderings` by using `$ord`.
                 importContainerFun()
                 importRowFun()
                 ln { }
-
-                ktContainer {
-
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to "${SZ_4.name} $ord ${ORD_3.name}")
-                        ) {
-                            string("all = ${SZ_4.name} $ord ${ORD_3.name}")
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        listOf(
+                            "${SZ_4.name} $ord ${ORD_3.name}",
+                            "${OFF_1.name} $ord ${ORD_3.name}",
+                            "${END.name} $ord ${ORD_3.name}"
+                        ).joinToString("") {
+                            FunCall.builder(RBuilder::row)
+                                .setLambdaArgument(
+                                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                        .addArgument("all", FunCall.Argument.PureValue(it))
+                                        .setLambdaArgument(plusString("all = $it"))
+                                        .build(),
+                                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                        .setLambdaArgument(plusString("Reference"))
+                                        .build()
+                                )
+                                .build()
                         }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
-
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to "${OFF_1.name} $ord ${ORD_3.name}")
-                        ) {
-                            string("all = ${OFF_1.name} $ord ${ORD_3.name}")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
-
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to "${END.name} $ord ${ORD_3.name}")
-                        ) {
-                            string("all = ${END.name} $ord ${ORD_3.name}")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
-                }
+                    )
+                    .build()
             }
         }
 
@@ -295,41 +249,27 @@ Combine other attributes with `$alignments` by using `$align`.
                 importRowFun()
                 ln { }
 
-                ktContainer {
-
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to "${SZ_4.name} $align ${END.name}")
-                        ) {
-                            string("all = ${SZ_4.name} $align ${END.name}")
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        listOf(
+                            "${SZ_4.name} $align ${END.name}",
+                            "${OFF_1.name} $align ${END.name}",
+                            "${ORD_3.name} $align ${END.name}"
+                        ).joinToString("") {
+                            FunCall.builder(RBuilder::row)
+                                .setLambdaArgument(
+                                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                        .addArgument("all", FunCall.Argument.PureValue(it))
+                                        .setLambdaArgument(plusString("all = $it"))
+                                        .build(),
+                                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                        .setLambdaArgument(plusString("Reference"))
+                                        .build()
+                                )
+                                .build()
                         }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
-
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to "${OFF_1.name} $align ${END.name}")
-                        ) {
-                            string("all = ${OFF_1.name} $align ${END.name}")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
-
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to "${ORD_3.name} $align ${END.name}")
-                        ) {
-                            string("all = ${ORD_3.name} $align ${END.name}")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
-                }
+                    )
+                    .build()
             }
         }
 
@@ -342,22 +282,6 @@ Combine other attributes with `$alignments` by using `$align`.
 }
 
 private fun RBuilder.allPossibleCombinations() {
-    val sizeToOffset = Pairing(SZ_4, OFF_1, ColAttributes.Sizes::off)
-    val sizeToOrder = Pairing(SZ_4, ORD_3, ColAttributes.Sizes::ord)
-    val sizeToAlignment = Pairing(SZ_4, END, ColAttributes.Sizes::align)
-
-    val offsetToOrder = Pairing(OFF_1, ORD_3, ColAttributes.Offsets::ord)
-    val offsetToAlignment = Pairing(OFF_1, END, ColAttributes.Offsets::align)
-    val offsetToSize = Pairing(OFF_1, SZ_4, ColAttributes.Offsets::sz)
-
-    val orderToSize = Pairing(ORD_3, SZ_4, ColAttributes.Orderings::sz)
-    val orderToOffset = Pairing(ORD_3, OFF_1, ColAttributes.Orderings::off)
-    val orderToAlignment = Pairing(ORD_3, END, ColAttributes.Orderings::align)
-
-    val alignmentToSize = Pairing(END, SZ_4, ColAttributes.Alignments::sz)
-    val alignmentToOffset = Pairing(END, OFF_1, ColAttributes.Alignments::off)
-    val alignmentToOrder = Pairing(END, ORD_3, ColAttributes.Alignments::ord)
-
     val sizeOffsetOrderFun = ColAttributes.SizeOffsetPair::ord
     val sizeOffsetAlignmentFun = ColAttributes.SizeOffsetPair::align
 
@@ -375,6 +299,22 @@ private fun RBuilder.allPossibleCombinations() {
 
     val orderAlignmentSizeFun = ColAttributes.OrderAlignmentPair::sz
     val orderAlignmentOffsetFun = ColAttributes.OrderAlignmentPair::off
+
+    val sizeToOffset = Pairing(SZ_4, OFF_1, ColAttributes.Sizes::off)
+    val sizeToOrder = Pairing(SZ_4, ORD_3, ColAttributes.Sizes::ord)
+    val sizeToAlignment = Pairing(SZ_4, END, ColAttributes.Sizes::align)
+
+    val offsetToOrder = Pairing(OFF_1, ORD_3, ColAttributes.Offsets::ord)
+    val offsetToAlignment = Pairing(OFF_1, END, ColAttributes.Offsets::align)
+    val offsetToSize = Pairing(OFF_1, SZ_4, ColAttributes.Offsets::sz)
+
+    val orderToSize = Pairing(ORD_3, SZ_4, ColAttributes.Orderings::sz)
+    val orderToOffset = Pairing(ORD_3, OFF_1, ColAttributes.Orderings::off)
+    val orderToAlignment = Pairing(ORD_3, END, ColAttributes.Orderings::align)
+
+    val alignmentToSize = Pairing(END, SZ_4, ColAttributes.Alignments::sz)
+    val alignmentToOffset = Pairing(END, OFF_1, ColAttributes.Alignments::off)
+    val alignmentToOrder = Pairing(END, ORD_3, ColAttributes.Alignments::ord)
 
     val sizeOffsetToOrder = Tripling(ORD_3, sizeToOffset, offsetToSize, sizeOffsetOrderFun)
     val sizeOffsetToAlignment = Tripling(END, sizeToOffset, offsetToSize, sizeOffsetAlignmentFun)
@@ -492,12 +432,21 @@ private fun RBuilder.allPossibleCombinations() {
                 importContainerFun()
                 importRowFun()
                 ln { }
-                ktConRow {
-                    ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("all" to pairing.argString)) {
-                        string("all = ${pairing.argString}")
-                    }
-                    ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                }
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                    .addArgument("all", FunCall.Argument.PureValue(pairing.argString))
+                                    .setLambdaArgument(plusString("all = ${pairing.argString}"))
+                                    .build(),
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .setLambdaArgument(plusString("Reference"))
+                                    .build()
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
     }
@@ -533,12 +482,21 @@ private fun RBuilder.allPossibleCombinations() {
                     importContainerFun()
                     importRowFun()
                     ln { }
-                    ktConRow {
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("all" to argString)) {
-                            string("all = $argString")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
+                    +FunCall.builder(RBuilder::container)
+                        .setLambdaArgument(
+                            FunCall.builder(RBuilder::row)
+                                .setLambdaArgument(
+                                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                        .addArgument("all", FunCall.Argument.PureValue(argString))
+                                        .setLambdaArgument(plusString("all = $argString"))
+                                        .build(),
+                                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                        .setLambdaArgument(plusString("Reference"))
+                                        .build()
+                                )
+                                .build()
+                        )
+                        .build()
                 }
             }
         }
@@ -580,12 +538,21 @@ private fun RBuilder.allPossibleCombinations() {
                     importContainerFun()
                     importRowFun()
                     ln { }
-                    ktConRow {
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("all" to argString)) {
-                            string("all = $argString")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
-                    }
+                    +FunCall.builder(RBuilder::container)
+                        .setLambdaArgument(
+                            FunCall.builder(RBuilder::row)
+                                .setLambdaArgument(
+                                    FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                        .addArgument("all", FunCall.Argument.PureValue(argString))
+                                        .setLambdaArgument(plusString("all = $argString"))
+                                        .build(),
+                                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                        .setLambdaArgument(plusString("Reference"))
+                                        .build()
+                                )
+                                .build()
+                        )
+                        .build()
                 }
             }
         }

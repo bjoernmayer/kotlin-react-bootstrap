@@ -210,7 +210,7 @@ needed. See the example below for a better idea of how it all works.
                                     .addArgument("md", FunCall.Argument.PureValue(SZ_8.name))
                                     .setLambdaArgument(plusString("md = ${SZ_8.name}"))
                                     .build(),
-                                )
+                            )
                             .build()
                     )
                     .build()

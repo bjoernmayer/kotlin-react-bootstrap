@@ -15,14 +15,13 @@ import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_6
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.row
-import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.layout.importContainerFun
-import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.h4
 
 internal class Reordering : SectionComponent() {
@@ -60,19 +59,25 @@ for 1 through 12 across all five grid tiers.
                 importContainerFun()
                 importRowFun()
                 ln { }
-                ktConRow {
-                    ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("First in DOM, no order applied") }
-                    ktFun(
-                        RBuilder::col,
-                        style = FunStyle.INLINE_BLOCK,
-                        args = mapOf("all" to ORD_12.name)
-                    ) { string(" Second in DOM, with a larger order") }
-                    ktFun(
-                        RBuilder::col,
-                        style = FunStyle.INLINE_BLOCK,
-                        args = mapOf("all" to ORD_1.name)
-                    ) { string("Third in DOM, with an order of 1") }
-                }
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                    .setLambdaArgument(plusString("First in DOM, no order applied"))
+                                    .build(),
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                    .addArgument("all", FunCall.Argument.PureValue(ORD_12.name))
+                                    .setLambdaArgument(plusString("Second in DOM, with a larger order"))
+                                    .build(),
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("all", FunCall.Argument.PureValue(ORD_1.name))
+                                    .setLambdaArgument(plusString("Third in DOM, with an order of 1"))
+                                    .build(),
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
         subSectionTitle("Offsetting columns", section)
@@ -120,43 +125,47 @@ columns. For example, `md = ${SZ_4.name} $off ${OFF_4.name}` moves `$colFun(md =
                 importRowFun()
                 ln { }
 
-                ktContainer {
-
-                    ktRow {
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("md" to SZ_4.name)) {
-                            string("md = ${SZ_4.name}")
-                        }
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("md" to "${SZ_4.name} $off ${OFF_4.name}")
-                        ) {
-                            string("md = ${SZ_4.name} $off ${OFF_4.name}")
-                        }
-                    }
-
-                    ktRow {
-                        for (x in 1..2) {
-                            ktFun(
-                                RBuilder::col,
-                                style = FunStyle.INLINE_BLOCK,
-                                args = mapOf("md" to "${SZ_3.name} $off ${OFF_3.name}")
-                            ) {
-                                string("md = ${SZ_3.name} $off ${OFF_3.name}")
-                            }
-                        }
-                    }
-
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("md" to "${SZ_6.name} $off ${OFF_3.name}")
-                        ) {
-                            string("md = ${SZ_6.name} $off ${OFF_3.name}")
-                        }
-                    }
-                }
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                    .addArgument("md", FunCall.Argument.PureValue(SZ_4.name))
+                                    .setLambdaArgument(plusString("md = ${SZ_4.name}"))
+                                    .build(),
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("md", FunCall.Argument.PureValue("${SZ_4.name} $off ${OFF_4.name}"))
+                                    .setLambdaArgument(plusString("${SZ_4.name} $off ${OFF_4.name}"))
+                                    .build()
+                            )
+                            .build(),
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                buildString {
+                                    repeat(2) {
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                                .addArgument(
+                                                    "md",
+                                                    FunCall.Argument.PureValue("${SZ_3.name} $off ${OFF_3.name}")
+                                                )
+                                                .setLambdaArgument(plusString("md = ${SZ_3.name} $off ${OFF_3.name}"))
+                                                .build()
+                                        )
+                                    }
+                                }
+                            )
+                            .build(),
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("md", FunCall.Argument.PureValue("${SZ_6.name} $off ${OFF_3.name}"))
+                                    .setLambdaArgument(plusString("md = ${SZ_6.name} $off ${OFF_3.name}"))
+                                    .build()
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
     }
