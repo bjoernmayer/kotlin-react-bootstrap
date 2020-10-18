@@ -11,7 +11,7 @@ import react.bootstrap.content.typography.display4
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.dom.span
 import react.dom.tbody
@@ -70,7 +70,7 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
             ln { +"// Or you use a more generic way" }
             ktFun(
                 RBuilder::display4,
-                args = mapOf("variant" to Display.Variants.DISPLAY_4.kt, "renderAs" to "{ span { } }")
+                args = mapOf("variant" to Display.Variants.DISPLAY_4.nestedName, "renderAs" to "{ span { } }")
             ) {
                 ln("Display 4")
             }

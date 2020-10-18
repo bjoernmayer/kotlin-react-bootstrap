@@ -13,9 +13,6 @@ internal fun pageTitle(pagetitle: String) {
     document.title = "$pagetitle · Kotlin React Bootstrap"
 }
 
-internal val Enum<*>.kt: String
-    get() = buildNestedName(name, this::class)
-
 internal fun buildNestedName(target: String, vararg parents: String): String =
     "${parents.joinToString(".")}.$target"
 

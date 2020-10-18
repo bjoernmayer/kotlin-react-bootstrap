@@ -20,9 +20,9 @@ import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.grid.colFun
 import react.bootstrap.site.components.docs.layout.grid.rowFun
+import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.dom.RDOMBuilder
 import react.dom.dd
@@ -72,7 +72,7 @@ immediate children list items__, meaning you will need to add the class for any 
             import("content.typography.${ListStyles::class.simpleName}")
             import("content.typography.ul")
             ln { }
-            ktFun(ulFun, args = mapOf(null to ListStyles.UNSTYLED.kt)) {
+            ktFun(ulFun, args = mapOf(null to ListStyles.UNSTYLED.nestedName)) {
                 ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Lorem ipsum dolor sit amet") }
                 ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Consectetur adipiscing elit") }
                 ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Integer molestie lorem at massa") }
@@ -101,8 +101,8 @@ immediate children list items__, meaning you will need to add the class for any 
         Markdown {
             //language=Markdown
             +"""
-Remove a list’s bullets and apply some light `margin` with a combination of two functions, `ul(${ListStyles.INLINE.kt})
-{ }` and `li(${ListItemStyles.INLINE.kt}) { }`.
+Remove a list’s bullets and apply some light `margin` with a combination of two functions,
+`ul(${ListStyles.INLINE.nestedName}) { }` and `li(${ListItemStyles.INLINE.nestedName}) { }`.
             """
         }
         liveExample {
@@ -118,7 +118,7 @@ Remove a list’s bullets and apply some light `margin` with a combination of tw
             import("content.typography.li")
             import("content.typography.ul")
             ln { }
-            ktFun(ulFun, args = mapOf(null to ListStyles.INLINE.kt)) {
+            ktFun(ulFun, args = mapOf(null to ListStyles.INLINE.nestedName)) {
                 ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Lorem ipsum") }
                 ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Phasellus iaculis") }
                 ktFun(liFun, style = FunStyle.INLINE_BLOCK) { string("Nulla volutpat") }
@@ -129,7 +129,7 @@ Remove a list’s bullets and apply some light `margin` with a combination of tw
             //language=Markdown
             +"""
 Align terms and descriptions horizontally by using our grid system’s builder funs. For longer terms, you can optionally
-add a `${ClassNames.TEXT_TRUNCATE.kt}` class to truncate the text with an ellipsis.
+add a `${ClassNames.TEXT_TRUNCATE.nestedName}` class to truncate the text with an ellipsis.
             """
         }
         liveExample {
@@ -219,7 +219,7 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                     RBuilder::col,
                     style = FunStyle.BLOCK,
                     args = mutableMapOf<String, Any>(
-                        "classes" to Quoted("\${${ClassNames.TEXT_TRUNCATE.kt}}")
+                        "classes" to Quoted("\${${ClassNames.TEXT_TRUNCATE.nestedName}}")
                     ).apply {
                         putAll(dtArgs)
                     }

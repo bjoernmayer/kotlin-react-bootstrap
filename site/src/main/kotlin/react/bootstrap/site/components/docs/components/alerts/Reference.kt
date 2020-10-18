@@ -20,7 +20,7 @@ import react.bootstrap.content.typography.Headings
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunSpec
 import react.bootstrap.site.lib.codepoet.Generic
@@ -69,7 +69,7 @@ internal class Reference : SectionComponent() {
         Markdown {
             //language=Markdown
             +"""
-Adds `${ClassNames.ALERT_LINK.kt}` to the outer most `ReactElement` resulting from `block`.
+Adds `${ClassNames.ALERT_LINK.nestedName}` to the outer most `ReactElement` resulting from `block`.
             """
         }
         codeExample {
@@ -83,7 +83,7 @@ Adds `${ClassNames.ALERT_LINK.kt}` to the outer most `ReactElement` resulting fr
         Markdown {
             //language=Markdown
             +"""
-Adds `${ClassNames.ALERT_HEADING.kt}` to the outer most `ReactElement` resulting from `block`.
+Adds `${ClassNames.ALERT_HEADING.nestedName}` to the outer most `ReactElement` resulting from `block`.
             """
         }
         codeExample {
@@ -106,7 +106,7 @@ Adds `${ClassNames.ALERT_HEADING.kt}` to the outer most `ReactElement` resulting
             Markdown {
                 //language=Markdown
                 +"""
-Custom `${function.name}` which behaves the same but adds `${ClassNames.ALERT_HEADING.kt}` to `classes`.
+Custom `${function.name}` which behaves the same but adds `${ClassNames.ALERT_HEADING.nestedName}` to `classes`.
             """
             }
             codeExample {

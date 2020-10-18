@@ -8,7 +8,7 @@ import react.bootstrap.content.tables.table
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 
@@ -20,8 +20,8 @@ internal class BorderStyles : SectionComponent() {
         Markdown {
             //language=Markdown
             +"""
-Use the `table(borderStyle)`-argument with the value `${BorderStyles.BORDERED.kt}` to get borders on all sides of the
-table and cells. Or set the value to `${BorderStyles.BORDERLESS.kt}` for a table without borders.
+Use the `table(borderStyle)`-argument with the value `${BorderStyles.BORDERED.nestedName}` to get borders on all sides of the
+table and cells. Or set the value to `${BorderStyles.BORDERLESS.nestedName}` for a table without borders.
             """
         }
         liveExample {

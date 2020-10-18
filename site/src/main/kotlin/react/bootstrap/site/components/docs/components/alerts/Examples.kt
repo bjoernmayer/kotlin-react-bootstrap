@@ -22,7 +22,6 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.Assignment
@@ -50,7 +49,7 @@ internal class Examples : SectionComponent() {
             //language=Markdown
             +"""
 Alerts are available for any length of text, as well as an optional dismiss button. For proper styling, use one of the
-eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.kt}`).
+eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.nestedName}`).
             """
         }
         val variants = mapOf(

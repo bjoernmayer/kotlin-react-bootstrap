@@ -17,9 +17,9 @@ import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
+import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.dom.p
 
@@ -174,7 +174,7 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
                 ktContainer {
                     ktFun(
                         RBuilder::row,
-                        args = mapOf("classes" to Quoted("\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.kt}}"))
+                        args = mapOf("classes" to Quoted("\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.nestedName}}"))
                     ) {
                         ktFun(
                             RBuilder::col,

@@ -13,7 +13,6 @@ import react.bootstrap.site.components.docs.components.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.kt
 import react.dom.p
 
 internal class ButtonToolbar : SectionComponent() {
@@ -53,7 +52,7 @@ out groups, buttons, and more.
                 .addArgument("label", "Toolbar with button groups")
                 .setLambdaArgument(
                     FunCall.builder(RBuilder::buttonGroup)
-                        .addArgument("classes", "\${${ClassNames.MR_2.kt}}")
+                        .addArgument("classes", ClassNames.MR_2)
                         .addArgument("label", "First group")
                         .setLambdaArgument(
                             buildString {
@@ -69,7 +68,7 @@ out groups, buttons, and more.
                             }
                         ).build(),
                     FunCall.builder(RBuilder::buttonGroup)
-                        .addArgument("classes", "\${${ClassNames.MR_2.kt}}")
+                        .addArgument("classes", ClassNames.MR_2)
                         .addArgument("label", "Second group")
                         .setLambdaArgument(
                             buildString {
@@ -85,7 +84,7 @@ out groups, buttons, and more.
                             }
                         ).build(),
                     FunCall.builder(RBuilder::buttonGroup)
-                        .addArgument("classes", "\${${ClassNames.MR_2.kt}}")
+                        .addArgument("classes", ClassNames.MR_2)
                         .addArgument("label", "Third group")
                         .setLambdaArgument(
                             FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
