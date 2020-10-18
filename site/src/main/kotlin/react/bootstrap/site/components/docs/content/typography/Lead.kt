@@ -31,7 +31,10 @@ Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis moll
             ln { }
             +FunCall.builder(RBuilder::lead)
                 .setLambdaArgument(
-                    plusString("Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non comm odo "),
+                    plusString(
+                        "Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non" +
+                            " comm odo "
+                    ),
                     "\n",
                     plusString("luctus.")
 

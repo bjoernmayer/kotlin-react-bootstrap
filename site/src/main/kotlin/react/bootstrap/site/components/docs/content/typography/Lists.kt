@@ -374,7 +374,9 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                                         )
                                         .addDdArgument()
                                         .setLambdaArgument(
-                                            plusString("Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc."),
+                                            plusString(
+                                                "Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc."
+                                            ),
                                         )
                                         .build(),
                                 )
