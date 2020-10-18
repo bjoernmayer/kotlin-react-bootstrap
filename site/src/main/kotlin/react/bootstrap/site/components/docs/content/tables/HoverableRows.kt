@@ -8,6 +8,7 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 
 internal class HoverableRows : SectionComponent() {
     override val title: String = "Hoverable Rows"
@@ -32,13 +33,16 @@ Set the `table(hoverable)`-argument to `true` to enable a hover state on table r
         codeExample {
             import("content.tables.table")
             ln { }
-            ktFun(RBuilder::table, args = mapOf("hoverable" to true)) {
-                defaultExample()
-            }
+            +FunCall.builder(RBuilder::table)
+                .addArgument("hoverable", true)
+                .setLambdaArgument(defaultExample())
+                .build()
             ln { }
-            ktFun(RBuilder::table, args = mapOf("hoverable" to true, "dark" to true)) {
-                defaultExample()
-            }
+            +FunCall.builder(RBuilder::table)
+                .addArgument("hoverable", true)
+                .addArgument("dark", true)
+                .setLambdaArgument(defaultExample())
+                .build()
         }
     }
 }

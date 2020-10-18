@@ -8,6 +8,7 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 
 internal class SmallTable : SectionComponent() {
     override val title: String = "Small table"
@@ -32,13 +33,16 @@ Set the `table(hoverable)`-argument to `true` to make tables more compact by cut
         codeExample {
             import("content.tables.table")
             ln { }
-            ktFun(RBuilder::table, args = mapOf("small" to true)) {
-                defaultExample()
-            }
+            +FunCall.builder(RBuilder::table)
+                .addArgument("small", true)
+                .setLambdaArgument(defaultExample())
+                .build()
             ln { }
-            ktFun(RBuilder::table, args = mapOf("small" to true, "dark" to true)) {
-                defaultExample()
-            }
+            +FunCall.builder(RBuilder::table)
+                .addArgument("small", true)
+                .addArgument("dark", true)
+                .setLambdaArgument(defaultExample())
+                .build()
         }
     }
 }

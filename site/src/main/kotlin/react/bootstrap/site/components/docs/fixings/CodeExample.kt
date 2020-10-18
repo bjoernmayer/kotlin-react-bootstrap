@@ -56,8 +56,6 @@ internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<Cod
 
     internal fun plusString(content: String): String = "+\"$content\""
 
-    internal fun plusMultiLineString(content: String): String = "+\"\"\"\n$content\"\"\""
-
     internal fun multiline(vararg contents: String) {
         ln { +"+\"\"\"" }
         // no ln to not have indent

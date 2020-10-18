@@ -9,13 +9,11 @@ import react.bootstrap.content.figures.figcaption
 import react.bootstrap.content.figures.figure
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.ariaLabel
-import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.PageComponent
-import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.img
 import react.dom.svg
 
@@ -69,21 +67,21 @@ Images in figures have no explicit size, so be sure to add the `img(fluid)` to `
             import("content.figures.img")
             importClassNames()
             ln { }
-            ktFun(RBuilder::figure) {
-                ktFun(
-                    RBuilder::img,
-                    style = FunStyle.INLINE_BLOCK,
-                    args = mapOf(
-                        "fluid" to true,
-                        "classes" to Quoted("\${${ClassNames.ROUNDED.kt}}"),
-                        "src" to Quoted("..."),
-                        "alt" to Quoted("...")
-                    )
-                ) { }
-                ktFun(RBuilder::figcaption) {
-                    ln("A caption for the above image.")
-                }
-            }
+            +FunCall.builder(RBuilder::figure)
+                .setLambdaArgument(
+                    FunCall.builder(RBuilder::img, FunCall.Style.INLINE)
+                        .addArgument("fluid", true)
+                        .addArgument("classes", ClassNames.ROUNDED)
+                        .addArgument("src", "...")
+                        .addArgument("alt", "...")
+                        .setEmptyLambdaArgument()
+                        .build(),
+                    "\n",
+                    FunCall.builder(RBuilder::figcaption)
+                        .setLambdaArgument(plusString("A caption for the above image."))
+                        .build()
+                )
+                .build()
         }
     }
 }

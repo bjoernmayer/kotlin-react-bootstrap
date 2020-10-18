@@ -6,6 +6,7 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 
 internal class CodeBlocks : SectionComponent() {
     override val title: String = "Code blocks"
@@ -57,9 +58,10 @@ provide a y-axis scrollbar.
         codeExample {
             import("content.pre")
             ln { }
-            ktF(RBuilder::pre, args = mapOf("scrollable" to true)) {
-                ln { +"// Kotlin Code was here" }
-            }
+            +FunCall.builder(RBuilder::pre)
+                .addArgument("scrollable", true)
+                .setLambdaArgument("// Kotlin Code was here")
+                .build()
         }
     }
 }
@@ -69,9 +71,10 @@ provide a y-axis scrollbar.
         codeExample {
             import("content.pre")
             ln { }
-            ktFun(RBuilder::pre, args = mapOf("scrollable" to true)) {
-                ln { +"// Kotlin Code was here" }
-            }
+            +FunCall.builder(RBuilder::pre)
+                .addArgument("scrollable", true)
+                .setLambdaArgument("// Kotlin Code was here")
+                .build()
         }
     }
 }

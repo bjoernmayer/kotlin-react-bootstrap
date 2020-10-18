@@ -5,11 +5,10 @@ import react.RBuilder
 import react.bootstrap.content.tables.ContextualStyle
 import react.bootstrap.content.tables.table
 import react.bootstrap.content.tables.tr
-import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.p
 import react.dom.tbody
 import react.dom.td
@@ -58,15 +57,24 @@ internal class ContextualStyles : SectionComponent() {
             ln { }
             ln { +"// On rows" }
             ContextualStyle.values().forEach {
-                ktFun(RBuilder::tr, style = FunStyle.INLINE_BLOCK, args = mapOf(null to it.kt)) { string("...") }
+                +FunCall.builder(RBuilder::tr, FunCall.Style.INLINE)
+                    .addArgument(it)
+                    .setLambdaArgument(plusString("..."))
+                    .build()
+                +"\n"
             }
             ln { }
             ln { +"// On cells (`td` or `th`)" }
-            ktFun(RBuilder::tr) {
-                ContextualStyle.values().forEach {
-                    ktFun(RBuilder::td, style = FunStyle.INLINE_BLOCK, args = mapOf(null to it.kt)) { string("...") }
-                }
-            }
+            +FunCall.builder(RBuilder::tr)
+                .setLambdaArgument(
+                    ContextualStyle.values().joinToString("\n") {
+                        FunCall.builder(RBuilder::td, FunCall.Style.INLINE)
+                            .addArgument(it)
+                            .setLambdaArgument(plusString("..."))
+                            .build()
+                    }
+                )
+                .build()
         }
         p {
             +"Regular table background variants are not available with the dark table"

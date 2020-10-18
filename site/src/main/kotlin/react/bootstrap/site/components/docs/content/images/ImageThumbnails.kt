@@ -6,12 +6,11 @@ import react.RBuilder
 import react.bootstrap.content.img
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.lib.ariaLabel
-import react.bootstrap.site.components.docs.fixings.FunStyle
-import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.svg
 
 internal class ImageThumbnails : SectionComponent() {
@@ -49,15 +48,12 @@ appearance.
         codeExample {
             import("content.img")
             ln { }
-            ktFun(
-                RBuilder::img,
-                style = FunStyle.INLINE,
-                args = mapOf(
-                    "thumbnail" to true,
-                    "alt" to Quoted("Responsive image"),
-                    "src" to Quoted("...")
-                )
-            ) { }
+            +FunCall.builder(RBuilder::img, FunCall.Style.INLINE)
+                .addArgument("thumbnail", true)
+                .addArgument("alt", "Responsive image")
+                .addArgument("src", "...")
+                .setEmptyLambdaArgument()
+                .build()
         }
     }
 }

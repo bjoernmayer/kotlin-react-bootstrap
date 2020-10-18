@@ -11,8 +11,9 @@ import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.p
 import react.dom.strong
 import react.dom.tbody
@@ -34,7 +35,7 @@ the usual viewport breakpoints by setting the `table(responsive)`-argument.
         Markdown {
             //language=Markdown
             +"""
-Accross every breakpoint, set `table(responsive)` to `${Breakpoints.ALL.kt}`.
+Accross every breakpoint, set `table(responsive)` to `${Breakpoints.ALL.nestedName}`.
             """
         }
         liveExample {
@@ -44,9 +45,10 @@ Accross every breakpoint, set `table(responsive)` to `${Breakpoints.ALL.kt}`.
         }
         codeExample {
             exampleImports()
-            ktFun(RBuilder::table, args = mapOf("responsive" to Breakpoints.ALL.kt)) {
-                ln { +"..." }
-            }
+            +FunCall.builder(RBuilder::table)
+                .addArgument("responsive", Breakpoints.ALL)
+                .setLambdaArgument("...")
+                .build()
         }
         subSectionTitle("Breakpoint specific", section)
         Markdown {
@@ -62,48 +64,18 @@ up, the table will behave normally and not scroll horizontally.
                 +"These tables may appear broken until their responsive styles apply at specific viewport widths."
             }
         }
-        liveExample {
-            table(responsive = Breakpoints.SM) {
-                exampleTableBody()
+        listOf(Breakpoints.SM, Breakpoints.MD, Breakpoints.LG, Breakpoints.XL).forEach { breakpoints ->
+            liveExample {
+                table(responsive = breakpoints) {
+                    exampleTableBody()
+                }
             }
-        }
-        codeExample {
-            exampleImports()
-            ktFun(RBuilder::table, args = mapOf("responsive" to Breakpoints.SM.kt)) {
-                ln { +"..." }
-            }
-        }
-        liveExample {
-            table(responsive = Breakpoints.MD) {
-                exampleTableBody()
-            }
-        }
-        codeExample {
-            exampleImports()
-            ktFun(RBuilder::table, args = mapOf("responsive" to Breakpoints.MD.kt)) {
-                ln { +"..." }
-            }
-        }
-        liveExample {
-            table(responsive = Breakpoints.LG) {
-                exampleTableBody()
-            }
-        }
-        codeExample {
-            exampleImports()
-            ktFun(RBuilder::table, args = mapOf("responsive" to Breakpoints.LG.kt)) {
-                ln { +"..." }
-            }
-        }
-        liveExample {
-            table(responsive = Breakpoints.XL) {
-                exampleTableBody()
-            }
-        }
-        codeExample {
-            exampleImports()
-            ktFun(RBuilder::table, args = mapOf("responsive" to Breakpoints.XL.kt)) {
-                ln { +"..." }
+            codeExample {
+                exampleImports()
+                +FunCall.builder(RBuilder::table)
+                    .addArgument("responsive", breakpoints)
+                    .setLambdaArgument("...")
+                    .build()
             }
         }
     }

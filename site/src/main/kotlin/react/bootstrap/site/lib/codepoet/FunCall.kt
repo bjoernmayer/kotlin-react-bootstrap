@@ -164,7 +164,7 @@ internal class FunCall private constructor(
 
             append(
                 when (value) {
-                    is ClassNames -> "\${${value.kt}}"
+                    is ClassNames -> "\"\${${value.kt}}\""
                     is Enum<*> -> value.nestedName
                     is PureValue -> value.value
                     is String -> "\"$value\""

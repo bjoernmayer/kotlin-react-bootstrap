@@ -9,8 +9,8 @@ import react.bootstrap.content.tables.thead
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.tbody
 import react.dom.tr
 
@@ -57,30 +57,28 @@ Similar to tables and dark tables, use the `thead(style)`-argument to make table
             import("content.tables.table")
             import("content.tables.thead")
             ln { }
-            ktFun(RBuilder::table) {
-                ktFun(RBuilder::thead, args = mapOf(null to THeadStyles.DARK.kt)) {
-                    ktFun(RBuilder::tr) {
-                        headerCells()
-                    }
-                }
-                ktFun(RBuilder::tbody) {
-                    exampleRows.forEachIndexed { key, example ->
-                        exampleRow(example, key)
-                    }
-                }
-            }
-            ln { }
-            ktFun(RBuilder::table) {
-                ktFun(RBuilder::thead, args = mapOf(null to THeadStyles.LIGHT.kt)) {
-                    ktFun(RBuilder::tr) {
-                        headerCells()
-                    }
-                }
-                ktFun(RBuilder::tbody) {
-                    exampleRows.forEachIndexed { key, example ->
-                        exampleRow(example, key)
-                    }
-                }
+            +listOf(THeadStyles.DARK, THeadStyles.LIGHT).joinToString("\n") { tHeadStyles ->
+                FunCall.builder(RBuilder::table)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::thead)
+                            .addArgument(tHeadStyles)
+                            .setLambdaArgument(
+                                FunCall.builder(RBuilder::tr)
+                                    .setLambdaArgument(headerCells())
+                                    .build()
+                            )
+                            .build(),
+                        FunCall.builder(RBuilder::tbody)
+                            .setLambdaArgument(
+                                buildString {
+                                    exampleRows.forEachIndexed { key, example ->
+                                        append(exampleRow(example, key))
+                                    }
+                                }
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
     }
