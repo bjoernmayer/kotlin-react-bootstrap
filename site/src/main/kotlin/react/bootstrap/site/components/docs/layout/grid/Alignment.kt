@@ -17,6 +17,7 @@ import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.AROUND as rxAROUND
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.BETWEEN as rxBETWEEN
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.CENTER as rxCENTER
@@ -68,6 +69,7 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importFromGrid("row", rySTART.import)
                 importRowFun()
                 ln { }
+
                 ktContainer {
                     ktFun(RBuilder::row, args = mapOf("all" to rySTART.name)) {
                         for (x in 1..3) {
@@ -148,6 +150,7 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 importContainerFun()
                 importRowFun()
                 ln { }
+
                 ktContainer {
                     listOf(rxSTART.name, rxCENTER.name, rxEND.name, rxAROUND.name, rxBETWEEN.name).forEach {
                         ktFun(RBuilder::row, args = mapOf("all" to it)) {

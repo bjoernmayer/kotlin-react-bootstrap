@@ -21,6 +21,7 @@ import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.em
 import react.dom.p
 
@@ -67,25 +68,42 @@ ${EQ.name}`.
                 importContainerFun()
                 importRowFun()
                 ln { }
-                ktContainer {
-                    ktRow {
-                        for (x in 1..4) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) {
-                                ktFun(RBuilder::em, style = FunStyle.INLINE) {
-                                    string("all = ${EQ.name}")
+
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                buildString {
+                                    repeat(4) {
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                                .setLambdaArgument(
+                                                    FunCall.builder(RBuilder::em, FunCall.Style.INLINE)
+                                                        .setLambdaArgument(plusString("all = ${EQ.name}"))
+                                                        .build()
+                                                )
+                                                .build()
+                                        )
+                                        append("\n")
+                                    }
                                 }
-                            }
-                        }
-                    }
-                    ktRow {
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("all" to SZ_8.name)) {
-                            string("all = ${SZ_8.name}")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("all" to SZ_4.name)) {
-                            string("all = ${SZ_4.name}")
-                        }
-                    }
-                }
+                            )
+                            .build(),
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("all", FunCall.Argument.PureValue(SZ_8.name))
+                                    .setLambdaArgument(plusString("all = ${SZ_8.name}"))
+                                    .build(),
+                                "\n",
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("all", FunCall.Argument.PureValue(SZ_4.name))
+                                    .setLambdaArgument(plusString("all = ${SZ_4.name}"))
+                                    .build()
+                            )
+                            .build(),
+                    )
+                    .build()
             }
         }
         subSectionTitle("Stacked to horizontal", section)
@@ -118,23 +136,38 @@ stacked and becomes horizontal at the small breakpoint (`sm`).
                 importContainerFun()
                 importRowFun()
                 ln { }
-                ktContainer {
-                    ktRow {
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("sm" to SZ_8.name)) {
-                            string("sm = ${SZ_8.name}")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("sm" to SZ_4.name)) {
-                            string("sm = ${SZ_4.name}")
-                        }
-                    }
-                    ktRow {
-                        for (x in 1..3) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("sm" to EQ.name)) {
-                                string("sm = ${EQ.name}")
-                            }
-                        }
-                    }
-                }
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("sm", FunCall.Argument.PureValue(SZ_8.name))
+                                    .setLambdaArgument(plusString("sm = ${SZ_8.name}"))
+                                    .build(),
+                                "\n",
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("sm", FunCall.Argument.PureValue(SZ_4.name))
+                                    .setLambdaArgument(plusString("sm = ${SZ_4.name}"))
+                                    .build()
+                            )
+                            .build(),
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                buildString {
+                                    repeat(3) {
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                                .addArgument("sm", FunCall.Argument.PureValue(EQ.name))
+                                                .setLambdaArgument(plusString("sm = ${EQ.name}"))
+                                                .build()
+                                        )
+                                        append("\n")
+                                    }
+                                }
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
         subSectionTitle("Mix and match", section)
@@ -236,6 +269,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importFromGrid("row", CNT_2.import)
                 importRowFun()
                 ln { }
+
                 ktContainer {
                     ktFun(RBuilder::row, args = mapOf("all" to CNT_2.name)) {
                         for (x in 1..4) {
@@ -261,6 +295,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importFromGrid("row", CNT_3.import)
                 importRowFun()
                 ln { }
+
                 ktContainer {
                     ktFun(RBuilder::row, args = mapOf("all" to CNT_3.name)) {
                         for (x in 1..4) {
@@ -286,6 +321,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importFromGrid("row", CNT_4.import)
                 importRowFun()
                 ln { }
+
                 ktContainer {
                     ktFun(RBuilder::row, args = mapOf("all" to CNT_4.name)) {
                         for (x in 1..4) {
@@ -314,6 +350,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importFromGrid("row", CNT_4.import)
                 importRowFun()
                 ln { }
+
                 ktContainer {
                     ktFun(RBuilder::row, args = mapOf("all" to CNT_4.name)) {
                         for (x in 1..2) {
@@ -347,6 +384,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 importFromGrid("row", CNT_4.import)
                 importRowFun()
                 ln { }
+
                 ktContainer {
                     ktFun(RBuilder::row, args = mapOf("all" to CNT_1.name, "sm" to CNT_2.name, "md" to CNT_4.name)) {
                         for (x in 1..4) {
@@ -387,6 +425,7 @@ column widths, responsive tiers, reorders, and more).
                 importContainerFun()
                 importRowFun()
                 ln { }
+
                 ktContainer {
                     ktFun(RBuilder::row, args = mapOf("gutters" to false)) {
                         ktFun(

@@ -12,15 +12,12 @@ import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.row
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.fixings.FunStyle
-import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.layout.importContainerFun
-import react.bootstrap.site.components.docs.layout.ktContainer
-import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.p
 
 internal class AutoLayoutColumns : SectionComponent() {
@@ -64,28 +61,41 @@ equal-size enums for each breakpoint you need and every column will be the same 
                 importContainerFun()
                 importRowFun()
                 ln { }
-                ktContainer {
-                    ktRow {
-                        for (x in 1..2) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) {
-                                string("$x of 2")
-                            }
-                        }
-                        ln { +"// Same as: " }
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE,
-                            args = mapOf(null to EQ.name)
-                        ) { string("x of 2") }
-                    }
-                    ktRow {
-                        for (x in 1..3) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) {
-                                string("$x of 2")
-                            }
-                        }
-                    }
-                }
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                buildString {
+                                    for (x in 1..2) {
+                                        appendLine(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                                .setLambdaArgument(plusString("$x of 2"))
+                                                .build()
+                                        )
+                                    }
+                                },
+                                "// Same as: \n// ",
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument(FunCall.Argument.PureValue(EQ.name))
+                                    .setLambdaArgument(plusString("x of 2"))
+                                    .build()
+                            )
+                            .build(),
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                buildString {
+                                    for (x in 1..3) {
+                                        appendLine(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                                .setLambdaArgument(plusString("$x of 3"))
+                                                .build()
+                                        )
+                                    }
+                                }
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
         subSectionTitle("Setting one column width", section)
@@ -118,26 +128,29 @@ Note that the other columns will resize no matter the width of the center column
                 importContainerFun()
                 importRowFun()
                 ln { }
-                ktContainer {
-                    ktRow {
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("1 of 3") }
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to SZ_6.name)
-                        ) { string("2 of 3 (wider)") }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("3 of 3") }
-                    }
-                    ktRow {
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("1 of 3") }
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to SZ_5.name)
-                        ) { string("2 of 3 (wider)") }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("3 of 3") }
-                    }
-                }
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        listOf(SZ_5, SZ_6).joinToString("") { size ->
+                            FunCall.builder(RBuilder::row)
+                                .setLambdaArgument(
+                                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                        .setLambdaArgument(plusString("1 of 3"))
+                                        .build(),
+                                    "\n",
+                                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                        .addArgument("all", FunCall.Argument.PureValue(size.name))
+                                        .setLambdaArgument(plusString("2 of 3 (wider)"))
+                                        .build(),
+                                    "\n",
+                                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                        .setLambdaArgument(plusString("3 of 3"))
+                                        .build(),
+
+                                    )
+                                .build()
+                        }
+                    )
+                    .build()
             }
         }
         subSectionTitle("Variable width content", section)
@@ -171,44 +184,49 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
                 importRowFun()
                 importClassNames()
                 ln { }
-                ktContainer {
-                    ktFun(
-                        RBuilder::row,
-                        args = mapOf("classes" to Quoted("\${${ClassNames.JUSTIFY_CONTENT_MD_CENTER.nestedName}}"))
-                    ) {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to EQ.name, "lg" to SZ_2.name)
-                        ) { string("1 of 3") }
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("md" to AUTO.name)
-                        ) { string("Variable width content") }
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to EQ.name, "lg" to SZ_2.name)
-                        ) { string("3 of 3") }
-                    }
-                    ktRow {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK
-                        ) { string("1 of 3") }
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("md" to AUTO.name)
-                        ) { string("Variable width content") }
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to EQ.name, "lg" to SZ_2.name)
-                        ) { string("3 of 3") }
-                    }
-                }
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .addArgument("classes", ClassNames.JUSTIFY_CONTENT_MD_CENTER)
+                            .setLambdaArgument(
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("all", FunCall.Argument.PureValue(EQ.name))
+                                    .addArgument("lg", FunCall.Argument.PureValue(SZ_2.name))
+                                    .setLambdaArgument(plusString("1 of 3"))
+                                    .build(),
+                                "\n",
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("md", FunCall.Argument.PureValue(AUTO.name))
+                                    .setLambdaArgument(plusString("Variable width content"))
+                                    .build(),
+                                "\n",
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("all", FunCall.Argument.PureValue(EQ.name))
+                                    .addArgument("lg", FunCall.Argument.PureValue(SZ_2.name))
+                                    .setLambdaArgument(plusString("3 of 3"))
+                                    .build(),
+                            )
+                            .build(),
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .setLambdaArgument(plusString("1 of 3"))
+                                    .build(),
+                                "\n",
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("md", FunCall.Argument.PureValue(AUTO.name))
+                                    .setLambdaArgument(plusString("Variable width content"))
+                                    .build(),
+                                "\n",
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("all", FunCall.Argument.PureValue(EQ.name))
+                                    .addArgument("lg", FunCall.Argument.PureValue(SZ_2.name))
+                                    .setLambdaArgument(plusString("3 of 3"))
+                                    .build(),
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
     }

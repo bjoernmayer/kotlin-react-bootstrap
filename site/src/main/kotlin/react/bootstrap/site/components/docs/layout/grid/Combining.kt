@@ -19,6 +19,7 @@ import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.h4
 import react.dom.p
 import kotlin.reflect.KFunction2
@@ -78,7 +79,9 @@ Combine other attributes with `$sizes` by using `$sz`.
                 importContainerFun()
                 importRowFun()
                 ln { }
+
                 ktContainer {
+
                     ktRow {
                         ktFun(
                             RBuilder::col,
@@ -89,6 +92,7 @@ Combine other attributes with `$sizes` by using `$sz`.
                         }
                         ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
+
                     ktRow {
                         ktFun(
                             RBuilder::col,
@@ -99,6 +103,7 @@ Combine other attributes with `$sizes` by using `$sz`.
                         }
                         ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
+
                     ktRow {
                         ktFun(
                             RBuilder::col,
@@ -146,7 +151,9 @@ Combine other attributes with `$offsets` by using `$off`.
                 importContainerFun()
                 importRowFun()
                 ln { }
+
                 ktContainer {
+
                     ktRow {
                         ktFun(
                             RBuilder::col,
@@ -157,6 +164,7 @@ Combine other attributes with `$offsets` by using `$off`.
                         }
                         ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
+
                     ktRow {
                         ktFun(
                             RBuilder::col,
@@ -167,6 +175,7 @@ Combine other attributes with `$offsets` by using `$off`.
                         }
                         ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
+
                     ktRow {
                         ktFun(
                             RBuilder::col,
@@ -214,7 +223,9 @@ Combine other attributes with `$orderings` by using `$ord`.
                 importContainerFun()
                 importRowFun()
                 ln { }
+
                 ktContainer {
+
                     ktRow {
                         ktFun(
                             RBuilder::col,
@@ -225,6 +236,7 @@ Combine other attributes with `$orderings` by using `$ord`.
                         }
                         ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
+
                     ktRow {
                         ktFun(
                             RBuilder::col,
@@ -235,6 +247,7 @@ Combine other attributes with `$orderings` by using `$ord`.
                         }
                         ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
+
                     ktRow {
                         ktFun(
                             RBuilder::col,
@@ -282,7 +295,9 @@ Combine other attributes with `$alignments` by using `$align`.
                 importContainerFun()
                 importRowFun()
                 ln { }
+
                 ktContainer {
+
                     ktRow {
                         ktFun(
                             RBuilder::col,
@@ -293,6 +308,7 @@ Combine other attributes with `$alignments` by using `$align`.
                         }
                         ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
+
                     ktRow {
                         ktFun(
                             RBuilder::col,
@@ -303,6 +319,7 @@ Combine other attributes with `$alignments` by using `$align`.
                         }
                         ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Reference") }
                     }
+
                     ktRow {
                         ktFun(
                             RBuilder::col,

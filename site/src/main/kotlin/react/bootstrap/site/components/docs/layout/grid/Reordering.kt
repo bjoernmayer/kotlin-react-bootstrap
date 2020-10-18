@@ -23,6 +23,7 @@ import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.layout.importContainerFun
 import react.bootstrap.site.components.docs.layout.ktContainer
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.h4
 
 internal class Reordering : SectionComponent() {
@@ -119,7 +120,9 @@ columns. For example, `md = ${SZ_4.name} $off ${OFF_4.name}` moves `$colFun(md =
                 importContainerFun()
                 importRowFun()
                 ln { }
+
                 ktContainer {
+
                     ktRow {
                         ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("md" to SZ_4.name)) {
                             string("md = ${SZ_4.name}")
@@ -132,6 +135,7 @@ columns. For example, `md = ${SZ_4.name} $off ${OFF_4.name}` moves `$colFun(md =
                             string("md = ${SZ_4.name} $off ${OFF_4.name}")
                         }
                     }
+
                     ktRow {
                         for (x in 1..2) {
                             ktFun(
@@ -143,6 +147,7 @@ columns. For example, `md = ${SZ_4.name} $off ${OFF_4.name}` moves `$colFun(md =
                             }
                         }
                     }
+
                     ktRow {
                         ktFun(
                             RBuilder::col,
