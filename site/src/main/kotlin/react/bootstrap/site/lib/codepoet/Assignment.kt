@@ -2,9 +2,7 @@ package react.bootstrap.site.lib.codepoet
 
 import kotlin.reflect.KProperty
 
-internal class Assignment private constructor(
-    private val assignedName: String
-) {
+internal class Assignment private constructor(private val assignedName: String) {
     private val modifiers: MutableSet<String> = mutableSetOf()
 
     private var type: Type = Type.NEITHER

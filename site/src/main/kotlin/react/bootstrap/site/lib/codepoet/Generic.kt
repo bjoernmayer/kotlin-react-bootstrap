@@ -3,7 +3,7 @@ package react.bootstrap.site.lib.codepoet
 import react.bootstrap.site.components.docs.nestedName
 import kotlin.reflect.KClass
 
-data class Generic(
+internal data class Generic(
     private val className: String,
     private val typeName: String
 ) {

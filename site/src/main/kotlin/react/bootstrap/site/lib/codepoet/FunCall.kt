@@ -15,9 +15,7 @@ internal class FunCall private constructor(
     private val appendSemicolon: Boolean
 ) {
     private val parents = mutableSetOf<Parent>()
-
     private val arguments = mutableSetOf<Argument>()
-
     private var lambdaArgumentContent: String? = null
 
     fun nestedBy(klazz: KClass<*>, nullable: Boolean = false): FunCall {
