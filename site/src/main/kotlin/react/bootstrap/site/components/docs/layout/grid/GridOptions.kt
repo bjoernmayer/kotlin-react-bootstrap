@@ -7,8 +7,10 @@ import react.bootstrap.content.tables.table
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.br
 import react.dom.code
+import react.dom.col
 import react.dom.p
 import react.dom.small
 import react.dom.tbody
@@ -69,11 +71,15 @@ This is because the viewport width is in pixels and does not change with the fon
                 }
                 tr {
                     th(scope = ThScope.row, classes = "${ClassNames.TEXT_NOWRAP}") { +"Function Argument" }
-                    td { code { +"$colFun(all = )" } }
-                    td { code { +"$colFun(sm = )" } }
-                    td { code { +"$colFun(md = )" } }
-                    td { code { +"$colFun(lg = )" } }
-                    td { code { +"$colFun(xl = )" } }
+                    listOf("all", "sm", "md", "lg", "xl").forEach {
+                        td {
+                            code {
+                                +FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument(it, FunCall.Argument.PureValue(""))
+                                    .build()
+                            }
+                        }
+                    }
                 }
                 tr {
                     th(scope = ThScope.row, classes = "${ClassNames.TEXT_NOWRAP}") { +"# of columns" }

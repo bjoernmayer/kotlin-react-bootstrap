@@ -6,18 +6,25 @@ import react.RBuilder
 import react.RElementBuilder
 import react.RProps
 import react.bootstrap.components.button.Button
+import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
-import react.bootstrap.site.components.docs.components.importButtonGroup
-import react.bootstrap.site.components.docs.components.importButtonGroupBuilder
-import react.bootstrap.site.components.docs.components.importButtonsBuilder
-import react.bootstrap.site.components.docs.fixings.FunStyle
-import react.bootstrap.site.components.docs.fixings.Quoted
+import react.bootstrap.site.components.docs.importButton
+import react.bootstrap.site.components.docs.importButtonGroup
+import react.bootstrap.site.components.docs.importButtonGroupBuilder
+import react.bootstrap.site.components.docs.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.Assignment
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Generic
+import react.bootstrap.site.lib.codepoet.If
+import react.bootstrap.site.lib.codepoet.Imports
+import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.child
 import react.dom.br
 import react.functionalComponent
@@ -55,36 +62,54 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
             }
         }
         codeExample {
-            importButton()
-            importButtonsBuilder()
-            ln { }
-            ktFun(
-                solidPrimaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.BLOCK,
-                args = mapOf("href" to Quoted("#"), "active" to true, "sizes" to Button.Sizes.LG.ktN)
-            ) {
-                ktFun(RElementBuilder<RProps>::attrs) {
-                    ln {
-                        +"onClick = { e -> e.preventDefault() }"
-                    }
-                }
-                ln("Primary link")
-            }
-            ln(" ")
-            ktFun(
-                solidSecondaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.BLOCK,
-                args = mapOf("href" to Quoted("#"), "active" to true, "sizes" to Button.Sizes.LG.ktN)
-            ) {
-                ktFun(RElementBuilder<RProps>::attrs) {
-                    ln {
-                        +"onClick = { e -> e.preventDefault() }"
-                    }
-                }
-                ln("Link")
-            }
+            +Imports.builder()
+                .importButton()
+                .importButtonsBuilder()
+                .build()
+
+            +FunCall.builder(solidPrimaryFun)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("href", "#")
+                .addArgument("active", true)
+                .addArgument("sizes", Button.Sizes.LG)
+                .setLambdaArgument(
+                    FunCall.builder(RElementBuilder<RProps>::attrs)
+                        .setLambdaArgument(
+                            Assignment.builder(Button.Props::onClick)
+                                .value(
+                                    LambdaValue(
+                                        "e -> e.preventDefault()",
+                                        LambdaValue.Style.INLINE
+                                    )
+                                )
+                                .build()
+                        ).build(),
+                    plusString("Primary link")
+                )
+                .build()
+            appendLine(plusString(" "))
+            +FunCall.builder(solidSecondaryFun)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("href", "#")
+                .addArgument("active", true)
+                .addArgument("sizes", Button.Sizes.LG)
+                .setLambdaArgument(
+                    FunCall.builder(RElementBuilder<RProps>::attrs)
+                        .setLambdaArgument(
+                            Assignment.builder(Button.Props::onClick)
+                                .value(
+                                    LambdaValue(
+                                        "e -> e.preventDefault()",
+                                        LambdaValue.Style.INLINE
+                                    )
+                                )
+                                .build()
+                        ).build(),
+                    plusString("Link")
+                )
+                .build()
         }
         subSectionTitle("Toggleable button", section)
         Markdown {
@@ -97,29 +122,53 @@ Since we are working with react here, implementing a toggleable button is quite 
             child(toggleableButton)
         }
         codeExample {
-            importButtonsBuilder()
-            ln { }
-            ktBlock("private val toggleableButton = functionalComponent<RProps> {") {
-                ln {
-                    +"var active by useState(false)"
-                }
-                ln { }
-                ktFun(
-                    solidPrimaryFun,
-                    parents = solidButtonBuilderParents,
-                    args = mapOf("active" to "active")
-                ) {
-                    ktFun(RElementBuilder<RProps>::attrs) {
-                        ln { +"onClick = { active = !active }" }
-                    }
-                    ktBlock("if (active)") {
-                        ln("I am toggled")
-                    }
-                    ktBlock("else") {
-                        ln("Toggle me!")
-                    }
-                }
-            }
+            +Imports.builder()
+                .importButtonsBuilder()
+                .build()
+
+            +Assignment.builder("toggleableButton")
+                .addModifier("private")
+                .valType()
+                .value(
+                    FunCall.builder(Generic("functionalComponent", "RProps"))
+                        .setLambdaArgument(
+                            Assignment.builder("active")
+                                .varType()
+                                .value(
+                                    Assignment.FunCallDelegate(
+                                        FunCall.builder("useState")
+                                            .addArgument(false)
+                                    )
+                                )
+                                .build(),
+                            "\n\n",
+                            FunCall.builder(solidPrimaryFun)
+                                .nestedBy(RBuilder::Buttons)
+                                .nestedBy(ButtonBuilder::solid)
+                                .addArgument("active", FunCall.Argument.PureValue("active"))
+                                .setLambdaArgument(
+                                    FunCall.builder(RElementBuilder<RProps>::attrs)
+                                        .setLambdaArgument(
+                                            Assignment.builder(Button.Props::onClick)
+                                                .value(
+                                                    LambdaValue(
+                                                        "active = !active",
+                                                        LambdaValue.Style.INLINE
+                                                    )
+                                                )
+                                                .build()
+                                        )
+                                        .build(),
+                                    If.builder("active")
+                                        .setContent(plusString("I am toggled"))
+                                        .setElseContent(plusString("Toggle me!"))
+                                        .build()
+
+                                )
+                                .build()
+                        )
+                )
+                .build()
         }
         subSectionTitle("Radio- and Checkbox Behaviour", section)
         Markdown {
@@ -152,64 +201,90 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
             }
         }
         codeExample {
-            importButtonGroup()
-            importButtonsBuilder()
-            importButtonGroupBuilder()
-            ln { }
-            ktFun(RBuilder::buttonGroup, args = mapOf("behaviour" to ButtonGroup.Behaviours.RADIOS.ktN)) {
-                for (x in 1..3) {
-                    val args = if (x == 1) {
-                        mapOf<String?, Any>("active" to true)
-                    } else {
-                        emptyMap()
-                    }
-                    ktFun(solidSecondaryFun, solidButtonBuilderParents, args = args) {
-                        ktFun(RElementBuilder<RProps>::attrs) {
-                            ktBlock("${Button.Props::onActive.name} =") {
-                                ktFun(
-                                    Console::log,
-                                    listOf("console"),
-                                    style = FunStyle.INLINE,
-                                    args = mapOf(
-                                        null to Quoted(
-                                            "Radio$x"
-                                        )
+            +Imports.builder()
+                .importButtonGroup()
+                .importButtonsBuilder()
+                .importButtonGroupBuilder()
+                .build()
+
+            +FunCall.builder(RBuilder::buttonGroup)
+                .addArgument("behaviour", ButtonGroup.Behaviours.RADIOS)
+                .setLambdaArgument(
+                    buildString {
+                        for (x in 1..3) {
+                            append(
+                                FunCall.builder(solidSecondaryFun)
+                                    .nestedBy(RBuilder::Buttons)
+                                    .nestedBy(ButtonBuilder::solid)
+                                    .apply {
+                                        if (x == 1) {
+                                            addArgument("active", true)
+                                        }
+                                    }
+                                    .setLambdaArgument(
+                                        FunCall.builder(RElementBuilder<RProps>::attrs)
+                                            .setLambdaArgument(
+                                                Assignment.builder(Button.Props::onActive)
+                                                    .value(
+                                                        LambdaValue(
+                                                            FunCall.builder(Console::log, FunCall.Style.INLINE)
+                                                                .nestedBy(::console)
+                                                                .addArgument("Radio$x")
+                                                                .build()
+                                                        )
+                                                    )
+                                                    .build()
+                                            )
+                                            .build(),
+                                        plusString("Radio$x")
                                     )
-                                )
-                            }
+                                    .build()
+                            )
                         }
-                        ln("Radio$x")
                     }
-                }
-            }
-            ktFun(RBuilder::br, style = FunStyle.INLINE_BLOCK) { }
-            ktFun(RBuilder::buttonGroup, args = mapOf("behaviour" to ButtonGroup.Behaviours.CHECKBOXES.ktN)) {
-                for (x in 1..3) {
-                    ktFun(solidSecondaryFun, solidButtonBuilderParents) {
-                        ktFun(RElementBuilder<RProps>::attrs) {
-                            ktBlock("${Button.Props::onActive.name} =") {
-                                ktFun(
-                                    Console::log,
-                                    listOf("console"),
-                                    style = FunStyle.INLINE,
-                                    args = mapOf(
-                                        null to Quoted(
-                                            "Checkbox$x"
-                                        )
+                )
+                .build()
+            +FunCall.builder(RBuilder::br, FunCall.Style.NEW_INLINE)
+                .setEmptyLambdaArgument()
+                .build()
+            +FunCall.builder(RBuilder::buttonGroup)
+                .addArgument("behaviour", ButtonGroup.Behaviours.CHECKBOXES)
+                .setLambdaArgument(
+                    buildString {
+                        for (x in 1..3) {
+                            append(
+                                FunCall.builder(solidSecondaryFun)
+                                    .nestedBy(RBuilder::Buttons)
+                                    .nestedBy(ButtonBuilder::solid)
+                                    .setLambdaArgument(
+                                        FunCall.builder(RElementBuilder<RProps>::attrs)
+                                            .setLambdaArgument(
+                                                Assignment.builder(Button.Props::onActive)
+                                                    .value(
+                                                        LambdaValue(
+                                                            FunCall.builder(Console::log, FunCall.Style.INLINE)
+                                                                .nestedBy(::console)
+                                                                .addArgument("Checkbox$x")
+                                                                .build()
+                                                        )
+                                                    )
+                                                    .build()
+                                            )
+                                            .build(),
+                                        plusString("Checkbox$x")
                                     )
-                                )
-                            }
+                                    .build()
+                            )
                         }
-                        ln("Checkbox$x")
                     }
-                }
-            }
+                )
+                .build()
         }
         Markdown {
             //language=Markdown
             +"""
 Or you use actual checkboxes and radios and display them as buttons. If you do not like the looks of a `buttonGroup` you
-can set `${ButtonGroup.Props::appearance.name}` to `${ButtonGroup.Appearance.NONE.ktN}`.
+can set `${ButtonGroup.Props::appearance.name}` to `${ButtonGroup.Appearance.NONE.nestedName}`.
             """
         }
         liveExample {
@@ -237,51 +312,57 @@ can set `${ButtonGroup.Props::appearance.name}` to `${ButtonGroup.Appearance.NON
             }
         }
         codeExample {
-            importButton()
-            importButtonGroup()
-            importButtonsBuilder()
-            importButtonGroupBuilder()
-            ln { }
-            ktFun(RBuilder::buttonGroup, args = mapOf("appearance" to ButtonGroup.Appearance.NONE.ktN)) {
-                for (x in 1..6) {
-                    if (x % 2 == 0) {
-                        ktFun(
-                            solidSecondaryFun,
-                            solidButtonBuilderParents,
-                            breakDownArgs = true,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf(
-                                "value" to Quoted("${x / 2}"),
-                                "title" to Quoted("Actual Checkbox${x / 2}"),
-                                "name" to Quoted("checkboxes"),
-                                "type" to Button.Types.Input.Type.CHECKBOX.ktN
-                            )
-                        ) { }
-                    } else {
-                        ktFun(
-                            solidSecondaryFun,
-                            solidButtonBuilderParents,
-                            breakDownArgs = true,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf<String?, Any>(
-                                "value" to Quoted("${(x + 1) / 2}"),
-                                "title" to Quoted("Actual Radio${(x + 1) / 2}"),
-                                "name" to Quoted("radios"),
-                                "type" to Button.Types.Input.Type.RADIO.ktN
-                            ).run {
-                                if (x == 1) {
-                                    val map = toMutableMap()
-                                    map["active"] = true
-                                    map
-                                } else {
-                                    this
-                                }
+            +Imports.builder()
+                .importButton()
+                .importButtonGroup()
+                .importButtonsBuilder()
+                .importButtonGroupBuilder()
+                .build()
+
+            +FunCall.builder(RBuilder::buttonGroup)
+                .addArgument("appearance", ButtonGroup.Appearance.NONE)
+                .setLambdaArgument(
+                    buildString {
+                        for (x in 1..6) {
+                            if (x % 2 == 0) {
+                                append(
+                                    FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE, true)
+                                        .nestedBy(RBuilder::Buttons)
+                                        .nestedBy(ButtonBuilder::solid)
+                                        .addArgument("value", "${x / 2}")
+                                        .addArgument("title", "Actual Checkbox${x / 2}")
+                                        .addArgument("name", "checkboxes")
+                                        .addArgument("type", Button.Types.Input.Type.CHECKBOX)
+                                        .setEmptyLambdaArgument()
+                                        .build()
+                                )
+                            } else {
+                                append(
+                                    FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE, true)
+                                        .nestedBy(RBuilder::Buttons)
+                                        .nestedBy(ButtonBuilder::solid)
+                                        .apply {
+                                            if (x == 1) {
+                                                addArgument("active", true)
+                                            }
+                                        }
+                                        .addArgument("value", "${(x + 1) / 2}")
+                                        .addArgument("title", "Actual Radio${(x + 1) / 2}")
+                                        .addArgument("name", "radios")
+                                        .addArgument("type", Button.Types.Input.Type.RADIO)
+                                        .setEmptyLambdaArgument()
+                                        .build()
+                                )
                             }
-                        ) { }
+                            if (x < 6) {
+                                append("\n")
+                                append(plusString(" "))
+                                append("\n")
+                            }
+                        }
                     }
-                    ln(" ")
-                }
-            }
+                )
+                .build()
         }
     }
 

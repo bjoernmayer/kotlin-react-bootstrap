@@ -3,15 +3,16 @@ package react.bootstrap.site.components.docs.components.buttons
 import kotlinx.html.ButtonType
 import react.RBuilder
 import react.bootstrap.components.button.Button
+import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.site.components.docs.buildNestedName
-import react.bootstrap.site.components.docs.components.importButtonsBuilder
-import react.bootstrap.site.components.docs.fixings.FunStyle
-import react.bootstrap.site.components.docs.fixings.Quoted
+import react.bootstrap.site.components.docs.importButton
+import react.bootstrap.site.components.docs.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 
 internal class ButtonTags : SectionComponent() {
     override val title: String = "Button tags"
@@ -42,83 +43,65 @@ __Keep in mind, that the `input` element cannot have child elements.__
             Buttons.solid.primary(value = "true", title = "Radio", type = Button.Types.Input.Type.RADIO) { }
         }
         codeExample {
-            importButton()
-            importButtonsBuilder()
-            ln { }
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "href" to Quoted("#")
-                )
-            ) {
-                string("Link")
-            }
-            ln(" ")
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "buttonType" to buildNestedName(ButtonType.submit.name, ButtonType::class.simpleName!!)
-                )
-            ) {
-                string("Button")
-            }
-            ln(" ")
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "value" to Quoted("Input")
-                )
-            ) {
-                string("Input")
-            }
-            ln(" ")
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "value" to Quoted("Submit"),
-                    "type" to Button.Types.Input.Type.SUBMIT.ktN
-                )
-            )
-            ln(" ")
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "value" to Quoted("Reset"),
-                    "type" to Button.Types.Input.Type.RESET.ktN
-                )
-            )
-            ln(" ")
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "value" to Quoted("true"),
-                    "title" to Quoted("Checkbox"),
-                    "type" to Button.Types.Input.Type.CHECKBOX.ktN
-                )
-            )
-            ln(" ")
-            ktFun(
-                solidPrimaryFun,
-                solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf(
-                    "value" to Quoted("true"),
-                    "title" to Quoted("Radio"),
-                    "type" to Button.Types.Input.Type.RADIO.ktN
-                )
-            )
+            +Imports.builder()
+                .importButton()
+                .importButtonsBuilder()
+                .build()
+
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("href", "#")
+                .setLambdaArgument(plusString("Link"))
+                .build()
+            appendLine(plusString(" "))
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("buttonType", ButtonType.submit)
+                .setLambdaArgument(plusString("Button"))
+                .build()
+            appendLine(plusString(" "))
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("value", "Input")
+                .setLambdaArgument(plusString("Input"))
+                .build()
+            appendLine(plusString(" "))
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("value", "Submit")
+                .addArgument("type", Button.Types.Input.Type.SUBMIT)
+                .setEmptyLambdaArgument()
+                .build()
+            appendLine(plusString(" "))
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("value", "Reset")
+                .addArgument("type", Button.Types.Input.Type.RESET)
+                .setEmptyLambdaArgument()
+                .build()
+            appendLine(plusString(" "))
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("value", "true")
+                .addArgument("title", "Checkbox")
+                .addArgument("type", Button.Types.Input.Type.CHECKBOX)
+                .setEmptyLambdaArgument()
+                .build()
+            appendLine(plusString(" "))
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("value", "true")
+                .addArgument("title", "Radio")
+                .addArgument("type", Button.Types.Input.Type.RADIO)
+                .setEmptyLambdaArgument()
+                .build()
         }
     }
 }

@@ -2,12 +2,14 @@ package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
 import react.bootstrap.components.button.Button
+import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.site.components.docs.components.importButtonsBuilder
-import react.bootstrap.site.components.docs.fixings.FunStyle
+import react.bootstrap.site.components.docs.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.p
 
 internal class Examples : SectionComponent() {
@@ -43,8 +45,10 @@ for more control.
         }
 
         codeExample {
-            importButtonsBuilder()
-            ln { }
+            +Imports.builder()
+                .importButtonsBuilder()
+                .build()
+
             mapOf(
                 solidDangerFun to Button.Variants.Solid.DANGER,
                 solidDarkFun to Button.Variants.Solid.DARK,
@@ -56,10 +60,12 @@ for more control.
                 solidSuccessFun to Button.Variants.Solid.SUCCESS,
                 solidWarningFun to Button.Variants.Solid.WARNING
             ).forEach {
-                ktFun(it.key, solidButtonBuilderParents, style = FunStyle.INLINE_BLOCK) {
-                    string(it.value::class.normalName)
-                }
-                ln(" ")
+                +FunCall.builder(it.key, FunCall.Style.NEW_INLINE)
+                    .nestedBy(RBuilder::Buttons)
+                    .nestedBy(ButtonBuilder::solid)
+                    .setLambdaArgument(plusString(it.value::class.normalName))
+                    .build()
+                appendLine(plusString(" "))
             }
         }
     }

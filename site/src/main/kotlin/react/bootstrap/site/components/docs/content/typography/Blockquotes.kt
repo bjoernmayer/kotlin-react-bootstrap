@@ -4,13 +4,12 @@ import react.RBuilder
 import react.bootstrap.content.typography.blockQuote
 import react.bootstrap.content.typography.blockQuoteFooter
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.fixings.FunStyle
-import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.cite
 
 internal class Blockquotes : SectionComponent() {
@@ -31,12 +30,17 @@ any HTML as the quote.
             }
         }
         codeExample {
-            import("content.typography.${RBuilder::blockQuote.name}")
-            importClassNames()
-            ln { }
-            ktFun(RBuilder::blockQuote, args = mapOf(null to Quoted("\${${ClassNames.MB_0.kt}}"))) {
-                ln("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.")
-            }
+            +Imports.builder()
+                .addImport("content.typography.${RBuilder::blockQuote.name}")
+                .importClassNames()
+                .build()
+
+            +FunCall.builder(RBuilder::blockQuote)
+                .addArgument(ClassNames.MB_0)
+                .setLambdaArgument(
+                    plusString("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.")
+                )
+                .build()
         }
         subSectionTitle("Naming a source", section)
         Markdown {
@@ -53,20 +57,30 @@ Add a `${RBuilder::blockQuoteFooter.name} { }`  for identifying the source. Wrap
             }
         }
         codeExample {
-            import("content.typography.${RBuilder::blockQuoteFooter.name}")
-            import("content.typography.${RBuilder::blockQuote.name}")
-            importClassNames()
-            ln { }
-            ktFun(RBuilder::blockQuote, args = mapOf(null to Quoted("\${${ClassNames.MB_0.kt}}"))) {
-                ln("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.")
-                ktFun(RBuilder::blockQuoteFooter, style = FunStyle.INLINE) {
-                    string("Someone famous in ")
-                    +"; "
-                    ktFun(RBuilder::cite, style = FunStyle.INLINE) {
-                        string("Source Title")
-                    }
-                }
-            }
+            +Imports.builder()
+                .addImport("content.typography.${RBuilder::blockQuoteFooter.name}")
+                .addImport("content.typography.${RBuilder::blockQuote.name}")
+                .importClassNames()
+                .build()
+
+            +FunCall.builder(RBuilder::blockQuote)
+                .addArgument(ClassNames.MB_0)
+                .setLambdaArgument(
+                    plusString(
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+                    ),
+                    "\n",
+                    FunCall.builder(RBuilder::blockQuoteFooter, FunCall.Style.INLINE)
+                        .setLambdaArgument(
+                            plusString("Someone famous in "),
+                            "; ",
+                            FunCall.builder(RBuilder::cite, FunCall.Style.INLINE)
+                                .setLambdaArgument(plusString("Source Title"))
+                                .build()
+                        ).build()
+
+                )
+                .build()
         }
     }
 }
