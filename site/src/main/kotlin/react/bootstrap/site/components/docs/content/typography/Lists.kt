@@ -22,6 +22,7 @@ import react.bootstrap.site.components.docs.layout.grid.rowFun
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.dom.RDOMBuilder
 import react.dom.dd
@@ -83,9 +84,11 @@ immediate children list items__, meaning you will need to add the class for any 
         val ulFun: KFunction3<RBuilder, String?, (RDOMBuilder<UL>.() -> Unit), ReactElement> = RBuilder::ul
         val liFun: KFunction3<RBuilder, String?, (RDOMBuilder<LI>.() -> Unit), ReactElement> = RBuilder::li
         codeExample {
-            addImport("content.typography.${ListStyles::class.simpleName}")
-            addImport("content.typography.ul")
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.typography.${ListStyles::class.simpleName}")
+                .addImport("content.typography.ul")
+                .build()
+
             +FunCall.builder(ulFun)
                 .addArgument(ListStyles.UNSTYLED)
                 .setLambdaArgument(
@@ -131,11 +134,13 @@ Remove a list’s bullets and apply some light `margin` with a combination of tw
             }
         }
         codeExample {
-            addImport("content.typography.${ListItemStyles::class.simpleName}")
-            addImport("content.typography.${ListStyles::class.simpleName}")
-            addImport("content.typography.li")
-            addImport("content.typography.ul")
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.typography.${ListItemStyles::class.simpleName}")
+                .addImport("content.typography.${ListStyles::class.simpleName}")
+                .addImport("content.typography.li")
+                .addImport("content.typography.ul")
+                .build()
+
             +FunCall.builder(ulFun)
                 .addArgument(ListStyles.INLINE)
                 .setLambdaArgument(
@@ -241,10 +246,12 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                 return this
             }
 
-            addImport("layout.grid.col.${ColAttributes::class.simpleName!!}")
-            addImport("layout.grid.col.$colFun")
-            addImport("layout.grid.row.$rowFun")
-            appendLine { }
+            +Imports.builder()
+                .addImport("layout.grid.col.${ColAttributes::class.simpleName!!}")
+                .addImport("layout.grid.col.$colFun")
+                .addImport("layout.grid.row.$rowFun")
+                .build()
+
             +FunCall.builder(RBuilder::row)
                 .addArgument(
                     "renderAs",

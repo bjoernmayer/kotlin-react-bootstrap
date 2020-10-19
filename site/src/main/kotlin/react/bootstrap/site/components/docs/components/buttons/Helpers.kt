@@ -9,8 +9,6 @@ import react.ReactElement
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.Button.Variants
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.site.components.docs.buildNestedName
-import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction10
 
@@ -54,7 +52,3 @@ internal val RBuilder.solidWarningFun: ButtonFun
     get() = Buttons.solid::warning
 internal val RBuilder.outlineWarningFun: ButtonFun
     get() = Buttons.outline::warning
-
-internal fun CodeExampleBuilder.importButton() {
-    addImport(buildNestedName(Button::class.simpleName!!, "components", "button"))
-}

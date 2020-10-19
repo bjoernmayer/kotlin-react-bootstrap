@@ -9,9 +9,8 @@ import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.row.RowAttributes
 import react.bootstrap.layout.grid.row.row
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.site.components.docs.buildNestedName
-import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import react.dom.div
+import kotlin.reflect.KClass
 
 internal val ColAttributes.Sizes.name
     get() = this::class.simpleName!!
@@ -90,22 +89,13 @@ internal val RowAttributes.ItemsYs.import
         RowAttributes.ItemsYs.Companion::class
     )
 
+private fun buildNestedName(target: KClass<*>, vararg parents: KClass<*>): String =
+    "${parents.joinToString(".") { it.simpleName!! }}.${target.simpleName!!}"
+
 internal val RBuilder.colFun: String
     get() = RBuilder::col.name
 internal val RBuilder.rowFun: String
     get() = RBuilder::row.name
-
-internal fun CodeExampleBuilder.importColFun() {
-    importFromGrid("col", colFun)
-}
-
-internal fun CodeExampleBuilder.importRowFun() {
-    importFromGrid("row", rowFun)
-}
-
-internal fun CodeExampleBuilder.importFromGrid(`package`: String, className: String) {
-    addImport("layout.grid.${`package`}.$className")
-}
 
 internal fun RBuilder.exampleRow(classes: String? = null, block: RDOMHandler<DIV>): ReactElement =
     div(classes.appendClass("bd-example-row")) {

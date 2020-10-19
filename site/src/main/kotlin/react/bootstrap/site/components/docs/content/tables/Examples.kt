@@ -9,6 +9,7 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 
 internal class Examples : SectionComponent() {
     override val title: String = "Examples"
@@ -36,8 +37,10 @@ inherited in Bootstrap 4__, meaning any nested tables will be styled in the same
             }
         }
         codeExample {
-            addImport("content.tables.table")
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.tables.table")
+                .build()
+
             +FunCall.builder(RBuilder::table)
                 .setLambdaArgument(defaultExample())
                 .build()
@@ -54,8 +57,10 @@ You can also invert the colors - with light text on dark background - by setting
             }
         }
         codeExample {
-            addImport("content.tables.table")
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.tables.table")
+                .build()
+
             +FunCall.builder(RBuilder::table)
                 .addArgument("dark", true)
                 .setLambdaArgument(defaultExample())

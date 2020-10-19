@@ -13,6 +13,7 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.dom.span
 import react.dom.tbody
@@ -52,12 +53,15 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
             }
         }
         codeExample {
-            addImport("content.typography.${Display::class.simpleName}")
-            addImport("content.typography.${RBuilder::display.name}")
-            for (x in 1..3) {
-                addImport("content.typography.${RBuilder::display.name}$x")
-            }
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.typography.${Display::class.simpleName}")
+                .addImport("content.typography.${RBuilder::display.name}")
+                .apply {
+                    for (x in 1..3) {
+                        addImport("content.typography.${RBuilder::display.name}$x")
+                    }
+                }
+                .build()
 
             listOf(
                 RBuilder::display1,

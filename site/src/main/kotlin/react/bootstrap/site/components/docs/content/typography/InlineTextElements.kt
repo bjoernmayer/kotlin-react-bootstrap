@@ -10,6 +10,7 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.RDOMBuilder
 import react.dom.p
 import react.dom.small
@@ -37,9 +38,11 @@ unwanted semantic implications that the tags would bring.
             }
         }
         codeExample {
-            addImport("content.typography.mark")
-            addImport("content.typography.small")
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.typography.mark")
+                .addImport("content.typography.small")
+                .build()
+
             +FunCall.builder(RBuilder::p)
                 .setLambdaArgument(
                     plusString("You can use the alternative mark to "),

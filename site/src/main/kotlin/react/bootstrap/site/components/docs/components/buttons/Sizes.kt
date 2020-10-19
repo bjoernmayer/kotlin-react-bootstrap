@@ -4,13 +4,15 @@ import react.RBuilder
 import react.bootstrap.components.button.Button.Sizes
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.site.components.docs.components.importButtonsBuilder
+import react.bootstrap.site.components.docs.importButton
+import react.bootstrap.site.components.docs.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 
 internal class Sizes : SectionComponent() {
     override val title: String = "Sizes"
@@ -30,9 +32,11 @@ Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)
             Buttons.solid.secondary(sizes = Sizes.LG) { +"Large button" }
         }
         codeExample {
-            importButton()
-            importButtonsBuilder()
-            appendLine { }
+            +Imports.builder()
+                .importButton()
+                .importButtonsBuilder()
+                .build()
+
             +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
@@ -53,9 +57,11 @@ Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)
             Buttons.solid.secondary(sizes = Sizes.SM) { +"Small button" }
         }
         codeExample {
-            importButton()
-            importButtonsBuilder()
-            appendLine { }
+            +Imports.builder()
+                .importButton()
+                .importButtonsBuilder()
+                .build()
+
             +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
@@ -83,9 +89,11 @@ Create block level buttons—those that span the full width of a parent—by add
             Buttons.solid.secondary(sizes = Sizes.LG, blockSized = true) { +"Block level button" }
         }
         codeExample {
-            importButton()
-            importButtonsBuilder()
-            appendLine { }
+            +Imports.builder()
+                .importButton()
+                .importButtonsBuilder()
+                .build()
+
             +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)

@@ -9,6 +9,7 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.p
 import react.dom.tbody
 import react.dom.td
@@ -50,11 +51,13 @@ internal class ContextualStyles : SectionComponent() {
             }
         }
         codeExample {
-            addImport("content.tables.${ContextualStyle::class.simpleName}")
-            addImport("content.tables.table")
-            addImport("content.tables.td")
-            addImport("content.tables.tr")
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.tables.${ContextualStyle::class.simpleName}")
+                .addImport("content.tables.table")
+                .addImport("content.tables.td")
+                .addImport("content.tables.tr")
+                .build()
+
             appendLine { +"// On rows" }
             ContextualStyle.values().forEach {
                 +FunCall.builder(RBuilder::tr, FunCall.Style.NEW_INLINE)

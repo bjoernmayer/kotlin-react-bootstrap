@@ -14,6 +14,7 @@ import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.p
 import react.dom.strong
 import react.dom.tbody
@@ -81,9 +82,10 @@ up, the table will behave normally and not scroll horizontally.
     }
 
     private fun CodeExampleBuilder.exampleImports() {
-        addImport("content.tables.table")
-        addImport("lib.${Breakpoints::class.simpleName}")
-        appendLine { }
+        +Imports.builder()
+            .addImport("content.tables.table")
+            .addImport("lib.${Breakpoints::class.simpleName}")
+            .build()
     }
 
     private fun RBuilder.exampleTableBody() {

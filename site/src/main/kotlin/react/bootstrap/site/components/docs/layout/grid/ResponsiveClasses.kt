@@ -17,9 +17,13 @@ import react.bootstrap.layout.grid.row.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.components.docs.importColFun
+import react.bootstrap.site.components.docs.importFromGrid
+import react.bootstrap.site.components.docs.importRowFun
+import react.bootstrap.site.components.docs.importContainerFun
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.em
 import react.dom.p
 
@@ -59,13 +63,14 @@ ${EQ.name}`.
                 }
             }
             codeExample {
-                importFromGrid("col", EQ.import)
-                importFromGrid("col", SZ_4.import)
-                importFromGrid("col", SZ_8.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", EQ.import)
+                    .importFromGrid("col", SZ_4.import)
+                    .importFromGrid("col", SZ_8.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -125,13 +130,15 @@ stacked and becomes horizontal at the small breakpoint (`sm`).
                 }
             }
             codeExample {
-                importFromGrid("col", EQ.import)
-                importFromGrid("col", SZ_4.import)
-                importFromGrid("col", SZ_8.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", EQ.import)
+                    .importFromGrid("col", SZ_4.import)
+                    .importFromGrid("col", SZ_8.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -191,13 +198,15 @@ needed. See the example below for a better idea of how it all works.
                 }
             }
             codeExample {
-                importFromGrid("col", SZ_4.import)
-                importFromGrid("col", SZ_6.import)
-                importFromGrid("col", SZ_8.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", SZ_4.import)
+                    .importFromGrid("col", SZ_6.import)
+                    .importFromGrid("col", SZ_8.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -268,11 +277,12 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 }
             }
             codeExample {
-                importColFun()
-                importContainerFun()
-                importFromGrid("row", CNT_2.import)
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importColFun()
+                    .importContainerFun()
+                    .importFromGrid("row", CNT_2.import)
+                    .importRowFun()
+                    .build()
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -305,11 +315,12 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 }
             }
             codeExample {
-                importColFun()
-                importContainerFun()
-                importFromGrid("row", CNT_3.import)
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importColFun()
+                    .importContainerFun()
+                    .importFromGrid("row", CNT_3.import)
+                    .importRowFun()
+                    .build()
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -342,11 +353,13 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 }
             }
             codeExample {
-                importColFun()
-                importContainerFun()
-                importFromGrid("row", CNT_4.import)
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importColFun()
+                    .importContainerFun()
+                    .importFromGrid("row", CNT_4.import)
+                    .importRowFun()
+                    .build()
+
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -380,12 +393,13 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 }
             }
             codeExample {
-                importFromGrid("col", SZ_6.import)
-                importColFun()
-                importContainerFun()
-                importFromGrid("row", CNT_4.import)
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", SZ_6.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importFromGrid("row", CNT_4.import)
+                    .importRowFun()
+                    .build()
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -429,13 +443,14 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 }
             }
             codeExample {
-                importColFun()
-                importContainerFun()
-                importFromGrid("row", CNT_1.import)
-                importFromGrid("row", CNT_2.import)
-                importFromGrid("row", CNT_4.import)
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importColFun()
+                    .importContainerFun()
+                    .importFromGrid("row", CNT_1.import)
+                    .importFromGrid("row", CNT_2.import)
+                    .importFromGrid("row", CNT_4.import)
+                    .importRowFun()
+                    .build()
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -483,13 +498,14 @@ column widths, responsive tiers, reorders, and more).
                 }
             }
             codeExample {
-                importFromGrid("col", SZ_4.import)
-                importFromGrid("col", SZ_6.import)
-                importFromGrid("col", SZ_8.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", SZ_4.import)
+                    .importFromGrid("col", SZ_6.import)
+                    .importFromGrid("col", SZ_8.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(

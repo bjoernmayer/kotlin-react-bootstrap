@@ -9,6 +9,7 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.cite
 
 internal class Blockquotes : SectionComponent() {
@@ -29,9 +30,11 @@ any HTML as the quote.
             }
         }
         codeExample {
-            addImport("content.typography.${RBuilder::blockQuote.name}")
-            importClassNames()
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.typography.${RBuilder::blockQuote.name}")
+                .importClassNames()
+                .build()
+
             +FunCall.builder(RBuilder::blockQuote)
                 .addArgument(ClassNames.MB_0)
                 .setLambdaArgument(
@@ -54,10 +57,12 @@ Add a `${RBuilder::blockQuoteFooter.name} { }`  for identifying the source. Wrap
             }
         }
         codeExample {
-            addImport("content.typography.${RBuilder::blockQuoteFooter.name}")
-            addImport("content.typography.${RBuilder::blockQuote.name}")
-            importClassNames()
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.typography.${RBuilder::blockQuoteFooter.name}")
+                .addImport("content.typography.${RBuilder::blockQuote.name}")
+                .importClassNames()
+                .build()
+
             +FunCall.builder(RBuilder::blockQuote)
                 .addArgument(ClassNames.MB_0)
                 .setLambdaArgument(

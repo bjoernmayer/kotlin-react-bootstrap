@@ -9,6 +9,7 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 
 internal class HoverableRows : SectionComponent() {
     override val title: String = "Hoverable Rows"
@@ -31,8 +32,10 @@ Set the `table(hoverable)`-argument to `true` to enable a hover state on table r
             }
         }
         codeExample {
-            addImport("content.tables.table")
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.tables.table")
+                .build()
+
             +FunCall.builder(RBuilder::table)
                 .addArgument("hoverable", true)
                 .setLambdaArgument(defaultExample())

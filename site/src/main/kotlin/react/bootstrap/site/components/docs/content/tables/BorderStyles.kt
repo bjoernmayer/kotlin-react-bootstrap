@@ -11,6 +11,7 @@ import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 
 internal class BorderStyles : SectionComponent() {
     override val title: String = "Border styles"
@@ -42,9 +43,11 @@ table and cells. Or set the value to `${BorderStyles.BORDERLESS.nestedName}` for
             }
         }
         codeExample {
-            addImport("content.tables.${BorderStyles::class.simpleName}")
-            addImport("content.tables.table")
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.tables.${BorderStyles::class.simpleName}")
+                .addImport("content.tables.table")
+                .build()
+
             +FunCall.builder(RBuilder::table)
                 .addArgument("borderStyle", BorderStyles.BORDERED)
                 .setLambdaArgument(defaultExample())

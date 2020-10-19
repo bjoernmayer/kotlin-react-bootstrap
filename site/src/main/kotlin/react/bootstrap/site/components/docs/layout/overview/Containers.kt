@@ -10,11 +10,12 @@ import react.bootstrap.layout.grid.container.container
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.layout.importContainer
-import react.bootstrap.site.components.docs.layout.importContainerFun
-import react.bootstrap.site.components.docs.layout.nestedName
+import react.bootstrap.site.components.docs.importContainer
+import react.bootstrap.site.components.docs.importContainerFun
+import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.br
 import react.dom.code
 import react.dom.li
@@ -189,8 +190,10 @@ breakpoint.
             """
         }
         codeExample {
-            importContainerFun()
-            appendLine { }
+            +Imports.builder()
+                .importContainerFun()
+                .build()
+
             +FunCall.builder(RBuilder::container)
                 .setLambdaArgument("// Content here")
                 .build()
@@ -204,9 +207,11 @@ spanning the entire width of the viewport.
             """
         }
         codeExample {
-            importContainer()
-            importContainerFun()
-            appendLine { }
+            +Imports.builder()
+                .importContainer()
+                .importContainerFun()
+                .build()
+
             +FunCall.builder(RBuilder::container)
                 .addArgument("viscosity", Container.Viscosities.FLUID)
                 .setLambdaArgument("// Content here")
@@ -227,9 +232,11 @@ reached, where it will scale up with `md`, `lg`, and `xl`.
             """
         }
         codeExample {
-            importContainer()
-            importContainerFun()
-            appendLine { }
+            +Imports.builder()
+                .importContainer()
+                .importContainerFun()
+                .build()
+
             +FunCall.builder(RBuilder::container)
                 .addArgument("viscosity", Container.Viscosities.SM)
                 .setLambdaArgument("// 100% wide until small breakpoint")

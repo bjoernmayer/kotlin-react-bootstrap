@@ -15,9 +15,13 @@ import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.components.docs.importColFun
+import react.bootstrap.site.components.docs.importFromGrid
+import react.bootstrap.site.components.docs.importRowFun
+import react.bootstrap.site.components.docs.importContainerFun
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.p
 
 internal class AutoLayoutColumns : SectionComponent() {
@@ -56,11 +60,13 @@ equal-size enums for each breakpoint you need and every column will be the same 
                 }
             }
             codeExample {
-                importFromGrid("col", EQ.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", EQ.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -122,12 +128,14 @@ Note that the other columns will resize no matter the width of the center column
                 }
             }
             codeExample {
-                importFromGrid("col", SZ_5.import)
-                importFromGrid("col", SZ_6.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", SZ_5.import)
+                    .importFromGrid("col", SZ_6.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         listOf(SZ_5, SZ_6).joinToString("") { size ->
@@ -173,14 +181,16 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
                 }
             }
             codeExample {
-                importFromGrid("col", AUTO.import)
-                importFromGrid("col", EQ.import)
-                importFromGrid("col", SZ_2.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                importClassNames()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", AUTO.import)
+                    .importFromGrid("col", EQ.import)
+                    .importFromGrid("col", SZ_2.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .importClassNames()
+                    .build()
+
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)

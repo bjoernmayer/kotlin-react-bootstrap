@@ -10,9 +10,13 @@ import react.bootstrap.layout.grid.row.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.components.docs.importColFun
+import react.bootstrap.site.components.docs.importFromGrid
+import react.bootstrap.site.components.docs.importRowFun
+import react.bootstrap.site.components.docs.importContainerFun
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.a
 import react.dom.p
 import react.dom.strong
@@ -47,11 +51,13 @@ flexbox and is fully responsive. Below is an example and an in-depth look at how
             }
         }
         codeExample {
-            importFromGrid("col", EQ.import)
-            importColFun()
-            importContainerFun()
-            importRowFun()
-            appendLine { }
+            +Imports.builder()
+                .importFromGrid("col", EQ.import)
+                .importColFun()
+                .importContainerFun()
+                .importRowFun()
+                .build()
+
             +FunCall.builder(RBuilder::container)
                 .setLambdaArgument(
                     FunCall.builder(RBuilder::row)

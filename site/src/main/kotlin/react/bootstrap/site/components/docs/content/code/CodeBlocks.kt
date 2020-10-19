@@ -7,6 +7,7 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 
 internal class CodeBlocks : SectionComponent() {
     override val title: String = "Code blocks"
@@ -30,11 +31,10 @@ import react.RBuilder
 import react.bootstrap.content.pre
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.import
-import react.bootstrap.site.components.docs.fixings.ktB
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.fixings.ln
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 
 internal class CodeBlocks : SectionComponent() {
     override val title: String = "Code blocks"
@@ -50,14 +50,16 @@ provide a y-axis scrollbar.
         }
         liveExample {
             pre(scrollable = true) {
+                //language=Kotlin
                 +""${'"'}
 // Code was here
-                ""${'"'}.trimIndent()
+                ""${'"'}
             }
         }
         codeExample {
-            import("content.pre")
-            ln { }
+            +Imports.builder()
+                .addImport("content.pre")
+                .build()
             +FunCall.builder(RBuilder::pre)
                 .addArgument("scrollable", true)
                 .setLambdaArgument("// Kotlin Code was here")
@@ -65,12 +67,15 @@ provide a y-axis scrollbar.
         }
     }
 }
+
                 """
             }
         }
         codeExample {
-            addImport("content.pre")
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.pre")
+                .build()
+
             +FunCall.builder(RBuilder::pre)
                 .addArgument("scrollable", true)
                 .setLambdaArgument("// Kotlin Code was here")

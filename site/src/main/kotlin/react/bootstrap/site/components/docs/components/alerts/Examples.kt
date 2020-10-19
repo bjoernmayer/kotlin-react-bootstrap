@@ -14,7 +14,6 @@ import react.bootstrap.components.alert.link
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.lib.ClassNames
-import react.bootstrap.site.components.docs.buildNestedName
 import react.bootstrap.site.components.docs.components.buttons.outlineDangerFun
 import react.bootstrap.site.components.docs.components.buttons.solidInfoFun
 import react.bootstrap.site.components.docs.components.buttons.solidSuccessFun
@@ -186,7 +185,7 @@ Aww yeah, you successfully read this important alert message. This example text 
         Markdown {
             //language=Markdown
             +"""
-Use the builders under `${buildNestedName(Alerts::dismissible.name, RBuilder::Alerts.name)}` to create dismissible
+Use the builders under `${RBuilder::Alerts.name}.${Alerts::dismissible.name}` to create dismissible
 alerts.
             """
         }

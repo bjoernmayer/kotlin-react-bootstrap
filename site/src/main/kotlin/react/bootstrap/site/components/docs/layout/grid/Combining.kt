@@ -15,9 +15,13 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.components.docs.importColFun
+import react.bootstrap.site.components.docs.importFromGrid
+import react.bootstrap.site.components.docs.importRowFun
+import react.bootstrap.site.components.docs.importContainerFun
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.h4
 import react.dom.p
 import kotlin.reflect.KFunction2
@@ -69,14 +73,16 @@ Combine other attributes with `$sizes` by using `$sz`.
                 }
             }
             codeExample {
-                importFromGrid("col", END.import)
-                importFromGrid("col", OFF_1.import)
-                importFromGrid("col", ORD_3.import)
-                importFromGrid("col", SZ_4.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", END.import)
+                    .importFromGrid("col", OFF_1.import)
+                    .importFromGrid("col", ORD_3.import)
+                    .importFromGrid("col", SZ_4.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         listOf(
@@ -126,14 +132,16 @@ Combine other attributes with `$offsets` by using `$off`.
                 }
             }
             codeExample {
-                importFromGrid("col", END.import)
-                importFromGrid("col", OFF_1.import)
-                importFromGrid("col", ORD_3.import)
-                importFromGrid("col", SZ_4.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", END.import)
+                    .importFromGrid("col", OFF_1.import)
+                    .importFromGrid("col", ORD_3.import)
+                    .importFromGrid("col", SZ_4.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         listOf(
@@ -183,14 +191,16 @@ Combine other attributes with `$orderings` by using `$ord`.
                 }
             }
             codeExample {
-                importFromGrid("col", END.import)
-                importFromGrid("col", OFF_1.import)
-                importFromGrid("col", ORD_3.import)
-                importFromGrid("col", SZ_4.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", END.import)
+                    .importFromGrid("col", OFF_1.import)
+                    .importFromGrid("col", ORD_3.import)
+                    .importFromGrid("col", SZ_4.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         listOf(
@@ -240,14 +250,15 @@ Combine other attributes with `$alignments` by using `$align`.
                 }
             }
             codeExample {
-                importFromGrid("col", END.import)
-                importFromGrid("col", OFF_1.import)
-                importFromGrid("col", ORD_3.import)
-                importFromGrid("col", SZ_4.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", END.import)
+                    .importFromGrid("col", OFF_1.import)
+                    .importFromGrid("col", ORD_3.import)
+                    .importFromGrid("col", SZ_4.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -425,13 +436,17 @@ private fun RBuilder.allPossibleCombinations() {
             }
             val imports = listOf(pairing.thisImport, pairing.withImport).sortedBy { it }
             codeExample {
-                imports.forEach {
-                    importFromGrid("col", it)
-                }
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .apply {
+                        imports.forEach {
+                            importFromGrid("col", it)
+                        }
+                    }
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -475,13 +490,17 @@ private fun RBuilder.allPossibleCombinations() {
                 }
                 val imports = listOf(pairing.thisImport, pairing.withImport, tripling.thisImport).sortedBy { it }
                 codeExample {
-                    imports.forEach {
-                        importFromGrid("col", it)
-                    }
-                    importColFun()
-                    importContainerFun()
-                    importRowFun()
-                    appendLine { }
+                    +Imports.builder()
+                        .apply {
+                            imports.forEach {
+                                importFromGrid("col", it)
+                            }
+                        }
+                        .importColFun()
+                        .importContainerFun()
+                        .importRowFun()
+                        .build()
+
                     +FunCall.builder(RBuilder::container)
                         .setLambdaArgument(
                             FunCall.builder(RBuilder::row)
@@ -530,14 +549,16 @@ private fun RBuilder.allPossibleCombinations() {
                     }
                 }
                 codeExample {
-                    importFromGrid("col", END.import)
-                    importFromGrid("col", OFF_1.import)
-                    importFromGrid("col", ORD_3.import)
-                    importFromGrid("col", SZ_4.import)
-                    importColFun()
-                    importContainerFun()
-                    importRowFun()
-                    appendLine { }
+                    +Imports.builder()
+                        .importFromGrid("col", END.import)
+                        .importFromGrid("col", OFF_1.import)
+                        .importFromGrid("col", ORD_3.import)
+                        .importFromGrid("col", SZ_4.import)
+                        .importColFun()
+                        .importContainerFun()
+                        .importRowFun()
+                        .build()
+
                     +FunCall.builder(RBuilder::container)
                         .setLambdaArgument(
                             FunCall.builder(RBuilder::row)

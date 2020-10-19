@@ -5,12 +5,14 @@ import react.RBuilder
 import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.site.components.docs.components.importButtonsBuilder
+import react.bootstrap.site.components.docs.importButton
+import react.bootstrap.site.components.docs.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 
 internal class ButtonTags : SectionComponent() {
     override val title: String = "Button tags"
@@ -41,9 +43,11 @@ __Keep in mind, that the `input` element cannot have child elements.__
             Buttons.solid.primary(value = "true", title = "Radio", type = Button.Types.Input.Type.RADIO) { }
         }
         codeExample {
-            importButton()
-            importButtonsBuilder()
-            appendLine { }
+            +Imports.builder()
+                .importButton()
+                .importButtonsBuilder()
+                .build()
+
             +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)

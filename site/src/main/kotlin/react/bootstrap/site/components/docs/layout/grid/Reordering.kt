@@ -19,9 +19,13 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.components.docs.importColFun
+import react.bootstrap.site.components.docs.importFromGrid
+import react.bootstrap.site.components.docs.importRowFun
+import react.bootstrap.site.components.docs.importContainerFun
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.h4
 
 internal class Reordering : SectionComponent() {
@@ -53,12 +57,14 @@ for 1 through 12 across all five grid tiers.
                 }
             }
             codeExample {
-                importFromGrid("col", ORD_1.import)
-                importFromGrid("col", ORD_12.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", ORD_1.import)
+                    .importFromGrid("col", ORD_12.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -115,15 +121,16 @@ columns. For example, `md = ${SZ_4.name} $off ${OFF_4.name}` moves `$colFun(md =
                 }
             }
             codeExample {
-                importFromGrid("col", OFF_4.import)
-                importFromGrid("col", OFF_3.import)
-                importFromGrid("col", SZ_3.import)
-                importFromGrid("col", SZ_4.import)
-                importFromGrid("col", SZ_6.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", OFF_4.import)
+                    .importFromGrid("col", OFF_3.import)
+                    .importFromGrid("col", SZ_3.import)
+                    .importFromGrid("col", SZ_4.import)
+                    .importFromGrid("col", SZ_6.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(

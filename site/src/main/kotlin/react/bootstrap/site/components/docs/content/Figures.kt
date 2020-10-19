@@ -14,6 +14,7 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.img
 import react.dom.svg
 
@@ -62,11 +63,13 @@ Images in figures have no explicit size, so be sure to add the `img(fluid)` to `
             }
         }
         codeExample {
-            addImport("content.figures.figure")
-            addImport("content.figures.figcaption")
-            addImport("content.figures.img")
-            importClassNames()
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.figures.figure")
+                .addImport("content.figures.figcaption")
+                .addImport("content.figures.img")
+                .importClassNames()
+                .build()
+
             +FunCall.builder(RBuilder::figure)
                 .setLambdaArgument(
                     FunCall.builder(RBuilder::img, FunCall.Style.NEW_INLINE)

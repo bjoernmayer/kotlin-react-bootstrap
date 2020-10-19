@@ -9,6 +9,7 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 
 internal class StripedRows : SectionComponent() {
     override val title: String = "Striped rows"
@@ -27,8 +28,10 @@ Use the `table(striped)`-argument to add zebra-striping to any table row within 
             }
         }
         codeExample {
-            addImport("content.tables.table")
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.tables.table")
+                .build()
+
             +FunCall.builder(RBuilder::table)
                 .addArgument("striped", true)
                 .setLambdaArgument(defaultExample())

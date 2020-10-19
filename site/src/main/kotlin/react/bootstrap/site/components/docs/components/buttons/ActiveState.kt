@@ -10,9 +10,10 @@ import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
-import react.bootstrap.site.components.docs.components.importButtonGroup
-import react.bootstrap.site.components.docs.components.importButtonGroupBuilder
-import react.bootstrap.site.components.docs.components.importButtonsBuilder
+import react.bootstrap.site.components.docs.importButton
+import react.bootstrap.site.components.docs.importButtonGroup
+import react.bootstrap.site.components.docs.importButtonGroupBuilder
+import react.bootstrap.site.components.docs.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -22,6 +23,7 @@ import react.bootstrap.site.lib.codepoet.Assignment
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Generic
 import react.bootstrap.site.lib.codepoet.If
+import react.bootstrap.site.lib.codepoet.Imports
 import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.child
 import react.dom.br
@@ -60,9 +62,11 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
             }
         }
         codeExample {
-            importButton()
-            importButtonsBuilder()
-            appendLine { }
+            +Imports.builder()
+                .importButton()
+                .importButtonsBuilder()
+                .build()
+
             +FunCall.builder(solidPrimaryFun)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
@@ -118,8 +122,10 @@ Since we are working with react here, implementing a toggleable button is quite 
             child(toggleableButton)
         }
         codeExample {
-            importButtonsBuilder()
-            appendLine { }
+            +Imports.builder()
+                .importButtonsBuilder()
+                .build()
+
             +Assignment.builder("toggleableButton")
                 .addModifier("private")
                 .valType()
@@ -195,10 +201,12 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
             }
         }
         codeExample {
-            importButtonGroup()
-            importButtonsBuilder()
-            importButtonGroupBuilder()
-            appendLine { }
+            +Imports.builder()
+                .importButtonGroup()
+                .importButtonsBuilder()
+                .importButtonGroupBuilder()
+                .build()
+
             +FunCall.builder(RBuilder::buttonGroup)
                 .addArgument("behaviour", ButtonGroup.Behaviours.RADIOS)
                 .setLambdaArgument(
@@ -304,11 +312,13 @@ can set `${ButtonGroup.Props::appearance.name}` to `${ButtonGroup.Appearance.NON
             }
         }
         codeExample {
-            importButton()
-            importButtonGroup()
-            importButtonsBuilder()
-            importButtonGroupBuilder()
-            appendLine { }
+            +Imports.builder()
+                .importButton()
+                .importButtonGroup()
+                .importButtonsBuilder()
+                .importButtonGroupBuilder()
+                .build()
+
             +FunCall.builder(RBuilder::buttonGroup)
                 .addArgument("appearance", ButtonGroup.Appearance.NONE)
                 .setLambdaArgument(

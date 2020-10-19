@@ -7,7 +7,6 @@ import react.RElementBuilder
 import react.RProps
 import react.RState
 import react.ReactElement
-import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.external.PrismLight
 import react.dom.figure
 
@@ -63,19 +62,6 @@ internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<Cod
         appendLine {
             string(content)
         }
-    }
-
-    // Todo remove this
-    internal fun addImport(afterReactBootstrap: String) {
-        appendLine { +"import react.bootstrap.$afterReactBootstrap" }
-    }
-
-    // Todo remove this
-    /**
-     * @deprecated
-     */
-    internal fun importClassNames() {
-        addImport("lib.${ClassNames::class.simpleName}")
     }
 
     // Todo remove this

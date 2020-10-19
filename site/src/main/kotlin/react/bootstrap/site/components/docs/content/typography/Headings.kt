@@ -13,6 +13,7 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.h1
 import react.dom.h2
 import react.dom.h3
@@ -45,10 +46,13 @@ heading but cannot use the associated HTML element.
         }
 
         codeExample {
-            for (x in 1..6) {
-                addImport("content.typography.h$x")
-            }
-            appendLine { }
+            +Imports.builder()
+                .apply {
+                    for (x in 1..6) {
+                        addImport("content.typography.h$x")
+                    }
+                }
+                .build()
             +listOf<KFunction3<*, *, *, *>>(
                 RBuilder::h1,
                 RBuilder::h2,
@@ -74,8 +78,10 @@ heading but cannot use the associated HTML element.
             }
         }
         codeExample {
-            addImport("content.typography.muted")
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.typography.muted")
+                .build()
+
             val h3: KFunction3<*, *, *, *> = RBuilder::h3
             +FunCall.builder(h3)
                 .setLambdaArgument(

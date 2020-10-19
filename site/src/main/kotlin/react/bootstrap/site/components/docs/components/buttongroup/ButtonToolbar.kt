@@ -8,11 +8,12 @@ import react.bootstrap.components.button.buttonToolbar
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.components.docs.components.buttons.solidSecondaryFun
-import react.bootstrap.site.components.docs.components.importButtonGroupBuilder
-import react.bootstrap.site.components.docs.components.importButtonsBuilder
+import react.bootstrap.site.components.docs.importButtonGroupBuilder
+import react.bootstrap.site.components.docs.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.p
 
 internal class ButtonToolbar : SectionComponent() {
@@ -44,10 +45,12 @@ out groups, buttons, and more.
             }
         }
         codeExample {
-            importButtonsBuilder()
-            importButtonGroupBuilder()
-            addImport("components.button.${RBuilder::buttonToolbar.name}")
-            appendLine { }
+            +Imports.builder()
+                .importButtonsBuilder()
+                .importButtonGroupBuilder()
+                .addImport("components.button.${RBuilder::buttonToolbar.name}")
+                .build()
+
             +FunCall.builder(RBuilder::buttonToolbar)
                 .addArgument("label", "Toolbar with button groups")
                 .setLambdaArgument(

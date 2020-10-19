@@ -13,9 +13,13 @@ import react.bootstrap.layout.grid.row.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.layout.importContainerFun
+import react.bootstrap.site.components.docs.importColFun
+import react.bootstrap.site.components.docs.importFromGrid
+import react.bootstrap.site.components.docs.importRowFun
+import react.bootstrap.site.components.docs.importContainerFun
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.AROUND as rxAROUND
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.BETWEEN as rxBETWEEN
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.CENTER as rxCENTER
@@ -60,13 +64,14 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 }
             }
             codeExample {
-                importColFun()
-                importContainerFun()
-                importFromGrid("row", ryCENTER.import)
-                importFromGrid("row", ryEND.import)
-                importFromGrid("row", rySTART.import)
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importColFun()
+                    .importContainerFun()
+                    .importFromGrid("row", ryCENTER.import)
+                    .importFromGrid("row", ryEND.import)
+                    .importFromGrid("row", rySTART.import)
+                    .importRowFun()
+                    .build()
 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
@@ -105,13 +110,15 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 }
             }
             codeExample {
-                importFromGrid("col", CENTER.import)
-                importFromGrid("col", END.import)
-                importFromGrid("col", START.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", CENTER.import)
+                    .importFromGrid("col", END.import)
+                    .importFromGrid("col", START.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
@@ -146,16 +153,18 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                 }
             }
             codeExample {
-                importFromGrid("col", SZ_4.import)
-                importFromGrid("row", rxAROUND.import)
-                importFromGrid("row", rxBETWEEN.import)
-                importFromGrid("row", rxCENTER.import)
-                importFromGrid("row", rxEND.import)
-                importFromGrid("row", rxSTART.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                appendLine { }
+                +Imports.builder()
+                    .importFromGrid("col", SZ_4.import)
+                    .importFromGrid("row", rxAROUND.import)
+                    .importFromGrid("row", rxBETWEEN.import)
+                    .importFromGrid("row", rxCENTER.import)
+                    .importFromGrid("row", rxEND.import)
+                    .importFromGrid("row", rxSTART.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         buildString {

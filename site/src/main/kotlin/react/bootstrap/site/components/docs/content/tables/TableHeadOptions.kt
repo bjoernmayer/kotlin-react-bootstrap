@@ -11,6 +11,7 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.tbody
 import react.dom.tr
 
@@ -53,10 +54,12 @@ Similar to tables and dark tables, use the `thead(style)`-argument to make table
             }
         }
         codeExample {
-            addImport("content.tables.${THeadStyles::class.simpleName}")
-            addImport("content.tables.table")
-            addImport("content.tables.thead")
-            appendLine { }
+            +Imports.builder()
+                .addImport("content.tables.${THeadStyles::class.simpleName}")
+                .addImport("content.tables.table")
+                .addImport("content.tables.thead")
+                .build()
+
             +listOf(THeadStyles.DARK, THeadStyles.LIGHT).joinToString("\n") { tHeadStyles ->
                 FunCall.builder(RBuilder::table)
                     .setLambdaArgument(
