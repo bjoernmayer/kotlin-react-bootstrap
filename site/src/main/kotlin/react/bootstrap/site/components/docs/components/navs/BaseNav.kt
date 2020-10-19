@@ -7,12 +7,13 @@ import react.RBuilder
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
-import react.bootstrap.site.components.docs.fixings.FunStyle
-import react.bootstrap.site.components.docs.fixings.Quoted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.importNavComponents
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.RDOMBuilder
 import react.dom.div
 
@@ -42,62 +43,13 @@ demonstrate that this particular value does not trigger any special styling.
             ulTestingNav()
         }
         codeExample {
-            importNavsBuilder()
-            importNavItemBuilder()
-            importNavLinkBuilder()
-            ln { }
-            ktFun(
-                Navs::ul,
-                navsBuilderParents,
-                style = FunStyle.BLOCK
-            ) {
-                ktFun(
-                    navItemBuilderFun,
-                    style = FunStyle.BLOCK
-                ) {
-                    ktFun(
-                        navLinkBuilderFun,
-                        style = FunStyle.BLOCK,
-                        args = mapOf(
-                            "href" to Quoted("#"),
-                            "active" to true
-                        )
-                    ) {
-                        ln("Active")
-                    }
-                }
-                repeat(2) {
-                    ktFun(
-                        navItemBuilderFun,
-                        style = FunStyle.BLOCK
-                    ) {
-                        ktFun(
-                            navLinkBuilderFun,
-                            style = FunStyle.BLOCK,
-                            args = mapOf(
-                                "href" to Quoted("#")
-                            )
-                        ) {
-                            ln("Link")
-                        }
-                    }
-                }
-                ktFun(
-                    navItemBuilderFun,
-                    style = FunStyle.BLOCK
-                ) {
-                    ktFun(
-                        navLinkBuilderFun,
-                        style = FunStyle.BLOCK,
-                        args = mapOf(
-                            "href" to Quoted("#"),
-                            "disabled" to true
-                        )
-                    ) {
-                        ln("Disabled")
-                    }
-                }
-            }
+            +Imports.builder().importNavComponents().build()
+
+            +FunCall.builder(Navs::ul)
+                .nestedBy(RBuilder::Navs)
+                .setLambdaArgument(
+                    testingNavItemsString()
+                ).build()
         }
         Markdown {
             //language=Markdown
@@ -111,11 +63,25 @@ Don't want to use `ul`? You can also use `ol`, `nav` or even just `div`.
             divTestingNav()
         }
         codeExample {
-            importNavsBuilder()
-            importNavItemBuilder()
-            importNavLinkBuilder()
-            ln { }
-            // Todo: Add Code Examples for all three
+            +Imports.builder().importNavComponents().build()
+
+            +FunCall.builder(Navs::ol)
+                .nestedBy(RBuilder::Navs)
+                .setLambdaArgument(
+                    testingNavItemsString()
+                ).build()
+            appendLine("")
+            +FunCall.builder(Navs::nav)
+                .nestedBy(RBuilder::Navs)
+                .setLambdaArgument(
+                    testingNavItemsString()
+                ).build()
+            appendLine("")
+            +FunCall.builder(Navs::div)
+                .nestedBy(RBuilder::Navs)
+                .setLambdaArgument(
+                    testingNavItemsString()
+                ).build()
         }
         Markdown {
             //language=Markdown
@@ -141,47 +107,37 @@ without the extra markup.
             }
         }
         codeExample {
-            importNavsBuilder()
-            importNavItemBuilder()
-            importNavLinkBuilder()
-            ln { }
-            ktFun(
-                Navs::nav,
-                navsBuilderParents,
-                style = FunStyle.BLOCK
-            ) {
-                ktFun(
-                    navLinkBuilderFun,
-                    style = FunStyle.BLOCK,
-                    args = mapOf(
-                        "href" to Quoted("#"),
-                        "active" to true
-                    )
-                ) {
-                    ln("Active")
-                }
-                repeat(2) {
-                    ktFun(
-                        navLinkBuilderFun,
-                        style = FunStyle.BLOCK,
-                        args = mapOf(
-                            "href" to Quoted("#")
+            +Imports.builder().importNavComponents().build()
+
+            +FunCall.builder(Navs::nav)
+                .nestedBy(RBuilder::Navs)
+                .setLambdaArgument(
+                    buildString {
+                        append(
+                            FunCall.builder(navLinkBuilderFun)
+                                .addArgument("href", "#")
+                                .addArgument("active", true)
+                                .setLambdaArgument(plusString("Active"))
+                                .build()
                         )
-                    ) {
-                        ln("Link")
+                        repeat(2) {
+                            append(
+                                FunCall.builder(navLinkBuilderFun)
+                                    .addArgument("href", "#")
+                                    .setLambdaArgument(plusString("Link"))
+                                    .build()
+                            )
+                        }
+                        append(
+                            FunCall.builder(navLinkBuilderFun)
+                                .addArgument("href", "#")
+                                .addArgument("disabled", true)
+                                .setLambdaArgument(plusString("Disabled"))
+                                .build()
+                        )
                     }
-                }
-                ktFun(
-                    navLinkBuilderFun,
-                    style = FunStyle.BLOCK,
-                    args = mapOf(
-                        "href" to Quoted("#"),
-                        "disabled" to true
-                    )
-                ) {
-                    ln("Disabled")
-                }
-            }
+
+                ).build()
         }
     }
 

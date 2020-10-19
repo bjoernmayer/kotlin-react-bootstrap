@@ -13,6 +13,15 @@ internal class Imports private constructor() {
         return this
     }
 
+    fun addImport(parts: Collection<String>): Imports {
+        imports.add(parts.joinToString("."))
+
+        return this
+    }
+
+    fun addImport(part: String, vararg parts: String) =
+        addImport(listOf(part, *parts))
+
     fun build() = buildString {
         appendLine(
             imports.sorted().joinToString("\n", postfix = "\n") {
