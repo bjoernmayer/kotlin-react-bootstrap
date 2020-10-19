@@ -40,7 +40,7 @@ Set the `table(hoverable)`-argument to `true` to enable a hover state on table r
                 .addArgument("hoverable", true)
                 .setLambdaArgument(defaultExample())
                 .build()
-            appendLine { }
+            appendLine("")
             +FunCall.builder(RBuilder::table)
                 .addArgument("hoverable", true)
                 .addArgument("dark", true)

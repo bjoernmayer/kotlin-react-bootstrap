@@ -43,34 +43,9 @@ internal class CodeExample : RComponent<CodeExample.Props, RState>() {
 internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<CodeExample.Props>(jsObject()) {
     internal fun joinToString(): String = childList.joinToString("")
 
-    // Todo remove this
-    internal fun string(content: String) {
-        +"+\"$content\""
-    }
-
     internal fun plusString(content: String): String = "+\"$content\""
 
-    // Todo remove this
-    internal fun appendLine(block: CodeExampleBuilder.() -> Unit) {
-        +getIndent(indent)
-        block()
-        +"\n"
-    }
-
-    // Todo remove this
-    internal fun appendLine(content: String) {
-        appendLine {
-            string(content)
-        }
-    }
-
-    // Todo remove this
-    private fun getIndent(level: Int): String =
-        buildString {
-            for (x in 1..level) {
-                append("    ")
-            }
-        }
+    internal fun appendLine(content: String) = +"$content\n"
 }
 
 internal fun RBuilder.codeExample(block: CodeExampleBuilder.() -> Unit): ReactElement {

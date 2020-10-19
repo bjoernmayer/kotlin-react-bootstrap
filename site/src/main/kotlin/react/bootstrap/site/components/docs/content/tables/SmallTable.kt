@@ -40,7 +40,7 @@ Set the `table(hoverable)`-argument to `true` to make tables more compact by cut
                 .addArgument("small", true)
                 .setLambdaArgument(defaultExample())
                 .build()
-            appendLine { }
+            appendLine("")
             +FunCall.builder(RBuilder::table)
                 .addArgument("small", true)
                 .addArgument("dark", true)

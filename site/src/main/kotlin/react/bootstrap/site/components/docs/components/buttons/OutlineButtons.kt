@@ -64,7 +64,7 @@ In need of a button, but not the hefty background colors they bring? Use the
                     .nestedBy(ButtonBuilder::outline)
                     .setLambdaArgument(plusString(it.value::class.normalName))
                     .build()
-                appendLine(" ")
+                appendLine(plusString(" "))
             }
         }
     }

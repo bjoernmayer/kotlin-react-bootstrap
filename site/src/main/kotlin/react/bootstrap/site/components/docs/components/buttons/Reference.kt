@@ -68,7 +68,7 @@ internal class Reference : SectionComponent() {
                     .build()
 
                 outlineFun?.apply {
-                    appendLine { }
+                    appendLine("")
                     +FunSpec.builder(outlineFun)
                         .nestedBy(RBuilder::Buttons)
                         .nestedBy(ButtonBuilder::outline)
@@ -108,7 +108,7 @@ internal class Reference : SectionComponent() {
                     .returns("ReactElement")
                     .build()
                 outlineFun?.apply {
-                    appendLine { }
+                    appendLine("")
                     +FunSpec.builder(outlineFun)
                         .nestedBy(RBuilder::Buttons)
                         .nestedBy(ButtonBuilder::outline)
@@ -153,7 +153,7 @@ internal class Reference : SectionComponent() {
                     .build()
 
                 outlineFun?.apply {
-                    appendLine { }
+                    appendLine("")
                     +FunSpec.builder(outlineFun)
                         .nestedBy(RBuilder::Buttons)
                         .nestedBy(ButtonBuilder::outline)

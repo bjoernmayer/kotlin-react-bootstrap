@@ -15,6 +15,7 @@ import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
 import react.bootstrap.site.lib.codepoet.LambdaValue
+import react.bootstrap.site.lib.codepoet.LineComment
 import react.dom.span
 import react.dom.tbody
 import react.dom.td
@@ -74,7 +75,7 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
                     )
                     .build()
             }
-            appendLine { +"// Or you use a more generic way" }
+            +LineComment.builder("Or you use a more generic way").build()
             +FunCall.builder(RBuilder::display4)
                 .addArgument("variant", Display.Variants.DISPLAY_4)
                 .addArgument(

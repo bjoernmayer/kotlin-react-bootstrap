@@ -88,7 +88,7 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
                     plusString("Primary link")
                 )
                 .build()
-            appendLine(" ")
+            appendLine(plusString(" "))
             +FunCall.builder(solidSecondaryFun)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)

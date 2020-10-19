@@ -52,18 +52,18 @@ table and cells. Or set the value to `${BorderStyles.BORDERLESS.nestedName}` for
                 .addArgument("borderStyle", BorderStyles.BORDERED)
                 .setLambdaArgument(defaultExample())
                 .build()
-            appendLine { }
+            appendLine("")
             +FunCall.builder(RBuilder::table)
                 .addArgument("borderStyle", BorderStyles.BORDERED)
                 .addArgument("dark", true)
                 .setLambdaArgument(defaultExample())
                 .build()
-            appendLine { }
+            appendLine("")
             +FunCall.builder(RBuilder::table)
                 .addArgument("borderStyle", BorderStyles.BORDERLESS)
                 .setLambdaArgument(defaultExample())
                 .build()
-            appendLine { }
+            appendLine("")
             +FunCall.builder(RBuilder::table)
                 .addArgument("borderStyle", BorderStyles.BORDERLESS)
                 .addArgument("dark", true)

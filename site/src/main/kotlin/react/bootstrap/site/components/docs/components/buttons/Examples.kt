@@ -49,7 +49,6 @@ for more control.
                 .importButtonsBuilder()
                 .build()
 
-            appendLine { }
             mapOf(
                 solidDangerFun to Button.Variants.Solid.DANGER,
                 solidDarkFun to Button.Variants.Solid.DARK,
@@ -66,7 +65,7 @@ for more control.
                     .nestedBy(ButtonBuilder::solid)
                     .setLambdaArgument(plusString(it.value::class.normalName))
                     .build()
-                appendLine(" ")
+                appendLine(plusString(" "))
             }
         }
     }
