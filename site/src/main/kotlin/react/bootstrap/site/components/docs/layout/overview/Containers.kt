@@ -10,13 +10,12 @@ import react.bootstrap.layout.grid.container.container
 import react.bootstrap.lib.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.layout.containerFun
-import react.bootstrap.site.components.docs.layout.importContainer
-import react.bootstrap.site.components.docs.layout.importContainerFun
-import react.bootstrap.site.components.docs.layout.ktContainer
-import react.bootstrap.site.components.docs.layout.ktN
-import react.bootstrap.site.components.docs.layout.nestedName
+import react.bootstrap.site.components.docs.importContainer
+import react.bootstrap.site.components.docs.importContainerFun
+import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.br
 import react.dom.code
 import react.dom.li
@@ -44,20 +43,45 @@ most layouts do not require a nested container.
         p {
             +"Bootstrap comes with three different containers:"
         }
+        val renderedContainerFun = FunCall.builder(RBuilder::container, FunCall.Style.INLINE)
+            .setEmptyLambdaArgument()
+            .build()
+        val renderedContainerFunFluid = FunCall.builder(RBuilder::container, FunCall.Style.INLINE)
+            .addArgument("viscosity", Container.Viscosities.FLUID)
+            .setEmptyLambdaArgument()
+            .build()
         ul {
             li {
-                code { +"$containerFun { }" }; +", which sets a "; code { +"max-width" }
+                code { +renderedContainerFun }; +", which sets a "; code { +"max-width" }
                 +" at each responsive breakpoint"
             }
             li {
-                code { +"$containerFun(viscosity = ${Container.Viscosities.FLUID.ktN}) { }" }; +", which is "
+                code { +renderedContainerFunFluid }; +", which is "
                 code { +"width: 100%" }; +" at all breakpoints"
             }
             li {
                 code {
-                    +"$containerFun(viscosity = ${Container.Viscosities::class.nestedName}"
-                    +"{.${Container.Viscosities.SM.name}|.${Container.Viscosities.MD.name}"
-                    +"|.${Container.Viscosities.LG.name}|.${Container.Viscosities.XL.name}|}) { }"
+                    +FunCall.builder(RBuilder::container, FunCall.Style.INLINE)
+                        .addArgument(
+                            "viscosity",
+                            FunCall.Argument.PureValue(
+                                buildString {
+                                    append(Container.Viscosities::class.nestedName)
+                                    append("{.")
+                                    append(
+                                        listOf(
+                                            Container.Viscosities.SM,
+                                            Container.Viscosities.MD,
+                                            Container.Viscosities.LG,
+                                            Container.Viscosities.XL,
+                                        ).joinToString("|.")
+                                    )
+                                    append("}")
+                                }
+                            )
+                        )
+                        .setEmptyLambdaArgument()
+                        .build()
                 }; +", which is "
                 code { +"width: 100%" }; +" until the specified breakpoint"
             }
@@ -65,8 +89,8 @@ most layouts do not require a nested container.
         Markdown {
             //language=Markdown
             +"""
-The table below illustrates how each container’s `max-width` compares to the original `$containerFun { }` and
-`$containerFun(viscosity = ${Container.Viscosities.FLUID.ktN}) { }` accross each breakpoint.
+The table below illustrates how each container’s `max-width` compares to the original `$renderedContainerFun` and
+`$renderedContainerFunFluid` accross each breakpoint.
             """
         }
         p {
@@ -83,7 +107,7 @@ The table below illustrates how each container’s `max-width` compares to the o
                     th { +"Extra large"; br { }; span(classes = "${ClassNames.FONT_WEIGHT_NORMAL}") { +"≥1200px" } }
                 }
                 tr {
-                    td { code { +"$containerFun { }" } }
+                    td { code { +renderedContainerFun } }
                     muted(RBuilder::td) { +"100%" }
                     td { +"540px" }
                     td { +"720px" }
@@ -91,7 +115,14 @@ The table below illustrates how each container’s `max-width` compares to the o
                     td { +"1140px" }
                 }
                 tr {
-                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.SM.ktN}) { }" } }
+                    td {
+                        code {
+                            +FunCall.builder(RBuilder::container)
+                                .addArgument("viscosity", Container.Viscosities.SM)
+                                .setEmptyLambdaArgument()
+                                .build()
+                        }
+                    }
                     muted(RBuilder::td) { +"100%" }
                     td { +"540px" }
                     td { +"720px" }
@@ -99,7 +130,14 @@ The table below illustrates how each container’s `max-width` compares to the o
                     td { +"1140px" }
                 }
                 tr {
-                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.MD.ktN}) { }" } }
+                    td {
+                        code {
+                            +FunCall.builder(RBuilder::container)
+                                .addArgument("viscosity", Container.Viscosities.MD)
+                                .setEmptyLambdaArgument()
+                                .build()
+                        }
+                    }
                     muted(RBuilder::td) { +"100%" }
                     muted(RBuilder::td) { +"100%" }
                     td { +"720px" }
@@ -107,7 +145,14 @@ The table below illustrates how each container’s `max-width` compares to the o
                     td { +"1140px" }
                 }
                 tr {
-                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.LG.ktN}) { }" } }
+                    td {
+                        code {
+                            +FunCall.builder(RBuilder::container)
+                                .addArgument("viscosity", Container.Viscosities.LG)
+                                .setEmptyLambdaArgument()
+                                .build()
+                        }
+                    }
                     for (x in 1..3) {
                         muted(RBuilder::td) { +"100%" }
                     }
@@ -115,14 +160,21 @@ The table below illustrates how each container’s `max-width` compares to the o
                     td { +"1140px" }
                 }
                 tr {
-                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.XL.ktN}) { }" } }
+                    td {
+                        code {
+                            +FunCall.builder(RBuilder::container)
+                                .addArgument("viscosity", Container.Viscosities.XL)
+                                .setEmptyLambdaArgument()
+                                .build()
+                        }
+                    }
                     for (x in 1..4) {
                         muted(RBuilder::td) { +"100%" }
                     }
                     td { +"1140px" }
                 }
                 tr {
-                    td { code { +"$containerFun(viscosity = ${Container.Viscosities.FLUID.ktN}) { }" } }
+                    td { code { +renderedContainerFunFluid } }
                     for (x in 1..5) {
                         muted(RBuilder::td) { +"100%" }
                     }
@@ -133,59 +185,74 @@ The table below illustrates how each container’s `max-width` compares to the o
         Markdown {
             //language=Markdown
             +"""
-Our default `$containerFun { }` is a responsive, fixed-width container, meaning its max-width changes at each
+Our default `$renderedContainerFun` is a responsive, fixed-width container, meaning its max-width changes at each
 breakpoint.
             """
         }
         codeExample {
-            importContainerFun()
-            ln { }
-            ktContainer {
-                ln { +"// Content here" }
-            }
+            +Imports.builder()
+                .importContainerFun()
+                .build()
+
+            +FunCall.builder(RBuilder::container)
+                .setLambdaArgument("// Content here")
+                .build()
         }
         subSectionTitle("Fluid", section)
         Markdown {
             //language=Markdown
             +"""
-Use `$containerFun(viscosity = ${Container.Viscosities.FLUID.ktN}) { }` for a full width container,
+Use `$renderedContainerFunFluid` for a full width container,
 spanning the entire width of the viewport.
             """
         }
         codeExample {
-            importContainer()
-            importContainerFun()
-            ln { }
-            ktFun(RBuilder::container, args = mapOf("viscosity" to Container.Viscosities.FLUID.ktN)) {
-                ln { +"// Content here" }
-            }
+            +Imports.builder()
+                .importContainer()
+                .importContainerFun()
+                .build()
+
+            +FunCall.builder(RBuilder::container)
+                .addArgument("viscosity", Container.Viscosities.FLUID)
+                .setLambdaArgument("// Content here")
+                .build()
         }
         subSectionTitle("Responsive", section)
         Markdown {
+            val renderedSmContainer = FunCall.builder(RBuilder::container, FunCall.Style.INLINE)
+                .addArgument("viscosity", Container.Viscosities.SM)
+                .setEmptyLambdaArgument()
+                .build()
             //language=Markdown
             +"""
 Responsive containers are new in Bootstrap v4.4. They allow you to specify a class that is 100% wide until the specified
 breakpoint is reached, after which we apply `max-width`s for each of the higher breakpoints. For example,
-`$containerFun(viscosity = ${Container.Viscosities.SM.ktN}) { }` is 100% wide to start until the `sm` breakpoint is
+`$renderedSmContainer` is 100% wide to start until the `sm` breakpoint is
 reached, where it will scale up with `md`, `lg`, and `xl`.
             """
         }
         codeExample {
-            importContainer()
-            importContainerFun()
-            ln { }
-            ktFun(RBuilder::container, args = mapOf("viscosity" to Container.Viscosities.SM.ktN)) {
-                ln("100% wide until small breakpoint")
-            }
-            ktFun(RBuilder::container, args = mapOf("viscosity" to Container.Viscosities.MD.ktN)) {
-                ln("100% wide until medium breakpoint")
-            }
-            ktFun(RBuilder::container, args = mapOf("viscosity" to Container.Viscosities.LG.ktN)) {
-                ln("100% wide until large breakpoint")
-            }
-            ktFun(RBuilder::container, args = mapOf("viscosity" to Container.Viscosities.XL.ktN)) {
-                ln("100% wide until extra large breakpoint")
-            }
+            +Imports.builder()
+                .importContainer()
+                .importContainerFun()
+                .build()
+
+            +FunCall.builder(RBuilder::container)
+                .addArgument("viscosity", Container.Viscosities.SM)
+                .setLambdaArgument("// 100% wide until small breakpoint")
+                .build()
+            +FunCall.builder(RBuilder::container)
+                .addArgument("viscosity", Container.Viscosities.MD)
+                .setLambdaArgument("// 100% wide until medium breakpoint")
+                .build()
+            +FunCall.builder(RBuilder::container)
+                .addArgument("viscosity", Container.Viscosities.LG)
+                .setLambdaArgument("// 100% wide until large breakpoint")
+                .build()
+            +FunCall.builder(RBuilder::container)
+                .addArgument("viscosity", Container.Viscosities.XL)
+                .setLambdaArgument("// 100% wide until extra large breakpoint")
+                .build()
         }
     }
 }

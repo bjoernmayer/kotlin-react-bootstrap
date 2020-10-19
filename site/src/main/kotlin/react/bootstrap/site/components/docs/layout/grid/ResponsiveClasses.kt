@@ -14,13 +14,16 @@ import react.bootstrap.layout.grid.row.RowAttributes.ColCounts.Companion.CNT_2
 import react.bootstrap.layout.grid.row.RowAttributes.ColCounts.Companion.CNT_3
 import react.bootstrap.layout.grid.row.RowAttributes.ColCounts.Companion.CNT_4
 import react.bootstrap.layout.grid.row.row
-import react.bootstrap.site.components.docs.fixings.FunStyle
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.layout.importContainerFun
-import react.bootstrap.site.components.docs.layout.ktContainer
+import react.bootstrap.site.components.docs.importColFun
+import react.bootstrap.site.components.docs.importFromGrid
+import react.bootstrap.site.components.docs.importRowFun
+import react.bootstrap.site.components.docs.importContainerFun
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.em
 import react.dom.p
 
@@ -60,32 +63,48 @@ ${EQ.name}`.
                 }
             }
             codeExample {
-                importFromGrid("col", EQ.import)
-                importFromGrid("col", SZ_4.import)
-                importFromGrid("col", SZ_8.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                ln { }
-                ktContainer {
-                    ktRow {
-                        for (x in 1..4) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) {
-                                ktFun(RBuilder::em, style = FunStyle.INLINE) {
-                                    string("all = ${EQ.name}")
+                +Imports.builder()
+                    .importFromGrid("col", EQ.import)
+                    .importFromGrid("col", SZ_4.import)
+                    .importFromGrid("col", SZ_8.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                buildString {
+                                    repeat(4) {
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                                .setLambdaArgument(
+                                                    FunCall.builder(RBuilder::em, FunCall.Style.INLINE)
+                                                        .setLambdaArgument(plusString("all = ${EQ.name}"))
+                                                        .build()
+                                                )
+                                                .build()
+                                        )
+                                    }
                                 }
-                            }
-                        }
-                    }
-                    ktRow {
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("all" to SZ_8.name)) {
-                            string("all = ${SZ_8.name}")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("all" to SZ_4.name)) {
-                            string("all = ${SZ_4.name}")
-                        }
-                    }
-                }
+                            )
+                            .build(),
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                    .addArgument("all", FunCall.Argument.PureValue(SZ_8.name))
+                                    .setLambdaArgument(plusString("all = ${SZ_8.name}"))
+                                    .build(),
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("all", FunCall.Argument.PureValue(SZ_4.name))
+                                    .setLambdaArgument(plusString("all = ${SZ_4.name}"))
+                                    .build()
+                            )
+                            .build(),
+                    )
+                    .build()
             }
         }
         subSectionTitle("Stacked to horizontal", section)
@@ -111,30 +130,45 @@ stacked and becomes horizontal at the small breakpoint (`sm`).
                 }
             }
             codeExample {
-                importFromGrid("col", EQ.import)
-                importFromGrid("col", SZ_4.import)
-                importFromGrid("col", SZ_8.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                ln { }
-                ktContainer {
-                    ktRow {
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("sm" to SZ_8.name)) {
-                            string("sm = ${SZ_8.name}")
-                        }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("sm" to SZ_4.name)) {
-                            string("sm = ${SZ_4.name}")
-                        }
-                    }
-                    ktRow {
-                        for (x in 1..3) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("sm" to EQ.name)) {
-                                string("sm = ${EQ.name}")
-                            }
-                        }
-                    }
-                }
+                +Imports.builder()
+                    .importFromGrid("col", EQ.import)
+                    .importFromGrid("col", SZ_4.import)
+                    .importFromGrid("col", SZ_8.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                    .addArgument("sm", FunCall.Argument.PureValue(SZ_8.name))
+                                    .setLambdaArgument(plusString("sm = ${SZ_8.name}"))
+                                    .build(),
+                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    .addArgument("sm", FunCall.Argument.PureValue(SZ_4.name))
+                                    .setLambdaArgument(plusString("sm = ${SZ_4.name}"))
+                                    .build()
+                            )
+                            .build(),
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                buildString {
+                                    repeat(3) {
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                                .addArgument("sm", FunCall.Argument.PureValue(EQ.name))
+                                                .setLambdaArgument(plusString("sm = ${EQ.name}"))
+                                                .build()
+                                        )
+                                    }
+                                }
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
         subSectionTitle("Mix and match", section)
@@ -164,52 +198,64 @@ needed. See the example below for a better idea of how it all works.
                 }
             }
             codeExample {
-                importFromGrid("col", SZ_4.import)
-                importFromGrid("col", SZ_6.import)
-                importFromGrid("col", SZ_8.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                ln { }
-                ktContainer {
-                    ktRow {
-                        ln { +"// Stack the columns on mobile by making one full-width and the other half-width" }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK, args = mapOf("md" to SZ_8.name)) {
-                            string("md = ${SZ_8.name}")
-                        }
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to SZ_6.name, "md" to SZ_4.name)
-                        ) {
-                            string("all = ${SZ_6.name}, md = ${SZ_4.name}")
-                        }
-                    }
-                    ktRow {
-                        ln { +"// Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop" }
-                        for (x in 1..3) {
-                            ktFun(
-                                RBuilder::col,
-                                style = FunStyle.INLINE_BLOCK,
-                                args = mapOf("all" to SZ_6.name, "md" to SZ_4.name)
-                            ) {
-                                string("all = ${SZ_6.name}, md = ${SZ_4.name}")
-                            }
-                        }
-                    }
-                    ktRow {
-                        ln { +"// Columns are always 50% wide, on mobile and desktop" }
-                        for (x in 1..2) {
-                            ktFun(
-                                RBuilder::col,
-                                style = FunStyle.INLINE_BLOCK,
-                                args = mapOf("all" to SZ_6.name)
-                            ) {
-                                string("all = ${SZ_6.name}")
-                            }
-                        }
-                    }
-                }
+                +Imports.builder()
+                    .importFromGrid("col", SZ_4.import)
+                    .importFromGrid("col", SZ_6.import)
+                    .importFromGrid("col", SZ_8.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                "// Stack the columns on mobile by making one full-width and the other half-width\n",
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                    .addArgument("md", FunCall.Argument.PureValue(SZ_8.name))
+                                    .setLambdaArgument(plusString("md = ${SZ_8.name}"))
+                                    .build(),
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                    .addArgument("all", FunCall.Argument.PureValue(SZ_6.name))
+                                    .addArgument("md", FunCall.Argument.PureValue(SZ_4.name))
+                                    .setLambdaArgument(plusString("all = ${SZ_6.name}, md = ${SZ_4.name}"))
+                                    .build()
+                            )
+                            .build(),
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                "// Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop\n",
+                                buildString {
+                                    repeat(3) {
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                                .addArgument("all", FunCall.Argument.PureValue(SZ_6.name))
+                                                .addArgument("md", FunCall.Argument.PureValue(SZ_4.name))
+                                                .setLambdaArgument(plusString("all = ${SZ_6.name}, md = ${SZ_4.name}"))
+                                                .build()
+                                        )
+                                    }
+                                }
+                            )
+                            .build(),
+                        FunCall.builder(RBuilder::row)
+                            .setLambdaArgument(
+                                "// Columns are always 50% wide, on mobile and desktop\n",
+                                buildString {
+                                    repeat(2) {
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                                .addArgument("all", FunCall.Argument.PureValue(SZ_6.name))
+                                                .setLambdaArgument(plusString("all = ${SZ_6.name}"))
+                                                .build()
+                                        )
+                                    }
+                                }
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
         subSectionTitle("Row columns", section)
@@ -231,18 +277,31 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 }
             }
             codeExample {
-                importColFun()
-                importContainerFun()
-                importFromGrid("row", CNT_2.import)
-                importRowFun()
-                ln { }
-                ktContainer {
-                    ktFun(RBuilder::row, args = mapOf("all" to CNT_2.name)) {
-                        for (x in 1..4) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Column") }
-                        }
-                    }
-                }
+                +Imports.builder()
+                    .importColFun()
+                    .importContainerFun()
+                    .importFromGrid("row", CNT_2.import)
+                    .importRowFun()
+                    .build()
+
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .addArgument("all", FunCall.Argument.PureValue(CNT_2.name))
+                            .setLambdaArgument(
+                                buildString {
+                                    repeat(4) {
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                                .setLambdaArgument(plusString("Column"))
+                                                .build()
+                                        )
+                                    }
+                                }
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
         exampleRow {
@@ -256,18 +315,31 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 }
             }
             codeExample {
-                importColFun()
-                importContainerFun()
-                importFromGrid("row", CNT_3.import)
-                importRowFun()
-                ln { }
-                ktContainer {
-                    ktFun(RBuilder::row, args = mapOf("all" to CNT_3.name)) {
-                        for (x in 1..4) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Column") }
-                        }
-                    }
-                }
+                +Imports.builder()
+                    .importColFun()
+                    .importContainerFun()
+                    .importFromGrid("row", CNT_3.import)
+                    .importRowFun()
+                    .build()
+
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .addArgument("all", FunCall.Argument.PureValue(CNT_3.name))
+                            .setLambdaArgument(
+                                buildString {
+                                    repeat(4) {
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                                .setLambdaArgument(plusString("Column"))
+                                                .build()
+                                        )
+                                    }
+                                }
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
         exampleRow {
@@ -281,18 +353,31 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 }
             }
             codeExample {
-                importColFun()
-                importContainerFun()
-                importFromGrid("row", CNT_4.import)
-                importRowFun()
-                ln { }
-                ktContainer {
-                    ktFun(RBuilder::row, args = mapOf("all" to CNT_4.name)) {
-                        for (x in 1..4) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Column") }
-                        }
-                    }
-                }
+                +Imports.builder()
+                    .importColFun()
+                    .importContainerFun()
+                    .importFromGrid("row", CNT_4.import)
+                    .importRowFun()
+                    .build()
+
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .addArgument("all", FunCall.Argument.PureValue(CNT_4.name))
+                            .setLambdaArgument(
+                                buildString {
+                                    repeat(4) {
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                                .setLambdaArgument(plusString("Column"))
+                                                .build()
+                                        )
+                                    }
+                                }
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
         exampleRow {
@@ -308,25 +393,43 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 }
             }
             codeExample {
-                importFromGrid("col", SZ_6.import)
-                importColFun()
-                importContainerFun()
-                importFromGrid("row", CNT_4.import)
-                importRowFun()
-                ln { }
-                ktContainer {
-                    ktFun(RBuilder::row, args = mapOf("all" to CNT_4.name)) {
-                        for (x in 1..2) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Column") }
-                        }
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to SZ_6.name)
-                        ) { string("Column") }
-                        ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Column") }
-                    }
-                }
+                +Imports.builder()
+                    .importFromGrid("col", SZ_6.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importFromGrid("row", CNT_4.import)
+                    .importRowFun()
+                    .build()
+
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .addArgument("all", FunCall.Argument.PureValue(CNT_4.name))
+                            .setLambdaArgument(
+                                buildString {
+                                    repeat(2) {
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                                .setLambdaArgument(plusString("Column"))
+                                                .build()
+                                        )
+                                    }
+                                    append(
+                                        FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                            .addArgument("all", FunCall.Argument.PureValue(SZ_6.name))
+                                            .setLambdaArgument(plusString("Column"))
+                                            .build()
+                                    )
+                                    append(
+                                        FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                            .setLambdaArgument(plusString("Column"))
+                                            .build()
+                                    )
+                                }
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
         exampleRow {
@@ -340,20 +443,35 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                 }
             }
             codeExample {
-                importColFun()
-                importContainerFun()
-                importFromGrid("row", CNT_1.import)
-                importFromGrid("row", CNT_2.import)
-                importFromGrid("row", CNT_4.import)
-                importRowFun()
-                ln { }
-                ktContainer {
-                    ktFun(RBuilder::row, args = mapOf("all" to CNT_1.name, "sm" to CNT_2.name, "md" to CNT_4.name)) {
-                        for (x in 1..4) {
-                            ktFun(RBuilder::col, style = FunStyle.INLINE_BLOCK) { string("Column") }
-                        }
-                    }
-                }
+                +Imports.builder()
+                    .importColFun()
+                    .importContainerFun()
+                    .importFromGrid("row", CNT_1.import)
+                    .importFromGrid("row", CNT_2.import)
+                    .importFromGrid("row", CNT_4.import)
+                    .importRowFun()
+                    .build()
+
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .addArgument("all", FunCall.Argument.PureValue(CNT_1.name))
+                            .addArgument("sm", FunCall.Argument.PureValue(CNT_2.name))
+                            .addArgument("md", FunCall.Argument.PureValue(CNT_4.name))
+                            .setLambdaArgument(
+                                buildString {
+                                    for (x in 1..4) {
+                                        append(
+                                            FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                                .setLambdaArgument(plusString("Column"))
+                                                .build()
+                                        )
+                                    }
+                                }
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
         subSectionTitle("No gutters", section)
@@ -380,31 +498,34 @@ column widths, responsive tiers, reorders, and more).
                 }
             }
             codeExample {
-                importFromGrid("col", SZ_4.import)
-                importFromGrid("col", SZ_6.import)
-                importFromGrid("col", SZ_8.import)
-                importColFun()
-                importContainerFun()
-                importRowFun()
-                ln { }
-                ktContainer {
-                    ktFun(RBuilder::row, args = mapOf("gutters" to false)) {
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("sm" to SZ_6.name, "md" to SZ_8.name)
-                        ) {
-                            string("sm = ${SZ_6.name}, md = ${SZ_8.name}")
-                        }
-                        ktFun(
-                            RBuilder::col,
-                            style = FunStyle.INLINE_BLOCK,
-                            args = mapOf("all" to SZ_6.name, "md" to SZ_4.name)
-                        ) {
-                            string("all = ${SZ_6.name}, md = ${SZ_4.name}")
-                        }
-                    }
-                }
+                +Imports.builder()
+                    .importFromGrid("col", SZ_4.import)
+                    .importFromGrid("col", SZ_6.import)
+                    .importFromGrid("col", SZ_8.import)
+                    .importColFun()
+                    .importContainerFun()
+                    .importRowFun()
+                    .build()
+
+                +FunCall.builder(RBuilder::container)
+                    .setLambdaArgument(
+                        FunCall.builder(RBuilder::row)
+                            .addArgument("gutters", false)
+                            .setLambdaArgument(
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                    .addArgument("sm", FunCall.Argument.PureValue(SZ_6.name))
+                                    .addArgument("md", FunCall.Argument.PureValue(SZ_8.name))
+                                    .setLambdaArgument(plusString("sm = ${SZ_6.name}, md = ${SZ_8.name}"))
+                                    .build(),
+                                FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
+                                    .addArgument("all", FunCall.Argument.PureValue(SZ_6.name))
+                                    .addArgument("md", FunCall.Argument.PureValue(SZ_4.name))
+                                    .setLambdaArgument(plusString("all = ${SZ_6.name}, md = ${SZ_4.name}"))
+                                    .build()
+                            )
+                            .build()
+                    )
+                    .build()
             }
         }
     }

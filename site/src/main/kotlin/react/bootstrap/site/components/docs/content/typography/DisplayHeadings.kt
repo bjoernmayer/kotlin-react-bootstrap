@@ -11,8 +11,11 @@ import react.bootstrap.content.typography.display4
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
-import react.bootstrap.site.components.docs.kt
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
+import react.bootstrap.site.lib.codepoet.LambdaValue
+import react.bootstrap.site.lib.codepoet.LineComment
 import react.dom.span
 import react.dom.tbody
 import react.dom.td
@@ -51,29 +54,41 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
             }
         }
         codeExample {
-            import("content.typography.${Display::class.simpleName}")
-            import("content.typography.${RBuilder::display.name}")
-            for (x in 1..3) {
-                import("content.typography.${RBuilder::display.name}$x")
-            }
-            ln { }
+            +Imports.builder()
+                .addImport("content.typography.${Display::class.simpleName}")
+                .addImport("content.typography.${RBuilder::display.name}")
+                .apply {
+                    for (x in 1..3) {
+                        addImport("content.typography.${RBuilder::display.name}$x")
+                    }
+                }
+                .build()
 
             listOf(
                 RBuilder::display1,
                 RBuilder::display2,
                 RBuilder::display3
             ).forEachIndexed { index, kFunction3 ->
-                ktFun(kFunction3) {
-                    ln("Display ${index + 1}")
-                }
+                +FunCall.builder(kFunction3)
+                    .setLambdaArgument(
+                        plusString("Display ${index + 1}")
+                    )
+                    .build()
             }
-            ln { +"// Or you use a more generic way" }
-            ktFun(
-                RBuilder::display4,
-                args = mapOf("variant" to Display.Variants.DISPLAY_4.kt, "renderAs" to "{ span { } }")
-            ) {
-                ln("Display 4")
-            }
+            +LineComment.builder("Or you use a more generic way").build()
+            +FunCall.builder(RBuilder::display4)
+                .addArgument("variant", Display.Variants.DISPLAY_4)
+                .addArgument(
+                    "renderAs",
+                    LambdaValue(
+                        FunCall.builder(RBuilder::span, FunCall.Style.INLINE)
+                            .setEmptyLambdaArgument()
+                            .build(),
+                        LambdaValue.Style.INLINE
+                    )
+                )
+                .setLambdaArgument(plusString("Display 4"))
+                .build()
         }
     }
 }

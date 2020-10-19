@@ -2,14 +2,16 @@ package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
 import react.bootstrap.components.button.Button
+import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.site.components.docs.components.importButtonsBuilder
-import react.bootstrap.site.components.docs.fixings.FunStyle
-import react.bootstrap.site.components.docs.fixings.Quoted
+import react.bootstrap.site.components.docs.importButton
+import react.bootstrap.site.components.docs.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 
 internal class DisabledState : SectionComponent() {
     override val title: String = "Disabled state"
@@ -28,26 +30,26 @@ Make buttons look inactive by setting the `disabled` boolean attribute to any `b
             Buttons.solid.secondary(disabled = true, sizes = Button.Sizes.LG) { +"Button" }
         }
         codeExample {
-            importButton()
-            importButtonsBuilder()
-            ln { }
-            ktFun(
-                solidPrimaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("disabled" to true, "sizes" to Button.Sizes.LG.ktN)
-            ) {
-                string("Primary Button")
-            }
-            ln(" ")
-            ktFun(
-                solidSecondaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("disabled" to true, "sizes" to Button.Sizes.LG.ktN)
-            ) {
-                string("Button")
-            }
+            +Imports.builder()
+                .importButton()
+                .importButtonsBuilder()
+                .build()
+
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("disabled", true)
+                .addArgument("sizes", Button.Sizes.LG)
+                .setLambdaArgument(plusString("Primary Button"))
+                .build()
+            appendLine(plusString(" "))
+            +FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("disabled", true)
+                .addArgument("sizes", Button.Sizes.LG)
+                .setLambdaArgument(plusString("Button"))
+                .build()
         }
         Markdown {
             //language=Markdown
@@ -62,26 +64,28 @@ Usage for you stays the same, though:
             Buttons.solid.secondary(href = "#", disabled = true, sizes = Button.Sizes.LG) { +"Button" }
         }
         codeExample {
-            importButton()
-            importButtonsBuilder()
-            ln { }
-            ktFun(
-                solidPrimaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("href" to Quoted("#"), "disabled" to true, "sizes" to Button.Sizes.LG.ktN)
-            ) {
-                string("Primary Button")
-            }
-            ln(" ")
-            ktFun(
-                solidSecondaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("href" to Quoted("#"), "disabled" to true, "sizes" to Button.Sizes.LG.ktN)
-            ) {
-                string("Button")
-            }
+            +Imports.builder()
+                .importButton()
+                .importButtonsBuilder()
+                .build()
+
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("href", "#")
+                .addArgument("disabled", true)
+                .addArgument("sizes", Button.Sizes.LG)
+                .setLambdaArgument(plusString("Primary Button"))
+                .build()
+            appendLine(plusString(" "))
+            +FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("href", "#")
+                .addArgument("disabled", true)
+                .addArgument("sizes", Button.Sizes.LG)
+                .setLambdaArgument(plusString("Button"))
+                .build()
         }
     }
 }

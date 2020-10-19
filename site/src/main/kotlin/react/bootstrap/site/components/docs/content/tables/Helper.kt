@@ -5,8 +5,7 @@ import kotlinx.html.TR
 import kotlinx.html.ThScope
 import react.RBuilder
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
-import react.bootstrap.site.components.docs.fixings.FunStyle
-import react.bootstrap.site.components.docs.kt
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.dom.RDOMBuilder
 import react.dom.tbody
 import react.dom.td
@@ -33,48 +32,54 @@ internal fun RDOMBuilder<TABLE>.defaultExample() {
     }
 }
 
-internal fun CodeExampleBuilder.defaultExample() {
-    ktFun(RBuilder::thead) {
-        ktFun(RBuilder::tr) {
-            headerCells()
-        }
-    }
-    ktFun(RBuilder::tbody) {
-        exampleRows.forEachIndexed { key, example ->
-            exampleRow(example, key)
-        }
-    }
+internal fun CodeExampleBuilder.defaultExample() = buildString {
+    append(
+        FunCall.builder(RBuilder::thead)
+            .setLambdaArgument(
+                FunCall.builder(RBuilder::tr)
+                    .setLambdaArgument(
+                        headerCells()
+                    )
+                    .build()
+            )
+            .build()
+    )
+    append(
+        FunCall.builder(RBuilder::tbody)
+            .setLambdaArgument(
+                buildString {
+                    exampleRows.forEachIndexed { key, example ->
+                        append(exampleRow(example, key))
+                    }
+                }
+            )
+            .build()
+    )
 }
 
 internal fun RDOMBuilder<TR>.headerCells() {
-    th(ThScope.col) { +"#" }
-    th(ThScope.col) { +"First" }
-    th(ThScope.col) { +"Last" }
-    th(ThScope.col) { +"Handle" }
+    listOf(
+        "#",
+        "First",
+        "Last",
+        "Handle"
+    ).forEach {
+        th(ThScope.col) { +it }
+    }
 }
 
-internal fun CodeExampleBuilder.headerCells() {
-    ktFun(
-        RBuilder::th,
-        style = FunStyle.INLINE_BLOCK,
-        args = mapOf(null to ThScope.col.kt)
-    ) { string("#") }
-    ktFun(
-        RBuilder::th,
-        style = FunStyle.INLINE_BLOCK,
-        args = mapOf(null to ThScope.col.kt)
-    ) { string("First") }
-    ktFun(
-        RBuilder::th,
-        style = FunStyle.INLINE_BLOCK,
-        args = mapOf(null to ThScope.col.kt)
-    ) { string("Last") }
-    ktFun(
-        RBuilder::th,
-        style = FunStyle.INLINE_BLOCK,
-        args = mapOf(null to ThScope.col.kt)
-    ) { string("Handle") }
-}
+internal fun CodeExampleBuilder.headerCells() =
+    listOf(
+        "#",
+        "First",
+        "Last",
+        "Handle"
+    ).joinToString("\n") { content ->
+        FunCall.builder(RBuilder::th, FunCall.Style.INLINE)
+            .addArgument(ThScope.col)
+            .setLambdaArgument(plusString(content))
+            .build()
+    }
 
 internal fun RBuilder.exampleRow(exampleRow: ExampleRow, index: Int) {
     tr {
@@ -85,18 +90,20 @@ internal fun RBuilder.exampleRow(exampleRow: ExampleRow, index: Int) {
     }
 }
 
-internal fun CodeExampleBuilder.exampleRow(exampleRow: ExampleRow, index: Int) {
-    ktFun(RBuilder::tr) {
-        ktFun(
-            RBuilder::th,
-            style = FunStyle.INLINE_BLOCK,
-            args = mapOf(null to ThScope.row.kt)
-        ) { string((index + 1).toString()) }
-        ktFun(RBuilder::td, style = FunStyle.INLINE_BLOCK) { string(exampleRow.first) }
-        ktFun(RBuilder::td, style = FunStyle.INLINE_BLOCK) { string(exampleRow.last) }
-        ktFun(RBuilder::td, style = FunStyle.INLINE_BLOCK) { string(exampleRow.handle) }
-    }
-}
+internal fun CodeExampleBuilder.exampleRow(exampleRow: ExampleRow, index: Int) =
+    FunCall.builder(RBuilder::tr)
+        .setLambdaArgument(
+            FunCall.builder(RBuilder::th, FunCall.Style.NEW_INLINE)
+                .addArgument(ThScope.row)
+                .setLambdaArgument(plusString((index + 1).toString()))
+                .build(),
+            listOf(exampleRow.first, exampleRow.last, exampleRow.handle).joinToString("\n") { content ->
+                FunCall.builder(RBuilder::td, FunCall.Style.INLINE)
+                    .setLambdaArgument(plusString(content))
+                    .build()
+            }
+        )
+        .build()
 
 internal val exampleRows = listOf(
     ExampleRow("Mark", "Otto", "@mdo"),

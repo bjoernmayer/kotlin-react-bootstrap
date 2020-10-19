@@ -2,13 +2,17 @@ package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
 import react.bootstrap.components.button.Button.Sizes
+import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.site.components.docs.components.importButtonsBuilder
-import react.bootstrap.site.components.docs.fixings.FunStyle
+import react.bootstrap.site.components.docs.importButton
+import react.bootstrap.site.components.docs.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 
 internal class Sizes : SectionComponent() {
     override val title: String = "Sizes"
@@ -18,8 +22,8 @@ internal class Sizes : SectionComponent() {
         Markdown {
             //language=Markdown
             +"""
-Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)` to `${Sizes.LG.ktN}` or
-`${Sizes.SM.ktN}`.
+Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)` to `${Sizes.LG.nestedName}` or
+`${Sizes.SM.nestedName}`.
             """
         }
         liveExample {
@@ -28,26 +32,24 @@ Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)
             Buttons.solid.secondary(sizes = Sizes.LG) { +"Large button" }
         }
         codeExample {
-            importButton()
-            importButtonsBuilder()
-            ln { }
-            ktFun(
-                solidPrimaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("sizes" to Sizes.LG.ktN)
-            ) {
-                string("Large button")
-            }
-            ln(" ")
-            ktFun(
-                solidSecondaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("sizes" to Sizes.LG.ktN)
-            ) {
-                string("Large button")
-            }
+            +Imports.builder()
+                .importButton()
+                .importButtonsBuilder()
+                .build()
+
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("sizes", Sizes.LG)
+                .setLambdaArgument(plusString("Large button"))
+                .build()
+            appendLine(plusString(" "))
+            +FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("sizes", Sizes.LG)
+                .setLambdaArgument(plusString("Large button"))
+                .build()
         }
         liveExample {
             Buttons.solid.primary(sizes = Sizes.SM) { +"Small button" }
@@ -55,26 +57,24 @@ Fancy larger or smaller buttons? Set `button(sizes: ${Sizes::class.simpleName}?)
             Buttons.solid.secondary(sizes = Sizes.SM) { +"Small button" }
         }
         codeExample {
-            importButton()
-            importButtonsBuilder()
-            ln { }
-            ktFun(
-                solidPrimaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("sizes" to Sizes.SM.ktN)
-            ) {
-                string("Small button")
-            }
-            ln(" ")
-            ktFun(
-                solidSecondaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("sizes" to Sizes.SM.ktN)
-            ) {
-                string("Small button")
-            }
+            +Imports.builder()
+                .importButton()
+                .importButtonsBuilder()
+                .build()
+
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("sizes", Sizes.SM)
+                .setLambdaArgument(plusString("Small button"))
+                .build()
+            appendLine(plusString(" "))
+            +FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("sizes", Sizes.SM)
+                .setLambdaArgument(plusString("Small button"))
+                .build()
         }
         Markdown {
             //language=Markdown
@@ -89,26 +89,26 @@ Create block level buttons—those that span the full width of a parent—by add
             Buttons.solid.secondary(sizes = Sizes.LG, blockSized = true) { +"Block level button" }
         }
         codeExample {
-            importButton()
-            importButtonsBuilder()
-            ln { }
-            ktFun(
-                solidPrimaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("sizes" to Sizes.LG.ktN, "blockSized" to true)
-            ) {
-                string("Block level button")
-            }
-            ln(" ")
-            ktFun(
-                solidSecondaryFun,
-                parents = solidButtonBuilderParents,
-                style = FunStyle.INLINE_BLOCK,
-                args = mapOf("sizes" to Sizes.LG.ktN, "blockSized" to true)
-            ) {
-                string("Block level button")
-            }
+            +Imports.builder()
+                .importButton()
+                .importButtonsBuilder()
+                .build()
+
+            +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("sizes", Sizes.LG)
+                .addArgument("blockSized", true)
+                .setLambdaArgument(plusString("Block level button"))
+                .build()
+            appendLine(plusString(" "))
+            +FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
+                .nestedBy(RBuilder::Buttons)
+                .nestedBy(ButtonBuilder::solid)
+                .addArgument("sizes", Sizes.LG)
+                .addArgument("blockSized", true)
+                .setLambdaArgument(plusString("Block level button"))
+                .build()
         }
     }
 }

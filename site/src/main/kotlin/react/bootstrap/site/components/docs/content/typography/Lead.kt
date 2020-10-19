@@ -6,6 +6,8 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.Imports
 
 internal class Lead : SectionComponent() {
     override val title: String = "Lead"
@@ -26,14 +28,21 @@ Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis moll
             }
         }
         codeExample {
-            import("content.typography.${RBuilder::lead.name}")
-            ln { }
-            ktFun(RBuilder::lead) {
-                multiline(
-                    "Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non comm" +
-                        "odo luctus."
+            +Imports.builder()
+                .addImport("content.typography.${RBuilder::lead.name}")
+                .build()
+
+            +FunCall.builder(RBuilder::lead)
+                .setLambdaArgument(
+                    plusString(
+                        "Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non" +
+                            " comm odo "
+                    ),
+                    "\n",
+                    plusString("luctus.")
+
                 )
-            }
+                .build()
         }
     }
 }

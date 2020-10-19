@@ -2,8 +2,6 @@ package react.bootstrap.lib
 
 /**
  * @see "https://gistgithubcom/JacobLett/3f16b4c857fdec22472ac20e3dd0366a"
- *
- * Todo: sort these
  */
 enum class ClassNames {
     ACCORDION,

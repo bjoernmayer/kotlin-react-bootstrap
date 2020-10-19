@@ -5,11 +5,10 @@ import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.ButtonToolbar
 import react.bootstrap.components.button.buttonGroup
 import react.bootstrap.components.button.buttonToolbar
-import react.bootstrap.site.components.docs.FunReference
-import react.bootstrap.site.components.docs.buildNestedName
-import react.bootstrap.site.components.docs.components.buttons.ktN
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.lib.codepoet.FunSpec
+import react.bootstrap.site.lib.codepoet.Generic
 import react.dom.p
 
 internal class Reference : SectionComponent() {
@@ -22,56 +21,29 @@ internal class Reference : SectionComponent() {
             +"Adds a button group."
         }
         codeExample {
-            +FunReference(
-                RBuilder::buttonGroup,
-                setOf(RBuilder::class.simpleName!!),
-                setOf(
-                    FunReference.Argument(
-                        "appearance",
-                        buildNestedName(ButtonGroup.Appearance::class, ButtonGroup::class),
-                        false,
-                        ButtonGroup.Appearance.DEFAULT.ktN
-                    ),
-                    FunReference.Argument(
-                        "behaviour",
-                        buildNestedName(ButtonGroup.Behaviours::class, ButtonGroup::class),
-                        true,
-                        FunReference.Argument.NULL
-                    ),
-                    FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
-                    FunReference.Argument("label", String::class, true, FunReference.Argument.NULL),
-                    FunReference.Argument(
-                        "sizes",
-                        buildNestedName(ButtonGroup.Sizes::class, ButtonGroup::class),
-                        true,
-                        FunReference.Argument.NULL
-                    ),
-                    FunReference.Argument(
-                        "block",
-                        "RHandler<${buildNestedName(ButtonGroup.Props::class, ButtonGroup::class)}>"
-                    )
-                ),
-                "ReactElement"
-            ).print(false)
+            +FunSpec.builder(RBuilder::buttonGroup)
+                .nestedBy(RBuilder::class)
+                .addParameter("appearance", ButtonGroup.Appearance::class, false, ButtonGroup.Appearance.DEFAULT)
+                .addParameter("behaviour", ButtonGroup.Behaviours::class, true, FunSpec.Parameter.NULL)
+                .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                .addParameter("label", String::class, true, FunSpec.Parameter.NULL)
+                .addParameter("sizes", ButtonGroup.Sizes::class, true, FunSpec.Parameter.NULL)
+                .addParameter("block", Generic("RHandler", ButtonGroup.Props::class))
+                .returns("ReactElement")
+                .build()
         }
         subSectionTitle(RBuilder::buttonToolbar.name, section)
         p {
             +"Add a button toolbar."
         }
         codeExample {
-            +FunReference(
-                RBuilder::buttonToolbar,
-                setOf(RBuilder::class.simpleName!!),
-                setOf(
-                    FunReference.Argument("classes", String::class, true, FunReference.Argument.NULL),
-                    FunReference.Argument("label", String::class, true, FunReference.Argument.NULL),
-                    FunReference.Argument(
-                        "block",
-                        "RHandler<${buildNestedName(ButtonToolbar.Props::class, ButtonToolbar::class)}>"
-                    )
-                ),
-                "ReactElement"
-            ).print(false)
+            +FunSpec.builder(RBuilder::buttonToolbar)
+                .nestedBy(RBuilder::class)
+                .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                .addParameter("label", String::class, true, FunSpec.Parameter.NULL)
+                .addParameter("block", Generic("RHandler", ButtonToolbar.Props::class))
+                .returns("ReactElement")
+                .build()
         }
     }
 }
