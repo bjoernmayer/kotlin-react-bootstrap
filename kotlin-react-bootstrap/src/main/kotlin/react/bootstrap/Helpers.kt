@@ -31,6 +31,8 @@ fun String?.appendClass(classNames: Set<String>) = run {
     }
 }
 
+fun String?.toClasses(): Set<String>? = this?.split(" ")?.toSet()
+
 fun <T> Set<T>?.addOrInit(newEntries: Set<T>): Set<T> = run {
     this?.toMutableSet()?.apply {
         addAll(newEntries)

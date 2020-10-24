@@ -235,6 +235,7 @@ Set `appearance = ${Appearance.TABS.nestedName}` to generate a tabbed interface.
                 }
             }
         }
+        // Todo move into new section
         subSectionTitle("Active Navlink", section)
         liveExample {
             Navs.ul(
@@ -243,7 +244,29 @@ Set `appearance = ${Appearance.TABS.nestedName}` to generate a tabbed interface.
                     it.props.id == "thisOneIsActive"
                 }
             ) {
-                buildDefaultExample()
+                navItem {
+                    navLink(href = "#", active = true) {
+                        attrs {
+                            id = "thisOneIsActive"
+                        }
+                        +"Active"
+                    }
+                }
+                navItem {
+                    navLink(href = "#") {
+                        +"Link"
+                    }
+                }
+                navItem {
+                    navLink(href = "#") {
+                        +"Link"
+                    }
+                }
+                navItem {
+                    navLink(href = "#", disabled = true) {
+                        +"Disabled"
+                    }
+                }
             }
         }
     }

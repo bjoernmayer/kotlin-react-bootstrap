@@ -12,6 +12,7 @@ import react.RProps
 import react.RState
 import react.ReactElement
 import react.asElementOrNull
+import react.bootstrap.addOrInit
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.EventHandler
@@ -19,10 +20,11 @@ import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.lib.rprops.WithDomEvents
 import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
+import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
+import react.bootstrap.lib.rprops.WithGlobalAttributes
 import react.bootstrap.utilities.close
 import react.children
 import react.cloneElement
-import react.dom.WithClassName
 import react.dom.div
 import react.setState
 
@@ -127,8 +129,12 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
 
             attrs {
                 loadDomEvents(props, props::onTransitionEnd)
+                loadGlobalAttributes(props)
+
                 role = "alert"
-                classes = alertClasses.map { it.className }.toSet()
+
+                // Set classes again, since we added a few
+                classes = props.classes.addOrInit(alertClasses)
             }
         }
     }
@@ -174,7 +180,7 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
         var random: Int?
     }
 
-    interface Props : WithClassName, WithDomEvents {
+    interface Props : WithGlobalAttributes, WithDomEvents {
         var dismissible: Dismissible?
         var variant: Variants?
 

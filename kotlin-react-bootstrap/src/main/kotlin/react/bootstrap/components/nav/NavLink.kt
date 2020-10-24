@@ -13,6 +13,7 @@ import react.bootstrap.lib.rprops.WithDisabled
 import react.bootstrap.lib.rprops.WithDomEvents
 import react.bootstrap.lib.rprops.WithTypeFlag
 import react.bootstrap.lib.kotlinxhtml.ariaDisabled
+import react.bootstrap.lib.kotlinxhtml.loadAttributes
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.dom.a
@@ -32,16 +33,14 @@ class NavLink : RComponent<NavLink.Props, RState>() {
             navLinkClasses.add(ClassNames.DISABLED)
         }
 
-        val classes = props.classes.addOrInit(navLinkClasses)
-
         a {
             attrs {
                 loadGlobalAttributes(props)
                 loadDomEvents(props)
-                // Set classes again, since we added a few
-                this.classes = classes
-                // load A attributes
+                loadAttributes(props)
 
+                // Set classes again, since we added a few
+                classes = props.classes.addOrInit(navLinkClasses)
 
                 if (props.disabled == true) {
                     tabIndex = "-1"
