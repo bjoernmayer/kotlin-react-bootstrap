@@ -1,7 +1,5 @@
 package react.bootstrap.site.components.docs.components.navs
 
-import kotlinx.html.A
-import kotlinx.html.id
 import react.RBuilder
 import react.RElementBuilder
 import react.bootstrap.components.nav.Navs
@@ -211,12 +209,6 @@ Set `appearance = ${Appearance.TABS.nestedName}` to generate a tabbed interface.
                         +"Disabled"
                     }
                 }
-            }
-        }
-        a {
-            attrs {
-                id = "lol"
-                val test: A = this
             }
         }
         liveExample {
