@@ -4,7 +4,7 @@ import kotlinx.html.THEAD
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.RDOMHandler
 import react.dom.thead
 

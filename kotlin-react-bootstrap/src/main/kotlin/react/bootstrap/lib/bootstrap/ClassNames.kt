@@ -1,4 +1,4 @@
-package react.bootstrap.lib
+package react.bootstrap.lib.bootstrap
 
 /**
  * @see "https://gistgithubcom/JacobLett/3f16b4c857fdec22472ac20e3dd0366a"

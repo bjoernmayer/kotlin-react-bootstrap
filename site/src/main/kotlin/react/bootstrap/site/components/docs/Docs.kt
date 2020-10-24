@@ -15,7 +15,7 @@ import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_8
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_9
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.row.row
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.components.Components
 import react.bootstrap.site.components.docs.content.Content
 import react.bootstrap.site.components.docs.fixings.CategoryComponent

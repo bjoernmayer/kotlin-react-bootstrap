@@ -5,9 +5,9 @@ import react.RBuilder
 import react.RComponent
 import react.RState
 import react.bootstrap.appendClass
-import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.WithAriaLabel
-import react.bootstrap.lib.ariaLabel
+import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.rprops.WithAriaLabel
+import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.dom.WithClassName
 import react.dom.div
 

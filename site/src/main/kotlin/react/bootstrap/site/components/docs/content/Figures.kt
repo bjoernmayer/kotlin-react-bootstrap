@@ -7,8 +7,8 @@ import kotlinx.html.unsafe
 import react.RBuilder
 import react.bootstrap.content.figures.figcaption
 import react.bootstrap.content.figures.figure
-import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.ariaLabel
+import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.site.components.docs.fixings.PageComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample

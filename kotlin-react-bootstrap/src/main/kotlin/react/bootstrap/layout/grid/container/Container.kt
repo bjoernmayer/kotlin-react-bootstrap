@@ -5,8 +5,8 @@ import react.RComponent
 import react.RProps
 import react.RState
 import react.bootstrap.appendClass
-import react.bootstrap.lib.ClassNameEnum
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.component.ClassNameEnum
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.dom.div
 
 class Container : RComponent<Container.Props, RState>() {

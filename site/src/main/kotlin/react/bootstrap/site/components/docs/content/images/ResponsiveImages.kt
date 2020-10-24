@@ -4,8 +4,8 @@ import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
 import react.bootstrap.content.img
-import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.ariaLabel
+import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample

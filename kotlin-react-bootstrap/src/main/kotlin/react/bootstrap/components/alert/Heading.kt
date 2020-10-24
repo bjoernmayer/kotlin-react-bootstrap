@@ -12,10 +12,10 @@ import react.RElementBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.content.typography.Headings
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.ElementProvider
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.classNameWrapper
+import react.bootstrap.lib.component.classNameWrapper
 import react.dom.h1
 import react.dom.h2
 import react.dom.h3

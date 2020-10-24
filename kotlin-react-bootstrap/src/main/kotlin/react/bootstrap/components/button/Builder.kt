@@ -12,8 +12,8 @@ import react.RElementBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.Builder
-import react.bootstrap.lib.WithTypeFlag
-import react.bootstrap.lib.toMutable
+import react.bootstrap.lib.rprops.WithTypeFlag
+import react.bootstrap.lib.rprops.toMutable
 
 private fun RBuilder.button(
     variant: Button.Variants,

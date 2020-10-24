@@ -1,5 +1,7 @@
 package react.bootstrap.site.components.docs.components.navs
 
+import kotlinx.html.A
+import kotlinx.html.id
 import react.RBuilder
 import react.RElementBuilder
 import react.bootstrap.components.nav.Navs
@@ -7,7 +9,7 @@ import react.bootstrap.components.nav.Navs.Appearance
 import react.bootstrap.components.nav.Navs.WidthHandling
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -16,6 +18,7 @@ import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
+import react.dom.a
 
 internal class AvailableStyles : SectionComponent() {
     override val title: String = "Available styles"
@@ -210,6 +213,12 @@ Set `appearance = ${Appearance.TABS.nestedName}` to generate a tabbed interface.
                 }
             }
         }
+        a {
+            attrs {
+                id = "lol"
+                val test: A = this
+            }
+        }
         liveExample {
             Navs.ul(appearance = Appearance.PILLS, widthHandling = WidthHandling.JUSTIFY) {
                 navItem {
@@ -232,6 +241,17 @@ Set `appearance = ${Appearance.TABS.nestedName}` to generate a tabbed interface.
                         +"Disabled"
                     }
                 }
+            }
+        }
+        subSectionTitle("Active Navlink", section)
+        liveExample {
+            Navs.ul(
+                appearance = Appearance.PILLS,
+                activeLinkPredicate = {
+                    it.props.id == "thisOneIsActive"
+                }
+            ) {
+                buildDefaultExample()
             }
         }
     }

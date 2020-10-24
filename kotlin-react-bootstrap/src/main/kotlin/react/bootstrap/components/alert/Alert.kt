@@ -12,13 +12,13 @@ import react.RProps
 import react.RState
 import react.ReactElement
 import react.asElementOrNull
-import react.bootstrap.lib.ClassNameEnum
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.component.ClassNameEnum
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.NoArgEventHandler
-import react.bootstrap.lib.WithDomEvents
-import react.bootstrap.lib.onTransitionEndFunction
-import react.bootstrap.lib.transferDomEvents
+import react.bootstrap.lib.rprops.WithDomEvents
+import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
+import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.utilities.close
 import react.children
 import react.cloneElement
@@ -126,7 +126,7 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
             }
 
             attrs {
-                transferDomEvents(props, props::onTransitionEnd)
+                loadDomEvents(props, props::onTransitionEnd)
                 role = "alert"
                 classes = alertClasses.map { it.className }.toSet()
             }

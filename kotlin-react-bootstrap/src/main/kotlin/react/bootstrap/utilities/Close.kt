@@ -7,11 +7,11 @@ import react.RHandler
 import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.WithDomEvents
-import react.bootstrap.lib.ariaHidden
-import react.bootstrap.lib.ariaLabel
-import react.bootstrap.lib.transferDomEvents
+import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.rprops.WithDomEvents
+import react.bootstrap.lib.kotlinxhtml.ariaHidden
+import react.bootstrap.lib.kotlinxhtml.ariaLabel
+import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.dom.WithClassName
 import react.dom.button
 import react.dom.span
@@ -22,7 +22,7 @@ class Close : RComponent<Close.Props, RState>() {
             attrs {
                 ariaLabel = props.label ?: "Close"
 
-                transferDomEvents(props)
+                loadDomEvents(props)
             }
 
             span {

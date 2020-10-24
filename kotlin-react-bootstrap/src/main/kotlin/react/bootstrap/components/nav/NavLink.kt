@@ -1,23 +1,25 @@
 package react.bootstrap.components.nav
 
+import kotlinx.html.classes
 import kotlinx.html.tabIndex
 import react.RBuilder
+import react.RComponent
 import react.RState
-import react.ReactElement
-import react.bootstrap.appendClass
-import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.CustomisableComponent
-import react.bootstrap.lib.WithActive
-import react.bootstrap.lib.WithDisabled
-import react.bootstrap.lib.WithDomEvents
-import react.bootstrap.lib.WithRenderAs
-import react.bootstrap.lib.ariaDisabled
-import react.bootstrap.lib.transferDomEvents
-import react.dom.WithClassName
+import react.bootstrap.addOrInit
+import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.rprops.WithActive
+import react.bootstrap.lib.rprops.tags.WithAttributesA
+import react.bootstrap.lib.rprops.WithDisabled
+import react.bootstrap.lib.rprops.WithDomEvents
+import react.bootstrap.lib.rprops.WithTypeFlag
+import react.bootstrap.lib.kotlinxhtml.ariaDisabled
+import react.bootstrap.lib.kotlinxhtml.loadDomEvents
+import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.dom.a
 
-class NavLink : CustomisableComponent<NavLink.RendererProps, NavLink.Props, RState>() {
-    override fun RendererProps.handleProps() {
+// Todo: on active handling
+class NavLink : RComponent<NavLink.Props, RState>() {
+    override fun RBuilder.render() {
         val navLinkClasses = mutableSetOf(
             ClassNames.NAV_LINK
         )
@@ -28,32 +30,27 @@ class NavLink : CustomisableComponent<NavLink.RendererProps, NavLink.Props, RSta
 
         if (props.disabled == true) {
             navLinkClasses.add(ClassNames.DISABLED)
-
-            tabIndex = -1
-            // Aria Disabled would need be set here, too. This is currently not possible, because [fixAttributeName] in
-            // ReactDOMAttributes.kt does not fix the html property name correctly
         }
 
-        className = props.className.appendClass(navLinkClasses)
+        val classes = props.classes.addOrInit(navLinkClasses)
 
-        transferDomEvents(props)
-    }
-
-    override fun RBuilder.getDefaultRenderer(): ReactElement = a(href = props.href, target = props.target) {
-        if (props.disabled == true) {
+        a {
             attrs {
-                tabIndex = "-1"
-                ariaDisabled = true
+                loadGlobalAttributes(props)
+                loadDomEvents(props)
+                // Set classes again, since we added a few
+                this.classes = classes
+                // load A attributes
+
+
+                if (props.disabled == true) {
+                    tabIndex = "-1"
+                    ariaDisabled = true
+                }
             }
+            children()
         }
     }
 
-    interface Props : WithClassName, WithRenderAs, WithActive, WithDisabled, WithDomEvents {
-        var href: String?
-        var target: String?
-    }
-
-    interface RendererProps : WithClassName, WithDomEvents {
-        var tabIndex: Int?
-    }
+    interface Props : WithAttributesA, WithActive, WithDisabled, WithDomEvents, WithTypeFlag<NavLink>
 }

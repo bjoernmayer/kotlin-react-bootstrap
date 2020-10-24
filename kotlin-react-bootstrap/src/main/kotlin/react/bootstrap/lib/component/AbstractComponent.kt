@@ -1,4 +1,4 @@
-package react.bootstrap.lib
+package react.bootstrap.lib.component
 
 import react.Child
 import react.Children

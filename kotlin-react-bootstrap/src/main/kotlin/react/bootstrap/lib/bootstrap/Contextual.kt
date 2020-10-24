@@ -1,4 +1,6 @@
-package react.bootstrap.lib
+package react.bootstrap.lib.bootstrap
+
+import react.bootstrap.lib.bootstrap.ClassNames
 
 class Contextual {
     enum class Background(val className: ClassNames) {
@@ -12,8 +14,5 @@ class Contextual {
         TRANSPARENT(ClassNames.BG_TRANSPARENT),
         WARNING(ClassNames.BG_WARNING),
         WHITE(ClassNames.BG_WHITE);
-
-        // Todo: this should be moved into documentation
-        val kt = "${Contextual::class.simpleName}.${Background::class.simpleName}.$name"
     }
 }

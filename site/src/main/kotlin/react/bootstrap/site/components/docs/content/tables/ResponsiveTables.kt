@@ -6,7 +6,7 @@ import react.bootstrap.content.tables.table
 import react.bootstrap.content.tables.td
 import react.bootstrap.content.tables.thead
 import react.bootstrap.content.tables.tr
-import react.bootstrap.lib.Breakpoints
+import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
@@ -84,7 +84,7 @@ up, the table will behave normally and not scroll horizontally.
     private fun CodeExampleBuilder.exampleImports() {
         +Imports.builder()
             .addImport("content.tables.table")
-            .addImport("lib.${Breakpoints::class.simpleName}")
+            .addImport("lib.bootstrap.${Breakpoints::class.simpleName}")
             .build()
     }
 

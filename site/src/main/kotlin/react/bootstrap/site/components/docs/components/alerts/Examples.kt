@@ -13,7 +13,7 @@ import react.bootstrap.components.alert.closingElement
 import react.bootstrap.components.alert.link
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.components.buttons.outlineDangerFun
 import react.bootstrap.site.components.docs.components.buttons.solidInfoFun
 import react.bootstrap.site.components.docs.components.buttons.solidSuccessFun

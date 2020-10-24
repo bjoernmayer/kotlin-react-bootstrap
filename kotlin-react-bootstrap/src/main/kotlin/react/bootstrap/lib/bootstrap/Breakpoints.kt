@@ -1,4 +1,4 @@
-package react.bootstrap.lib
+package react.bootstrap.lib.bootstrap
 
 enum class Breakpoints {
     ALL,

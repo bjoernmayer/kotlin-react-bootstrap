@@ -1,9 +1,11 @@
-package react.bootstrap.lib
+package react.bootstrap.lib.component
 
 import kotlinext.js.jsObject
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
+import react.bootstrap.lib.ElementProvider
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.cloneElement
 import react.dom.WithClassName
 

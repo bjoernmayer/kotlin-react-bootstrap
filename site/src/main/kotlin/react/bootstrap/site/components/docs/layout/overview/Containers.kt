@@ -7,7 +7,7 @@ import react.bootstrap.content.tables.table
 import react.bootstrap.content.typography.muted
 import react.bootstrap.layout.grid.container.Container
 import react.bootstrap.layout.grid.container.container
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.importContainer

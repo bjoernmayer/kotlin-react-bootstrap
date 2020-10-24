@@ -3,7 +3,7 @@ package react.bootstrap.site.components.docs.content.typography
 import react.RBuilder
 import react.bootstrap.content.typography.blockQuote
 import react.bootstrap.content.typography.blockQuoteFooter
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample

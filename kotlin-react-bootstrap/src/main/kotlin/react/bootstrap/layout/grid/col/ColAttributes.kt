@@ -2,10 +2,10 @@
 
 package react.bootstrap.layout.grid.col
 
-import react.bootstrap.lib.AttributePair
-import react.bootstrap.lib.AttributeQuadruple
-import react.bootstrap.lib.AttributeTriple
-import react.bootstrap.lib.CombinedAttributes
+import react.bootstrap.lib.component.AttributePair
+import react.bootstrap.lib.component.AttributeQuadruple
+import react.bootstrap.lib.component.AttributeTriple
+import react.bootstrap.lib.component.CombinedAttributes
 
 sealed class ColAttributes : CombinedAttributes {
     abstract val size: Sizes?

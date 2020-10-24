@@ -4,8 +4,8 @@ import react.RBuilder
 import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.bootstrap.lib.AbstractComponent
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.component.AbstractComponent
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.dom.WithClassName
 import react.dom.div
 import react.dom.nav
@@ -67,6 +67,7 @@ sealed class Navs<P : Navs.Props> : AbstractComponent<P, P, RState>() {
     interface Props : WithClassName {
         var appearance: Appearance?
         var widthHandling: WidthHandling?
+        var activeLinkPredicate: ((NavLink) -> Boolean)?
     }
 
     enum class Appearance {

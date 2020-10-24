@@ -7,10 +7,10 @@ import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.EQ
-import react.bootstrap.lib.Breakpoints
-import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.CustomisableComponent
-import react.bootstrap.lib.WithRenderAs
+import react.bootstrap.lib.bootstrap.Breakpoints
+import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.CustomisableComponent
+import react.bootstrap.lib.rprops.WithRenderAs
 import react.dom.WithClassName
 import react.dom.div
 

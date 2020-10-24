@@ -1,6 +1,6 @@
 package react.bootstrap.site.lib.codepoet
 
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.lib.codepoet.IndentTool.getIndent
 import react.bootstrap.site.lib.codepoet.IndentTool.indentLines

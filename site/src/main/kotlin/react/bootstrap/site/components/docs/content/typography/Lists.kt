@@ -13,7 +13,7 @@ import react.bootstrap.content.typography.ul
 import react.bootstrap.layout.grid.col.ColAttributes
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.row.row
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample

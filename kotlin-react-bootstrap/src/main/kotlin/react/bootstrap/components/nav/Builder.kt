@@ -6,7 +6,6 @@ import react.RElementBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.Builder
-import react.bootstrap.lib.ElementProvider
 import react.bootstrap.lib.NoArgEventHandler
 import kotlin.reflect.KClass
 
@@ -16,12 +15,14 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: Navs.Appearance? = null,
         widthHandling: Navs.WidthHandling? = null,
+        activeLinkPredicate: ((NavLink) -> Boolean)? = null,
         block: RHandler<P>
     ): ReactElement = child(klazz) {
         attrs {
             this.className = classes
             this.appearance = appearance
             this.widthHandling = widthHandling
+            this.activeLinkPredicate = activeLinkPredicate
         }
 
         block()
@@ -31,6 +32,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: Navs.Appearance? = null,
         widthHandling: Navs.WidthHandling? = null,
+        activeLinkPredicate: ((NavLink) -> Boolean)? = null,
         block: RHandler<Navs.Ul.Props>
     ): ReactElement =
         builder.buildNav(
@@ -38,6 +40,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
             classes = classes,
             appearance = appearance,
             widthHandling = widthHandling,
+            activeLinkPredicate = activeLinkPredicate,
             block = block
         )
 
@@ -45,6 +48,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: Navs.Appearance? = null,
         widthHandling: Navs.WidthHandling? = null,
+        activeLinkPredicate: ((NavLink) -> Boolean)? = null,
         block: RHandler<Navs.Ol.Props>
     ): ReactElement =
         builder.buildNav(
@@ -52,6 +56,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
             classes = classes,
             appearance = appearance,
             widthHandling = widthHandling,
+            activeLinkPredicate = activeLinkPredicate,
             block = block
         )
 
@@ -59,6 +64,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: Navs.Appearance? = null,
         widthHandling: Navs.WidthHandling? = null,
+        activeLinkPredicate: ((NavLink) -> Boolean)? = null,
         block: RHandler<Navs.Nav.Props>
     ): ReactElement =
         builder.buildNav(
@@ -66,6 +72,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
             classes = classes,
             appearance = appearance,
             widthHandling = widthHandling,
+            activeLinkPredicate = activeLinkPredicate,
             block = block
         )
 
@@ -73,6 +80,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: Navs.Appearance? = null,
         widthHandling: Navs.WidthHandling? = null,
+        activeLinkPredicate: ((NavLink) -> Boolean)? = null,
         block: RHandler<Navs.Div.Props>
     ): ReactElement =
         builder.buildNav(
@@ -80,6 +88,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
             classes = classes,
             appearance = appearance,
             widthHandling = widthHandling,
+            activeLinkPredicate = activeLinkPredicate,
             block = block
         )
 }
@@ -128,30 +137,17 @@ private fun RBuilder.buildNavLink(
     block: RHandler<NavLink.Props>
 ): ReactElement = child(NavLink::class) {
     attrs {
+        // todo add other a attributes
         this.href = href
         this.target = target
         this.active = active
         this.onActive = onActive
         this.disabled = disabled
+        this.krbType = NavLink::class
     }
     block()
 }
 
-private fun RBuilder.buildRenderAsNavLink(
-    active: Boolean? = null,
-    onActive: NoArgEventHandler? = null,
-    disabled: Boolean? = null,
-    renderAs: ElementProvider
-): ReactElement =
-    child(NavLink::class) {
-        attrs {
-            this.renderAs = renderAs
-            this.active = active
-            this.onActive = onActive
-            this.disabled = disabled
-        }
-    }
-
 fun RElementBuilder<NavItems.Li.Props>.navLink(
     href: String? = null,
     target: String? = null,
@@ -161,13 +157,6 @@ fun RElementBuilder<NavItems.Li.Props>.navLink(
     block: RHandler<NavLink.Props>
 ): ReactElement = buildNavLink(href, target, active, onActive, disabled, block)
 
-fun RElementBuilder<NavItems.Li.Props>.navLink(
-    active: Boolean? = null,
-    onActive: NoArgEventHandler? = null,
-    disabled: Boolean? = null,
-    renderAs: ElementProvider
-): ReactElement = buildRenderAsNavLink(active, onActive, disabled, renderAs)
-
 fun RElementBuilder<Navs.Nav.Props>.navLink(
     href: String? = null,
     target: String? = null,
@@ -176,20 +165,6 @@ fun RElementBuilder<Navs.Nav.Props>.navLink(
     disabled: Boolean? = null,
     block: RHandler<NavLink.Props>
 ): ReactElement = buildNavLink(href, target, active, onActive, disabled, block)
-
-fun RElementBuilder<Navs.Nav.Props>.navLink(
-    active: Boolean? = null,
-    onActive: NoArgEventHandler? = null,
-    disabled: Boolean? = null,
-    renderAs: ElementProvider
-): ReactElement = buildRenderAsNavLink(active, onActive, disabled, renderAs)
-
-fun RElementBuilder<NavItems.NavItem.Props>.navLink(
-    active: Boolean? = null,
-    onActive: NoArgEventHandler? = null,
-    disabled: Boolean? = null,
-    renderAs: ElementProvider
-): ReactElement = buildRenderAsNavLink(active, onActive, disabled, renderAs)
 
 fun RElementBuilder<NavItems.NavItem.Props>.navLink(
     href: String? = null,
@@ -208,20 +183,6 @@ fun RElementBuilder<Navs.Div.Props>.navLink(
     disabled: Boolean? = null,
     block: RHandler<NavLink.Props>
 ): ReactElement = buildNavLink(href, target, active, onActive, disabled, block)
-
-fun RElementBuilder<Navs.Div.Props>.navLink(
-    active: Boolean? = null,
-    onActive: NoArgEventHandler? = null,
-    disabled: Boolean? = null,
-    renderAs: ElementProvider
-): ReactElement = buildRenderAsNavLink(active, onActive, disabled, renderAs)
-
-fun RElementBuilder<NavItems.DivItem.Props>.navLink(
-    active: Boolean? = null,
-    onActive: NoArgEventHandler? = null,
-    disabled: Boolean? = null,
-    renderAs: ElementProvider
-): ReactElement = buildRenderAsNavLink(active, onActive, disabled, renderAs)
 
 fun RElementBuilder<NavItems.DivItem.Props>.navLink(
     href: String? = null,

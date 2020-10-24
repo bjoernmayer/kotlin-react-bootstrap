@@ -4,7 +4,7 @@ import kotlinx.html.HTMLTag
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.RDOMHandler
 
 enum class Headings(val className: ClassNames) {

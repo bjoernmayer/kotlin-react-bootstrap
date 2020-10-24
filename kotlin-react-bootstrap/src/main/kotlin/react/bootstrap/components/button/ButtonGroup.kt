@@ -11,11 +11,11 @@ import react.RComponent
 import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.bootstrap.lib.ClassNameEnum
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.component.ClassNameEnum
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.EventHandler
-import react.bootstrap.lib.WithTypeFlag
-import react.bootstrap.lib.ariaLabel
+import react.bootstrap.lib.rprops.WithTypeFlag
+import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.children
 import react.dom.WithClassName
 import react.dom.div
