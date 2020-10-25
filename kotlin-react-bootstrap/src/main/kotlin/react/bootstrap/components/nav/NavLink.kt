@@ -9,6 +9,7 @@ import react.RState
 import react.RStatics
 import react.bootstrap.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.react.rprops.WithActive
 import react.bootstrap.lib.react.rprops.tags.WithAttributesA
 import react.bootstrap.lib.react.rprops.WithDisabled
@@ -21,8 +22,8 @@ import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.dom.a
 
 // Todo: on active handling
-class NavLink : RComponent<NavLink.Props, RState>() {
-    override fun RBuilder.render() {
+class NavLink : BootstrapComponent<NavLink.Props, RState>() {
+    override fun buildClasses(): Set<ClassNames> {
         val navLinkClasses = mutableSetOf(
             ClassNames.NAV_LINK
         )
@@ -35,14 +36,17 @@ class NavLink : RComponent<NavLink.Props, RState>() {
             navLinkClasses.add(ClassNames.DISABLED)
         }
 
+        return navLinkClasses
+    }
+
+    override fun RBuilder.render() {
         a {
             attrs {
                 loadGlobalAttributes(props)
                 loadDomEvents(props)
                 loadAttributes(props)
 
-                // Set classes again, since we added a few
-                classes = props.classes.addOrInit(navLinkClasses)
+                classes = getComponentClasses()
 
                 if (props.disabled == true) {
                     tabIndex = "-1"

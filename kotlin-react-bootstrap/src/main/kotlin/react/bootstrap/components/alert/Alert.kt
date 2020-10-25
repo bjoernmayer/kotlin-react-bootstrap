@@ -141,7 +141,6 @@ class Alert(props: Props) : BootstrapComponent<Alert.Props, Alert.State>(props) 
 
                 role = "alert"
 
-                // Set classes again, since we added a few
                 classes = getComponentClasses()
             }
         }

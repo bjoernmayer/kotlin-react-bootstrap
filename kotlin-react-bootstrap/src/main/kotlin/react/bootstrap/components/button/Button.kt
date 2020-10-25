@@ -10,6 +10,7 @@ import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.InputFormEncType
 import kotlinx.html.InputFormMethod
 import kotlinx.html.InputType
+import kotlinx.html.classes
 import kotlinx.html.js.onChangeFunction
 import kotlinx.html.role
 import kotlinx.html.style
@@ -18,28 +19,28 @@ import kotlinx.html.title
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.events.Event
 import react.RBuilder
-import react.RComponent
 import react.RState
 import react.RStatics
-import react.bootstrap.appendClass
-import react.bootstrap.lib.component.ClassNameEnum
-import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.EventHandler
-import react.bootstrap.lib.react.rprops.WithActive
-import react.bootstrap.lib.react.rprops.WithDisabled
-import react.bootstrap.lib.react.rprops.WithDomEvents
-import react.bootstrap.lib.react.identifiable.IdentifiableProps
+import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.BootstrapComponent
+import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.kotlinxhtml.ariaDisabled
 import react.bootstrap.lib.kotlinxhtml.ariaPressed
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
-import react.dom.WithClassName
+import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
+import react.bootstrap.lib.react.identifiable.IdentifiableProps
+import react.bootstrap.lib.react.rprops.WithActive
+import react.bootstrap.lib.react.rprops.WithDisabled
+import react.bootstrap.lib.react.rprops.WithDomEvents
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.dom.a
 import react.dom.button
 import react.dom.input
 import react.dom.label
 import react.setState
 
-class Button(props: Props) : RComponent<Button.Props, Button.State>(props) {
+class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(props) {
     override fun State.init(props: Props) {
         active = props.active == true
     }
@@ -72,8 +73,7 @@ class Button(props: Props) : RComponent<Button.Props, Button.State>(props) {
         }
     }
 
-    @Suppress("UnsafeCastFromDynamic")
-    override fun RBuilder.render() {
+    override fun buildClasses(): Set<ClassNames> {
         val btnClasses = mutableSetOf(ClassNames.BTN)
 
         if (state.active == true) {
@@ -105,18 +105,25 @@ class Button(props: Props) : RComponent<Button.Props, Button.State>(props) {
             btnClasses.add(it.className)
         }
 
-        val classes = props.className.appendClass(btnClasses)
+        return btnClasses
+    }
+
+    @Suppress("UnsafeCastFromDynamic")
+    override fun RBuilder.render() {
         if (props.type !== null) {
             when (val type = props.type) {
                 is Types.Button -> {
                     button(
                         formEncType = type.buttonFormEncType,
                         formMethod = type.buttonFormMethod,
-                        type = type.buttonType,
-                        classes = classes
+                        type = type.buttonType
                     ) {
                         attrs {
                             handleCommonAttrs()
+                            loadGlobalAttributes(props)
+
+                            classes = getComponentClasses()
+
                             attrs.disabled = props.disabled == true
                         }
                         children()
@@ -124,7 +131,12 @@ class Button(props: Props) : RComponent<Button.Props, Button.State>(props) {
                 }
                 is Types.Input -> {
                     if (type.type == Types.Input.Type.CHECKBOX || type.type == Types.Input.Type.RADIO) {
-                        label(classes = classes) {
+                        label {
+                            attrs {
+                                loadGlobalAttributes(props)
+
+                                classes = getComponentClasses()
+                            }
                             input(
                                 type = type.type.inputType,
                                 formEncType = type.inputFormEncType,
@@ -163,11 +175,14 @@ class Button(props: Props) : RComponent<Button.Props, Button.State>(props) {
                             type = type.type.inputType,
                             formEncType = type.inputFormEncType,
                             formMethod = type.inputFormMethod,
-                            name = type.name,
-                            classes = classes
+                            name = type.name
+
                         ) {
                             attrs {
                                 handleCommonAttrs()
+                                loadGlobalAttributes(props)
+
+                                classes = getComponentClasses()
                                 value = type.value
 
                                 type.title?.let {
@@ -184,9 +199,12 @@ class Button(props: Props) : RComponent<Button.Props, Button.State>(props) {
                     }
                 }
                 is Types.Link -> {
-                    a(href = type.href, target = type.target, classes = classes) {
+                    a(href = type.href, target = type.target) {
                         attrs {
                             handleCommonAttrs()
+                            loadGlobalAttributes(props)
+
+                            classes = getComponentClasses()
                             role = "button"
                         }
                         children()
@@ -194,7 +212,7 @@ class Button(props: Props) : RComponent<Button.Props, Button.State>(props) {
                 }
             }
         } else {
-            button(type = ButtonType.button, classes = classes) {
+            button(type = ButtonType.button) {
                 attrs {
                     handleCommonAttrs()
                     attrs.disabled = props.disabled == true
@@ -294,7 +312,7 @@ class Button(props: Props) : RComponent<Button.Props, Button.State>(props) {
         ) : Types()
     }
 
-    interface Props : WithClassName, WithActive, WithDisabled, WithDomEvents, IdentifiableProps<Button> {
+    interface Props : WithGlobalAttributes, WithActive, WithDisabled, WithDomEvents, IdentifiableProps<Button> {
         var nowrap: Boolean?
         var sizes: Sizes?
         var type: Types?

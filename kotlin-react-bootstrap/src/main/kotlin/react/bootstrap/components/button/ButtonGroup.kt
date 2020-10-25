@@ -1,26 +1,27 @@
 package react.bootstrap.components.button
 
 import kotlinext.js.clone
+import kotlinx.html.classes
 import kotlinx.html.role
 import org.w3c.dom.events.Event
 import react.Children
 import react.RBuilder
-import react.RComponent
 import react.RState
-import react.bootstrap.appendClass
-import react.bootstrap.lib.component.ClassNameEnum
-import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.EventHandler
+import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.BootstrapComponent
+import react.bootstrap.lib.component.ClassNameEnum
+import react.bootstrap.lib.kotlinxhtml.ariaLabel
+import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.react.identifiable.gatherChildrenProps
 import react.bootstrap.lib.react.identifiable.isComponent
-import react.bootstrap.lib.kotlinxhtml.ariaLabel
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.children
-import react.dom.WithClassName
 import react.dom.div
 import react.rClass
 import react.setState
 
-class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.State>(props) {
+class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGroup.State>(props) {
     override fun State.init(props: Props) {
         buttons = Children.toArray(props.children).gatherChildrenProps<Button, Button.Props>()
 
@@ -112,7 +113,7 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
         }
     }
 
-    override fun RBuilder.render() {
+    override fun buildClasses(): Set<ClassNames> {
         val btnGroupClasses = mutableSetOf<ClassNames>()
 
         if (props.appearance == Appearance.DEFAULT || props.appearance == null) {
@@ -132,10 +133,14 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
             )
         }
 
-        val classes = props.className.appendClass(btnGroupClasses)
+        return btnGroupClasses
+    }
 
-        div(classes = classes) {
+    override fun RBuilder.render() {
+        div {
             attrs {
+                loadGlobalAttributes(props)
+                classes = getComponentClasses()
                 role = "group"
 
                 props.label?.let {
@@ -166,7 +171,7 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
         }
     }
 
-    interface Props : WithClassName {
+    interface Props : WithGlobalAttributes {
         var appearance: Appearance?
         var behaviour: Behaviours?
         var label: String?

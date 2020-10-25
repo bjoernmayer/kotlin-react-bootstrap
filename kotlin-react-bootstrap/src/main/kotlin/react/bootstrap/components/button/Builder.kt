@@ -30,7 +30,7 @@ private fun RBuilder.button(
             this.nowrap = nowrap
             this.type = type
             this.sizes = sizes
-            this.className = classes
+            this.classes = classes.toClasses()
             this.blockSized = blockSized
         }
 
@@ -843,7 +843,7 @@ fun RBuilder.buttonGroup(
     attrs {
         this.appearance = appearance
         this.behaviour = behaviour
-        this.className = classes
+        this.classes = classes.toClasses()
         this.label = label
         this.sizes = sizes
     }
