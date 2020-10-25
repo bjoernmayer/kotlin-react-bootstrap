@@ -4,10 +4,8 @@ import kotlinext.js.jsObject
 import kotlinx.html.classes
 import kotlinx.html.tabIndex
 import react.RBuilder
-import react.RComponent
 import react.RState
 import react.RStatics
-import react.bootstrap.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.react.rprops.WithActive

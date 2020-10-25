@@ -103,7 +103,7 @@ private fun <P : NavItems.Props> RBuilder.buildNavItem(
     block: RHandler<P>
 ) = child(klazz) {
     attrs {
-        this.className = classes
+        this.classes = classes.toClasses()
     }
 
     block()
@@ -130,8 +130,8 @@ fun RElementBuilder<Navs.Div.Props>.navItem(
 ): ReactElement = buildNavItem(NavItems.DivItem::class, classes, block)
 
 private fun RBuilder.buildNavLink(
-    classes: String? = null,
     href: String? = null,
+    classes: String? = null,
     target: String? = null,
     active: Boolean? = null,
     onActive: NoArgEventHandler? = null,

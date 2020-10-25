@@ -9,7 +9,6 @@ import react.RState
 import react.ReactElement
 import react.children
 import react.cloneElement
-import react.dom.fixAttributeName
 
 /**
  * @param RP Renderer Props: This [RProps] of the actual renderer element
@@ -28,16 +27,6 @@ abstract class AbstractComponent<RP : RProps, ACP : RProps, ACS : RState> : RCom
      * This should return a [ReactElement] which is used as default renderer if no `renderAs` was set.
      */
     protected abstract fun RBuilder.getRenderer(): ReactElement
-
-    /**
-     * Use this as dynamic setter for "unknown" properties.
-     * FIXME: does not work lol. not extensible
-     * // this cannot work. the underlying object gets gnerated only with RP fields. with nothing more
-     */
-    protected fun RP.setProp(attribute: String, value: Any?) {
-        val key = fixAttributeName(attribute)
-        props.asDynamic()[key] = value
-    }
 
     final override fun RBuilder.render() {
         val element: ReactElement = getRenderer()

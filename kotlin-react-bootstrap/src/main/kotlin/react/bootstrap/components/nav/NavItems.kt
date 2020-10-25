@@ -1,12 +1,14 @@
 package react.bootstrap.components.nav
 
+import kotlinx.html.classes
 import react.RBuilder
 import react.RState
 import react.ReactElement
-import react.bootstrap.appendClass
+import react.bootstrap.addOrInit
 import react.bootstrap.lib.component.AbstractComponent
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.dom.WithClassName
+import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.dom.div
 import react.dom.li
 
@@ -23,26 +25,40 @@ gestzt
  */
 sealed class NavItems<P : NavItems.Props> : AbstractComponent<P, P, RState>() {
     class Li : NavItems<Li.Props>() {
-        override fun RBuilder.getRenderer(): ReactElement = li { }
+        override fun RBuilder.getRenderer(): ReactElement = li {
+            attrs {
+                loadGlobalAttributes(props)
+                classes = props.classes.addOrInit(setOf(ClassNames.NAV_ITEM))
+            }
+        }
 
         interface Props : NavItems.Props
     }
 
     class NavItem : NavItems<NavItem.Props>() {
-        override fun RBuilder.getRenderer(): ReactElement = div { }
+        override fun RBuilder.getRenderer(): ReactElement = div {
+            attrs {
+                loadGlobalAttributes(props)
+                classes = props.classes.addOrInit(setOf(ClassNames.NAV_ITEM))
+            }
+        }
 
         interface Props : NavItems.Props
     }
 
     class DivItem : NavItems<DivItem.Props>() {
-        override fun RBuilder.getRenderer(): ReactElement = div { }
+        override fun RBuilder.getRenderer(): ReactElement = div {
+            attrs {
+                loadGlobalAttributes(props)
+                classes = props.classes.addOrInit(setOf(ClassNames.NAV_ITEM))
+            }
+        }
 
         interface Props : NavItems.Props
     }
 
-    override fun P.handleProps() {
-        className = props.className.appendClass(ClassNames.NAV_ITEM)
-    }
+    // Props are handled in sealed classes
+    override fun P.handleProps() { }
 
-    interface Props : WithClassName
+    interface Props : WithGlobalAttributes
 }
