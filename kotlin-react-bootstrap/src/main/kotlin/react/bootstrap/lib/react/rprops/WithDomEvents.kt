@@ -4,7 +4,6 @@ package react.bootstrap.lib.react.rprops
 
 import react.RProps
 import react.bootstrap.lib.EventHandler
-import kotlin.reflect.KProperty
 
 interface WithDomEvents : RProps {
     var onAbort: EventHandler?

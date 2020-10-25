@@ -9,6 +9,7 @@ import react.cloneElement
 import kotlin.random.Random
 
 /**
+ * Todo: Get rid of CloseElementMarkerProps and make closeElement an actual compoentn
  * Wrapper for a custom alert closing element.
  *
  * Build whatever close element you like.

@@ -1,21 +1,27 @@
 package react.bootstrap.components.button
 
+import kotlinx.html.classes
 import kotlinx.html.role
 import react.RBuilder
-import react.RComponent
 import react.RState
-import react.bootstrap.appendClass
 import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.react.rprops.WithAriaLabel
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
-import react.dom.WithClassName
+import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.dom.div
 
-class ButtonToolbar : RComponent<ButtonToolbar.Props, RState>() {
+class ButtonToolbar : BootstrapComponent<ButtonToolbar.Props, RState>() {
+    override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.BTN_TOOLBAR)
+
     override fun RBuilder.render() {
-        div(classes = props.className.appendClass(ClassNames.BTN_TOOLBAR)) {
+        div {
             attrs {
+                loadGlobalAttributes(props)
+
                 role = "toolbar"
+                classes = getComponentClasses()
 
                 props.ariaLabel?.let {
                     ariaLabel = it
@@ -25,5 +31,5 @@ class ButtonToolbar : RComponent<ButtonToolbar.Props, RState>() {
         }
     }
 
-    interface Props : WithClassName, WithAriaLabel
+    interface Props : WithGlobalAttributes, WithAriaLabel
 }

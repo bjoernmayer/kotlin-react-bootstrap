@@ -7,16 +7,15 @@ import kotlinx.html.role
 import org.w3c.dom.events.Event
 import react.Children
 import react.RBuilder
-import react.RComponent
 import react.RProps
 import react.RState
 import react.ReactElement
 import react.asElementOrNull
-import react.bootstrap.addOrInit
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.NoArgEventHandler
+import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.react.rprops.WithDomEvents
 import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
@@ -28,7 +27,7 @@ import react.cloneElement
 import react.dom.div
 import react.setState
 
-class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
+class Alert(props: Props) : BootstrapComponent<Alert.Props, Alert.State>(props) {
     override fun State.init(props: Props) {
         state = States.SHOWN
     }
@@ -75,6 +74,26 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
         }
     }
 
+    override fun buildClasses(): Set<ClassNames> {
+        val alertClasses = mutableSetOf(ClassNames.ALERT)
+
+        props.variant?.also { alertClasses.add(it.className) }
+
+        props.dismissible?.also { dismissibleProps ->
+            alertClasses.add(ClassNames.ALERT_DISMISSIBLE)
+
+            if (state.state == States.SHOWN) {
+                alertClasses.add(ClassNames.SHOW)
+            }
+
+            if (dismissibleProps.fade == true) {
+                alertClasses.add(ClassNames.FADE)
+            }
+        }
+
+        return alertClasses
+    }
+
     override fun RBuilder.render() {
         if (state.state == States.DISMISSED) {
             return
@@ -83,19 +102,8 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
         div {
             children()
 
-            val alertClasses = mutableSetOf(ClassNames.ALERT)
-
-            props.variant?.also { alertClasses.add(it.className) }
-
             props.dismissible?.also { dismissibleProps ->
-                alertClasses.add(ClassNames.ALERT_DISMISSIBLE)
-
-                if (state.state == States.SHOWN) {
-                    alertClasses.add(ClassNames.SHOW)
-                }
-
                 if (dismissibleProps.fade == true) {
-                    alertClasses.add(ClassNames.FADE)
                     attrs.onTransitionEndFunction = this@Alert::handleTransitionEnd
                 }
 
@@ -134,7 +142,7 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
                 role = "alert"
 
                 // Set classes again, since we added a few
-                classes = props.classes.addOrInit(alertClasses)
+                classes = getComponentClasses()
             }
         }
     }

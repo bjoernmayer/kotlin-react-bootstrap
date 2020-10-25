@@ -1,7 +1,5 @@
 package react.bootstrap.lib.bootstrap
 
-import react.bootstrap.lib.bootstrap.ClassNames
-
 class Contextual {
     enum class Background(val className: ClassNames) {
         DANGER(ClassNames.BG_DANGER),

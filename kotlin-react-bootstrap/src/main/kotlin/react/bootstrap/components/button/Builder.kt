@@ -9,6 +9,7 @@ import react.RBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.Builder
+import react.bootstrap.toClasses
 
 private fun RBuilder.button(
     variant: Button.Variants,
@@ -856,7 +857,7 @@ fun RBuilder.buttonToolbar(
 ): ReactElement =
     child(ButtonToolbar::class) {
         attrs {
-            className = classes
+            this.classes = classes.toClasses()
             ariaLabel = label
         }
 

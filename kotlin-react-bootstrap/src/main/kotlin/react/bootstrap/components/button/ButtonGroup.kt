@@ -11,7 +11,7 @@ import react.bootstrap.appendClass
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.EventHandler
-import react.bootstrap.lib.react.identifiable.gatherChildrenPropsOfType
+import react.bootstrap.lib.react.identifiable.gatherChildrenProps
 import react.bootstrap.lib.react.identifiable.isComponent
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.children
@@ -22,7 +22,7 @@ import react.setState
 
 class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.State>(props) {
     override fun State.init(props: Props) {
-        buttons = Children.toArray(props.children).gatherChildrenPropsOfType<Button, Button.Props>()
+        buttons = Children.toArray(props.children).gatherChildrenProps<Button, Button.Props>()
 
         activeButtons = buttons?.mapNotNull { (index, buttonProps) ->
             if (buttonProps.active == true) {

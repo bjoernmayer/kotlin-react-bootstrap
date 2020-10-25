@@ -16,7 +16,6 @@ import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
-import react.dom.a
 
 internal class AvailableStyles : SectionComponent() {
     override val title: String = "Available styles"

@@ -14,7 +14,7 @@ import react.bootstrap.lib.react.rprops.toMutable
  * @param PT RProps of the same Kotlin React Bootstrap Component
  * @return A map with found children with the child index as key
  */
-inline fun <reified CT : Component<*, *>, reified PT : RProps> Array<out Child>.gatherChildrenPropsOfType(): Map<Int, PT> =
+inline fun <reified CT : Component<*, *>, reified PT : RProps> Array<out Child>.gatherChildrenProps(): Map<Int, PT> =
     mapIndexedNotNull { index, child ->
         if (child.isComponent<CT>()) {
             val reactElement = child.asJsObject().asReactElementOrNull() ?: return@mapIndexedNotNull null
