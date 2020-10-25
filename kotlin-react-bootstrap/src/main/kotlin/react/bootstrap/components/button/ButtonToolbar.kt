@@ -6,7 +6,7 @@ import react.RComponent
 import react.RState
 import react.bootstrap.appendClass
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.rprops.WithAriaLabel
+import react.bootstrap.lib.react.rprops.WithAriaLabel
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.dom.WithClassName
 import react.dom.div

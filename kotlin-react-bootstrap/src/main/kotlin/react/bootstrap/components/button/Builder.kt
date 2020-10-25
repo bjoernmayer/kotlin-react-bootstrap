@@ -1,19 +1,14 @@
 package react.bootstrap.components.button
 
-import kotlinext.js.asJsObject
-import kotlinext.js.jsObject
 import kotlinx.html.ButtonFormEncType
 import kotlinx.html.ButtonFormMethod
 import kotlinx.html.ButtonType
 import kotlinx.html.InputFormEncType
 import kotlinx.html.InputFormMethod
 import react.RBuilder
-import react.RElementBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.Builder
-import react.bootstrap.lib.rprops.WithTypeFlag
-import react.bootstrap.lib.rprops.toMutable
 
 private fun RBuilder.button(
     variant: Button.Variants,
@@ -36,7 +31,6 @@ private fun RBuilder.button(
             this.sizes = sizes
             this.className = classes
             this.blockSized = blockSized
-            this.krbType = Button::class
         }
 
         block()
@@ -844,44 +838,15 @@ fun RBuilder.buttonGroup(
     label: String? = null,
     sizes: ButtonGroup.Sizes? = null,
     block: RHandler<ButtonGroup.Props>
-): ReactElement {
-    val builder = RElementBuilder<ButtonGroup.Props>(jsObject())
-
-    builder.block()
-
-    // Gather buttons. They are rendered in a custom way
-    val buttons: Map<Int, Button.Props> = builder.childList.mapIndexedNotNull { index, child ->
-        val element = child.asJsObject()
-
-        if (!element.hasOwnProperty(ReactElement::props.name)) {
-            return@mapIndexedNotNull null
-        }
-
-        val reactElement = element.unsafeCast<ReactElement>()
-        val elProps = reactElement.props.asJsObject()
-
-        if (!elProps.hasOwnProperty(WithTypeFlag<*>::krbType.name)) {
-            return@mapIndexedNotNull null
-        }
-
-        if (elProps.unsafeCast<WithTypeFlag<*>>().krbType == Button::class) {
-            index to elProps.unsafeCast<Button.Props>().toMutable()
-        } else {
-            null
-        }
-    }.toMap()
-
-    return child(ButtonGroup::class) {
-        attrs {
-            this.appearance = appearance
-            this.behaviour = behaviour
-            this.buttons = buttons
-            this.className = classes
-            this.label = label
-            this.sizes = sizes
-        }
-        block()
+): ReactElement = child(ButtonGroup::class) {
+    attrs {
+        this.appearance = appearance
+        this.behaviour = behaviour
+        this.className = classes
+        this.label = label
+        this.sizes = sizes
     }
+    block()
 }
 
 fun RBuilder.buttonToolbar(

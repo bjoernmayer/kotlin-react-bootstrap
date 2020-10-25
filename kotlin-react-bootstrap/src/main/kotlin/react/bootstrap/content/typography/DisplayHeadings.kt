@@ -9,7 +9,7 @@ import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.ElementProvider
 import react.bootstrap.lib.component.CustomisableComponent
-import react.bootstrap.lib.rprops.WithRenderAs
+import react.bootstrap.lib.react.rprops.WithRenderAs
 import react.dom.WithClassName
 import react.dom.h1
 import react.dom.h2

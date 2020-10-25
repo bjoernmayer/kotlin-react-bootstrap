@@ -3,7 +3,7 @@
 package react.bootstrap.lib.kotlinxhtml
 
 import kotlinx.html.A
-import react.bootstrap.lib.rprops.tags.WithAttributesA
+import react.bootstrap.lib.react.rprops.tags.WithAttributesA
 import kotlin.reflect.KProperty
 
 fun A.loadAttributes(props: WithAttributesA, vararg excludes: KProperty<*>) {

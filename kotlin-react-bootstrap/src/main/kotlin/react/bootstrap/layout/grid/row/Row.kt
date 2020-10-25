@@ -9,7 +9,7 @@ import react.bootstrap.appendClass
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.CustomisableComponent
-import react.bootstrap.lib.rprops.WithRenderAs
+import react.bootstrap.lib.react.rprops.WithRenderAs
 import react.dom.WithClassName
 import react.dom.div
 

@@ -17,11 +17,11 @@ import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.NoArgEventHandler
-import react.bootstrap.lib.rprops.WithDomEvents
+import react.bootstrap.lib.react.rprops.WithDomEvents
 import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
-import react.bootstrap.lib.rprops.WithGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.utilities.close
 import react.children
 import react.cloneElement

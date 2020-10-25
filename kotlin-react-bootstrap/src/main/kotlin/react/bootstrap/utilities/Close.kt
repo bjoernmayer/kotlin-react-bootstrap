@@ -8,7 +8,7 @@ import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.rprops.WithDomEvents
+import react.bootstrap.lib.react.rprops.WithDomEvents
 import react.bootstrap.lib.kotlinxhtml.ariaHidden
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents

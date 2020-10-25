@@ -2,6 +2,7 @@
 
 package react.bootstrap.components.button
 
+import kotlinext.js.jsObject
 import kotlinx.html.ButtonFormEncType
 import kotlinx.html.ButtonFormMethod
 import kotlinx.html.ButtonType
@@ -19,14 +20,15 @@ import org.w3c.dom.events.Event
 import react.RBuilder
 import react.RComponent
 import react.RState
+import react.RStatics
 import react.bootstrap.appendClass
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.EventHandler
-import react.bootstrap.lib.rprops.WithActive
-import react.bootstrap.lib.rprops.WithDisabled
-import react.bootstrap.lib.rprops.WithDomEvents
-import react.bootstrap.lib.rprops.WithTypeFlag
+import react.bootstrap.lib.react.rprops.WithActive
+import react.bootstrap.lib.react.rprops.WithDisabled
+import react.bootstrap.lib.react.rprops.WithDomEvents
+import react.bootstrap.lib.react.identifiable.IdentifiableProps
 import react.bootstrap.lib.kotlinxhtml.ariaDisabled
 import react.bootstrap.lib.kotlinxhtml.ariaPressed
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
@@ -292,7 +294,7 @@ class Button(props: Props) : RComponent<Button.Props, Button.State>(props) {
         ) : Types()
     }
 
-    interface Props : WithClassName, WithActive, WithDisabled, WithDomEvents, WithTypeFlag<Button> {
+    interface Props : WithClassName, WithActive, WithDisabled, WithDomEvents, IdentifiableProps<Button> {
         var nowrap: Boolean?
         var sizes: Sizes?
         var type: Types?
@@ -302,5 +304,13 @@ class Button(props: Props) : RComponent<Button.Props, Button.State>(props) {
 
     interface State : RState {
         var active: Boolean?
+    }
+
+    companion object : RStatics<Props, State, Button, Nothing>(Button::class) {
+        init {
+            defaultProps = jsObject {
+                componentType = Button::class
+            }
+        }
     }
 }

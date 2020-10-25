@@ -14,7 +14,7 @@ import kotlinx.html.lang
 import kotlinx.html.spellCheck
 import kotlinx.html.tabIndex
 import kotlinx.html.title
-import react.bootstrap.lib.rprops.WithGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import kotlin.reflect.KProperty
 
 fun CommonAttributeGroupFacade.loadGlobalAttributes(props: WithGlobalAttributes, vararg excludes: KProperty<*>) {

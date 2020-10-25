@@ -1,17 +1,19 @@
 package react.bootstrap.components.nav
 
+import kotlinext.js.jsObject
 import kotlinx.html.classes
 import kotlinx.html.tabIndex
 import react.RBuilder
 import react.RComponent
 import react.RState
+import react.RStatics
 import react.bootstrap.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.rprops.WithActive
-import react.bootstrap.lib.rprops.tags.WithAttributesA
-import react.bootstrap.lib.rprops.WithDisabled
-import react.bootstrap.lib.rprops.WithDomEvents
-import react.bootstrap.lib.rprops.WithTypeFlag
+import react.bootstrap.lib.react.rprops.WithActive
+import react.bootstrap.lib.react.rprops.tags.WithAttributesA
+import react.bootstrap.lib.react.rprops.WithDisabled
+import react.bootstrap.lib.react.rprops.WithDomEvents
+import react.bootstrap.lib.react.identifiable.IdentifiableProps
 import react.bootstrap.lib.kotlinxhtml.ariaDisabled
 import react.bootstrap.lib.kotlinxhtml.loadAttributes
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
@@ -51,5 +53,13 @@ class NavLink : RComponent<NavLink.Props, RState>() {
         }
     }
 
-    interface Props : WithAttributesA, WithActive, WithDisabled, WithDomEvents, WithTypeFlag<NavLink>
+    interface Props : WithAttributesA, WithActive, WithDisabled, WithDomEvents, IdentifiableProps<NavLink>
+
+    companion object : RStatics<Props, RState, NavLink, Nothing>(NavLink::class) {
+        init {
+            defaultProps = jsObject {
+                componentType = NavLink::class
+            }
+        }
+    }
 }

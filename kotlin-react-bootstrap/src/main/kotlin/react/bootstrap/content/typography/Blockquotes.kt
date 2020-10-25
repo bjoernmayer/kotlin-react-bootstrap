@@ -9,7 +9,7 @@ import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.rprops.WithRDOMHandler
+import react.bootstrap.lib.react.rprops.WithRDOMHandler
 import react.dom.WithClassName
 import react.dom.blockQuote
 import react.dom.div

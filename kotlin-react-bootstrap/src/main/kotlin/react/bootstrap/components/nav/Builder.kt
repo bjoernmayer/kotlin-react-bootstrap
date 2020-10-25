@@ -143,7 +143,6 @@ private fun RBuilder.buildNavLink(
         this.active = active
         this.onActive = onActive
         this.disabled = disabled
-        this.krbType = NavLink::class
     }
     block()
 }

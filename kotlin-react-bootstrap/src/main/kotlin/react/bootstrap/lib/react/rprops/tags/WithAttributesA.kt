@@ -1,6 +1,6 @@
-package react.bootstrap.lib.rprops.tags
+package react.bootstrap.lib.react.rprops.tags
 
-import react.bootstrap.lib.rprops.WithGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 
 interface WithAttributesA : WithGlobalAttributes {
     var href: String?

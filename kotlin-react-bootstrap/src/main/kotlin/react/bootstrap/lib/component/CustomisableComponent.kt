@@ -4,7 +4,7 @@ import react.RBuilder
 import react.RProps
 import react.RState
 import react.ReactElement
-import react.bootstrap.lib.rprops.WithRenderAs
+import react.bootstrap.lib.react.rprops.WithRenderAs
 
 /**
  * This class bundles logic to allow components being rendered as different HTML elements.

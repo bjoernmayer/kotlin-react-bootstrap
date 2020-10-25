@@ -57,7 +57,7 @@ import kotlinx.html.js.onVolumeChangeFunction
 import kotlinx.html.js.onWaitingFunction
 import kotlinx.html.js.onWheelFunction
 import react.bootstrap.lib.EventHandler
-import react.bootstrap.lib.rprops.WithDomEvents
+import react.bootstrap.lib.react.rprops.WithDomEvents
 import kotlin.reflect.KProperty
 
 fun CommonAttributeGroupFacade.loadDomEvents(props: WithDomEvents, vararg excludes: KProperty<EventHandler?>) {

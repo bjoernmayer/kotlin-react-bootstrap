@@ -1,20 +1,18 @@
 package react.bootstrap.components.button
 
-import kotlinext.js.asJsObject
 import kotlinext.js.clone
 import kotlinx.html.role
 import org.w3c.dom.events.Event
-import react.Child
 import react.Children
 import react.RBuilder
 import react.RComponent
 import react.RState
-import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.EventHandler
-import react.bootstrap.lib.rprops.WithTypeFlag
+import react.bootstrap.lib.react.identifiable.gatherChildrenPropsOfType
+import react.bootstrap.lib.react.identifiable.isComponent
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.children
 import react.dom.WithClassName
@@ -24,7 +22,9 @@ import react.setState
 
 class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.State>(props) {
     override fun State.init(props: Props) {
-        activeButtons = props.buttons?.mapNotNull { (index, buttonProps) ->
+        buttons = Children.toArray(props.children).gatherChildrenPropsOfType<Button, Button.Props>()
+
+        activeButtons = buttons?.mapNotNull { (index, buttonProps) ->
             if (buttonProps.active == true) {
                 index
             } else {
@@ -50,7 +50,7 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
 
         // Behaviour was not given. Buttons might be of type Radio or Checkbox
         if (props.behaviour == null) {
-            (props.buttons?.get(index) ?: error("Button props not found.")).also { clickedButtonProps ->
+            (state.buttons?.get(index) ?: error("Buttongroup has no buttons.")).also { clickedButtonProps ->
                 if (clickedButtonProps.type !is Button.Types.Input) {
                     return@also
                 }
@@ -68,7 +68,7 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
                 setState {
                     // Behaviour is not given. Gather already checked Checkboxes and Radios that do not have the same
                     // name as the clicked one. Then add the clicked one to set of active buttons
-                    activeButtons = props.buttons!!.mapNotNull { (key, buttonProps) ->
+                    activeButtons = state.buttons!!.mapNotNull { (key, buttonProps) ->
                         if (activeButtons?.contains(key) != true) {
                             return@mapNotNull null
                         }
@@ -144,14 +144,14 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
             }
 
             Children.toArray(props.children).forEachIndexed { index, child ->
-                if (child.isButton().not()) {
+                if (child.isComponent<Button>().not()) {
                     childList.add(child)
 
                     return@forEachIndexed
                 }
 
-                props.buttons?.let { buttonPropsMap ->
-                    val buttonProps = buttonPropsMap[index] ?: error("Button props not found.")
+                state.buttons?.let { buttonPropsMap ->
+                    val buttonProps = buttonPropsMap[index] ?: error("Buttongroup has no buttons.")
 
                     child(Button::class.rClass, clone(buttonProps)) {
                         attrs {
@@ -166,32 +166,15 @@ class ButtonGroup(props: Props) : RComponent<ButtonGroup.Props, ButtonGroup.Stat
         }
     }
 
-    private fun Child.isButton(): Boolean {
-        val element = this.asJsObject()
-
-        if (!element.hasOwnProperty(ReactElement::props.name)) {
-            return false
-        }
-
-        val reactElement = element.unsafeCast<ReactElement>()
-        val elProps = reactElement.props.asJsObject()
-
-        if (!elProps.hasOwnProperty(WithTypeFlag<*>::krbType.name)) {
-            return false
-        }
-
-        return elProps.unsafeCast<WithTypeFlag<*>>().krbType == Button::class
-    }
-
     interface Props : WithClassName {
         var appearance: Appearance?
         var behaviour: Behaviours?
-        var buttons: Map<Int, Button.Props>?
         var label: String?
         var sizes: Sizes?
     }
 
     interface State : RState {
+        var buttons: Map<Int, Button.Props>?
         var activeButtons: Collection<Int>?
     }
 

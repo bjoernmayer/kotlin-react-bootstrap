@@ -1,4 +1,4 @@
-package react.bootstrap.lib.rprops
+package react.bootstrap.lib.react.rprops
 
 import react.RHandler
 import react.RProps

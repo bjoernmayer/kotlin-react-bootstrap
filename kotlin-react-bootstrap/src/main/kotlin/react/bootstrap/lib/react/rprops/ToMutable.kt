@@ -1,4 +1,4 @@
-package react.bootstrap.lib.rprops
+package react.bootstrap.lib.react.rprops
 
 import kotlinext.js.Object
 import kotlinext.js.jsObject
