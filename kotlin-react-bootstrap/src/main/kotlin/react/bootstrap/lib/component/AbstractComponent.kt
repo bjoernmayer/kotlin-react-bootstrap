@@ -1,9 +1,5 @@
 package react.bootstrap.lib.component
 
-import kotlinext.js.clone
-import kotlinext.js.getOwnPropertyNames
-import kotlinext.js.jsObject
-import kotlinx.html.HTMLTag
 import kotlinx.html.Tag
 import kotlinx.html.attributesMapOf
 import react.Children
@@ -11,72 +7,44 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
-import react.ReactElement
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithRendererTag
-import react.bootstrap.makeInstance
 import react.children
-import react.dom.fixAttributeName
+import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
 /**
+ * @param TT Tag Tyoe: The HTML tag type used to render this component
  * @param ACP Abstract Component Props: The [RProps] of the [AbstractComponent] implementation
  * @param ACS Abstract Componnt State: The [RState] of  the [AbstractComponent] implementation
  */
-abstract class AbstractComponent<ACP : WithGlobalAttributes, ACS : RState> : RComponent<ACP, ACS> {
+abstract class AbstractComponent<TT : Tag, ACP : WithGlobalAttributes, ACS : RState> : RComponent<ACP, ACS> {
     constructor() : super()
     constructor(props: ACP) : super(props)
 
-    protected abstract fun WithGlobalAttributes.handleProps()
+    abstract val rendererTag: KClass<out TT>
 
-    /**
-     * This is an [ElementProvider].
-     *
-     * This should return a [ReactElement] which is used as default renderer if no `renderAs` was set.
-     */
-    protected abstract fun getRenderer(): KClass<out Tag>
+    protected abstract fun RDOMBuilder<TT>.build()
 
     final override fun RBuilder.render() {
-        val renderer: KClass<out Tag> = getRenderer()
+        @Suppress("UNUSED_VARIABLE")
+        val rROMBuilder = RDOMBuilder {
+            // This intantiates the tag by using some reflection js magic.
+            val constructor = rendererTag.js
+            val attributes = attributesMapOf("class", null)
+            val meesaConsumer = it
 
-        val tagName = renderer.simpleName!!.toLowerCase()
-
-        // val constructor = renderer.js
-        // val attributes = attributesMapOf()
-        // val lol =  js("new constructor(attributes)") as TT
-        //
-        // console.log(renderer.js)
-        //
-        // lol.handleProps()
-
-        val actualProps: WithGlobalAttributes = jsObject()
-        actualProps.handleProps()
-
-        console.log(actualProps)
-
-        val fixedProps: RProps = jsObject()
-        actualProps.getOwnPropertyNames().forEach {
-            val (key, value) = if (it == WithGlobalAttributes::classes.name) {
-                "className" to ((actualProps.asDynamic()[it] as Set<String>?)?.joinToString(" ") ?: "")
-            } else {
-                fixAttributeName(it) to actualProps.asDynamic()[it]
-            }
-            fixedProps.asDynamic()[key] = value
+            js("new constructor(attributes, meesaConsumer)") as TT
         }
 
-        console.log(fixedProps)
-
-        // lol.attributesEntries.forEach { (attribute: String, value: Any?) ->
-        //     val key = fixAttributeName(attribute)
-        //     actualProps.asDynamic()[key] = value
-        // }
+        // Move children from the AbstractComponent into the newly created one
+        Children.toArray(props.children).forEach {
+            rROMBuilder.childList.add(it)
+        }
 
         child(
-            tagName,
-            fixedProps,
-            Children.toArray(props.children).toList()
+            rROMBuilder.apply {
+                build()
+            }.create()
         )
     }
-
-    final override fun render(): dynamic = RBuilder().apply { render() }.childList.last()
 }

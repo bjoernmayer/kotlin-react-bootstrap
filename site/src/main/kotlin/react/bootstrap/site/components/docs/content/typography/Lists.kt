@@ -2,6 +2,9 @@
 
 package react.bootstrap.site.components.docs.content.typography
 
+import kotlinx.html.DD
+import kotlinx.html.DL
+import kotlinx.html.DT
 import kotlinx.html.LI
 import kotlinx.html.UL
 import react.RBuilder
@@ -23,11 +26,8 @@ import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
-import react.bootstrap.site.lib.codepoet.LambdaValue
+import react.bootstrap.site.lib.codepoet.KlazzValue
 import react.dom.RDOMBuilder
-import react.dom.dd
-import react.dom.dl
-import react.dom.dt
 import react.dom.li
 import react.dom.p
 import react.dom.ul
@@ -161,37 +161,37 @@ add a `${ClassNames.TEXT_TRUNCATE.nestedName}` class to truncate the text with a
             """
         }
         liveExample {
-            row(renderAs = { dl { } }) {
-                col(sm = ColAttributes.Sizes.SZ_3, renderAs = { dt { } }) { +"Description lists" }
-                col(sm = ColAttributes.Sizes.SZ_9, renderAs = { dd { } }) {
+            row(rendererTag = DL::class) {
+                col(sm = ColAttributes.Sizes.SZ_3, rendererTag = DT::class) { +"Description lists" }
+                col(sm = ColAttributes.Sizes.SZ_9, rendererTag = DD::class) {
                     +"A description list is perfect for defining terms."
                 }
 
-                col(sm = ColAttributes.Sizes.SZ_3, renderAs = { dt { } }) { +"Euismod" }
-                col(sm = ColAttributes.Sizes.SZ_9, renderAs = { dd { } }) {
+                col(sm = ColAttributes.Sizes.SZ_3, rendererTag = DT::class) { +"Euismod" }
+                col(sm = ColAttributes.Sizes.SZ_9, rendererTag = DD::class) {
                     p { +"Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit." }
                     p { +"Donec id elit non mi porta gravida at eget metus." }
                 }
 
-                col(sm = ColAttributes.Sizes.SZ_3, renderAs = { dt { } }) { +"Malesuada porta" }
-                col(sm = ColAttributes.Sizes.SZ_9, renderAs = { dd { } }) {
+                col(sm = ColAttributes.Sizes.SZ_3, rendererTag = DT::class) { +"Malesuada porta" }
+                col(sm = ColAttributes.Sizes.SZ_9, rendererTag = DD::class) {
                     +"Etiam porta sem malesuada magna mollis euismod."
                 }
 
-                col(classes = "${ClassNames.TEXT_TRUNCATE}", sm = ColAttributes.Sizes.SZ_3, renderAs = { dt { } }) {
+                col(classes = "${ClassNames.TEXT_TRUNCATE}", sm = ColAttributes.Sizes.SZ_3, rendererTag = DT::class) {
                     +"Truncated term is truncated"
                 }
-                col(sm = ColAttributes.Sizes.SZ_9, renderAs = { dd { } }) {
+                col(sm = ColAttributes.Sizes.SZ_9, rendererTag = DD::class) {
                     +"""
 Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massajustosit amet risus.
                     """
                 }
 
-                col(sm = ColAttributes.Sizes.SZ_3, renderAs = { dt { } }) { +"Nesting" }
-                col(sm = ColAttributes.Sizes.SZ_9, renderAs = { dd { } }) {
-                    row(renderAs = { dl { } }) {
-                        col(sm = ColAttributes.Sizes.SZ_4, renderAs = { dt { } }) { +"Nested definition list" }
-                        col(sm = ColAttributes.Sizes.SZ_8, renderAs = { dd { } }) {
+                col(sm = ColAttributes.Sizes.SZ_3, rendererTag = DT::class) { +"Nesting" }
+                col(sm = ColAttributes.Sizes.SZ_9, rendererTag = DD::class) {
+                    row(rendererTag = DL::class) {
+                        col(sm = ColAttributes.Sizes.SZ_4, rendererTag = DT::class) { +"Nested definition list" }
+                        col(sm = ColAttributes.Sizes.SZ_8, rendererTag = DD::class) {
                             +"Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc."
                         }
                     }
@@ -221,28 +221,13 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
             }
 
             fun FunCall.addDtArgument(): FunCall {
-                addArgument(
-                    "renderAs",
-                    LambdaValue(
-                        FunCall.builder(RBuilder::dt, FunCall.Style.INLINE)
-                            .setEmptyLambdaArgument()
-                            .build(),
-                        LambdaValue.Style.INLINE
-                    )
-                )
+                addArgument("rendererTag", KlazzValue(DT::class))
+
                 return this
             }
 
             fun FunCall.addDdArgument(): FunCall {
-                addArgument(
-                    "renderAs",
-                    LambdaValue(
-                        FunCall.builder(RBuilder::dd, FunCall.Style.INLINE)
-                            .setEmptyLambdaArgument()
-                            .build(),
-                        LambdaValue.Style.INLINE
-                    )
-                )
+                addArgument("rendererTag", KlazzValue(DD::class))
                 return this
             }
 
@@ -253,15 +238,7 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                 .build()
 
             +FunCall.builder(RBuilder::row)
-                .addArgument(
-                    "renderAs",
-                    LambdaValue(
-                        FunCall.builder(RBuilder::dl, FunCall.Style.INLINE)
-                            .setEmptyLambdaArgument()
-                            .build(),
-                        LambdaValue.Style.INLINE
-                    )
-                )
+                .addArgument("rendererTag", KlazzValue(DL::class))
                 .setLambdaArgument(
                     FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                         .addSz3Argument()
@@ -337,15 +314,7 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                         .addDdArgument()
                         .setLambdaArgument(
                             FunCall.builder(RBuilder::row)
-                                .addArgument(
-                                    "renderAs",
-                                    LambdaValue(
-                                        FunCall.builder(RBuilder::dl, FunCall.Style.INLINE)
-                                            .setEmptyLambdaArgument()
-                                            .build(),
-                                        LambdaValue.Style.INLINE
-                                    )
-                                )
+                                .addArgument("rendererTag", KlazzValue(DL::class))
                                 .setLambdaArgument(
                                     FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                         .addArgument(

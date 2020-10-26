@@ -5,30 +5,34 @@ import kotlinx.html.H2
 import kotlinx.html.H3
 import kotlinx.html.H4
 import kotlinx.html.HtmlInlineTag
+import kotlinx.html.classes
 import react.RBuilder
 import react.RHandler
 import react.RState
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.component.CustomisableComponent
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithRendererTag
 import react.bootstrap.toClasses
+import react.dom.RDOMBuilder
 import react.dom.WithClassName
 import kotlin.reflect.KClass
 
-class Display : CustomisableComponent<Display.Props, RState>() {
-    override fun WithGlobalAttributes.handleProps() {
-        classes = props.className.appendClass(props.variant.className).toClasses()!!
-    }
+class Display : CustomisableComponent<HtmlInlineTag, Display.Props, RState>() {
+    override val defaultRendererTag: KClass<out HtmlInlineTag>
+        get() = when (props.variant) {
+            Variants.DISPLAY_1 -> H1::class
+            Variants.DISPLAY_2 -> H2::class
+            Variants.DISPLAY_3 -> H3::class
+            Variants.DISPLAY_4 -> H4::class
+        }
 
-    override fun getDefaultRendererTag(): KClass<out HtmlInlineTag> = when (props.variant) {
-        Variants.DISPLAY_1 -> H1::class
-        Variants.DISPLAY_2 -> H2::class
-        Variants.DISPLAY_3 -> H3::class
-        Variants.DISPLAY_4 -> H4::class
+    override fun RDOMBuilder<HtmlInlineTag>.build() {
+        attrs {
+            classes = props.className.appendClass(props.variant.className).toClasses()!!
+        }
     }
 
     enum class Variants(override val className: ClassNames) : ClassNameEnum {
@@ -61,14 +65,14 @@ fun RBuilder.display4(classes: String? = null, block: RHandler<Display.Props>): 
 
 fun RBuilder.display(
     variant: Display.Variants,
-    rendererTag: KClass<out HtmlInlineTag>? = null,
     classes: String? = null,
+    rendererTag: KClass<out HtmlInlineTag>? = null,
     block: RHandler<Display.Props>
 ): ReactElement = child(Display::class) {
     attrs {
         this.variant = variant
-        this.rendererTag = rendererTag
         this.className = classes
+        this.rendererTag = rendererTag
     }
 
     block()

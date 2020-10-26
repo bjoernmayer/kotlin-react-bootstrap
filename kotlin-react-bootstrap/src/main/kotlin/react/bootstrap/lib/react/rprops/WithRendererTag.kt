@@ -1,9 +1,8 @@
 package react.bootstrap.lib.react.rprops
 
-import kotlinx.html.Tag
-import react.RProps
+import kotlinx.html.CommonAttributeGroupFacade
 import kotlin.reflect.KClass
 
-interface WithRendererTag<TT : Tag> : WithGlobalAttributes {
+interface WithRendererTag<TT : CommonAttributeGroupFacade> : WithGlobalAttributes {
     var rendererTag: KClass<out TT>?
 }

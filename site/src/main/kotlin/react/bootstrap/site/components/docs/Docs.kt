@@ -5,6 +5,7 @@ package react.bootstrap.site.components.docs
 // import react.bootstrap.site.components.docs.extend.Extend
 // import react.bootstrap.site.components.docs.gettingstarted.GettingStarted
 // import react.bootstrap.site.components.docs.utilities.Utilities
+import kotlinx.html.MAIN
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -21,7 +22,6 @@ import react.bootstrap.site.components.docs.content.Content
 import react.bootstrap.site.components.docs.fixings.CategoryComponent
 import react.bootstrap.site.components.docs.layout.Layout
 import react.bootstrap.site.from
-import react.dom.main
 import react.router.dom.RouteResultProps
 import react.router.dom.redirect
 import react.router.dom.route
@@ -74,7 +74,7 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
                 md = SZ_9,
                 xl = SZ_8,
                 classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content",
-                renderAs = { main { } }
+                rendererTag = MAIN::class
             ) {
                 switch {
                     Pages.categories.forEach { category ->
