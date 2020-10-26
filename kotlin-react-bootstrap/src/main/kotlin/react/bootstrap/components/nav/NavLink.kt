@@ -18,15 +18,36 @@ import react.bootstrap.lib.kotlinxhtml.loadAttributes
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.dom.a
+import react.setState
 
-// Todo: on active handling
-class NavLink : BootstrapComponent<NavLink.Props, RState>() {
+class NavLink(props: Props) : BootstrapComponent<NavLink.Props, NavLink.State>(props) {
+    override fun State.init(props: Props) {
+        active = props.active == true
+    }
+
+    override fun componentDidMount() {
+        if (state.active == true) {
+            props.onActive?.invoke()
+        }
+    }
+
+    override fun componentDidUpdate(prevProps: Props, prevState: State, snapshot: Any) {
+        if (prevProps !== props) {
+            setState {
+                active = props.active == true
+            }
+        }
+        if (prevState.active == false && props.active == true) {
+            props.onActive?.invoke()
+        }
+    }
+
     override fun buildClasses(): Set<ClassNames> {
         val navLinkClasses = mutableSetOf(
             ClassNames.NAV_LINK
         )
 
-        if (props.active == true) {
+        if (state.active == true) {
             navLinkClasses.add(ClassNames.ACTIVE)
         }
 
@@ -57,7 +78,11 @@ class NavLink : BootstrapComponent<NavLink.Props, RState>() {
 
     interface Props : WithAttributesA, WithActive, WithDisabled, WithDomEvents, IdentifiableProps<NavLink>
 
-    companion object : RStatics<Props, RState, NavLink, Nothing>(NavLink::class) {
+    interface State : RState {
+        var active: Boolean?
+    }
+
+    companion object : RStatics<Props, State, NavLink, Nothing>(NavLink::class) {
         init {
             defaultProps = jsObject {
                 componentType = NavLink::class

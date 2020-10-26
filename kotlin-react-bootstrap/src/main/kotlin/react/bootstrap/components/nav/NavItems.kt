@@ -13,17 +13,6 @@ import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
-/*
-Notizen:
-Ich brauche eine Property (oder zwei), welche der Nav mitteilt, welches item das aktive ist.
-Die Property ist optional, das active prop kann weiterhin auf links gesetzt werden.
-
-Anhand des href oder anhand eines keys (nicht unique, mehrere können aktiiv sein. vllt sogar ne liste erlauben?
-
-onActive predicate?
-eine closure welche ein item bekommt, und dann je nachdem ob true zurück kommt oder nicht, wird die dann auf active
-gestzt
- */
 sealed class NavItems<P : NavItems.Props> : AbstractComponent<HtmlBlockTag, P, RState>() {
     class Li : NavItems<Li.Props>() {
         override val rendererTag: KClass<out HtmlBlockTag> = LI::class

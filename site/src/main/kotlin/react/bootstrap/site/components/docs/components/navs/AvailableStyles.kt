@@ -4,6 +4,8 @@ package react.bootstrap.site.components.docs.components.navs
 
 import react.RBuilder
 import react.RElementBuilder
+import react.RProps
+import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.Navs.Appearance
 import react.bootstrap.components.nav.Navs.WidthHandling
@@ -18,6 +20,11 @@ import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
+import react.child
+import react.functionalComponent
+import react.getValue
+import react.setValue
+import react.useState
 
 internal class AvailableStyles : SectionComponent() {
     override val title: String = "Available styles"
@@ -180,9 +187,7 @@ Set `appearance = ${Appearance.TABS.nestedName}` to generate a tabbed interface.
             """
         }
         liveExample {
-            Navs.ul(appearance = Appearance.TABS) {
-                buildDefaultExample()
-            }
+            child(toggleableNavs)
         }
         // Todo: code example!
 
@@ -482,6 +487,52 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         navItem {
             navLink(href = "#", disabled = true) {
                 +"Disabled"
+            }
+        }
+    }
+
+    // Todo: Do this for every nav in the doc. Somehow very generic, please
+    private val toggleableNavs = functionalComponent<RProps> {
+        var activeNavLink by useState(0)
+
+        Navs.ul(appearance = Appearance.TABS) {
+            navItem {
+                navLink(href = "#", active = activeNavLink == 0) {
+                    attrs {
+                        onClick = {
+                            it.preventDefault()
+                            activeNavLink = 0
+                        }
+                    }
+                    +"Active"
+                }
+            }
+            navItem {
+                navLink(href = "#", active = activeNavLink == 1) {
+                    attrs {
+                        onClick = {
+                            it.preventDefault()
+                            activeNavLink = 1
+                        }
+                    }
+                    +"Link"
+                }
+            }
+            navItem {
+                navLink(href = "#", active = activeNavLink == 2) {
+                    attrs {
+                        onClick = {
+                            it.preventDefault()
+                            activeNavLink = 2
+                        }
+                    }
+                    +"Link"
+                }
+            }
+            navItem {
+                navLink(href = "#", disabled = true) {
+                    +"Disabled"
+                }
             }
         }
     }
