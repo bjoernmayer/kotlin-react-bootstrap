@@ -20,7 +20,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         block: RHandler<P>
     ): ReactElement = child(klazz) {
         attrs {
-            this.className = classes
+            this.classes = classes.toClasses()
             this.appearance = appearance
             this.widthHandling = widthHandling
             this.activeLinkPredicate = activeLinkPredicate

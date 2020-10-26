@@ -1,70 +1,74 @@
 package react.bootstrap.components.nav
 
-import react.RBuilder
+import kotlinx.html.DIV
+import kotlinx.html.HtmlBlockTag
+import kotlinx.html.NAV
+import kotlinx.html.OL
+import kotlinx.html.UL
+import kotlinx.html.classes
 import react.RState
-import react.ReactElement
+import react.bootstrap.addOrInit
 import react.bootstrap.appendClass
 import react.bootstrap.lib.component.AbstractComponent
 import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.toClasses
 import react.dom.WithClassName
-import react.dom.div
-import react.dom.nav
-import react.dom.ol
-import react.dom.ul
+import kotlin.reflect.KClass
 
 /**
  * This is designed as a sealed class in order to differiante between different Props in the builder extension functions
  */
-sealed class Navs<P : Navs.Props> : AbstractComponent<P, P, RState>() {
+sealed class Navs<P : Navs.Props> : AbstractComponent<P, RState>() {
     class Ul : Navs<Ul.Props>() {
-        override fun RBuilder.getRenderer(): ReactElement = ul { }
+        override fun getRenderer(): KClass<out HtmlBlockTag> = UL::class
 
         interface Props : Navs.Props
     }
 
     class Ol : Navs<Ol.Props>() {
-        override fun RBuilder.getRenderer(): ReactElement = ol { }
+        override fun getRenderer(): KClass<out HtmlBlockTag> = OL::class
 
         interface Props : Navs.Props
     }
 
     class Nav : Navs<Nav.Props>() {
-        override fun RBuilder.getRenderer(): ReactElement = nav { }
+        override fun getRenderer(): KClass<out HtmlBlockTag> = NAV::class
 
         interface Props : Navs.Props
     }
 
     class Div : Navs<Div.Props>() {
-        override fun RBuilder.getRenderer(): ReactElement = div { }
+        override fun getRenderer(): KClass<out HtmlBlockTag> = DIV::class
 
         interface Props : Navs.Props
     }
 
-    final override fun P.handleProps() {
-        val classes = mutableSetOf(
+    final override fun WithGlobalAttributes.handleProps() {
+        val navClasses = mutableSetOf(
             ClassNames.NAV
         )
 
         if (props.appearance == Appearance.TABS) {
-            classes.add(ClassNames.NAV_TABS)
+            navClasses.add(ClassNames.NAV_TABS)
         }
 
         if (props.appearance == Appearance.PILLS) {
-            classes.add(ClassNames.NAV_PILLS)
+            navClasses.add(ClassNames.NAV_PILLS)
         }
 
         if (props.widthHandling == WidthHandling.FILL) {
-            classes.add(ClassNames.NAV_FILL)
+            navClasses.add(ClassNames.NAV_FILL)
         }
 
         if (props.widthHandling == WidthHandling.JUSTIFY) {
-            classes.add(ClassNames.NAV_JUSTIFIED)
+            navClasses.add(ClassNames.NAV_JUSTIFIED)
         }
 
-        className = props.className.appendClass(classes)
+        classes = props.classes.addOrInit(navClasses)
     }
 
-    interface Props : WithClassName {
+    interface Props : WithGlobalAttributes {
         var appearance: Appearance?
         var widthHandling: WidthHandling?
         var activeLinkPredicate: ((NavLink) -> Boolean)?

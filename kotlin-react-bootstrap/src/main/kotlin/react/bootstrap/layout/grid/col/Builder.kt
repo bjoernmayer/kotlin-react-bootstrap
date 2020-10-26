@@ -21,7 +21,7 @@ fun RBuilder.col(
         this.md = md
         this.lg = lg
         this.xl = xl
-        this.renderAs = renderAs
+        // this.renderAs = renderAs
         this.className = classes
     }
 

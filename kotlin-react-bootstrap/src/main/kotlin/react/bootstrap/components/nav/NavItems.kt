@@ -1,5 +1,8 @@
 package react.bootstrap.components.nav
 
+import kotlinx.html.DIV
+import kotlinx.html.HtmlBlockTag
+import kotlinx.html.LI
 import kotlinx.html.classes
 import react.RBuilder
 import react.RState
@@ -11,6 +14,7 @@ import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.dom.div
 import react.dom.li
+import kotlin.reflect.KClass
 
 /*
 Notizen:
@@ -23,42 +27,45 @@ onActive predicate?
 eine closure welche ein item bekommt, und dann je nachdem ob true zurück kommt oder nicht, wird die dann auf active
 gestzt
  */
-sealed class NavItems<P : NavItems.Props> : AbstractComponent<P, P, RState>() {
+sealed class NavItems<P : NavItems.Props> : AbstractComponent<P, RState>() {
     class Li : NavItems<Li.Props>() {
-        override fun RBuilder.getRenderer(): ReactElement = li {
-            attrs {
-                loadGlobalAttributes(props)
-                classes = props.classes.addOrInit(setOf(ClassNames.NAV_ITEM))
-            }
-        }
+        override fun getRenderer(): KClass<out HtmlBlockTag> = LI::class
+        //     li {
+        //     attrs {
+        //         loadGlobalAttributes(props)
+        //         classes = props.classes.addOrInit(setOf(ClassNames.NAV_ITEM))
+        //     }
+        // }
 
         interface Props : NavItems.Props
     }
 
     class NavItem : NavItems<NavItem.Props>() {
-        override fun RBuilder.getRenderer(): ReactElement = div {
-            attrs {
-                loadGlobalAttributes(props)
-                classes = props.classes.addOrInit(setOf(ClassNames.NAV_ITEM))
-            }
-        }
+        override fun getRenderer(): KClass<out HtmlBlockTag> = DIV::class
+        //     div {
+        //     attrs {
+        //         loadGlobalAttributes(props)
+        //         classes = props.classes.addOrInit(setOf(ClassNames.NAV_ITEM))
+        //     }
+        // }
 
         interface Props : NavItems.Props
     }
 
     class DivItem : NavItems<DivItem.Props>() {
-        override fun RBuilder.getRenderer(): ReactElement = div {
-            attrs {
-                loadGlobalAttributes(props)
-                classes = props.classes.addOrInit(setOf(ClassNames.NAV_ITEM))
-            }
-        }
+        override fun getRenderer(): KClass<out HtmlBlockTag> = DIV::class
+        //     div {
+        //     attrs {
+        //         loadGlobalAttributes(props)
+        //         classes = props.classes.addOrInit(setOf(ClassNames.NAV_ITEM))
+        //     }
+        // }
 
         interface Props : NavItems.Props
     }
 
     // Props are handled in sealed classes
-    override fun P.handleProps() { }
+    override fun WithGlobalAttributes.handleProps() { }
 
     interface Props : WithGlobalAttributes
 }

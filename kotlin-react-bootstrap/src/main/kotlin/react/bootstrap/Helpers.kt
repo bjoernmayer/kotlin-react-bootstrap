@@ -4,6 +4,7 @@ import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.classes
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.dom.RDOMBuilder
+import kotlin.reflect.KClass
 
 fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg className: String) {
     attrs {
@@ -13,6 +14,11 @@ fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg className: String) {
             }
         }
     }
+}
+
+inline fun <reified T : Any> makeInstance(klazz: KClass<T>): T {
+    val constructor = klazz.js
+    return js("new constructor()") as T
 }
 
 fun String?.appendClass(className: ClassNames) = appendClass(setOf(className.toString()))

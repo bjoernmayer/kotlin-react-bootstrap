@@ -2,10 +2,12 @@
 
 package react.bootstrap.site.components.docs.components.alerts
 
+import kotlinx.html.DIV
 import kotlinx.html.currentTimeMillis
 import react.RBuilder
 import react.RElementBuilder
 import react.RProps
+import react.bootstrap.RenderAsComponentTest
 import react.bootstrap.components.alert.Alert
 import react.bootstrap.components.alert.AlertBuilder
 import react.bootstrap.components.alert.Alerts
@@ -30,6 +32,7 @@ import react.bootstrap.site.lib.codepoet.If
 import react.bootstrap.site.lib.codepoet.Imports
 import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.child
+import react.dom.RDOMBuilder
 import react.dom.a
 import react.dom.h4
 import react.dom.hr

@@ -1,5 +1,6 @@
 package react.bootstrap.site.components.docs.content.typography
 
+import kotlinx.html.SPAN
 import react.RBuilder
 import react.bootstrap.content.tables.table
 import react.bootstrap.content.typography.Display
@@ -44,7 +45,8 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
                     ).forEachIndexed { index, variants ->
                         tr {
                             td {
-                                display(variants, { span { } }) {
+                                // todo make this a generic fun
+                                display(variants, rendererTag = SPAN::class) {
                                     +"Display ${index + 1}"
                                 }
                             }

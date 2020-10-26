@@ -23,7 +23,7 @@ fun RBuilder.row(
         this.lg = lg
         this.xl = xl
         this.gutters = gutters
-        this.renderAs = renderAs
+        // this.renderAs = renderAs
         this.className = classes
     }
 
