@@ -4,7 +4,6 @@ import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.classes
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.dom.RDOMBuilder
-import kotlin.reflect.KClass
 
 fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg className: String) {
     attrs {

@@ -1,3 +1,5 @@
+@file:Suppress("DuplicatedCode")
+
 package react.bootstrap.site.components.docs.components.navs
 
 import react.RBuilder
@@ -28,6 +30,7 @@ internal class AvailableStyles : SectionComponent() {
 Change the style of `nav { }` component with modifiers and utilities. Mix and match as needed, or build your own.
             """
         }
+
         subSectionTitle("Horizontal alignment", section)
         Markdown {
             //language=Markdown
@@ -83,6 +86,7 @@ Centered with `${ClassNames.JUSTIFY_CONTENT_END.nestedName}`:
                 .setLambdaArgument(testingNavItemsString())
                 .build()
         }
+
         subSectionTitle("Vertical", section)
         Markdown {
             //language=Markdown
@@ -167,6 +171,7 @@ As always, vertical navigation is possible without `ul`s, too.
 
                 ).build()
         }
+
         subSectionTitle("Tabs", section)
         Markdown {
             //language=Markdown
@@ -179,13 +184,25 @@ Set `appearance = ${Appearance.TABS.nestedName}` to generate a tabbed interface.
                 buildDefaultExample()
             }
         }
+        // Todo: code example!
+
         subSectionTitle("Pills", section)
         liveExample {
             Navs.ul(appearance = Appearance.PILLS) {
                 buildDefaultExample()
             }
         }
+        // Todo: code example
+
         subSectionTitle("Fill and justify", section)
+        Markdown {
+            //language=Markdown
+            +"""
+Force your .nav’s contents to extend the full available width by setting `widthHandling`. To proportionately fill all
+available space with your `navItem`s, use `${WidthHandling.FILL.nestedName}`. Notice that all horizontal space is
+occupied, but not every nav item has the same width.
+            """
+        }
         liveExample {
             Navs.ul(appearance = Appearance.PILLS, widthHandling = WidthHandling.FILL) {
                 navItem {
@@ -209,6 +226,115 @@ Set `appearance = ${Appearance.TABS.nestedName}` to generate a tabbed interface.
                     }
                 }
             }
+        }
+        codeExample {
+            +Imports.builder()
+                .importNavComponents()
+                .build()
+
+            +FunCall.builder(Navs::ul)
+                .nestedBy(RBuilder::Navs)
+                .addArgument("appearance", Appearance.PILLS)
+                .addArgument("widthHandling", WidthHandling.FILL)
+                .setLambdaArgument(
+                    FunCall.builder(navItemBuilderFun)
+                        .setLambdaArgument(
+                            FunCall.builder(navLinkBuilderFun)
+                                .addArgument("href", "#")
+                                .addArgument("active", true)
+                                .setLambdaArgument(plusString("Active"))
+                                .build()
+                        )
+                        .build(),
+                    FunCall.builder(navItemBuilderFun)
+                        .setLambdaArgument(
+                            FunCall.builder(navLinkBuilderFun)
+                                .addArgument("href", "#")
+                                .addArgument("active", true)
+                                .setLambdaArgument(plusString("Much longer nav link"))
+                                .build()
+                        )
+                        .build(),
+                    FunCall.builder(navItemBuilderFun)
+                        .setLambdaArgument(
+                            FunCall.builder(navLinkBuilderFun)
+                                .addArgument("href", "#")
+                                .addArgument("active", true)
+                                .setLambdaArgument(plusString("Link"))
+                                .build()
+                        )
+                        .build(),
+                    FunCall.builder(navItemBuilderFun)
+                        .setLambdaArgument(
+                            FunCall.builder(navLinkBuilderFun)
+                                .addArgument("href", "#")
+                                .addArgument("disabled", true)
+                                .setLambdaArgument(plusString("Disabled"))
+                                .build()
+                        )
+                        .build()
+                )
+                .build()
+        }
+        Markdown {
+            //language=Markdown
+            +"""
+When using a `<nav>`-based navigation, you can safely omit `navItem` as only `navLink` is required for styling `<a>`
+elements.
+            """
+        }
+        liveExample {
+            Navs.nav(appearance = Appearance.PILLS, widthHandling = WidthHandling.FILL) {
+                navLink(href = "#", active = true) {
+                    +"Active"
+                }
+                navLink(href = "#") {
+                    +"Much longer nav link"
+                }
+                navLink(href = "#") {
+                    +"Link"
+                }
+                navLink(href = "#", disabled = true) {
+                    +"Disabled"
+                }
+            }
+        }
+        codeExample {
+            +Imports.builder()
+                .importNavComponents()
+                .build()
+
+            +FunCall.builder(Navs::nav)
+                .nestedBy(RBuilder::Navs)
+                .addArgument("appearance", Appearance.PILLS)
+                .addArgument("widthHandling", WidthHandling.FILL)
+                .setLambdaArgument(
+                    FunCall.builder(navLinkBuilderFun)
+                        .addArgument("href", "#")
+                        .addArgument("active", true)
+                        .setLambdaArgument(plusString("Active"))
+                        .build(),
+                    FunCall.builder(navLinkBuilderFun)
+                        .addArgument("href", "#")
+                        .setLambdaArgument(plusString("Much longer nav link"))
+                        .build(),
+                    FunCall.builder(navLinkBuilderFun)
+                        .addArgument("href", "#")
+                        .setLambdaArgument(plusString("Link"))
+                        .build(),
+                    FunCall.builder(navLinkBuilderFun)
+                        .addArgument("href", "#")
+                        .addArgument("disabled", true)
+                        .setLambdaArgument(plusString("Disabled"))
+                        .build()
+                ).build()
+        }
+        Markdown {
+            //language=Markdown
+            +"""
+For equal-width elements, use `${WidthHandling.JUSTIFY.nestedName}`. All horizontal space will be occupied by nav
+links, but unlike the `${WidthHandling.FILL.nestedName}` above, every nav item will be the same width.
+            """
         }
         liveExample {
             Navs.ul(appearance = Appearance.PILLS, widthHandling = WidthHandling.JUSTIFY) {
@@ -234,39 +360,106 @@ Set `appearance = ${Appearance.TABS.nestedName}` to generate a tabbed interface.
                 }
             }
         }
-        // Todo move into new section
-        subSectionTitle("Active Navlink", section)
+        codeExample {
+            +Imports.builder()
+                .importNavComponents()
+                .build()
+
+            +FunCall.builder(Navs::ul)
+                .nestedBy(RBuilder::Navs)
+                .addArgument("appearance", Appearance.PILLS)
+                .addArgument("widthHandling", WidthHandling.JUSTIFY)
+                .setLambdaArgument(
+                    FunCall.builder(navItemBuilderFun)
+                        .setLambdaArgument(
+                            FunCall.builder(navLinkBuilderFun)
+                                .addArgument("href", "#")
+                                .addArgument("active", true)
+                                .setLambdaArgument(plusString("Active"))
+                                .build()
+                        )
+                        .build(),
+                    FunCall.builder(navItemBuilderFun)
+                        .setLambdaArgument(
+                            FunCall.builder(navLinkBuilderFun)
+                                .addArgument("href", "#")
+                                .addArgument("active", true)
+                                .setLambdaArgument(plusString("Much longer nav link"))
+                                .build()
+                        )
+                        .build(),
+                    FunCall.builder(navItemBuilderFun)
+                        .setLambdaArgument(
+                            FunCall.builder(navLinkBuilderFun)
+                                .addArgument("href", "#")
+                                .addArgument("active", true)
+                                .setLambdaArgument(plusString("Link"))
+                                .build()
+                        )
+                        .build(),
+                    FunCall.builder(navItemBuilderFun)
+                        .setLambdaArgument(
+                            FunCall.builder(navLinkBuilderFun)
+                                .addArgument("href", "#")
+                                .addArgument("disabled", true)
+                                .setLambdaArgument(plusString("Disabled"))
+                                .build()
+                        )
+                        .build()
+                )
+                .build()
+        }
+        Markdown {
+            //language=Markdown
+            +"""
+Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based navigation.
+            """
+        }
         liveExample {
-            Navs.ul(
-                appearance = Appearance.PILLS,
-                activeLinkPredicate = {
-                    it.props.id == "thisOneIsActive"
+            Navs.nav(appearance = Appearance.PILLS, widthHandling = WidthHandling.JUSTIFY) {
+                navLink(href = "#", active = true) {
+                    +"Active"
                 }
-            ) {
-                navItem {
-                    navLink(href = "#", active = true) {
-                        attrs {
-                            id = "thisOneIsActive"
-                        }
-                        +"Active"
-                    }
+                navLink(href = "#") {
+                    +"Much longer nav link"
                 }
-                navItem {
-                    navLink(href = "#") {
-                        +"Link"
-                    }
+                navLink(href = "#") {
+                    +"Link"
                 }
-                navItem {
-                    navLink(href = "#") {
-                        +"Link"
-                    }
-                }
-                navItem {
-                    navLink(href = "#", disabled = true) {
-                        +"Disabled"
-                    }
+                navLink(href = "#", disabled = true) {
+                    +"Disabled"
                 }
             }
+        }
+        codeExample {
+            +Imports.builder()
+                .importNavComponents()
+                .build()
+
+            +FunCall.builder(Navs::nav)
+                .nestedBy(RBuilder::Navs)
+                .addArgument("appearance", Appearance.PILLS)
+                .addArgument("widthHandling", WidthHandling.JUSTIFY)
+                .setLambdaArgument(
+                    FunCall.builder(navLinkBuilderFun)
+                        .addArgument("href", "#")
+                        .addArgument("active", true)
+                        .setLambdaArgument(plusString("Active"))
+                        .build(),
+                    FunCall.builder(navLinkBuilderFun)
+                        .addArgument("href", "#")
+                        .setLambdaArgument(plusString("Much longer nav link"))
+                        .build(),
+                    FunCall.builder(navLinkBuilderFun)
+                        .addArgument("href", "#")
+                        .setLambdaArgument(plusString("Link"))
+                        .build(),
+                    FunCall.builder(navLinkBuilderFun)
+                        .addArgument("href", "#")
+                        .addArgument("disabled", true)
+                        .setLambdaArgument(plusString("Disabled"))
+                        .build()
+                ).build()
         }
     }
 
