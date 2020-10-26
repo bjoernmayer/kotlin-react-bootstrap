@@ -4,6 +4,7 @@ import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
 import react.RHandler
 import react.ReactElement
+import react.bootstrap.splitClassesToSet
 import kotlin.reflect.KClass
 
 fun RBuilder.col(
@@ -23,7 +24,7 @@ fun RBuilder.col(
         this.lg = lg
         this.xl = xl
         this.rendererTag = rendererTag
-        this.className = classes
+        this.classes = classes.splitClassesToSet()
     }
 
     block()

@@ -9,7 +9,7 @@ import react.RBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.Builder
-import react.bootstrap.toClasses
+import react.bootstrap.splitClassesToSet
 
 private fun RBuilder.button(
     variant: Button.Variants,
@@ -30,7 +30,7 @@ private fun RBuilder.button(
             this.nowrap = nowrap
             this.type = type
             this.sizes = sizes
-            this.classes = classes.toClasses()
+            this.classes = classes.splitClassesToSet()
             this.blockSized = blockSized
         }
 
@@ -843,7 +843,7 @@ fun RBuilder.buttonGroup(
     attrs {
         this.appearance = appearance
         this.behaviour = behaviour
-        this.classes = classes.toClasses()
+        this.classes = classes.splitClassesToSet()
         this.label = label
         this.sizes = sizes
     }
@@ -857,7 +857,7 @@ fun RBuilder.buttonToolbar(
 ): ReactElement =
     child(ButtonToolbar::class) {
         attrs {
-            this.classes = classes.toClasses()
+            this.classes = classes.splitClassesToSet()
             ariaLabel = label
         }
 

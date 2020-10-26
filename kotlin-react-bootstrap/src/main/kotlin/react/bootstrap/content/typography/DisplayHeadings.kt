@@ -10,14 +10,15 @@ import react.RBuilder
 import react.RHandler
 import react.RState
 import react.ReactElement
-import react.bootstrap.appendClass
+import react.bootstrap.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.component.CustomisableComponent
+import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithRendererTag
-import react.bootstrap.toClasses
+import react.bootstrap.splitClassesToSet
 import react.dom.RDOMBuilder
-import react.dom.WithClassName
 import kotlin.reflect.KClass
 
 class Display : CustomisableComponent<HtmlInlineTag, Display.Props, RState>() {
@@ -31,7 +32,8 @@ class Display : CustomisableComponent<HtmlInlineTag, Display.Props, RState>() {
 
     override fun RDOMBuilder<HtmlInlineTag>.build() {
         attrs {
-            classes = props.className.appendClass(props.variant.className).toClasses()!!
+            loadGlobalAttributes(props)
+            classes = props.classes.addOrInit(props.variant.className)
         }
     }
 
@@ -42,7 +44,7 @@ class Display : CustomisableComponent<HtmlInlineTag, Display.Props, RState>() {
         DISPLAY_4(ClassNames.DISPLAY_4);
     }
 
-    interface Props : WithRendererTag<HtmlInlineTag>, WithClassName {
+    interface Props : WithRendererTag<HtmlInlineTag>, WithGlobalAttributes {
         var variant: Variants
     }
 }
@@ -71,7 +73,7 @@ fun RBuilder.display(
 ): ReactElement = child(Display::class) {
     attrs {
         this.variant = variant
-        this.className = classes
+        this.classes = classes.splitClassesToSet()
         this.rendererTag = rendererTag
     }
 

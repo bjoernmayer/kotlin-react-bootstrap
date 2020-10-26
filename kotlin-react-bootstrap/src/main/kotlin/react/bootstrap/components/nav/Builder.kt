@@ -7,7 +7,7 @@ import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.Builder
 import react.bootstrap.lib.NoArgEventHandler
-import react.bootstrap.toClasses
+import react.bootstrap.splitClassesToSet
 import kotlin.reflect.KClass
 
 class NavBuilder(override val builder: RBuilder) : Builder {
@@ -20,7 +20,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         block: RHandler<P>
     ): ReactElement = child(klazz) {
         attrs {
-            this.classes = classes.toClasses()
+            this.classes = classes.splitClassesToSet()
             this.appearance = appearance
             this.widthHandling = widthHandling
             this.activeLinkPredicate = activeLinkPredicate
@@ -103,7 +103,7 @@ private fun <P : NavItems.Props> RBuilder.buildNavItem(
     block: RHandler<P>
 ) = child(klazz) {
     attrs {
-        this.classes = classes.toClasses()
+        this.classes = classes.splitClassesToSet()
     }
 
     block()
@@ -144,7 +144,7 @@ private fun RBuilder.buildNavLink(
         this.active = active
         this.onActive = onActive
         this.disabled = disabled
-        this.classes = classes.toClasses()
+        this.classes = classes.splitClassesToSet()
     }
     block()
 }

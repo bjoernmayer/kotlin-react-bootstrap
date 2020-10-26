@@ -1,28 +1,34 @@
 package react.bootstrap.utilities
 
 import kotlinx.html.ButtonType
+import kotlinx.html.classes
 import react.RBuilder
-import react.RComponent
 import react.RHandler
 import react.RState
 import react.ReactElement
-import react.bootstrap.appendClass
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.react.rprops.WithDomEvents
+import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.kotlinxhtml.ariaHidden
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
-import react.dom.WithClassName
+import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithDomEvents
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.splitClassesToSet
 import react.dom.button
 import react.dom.span
 
-class Close : RComponent<Close.Props, RState>() {
-    override fun RBuilder.render() {
-        button(type = ButtonType.button, classes = props.className.appendClass(ClassNames.CLOSE)) {
-            attrs {
-                ariaLabel = props.label ?: "Close"
+class Close : BootstrapComponent<Close.Props, RState>() {
+    override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.CLOSE)
 
+    override fun RBuilder.render() {
+        button(type = ButtonType.button) {
+            attrs {
+                loadGlobalAttributes(props)
                 loadDomEvents(props)
+
+                classes = getComponentClasses()
+                ariaLabel = props.label ?: "Close"
             }
 
             span {
@@ -35,7 +41,7 @@ class Close : RComponent<Close.Props, RState>() {
         }
     }
 
-    interface Props : WithClassName, WithDomEvents {
+    interface Props : WithGlobalAttributes, WithDomEvents {
         var label: String?
         var symbol: String?
     }
@@ -50,7 +56,7 @@ fun RBuilder.close(
     attrs {
         this.label = label
         this.symbol = symbol
-        this.className = classes
+        this.classes = classes.splitClassesToSet()
     }
 
     block()

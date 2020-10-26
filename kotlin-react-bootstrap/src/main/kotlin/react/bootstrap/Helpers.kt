@@ -16,11 +16,6 @@ fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg className: String) {
     }
 }
 
-inline fun <reified T : Any> makeInstance(klazz: KClass<T>): T {
-    val constructor = klazz.js
-    return js("new constructor()") as T
-}
-
 fun String?.appendClass(className: ClassNames) = appendClass(setOf(className.toString()))
 
 fun String?.appendClass(className: String) = appendClass(setOf(className))
@@ -37,7 +32,7 @@ fun String?.appendClass(classNames: Set<String>) = run {
     }
 }
 
-fun String?.toClasses(): Set<String>? = this?.split(" ")?.toSet()
+fun String?.splitClassesToSet(): Set<String>? = this?.split(" ")?.toSet()
 
 fun <T> Set<T>?.addOrInit(newEntries: Set<T>): Set<T> = run {
     this?.toMutableSet()?.apply {
@@ -50,3 +45,5 @@ fun Set<String>?.addOrInit(newClassNames: Set<ClassNames>): Set<String> = addOrI
         it.toString()
     }.toSet()
 )
+
+fun Set<String>?.addOrInit(newClassName: ClassNames): Set<String> = addOrInit(setOf(newClassName.className))

@@ -6,14 +6,14 @@ import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.DIV
 import kotlinx.html.classes
 import react.RState
-import react.bootstrap.appendClass
+import react.bootstrap.addOrInit
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.CustomisableComponent
+import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithRendererTag
-import react.bootstrap.toClasses
 import react.dom.RDOMBuilder
-import react.dom.WithClassName
 import kotlin.reflect.KClass
 
 class Row : CustomisableComponent<CommonAttributeGroupFacade, Row.Props, RState>() {
@@ -36,11 +36,12 @@ class Row : CustomisableComponent<CommonAttributeGroupFacade, Row.Props, RState>
                 xl?.getClassNames(Breakpoints.XL)?.let(rowClasses::addAll)
             }
 
-            classes = props.className.appendClass(rowClasses).toClasses()!!
+            loadGlobalAttributes(props)
+            classes = props.classes.addOrInit(rowClasses)
         }
     }
 
-    interface Props : WithRendererTag<CommonAttributeGroupFacade>, WithClassName {
+    interface Props : WithRendererTag<CommonAttributeGroupFacade>, WithGlobalAttributes {
         var all: RowAttributes?
         var sm: RowAttributes?
         var md: RowAttributes?

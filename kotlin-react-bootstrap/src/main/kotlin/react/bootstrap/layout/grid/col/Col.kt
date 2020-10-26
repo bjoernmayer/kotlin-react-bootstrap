@@ -6,15 +6,15 @@ import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.DIV
 import kotlinx.html.classes
 import react.RState
-import react.bootstrap.appendClass
+import react.bootstrap.addOrInit
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.EQ
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.CustomisableComponent
+import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithRendererTag
-import react.bootstrap.toClasses
 import react.dom.RDOMBuilder
-import react.dom.WithClassName
 import kotlin.reflect.KClass
 
 class Col : CustomisableComponent<CommonAttributeGroupFacade, Col.Props, RState>() {
@@ -37,11 +37,13 @@ class Col : CustomisableComponent<CommonAttributeGroupFacade, Col.Props, RState>
                 xl?.getClassNames(Breakpoints.XL)?.let(colClasses::addAll)
             }
 
-            classes = props.className.appendClass(colClasses).toClasses()!!
+            loadGlobalAttributes(props)
+
+            classes = props.classes.addOrInit(colClasses)
         }
     }
 
-    interface Props : WithRendererTag<CommonAttributeGroupFacade>, WithClassName {
+    interface Props : WithRendererTag<CommonAttributeGroupFacade>, WithGlobalAttributes {
         var all: ColAttributes?
         var sm: ColAttributes?
         var md: ColAttributes?
