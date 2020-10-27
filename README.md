@@ -10,7 +10,7 @@
 
 That is the current plan for this library:
 
-- 0.0.1
+- 0.1.0
     - Layout
     - Typography
     - button
@@ -18,39 +18,39 @@ That is the current plan for this library:
     - Navbar
     - Navs
     - Alerts
-- 0.1.0
-    - Forms
 - 0.2.0
-    - Tooltips
+    - Forms
 - 0.3.0
-    - Collapse
+    - Tooltips
 - 0.4.0
-    - Dropdown
+    - Collapse
 - 0.5.0
-    - Modal
+    - Dropdown
 - 0.6.0
-    - Carousel
+    - Modal
 - 0.7.0
-    - Pagination
+    - Carousel
 - 0.8.0
-    - List group
+    - Pagination
 - 0.9.0
-    - Toasts
+    - List group
 - 0.10.0
-    - Badge
+    - Toasts
 - 0.11.0
-    - Progress
+    - Badge
 - 0.12.0
-    - Spinners
+    - Progress
 - 0.13.0
-    - Scrollspy
+    - Spinners
 - 0.14.0
-    - Jumbotron
+    - Scrollspy
 - 0.15.0
-    - Media object
+    - Jumbotron
 - 0.16.0
-    - Breadcrumb
+    - Media object
 - 0.17.0
-    - Examples
+    - Breadcrumb
 - 0.18.0
+    - Examples
+- 0.19.0
     - Full Reference
