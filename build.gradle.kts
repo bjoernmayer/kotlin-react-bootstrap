@@ -16,7 +16,7 @@ plugins {
 }
 
 allprojects {
-    group = "react"
+    group = "io.github.bjoernmayer"
 }
 
 repositories {

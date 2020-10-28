@@ -1,6 +1,9 @@
+import groovy.lang.Closure
+
 plugins {
     kotlin("js")
-    id("maven-publish")
+    `maven-publish`
+    id("com.palantir.git-version").version("0.12.3")
 }
 
 dependencies {
@@ -13,12 +16,15 @@ val sourcesJar by tasks.registering(Jar::class) {
     from(kotlin.sourceSets.main.get().kotlin)
 }
 
+val gitVersion: Closure<*> by extra
+
 publishing {
     publications {
         create<MavenPublication>("kotlin") {
             from(components["kotlin"])
             artifact(tasks["sourcesJar"])
             pom {
+                version = gitVersion() as String
                 name.set("kotlin-react-bootstrap")
                 description.set("Bootstrap components built with Kotlin React.")
                 url.set("https://github.com/bjoernmayer/kotlin-react-bootstrap")
