@@ -22,10 +22,11 @@ kotlin.js {
         }
         webpackTask {
             cssSupport.enabled = true
-            cssSupport.mode = "import"
+            cssSupport.mode = "inline"
         }
         runTask {
             cssSupport.enabled = true
+            cssSupport.mode = "inline"
         }
     }
 }
