@@ -5,7 +5,6 @@ package react.bootstrap.site.components.docs.components.navs
 import react.RBuilder
 import react.RElementBuilder
 import react.RProps
-import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.Navs.Appearance
 import react.bootstrap.components.nav.Navs.WidthHandling
