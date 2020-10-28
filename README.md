@@ -7,51 +7,52 @@
 [bootstrap]: https://getbootstrap.com/
 [kotlin-react]: https://github.com/JetBrains/kotlin-wrappers/tree/master/kotlin-react
 
+## No release yet!
+This README might make you think otherwise, but `kotlin-react-bootstrap` was not released, yet. 
+First release version will be `0.1.0`.
+
+## Setup
+The library **will** be released on Github packages. You need to add this repository:
+
+```kotlin
+// build.gradle.kts
+
+repositories {
+    // . . .
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/bjoernmayer/kotlin-react-bootstrap")
+        credentials {
+            username = project.findProperty("krb.github.username") as String
+            password = project.findProperty("krb.github.token") as String
+        }
+    }
+    // . . .
+}
+```
+
+You need to authenticate in order to download from GitHub Packages.  
+For that [generate a GitHub token here](https://github.com/settings/tokens/new) and select the `read:packages` scope.
+
+Create a `gradle.properties` file in your `GRADLE_USER_HOME` (default path is `~/.gradle/gradle.properties`) and add
+the token there:
+   
+```properties
+krb.github.username=<YOUR_GITHUB_USERNAME>
+krb.github.token=<THE_TOKEN_YOU_JUST_GENERATED
+```
+
+To start using `kotlin-react-bootstrap` in your Kotlin/JS project, add the following dependency to the `dependencies`
+block inside your `build.gradle.kts` file:
+
+```kotlin
+// build.gradle.kts
+
+dependencies {
+    implementation("io.github.bjoernmayer:kotlin-react-bootstrap:<latest version>")
+    // . . .
+}
+```
+
 ## Roadmap (WIP)
-
-That is the current plan for this library:
-
-- 0.1.0
-    - Layout
-    - Typography
-    - button
-    - Buttongroup
-    - Navbar
-    - Navs
-    - Alerts
-- 0.2.0
-    - Forms
-- 0.3.0
-    - Tooltips
-- 0.4.0
-    - Collapse
-- 0.5.0
-    - Dropdown
-- 0.6.0
-    - Modal
-- 0.7.0
-    - Carousel
-- 0.8.0
-    - Pagination
-- 0.9.0
-    - List group
-- 0.10.0
-    - Toasts
-- 0.11.0
-    - Badge
-- 0.12.0
-    - Progress
-- 0.13.0
-    - Spinners
-- 0.14.0
-    - Scrollspy
-- 0.15.0
-    - Jumbotron
-- 0.16.0
-    - Media object
-- 0.17.0
-    - Breadcrumb
-- 0.18.0
-    - Examples
-- 0.19.0
-    - Full Reference
+You can find the roadmap in the [ROADMAP.md](ROADMAP.md).
