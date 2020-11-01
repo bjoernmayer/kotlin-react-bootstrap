@@ -127,12 +127,15 @@ As always, vertical navigation is possible without `ul`s, too.
         liveExample {
             Navs.nav(classes = "${ClassNames.FLEX_COLUMN}") {
                 navLink(href = "#", active = true) {
+                    attrs { onClick = { it.preventDefault() } }
                     +"Active"
                 }
                 navLink(href = "#") {
+                    attrs { onClick = { it.preventDefault() } }
                     +"Link"
                 }
                 navLink(href = "#") {
+                    attrs { onClick = { it.preventDefault() } }
                     +"Link"
                 }
                 navLink(href = "#", disabled = true) {
@@ -186,17 +189,43 @@ Set `appearance = ${Appearance.TABS.nestedName}` to generate a tabbed interface.
             """
         }
         liveExample {
-            child(toggleableNavs)
+            child(
+                buildToglleableNavLinks {
+                    appearance = Appearance.TABS
+                }
+            )
         }
-        // Todo: code example!
+        codeExample {
+            +Imports.builder()
+                .importNavComponents()
+                .build()
+
+            +FunCall.builder(Navs::ul)
+                .nestedBy(RBuilder::Navs)
+                .addArgument("appearance", Appearance.TABS)
+                .setLambdaArgument(testingNavItemsString())
+                .build()
+        }
 
         subSectionTitle("Pills", section)
         liveExample {
-            Navs.ul(appearance = Appearance.PILLS) {
-                buildDefaultExample()
-            }
+            child(
+                buildToglleableNavLinks {
+                    appearance = Appearance.PILLS
+                }
+            )
         }
-        // Todo: code example
+        codeExample {
+            +Imports.builder()
+                .importNavComponents()
+                .build()
+
+            +FunCall.builder(Navs::ul)
+                .nestedBy(RBuilder::Navs)
+                .addArgument("appearance", Appearance.PILLS)
+                .setLambdaArgument(testingNavItemsString())
+                .build()
+        }
 
         subSectionTitle("Fill and justify", section)
         Markdown {
@@ -208,28 +237,12 @@ occupied, but not every nav item has the same width.
             """
         }
         liveExample {
-            Navs.ul(appearance = Appearance.PILLS, widthHandling = WidthHandling.FILL) {
-                navItem {
-                    navLink(href = "#", active = true) {
-                        +"Active"
-                    }
+            child(
+                buildToglleableNavLinks(linkText1 = "Much longer nav link") {
+                    appearance = Appearance.PILLS
+                    widthHandling = WidthHandling.FILL
                 }
-                navItem {
-                    navLink(href = "#") {
-                        +"Much longer nav link"
-                    }
-                }
-                navItem {
-                    navLink(href = "#") {
-                        +"Link"
-                    }
-                }
-                navItem {
-                    navLink(href = "#", disabled = true) {
-                        +"Disabled"
-                    }
-                }
-            }
+            )
         }
         codeExample {
             +Imports.builder()
@@ -288,20 +301,12 @@ elements.
             """
         }
         liveExample {
-            Navs.nav(appearance = Appearance.PILLS, widthHandling = WidthHandling.FILL) {
-                navLink(href = "#", active = true) {
-                    +"Active"
+            child(
+                buildToglleableNavLinksInNavNav(linkText1 = "Much longer nav link") {
+                    appearance = Appearance.PILLS
+                    widthHandling = WidthHandling.FILL
                 }
-                navLink(href = "#") {
-                    +"Much longer nav link"
-                }
-                navLink(href = "#") {
-                    +"Link"
-                }
-                navLink(href = "#", disabled = true) {
-                    +"Disabled"
-                }
-            }
+            )
         }
         codeExample {
             +Imports.builder()
@@ -341,28 +346,12 @@ links, but unlike the `${WidthHandling.FILL.nestedName}` above, every nav item w
             """
         }
         liveExample {
-            Navs.ul(appearance = Appearance.PILLS, widthHandling = WidthHandling.JUSTIFY) {
-                navItem {
-                    navLink(href = "#", active = true) {
-                        +"Active"
-                    }
+            child(
+                buildToglleableNavLinks(linkText1 = "Much longer nav link") {
+                    appearance = Appearance.PILLS
+                    widthHandling = WidthHandling.JUSTIFY
                 }
-                navItem {
-                    navLink(href = "#") {
-                        +"Much longer nav link"
-                    }
-                }
-                navItem {
-                    navLink(href = "#") {
-                        +"Link"
-                    }
-                }
-                navItem {
-                    navLink(href = "#", disabled = true) {
-                        +"Disabled"
-                    }
-                }
-            }
+            )
         }
         codeExample {
             +Imports.builder()
@@ -420,20 +409,12 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
             """
         }
         liveExample {
-            Navs.nav(appearance = Appearance.PILLS, widthHandling = WidthHandling.JUSTIFY) {
-                navLink(href = "#", active = true) {
-                    +"Active"
+            child(
+                buildToglleableNavLinksInNavNav(linkText1 = "Much longer nav link") {
+                    appearance = Appearance.PILLS
+                    widthHandling = WidthHandling.JUSTIFY
                 }
-                navLink(href = "#") {
-                    +"Much longer nav link"
-                }
-                navLink(href = "#") {
-                    +"Link"
-                }
-                navLink(href = "#", disabled = true) {
-                    +"Disabled"
-                }
-            }
+            )
         }
         codeExample {
             +Imports.builder()
@@ -470,16 +451,31 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
     private fun RElementBuilder<Navs.Ul.Props>.buildDefaultExample() {
         navItem {
             navLink(href = "#", active = true) {
+                attrs {
+                    onClick = {
+                        it.preventDefault()
+                    }
+                }
                 +"Active"
             }
         }
         navItem {
             navLink(href = "#") {
+                attrs {
+                    onClick = {
+                        it.preventDefault()
+                    }
+                }
                 +"Link"
             }
         }
         navItem {
             navLink(href = "#") {
+                attrs {
+                    onClick = {
+                        it.preventDefault()
+                    }
+                }
                 +"Link"
             }
         }
@@ -490,11 +486,17 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         }
     }
 
-    // Todo: Do this for every nav in the doc. Somehow very generic, please
-    private val toggleableNavs = functionalComponent<RProps> {
+    private fun buildToglleableNavLinks(
+        linkText0: String = "Active",
+        linkText1: String = "Link",
+        linkText2: String = "Link",
+        disabledLinkText: String = "Disabled",
+        attrHandler: Navs.Ul.Props.() -> Unit
+    ) = functionalComponent<RProps> {
         var activeNavLink by useState(0)
 
-        Navs.ul(appearance = Appearance.TABS) {
+        Navs.ul {
+            attrs.attrHandler()
             navItem {
                 navLink(href = "#", active = activeNavLink == 0) {
                     attrs {
@@ -503,7 +505,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
                             activeNavLink = 0
                         }
                     }
-                    +"Active"
+                    +linkText0
                 }
             }
             navItem {
@@ -514,7 +516,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
                             activeNavLink = 1
                         }
                     }
-                    +"Link"
+                    +linkText1
                 }
             }
             navItem {
@@ -525,13 +527,57 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
                             activeNavLink = 2
                         }
                     }
-                    +"Link"
+                    +linkText2
                 }
             }
             navItem {
                 navLink(href = "#", disabled = true) {
-                    +"Disabled"
+                    +disabledLinkText
                 }
+            }
+        }
+    }
+
+    private fun buildToglleableNavLinksInNavNav(
+        linkText0: String = "Active",
+        linkText1: String = "Link",
+        linkText2: String = "Link",
+        disabledLinkText: String = "Disabled",
+        attrHandler: Navs.Nav.Props.() -> Unit
+    ) = functionalComponent<RProps> {
+        var activeNavLink by useState(0)
+
+        Navs.nav {
+            attrs.attrHandler()
+            navLink(href = "#", active = activeNavLink == 0) {
+                attrs {
+                    onClick = {
+                        it.preventDefault()
+                        activeNavLink = 0
+                    }
+                }
+                +linkText0
+            }
+            navLink(href = "#", active = activeNavLink == 1) {
+                attrs {
+                    onClick = {
+                        it.preventDefault()
+                        activeNavLink = 1
+                    }
+                }
+                +linkText1
+            }
+            navLink(href = "#", active = activeNavLink == 2) {
+                attrs {
+                    onClick = {
+                        it.preventDefault()
+                        activeNavLink = 2
+                    }
+                }
+                +linkText2
+            }
+            navLink(href = "#", disabled = true) {
+                +disabledLinkText
             }
         }
     }

@@ -93,9 +93,9 @@ The table below illustrates how each container’s `max-width` compares to the o
 `$renderedContainerFunFluid` accross each breakpoint.
             """
         }
-        p {
-            +"See them in action and compare them in our Grid example." // Todo link to examples
-        }
+        // p {
+        //     +"See them in action and compare them in our Grid example." // Todo link to examples
+        // }
         table(classes = "${ClassNames.TEXT_LEFT}") {
             thead {
                 tr {

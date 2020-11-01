@@ -93,12 +93,15 @@ without the extra markup.
         liveExample {
             Navs.nav {
                 navLink(href = "#", active = true) {
+                    attrs { onClick = { it.preventDefault() } }
                     +"Active"
                 }
                 navLink(href = "#") {
+                    attrs { onClick = { it.preventDefault() } }
                     +"Link"
                 }
                 navLink(href = "#") {
+                    attrs { onClick = { it.preventDefault() } }
                     +"Link"
                 }
                 navLink(href = "#", disabled = true) {
@@ -145,12 +148,14 @@ without the extra markup.
         Navs.ul {
             navItem {
                 navLink(href = "#", active = true) {
+                    attrs { onClick = { it.preventDefault() } }
                     +"Active"
                 }
             }
             repeat(2) {
                 navItem {
                     navLink(href = "#") {
+                        attrs { onClick = { it.preventDefault() } }
                         +"Link"
                     }
                 }
@@ -167,12 +172,14 @@ without the extra markup.
         Navs.ol {
             navItem {
                 navLink(href = "#", active = true) {
+                    attrs { onClick = { it.preventDefault() } }
                     +"Active"
                 }
             }
             repeat(2) {
                 navItem {
                     navLink(href = "#") {
+                        attrs { onClick = { it.preventDefault() } }
                         +"Link"
                     }
                 }
@@ -189,12 +196,14 @@ without the extra markup.
         Navs.nav {
             navItem {
                 navLink(href = "#", active = true) {
+                    attrs { onClick = { it.preventDefault() } }
                     +"Active"
                 }
             }
             repeat(2) {
                 navItem {
                     navLink(href = "#") {
+                        attrs { onClick = { it.preventDefault() } }
                         +"Link"
                     }
                 }
@@ -211,12 +220,14 @@ without the extra markup.
         Navs.div {
             navItem {
                 navLink(href = "#", active = true) {
+                    attrs { onClick = { it.preventDefault() } }
                     +"Active"
                 }
             }
             repeat(2) {
                 navItem {
                     navLink(href = "#") {
+                        attrs { onClick = { it.preventDefault() } }
                         +"Link"
                     }
                 }
