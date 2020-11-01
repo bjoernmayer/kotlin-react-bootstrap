@@ -1,7 +1,7 @@
 package react.bootstrap.site.lib.codepoet
 
-internal data class LambdaValue(val content: String, val style: Style = Style.BLOCK) {
-    internal fun build(): String = buildString {
+internal data class LambdaValue(val content: String, val style: Style = Style.BLOCK) : CodePoet {
+    override fun build(): String = buildString {
         if (style == Style.INLINE) {
             append("{ ")
             append(content)

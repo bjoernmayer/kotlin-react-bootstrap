@@ -2,7 +2,7 @@ package react.bootstrap.site.lib.codepoet
 
 import react.bootstrap.lib.bootstrap.ClassNames
 
-internal class Imports private constructor() {
+internal class Imports private constructor() : CodePoet {
     private val imports: MutableSet<String> = mutableSetOf()
 
     fun importClassNames() = addImport("lib.bootstrap.${ClassNames::class.simpleName}")
@@ -22,7 +22,7 @@ internal class Imports private constructor() {
     fun addImport(part: String, vararg parts: String) =
         addImport(listOf(part, *parts))
 
-    fun build() = buildString {
+    override fun build() = buildString {
         appendLine(
             imports.sorted().joinToString("\n", postfix = "\n") {
                 "import react.bootstrap.$it"

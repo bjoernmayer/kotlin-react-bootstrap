@@ -10,13 +10,13 @@ import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
+import react.bootstrap.site.components.docs.fixings.SectionComponent
+import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.importButton
 import react.bootstrap.site.components.docs.importButtonGroup
 import react.bootstrap.site.components.docs.importButtonGroupBuilder
 import react.bootstrap.site.components.docs.importButtonsBuilder
-import react.bootstrap.site.components.docs.fixings.SectionComponent
-import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.Assignment
@@ -126,10 +126,8 @@ Since we are working with react here, implementing a toggleable button is quite 
                 .importButtonsBuilder()
                 .build()
 
-            +Assignment.builder("toggleableButton")
-                .addModifier("private")
-                .valType()
-                .value(
+            +FunCall.builder("child")
+                .addArgument(
                     FunCall.builder(Generic("functionalComponent", "RProps"))
                         .setLambdaArgument(
                             Assignment.builder("active")

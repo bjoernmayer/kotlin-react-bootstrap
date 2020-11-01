@@ -24,7 +24,7 @@ internal class FunSpec private constructor(
     }
 
     fun nestedBy(generic: Generic): FunSpec {
-        parents.add(generic.simpleName)
+        parents.add(generic.build())
         return this
     }
 
@@ -64,7 +64,7 @@ internal class FunSpec private constructor(
         type: Generic,
         nullable: Boolean = false,
         default: String? = null
-    ): FunSpec = addParameter(Parameter(parameterName, type.simpleName, nullable, default))
+    ): FunSpec = addParameter(Parameter(parameterName, type.build(), nullable, default))
 
     fun returns(type: KClass<*>): FunSpec {
         returns = type.simpleName!!
@@ -139,7 +139,7 @@ internal class FunSpec private constructor(
             type: Generic,
             nullable: Boolean = false,
             default: String? = null
-        ) : this(name, type.simpleName, nullable, default)
+        ) : this(name, type.build(), nullable, default)
 
         fun build() = buildString {
             append("$name: $type")
