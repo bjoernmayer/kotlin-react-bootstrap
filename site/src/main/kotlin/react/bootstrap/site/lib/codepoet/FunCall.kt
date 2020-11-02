@@ -16,6 +16,7 @@ internal class FunCall private constructor(
 ) : CodePoet {
     private val parents = mutableSetOf<Parent>()
     private val arguments = mutableSetOf<Argument>()
+    private val typeParameters = mutableSetOf<String>()
     private var lambdaArgumentContent: String? = null
 
     fun nestedBy(klazz: KClass<*>, nullable: Boolean = false): FunCall {
@@ -35,6 +36,11 @@ internal class FunCall private constructor(
 
     fun addArgument(value: Any): FunCall {
         arguments.add(Argument(value = value))
+        return this
+    }
+
+    fun addTypeParameter(klazz: KClass<*>): FunCall {
+        typeParameters.add(klazz.simpleName!!)
         return this
     }
 
@@ -65,6 +71,12 @@ internal class FunCall private constructor(
                     }
                 )
                 append(".$functionName")
+            }
+
+            if (typeParameters.isNotEmpty()) {
+                append("<")
+                append(typeParameters.joinToString(" ,"))
+                append(">")
             }
 
             if (arguments.isNotEmpty() || lambdaArgumentContent == null) {
