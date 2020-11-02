@@ -15,7 +15,6 @@ import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
-import react.bootstrap.site.lib.codepoet.KlazzValue
 import react.bootstrap.site.lib.codepoet.LineComment
 import react.dom.tbody
 import react.dom.td
@@ -44,7 +43,7 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
                     ).forEachIndexed { index, variants ->
                         tr {
                             td {
-                                display(variants, rendererTag = SPAN::class) {
+                                display<SPAN>(variants) {
                                     +"Display ${index + 1}"
                                 }
                             }
@@ -55,11 +54,11 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
         }
         codeExample {
             +Imports.builder()
-                .addImport("content.typography.${Display::class.simpleName}")
-                .addImport("content.typography.${RBuilder::display.name}")
+                .addImport("content.typography.display.${Display::class.simpleName}")
+                .addImport("content.typography.display.display")
                 .apply {
                     for (x in 1..3) {
-                        addImport("content.typography.${RBuilder::display.name}$x")
+                        addImport("content.typography.display.display$x")
                     }
                 }
                 .build()
@@ -77,8 +76,8 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
             }
             +LineComment.builder("Or you use a more generic way").build()
             +FunCall.builder(RBuilder::display4)
+                .addTypeParameter(SPAN::class)
                 .addArgument("variant", Display.Variants.DISPLAY_4)
-                .addArgument("rendererTag", KlazzValue(SPAN::class))
                 .setLambdaArgument(plusString("Display 4"))
                 .build()
         }
