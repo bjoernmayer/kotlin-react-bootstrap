@@ -5,9 +5,9 @@ import kotlinx.html.UL
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.appendClass
-import react.bootstrap.lib.component.ClassNameEnum
-import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.RDOMHandler
+import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.ClassNameEnum
 import react.dom.li
 import react.dom.ul
 

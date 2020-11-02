@@ -29,7 +29,7 @@ Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis moll
         }
         codeExample {
             +Imports.builder()
-                .addImport("content.typography.${RBuilder::lead.name}")
+                .addImport("content.typography.lead.${RBuilder::lead.name}")
                 .build()
 
             +FunCall.builder(RBuilder::lead)

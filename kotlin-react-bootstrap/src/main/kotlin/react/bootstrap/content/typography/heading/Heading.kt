@@ -20,7 +20,7 @@ import kotlin.reflect.KClass
 
 class Heading(props: Props) : CustomisableComponent<CommonAttributeGroupFacade, Heading.Props, RState>(props) {
     override val defaultRendererTag: KClass<out CommonAttributeGroupFacade> =
-        when(props.size) {
+        when (props.size) {
             Sizes.H1 -> H1::class
             Sizes.H2 -> H2::class
             Sizes.H3 -> H3::class

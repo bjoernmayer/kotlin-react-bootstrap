@@ -1,6 +1,7 @@
 package react.bootstrap.site.components.docs.content.typography
 
 import kotlinx.html.P
+import kotlinx.html.SMALL
 import react.RBuilder
 import react.bootstrap.content.typography.heading.h1
 import react.bootstrap.content.typography.heading.h2
@@ -8,7 +9,7 @@ import react.bootstrap.content.typography.heading.h3
 import react.bootstrap.content.typography.heading.h4
 import react.bootstrap.content.typography.heading.h5
 import react.bootstrap.content.typography.heading.h6
-import react.bootstrap.content.typography.muted
+import react.bootstrap.content.typography.muted.muted
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -17,7 +18,6 @@ import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.h3
 import react.dom.p
-import react.dom.small
 
 internal class Headings : SectionComponent() {
     override val title: String = "Headings"
@@ -62,12 +62,12 @@ heading but cannot use the associated HTML element.
         liveExample {
             h3 {
                 +"Fancy display heading "
-                muted(RBuilder::small) { +"With faded secondary text" }
+                muted<SMALL> { +"With faded secondary text" }
             }
         }
         codeExample {
             +Imports.builder()
-                .addImport("content.typography.muted")
+                .addImport("content.typography.muted.muted")
                 .build()
 
             +FunCall.builder("h3")
@@ -75,7 +75,7 @@ heading but cannot use the associated HTML element.
                     plusString("Fancy display heading "),
                     "\n",
                     FunCall.builder("muted", FunCall.Style.INLINE)
-                        .addArgument(FunCall.Argument.PureValue("RBuilder::small"))
+                        .addTypeParameter(SMALL::class)
                         .setLambdaArgument(plusString("With faded secondary text"))
                         .build()
                 )

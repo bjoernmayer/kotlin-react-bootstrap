@@ -1,10 +1,11 @@
 package react.bootstrap.site.components.docs.content.typography
 
 import kotlinx.html.SMALL
+import kotlinx.html.SPAN
 import react.RBuilder
 import react.ReactElement
-import react.bootstrap.content.typography.mark
-import react.bootstrap.content.typography.small
+import react.bootstrap.content.typography.mark.mark
+import react.bootstrap.content.typography.small.small
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -14,7 +15,6 @@ import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.RDOMBuilder
 import react.dom.p
 import react.dom.small
-import react.dom.span
 import kotlin.reflect.KFunction3
 
 internal class InlineTextElements : SectionComponent() {
@@ -31,16 +31,16 @@ unwanted semantic implications that the tags would bring.
         }
         liveExample {
             p {
-                +"You can use the alternative mark to "; mark(RBuilder::span) { +"highlight" }; +" text."
+                +"You can use the alternative mark to "; mark<SPAN> { +"highlight" }; +" text."
             }
             p {
-                small(RBuilder::span) { +"This line of text is meant to be treated as fine print." }
+                small<SPAN> { +"This line of text is meant to be treated as fine print." }
             }
         }
         codeExample {
             +Imports.builder()
-                .addImport("content.typography.mark")
-                .addImport("content.typography.small")
+                .addImport("content.typography.mark.mark")
+                .addImport("content.typography.small.small")
                 .build()
 
             +FunCall.builder(RBuilder::p)
@@ -48,7 +48,7 @@ unwanted semantic implications that the tags would bring.
                     plusString("You can use the alternative mark to "),
                     "; ",
                     FunCall.builder("mark", FunCall.Style.INLINE, appendSemicolon = true)
-                        .addArgument(FunCall.Argument.PureValue("RBuilder::span"))
+                        .addTypeParameter(SPAN::class)
                         .setLambdaArgument(plusString("highlight"))
                         .build(),
                     " ",
@@ -59,7 +59,7 @@ unwanted semantic implications that the tags would bring.
             +FunCall.builder(RBuilder::p)
                 .setLambdaArgument(
                     FunCall.builder(smallFun, FunCall.Style.INLINE)
-                        .addArgument(FunCall.Argument.PureValue("RBuilder::span"))
+                        .addTypeParameter(SPAN::class)
                         .setLambdaArgument(
                             plusString("This line of text is meant to be treated as fine print.")
                         )

@@ -1,10 +1,10 @@
 package react.bootstrap.site.components
 
-import react.RBuilder
+import kotlinx.html.P
 import react.RProps
 import react.bootstrap.content.img
 import react.bootstrap.content.typography.lead.lead
-import react.bootstrap.content.typography.muted
+import react.bootstrap.content.typography.muted.muted
 import react.bootstrap.layout.grid.col.ColAttributes.Orderings.Companion.ORD_2
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.EQ
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_6
@@ -16,7 +16,6 @@ import react.bootstrap.lib.bootstrap.ClassNames
 import react.dom.br
 import react.dom.h1
 import react.dom.main
-import react.dom.p
 import react.functionalComponent
 import react.router.dom.routeLink
 
@@ -52,7 +51,8 @@ val Home = functionalComponent<RProps> {
                             }
                         }
                     }
-                    muted(RBuilder::p, "${ClassNames.MB_0}") {
+
+                    muted<P>("${ClassNames.MB_0}") {
                         +"Currently WIP"
                     }
                 }
