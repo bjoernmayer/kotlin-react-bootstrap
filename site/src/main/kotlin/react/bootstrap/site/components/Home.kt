@@ -3,7 +3,7 @@ package react.bootstrap.site.components
 import react.RBuilder
 import react.RProps
 import react.bootstrap.content.img
-import react.bootstrap.content.typography.lead
+import react.bootstrap.content.typography.lead.lead
 import react.bootstrap.content.typography.muted
 import react.bootstrap.layout.grid.col.ColAttributes.Orderings.Companion.ORD_2
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.EQ
