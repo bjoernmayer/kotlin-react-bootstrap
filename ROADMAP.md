@@ -28,4 +28,4 @@ NONE
 | `0.17.0` | Breadcrumb |
 | `0.18.0` | Examples |
 | `0.19.0` | Tab Component |
-| `0.19.0` | Full Reference |
+| `0.20.0` | Full Reference |
