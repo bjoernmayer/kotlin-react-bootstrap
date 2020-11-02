@@ -175,53 +175,69 @@ behaviour.
         }
 
         subSectionTitle("Active predicate", section)
-        /*
-         This Active Predicate means:
-
-
-         I need to find the navItems if there are any.
-         And in there I need to find NavLinks.
-
-         In the navLinks I have to set a new event handler on the onClick. The handler lives in the nav.
-         The handler will just update the "current active" nav link and triggers a rerender.
-
-         Problem here: I had this problem somewhere else already. I need to check if the user already  did set an
-         event handler for the click. Then I need to trigger both.
-
-         All in all it's just stuff that I have done already
-         */
+        Markdown {
+            //language=Markdown
+            +"""
+You set a `active predicate` on each `nav` which is checked, when the nav is rendered. The predicate is passed on from
+ the nav downwards to the `navItems` and `navLinks`.
+            """
+        }
 
         liveExample {
-            Navs.ul(
-                appearance = Appearance.PILLS,
-                activeLinkPredicate = {
-                    it.props.id == "thisOneIsActive"
-                }
+            Navs.nav(
+                appearance = Appearance.TABS,
+                activeLinkPredicate = { href == "#theActiveLink" }
             ) {
-                navItem {
-                    navLink(href = "#", active = true) {
-                        attrs {
-                            id = "thisOneIsActive"
-                        }
-                        +"Active"
-                    }
+                navLink(href = "#") {
+                    attrs { onClick = { it.preventDefault() } }
+                    +"Not Active"
                 }
-                navItem {
-                    navLink(href = "#") {
-                        +"Link"
-                    }
+                navLink(href = "#") {
+                    attrs { onClick = { it.preventDefault() } }
+                    +"Also not active"
                 }
-                navItem {
-                    navLink(href = "#") {
-                        +"Link"
+                navLink(href = "#theActiveLink") {
+                    attrs {
+                        onClick = { it.preventDefault() }
                     }
+                    +"Active"
                 }
-                navItem {
-                    navLink(href = "#", disabled = true) {
-                        +"Disabled"
-                    }
+                navLink(href = "#", disabled = true) {
+                    +"Disabled"
                 }
             }
+        }
+        codeExample {
+            +Imports.builder()
+                .importNavComponents()
+                .build()
+
+            +FunCall.builder(Navs::nav)
+                .nestedBy(RBuilder::Navs)
+                .addArgument("appearance", Appearance.TABS)
+                .addArgument(
+                    "activeLinkPredicate",
+                    LambdaValue("href == \"#theActiveLink\"", LambdaValue.Style.INLINE)
+                )
+                .setLambdaArgument(
+                    FunCall.builder(navLinkBuilderFun)
+                        .addArgument("href", "#")
+                        .setLambdaArgument(plusString("Not Active"))
+                        .build(),
+                    FunCall.builder(navLinkBuilderFun)
+                        .addArgument("href", "#")
+                        .setLambdaArgument(plusString("Also not active"))
+                        .build(),
+                    FunCall.builder(navLinkBuilderFun)
+                        .addArgument("href", "#theActiveLink")
+                        .setLambdaArgument(plusString("Active"))
+                        .build(),
+                    FunCall.builder(navLinkBuilderFun)
+                        .addArgument("href", "#")
+                        .addArgument("disabled", true)
+                        .setLambdaArgument(plusString("Disabled"))
+                        .build()
+                ).build()
         }
     }
 }

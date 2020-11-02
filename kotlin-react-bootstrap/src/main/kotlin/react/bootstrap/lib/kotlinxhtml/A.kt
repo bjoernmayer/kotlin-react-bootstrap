@@ -10,7 +10,6 @@ fun A.loadAttributes(props: WithAttributesA, vararg excludes: KProperty<*>) {
     if (props::href !in excludes) {
         props.href?.let { href = it }
     }
-
     if (props::target !in excludes) {
         props.target?.let { target = it }
     }

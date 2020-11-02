@@ -5,7 +5,6 @@ import kotlinext.js.jsObject
 import kotlinx.html.classes
 import kotlinx.html.role
 import org.w3c.dom.events.Event
-import react.Children
 import react.RBuilder
 import react.RProps
 import react.RState
@@ -21,8 +20,8 @@ import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.lib.react.rprops.childrenArray
 import react.bootstrap.utilities.close
-import react.children
 import react.cloneElement
 import react.dom.div
 import react.setState
@@ -150,7 +149,7 @@ class Alert(props: Props) : BootstrapComponent<Alert.Props, Alert.State>(props) 
      * We marked the close element before. Now we find it in the children and replace it
      */
     private fun MutableList<Any>.replaceCloseElement(newClosingElement: ReactElement) {
-        val closeElementInChildren = Children.toArray(props.children).indexOfFirst {
+        val closeElementInChildren = props.childrenArray.indexOfFirst {
             it.asElementOrNull()?.let { el ->
                 val props = el.props.asJsObject()
 

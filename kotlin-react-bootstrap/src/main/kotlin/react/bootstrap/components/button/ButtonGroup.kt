@@ -1,10 +1,8 @@
 package react.bootstrap.components.button
 
-import kotlinext.js.clone
 import kotlinx.html.classes
 import kotlinx.html.role
 import org.w3c.dom.events.Event
-import react.Children
 import react.RBuilder
 import react.RState
 import react.bootstrap.lib.EventHandler
@@ -14,16 +12,15 @@ import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.react.identifiable.gatherChildrenProps
-import react.bootstrap.lib.react.identifiable.isComponent
+import react.bootstrap.lib.react.identifiable.mapComponents
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.children
+import react.bootstrap.lib.react.rprops.childrenArray
 import react.dom.div
-import react.rClass
 import react.setState
 
 class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGroup.State>(props) {
     override fun State.init(props: Props) {
-        buttons = Children.toArray(props.children).gatherChildrenProps<Button, Button.Props>()
+        buttons = props.childrenArray.gatherChildrenProps<Button, Button.Props>()
 
         activeButtons = buttons?.mapNotNull { (index, buttonProps) ->
             if (buttonProps.active == true) {
@@ -148,26 +145,18 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
                 }
             }
 
-            Children.toArray(props.children).forEachIndexed { index, child ->
-                if (child.isComponent<Button>().not()) {
-                    childList.add(child)
-
-                    return@forEachIndexed
-                }
-
-                state.buttons?.let { buttonPropsMap ->
-                    val buttonProps = buttonPropsMap[index] ?: error("Buttongroup has no buttons.")
-
-                    child(Button::class.rClass, clone(buttonProps)) {
-                        attrs {
-                            onClick = { event ->
-                                handleButtonClick(index, event, buttonProps.onClick)
-                            }
-                            active = state.activeButtons?.contains(index)
+            // This basically replaces the buttons in this buttonGroup with a version, which has a onClick event
+            // It does so by manually adding each child instead of using the usual children() function
+            childList.addAll(
+                props.childrenArray.mapComponents<Button.Props, Button> { index, oldProps ->
+                    attrs {
+                        onClick = { event ->
+                            handleButtonClick(index, event, oldProps.onClick)
                         }
+                        active = state.activeButtons?.contains(index)
                     }
                 }
-            }
+            )
         }
     }
 

@@ -2,18 +2,16 @@ package react.bootstrap.lib.component
 
 import kotlinx.html.Tag
 import kotlinx.html.attributesMapOf
-import react.Children
 import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.children
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
 /**
- * @param TT Tag Tyoe: The HTML tag type used to render this component
+ * @param TT Tag Type: The HTML tag type used to render this component
  * @param ACP Abstract Component Props: The [RProps] of the [AbstractComponent] implementation
  * @param ACS Abstract Componnt State: The [RState] of  the [AbstractComponent] implementation
  */
@@ -25,26 +23,31 @@ abstract class AbstractComponent<TT : Tag, ACP : WithGlobalAttributes, ACS : RSt
 
     protected abstract fun RDOMBuilder<TT>.build()
 
+    /**
+     * This transfers the children of the [AbstractComponent] into the actual ReactElement
+     */
+    protected open fun RDOMBuilder<TT>.transferChildren() {
+        children()
+    }
+
     final override fun RBuilder.render() {
-        @Suppress("UNUSED_VARIABLE")
-        val rROMBuilder = RDOMBuilder {
+        @Suppress("UNUSED_VARIABLE", "UNUSED_ANONYMOUS_PARAMETER")
+        val rROMBuilder = RDOMBuilder { tagConsumer ->
             // This intantiates the tag by using some reflection js magic.
+            // ::class.js points to the javascript constructor
             val constructor = rendererTag.js
             val attributes = attributesMapOf("class", null)
-            val meesaConsumer = it
 
-            js("new constructor(attributes, meesaConsumer)") as TT
-        }
-
-        // Move children from the AbstractComponent into the newly created one
-        Children.toArray(props.children).forEach {
-            rROMBuilder.childList.add(it)
+            js("new constructor(attributes, tagConsumer)") as TT
         }
 
         child(
-            rROMBuilder.apply {
-                build()
-            }.create()
+            rROMBuilder
+                .apply {
+                    build()
+                    transferChildren()
+                }
+                .create()
         )
     }
 }

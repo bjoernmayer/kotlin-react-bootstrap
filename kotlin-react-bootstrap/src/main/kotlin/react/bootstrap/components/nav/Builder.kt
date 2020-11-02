@@ -16,7 +16,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: Navs.Appearance? = null,
         widthHandling: Navs.WidthHandling? = null,
-        activeLinkPredicate: ((NavLink) -> Boolean)? = null,
+        activeLinkPredicate: ((NavLink.Props) -> Boolean)? = null,
         block: RHandler<P>
     ): ReactElement = child(klazz) {
         attrs {
@@ -33,7 +33,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: Navs.Appearance? = null,
         widthHandling: Navs.WidthHandling? = null,
-        activeLinkPredicate: ((NavLink) -> Boolean)? = null,
+        activeLinkPredicate: (NavLink.Props.() -> Boolean)? = null,
         block: RHandler<Navs.Ul.Props>
     ): ReactElement =
         builder.buildNav(
@@ -49,7 +49,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: Navs.Appearance? = null,
         widthHandling: Navs.WidthHandling? = null,
-        activeLinkPredicate: ((NavLink) -> Boolean)? = null,
+        activeLinkPredicate: (NavLink.Props.() -> Boolean)? = null,
         block: RHandler<Navs.Ol.Props>
     ): ReactElement =
         builder.buildNav(
@@ -65,7 +65,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: Navs.Appearance? = null,
         widthHandling: Navs.WidthHandling? = null,
-        activeLinkPredicate: ((NavLink) -> Boolean)? = null,
+        activeLinkPredicate: (NavLink.Props.() -> Boolean)? = null,
         block: RHandler<Navs.Nav.Props>
     ): ReactElement =
         builder.buildNav(
@@ -81,7 +81,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: Navs.Appearance? = null,
         widthHandling: Navs.WidthHandling? = null,
-        activeLinkPredicate: ((NavLink) -> Boolean)? = null,
+        activeLinkPredicate: (NavLink.Props.() -> Boolean)? = null,
         block: RHandler<Navs.Div.Props>
     ): ReactElement =
         builder.buildNav(
