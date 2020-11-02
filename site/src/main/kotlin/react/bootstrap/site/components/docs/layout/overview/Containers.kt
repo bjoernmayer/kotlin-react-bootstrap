@@ -2,9 +2,10 @@
 
 package react.bootstrap.site.components.docs.layout.overview
 
+import kotlinx.html.TD
 import react.RBuilder
 import react.bootstrap.content.tables.table
-import react.bootstrap.content.typography.muted
+import react.bootstrap.content.typography.muted.muted
 import react.bootstrap.layout.grid.container.Container
 import react.bootstrap.layout.grid.container.container
 import react.bootstrap.lib.bootstrap.ClassNames
@@ -108,7 +109,7 @@ The table below illustrates how each container’s `max-width` compares to the o
                 }
                 tr {
                     td { code { +renderedContainerFun } }
-                    muted(RBuilder::td) { +"100%" }
+                    muted<TD> { +"100%" }
                     td { +"540px" }
                     td { +"720px" }
                     td { +"960px" }
@@ -123,7 +124,7 @@ The table below illustrates how each container’s `max-width` compares to the o
                                 .build()
                         }
                     }
-                    muted(RBuilder::td) { +"100%" }
+                    muted<TD> { +"100%" }
                     td { +"540px" }
                     td { +"720px" }
                     td { +"960px" }
@@ -138,8 +139,8 @@ The table below illustrates how each container’s `max-width` compares to the o
                                 .build()
                         }
                     }
-                    muted(RBuilder::td) { +"100%" }
-                    muted(RBuilder::td) { +"100%" }
+                    muted<TD> { +"100%" }
+                    muted<TD> { +"100%" }
                     td { +"720px" }
                     td { +"960px" }
                     td { +"1140px" }
@@ -154,7 +155,7 @@ The table below illustrates how each container’s `max-width` compares to the o
                         }
                     }
                     for (x in 1..3) {
-                        muted(RBuilder::td) { +"100%" }
+                        muted<TD> { +"100%" }
                     }
                     td { +"960px" }
                     td { +"1140px" }
@@ -169,14 +170,14 @@ The table below illustrates how each container’s `max-width` compares to the o
                         }
                     }
                     for (x in 1..4) {
-                        muted(RBuilder::td) { +"100%" }
+                        muted<TD> { +"100%" }
                     }
                     td { +"1140px" }
                 }
                 tr {
                     td { code { +renderedContainerFunFluid } }
                     for (x in 1..5) {
-                        muted(RBuilder::td) { +"100%" }
+                        muted<TD> { +"100%" }
                     }
                 }
             }

@@ -21,7 +21,7 @@ import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.childrenArray
-import react.bootstrap.utilities.close
+import react.bootstrap.utilities.close.close
 import react.cloneElement
 import react.dom.div
 import react.setState

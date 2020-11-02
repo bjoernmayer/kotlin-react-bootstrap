@@ -1,7 +1,7 @@
 package react.bootstrap.site.components.docs.content.typography
 
 import react.RBuilder
-import react.bootstrap.content.typography.lead
+import react.bootstrap.content.typography.lead.lead
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -29,7 +29,7 @@ Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis moll
         }
         codeExample {
             +Imports.builder()
-                .addImport("content.typography.${RBuilder::lead.name}")
+                .addImport("content.typography.lead.${RBuilder::lead.name}")
                 .build()
 
             +FunCall.builder(RBuilder::lead)

@@ -1,8 +1,8 @@
 package react.bootstrap.site.components.docs.content.typography
 
 import react.RBuilder
-import react.bootstrap.content.typography.blockQuote
-import react.bootstrap.content.typography.blockQuoteFooter
+import react.bootstrap.content.typography.blockquote.blockQuote
+import react.bootstrap.content.typography.blockquote.blockQuoteFooter
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
@@ -31,7 +31,7 @@ any HTML as the quote.
         }
         codeExample {
             +Imports.builder()
-                .addImport("content.typography.${RBuilder::blockQuote.name}")
+                .addImport("content.typography.blockquote.${RBuilder::blockQuote.name}")
                 .importClassNames()
                 .build()
 
@@ -58,8 +58,8 @@ Add a `${RBuilder::blockQuoteFooter.name} { }`  for identifying the source. Wrap
         }
         codeExample {
             +Imports.builder()
-                .addImport("content.typography.${RBuilder::blockQuoteFooter.name}")
-                .addImport("content.typography.${RBuilder::blockQuote.name}")
+                .addImport("content.typography.blockquote.${RBuilder::blockQuoteFooter.name}")
+                .addImport("content.typography.blockquote.${RBuilder::blockQuote.name}")
                 .importClassNames()
                 .build()
 

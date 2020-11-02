@@ -24,6 +24,11 @@ import react.dom.h5
 import react.dom.h6
 
 /**
+ * Notes:
+ * As soon as Kotlin supports default type values, those methods can be made generic.
+ */
+
+/**
  * Adds [ClassNames.ALERT_HEADING] to the outer most [ReactElement] resulting from [block].
  */
 fun RElementBuilder<Alert.Props>.heading(headings: Headings, block: ElementProvider): ReactElement =
