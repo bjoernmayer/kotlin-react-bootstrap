@@ -1,11 +1,9 @@
-package react.bootstrap.utilities
+package react.bootstrap.utilities.close
 
 import kotlinx.html.ButtonType
 import kotlinx.html.classes
 import react.RBuilder
-import react.RHandler
 import react.RState
-import react.ReactElement
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.kotlinxhtml.ariaHidden
@@ -14,7 +12,6 @@ import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithDomEvents
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.bootstrap.splitClassesToSet
 import react.dom.button
 import react.dom.span
 
@@ -45,19 +42,4 @@ class Close : BootstrapComponent<Close.Props, RState>() {
         var label: String?
         var symbol: String?
     }
-}
-
-fun RBuilder.close(
-    label: String? = null,
-    symbol: String? = null,
-    classes: String? = null,
-    block: RHandler<Close.Props>
-): ReactElement = child(Close::class) {
-    attrs {
-        this.label = label
-        this.symbol = symbol
-        this.classes = classes.splitClassesToSet()
-    }
-
-    block()
 }
