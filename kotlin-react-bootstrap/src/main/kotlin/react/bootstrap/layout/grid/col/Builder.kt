@@ -7,6 +7,11 @@ import react.ReactElement
 import react.bootstrap.splitClassesToSet
 import kotlin.reflect.KClass
 
+/**
+ * Notes:
+ * As soon as Kotlin supports default type values, those methods can be made generic.
+ */
+
 fun RBuilder.col(
     all: ColAttributes? = null,
     sm: ColAttributes? = null,
