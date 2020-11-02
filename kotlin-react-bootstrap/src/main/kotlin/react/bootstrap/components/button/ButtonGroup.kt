@@ -20,7 +20,7 @@ import react.setState
 
 class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGroup.State>(props) {
     override fun State.init(props: Props) {
-        buttons = props.childrenArray.gatherChildrenProps<Button, Button.Props>()
+        buttons = props.childrenArray.gatherChildrenProps<Button.Props, Button>()
 
         activeButtons = buttons?.mapNotNull { (index, buttonProps) ->
             if (buttonProps.active == true) {

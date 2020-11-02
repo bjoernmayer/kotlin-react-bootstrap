@@ -11,7 +11,7 @@ import react.ReactElement
 import react.rClass
 
 /**
- * This mapping function allows you to map Kotlin React Bootstrap Components.
+ * This mapping function allows you to modify Kotlin React Bootstrap Components.
  *
  * @param PT Props type of the child component
  * @param CT Component type of the child component
