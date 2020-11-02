@@ -4,6 +4,7 @@ import react.RBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.Builder
+import react.bootstrap.splitClassesToSet
 
 fun RBuilder.container(
     viscosity: Container.Viscosities? = null,
@@ -12,7 +13,7 @@ fun RBuilder.container(
 ): ReactElement = child(Container::class) {
     attrs {
         this.viscosity = viscosity
-        this.classes = classes
+        this.classes = classes.splitClassesToSet()
     }
     block()
 }

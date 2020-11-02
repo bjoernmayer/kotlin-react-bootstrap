@@ -4,7 +4,7 @@ import kotlinx.html.ThScope
 import react.RBuilder
 import react.bootstrap.content.tables.BorderStyles
 import react.bootstrap.content.tables.table
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall

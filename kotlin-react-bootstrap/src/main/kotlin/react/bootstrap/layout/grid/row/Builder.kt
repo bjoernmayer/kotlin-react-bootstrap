@@ -1,8 +1,11 @@
 package react.bootstrap.layout.grid.row
 
+import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
 import react.RHandler
 import react.ReactElement
+import react.bootstrap.splitClassesToSet
+import kotlin.reflect.KClass
 
 fun RBuilder.row(
     all: RowAttributes? = null,
@@ -11,7 +14,7 @@ fun RBuilder.row(
     lg: RowAttributes? = null,
     xl: RowAttributes? = null,
     gutters: Boolean = true,
-    renderAs: (RBuilder.() -> ReactElement)? = null,
+    rendererTag: KClass<out CommonAttributeGroupFacade>? = null,
     classes: String? = null,
     block: RHandler<Row.Props>
 ): ReactElement = child(Row::class) {
@@ -22,8 +25,8 @@ fun RBuilder.row(
         this.lg = lg
         this.xl = xl
         this.gutters = gutters
-        this.renderAs = renderAs
-        this.className = classes
+        this.rendererTag = rendererTag
+        this.classes = classes.splitClassesToSet()
     }
 
     block()

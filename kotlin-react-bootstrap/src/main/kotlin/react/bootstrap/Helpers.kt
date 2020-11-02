@@ -1,18 +1,9 @@
 package react.bootstrap
 
 import kotlinx.html.CommonAttributeGroupFacade
-import kotlinx.html.Tag
 import kotlinx.html.classes
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.dom.RDOMBuilder
-
-fun Tag.data(key: String, value: String) {
-    attributes["data-$key"] = value
-}
-
-fun Tag.data(keyValue: Pair<String, String>) {
-    attributes["data-${keyValue.first}"] = keyValue.second
-}
 
 fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg className: String) {
     attrs {
@@ -39,3 +30,19 @@ fun String?.appendClass(classNames: Set<String>) = run {
         "$this ${classNames.joinToString(" ")}"
     }
 }
+
+fun String?.splitClassesToSet(): Set<String>? = this?.split(" ")?.toSet()
+
+fun <T> Set<T>?.addOrInit(newEntries: Set<T>): Set<T> = run {
+    this?.toMutableSet()?.apply {
+        addAll(newEntries)
+    }?.toSet() ?: newEntries
+}
+
+fun Set<String>?.addOrInit(newClassNames: Set<ClassNames>): Set<String> = addOrInit(
+    newClassNames.map {
+        it.toString()
+    }.toSet()
+)
+
+fun Set<String>?.addOrInit(newClassName: ClassNames): Set<String> = addOrInit(setOf(newClassName.className))

@@ -20,5 +20,13 @@ kotlin.js {
         distribution {
             directory = File("$rootDir/docs/")
         }
+        webpackTask {
+            cssSupport.enabled = true
+            cssSupport.mode = "inline"
+        }
+        runTask {
+            cssSupport.enabled = true
+            cssSupport.mode = "inline"
+        }
     }
 }

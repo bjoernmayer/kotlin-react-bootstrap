@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 internal data class Generic(
     private val className: String,
     private val typeName: String
-) {
+) : CodePoet {
     constructor(
         clazz: KClass<*>,
         type: KClass<*>
@@ -17,5 +17,5 @@ internal data class Generic(
         type: KClass<*>
     ) : this(className, type.nestedName)
 
-    val simpleName = "$className<$typeName>"
+    override fun build(): String = "$className<$typeName>"
 }

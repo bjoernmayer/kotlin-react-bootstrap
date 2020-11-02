@@ -9,6 +9,7 @@ import react.cloneElement
 import kotlin.random.Random
 
 /**
+ * Todo: Rebuild this as actual component and make use of Identifiable
  * Wrapper for a custom alert closing element.
  *
  * Build whatever close element you like.

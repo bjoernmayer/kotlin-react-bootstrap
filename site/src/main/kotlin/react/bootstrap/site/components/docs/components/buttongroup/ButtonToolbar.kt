@@ -5,7 +5,7 @@ import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
 import react.bootstrap.components.button.buttonToolbar
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.components.docs.components.buttons.solidSecondaryFun
 import react.bootstrap.site.components.docs.importButtonGroupBuilder

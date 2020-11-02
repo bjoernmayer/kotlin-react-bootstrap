@@ -2,9 +2,9 @@
 
 package react.bootstrap.layout.grid.row
 
-import react.bootstrap.lib.AttributePair
-import react.bootstrap.lib.AttributeTriple
-import react.bootstrap.lib.CombinedAttributes
+import react.bootstrap.lib.component.AttributePair
+import react.bootstrap.lib.component.AttributeTriple
+import react.bootstrap.lib.component.CombinedAttributes
 
 sealed class RowAttributes : CombinedAttributes {
     abstract val colCount: ColCounts?

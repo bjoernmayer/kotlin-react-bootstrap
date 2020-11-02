@@ -9,6 +9,12 @@ plugins {
 dependencies {
     api(kotlinJsWrapper("react"))
     api(kotlinJsWrapper("react-dom"))
+
+    testImplementation(kotlin("test-js"))
+}
+
+kotlin {
+    explicitApi()
 }
 
 val sourcesJar by tasks.registering(Jar::class) {

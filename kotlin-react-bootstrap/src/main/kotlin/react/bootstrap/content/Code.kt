@@ -3,7 +3,7 @@ package react.bootstrap.content
 import kotlinx.html.PRE
 import react.RBuilder
 import react.bootstrap.appendClass
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.RDOMHandler
 import react.dom.pre
 

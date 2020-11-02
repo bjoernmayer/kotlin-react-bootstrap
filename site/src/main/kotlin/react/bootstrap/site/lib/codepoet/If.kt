@@ -4,7 +4,7 @@ import react.bootstrap.site.lib.codepoet.IndentTool.indentLines
 
 class If private constructor(
     private val condition: String
-) {
+) : CodePoet {
     private lateinit var content: String
     private var elseContent: String? = null
 
@@ -18,7 +18,7 @@ class If private constructor(
         return this
     }
 
-    fun build() = buildString {
+    override fun build() = buildString {
         appendLine("if ($condition) {")
         appendLine(indentLines(content))
 

@@ -1,4 +1,7 @@
-package react.bootstrap.lib
+package react.bootstrap.lib.component
+
+import react.bootstrap.lib.bootstrap.Breakpoints
+import react.bootstrap.lib.bootstrap.ClassNames
 
 interface CombinedAttributes {
     val classNamePrefix: String?

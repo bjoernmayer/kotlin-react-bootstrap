@@ -5,6 +5,7 @@ import react.RBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.Builder
+import react.bootstrap.splitClassesToSet
 
 class AlertBuilder(override val builder: RBuilder) : Builder {
     fun RBuilder.alert(
@@ -14,7 +15,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     ): ReactElement = child(Alert::class) {
         attrs {
             this.variant = variant
-            this.className = classes
+            this.classes = classes.splitClassesToSet()
         }
 
         block()
@@ -56,7 +57,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
     ): ReactElement = child(Alert::class) {
         attrs {
             this.variant = variant
-            this.className = classes
+            this.classes = classes.splitClassesToSet()
 
             dismissible = (dismissible ?: jsObject()).apply {
                 this.fade = fade

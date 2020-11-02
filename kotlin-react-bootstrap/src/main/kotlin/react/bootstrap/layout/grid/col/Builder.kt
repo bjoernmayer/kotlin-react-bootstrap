@@ -1,8 +1,11 @@
 package react.bootstrap.layout.grid.col
 
+import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
 import react.RHandler
 import react.ReactElement
+import react.bootstrap.splitClassesToSet
+import kotlin.reflect.KClass
 
 fun RBuilder.col(
     all: ColAttributes? = null,
@@ -10,7 +13,7 @@ fun RBuilder.col(
     md: ColAttributes? = null,
     lg: ColAttributes? = null,
     xl: ColAttributes? = null,
-    renderAs: (RBuilder.() -> ReactElement)? = null,
+    rendererTag: KClass<out CommonAttributeGroupFacade>? = null,
     classes: String? = null,
     block: RHandler<Col.Props>
 ): ReactElement = child(Col::class) {
@@ -20,8 +23,8 @@ fun RBuilder.col(
         this.md = md
         this.lg = lg
         this.xl = xl
-        this.renderAs = renderAs
-        this.className = classes
+        this.rendererTag = rendererTag
+        this.classes = classes.splitClassesToSet()
     }
 
     block()

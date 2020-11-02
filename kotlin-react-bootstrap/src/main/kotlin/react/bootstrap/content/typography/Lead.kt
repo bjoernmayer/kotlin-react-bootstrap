@@ -1,29 +1,38 @@
 package react.bootstrap.content.typography
 
+import kotlinx.html.classes
 import react.RBuilder
-import react.RComponent
 import react.RHandler
 import react.RState
 import react.ReactElement
-import react.bootstrap.appendClass
-import react.bootstrap.lib.ClassNames
-import react.dom.WithClassName
+import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.BootstrapComponent
+import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.splitClassesToSet
 import react.dom.p
 
-class Lead : RComponent<Lead.Props, RState>() {
+class Lead : BootstrapComponent<Lead.Props, RState>() {
+    override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.LEAD)
+
     override fun RBuilder.render() {
-        p(classes = props.className.appendClass(ClassNames.LEAD)) {
+        p {
+            attrs {
+                loadGlobalAttributes(props)
+                classes = getComponentClasses()
+            }
+
             children()
         }
     }
 
-    interface Props : WithClassName
+    interface Props : WithGlobalAttributes
 }
 
 fun RBuilder.lead(classes: String? = null, block: RHandler<Lead.Props>): ReactElement =
     child(Lead::class) {
         attrs {
-            className = classes
+            this.classes = classes.splitClassesToSet()
         }
 
         block()

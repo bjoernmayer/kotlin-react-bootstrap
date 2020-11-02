@@ -5,28 +5,28 @@ import kotlinext.js.jsObject
 import kotlinx.html.classes
 import kotlinx.html.role
 import org.w3c.dom.events.Event
-import react.Children
 import react.RBuilder
-import react.RComponent
 import react.RProps
 import react.RState
 import react.ReactElement
 import react.asElementOrNull
-import react.bootstrap.lib.ClassNameEnum
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.component.ClassNameEnum
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.NoArgEventHandler
-import react.bootstrap.lib.WithDomEvents
-import react.bootstrap.lib.onTransitionEndFunction
-import react.bootstrap.lib.transferDomEvents
+import react.bootstrap.lib.component.BootstrapComponent
+import react.bootstrap.lib.react.rprops.WithDomEvents
+import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
+import react.bootstrap.lib.kotlinxhtml.loadDomEvents
+import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.lib.react.rprops.childrenArray
 import react.bootstrap.utilities.close
-import react.children
 import react.cloneElement
-import react.dom.WithClassName
 import react.dom.div
 import react.setState
 
-class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
+class Alert(props: Props) : BootstrapComponent<Alert.Props, Alert.State>(props) {
     override fun State.init(props: Props) {
         state = States.SHOWN
     }
@@ -73,6 +73,26 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
         }
     }
 
+    override fun buildClasses(): Set<ClassNames> {
+        val alertClasses = mutableSetOf(ClassNames.ALERT)
+
+        props.variant?.also { alertClasses.add(it.className) }
+
+        props.dismissible?.also { dismissibleProps ->
+            alertClasses.add(ClassNames.ALERT_DISMISSIBLE)
+
+            if (state.state == States.SHOWN) {
+                alertClasses.add(ClassNames.SHOW)
+            }
+
+            if (dismissibleProps.fade == true) {
+                alertClasses.add(ClassNames.FADE)
+            }
+        }
+
+        return alertClasses
+    }
+
     override fun RBuilder.render() {
         if (state.state == States.DISMISSED) {
             return
@@ -81,19 +101,8 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
         div {
             children()
 
-            val alertClasses = mutableSetOf(ClassNames.ALERT)
-
-            props.variant?.also { alertClasses.add(it.className) }
-
             props.dismissible?.also { dismissibleProps ->
-                alertClasses.add(ClassNames.ALERT_DISMISSIBLE)
-
-                if (state.state == States.SHOWN) {
-                    alertClasses.add(ClassNames.SHOW)
-                }
-
                 if (dismissibleProps.fade == true) {
-                    alertClasses.add(ClassNames.FADE)
                     attrs.onTransitionEndFunction = this@Alert::handleTransitionEnd
                 }
 
@@ -126,9 +135,12 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
             }
 
             attrs {
-                transferDomEvents(props, props::onTransitionEnd)
+                loadDomEvents(props, props::onTransitionEnd)
+                loadGlobalAttributes(props)
+
                 role = "alert"
-                classes = alertClasses.map { it.className }.toSet()
+
+                classes = getComponentClasses()
             }
         }
     }
@@ -137,7 +149,7 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
      * We marked the close element before. Now we find it in the children and replace it
      */
     private fun MutableList<Any>.replaceCloseElement(newClosingElement: ReactElement) {
-        val closeElementInChildren = Children.toArray(props.children).indexOfFirst {
+        val closeElementInChildren = props.childrenArray.indexOfFirst {
             it.asElementOrNull()?.let { el ->
                 val props = el.props.asJsObject()
 
@@ -174,7 +186,7 @@ class Alert(props: Props) : RComponent<Alert.Props, Alert.State>(props) {
         var random: Int?
     }
 
-    interface Props : WithClassName, WithDomEvents {
+    interface Props : WithGlobalAttributes, WithDomEvents {
         var dismissible: Dismissible?
         var variant: Variants?
 

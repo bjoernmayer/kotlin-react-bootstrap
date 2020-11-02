@@ -4,8 +4,8 @@ import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
 import react.RProps
-import react.bootstrap.lib.ClassNames
-import react.bootstrap.lib.ariaLabel
+import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.dom.a
 import react.dom.div
 import react.dom.header

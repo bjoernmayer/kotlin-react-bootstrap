@@ -1,27 +1,9 @@
-package react.bootstrap.lib
+@file:Suppress("DuplicatedCode")
 
-import kotlinext.js.Object
-import kotlinext.js.jsObject
-import kotlinx.html.HTMLTag
-import react.RHandler
+package react.bootstrap.lib.react.rprops
+
 import react.RProps
-import kotlin.reflect.KClass
-
-interface WithTypeFlag<T : Any> : RProps {
-    var krbType: KClass<T>
-}
-
-interface WithRDOMHandler<T : HTMLTag> : RProps {
-    var handler: RDOMHandler<T>
-}
-
-interface WithRHandlerBlock<T : RProps> : RProps {
-    var handler: RHandler<T>
-}
-
-interface WithAriaLabel : RProps {
-    var ariaLabel: String?
-}
+import react.bootstrap.lib.EventHandler
 
 interface WithDomEvents : RProps {
     var onAbort: EventHandler?
@@ -105,8 +87,3 @@ interface WithDomEvents : RProps {
     var onWaiting: EventHandler?
     var onWheel: EventHandler?
 }
-
-/**
- * @return a mutable copy
- */
-fun <T : RProps> T.toMutable(): T = Object.assign(jsObject(), this)

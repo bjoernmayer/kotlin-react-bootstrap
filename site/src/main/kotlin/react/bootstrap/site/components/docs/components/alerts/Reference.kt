@@ -17,7 +17,7 @@ import react.bootstrap.components.alert.h6
 import react.bootstrap.components.alert.heading
 import react.bootstrap.components.alert.link
 import react.bootstrap.content.typography.Headings
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.nestedName

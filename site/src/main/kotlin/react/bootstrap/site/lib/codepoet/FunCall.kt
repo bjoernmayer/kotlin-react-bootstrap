@@ -1,6 +1,6 @@
 package react.bootstrap.site.lib.codepoet
 
-import react.bootstrap.lib.ClassNames
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.lib.codepoet.IndentTool.getIndent
 import react.bootstrap.site.lib.codepoet.IndentTool.indentLines
@@ -13,7 +13,7 @@ internal class FunCall private constructor(
     private val style: Style,
     private val putArgumentsOnSeparateLine: Boolean,
     private val appendSemicolon: Boolean
-) {
+) : CodePoet {
     private val parents = mutableSetOf<Parent>()
     private val arguments = mutableSetOf<Argument>()
     private var lambdaArgumentContent: String? = null
@@ -54,7 +54,7 @@ internal class FunCall private constructor(
 
     fun setEmptyLambdaArgument() = setLambdaArgument("")
 
-    fun build(): String =
+    override fun build(): String =
         buildString {
             if (parents.isEmpty()) {
                 append(functionName)
@@ -170,6 +170,8 @@ internal class FunCall private constructor(
                     is Enum<*> -> value.nestedName
                     is PureValue -> value.value
                     is LambdaValue -> value.build()
+                    is KlazzValue -> value.build()
+                    is FunCall -> "\n${indentLines(value.build())}\n"
                     is String -> "\"$value\""
                     else -> value
                 }
@@ -190,7 +192,7 @@ internal class FunCall private constructor(
             style: Style = Style.BLOCK,
             putArgumentsOnSeparateLine: Boolean = false,
             appendSemicolon: Boolean = false,
-        ) = FunCall(function.simpleName, style, putArgumentsOnSeparateLine, appendSemicolon)
+        ) = FunCall(function.build(), style, putArgumentsOnSeparateLine, appendSemicolon)
 
         fun builder(
             function: String,
