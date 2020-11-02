@@ -1,4 +1,4 @@
-package react.bootstrap.content.typography
+package react.bootstrap.content.typography.display
 
 import kotlinx.html.H1
 import kotlinx.html.H2
@@ -6,10 +6,7 @@ import kotlinx.html.H3
 import kotlinx.html.H4
 import kotlinx.html.HtmlInlineTag
 import kotlinx.html.classes
-import react.RBuilder
-import react.RHandler
 import react.RState
-import react.ReactElement
 import react.bootstrap.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.ClassNameEnum
@@ -17,7 +14,6 @@ import react.bootstrap.lib.component.CustomisableComponent
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithRendererTag
-import react.bootstrap.splitClassesToSet
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
@@ -47,35 +43,4 @@ class Display : CustomisableComponent<HtmlInlineTag, Display.Props, RState>() {
     interface Props : WithRendererTag<HtmlInlineTag>, WithGlobalAttributes {
         var variant: Variants
     }
-}
-
-@Suppress("unused")
-fun RBuilder.display1(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
-    display(variant = Display.Variants.DISPLAY_1, classes = classes, block = block)
-
-@Suppress("unused")
-fun RBuilder.display2(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
-    display(variant = Display.Variants.DISPLAY_2, classes = classes, block = block)
-
-@Suppress("unused")
-fun RBuilder.display3(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
-    display(variant = Display.Variants.DISPLAY_3, classes = classes, block = block)
-
-@Suppress("unused")
-fun RBuilder.display4(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
-    display(variant = Display.Variants.DISPLAY_4, classes = classes, block = block)
-
-fun RBuilder.display(
-    variant: Display.Variants,
-    classes: String? = null,
-    rendererTag: KClass<out HtmlInlineTag>? = null,
-    block: RHandler<Display.Props>
-): ReactElement = child(Display::class) {
-    attrs {
-        this.variant = variant
-        this.classes = classes.splitClassesToSet()
-        this.rendererTag = rendererTag
-    }
-
-    block()
 }
