@@ -31,7 +31,7 @@ any HTML as the quote.
         }
         codeExample {
             +Imports.builder()
-                .addImport("content.typography.${RBuilder::blockQuote.name}")
+                .addImport("content.typography.blockquote.${RBuilder::blockQuote.name}")
                 .importClassNames()
                 .build()
 
@@ -58,8 +58,8 @@ Add a `${RBuilder::blockQuoteFooter.name} { }`  for identifying the source. Wrap
         }
         codeExample {
             +Imports.builder()
-                .addImport("content.typography.${RBuilder::blockQuoteFooter.name}")
-                .addImport("content.typography.${RBuilder::blockQuote.name}")
+                .addImport("content.typography.blockquote.${RBuilder::blockQuoteFooter.name}")
+                .addImport("content.typography.blockquote.${RBuilder::blockQuote.name}")
                 .importClassNames()
                 .build()
 
