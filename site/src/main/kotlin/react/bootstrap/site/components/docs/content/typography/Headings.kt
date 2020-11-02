@@ -33,11 +33,11 @@ heading but cannot use the associated HTML element.
         }
         liveExample {
             h1<P> { +"h1. Bootstrap heading" }
-            h2<P> { +"h1. Bootstrap heading" }
-            h3<P> { +"h1. Bootstrap heading" }
-            h4<P> { +"h1. Bootstrap heading" }
-            h5<P> { +"h1. Bootstrap heading" }
-            h6<P> { +"h1. Bootstrap heading" }
+            h2<P> { +"h2. Bootstrap heading" }
+            h3<P> { +"h3. Bootstrap heading" }
+            h4<P> { +"h4. Bootstrap heading" }
+            h5<P> { +"h5. Bootstrap heading" }
+            h6<P> { +"h6. Bootstrap heading" }
         }
 
         codeExample {
