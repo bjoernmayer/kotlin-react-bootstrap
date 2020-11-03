@@ -7,5 +7,6 @@ internal class Reference : PageComponent() {
     override fun RBuilder.render() {
         pageTitle("Reference")
         child(ContainersContainerBuilder::class)
+        child(RowCol::class)
     }
 }
