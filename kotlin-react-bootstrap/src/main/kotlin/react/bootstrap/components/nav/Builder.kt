@@ -6,7 +6,6 @@ import react.RElementBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.Builder
-import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.splitClassesToSet
 import kotlin.reflect.KClass
 
@@ -166,7 +165,6 @@ private fun RBuilder.buildNavLink(
     classes: String? = null,
     target: String? = null,
     active: Boolean? = null,
-    onActive: NoArgEventHandler? = null,
     disabled: Boolean? = null,
     block: RHandler<NavLink.Props>
 ): ReactElement = child(NavLink::class) {
@@ -174,7 +172,6 @@ private fun RBuilder.buildNavLink(
         this.href = href
         this.target = target
         this.active = active
-        this.onActive = onActive
         this.disabled = disabled
         this.classes = classes.splitClassesToSet()
     }
@@ -186,47 +183,42 @@ fun RElementBuilder<NavItems.Li.Props>.navLink(
     classes: String? = null,
     target: String? = null,
     active: Boolean? = null,
-    onActive: NoArgEventHandler? = null,
     disabled: Boolean? = null,
     block: RHandler<NavLink.Props>
-): ReactElement = buildNavLink(href, classes, target, active, onActive, disabled, block)
+): ReactElement = buildNavLink(href, classes, target, active, disabled, block)
 
 fun RElementBuilder<NavComponent.Nav.Props>.navLink(
     href: String? = null,
     classes: String? = null,
     target: String? = null,
     active: Boolean? = null,
-    onActive: NoArgEventHandler? = null,
     disabled: Boolean? = null,
     block: RHandler<NavLink.Props>
-): ReactElement = buildNavLink(href, classes, target, active, onActive, disabled, block)
+): ReactElement = buildNavLink(href, classes, target, active, disabled, block)
 
 fun RElementBuilder<NavItems.NavItem.Props>.navLink(
     href: String? = null,
     classes: String? = null,
     target: String? = null,
     active: Boolean? = null,
-    onActive: NoArgEventHandler? = null,
     disabled: Boolean? = null,
     block: RHandler<NavLink.Props>
-): ReactElement = buildNavLink(href, classes, target, active, onActive, disabled, block)
+): ReactElement = buildNavLink(href, classes, target, active, disabled, block)
 
 fun RElementBuilder<NavComponent.Div.Props>.navLink(
     href: String? = null,
     classes: String? = null,
     target: String? = null,
     active: Boolean? = null,
-    onActive: NoArgEventHandler? = null,
     disabled: Boolean? = null,
     block: RHandler<NavLink.Props>
-): ReactElement = buildNavLink(href, classes, target, active, onActive, disabled, block)
+): ReactElement = buildNavLink(href, classes, target, active, disabled, block)
 
 fun RElementBuilder<NavItems.DivItem.Props>.navLink(
     href: String? = null,
     classes: String? = null,
     target: String? = null,
     active: Boolean? = null,
-    onActive: NoArgEventHandler? = null,
     disabled: Boolean? = null,
     block: RHandler<NavLink.Props>
-): ReactElement = buildNavLink(href, classes, target, active, onActive, disabled, block)
+): ReactElement = buildNavLink(href, classes, target, active, disabled, block)

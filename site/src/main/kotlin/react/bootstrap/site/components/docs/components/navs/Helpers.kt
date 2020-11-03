@@ -9,11 +9,11 @@ import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import react.bootstrap.site.lib.codepoet.FunCall
-import kotlin.reflect.KFunction8
+import kotlin.reflect.KFunction7
 
 internal val navItemBuilderFun = RElementBuilder<NavComponent.Ul.Props>::navItem
-internal val navLinkBuilderFun: KFunction8<
-    RElementBuilder<NavItems.Li.Props>, String?, String?, String?, Boolean?, (() -> Unit)?, Boolean?,
+internal val navLinkBuilderFun: KFunction7<
+    RElementBuilder<NavItems.Li.Props>, String?, String?, String?, Boolean?, Boolean?,
     RElementBuilder<NavLink.Props>.() -> Unit, ReactElement> =
     RElementBuilder<NavItems.Li.Props>::navLink
 
