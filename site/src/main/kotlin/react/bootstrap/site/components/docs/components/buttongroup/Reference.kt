@@ -7,9 +7,9 @@ import react.bootstrap.components.button.buttonGroup
 import react.bootstrap.components.button.buttonToolbar
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunSpec
 import react.bootstrap.site.lib.codepoet.Generic
-import react.dom.p
 
 internal class Reference : SectionComponent() {
     override val title: String = "Reference"
@@ -17,8 +17,11 @@ internal class Reference : SectionComponent() {
     override fun RBuilder.render() {
         sectionTitle(section)
         subSectionTitle(RBuilder::buttonGroup.name, section)
-        p {
-            +"Adds a button group."
+        Markdown {
+            //language=Markdown
+            +"""
+Creates a `${ButtonGroup::class.simpleName!!}` element.
+            """
         }
         codeExample {
             +FunSpec.builder(RBuilder::buttonGroup)
@@ -33,8 +36,11 @@ internal class Reference : SectionComponent() {
                 .build()
         }
         subSectionTitle(RBuilder::buttonToolbar.name, section)
-        p {
-            +"Add a button toolbar."
+        Markdown {
+            //language=Markdown
+            +"""
+Creates a `${ButtonToolbar::class.simpleName!!}` element.
+            """
         }
         codeExample {
             +FunSpec.builder(RBuilder::buttonToolbar)

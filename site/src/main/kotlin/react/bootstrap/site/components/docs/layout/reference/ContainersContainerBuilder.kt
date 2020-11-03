@@ -49,7 +49,7 @@ Creates a `${Container::class.nestedName}` element with `viscosity` set to `${vi
             """
             }
             codeExample {
-                +FunSpec.builder(function)
+                +FunSpec.builder(function, false)
                     .nestedBy(ContainerBuilder::class)
                     .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
                     .addParameter("block", Generic("RHandler", Container.Props::class))
