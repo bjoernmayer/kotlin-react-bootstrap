@@ -23,18 +23,8 @@ internal class Reference : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle(section)
-        subSectionTitle("Builder", section)
-        Markdown {
-            //language=Markdown
-            +"""
-Navs are creating using the `${NavBuilder::class.simpleName!!}`. It is available in `RBuilder` as extension val.
-            """
-        }
-        codeExample {
-            +"val react.RBuilder.Navs get() = NavBuilder(this)"
-        }
         listOf(NavBuilder::ul, NavBuilder::ol, NavBuilder::nav, NavBuilder::div).forEach { function ->
-            subSectionTitle("${NavBuilder::class.simpleName!!}.${function.name}", section)
+            subSectionTitle(function.name, section)
             Markdown {
                 //language=Markdown
                 +"""
@@ -60,7 +50,7 @@ Creates a `${function.name}`-based navigation.
                     .build()
             }
         }
-        subSectionTitle(".navItem", section)
+        subSectionTitle("navItem", section)
         listOf(
             Triple(NavComponent.Ul.Props::class, NavItems.Li.Props::class, NavItems.Li::class),
             Triple(NavComponent.Ol.Props::class, NavItems.Li.Props::class, NavItems.Li::class),
@@ -84,7 +74,7 @@ Creates a `${itemKlazz.nestedName}` element.
                     .build()
             }
         }
-        subSectionTitle(".navLink", section)
+        subSectionTitle("navLink", section)
         listOf(
             RElementBuilder<NavItems.Li.Props>::navLink to NavItems.Li.Props::class,
             RElementBuilder<NavComponent.Nav.Props>::navLink to NavComponent.Nav.Props::class,

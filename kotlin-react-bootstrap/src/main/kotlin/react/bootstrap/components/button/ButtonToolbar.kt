@@ -6,9 +6,9 @@ import react.RBuilder
 import react.RState
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.BootstrapComponent
-import react.bootstrap.lib.react.rprops.WithAriaLabel
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithAriaLabel
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.dom.div
 

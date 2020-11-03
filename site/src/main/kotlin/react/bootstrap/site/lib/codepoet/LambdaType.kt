@@ -54,9 +54,11 @@ internal class LambdaType private constructor() : CodePoet {
             append("$receiver.")
         }
         append("(")
-        append(arguments.joinToString(", ") {
-            it.build()
-        })
+        append(
+            arguments.joinToString(", ") {
+                it.build()
+            }
+        )
         append(") -> ")
         append(returnType)
     }

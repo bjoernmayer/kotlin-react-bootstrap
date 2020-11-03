@@ -7,8 +7,8 @@ import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
-import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.NavComponent
+import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.container.Container

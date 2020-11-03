@@ -2,8 +2,8 @@ package react.bootstrap.components.alert
 
 import react.RElementBuilder
 import react.ReactElement
-import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.ElementProvider
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.classNameWrapper
 
 /**

@@ -2,8 +2,8 @@ package react.bootstrap.site.components.docs
 
 import react.bootstrap.site.MatchProps
 import react.bootstrap.site.components.PATH_DOCS
-import react.bootstrap.site.components.docs.fixings.PageComponent
 import react.bootstrap.site.components.docs.fixings.CategoryComponent
+import react.bootstrap.site.components.docs.fixings.PageComponent
 import kotlin.reflect.KClass
 
 internal data class Category(
