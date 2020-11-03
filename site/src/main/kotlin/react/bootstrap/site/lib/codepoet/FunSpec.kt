@@ -66,6 +66,27 @@ internal class FunSpec private constructor(
         default: String? = null
     ): FunSpec = addParameter(Parameter(parameterName, type.build(), nullable, default))
 
+    fun addParameter(
+        parameterName: String,
+        type: LambdaType,
+        nullable: Boolean = false,
+        default: String? = null
+    ): FunSpec {
+        val typeString = buildString {
+            if (nullable) {
+                append("(")
+            }
+
+            append(type.build())
+
+            if (nullable) {
+                append(")")
+            }
+        }
+
+        return addParameter(Parameter(parameterName, typeString, nullable, default))
+    }
+
     fun returns(type: KClass<*>): FunSpec {
         returns = type.simpleName!!
         return this

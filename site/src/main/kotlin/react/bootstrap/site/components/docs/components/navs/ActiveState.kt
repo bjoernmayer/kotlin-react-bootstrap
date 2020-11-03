@@ -4,8 +4,8 @@ import react.RBuilder
 import react.RElementBuilder
 import react.RProps
 import react.bootstrap.components.button.Button
+import react.bootstrap.components.nav.NavComponent.Appearance
 import react.bootstrap.components.nav.Navs
-import react.bootstrap.components.nav.Navs.Appearance
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
 import react.bootstrap.lib.bootstrap.ClassNames

@@ -11,11 +11,11 @@ import react.bootstrap.splitClassesToSet
 import kotlin.reflect.KClass
 
 class NavBuilder(override val builder: RBuilder) : Builder {
-    private fun <P : Navs.Props> RBuilder.buildNav(
+    private fun <P : NavComponent.Props> RBuilder.buildNav(
         klazz: KClass<out Component<P, *>>,
         classes: String? = null,
-        appearance: Navs.Appearance? = null,
-        widthHandling: Navs.WidthHandling? = null,
+        appearance: NavComponent.Appearance? = null,
+        widthHandling: NavComponent.WidthHandling? = null,
         activeLinkPredicate: ((NavLink.Props) -> Boolean)? = null,
         block: RHandler<P>
     ): ReactElement = child(klazz) {
@@ -29,15 +29,23 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         block()
     }
 
+    /**
+     * Creates a ul-based navigation.
+     *
+     * @param classes Space separated list of CSS classes for this element.
+     * @param appearance Set this value to change the appearance of the nav and make it look like Pills or Tabs.
+     * @param widthHandling Set this value to change the width handling among the [NavItems] and [NavLink]s of this nav.
+     * @param activeLinkPredicate Set this predicate to mark a [NavLink] active
+     */
     fun ul(
         classes: String? = null,
-        appearance: Navs.Appearance? = null,
-        widthHandling: Navs.WidthHandling? = null,
+        appearance: NavComponent.Appearance? = null,
+        widthHandling: NavComponent.WidthHandling? = null,
         activeLinkPredicate: (NavLink.Props.() -> Boolean)? = null,
-        block: RHandler<Navs.Ul.Props>
+        block: RHandler<NavComponent.Ul.Props>
     ): ReactElement =
         builder.buildNav(
-            klazz = Navs.Ul::class,
+            klazz = NavComponent.Ul::class,
             classes = classes,
             appearance = appearance,
             widthHandling = widthHandling,
@@ -45,15 +53,23 @@ class NavBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+    /**
+     * Creates a ol-based navigation.
+     *
+     * @param classes Space separated list of CSS classes for this element.
+     * @param appearance Set this value to change the appearance of the nav and make it look like Pills or Tabs.
+     * @param widthHandling Set this value to change the width handling among the [NavItems] and [NavLink]s of this nav.
+     * @param activeLinkPredicate Set this predicate to mark a [NavLink] active
+     */
     fun ol(
         classes: String? = null,
-        appearance: Navs.Appearance? = null,
-        widthHandling: Navs.WidthHandling? = null,
+        appearance: NavComponent.Appearance? = null,
+        widthHandling: NavComponent.WidthHandling? = null,
         activeLinkPredicate: (NavLink.Props.() -> Boolean)? = null,
-        block: RHandler<Navs.Ol.Props>
+        block: RHandler<NavComponent.Ol.Props>
     ): ReactElement =
         builder.buildNav(
-            klazz = Navs.Ol::class,
+            klazz = NavComponent.Ol::class,
             classes = classes,
             appearance = appearance,
             widthHandling = widthHandling,
@@ -61,15 +77,23 @@ class NavBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+    /**
+     * Creates a nav-based navigation.
+     *
+     * @param classes Space separated list of CSS classes for this element.
+     * @param appearance Set this value to change the appearance of the nav and make it look like Pills or Tabs.
+     * @param widthHandling Set this value to change the width handling among the [NavItems] and [NavLink]s of this nav.
+     * @param activeLinkPredicate Set this predicate to mark a [NavLink] active
+     */
     fun nav(
         classes: String? = null,
-        appearance: Navs.Appearance? = null,
-        widthHandling: Navs.WidthHandling? = null,
+        appearance: NavComponent.Appearance? = null,
+        widthHandling: NavComponent.WidthHandling? = null,
         activeLinkPredicate: (NavLink.Props.() -> Boolean)? = null,
-        block: RHandler<Navs.Nav.Props>
+        block: RHandler<NavComponent.Nav.Props>
     ): ReactElement =
         builder.buildNav(
-            klazz = Navs.Nav::class,
+            klazz = NavComponent.Nav::class,
             classes = classes,
             appearance = appearance,
             widthHandling = widthHandling,
@@ -77,15 +101,23 @@ class NavBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+    /**
+     * Creates a div-based navigation.
+     *
+     * @param classes Space separated list of CSS classes for this element.
+     * @param appearance Set this value to change the appearance of the nav and make it look like Pills or Tabs.
+     * @param widthHandling Set this value to change the width handling among the [NavItems] and [NavLink]s of this nav.
+     * @param activeLinkPredicate Set this predicate to mark a [NavLink] active
+     */
     fun div(
         classes: String? = null,
-        appearance: Navs.Appearance? = null,
-        widthHandling: Navs.WidthHandling? = null,
+        appearance: NavComponent.Appearance? = null,
+        widthHandling: NavComponent.WidthHandling? = null,
         activeLinkPredicate: (NavLink.Props.() -> Boolean)? = null,
-        block: RHandler<Navs.Div.Props>
+        block: RHandler<NavComponent.Div.Props>
     ): ReactElement =
         builder.buildNav(
-            klazz = Navs.Div::class,
+            klazz = NavComponent.Div::class,
             classes = classes,
             appearance = appearance,
             widthHandling = widthHandling,
@@ -109,22 +141,22 @@ private fun <P : NavItems.Props> RBuilder.buildNavItem(
     block()
 }
 
-fun RElementBuilder<Navs.Ul.Props>.navItem(
+fun RElementBuilder<NavComponent.Ul.Props>.navItem(
     classes: String? = null,
     block: RHandler<NavItems.Li.Props>
 ): ReactElement = buildNavItem(NavItems.Li::class, classes, block)
 
-fun RElementBuilder<Navs.Ol.Props>.navItem(
+fun RElementBuilder<NavComponent.Ol.Props>.navItem(
     classes: String? = null,
     block: RHandler<NavItems.Li.Props>
 ): ReactElement = buildNavItem(NavItems.Li::class, classes, block)
 
-fun RElementBuilder<Navs.Nav.Props>.navItem(
+fun RElementBuilder<NavComponent.Nav.Props>.navItem(
     classes: String? = null,
     block: RHandler<NavItems.NavItem.Props>
 ): ReactElement = buildNavItem(NavItems.NavItem::class, classes, block)
 
-fun RElementBuilder<Navs.Div.Props>.navItem(
+fun RElementBuilder<NavComponent.Div.Props>.navItem(
     classes: String? = null,
     block: RHandler<NavItems.DivItem.Props>
 ): ReactElement = buildNavItem(NavItems.DivItem::class, classes, block)
@@ -159,7 +191,7 @@ fun RElementBuilder<NavItems.Li.Props>.navLink(
     block: RHandler<NavLink.Props>
 ): ReactElement = buildNavLink(href, classes, target, active, onActive, disabled, block)
 
-fun RElementBuilder<Navs.Nav.Props>.navLink(
+fun RElementBuilder<NavComponent.Nav.Props>.navLink(
     href: String? = null,
     classes: String? = null,
     target: String? = null,
@@ -179,7 +211,7 @@ fun RElementBuilder<NavItems.NavItem.Props>.navLink(
     block: RHandler<NavLink.Props>
 ): ReactElement = buildNavLink(href, classes, target, active, onActive, disabled, block)
 
-fun RElementBuilder<Navs.Div.Props>.navLink(
+fun RElementBuilder<NavComponent.Div.Props>.navLink(
     href: String? = null,
     classes: String? = null,
     target: String? = null,

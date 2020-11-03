@@ -5,9 +5,10 @@ package react.bootstrap.site.components.docs.components.navs
 import react.RBuilder
 import react.RElementBuilder
 import react.RProps
+import react.bootstrap.components.nav.NavComponent
+import react.bootstrap.components.nav.NavComponent.Appearance
+import react.bootstrap.components.nav.NavComponent.WidthHandling
 import react.bootstrap.components.nav.Navs
-import react.bootstrap.components.nav.Navs.Appearance
-import react.bootstrap.components.nav.Navs.WidthHandling
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
 import react.bootstrap.lib.bootstrap.ClassNames
@@ -448,7 +449,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         }
     }
 
-    private fun RElementBuilder<Navs.Ul.Props>.buildDefaultExample() {
+    private fun RElementBuilder<NavComponent.Ul.Props>.buildDefaultExample() {
         navItem {
             navLink(href = "#", active = true) {
                 attrs {
@@ -491,7 +492,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         linkText1: String = "Link",
         linkText2: String = "Link",
         disabledLinkText: String = "Disabled",
-        attrHandler: Navs.Ul.Props.() -> Unit
+        attrHandler: NavComponent.Ul.Props.() -> Unit
     ) = functionalComponent<RProps> {
         var activeNavLink by useState(0)
 
@@ -543,7 +544,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         linkText1: String = "Link",
         linkText2: String = "Link",
         disabledLinkText: String = "Disabled",
-        attrHandler: Navs.Nav.Props.() -> Unit
+        attrHandler: NavComponent.Nav.Props.() -> Unit
     ) = functionalComponent<RProps> {
         var activeNavLink by useState(0)
 
