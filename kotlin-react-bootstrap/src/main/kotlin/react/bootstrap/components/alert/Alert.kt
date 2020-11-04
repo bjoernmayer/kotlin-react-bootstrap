@@ -194,7 +194,7 @@ class Alert(props: Props) : BootstrapComponent<Alert.Props, Alert.State>(props) 
             /**
              * This is the element the user can click on to dismiss the alert.
              *
-             * Defaults [react.bootstrap.utilities.Close]
+             * Defaults [react.bootstrap.utilities.close.Close]
              */
             var closeElement: ReactElement?
 

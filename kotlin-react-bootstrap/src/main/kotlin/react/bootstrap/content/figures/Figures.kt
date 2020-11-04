@@ -15,9 +15,23 @@ import react.dom.RDOMBuilder
 import react.dom.figcaption
 import react.dom.figure
 
+/**
+ * Creates a [FIGURE] and adds [ClassNames.FIGURE] to it.
+ *
+ * @param classes Space separated list of CSS classes for this element.
+ */
 fun RBuilder.figure(classes: String? = null, block: RDOMHandler<FIGURE>): ReactElement =
     figure(classes.appendClass(ClassNames.FIGURE), block)
 
+/**
+ * Creates an [IMG] and adds [ClassNames.FIGURE_IMG] to it.
+ *
+ * @param fluid If set to *true* the image resizes fluently.
+ * @param isThumbnail If set to `true`, a border is shown around the image.
+ * @param alt alternative string
+ * @param src
+ * @param classes Space separated list of CSS classes for this element.
+ */
 fun RDOMBuilder<FIGURE>.img(
     fluid: Boolean? = true,
     isThumbnail: Boolean? = null,

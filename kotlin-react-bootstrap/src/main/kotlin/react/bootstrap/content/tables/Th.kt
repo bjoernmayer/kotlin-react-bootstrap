@@ -8,6 +8,13 @@ import react.bootstrap.appendClass
 import react.bootstrap.lib.RDOMHandler
 import react.dom.th
 
+/**
+ * Creates a [TH] element.
+ *
+ * @param contextualStyle Set a [ContextualStyle] to colour-in the [TH]s.
+ * @param scope
+ * @param classes Space separated list of CSS classes for this element.
+ */
 fun RBuilder.th(
     contextualStyle: ContextualStyle? = null,
     scope: ThScope? = null,

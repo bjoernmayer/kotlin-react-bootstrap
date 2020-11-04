@@ -7,6 +7,8 @@ import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.classNameWrapper
 
 /**
+ * Todo: rebuild as proper Component
+ *
  * Adds [ClassNames.ALERT_LINK] to the outer most [ReactElement] resulting from [block].
  */
 fun RElementBuilder<Alert.Props>.link(block: ElementProvider): ReactElement =

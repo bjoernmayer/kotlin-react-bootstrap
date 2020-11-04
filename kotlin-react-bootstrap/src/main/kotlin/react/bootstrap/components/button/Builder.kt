@@ -48,6 +48,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         protected open val success: Button.Variants = Button.Variants.Outline.SUCCESS
         protected open val warning: Button.Variants = Button.Variants.Outline.WARNING
 
+        /**
+         * Creates a danger button using a HTML button
+         */
         fun danger(
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
@@ -75,6 +78,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a danger button using a link button
+         */
         fun danger(
             href: String?,
             target: String? = null,
@@ -100,6 +106,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a danger button using an input button
+         */
         fun danger(
             value: String,
             name: String? = null,
@@ -133,6 +142,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a dark button using a HTML button
+         */
         fun dark(
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
@@ -160,6 +172,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a dark button using a link button
+         */
         fun dark(
             href: String?,
             target: String? = null,
@@ -185,6 +200,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a dark button using an input button
+         */
         fun dark(
             value: String,
             name: String? = null,
@@ -218,6 +236,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a info button using a HTML button
+         */
         fun info(
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
@@ -245,6 +266,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a info button using a link button
+         */
         fun info(
             href: String?,
             target: String? = null,
@@ -270,6 +294,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a info button using an input button
+         */
         fun info(
             value: String,
             name: String? = null,
@@ -303,6 +330,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a light button using a HTML button
+         */
         fun light(
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
@@ -330,6 +360,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a light button using a link button
+         */
         fun light(
             href: String?,
             target: String? = null,
@@ -355,6 +388,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a light button using an input button
+         */
         fun light(
             value: String,
             name: String? = null,
@@ -388,6 +424,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a primary button using a HTML button
+         */
         fun primary(
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
@@ -415,6 +454,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a primary button using a link button
+         */
         fun primary(
             href: String?,
             target: String? = null,
@@ -440,6 +482,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a primary button using an input button
+         */
         fun primary(
             value: String,
             name: String? = null,
@@ -473,6 +518,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a secondary button using a HTML button
+         */
         fun secondary(
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
@@ -500,6 +548,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a secondary button using a link button
+         */
         fun secondary(
             href: String?,
             target: String? = null,
@@ -525,6 +576,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a secondary button using an input button
+         */
         fun secondary(
             value: String,
             name: String? = null,
@@ -558,6 +612,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a success button using a HTML button
+         */
         fun success(
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
@@ -585,6 +642,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a success button using a link button
+         */
         fun success(
             href: String?,
             target: String? = null,
@@ -610,6 +670,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a success button using an input button
+         */
         fun success(
             value: String,
             name: String? = null,
@@ -643,6 +706,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a warning button using a HTML button
+         */
         fun warning(
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
@@ -670,6 +736,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a warning button using a link button
+         */
         fun warning(
             href: String?,
             target: String? = null,
@@ -695,6 +764,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a warning button using an input button
+         */
         fun warning(
             value: String,
             name: String? = null,
@@ -739,6 +811,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         override val success: Button.Variants = Button.Variants.Solid.SUCCESS
         override val warning: Button.Variants = Button.Variants.Solid.WARNING
 
+        /**
+         * Creates a link button using a HTML button
+         */
         fun link(
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
@@ -766,6 +841,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a link button using a link button
+         */
         fun link(
             href: String?,
             target: String? = null,
@@ -791,6 +869,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
+        /**
+         * Creates a link button using a input button
+         */
         fun link(
             value: String,
             name: String? = null,
@@ -832,6 +913,9 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 val RBuilder.Buttons
     get() = ButtonBuilder(this)
 
+/**
+ * Creates a [ButtonGroup] element.
+ */
 fun RBuilder.buttonGroup(
     appearance: ButtonGroup.Appearance = ButtonGroup.Appearance.DEFAULT,
     behaviour: ButtonGroup.Behaviours? = null,
@@ -850,6 +934,12 @@ fun RBuilder.buttonGroup(
     block()
 }
 
+/**
+ * Creates a [ButtonToolbar] element.
+ *
+ * @param classes Space separated list of CSS classes for this element.
+ * @param label aria-label to describe the [ButtonToolbar]
+ */
 fun RBuilder.buttonToolbar(
     classes: String? = null,
     label: String? = null,

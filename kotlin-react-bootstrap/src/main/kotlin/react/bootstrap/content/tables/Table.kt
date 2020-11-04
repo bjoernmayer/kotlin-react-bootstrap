@@ -11,6 +11,17 @@ import react.bootstrap.lib.component.ClassNameEnum
 import react.dom.div
 import react.dom.table
 
+/**
+ * Creates a [TABLE] element and adds Bootstrap classes to it.
+ *
+ * @param dark If set to `true`, [ClassNames.TABLE_DARK] gets added to classes.
+ * @param striped If set to `true`, [ClassNames.TABLE_STRIPED] gets added to classes.
+ * @param borderStyle Choose between different [BorderStyles].
+ * @param hoverable If set to `true`, [ClassNames.TABLE_HOVER] gets added to classes.
+ * @param small If set to `true`, [ClassNames.TABLE_SM] gets added to classes.
+ * @param responsive Set [Breakpoints] to specify, when a table should start to show scrollbars.
+ * @param classes Space separated list of CSS classes for this element.
+ */
 fun RBuilder.table(
     dark: Boolean? = null,
     striped: Boolean? = null,

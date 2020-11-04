@@ -145,7 +145,7 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
                 }
             }
 
-            // This basically replaces the buttons in this buttonGroup with a version, which has a onClick event
+            // This basically replaces the buttons in this buttonGroup with a version, which has an onClick event
             // It does so by manually adding each child instead of using the usual children() function
             childList.addAll(
                 props.childrenArray.mapComponents<Button.Props, Button> { index, oldProps ->
@@ -161,8 +161,26 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
     }
 
     interface Props : WithGlobalAttributes {
+        /**
+         * Change the appearance of the [ButtonGroup] by setting an [Appearance].
+         *
+         * Defaults to [Appearance.DEFAULT], which "connects" buttons.
+         */
         var appearance: Appearance?
+
+        /**
+         * Set this to make [Button]s behave like Radio- or Checkboxes.
+         *
+         * Defaults to a smart [ButtonGroup] which does not change Behaviour for normal buttons, but lets Radio- &
+         * Checkboxes behave like they should.
+         */
         var behaviour: Behaviours?
+
+        /**
+         * aria-label
+         *
+         * Defaults to *null*.
+         */
         var label: String?
         var sizes: Sizes?
     }
