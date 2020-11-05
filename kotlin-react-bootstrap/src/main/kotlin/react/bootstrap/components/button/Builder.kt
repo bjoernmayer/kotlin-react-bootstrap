@@ -50,6 +50,16 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a danger button using a HTML button
+         *
+         * @param buttonType Choose between different [ButtonType]s for this button.
+         * @param buttonFormEncType HTML Form Enc Type.
+         * @param buttonFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun danger(
             buttonType: ButtonType = ButtonType.button,
@@ -80,6 +90,15 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a danger button using a link button
+         *
+         * @param href Href of the underlying link.
+         * @param target Target-Attribute of the underlying link
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun danger(
             href: String?,
@@ -108,6 +127,19 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a danger button using an input button
+         *
+         * @param value Value-Attribute of the input button.
+         * @param name Name-Attribute of the input button.
+         * @param title Title-Attribute of the input button
+         * @param type Choose between different [Button.Types.Input.Type]s for this button.
+         * @param inputFormEncType HTML Form Enc Type.
+         * @param inputFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun danger(
             value: String,
@@ -144,6 +176,16 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a dark button using a HTML button
+         *
+         * @param buttonType Choose between different [ButtonType]s for this button.
+         * @param buttonFormEncType HTML Form Enc Type.
+         * @param buttonFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun dark(
             buttonType: ButtonType = ButtonType.button,
@@ -174,6 +216,15 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a dark button using a link button
+         *
+         * @param href Href of the underlying link.
+         * @param target Target-Attribute of the underlying link
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun dark(
             href: String?,
@@ -202,6 +253,19 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a dark button using an input button
+         *
+         * @param value Value-Attribute of the input button.
+         * @param name Name-Attribute of the input button.
+         * @param title Title-Attribute of the input button
+         * @param type Choose between different [Button.Types.Input.Type]s for this button.
+         * @param inputFormEncType HTML Form Enc Type.
+         * @param inputFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun dark(
             value: String,
@@ -238,6 +302,16 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a info button using a HTML button
+         *
+         * @param buttonType Choose between different [ButtonType]s for this button.
+         * @param buttonFormEncType HTML Form Enc Type.
+         * @param buttonFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun info(
             buttonType: ButtonType = ButtonType.button,
@@ -268,6 +342,15 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a info button using a link button
+         *
+         * @param href Href of the underlying link.
+         * @param target Target-Attribute of the underlying link
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun info(
             href: String?,
@@ -296,6 +379,19 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a info button using an input button
+         *
+         * @param value Value-Attribute of the input button.
+         * @param name Name-Attribute of the input button.
+         * @param title Title-Attribute of the input button
+         * @param type Choose between different [Button.Types.Input.Type]s for this button.
+         * @param inputFormEncType HTML Form Enc Type.
+         * @param inputFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun info(
             value: String,
@@ -332,6 +428,16 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a light button using a HTML button
+         *
+         * @param buttonType Choose between different [ButtonType]s for this button.
+         * @param buttonFormEncType HTML Form Enc Type.
+         * @param buttonFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun light(
             buttonType: ButtonType = ButtonType.button,
@@ -362,6 +468,15 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a light button using a link button
+         *
+         * @param href Href of the underlying link.
+         * @param target Target-Attribute of the underlying link
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun light(
             href: String?,
@@ -390,6 +505,19 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a light button using an input button
+         *
+         * @param value Value-Attribute of the input button.
+         * @param name Name-Attribute of the input button.
+         * @param title Title-Attribute of the input button
+         * @param type Choose between different [Button.Types.Input.Type]s for this button.
+         * @param inputFormEncType HTML Form Enc Type.
+         * @param inputFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun light(
             value: String,
@@ -426,6 +554,16 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a primary button using a HTML button
+         *
+         * @param buttonType Choose between different [ButtonType]s for this button.
+         * @param buttonFormEncType HTML Form Enc Type.
+         * @param buttonFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun primary(
             buttonType: ButtonType = ButtonType.button,
@@ -456,6 +594,15 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a primary button using a link button
+         *
+         * @param href Href of the underlying link.
+         * @param target Target-Attribute of the underlying link
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun primary(
             href: String?,
@@ -484,6 +631,19 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a primary button using an input button
+         *
+         * @param value Value-Attribute of the input button.
+         * @param name Name-Attribute of the input button.
+         * @param title Title-Attribute of the input button
+         * @param type Choose between different [Button.Types.Input.Type]s for this button.
+         * @param inputFormEncType HTML Form Enc Type.
+         * @param inputFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun primary(
             value: String,
@@ -520,6 +680,16 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a secondary button using a HTML button
+         *
+         * @param buttonType Choose between different [ButtonType]s for this button.
+         * @param buttonFormEncType HTML Form Enc Type.
+         * @param buttonFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun secondary(
             buttonType: ButtonType = ButtonType.button,
@@ -550,6 +720,15 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a secondary button using a link button
+         *
+         * @param href Href of the underlying link.
+         * @param target Target-Attribute of the underlying link
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun secondary(
             href: String?,
@@ -578,6 +757,19 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a secondary button using an input button
+         *
+         * @param value Value-Attribute of the input button.
+         * @param name Name-Attribute of the input button.
+         * @param title Title-Attribute of the input button
+         * @param type Choose between different [Button.Types.Input.Type]s for this button.
+         * @param inputFormEncType HTML Form Enc Type.
+         * @param inputFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun secondary(
             value: String,
@@ -614,6 +806,16 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a success button using a HTML button
+         *
+         * @param buttonType Choose between different [ButtonType]s for this button.
+         * @param buttonFormEncType HTML Form Enc Type.
+         * @param buttonFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun success(
             buttonType: ButtonType = ButtonType.button,
@@ -644,6 +846,15 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a success button using a link button
+         *
+         * @param href Href of the underlying link.
+         * @param target Target-Attribute of the underlying link
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun success(
             href: String?,
@@ -672,6 +883,19 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a success button using an input button
+         *
+         * @param value Value-Attribute of the input button.
+         * @param name Name-Attribute of the input button.
+         * @param title Title-Attribute of the input button
+         * @param type Choose between different [Button.Types.Input.Type]s for this button.
+         * @param inputFormEncType HTML Form Enc Type.
+         * @param inputFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun success(
             value: String,
@@ -708,6 +932,16 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a warning button using a HTML button
+         *
+         * @param buttonType Choose between different [ButtonType]s for this button.
+         * @param buttonFormEncType HTML Form Enc Type.
+         * @param buttonFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun warning(
             buttonType: ButtonType = ButtonType.button,
@@ -738,6 +972,15 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a warning button using a link button
+         *
+         * @param href Href of the underlying link.
+         * @param target Target-Attribute of the underlying link
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun warning(
             href: String?,
@@ -766,6 +1009,19 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a warning button using an input button
+         *
+         * @param value Value-Attribute of the input button.
+         * @param name Name-Attribute of the input button.
+         * @param title Title-Attribute of the input button
+         * @param type Choose between different [Button.Types.Input.Type]s for this button.
+         * @param inputFormEncType HTML Form Enc Type.
+         * @param inputFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun warning(
             value: String,
@@ -813,6 +1069,16 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a link button using a HTML button
+         *
+         * @param buttonType Choose between different [ButtonType]s for this button.
+         * @param buttonFormEncType HTML Form Enc Type.
+         * @param buttonFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun link(
             buttonType: ButtonType = ButtonType.button,
@@ -843,6 +1109,15 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a link button using a link button
+         *
+         * @param href Href of the underlying link.
+         * @param target Target-Attribute of the underlying link
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun link(
             href: String?,
@@ -871,6 +1146,19 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
 
         /**
          * Creates a link button using a input button
+         *
+         * @param value Value-Attribute of the input button.
+         * @param name Name-Attribute of the input button.
+         * @param title Title-Attribute of the input button
+         * @param type Choose between different [Button.Types.Input.Type]s for this button.
+         * @param inputFormEncType HTML Form Enc Type.
+         * @param inputFormMethod GET/POST.
+         * @param active Renders the button in a *pressed* look.
+         * @param disabled Renders the button as *disabled*. Changes the cursor.
+         * @param nowrap Set this to *true*, to disable text-wrapping.
+         * @param sizes Choose between different [Button.Sizes].
+         * @param blockSized Renders the button as block, if set to *true*.
+         * @param classes Space separated list of CSS classes for this element.
          */
         fun link(
             value: String,
