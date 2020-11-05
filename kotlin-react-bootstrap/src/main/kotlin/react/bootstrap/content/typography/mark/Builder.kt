@@ -6,6 +6,12 @@ import react.RHandler
 import react.ReactElement
 import react.bootstrap.splitClassesToSet
 
+/**
+ * Creates a generic [Mark] element.
+ *
+ * @param TT Tag Type to be used to render this [Mark].
+ * @param classes Space separated list of CSS classes for this element.
+ */
 inline fun <reified TT : CommonAttributeGroupFacade> RBuilder.mark(
     classes: String? = null,
     noinline block: RHandler<Mark.Props>

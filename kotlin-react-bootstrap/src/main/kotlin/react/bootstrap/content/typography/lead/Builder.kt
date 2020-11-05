@@ -5,6 +5,11 @@ import react.RHandler
 import react.ReactElement
 import react.bootstrap.splitClassesToSet
 
+/**
+ * Creates a [Lead] element.
+ *
+ * @param classes Space separated list of CSS classes for this element.
+ */
 fun RBuilder.lead(classes: String? = null, block: RHandler<Lead.Props>): ReactElement =
     child(Lead::class) {
         attrs {

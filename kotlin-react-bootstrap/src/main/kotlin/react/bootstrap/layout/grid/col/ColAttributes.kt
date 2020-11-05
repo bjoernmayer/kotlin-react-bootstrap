@@ -7,12 +7,24 @@ import react.bootstrap.lib.component.AttributeQuadruple
 import react.bootstrap.lib.component.AttributeTriple
 import react.bootstrap.lib.component.CombinedAttributes
 
+/**
+ * Sealed class for different column attributes.
+ *
+ * [ColAttributes] can be combined by using the provided infix functions: `sz`, `off`, `ord` & ` align`
+ */
 sealed class ColAttributes : CombinedAttributes {
     abstract val size: Sizes?
     abstract val offset: Offsets?
     abstract val order: Orderings?
     abstract val alignment: Alignments?
 
+    /**
+     * [Sizes] of a [Col].
+     *
+     * Use [Sizes.off] to combine [Sizes] with [Offsets].
+     * Use [Sizes.ord] to combine [Sizes] with [Orderings].
+     * Use [Sizes.align] to combine [Sizes] with [Alignments].
+     */
     @Suppress("unused")
     sealed class Sizes(override val classNamePostfix: String?) : ColAttributes() {
         class SZ_1 internal constructor() : Sizes("1")
@@ -63,6 +75,13 @@ sealed class ColAttributes : CombinedAttributes {
         }
     }
 
+    /**
+     * [Offsets] of a [Col].
+     *
+     * Use [Offsets.sz] to combine [Offsets] with [Sizes].
+     * Use [Offsets.ord] to combine [Offsets] with [Orderings].
+     * Use [Offsets.align] to combine [Offsets] with [Alignments].
+     */
     @Suppress("unused")
     sealed class Offsets(private val value: Int) : ColAttributes() {
         class OFF_1 internal constructor() : Offsets(1)
@@ -109,6 +128,13 @@ sealed class ColAttributes : CombinedAttributes {
         }
     }
 
+    /**
+     * [Orderings] of a [Col].
+     *
+     * Use [Orderings.sz] to combine [Orderings] with [Sizes].
+     * Use [Orderings.off] to combine [Orderings] with [Offsets].
+     * Use [Orderings.align] to combine [Orderings] with [Alignments].
+     */
     @Suppress("unused")
     sealed class Orderings(override val classNamePostfix: String) : ColAttributes() {
         class ORD_0 internal constructor() : Orderings("0")
@@ -160,6 +186,13 @@ sealed class ColAttributes : CombinedAttributes {
         }
     }
 
+    /**
+     * [Alignments] of a [Col].
+     *
+     * Use [Alignments.sz] to combine [Alignments] with [Sizes].
+     * Use [Alignments.off] to combine [Alignments] with [Offsets].
+     * Use [Alignments.ord] to combine [Alignments] with [Orderings].
+     */
     @Suppress("unused")
     sealed class Alignments : ColAttributes() {
         class AUTO internal constructor() : Alignments()

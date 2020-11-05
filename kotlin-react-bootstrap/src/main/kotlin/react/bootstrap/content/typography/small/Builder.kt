@@ -6,6 +6,12 @@ import react.RHandler
 import react.ReactElement
 import react.bootstrap.splitClassesToSet
 
+/**
+ * Creates a generic [Small] element.
+ *
+ * @param TT Tag Type to be used to render this [Small].
+ * @param classes Space separated list of CSS classes for this element.
+ */
 inline fun <reified TT : CommonAttributeGroupFacade> RBuilder.small(
     classes: String? = null,
     noinline block: RHandler<Small.Props>

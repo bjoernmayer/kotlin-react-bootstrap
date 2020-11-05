@@ -7,6 +7,12 @@ import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.dom.pre
 
+/**
+ * Creates a [PRE] element.
+ *
+ * @param scrollable Set this to *true* to make preformatted contents scrollable.
+ * @param classes Space separated list of CSS classes for this element.
+ */
 @Suppress("unused")
 fun RBuilder.pre(scrollable: Boolean, classes: String? = null, block: RDOMHandler<PRE>) =
     pre(

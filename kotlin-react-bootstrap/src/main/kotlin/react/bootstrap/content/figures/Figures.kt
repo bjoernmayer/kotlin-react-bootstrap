@@ -29,7 +29,7 @@ fun RBuilder.figure(classes: String? = null, block: RDOMHandler<FIGURE>): ReactE
  * @param fluid If set to *true* the image resizes fluently.
  * @param isThumbnail If set to `true`, a border is shown around the image.
  * @param alt alternative string
- * @param src
+ * @param src Src-Attribute of the [IMG]
  * @param classes Space separated list of CSS classes for this element.
  */
 fun RDOMBuilder<FIGURE>.img(
