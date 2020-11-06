@@ -22,7 +22,7 @@ import react.setState
 
 class NavLink(props: Props) : BootstrapComponent<NavLink.Props, NavLink.State>(props) {
     override fun State.init(props: Props) {
-        active = props.active == true
+        active = props.active
 
         props.activeLinkPredicate?.let {
             active = it.invoke(props)
@@ -30,7 +30,7 @@ class NavLink(props: Props) : BootstrapComponent<NavLink.Props, NavLink.State>(p
     }
 
     override fun componentDidMount() {
-        if (state.active == true) {
+        if (state.active) {
             props.onActive?.invoke()
         }
     }
@@ -38,10 +38,10 @@ class NavLink(props: Props) : BootstrapComponent<NavLink.Props, NavLink.State>(p
     override fun componentDidUpdate(prevProps: Props, prevState: State, snapshot: Any) {
         if (prevProps !== props) {
             setState {
-                active = props.activeLinkPredicate?.invoke(props) ?: props.active == true
+                active = props.activeLinkPredicate?.invoke(props) ?: props.active
             }
         }
-        if (prevState.active == false && props.active == true) {
+        if (!prevState.active && props.active) {
             props.onActive?.invoke()
         }
     }
@@ -51,11 +51,11 @@ class NavLink(props: Props) : BootstrapComponent<NavLink.Props, NavLink.State>(p
             ClassNames.NAV_LINK
         )
 
-        if (state.active == true) {
+        if (state.active) {
             navLinkClasses.add(ClassNames.ACTIVE)
         }
 
-        if (props.disabled == true) {
+        if (props.disabled) {
             navLinkClasses.add(ClassNames.DISABLED)
         }
 
@@ -71,7 +71,7 @@ class NavLink(props: Props) : BootstrapComponent<NavLink.Props, NavLink.State>(p
 
                 classes = getComponentClasses()
 
-                if (props.disabled == true) {
+                if (props.disabled) {
                     tabIndex = "-1"
                     ariaDisabled = true
                 }
@@ -85,13 +85,15 @@ class NavLink(props: Props) : BootstrapComponent<NavLink.Props, NavLink.State>(p
     }
 
     interface State : RState {
-        var active: Boolean?
+        var active: Boolean
     }
 
     companion object : RStatics<Props, State, NavLink, Nothing>(NavLink::class) {
         init {
             defaultProps = jsObject {
                 componentType = NavLink::class
+                active = false
+                disabled = false
             }
         }
     }

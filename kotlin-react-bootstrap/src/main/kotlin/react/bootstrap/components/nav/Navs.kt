@@ -152,13 +152,11 @@ sealed class Navs<PT : Navs.Props> : AbstractComponent<HtmlBlockTag, PT, RState>
     }
 
     enum class Appearance {
-        DEFAULT,
         TABS,
         PILLS;
     }
 
     enum class WidthHandling {
-        DEFAULT,
         FILL,
         JUSTIFY;
     }

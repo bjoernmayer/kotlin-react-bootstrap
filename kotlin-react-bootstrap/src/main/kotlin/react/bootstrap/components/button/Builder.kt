@@ -13,12 +13,12 @@ import react.bootstrap.splitClassesToSet
 
 private fun RBuilder.button(
     variant: Button.Variants,
-    active: Boolean? = null,
-    disabled: Boolean? = null,
-    nowrap: Boolean? = null,
+    active: Boolean = false,
+    disabled: Boolean = false,
+    nowrap: Boolean = false,
     sizes: Button.Sizes? = null,
-    blockSized: Boolean? = null,
-    type: Button.Types? = null,
+    blockSized: Boolean = false,
+    type: Button.Types = Button.Types.Button(),
     classes: String? = null,
     block: RHandler<Button.Props>
 ): ReactElement =
@@ -52,11 +52,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
             buttonFormMethod: ButtonFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -78,11 +78,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         fun danger(
             href: String?,
             target: String? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -107,11 +107,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type: Button.Types.Input.Type = Button.Types.Input.Type.BUTTON,
             inputFormEncType: InputFormEncType? = null,
             inputFormMethod: InputFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -137,11 +137,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
             buttonFormMethod: ButtonFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -163,11 +163,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         fun dark(
             href: String?,
             target: String? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -192,11 +192,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type: Button.Types.Input.Type = Button.Types.Input.Type.BUTTON,
             inputFormEncType: InputFormEncType? = null,
             inputFormMethod: InputFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -222,11 +222,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
             buttonFormMethod: ButtonFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -248,11 +248,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         fun info(
             href: String?,
             target: String? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -277,11 +277,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type: Button.Types.Input.Type = Button.Types.Input.Type.BUTTON,
             inputFormEncType: InputFormEncType? = null,
             inputFormMethod: InputFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -307,11 +307,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
             buttonFormMethod: ButtonFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -333,11 +333,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         fun light(
             href: String?,
             target: String? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -362,11 +362,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type: Button.Types.Input.Type = Button.Types.Input.Type.BUTTON,
             inputFormEncType: InputFormEncType? = null,
             inputFormMethod: InputFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -392,11 +392,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
             buttonFormMethod: ButtonFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -418,11 +418,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         fun primary(
             href: String?,
             target: String? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -447,11 +447,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type: Button.Types.Input.Type = Button.Types.Input.Type.BUTTON,
             inputFormEncType: InputFormEncType? = null,
             inputFormMethod: InputFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -477,11 +477,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
             buttonFormMethod: ButtonFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -503,11 +503,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         fun secondary(
             href: String?,
             target: String? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -532,11 +532,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type: Button.Types.Input.Type = Button.Types.Input.Type.BUTTON,
             inputFormEncType: InputFormEncType? = null,
             inputFormMethod: InputFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -562,11 +562,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
             buttonFormMethod: ButtonFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -588,11 +588,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         fun success(
             href: String?,
             target: String? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -617,11 +617,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type: Button.Types.Input.Type = Button.Types.Input.Type.BUTTON,
             inputFormEncType: InputFormEncType? = null,
             inputFormMethod: InputFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -647,11 +647,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
             buttonFormMethod: ButtonFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -673,11 +673,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         fun warning(
             href: String?,
             target: String? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -702,11 +702,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type: Button.Types.Input.Type = Button.Types.Input.Type.BUTTON,
             inputFormEncType: InputFormEncType? = null,
             inputFormMethod: InputFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -743,11 +743,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             buttonType: ButtonType = ButtonType.button,
             buttonFormEncType: ButtonFormEncType? = null,
             buttonFormMethod: ButtonFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -769,11 +769,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         fun link(
             href: String?,
             target: String? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(
@@ -798,11 +798,11 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type: Button.Types.Input.Type = Button.Types.Input.Type.BUTTON,
             inputFormEncType: InputFormEncType? = null,
             inputFormMethod: InputFormMethod? = null,
-            active: Boolean? = null,
-            disabled: Boolean? = null,
-            nowrap: Boolean? = null,
+            active: Boolean = false,
+            disabled: Boolean = false,
+            nowrap: Boolean = false,
             sizes: Button.Sizes? = null,
-            blockSized: Boolean? = null,
+            blockSized: Boolean = false,
             classes: String? = null,
             block: RHandler<Button.Props>
         ): ReactElement = builder.button(

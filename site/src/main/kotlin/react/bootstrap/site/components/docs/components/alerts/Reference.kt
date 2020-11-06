@@ -57,7 +57,7 @@ internal class Reference : SectionComponent() {
                 +FunSpec.builder(function)
                     .nestedBy(RBuilder::Alerts)
                     .nestedBy(AlertBuilder::dismissible)
-                    .addParameter("fade", Boolean::class, true, FunSpec.Parameter.NULL)
+                    .addParameter("fade", Boolean::class, false, "false")
                     .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
                     .addParameter("block", Generic("RHandler", Alert.Dismissible.Props::class))
                     .returns("ReactElement")

@@ -153,7 +153,7 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
                         onClick = { event ->
                             handleButtonClick(index, event, oldProps.onClick)
                         }
-                        active = state.activeButtons?.contains(index)
+                        active = state.activeButtons?.contains(index) ?: false
                     }
                 }
             )

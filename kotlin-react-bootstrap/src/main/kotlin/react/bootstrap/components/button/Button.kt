@@ -41,12 +41,22 @@ import react.dom.label
 import react.setState
 
 class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(props) {
+    init {
+        // These comparison are not senseless. The props are built using kotlin's `dynamic` keyword. Null is a possible
+        // value.
+
+        @Suppress("SENSELESS_COMPARISON")
+        require(props.variant != null) {
+            "Missing property: variant must not be null!"
+        }
+    }
+
     override fun State.init(props: Props) {
-        active = props.active == true
+        active = props.active
     }
 
     override fun componentDidMount() {
-        if (state.active == true) {
+        if (state.active) {
             props.onActive?.invoke()
         }
     }
@@ -54,10 +64,10 @@ class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(prop
     override fun componentDidUpdate(prevProps: Props, prevState: State, snapshot: Any) {
         if (prevProps !== props) {
             setState {
-                active = props.active == true
+                active = props.active
             }
         }
-        if (prevState.active == false && props.active == true) {
+        if (!prevState.active && props.active) {
             props.onActive?.invoke()
         }
     }
@@ -76,19 +86,19 @@ class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(prop
     override fun buildClasses(): Set<ClassNames> {
         val btnClasses = mutableSetOf(ClassNames.BTN)
 
-        if (state.active == true) {
+        if (state.active) {
             btnClasses.add(ClassNames.ACTIVE)
         }
 
-        if (props.disabled == true && props.type is Types.Link) {
+        if (props.disabled && props.type is Types.Link) {
             btnClasses.add(ClassNames.DISABLED)
         }
 
-        if (props.nowrap == true) {
+        if (props.nowrap) {
             btnClasses.add(ClassNames.TEXT_NOWRAP)
         }
 
-        if (props.blockSized == true) {
+        if (props.blockSized) {
             btnClasses.add(ClassNames.BTN_BLOCK)
         }
 
@@ -101,130 +111,118 @@ class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(prop
             )
         }
 
-        props.variant?.also {
-            btnClasses.add(it.className)
-        }
+        btnClasses.add(props.variant.className)
 
         return btnClasses
     }
 
     @Suppress("UnsafeCastFromDynamic")
     override fun RBuilder.render() {
-        if (props.type !== null) {
-            when (val type = props.type) {
-                is Types.Button -> {
-                    button(
-                        formEncType = type.buttonFormEncType,
-                        formMethod = type.buttonFormMethod,
-                        type = type.buttonType
+        when (val type = props.type) {
+            is Types.Button -> {
+                button(
+                    formEncType = type.buttonFormEncType,
+                    formMethod = type.buttonFormMethod,
+                    type = type.buttonType
+                ) {
+                    attrs {
+                        handleCommonAttrs()
+                        loadGlobalAttributes(props)
+
+                        classes = getComponentClasses()
+
+                        attrs.disabled = props.disabled
+                    }
+                    children()
+                }
+            }
+            is Types.Input -> {
+                if (type.type == Types.Input.Type.CHECKBOX || type.type == Types.Input.Type.RADIO) {
+                    label {
+                        attrs {
+                            loadGlobalAttributes(props)
+
+                            classes = getComponentClasses()
+                        }
+                        input(
+                            type = type.type.inputType,
+                            formEncType = type.inputFormEncType,
+                            formMethod = type.inputFormMethod,
+                            name = type.name
+                        ) {
+                            attrs {
+                                handleCommonAttrs()
+                                onChangeFunction = {
+                                    handleChange(it, props.onChange)
+                                }
+
+                                value = type.value
+
+                                // Hide the box/circle
+                                style = kotlinext.js.js {
+                                    position = "absolute"
+                                    clip = "rect(0,0,0,0)"
+                                    pointerEvents = "none"
+                                }
+
+                                if (props.disabled) {
+                                    disabled = true
+                                    tabIndex = "-1"
+                                }
+
+                                defaultChecked = state.active
+                            }
+                            // No children allowed
+                        }
+                        +" "
+                        type.title?.let { +it } ?: +type.value
+                    }
+                } else {
+                    input(
+                        type = type.type.inputType,
+                        formEncType = type.inputFormEncType,
+                        formMethod = type.inputFormMethod,
+                        name = type.name
+
                     ) {
                         attrs {
                             handleCommonAttrs()
                             loadGlobalAttributes(props)
 
                             classes = getComponentClasses()
+                            value = type.value
 
-                            attrs.disabled = props.disabled == true
-                        }
-                        children()
-                    }
-                }
-                is Types.Input -> {
-                    if (type.type == Types.Input.Type.CHECKBOX || type.type == Types.Input.Type.RADIO) {
-                        label {
-                            attrs {
-                                loadGlobalAttributes(props)
-
-                                classes = getComponentClasses()
+                            type.title?.let {
+                                title = it
                             }
-                            input(
-                                type = type.type.inputType,
-                                formEncType = type.inputFormEncType,
-                                formMethod = type.inputFormMethod,
-                                name = type.name
-                            ) {
-                                attrs {
-                                    handleCommonAttrs()
-                                    onChangeFunction = {
-                                        handleChange(it, props.onChange)
-                                    }
 
-                                    value = type.value
-
-                                    // Hide the box/circle
-                                    style = kotlinext.js.js {
-                                        position = "absolute"
-                                        clip = "rect(0,0,0,0)"
-                                        pointerEvents = "none"
-                                    }
-
-                                    if (props.disabled == true) {
-                                        disabled = true
-                                        tabIndex = "-1"
-                                    }
-
-                                    defaultChecked = state.active == true
-                                }
-                                // No children allowed
+                            if (props.disabled) {
+                                disabled = true
+                                tabIndex = "-1"
                             }
-                            +" "
-                            type.title?.let { +it } ?: +type.value
                         }
-                    } else {
-                        input(
-                            type = type.type.inputType,
-                            formEncType = type.inputFormEncType,
-                            formMethod = type.inputFormMethod,
-                            name = type.name
-
-                        ) {
-                            attrs {
-                                handleCommonAttrs()
-                                loadGlobalAttributes(props)
-
-                                classes = getComponentClasses()
-                                value = type.value
-
-                                type.title?.let {
-                                    title = it
-                                }
-
-                                if (props.disabled == true) {
-                                    disabled = true
-                                    tabIndex = "-1"
-                                }
-                            }
-                            // No children allowed
-                        }
-                    }
-                }
-                is Types.Link -> {
-                    a(href = type.href, target = type.target) {
-                        attrs {
-                            handleCommonAttrs()
-                            loadGlobalAttributes(props)
-
-                            classes = getComponentClasses()
-                            role = "button"
-                        }
-                        children()
+                        // No children allowed
                     }
                 }
             }
-        } else {
-            button(type = ButtonType.button) {
-                attrs {
-                    handleCommonAttrs()
-                    attrs.disabled = props.disabled == true
+            is Types.Link -> {
+                a(href = type.href, target = type.target) {
+                    attrs {
+                        handleCommonAttrs()
+                        loadGlobalAttributes(props)
+
+                        classes = getComponentClasses()
+                        role = "button"
+                    }
+                    children()
                 }
-                children()
             }
         }
     }
 
     private fun <T : CommonAttributeGroupFacade> T.handleCommonAttrs() {
-        ariaPressed = state.active == true
-        ariaDisabled = props.disabled == true
+        ariaPressed = state.active
+        ariaDisabled = props.disabled
 
         loadDomEvents(props)
     }
@@ -313,21 +311,26 @@ class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(prop
     }
 
     interface Props : WithGlobalAttributes, WithActive, WithDisabled, WithDomEvents, IdentifiableProps<Button> {
-        var nowrap: Boolean?
+        var nowrap: Boolean
         var sizes: Sizes?
-        var type: Types?
-        var variant: Variants?
-        var blockSized: Boolean?
+        var type: Types
+        var variant: Variants
+        var blockSized: Boolean
     }
 
     interface State : RState {
-        var active: Boolean?
+        var active: Boolean
     }
 
     companion object : RStatics<Props, State, Button, Nothing>(Button::class) {
         init {
             defaultProps = jsObject {
+                nowrap = false
+                type = Types.Button()
                 componentType = Button::class
+                blockSized = false
+                active = false
+                disabled = false
             }
         }
     }
