@@ -1,4 +1,4 @@
-@file:Suppress("ClassName", "unused")
+@file:Suppress("unused")
 
 package react.bootstrap.layout.grid.row
 
@@ -22,6 +22,7 @@ sealed class RowAttributes : CombinedAttributes {
      * Use [ColCounts.xs] to combine [ColCounts] with [ItemsXs].
      * Use [ColCounts.ys] to combine [ColCounts] with [ItemsYs].
      */
+    @Suppress("ClassName")
     sealed class ColCounts(private val value: Int) : RowAttributes() {
         class CNT_1 internal constructor() : ColCounts(1)
         class CNT_2 internal constructor() : ColCounts(2)
@@ -38,7 +39,9 @@ sealed class RowAttributes : CombinedAttributes {
         final override val itemsX: ItemsXs? = null
         final override val itemsY: ItemsYs? = null
 
+        @Suppress("MemberVisibilityCanBePrivate")
         infix fun xs(that: ItemsXs): ColCountItemXsPair = ColCountItemXsPair(this, that)
+        @Suppress("MemberVisibilityCanBePrivate")
         infix fun ys(that: ItemsYs): ColCountItemYsPair = ColCountItemYsPair(this, that)
 
         companion object {
@@ -106,6 +109,7 @@ sealed class RowAttributes : CombinedAttributes {
             get() = this
 
         infix fun colcount(that: ColCounts): ColCountItemYsPair = ColCountItemYsPair(that, this)
+        @Suppress("MemberVisibilityCanBePrivate")
         infix fun xs(that: ItemsXs): ItemsXsItemsYsPair = ItemsXsItemsYsPair(that, this)
 
         companion object {

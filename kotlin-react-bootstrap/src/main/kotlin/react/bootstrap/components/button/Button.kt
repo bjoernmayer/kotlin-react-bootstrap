@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package react.bootstrap.components.button
 
 import kotlinext.js.jsObject

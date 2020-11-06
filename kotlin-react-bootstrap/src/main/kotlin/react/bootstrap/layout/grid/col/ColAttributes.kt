@@ -1,4 +1,4 @@
-@file:Suppress("ClassName")
+@file:Suppress("ClassName", "unused")
 
 package react.bootstrap.layout.grid.col
 
@@ -25,7 +25,6 @@ sealed class ColAttributes : CombinedAttributes {
      * Use [Sizes.ord] to combine [Sizes] with [Orderings].
      * Use [Sizes.align] to combine [Sizes] with [Alignments].
      */
-    @Suppress("unused")
     sealed class Sizes(override val classNamePostfix: String?) : ColAttributes() {
         class SZ_1 internal constructor() : Sizes("1")
         class SZ_2 internal constructor() : Sizes("2")
@@ -57,6 +56,7 @@ sealed class ColAttributes : CombinedAttributes {
 
         infix fun align(that: Alignments) = SizeAlignmentPair(this, that)
 
+        @Suppress("unused")
         companion object {
             val SZ_1 = SZ_1()
             val SZ_2 = SZ_2()
@@ -82,7 +82,6 @@ sealed class ColAttributes : CombinedAttributes {
      * Use [Offsets.ord] to combine [Offsets] with [Orderings].
      * Use [Offsets.align] to combine [Offsets] with [Alignments].
      */
-    @Suppress("unused")
     sealed class Offsets(private val value: Int) : ColAttributes() {
         class OFF_1 internal constructor() : Offsets(1)
         class OFF_2 internal constructor() : Offsets(2)
@@ -112,6 +111,7 @@ sealed class ColAttributes : CombinedAttributes {
 
         infix fun align(that: Alignments) = OffsetAlignmentPair(this, that)
 
+        @Suppress("unused")
         companion object {
             val OFF_1 = OFF_1()
             val OFF_2 = OFF_2()
@@ -135,7 +135,6 @@ sealed class ColAttributes : CombinedAttributes {
      * Use [Orderings.off] to combine [Orderings] with [Offsets].
      * Use [Orderings.align] to combine [Orderings] with [Alignments].
      */
-    @Suppress("unused")
     sealed class Orderings(override val classNamePostfix: String) : ColAttributes() {
         class ORD_0 internal constructor() : Orderings("0")
         class ORD_1 internal constructor() : Orderings("1")
@@ -167,6 +166,7 @@ sealed class ColAttributes : CombinedAttributes {
 
         infix fun align(that: Alignments) = OrderAlignmentPair(this, that)
 
+        @Suppress("unused")
         companion object {
             val ORD_0 = ORD_0()
             val ORD_1 = ORD_1()
@@ -193,7 +193,6 @@ sealed class ColAttributes : CombinedAttributes {
      * Use [Alignments.off] to combine [Alignments] with [Offsets].
      * Use [Alignments.ord] to combine [Alignments] with [Orderings].
      */
-    @Suppress("unused")
     sealed class Alignments : ColAttributes() {
         class AUTO internal constructor() : Alignments()
         class BASELINE internal constructor() : Alignments()

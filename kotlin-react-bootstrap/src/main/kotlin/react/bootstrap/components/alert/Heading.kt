@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package react.bootstrap.components.alert
 
 import kotlinx.html.H1

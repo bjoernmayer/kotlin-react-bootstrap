@@ -1,5 +1,3 @@
-@file:Suppress("unused", "ClassName", "DuplicatedCode")
-
 package react.bootstrap.layout.grid.col
 
 import kotlinx.html.CommonAttributeGroupFacade

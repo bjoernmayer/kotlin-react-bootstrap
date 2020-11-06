@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package react.bootstrap.content.figures
 
 import kotlinx.html.FIGCAPTION

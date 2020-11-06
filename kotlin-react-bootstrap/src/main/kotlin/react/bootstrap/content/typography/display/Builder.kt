@@ -32,7 +32,6 @@ inline fun <reified TT : HtmlInlineTag> RBuilder.display(
  *
  * @param classes Space separated list of CSS classes for this element.
  */
-@Suppress("unused")
 fun RBuilder.display1(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
     display<SPAN>(variant = Display.Variants.DISPLAY_1, classes = classes, block = block)
 
@@ -41,7 +40,6 @@ fun RBuilder.display1(classes: String? = null, block: RHandler<Display.Props>): 
  *
  * @param classes Space separated list of CSS classes for this element.
  */
-@Suppress("unused")
 fun RBuilder.display2(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
     display<SPAN>(variant = Display.Variants.DISPLAY_2, classes = classes, block = block)
 
@@ -50,7 +48,6 @@ fun RBuilder.display2(classes: String? = null, block: RHandler<Display.Props>): 
  *
  * @param classes Space separated list of CSS classes for this element.
  */
-@Suppress("unused")
 fun RBuilder.display3(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
     display<SPAN>(variant = Display.Variants.DISPLAY_3, classes = classes, block = block)
 
@@ -59,6 +56,5 @@ fun RBuilder.display3(classes: String? = null, block: RHandler<Display.Props>): 
  *
  * @param classes Space separated list of CSS classes for this element.
  */
-@Suppress("unused")
 fun RBuilder.display4(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
     display<SPAN>(variant = Display.Variants.DISPLAY_4, classes = classes, block = block)
