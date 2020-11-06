@@ -10,7 +10,7 @@ pluginManagement {
 
             kotlin("js") extraVersion "kotlin"
 
-            id("org.jlleitschuh.gradle.ktlint") version "ktlint-gradle"
+            id("org.jlleitschuh.gradle.ktlint") extraVersion "ktlint-gradle"
         }
     }
 }
