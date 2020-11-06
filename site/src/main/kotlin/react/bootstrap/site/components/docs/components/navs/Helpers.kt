@@ -13,7 +13,7 @@ import kotlin.reflect.KFunction7
 
 internal val navItemBuilderFun = RElementBuilder<NavComponent.Ul.Props>::navItem
 internal val navLinkBuilderFun: KFunction7<
-    RElementBuilder<NavItems.Li.Props>, String?, String?, String?, Boolean?, Boolean?,
+    RElementBuilder<NavItems.Li.Props>, String?, String?, String?, Boolean, Boolean,
     RElementBuilder<NavLink.Props>.() -> Unit, ReactElement> =
     RElementBuilder<NavItems.Li.Props>::navLink
 

@@ -47,11 +47,11 @@ internal class Reference : SectionComponent() {
                 FunSpec.Parameter("buttonType", ButtonType::class, false, ButtonType.button),
                 FunSpec.Parameter("buttonFormEncType", ButtonFormEncType::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("buttonFormMethod", ButtonFormMethod::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("active", Boolean::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("disabled", Boolean::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("nowrap", Boolean::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("active", Boolean::class, false, "false"),
+                FunSpec.Parameter("disabled", Boolean::class, false, "false"),
+                FunSpec.Parameter("nowrap", Boolean::class, false, "false"),
                 FunSpec.Parameter("sizes", Button.Sizes::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("blockSized", Boolean::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("blockSized", Boolean::class, false, "false"),
                 FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("block", Generic("RHandler", Button.Props::class))
             )
@@ -88,11 +88,11 @@ internal class Reference : SectionComponent() {
             val linkButtonParameters = setOf(
                 FunSpec.Parameter("href", String::class, true),
                 FunSpec.Parameter("target", String::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("active", Boolean::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("disabled", Boolean::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("nowrap", Boolean::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("active", Boolean::class, false, "false"),
+                FunSpec.Parameter("disabled", Boolean::class, false, "false"),
+                FunSpec.Parameter("nowrap", Boolean::class, false, "false"),
                 FunSpec.Parameter("sizes", Button.Sizes::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("blockSized", Boolean::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("blockSized", Boolean::class, false, "false"),
                 FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("block", Generic("RHandler", Button.Props::class))
             )
@@ -132,11 +132,11 @@ internal class Reference : SectionComponent() {
                 FunSpec.Parameter("type", Button.Types.Input.Type::class, false, Button.Types.Input.Type.BUTTON),
                 FunSpec.Parameter("inputFormEncType", InputFormEncType::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("inputFormMethod", InputFormMethod::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("active", Boolean::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("disabled", Boolean::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("nowrap", Boolean::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("active", Boolean::class, false, "false"),
+                FunSpec.Parameter("disabled", Boolean::class, false, "false"),
+                FunSpec.Parameter("nowrap", Boolean::class, false, "false"),
                 FunSpec.Parameter("sizes", Button.Sizes::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("blockSized", Boolean::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("blockSized", Boolean::class, false, "false"),
                 FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("block", Generic("RHandler", Button.Props::class))
             )

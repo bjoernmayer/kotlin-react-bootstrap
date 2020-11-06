@@ -152,13 +152,11 @@ sealed class NavComponent<PT : NavComponent.Props> : AbstractComponent<HtmlBlock
     }
 
     enum class Appearance {
-        DEFAULT,
         TABS,
         PILLS;
     }
 
     enum class WidthHandling {
-        DEFAULT,
         FILL,
         JUSTIFY;
     }
