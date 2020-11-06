@@ -59,7 +59,7 @@ internal class Reference : SectionComponent() {
                     .nestedBy(AlertBuilder::dismissible)
                     .addParameter("fade", Boolean::class, true, FunSpec.Parameter.NULL)
                     .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
-                    .addParameter("block", Generic("RHandler", Alert.DismissibleProps::class))
+                    .addParameter("block", Generic("RHandler", Alert.Dismissible.Props::class))
                     .returns("ReactElement")
                     .build()
             }
@@ -123,8 +123,8 @@ Custom `${function.name}` which behaves the same but adds `${ClassNames.ALERT_HE
             +"Wrapper for a custom alert closing element."
         }
         codeExample {
-            +FunSpec.builder(RElementBuilder<Alert.DismissibleProps>::closingElement, false)
-                .nestedBy(Generic(RElementBuilder::class, Alert.DismissibleProps::class))
+            +FunSpec.builder(RElementBuilder<Alert.Dismissible.Props>::closingElement, false)
+                .nestedBy(Generic(RElementBuilder::class, Alert.Dismissible.Props::class))
                 .addParameter("block", "ElementProvider")
                 .returns("ReactElement")
                 .build()

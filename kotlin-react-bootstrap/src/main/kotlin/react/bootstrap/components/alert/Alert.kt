@@ -8,6 +8,7 @@ import org.w3c.dom.events.Event
 import react.RBuilder
 import react.RProps
 import react.RState
+import react.RStatics
 import react.ReactElement
 import react.asElementOrNull
 import react.bootstrap.lib.EventHandler
@@ -26,93 +27,108 @@ import react.cloneElement
 import react.dom.div
 import react.setState
 
-class Alert(props: Props) : BootstrapComponent<Alert.Props, Alert.State>(props) {
-    override fun State.init(props: Props) {
-        state = States.SHOWN
+sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponent<PT, ST>(props) {
+    class Static(props: Props) : Alert<Static.Props, RState>(props) {
+        override fun RBuilder.render() {
+            div {
+                children()
+
+                attrs {
+                    loadDomEvents(props)
+                    loadGlobalAttributes(props)
+
+                    role = "alert"
+
+                    classes = getComponentClasses()
+                }
+            }
+        }
+
+        interface Props : Alert.Props
     }
 
-    private fun handleDismissle(
-        @Suppress("UNUSED_PARAMETER") event: Event,
-        originalEventHandler: EventHandler?
-    ) {
-        if (originalEventHandler is EventHandler) {
-            originalEventHandler.invoke(event)
+    class Dismissible(props: Props) : Alert<Dismissible.Props, Dismissible.State>(props) {
+        override fun State.init(props: Props) {
+            state = States.SHOWN
         }
 
-        props.dismissible?.onClose?.apply {
-            invoke()
-        }
-
-        if (props.dismissible?.fade == true) {
-            setState {
-                state = States.DISMISSING
+        private fun handleDismissle(
+            @Suppress("UNUSED_PARAMETER") event: Event,
+            originalEventHandler: EventHandler?
+        ) {
+            if (originalEventHandler is EventHandler) {
+                originalEventHandler.invoke(event)
             }
 
-            return
-        }
-
-        setState {
-            state = States.DISMISSED
-        }
-
-        props.dismissible?.onClosed?.apply {
-            invoke()
-        }
-    }
-
-    private fun handleTransitionEnd(@Suppress("UNUSED_PARAMETER") event: Event) {
-        // Only react, under the right circumstances
-        if (props.dismissible?.fade == true && state.state == States.DISMISSING) {
-            props.dismissible?.onClosed?.apply {
+            props.onClose?.apply {
                 invoke()
+            }
+
+            if (props.fade) {
+                setState {
+                    state = States.DISMISSING
+                }
+
+                return
             }
 
             setState {
                 state = States.DISMISSED
             }
-        }
-    }
 
-    override fun buildClasses(): Set<ClassNames> {
-        val alertClasses = mutableSetOf(ClassNames.ALERT)
-
-        props.variant?.also { alertClasses.add(it.className) }
-
-        props.dismissible?.also { dismissibleProps ->
-            alertClasses.add(ClassNames.ALERT_DISMISSIBLE)
-
-            if (state.state == States.SHOWN) {
-                alertClasses.add(ClassNames.SHOW)
-            }
-
-            if (dismissibleProps.fade == true) {
-                alertClasses.add(ClassNames.FADE)
+            props.onClosed?.apply {
+                invoke()
             }
         }
 
-        return alertClasses
-    }
+        private fun handleTransitionEnd(@Suppress("UNUSED_PARAMETER") event: Event) {
+            // Only react, under the right circumstances
+            if (props.fade && state.state == States.DISMISSING) {
+                props.onClosed?.apply {
+                    invoke()
+                }
 
-    override fun RBuilder.render() {
-        if (state.state == States.DISMISSED) {
-            return
+                setState {
+                    state = States.DISMISSED
+                }
+            }
         }
 
-        div {
-            children()
+        override fun buildClasses(): Set<ClassNames> {
+            val superClasses = super.buildClasses()
 
-            props.dismissible?.also { dismissibleProps ->
-                if (dismissibleProps.fade == true) {
-                    attrs.onTransitionEndFunction = this@Alert::handleTransitionEnd
+            return superClasses.toMutableSet().apply {
+                add(ClassNames.ALERT_DISMISSIBLE)
+
+                if (state.state == States.SHOWN) {
+                    add(ClassNames.SHOW)
+                }
+
+                if (props.fade) {
+                    add(ClassNames.FADE)
+                }
+            }
+        }
+
+        override fun RBuilder.render() {
+            if (state.state == States.DISMISSED) {
+                return
+            }
+
+            div {
+                children()
+
+                if (props.fade) {
+                    attrs.onTransitionEndFunction = this@Dismissible::handleTransitionEnd
                 }
 
                 val closingElement = cloneElement<WithDomEvents>(
-                    dismissibleProps.closeElement ?: RBuilder().close { },
+                    props.closeElement,
                     jsObject {
-                        val origEventHandler = dismissibleProps
+                        val origEventHandler = props
                             .closeElement
-                            ?.run {
-                                val props = this.props.asJsObject()
+                            .run {
+                                val props = this@Dismissible.props.asJsObject()
 
                                 if (props.hasOwnProperty(WithDomEvents::onClick.name)) {
                                     props.unsafeCast<WithDomEvents>().onClick
@@ -127,83 +143,75 @@ class Alert(props: Props) : BootstrapComponent<Alert.Props, Alert.State>(props) 
                     }
                 )
 
-                if (dismissibleProps.closeElement != null) {
+                if (props.closeElement != defaultCloseElement) {
                     childList.replaceCloseElement(closingElement)
                 } else {
                     childList.add(closingElement)
                 }
-            }
 
-            attrs {
-                loadDomEvents(props, props::onTransitionEnd)
-                loadGlobalAttributes(props)
+                attrs {
+                    loadDomEvents(props, props::onTransitionEnd)
+                    loadGlobalAttributes(props)
 
-                role = "alert"
+                    role = "alert"
 
-                classes = getComponentClasses()
-            }
-        }
-    }
-
-    /**
-     * We marked the close element before. Now we find it in the children and replace it
-     */
-    private fun MutableList<Any>.replaceCloseElement(newClosingElement: ReactElement) {
-        val closeElementInChildren = props.childrenArray.indexOfFirst {
-            it.asElementOrNull()?.let { el ->
-                val props = el.props.asJsObject()
-
-                if (props.hasOwnProperty(CloseElementMarkerProps::random.name)) {
-                    @Suppress("UnsafeCastFromDynamic")
-                    props.unsafeCast<CloseElementMarkerProps>().random ==
-                        newClosingElement.props.unsafeCast<CloseElementMarkerProps>().random
-                } else {
-                    false
+                    classes = getComponentClasses()
                 }
-            } ?: false
+            }
         }
 
-        if (closeElementInChildren == -1) {
-            error("Given close element could not be found in children.")
+        /**
+         * We marked the close element before. Now we find it in the children and replace it
+         */
+        private fun MutableList<Any>.replaceCloseElement(newClosingElement: ReactElement) {
+            val closeElementInChildren = props.childrenArray.indexOfFirst {
+                it.asElementOrNull()?.let { el ->
+                    val props = el.props.asJsObject()
+
+                    if (props.hasOwnProperty(CloseElementMarkerProps::random.name)) {
+                        props.unsafeCast<CloseElementMarkerProps>().random ==
+                            newClosingElement.props.unsafeCast<CloseElementMarkerProps>().random
+                    } else {
+                        false
+                    }
+                } ?: false
+            }
+
+            if (closeElementInChildren == -1) {
+                error("Given close element could not be found in children.")
+            }
+
+            this[closeElementInChildren] = newClosingElement
         }
 
-        this[closeElementInChildren] = newClosingElement
-    }
+        internal interface CloseElementMarkerProps : RProps {
+            var random: Int?
+        }
 
-    @Suppress("unused")
-    enum class Variants(override val className: ClassNames) : ClassNameEnum {
-        DANGER(ClassNames.ALERT_DANGER),
-        DARK(ClassNames.ALERT_DARK),
-        INFO(ClassNames.ALERT_INFO),
-        LIGHT(ClassNames.ALERT_LIGHT),
-        PRIMARY(ClassNames.ALERT_PRIMARY),
-        SECONDARY(ClassNames.ALERT_SECONDARY),
-        SUCCESS(ClassNames.ALERT_SUCCESS),
-        WARNING(ClassNames.ALERT_WARNING);
-    }
+        enum class States {
+            SHOWN,
+            DISMISSING,
+            DISMISSED;
+        }
 
-    internal interface CloseElementMarkerProps : RProps {
-        var random: Int?
-    }
+        interface State : RState {
+            var state: States
+        }
 
-    interface Props : WithGlobalAttributes, WithDomEvents {
-        var dismissible: Dismissible?
-        var variant: Variants?
-
-        interface Dismissible {
+        interface Props : Alert.Props {
             /**
              * This is the element the user can click on to dismiss the alert.
              *
              * Defaults [react.bootstrap.utilities.close.Close]
              */
-            var closeElement: ReactElement?
+            var closeElement: ReactElement
 
             /**
              * When set to *true* the alert fades out, when dismissed.
              *
              * Defaults to *false*
              */
-            var fade: Boolean?
+            var fade: Boolean
 
             /**
              * This handler is called immediately when the [handleDismissle] handler was called.
@@ -217,15 +225,44 @@ class Alert(props: Props) : BootstrapComponent<Alert.Props, Alert.State>(props) 
         }
     }
 
-    interface DismissibleProps : Props
+    init {
+        // These comparison are not senseless. The props are built using kotlin's `dynamic` keyword. Null is a possible
+        // value.
 
-    enum class States {
-        SHOWN,
-        DISMISSING,
-        DISMISSED;
+        @Suppress("SENSELESS_COMPARISON")
+        require(props.variant != null) {
+            "Missing property: variant must not be null!"
+        }
     }
 
-    interface State : RState {
-        var state: States
+    override fun buildClasses(): Set<ClassNames> = mutableSetOf(ClassNames.ALERT, props.variant.className)
+
+    enum class Variants(override val className: ClassNames) : ClassNameEnum {
+        DANGER(ClassNames.ALERT_DANGER),
+        DARK(ClassNames.ALERT_DARK),
+        INFO(ClassNames.ALERT_INFO),
+        LIGHT(ClassNames.ALERT_LIGHT),
+        PRIMARY(ClassNames.ALERT_PRIMARY),
+        SECONDARY(ClassNames.ALERT_SECONDARY),
+        SUCCESS(ClassNames.ALERT_SUCCESS),
+        WARNING(ClassNames.ALERT_WARNING);
+    }
+
+    interface Props : WithGlobalAttributes, WithDomEvents {
+        var variant: Variants
+    }
+
+    /**
+     * This special companion must be part of the sealed class. Putting it into [Dismissible] would break things.
+     */
+    companion object : RStatics<Dismissible.Props, Dismissible.State, Dismissible, Nothing>(Dismissible::class) {
+        private val defaultCloseElement = RBuilder().close { }
+
+        init {
+            defaultProps = jsObject {
+                closeElement = defaultCloseElement
+                fade = false
+            }
+        }
     }
 }

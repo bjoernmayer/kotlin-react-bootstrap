@@ -17,11 +17,11 @@ import kotlin.random.Random
  * @param block [ElementProvider] Should return a ReactElement
  * @return The ceated ReactElement
  */
-fun RElementBuilder<Alert.DismissibleProps>.closingElement(block: ElementProvider): ReactElement {
+fun RElementBuilder<Alert.Dismissible.Props>.closingElement(block: ElementProvider): ReactElement {
     val element = RBuilder().block()
 
     // The closing element is marked, to be able to find it in the childlist
-    val clone = cloneElement<Alert.CloseElementMarkerProps>(
+    val clone = cloneElement<Alert.Dismissible.CloseElementMarkerProps>(
         element,
         jsObject {
             this.random = Random.nextInt()
@@ -29,9 +29,7 @@ fun RElementBuilder<Alert.DismissibleProps>.closingElement(block: ElementProvide
     )
 
     attrs {
-        dismissible = (dismissible ?: jsObject()).apply {
-            closeElement = clone
-        }
+        closeElement = clone
     }
 
     return child(clone)

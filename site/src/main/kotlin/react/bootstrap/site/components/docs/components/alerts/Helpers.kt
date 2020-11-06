@@ -5,5 +5,5 @@ import react.bootstrap.components.alert.Alert
 import react.bootstrap.components.alert.closingElement
 import react.bootstrap.components.alert.link
 
-internal val closingElementName = RElementBuilder<Alert.DismissibleProps>::closingElement.name
+internal val closingElementName = RElementBuilder<Alert.Dismissible.Props>::closingElement.name
 internal val linkName = RElementBuilder<Alert.Props>::link.name
