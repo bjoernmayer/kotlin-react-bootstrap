@@ -1,49 +1,51 @@
 package react.bootstrap.components.alert
 
-import kotlinext.js.jsObject
 import react.RBuilder
 import react.RHandler
 import react.ReactElement
+import react.bootstrap.components.alert.Alert.Variants.DANGER
+import react.bootstrap.components.alert.Alert.Variants.DARK
+import react.bootstrap.components.alert.Alert.Variants.INFO
+import react.bootstrap.components.alert.Alert.Variants.LIGHT
+import react.bootstrap.components.alert.Alert.Variants.PRIMARY
+import react.bootstrap.components.alert.Alert.Variants.SECONDARY
+import react.bootstrap.components.alert.Alert.Variants.SUCCESS
+import react.bootstrap.components.alert.Alert.Variants.WARNING
 import react.bootstrap.lib.Builder
 import react.bootstrap.splitClassesToSet
 
 class AlertBuilder(override val builder: RBuilder) : Builder {
-    fun RBuilder.alert(
-        variant: Alert.Variants,
-        classes: String? = null,
-        block: RHandler<Alert.Props>
-    ): ReactElement = child(Alert::class) {
-        attrs {
-            this.variant = variant
-            this.classes = classes.splitClassesToSet()
+    fun RBuilder.alert(variant: Alert.Variants, classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
+        child(Alert.Static::class) {
+            attrs {
+                this.variant = variant
+                this.classes = classes.splitClassesToSet()
+            }
+
+            block()
         }
 
-        block()
-    }
-
     fun danger(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
-        builder.alert(Alert.Variants.DANGER, classes, block)
+        builder.alert(DANGER, classes, block)
 
-    fun dark(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
-        builder.alert(Alert.Variants.DARK, classes, block)
+    fun dark(classes: String? = null, block: RHandler<Alert.Props>): ReactElement = builder.alert(DARK, classes, block)
 
-    fun info(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
-        builder.alert(Alert.Variants.INFO, classes, block)
+    fun info(classes: String? = null, block: RHandler<Alert.Props>): ReactElement = builder.alert(INFO, classes, block)
 
     fun light(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
-        builder.alert(Alert.Variants.LIGHT, classes, block)
+        builder.alert(LIGHT, classes, block)
 
     fun primary(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
-        builder.alert(Alert.Variants.PRIMARY, classes, block)
+        builder.alert(PRIMARY, classes, block)
 
     fun secondary(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
-        builder.alert(Alert.Variants.SECONDARY, classes, block)
+        builder.alert(SECONDARY, classes, block)
 
     fun success(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
-        builder.alert(Alert.Variants.SUCCESS, classes, block)
+        builder.alert(SUCCESS, classes, block)
 
     fun warning(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
-        builder.alert(Alert.Variants.WARNING, classes, block)
+        builder.alert(WARNING, classes, block)
 
     val dismissible = DismissibleAlertBuilder(builder)
 }
@@ -51,50 +53,58 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
 class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
     fun RBuilder.alert(
         variant: Alert.Variants,
-        fade: Boolean? = null,
+        fade: Boolean = false,
         classes: String? = null,
-        block: RHandler<Alert.DismissibleProps>
-    ): ReactElement = child(Alert::class) {
+        block: RHandler<Alert.Dismissible.Props>
+    ): ReactElement = child(Alert.Dismissible::class) {
         attrs {
             this.variant = variant
             this.classes = classes.splitClassesToSet()
-
-            dismissible = (dismissible ?: jsObject()).apply {
-                this.fade = fade
-            }
+            this.fade = fade
         }
 
-        @Suppress("UNCHECKED_CAST")
-        (block as RHandler<Alert.Props>).invoke(this)
+        block()
     }
 
-    fun danger(fade: Boolean? = null, classes: String? = null, block: RHandler<Alert.DismissibleProps>): ReactElement =
-        builder.alert(Alert.Variants.DANGER, fade, classes, block)
+    fun danger(fade: Boolean = false, classes: String? = null, block: RHandler<Alert.Dismissible.Props>): ReactElement =
+        builder.alert(DANGER, fade, classes, block)
 
-    fun dark(fade: Boolean? = null, classes: String? = null, block: RHandler<Alert.DismissibleProps>): ReactElement =
-        builder.alert(Alert.Variants.DARK, fade, classes, block)
+    fun dark(fade: Boolean = false, classes: String? = null, block: RHandler<Alert.Dismissible.Props>): ReactElement =
+        builder.alert(DARK, fade, classes, block)
 
-    fun info(fade: Boolean? = null, classes: String? = null, block: RHandler<Alert.DismissibleProps>): ReactElement =
-        builder.alert(Alert.Variants.INFO, fade, classes, block)
+    fun info(fade: Boolean = false, classes: String? = null, block: RHandler<Alert.Dismissible.Props>): ReactElement =
+        builder.alert(INFO, fade, classes, block)
 
-    fun light(fade: Boolean? = null, classes: String? = null, block: RHandler<Alert.DismissibleProps>): ReactElement =
-        builder.alert(Alert.Variants.LIGHT, fade, classes, block)
+    fun light(fade: Boolean = false, classes: String? = null, block: RHandler<Alert.Dismissible.Props>): ReactElement =
+        builder.alert(LIGHT, fade, classes, block)
 
-    fun primary(fade: Boolean? = null, classes: String? = null, block: RHandler<Alert.DismissibleProps>): ReactElement =
-        builder.alert(Alert.Variants.PRIMARY, fade, classes, block)
+    fun primary(
+        fade: Boolean = false,
+        classes: String? = null,
+        block: RHandler<Alert.Dismissible.Props>
+    ): ReactElement =
+        builder.alert(PRIMARY, fade, classes, block)
 
     fun secondary(
-        fade: Boolean? = null,
+        fade: Boolean = false,
         classes: String? = null,
-        block: RHandler<Alert.DismissibleProps>
+        block: RHandler<Alert.Dismissible.Props>
     ): ReactElement =
-        builder.alert(Alert.Variants.SECONDARY, fade, classes, block)
+        builder.alert(SECONDARY, fade, classes, block)
 
-    fun success(fade: Boolean? = null, classes: String? = null, block: RHandler<Alert.DismissibleProps>): ReactElement =
-        builder.alert(Alert.Variants.SUCCESS, fade, classes, block)
+    fun success(
+        fade: Boolean = false,
+        classes: String? = null,
+        block: RHandler<Alert.Dismissible.Props>
+    ): ReactElement =
+        builder.alert(SUCCESS, fade, classes, block)
 
-    fun warning(fade: Boolean? = null, classes: String? = null, block: RHandler<Alert.DismissibleProps>): ReactElement =
-        builder.alert(Alert.Variants.WARNING, fade, classes, block)
+    fun warning(
+        fade: Boolean = false,
+        classes: String? = null,
+        block: RHandler<Alert.Dismissible.Props>
+    ): ReactElement =
+        builder.alert(WARNING, fade, classes, block)
 }
 
 val RBuilder.Alerts

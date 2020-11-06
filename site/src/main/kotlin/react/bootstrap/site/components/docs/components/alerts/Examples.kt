@@ -6,9 +6,9 @@ import kotlinx.html.currentTimeMillis
 import react.RBuilder
 import react.RElementBuilder
 import react.RProps
-import react.bootstrap.components.alert.Alert
 import react.bootstrap.components.alert.AlertBuilder
 import react.bootstrap.components.alert.Alerts
+import react.bootstrap.components.alert.Alert
 import react.bootstrap.components.alert.closingElement
 import react.bootstrap.components.alert.link
 import react.bootstrap.components.button.ButtonBuilder
@@ -192,13 +192,11 @@ alerts.
         liveExample {
             Alerts.dismissible.warning(fade = true) {
                 attrs {
-                    dismissible?.apply {
-                        onClose = {
-                            console.log("Close on Alert was clicked. Timestamp: ${currentTimeMillis()}")
-                        }
-                        onClosed = {
-                            console.log("Alert was dismissed. Timestamp: ${currentTimeMillis()}")
-                        }
+                    onClose = {
+                        console.log("Close on Alert was clicked. Timestamp: ${currentTimeMillis()}")
+                    }
+                    onClosed = {
+                        console.log("Alert was dismissed. Timestamp: ${currentTimeMillis()}")
                     }
                 }
                 strong { +"Holy guacamole!" }; +" You should check in on some of those fields below."
@@ -216,36 +214,31 @@ alerts.
                 .setLambdaArgument(
                     FunCall.builder(RElementBuilder<RProps>::attrs)
                         .setLambdaArgument(
-                            FunCall.builder(Any::apply)
-                                .nestedBy(Alert.Props::dismissible, true)
-                                .setLambdaArgument(
-                                    Assignment.builder(Alert.Props.Dismissible::onClose)
-                                        .value(
-                                            LambdaValue(
-                                                FunCall.builder(Console::log, FunCall.Style.INLINE)
-                                                    .nestedBy(::console)
-                                                    .addArgument(
-                                                        "Close on Alert was clicked. Timestamp: " +
-                                                            "\${currentTimeMillis()}"
-                                                    )
-                                                    .build()
+                            Assignment.builder(Alert.Dismissible.Props::onClose)
+                                .value(
+                                    LambdaValue(
+                                        FunCall.builder(Console::log, FunCall.Style.INLINE)
+                                            .nestedBy(::console)
+                                            .addArgument(
+                                                "Close on Alert was clicked. Timestamp: " +
+                                                    "\${currentTimeMillis()}"
                                             )
-                                        )
-                                        .build(),
-                                    Assignment.builder(Alert.Props.Dismissible::onClosed)
-                                        .value(
-                                            LambdaValue(
-                                                FunCall.builder(Console::log, FunCall.Style.INLINE)
-                                                    .nestedBy(::console)
-                                                    .addArgument(
-                                                        "Alert was dismissed. Timestamp: \${currentTimeMillis()}"
-                                                    )
-                                                    .build()
-                                            )
-                                        )
-                                        .build(),
+                                            .build()
+                                    )
                                 )
-                                .build()
+                                .build(),
+                            Assignment.builder(Alert.Dismissible.Props::onClosed)
+                                .value(
+                                    LambdaValue(
+                                        FunCall.builder(Console::log, FunCall.Style.INLINE)
+                                            .nestedBy(::console)
+                                            .addArgument(
+                                                "Alert was dismissed. Timestamp: \${currentTimeMillis()}"
+                                            )
+                                            .build()
+                                    )
+                                )
+                                .build(),
                         )
                         .build(),
                     FunCall.builder(RBuilder::strong, FunCall.Style.INLINE, appendSemicolon = true)
@@ -290,7 +283,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
                     FunCall.builder(RBuilder::hr, FunCall.Style.NEW_INLINE)
                         .setEmptyLambdaArgument()
                         .build(),
-                    FunCall.builder(RElementBuilder<Alert.DismissibleProps>::closingElement)
+                    FunCall.builder(RElementBuilder<Alert.Dismissible.Props>::closingElement)
                         .setLambdaArgument(
                             FunCall.builder(solidSuccessFun)
                                 .nestedBy(RBuilder::Buttons)
@@ -339,19 +332,14 @@ You can build your own custom close element, by using `$closingElementName { }`.
                                         .setLambdaArgument(
                                             FunCall.builder(RElementBuilder<RProps>::attrs)
                                                 .setLambdaArgument(
-                                                    FunCall.builder(Any::apply)
-                                                        .nestedBy(Alert.Props::dismissible, true)
-                                                        .setLambdaArgument(
-                                                            Assignment.builder(Alert.Props.Dismissible::onClosed)
-                                                                .value(
-                                                                    LambdaValue(
-                                                                        Assignment.builder("show")
-                                                                            .value(false)
-                                                                            .build(),
-                                                                        LambdaValue.Style.INLINE
-                                                                    )
-                                                                )
-                                                                .build()
+                                                    Assignment.builder(Alert.Dismissible.Props::onClosed)
+                                                        .value(
+                                                            LambdaValue(
+                                                                Assignment.builder("show")
+                                                                    .value(false)
+                                                                    .build(),
+                                                                LambdaValue.Style.INLINE
+                                                            )
                                                         )
                                                         .build()
                                                 )
@@ -361,7 +349,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
                                             FunCall.builder(RBuilder::hr, FunCall.Style.NEW_INLINE)
                                                 .setEmptyLambdaArgument()
                                                 .build(),
-                                            FunCall.builder(RElementBuilder<Alert.DismissibleProps>::closingElement)
+                                            FunCall.builder(RElementBuilder<Alert.Dismissible.Props>::closingElement)
                                                 .setLambdaArgument(
                                                     FunCall.builder(solidInfoFun)
                                                         .nestedBy(RBuilder::Buttons)
@@ -436,9 +424,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
         if (show) {
             Alerts.dismissible.danger {
                 attrs {
-                    dismissible?.apply {
-                        onClosed = { show = false }
-                    }
+                    onClosed = { show = false }
                 }
                 +"You picked the wrong house, fool!"
                 hr { }
