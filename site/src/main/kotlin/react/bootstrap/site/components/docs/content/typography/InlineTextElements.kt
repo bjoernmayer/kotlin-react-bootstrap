@@ -21,7 +21,7 @@ internal class InlineTextElements : SectionComponent() {
     override val title: String = "Inline text elements"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

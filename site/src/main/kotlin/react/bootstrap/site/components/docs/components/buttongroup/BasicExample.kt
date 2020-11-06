@@ -18,7 +18,7 @@ internal class BasicExample : SectionComponent() {
     override val title: String = "Basic example"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

@@ -19,12 +19,12 @@ internal class Headings : SectionComponent() {
     override val title: String = "Headings"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         // Yes, those are the wrong headline funs. But as long as Kotlin does not support references to generic funs,
         // there is just no other way
         listOf(RBuilder::h1, RBuilder::h2, RBuilder::h3, RBuilder::h4, RBuilder::h5, RBuilder::h6)
             .forEach { function ->
-                subSectionTitle(function.name, section)
+                subSectionTitle(function.name)
                 Markdown {
                     //language=Markdown
                     +"""

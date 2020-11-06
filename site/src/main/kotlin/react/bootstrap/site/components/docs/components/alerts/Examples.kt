@@ -45,7 +45,7 @@ internal class Examples : SectionComponent() {
     override val title: String = "Examples"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -84,7 +84,7 @@ eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.nestedName}`).
                     .build()
             }
         }
-        subSectionTitle("Link color", section)
+        subSectionTitle("Link color")
         Markdown {
             //language=Markdown
             +"""
@@ -124,7 +124,7 @@ provide matching colored links within any alert.
                     ).build()
             }
         }
-        subSectionTitle("Additional content", section)
+        subSectionTitle("Additional content")
         p {
             +"""
 Alerts can also contain additional HTML elements like headings, paragraphs and dividers.
@@ -181,7 +181,7 @@ Aww yeah, you successfully read this important alert message. This example text 
                         ).build()
                 ).build()
         }
-        subSectionTitle("Dismissing", section)
+        subSectionTitle("Dismissing")
         Markdown {
             //language=Markdown
             +"""

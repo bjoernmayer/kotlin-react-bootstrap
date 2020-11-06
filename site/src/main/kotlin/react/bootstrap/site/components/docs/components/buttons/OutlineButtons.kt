@@ -17,7 +17,7 @@ internal class OutlineButtons : SectionComponent() {
     override val title: String = "Outline buttons"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

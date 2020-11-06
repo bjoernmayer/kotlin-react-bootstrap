@@ -28,7 +28,7 @@ internal class AutoLayoutColumns : SectionComponent() {
     override val title: String = "Auto-layout columns"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -36,7 +36,7 @@ Utilize breakpoint-specific equal-size enum values for easy column sizing withou
 `${SZ_6.name}`.
             """
         }
-        subSectionTitle("Equal-width", section)
+        subSectionTitle("Equal-width")
         Markdown {
             //language=Markdown
             +"""
@@ -104,7 +104,7 @@ equal-size enums for each breakpoint you need and every column will be the same 
                     .build()
             }
         }
-        subSectionTitle("Setting one column width", section)
+        subSectionTitle("Setting one column width")
         p {
             +"""
 Auto-layout for flexbox grid columns also means you can set the width of one column and have the sibling columns
@@ -158,7 +158,7 @@ Note that the other columns will resize no matter the width of the center column
                     .build()
             }
         }
-        subSectionTitle("Variable width content", section)
+        subSectionTitle("Variable width content")
         Markdown {
             //language=Markdown
             +"""

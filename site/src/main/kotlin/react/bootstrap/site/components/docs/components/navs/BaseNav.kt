@@ -21,7 +21,7 @@ internal class BaseNav : SectionComponent() {
     override val title: String = "Base nav"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

@@ -37,7 +37,7 @@ internal class ActiveState : SectionComponent() {
     override val title: String = "Active state"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -111,7 +111,7 @@ setting `button(active: Boolean)` to `true` should you need to replicate the sta
                 )
                 .build()
         }
-        subSectionTitle("Toggleable button", section)
+        subSectionTitle("Toggleable button")
         Markdown {
             //language=Markdown
             +"""
@@ -168,7 +168,7 @@ Since we are working with react here, implementing a toggleable button is quite 
                 )
                 .build()
         }
-        subSectionTitle("Radio- and Checkbox Behaviour", section)
+        subSectionTitle("Radio- and Checkbox Behaviour")
         Markdown {
             //language=Markdown
             +"""

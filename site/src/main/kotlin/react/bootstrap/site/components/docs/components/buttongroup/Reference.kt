@@ -15,8 +15,8 @@ internal class Reference : SectionComponent() {
     override val title: String = "Reference"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
-        subSectionTitle(RBuilder::buttonGroup.name, section)
+        sectionTitle()
+        subSectionTitle(RBuilder::buttonGroup.name)
         Markdown {
             //language=Markdown
             +"""
@@ -35,7 +35,7 @@ Creates a `${ButtonGroup::class.simpleName!!}` element.
                 .returns("ReactElement")
                 .build()
         }
-        subSectionTitle(RBuilder::buttonToolbar.name, section)
+        subSectionTitle(RBuilder::buttonToolbar.name)
         Markdown {
             //language=Markdown
             +"""

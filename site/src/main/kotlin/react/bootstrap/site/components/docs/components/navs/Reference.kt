@@ -22,9 +22,9 @@ internal class Reference : SectionComponent() {
     override val title: String = "Reference"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         listOf(NavBuilder::ul, NavBuilder::ol, NavBuilder::nav, NavBuilder::div).forEach { function ->
-            subSectionTitle(function.name, section)
+            subSectionTitle(function.name)
             Markdown {
                 //language=Markdown
                 +"""
@@ -50,7 +50,7 @@ Creates a `${function.name}`-based navigation.
                     .build()
             }
         }
-        subSectionTitle("navItem", section)
+        subSectionTitle("navItem")
         listOf(
             Triple(NavComponent.Ul.Props::class, NavItems.Li.Props::class, NavItems.Li::class),
             Triple(NavComponent.Ol.Props::class, NavItems.Li.Props::class, NavItems.Li::class),
@@ -74,7 +74,7 @@ Creates a `${itemKlazz.nestedName}` element.
                     .build()
             }
         }
-        subSectionTitle("navLink", section)
+        subSectionTitle("navLink")
         listOf(
             RElementBuilder<NavItems.Li.Props>::navLink to NavItems.Li.Props::class,
             RElementBuilder<NavComponent.Nav.Props>::navLink to NavComponent.Nav.Props::class,

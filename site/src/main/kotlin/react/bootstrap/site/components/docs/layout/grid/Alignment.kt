@@ -33,7 +33,7 @@ internal class Alignment : SectionComponent() {
     override val title: String = "Alignment"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -42,7 +42,7 @@ vertical alignment of flex items when the flex container has a `min-height` as s
 details]("https://github.com/philipwalton/flexbugs#flexbug-3").
             """
         }
-        subSectionTitle("Vertical alignment", section)
+        subSectionTitle("Vertical alignment")
         flexColsExampleRow {
             liveExample {
                 container {
@@ -139,7 +139,7 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                     .build()
             }
         }
-        subSectionTitle("Horizontal alignment", section)
+        subSectionTitle("Horizontal alignment")
         exampleRow {
             liveExample {
                 container {

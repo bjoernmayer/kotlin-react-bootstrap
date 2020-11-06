@@ -32,7 +32,7 @@ internal class ActiveState : SectionComponent() {
     override val title: String = "Active state"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -48,7 +48,7 @@ There will be a separate `Tab` component in the future which simplifies building
                 """
             }
         }
-        subSectionTitle("React's useState", section)
+        subSectionTitle("React's useState")
         Markdown {
             //language=Markdown
             +"""
@@ -174,7 +174,7 @@ behaviour.
                 .build()
         }
 
-        subSectionTitle("Active predicate", section)
+        subSectionTitle("Active predicate")
         Markdown {
             //language=Markdown
             +"""

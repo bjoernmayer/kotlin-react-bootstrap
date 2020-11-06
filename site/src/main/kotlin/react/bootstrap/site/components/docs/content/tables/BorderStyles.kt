@@ -17,7 +17,7 @@ internal class BorderStyles : SectionComponent() {
     override val title: String = "Border styles"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

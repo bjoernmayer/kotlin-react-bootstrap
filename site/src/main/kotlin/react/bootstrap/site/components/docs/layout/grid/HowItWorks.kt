@@ -25,7 +25,7 @@ internal class HowItWorks : SectionComponent() {
     override val title: String = "How it works"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         p {
             +"""
 Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with

@@ -19,8 +19,8 @@ internal class RowCol : SectionComponent() {
     override val title: String = "Row & Col"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
-        subSectionTitle(RBuilder::row.name, section)
+        sectionTitle()
+        subSectionTitle(RBuilder::row.name)
         Markdown {
             //language=Markdown
             +"""
@@ -48,7 +48,7 @@ Creates a `${Row::class.nestedName}` element.
                 .build()
         }
 
-        subSectionTitle(RBuilder::col.name, section)
+        subSectionTitle(RBuilder::col.name)
         Markdown {
             //language=Markdown
             +"""

@@ -23,7 +23,7 @@ internal class GridOptions : SectionComponent() {
     override val title: String = "Grid options"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

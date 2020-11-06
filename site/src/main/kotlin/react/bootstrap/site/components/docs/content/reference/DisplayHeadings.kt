@@ -20,14 +20,14 @@ internal class DisplayHeadings : SectionComponent() {
     override val title: String = "Display headings"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         listOf(
             RBuilder::display1 to Display.Variants.DISPLAY_1,
             RBuilder::display2 to Display.Variants.DISPLAY_2,
             RBuilder::display3 to Display.Variants.DISPLAY_3,
             RBuilder::display4 to Display.Variants.DISPLAY_4,
         ).forEach { (function, variant) ->
-            subSectionTitle(function.name, section)
+            subSectionTitle(function.name)
             Markdown {
                 //language=Markdown
                 +"""
@@ -44,7 +44,7 @@ Creates a `${Display::class.simpleName!!}` element with variant set to `${varian
             }
         }
 
-        subSectionTitle("display", section)
+        subSectionTitle("display")
         Markdown {
             //language=Markdown
             +"""

@@ -15,8 +15,8 @@ internal class ContainersContainerBuilder : SectionComponent() {
     override val title: String = "Containers & ContainerBuilder"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
-        subSectionTitle(RBuilder::container.name, section)
+        sectionTitle()
+        subSectionTitle(RBuilder::container.name)
         Markdown {
             //language=Markdown
             +"""
@@ -40,7 +40,7 @@ Creates a `${Container::class.nestedName}` element.
             ContainerBuilder::lg,
             ContainerBuilder::xl
         ).forEach { function ->
-            subSectionTitle(function.name, section)
+            subSectionTitle(function.name)
             val viscosity = Container.Viscosities.valueOf(function.name.toUpperCase())
             Markdown {
                 //language=Markdown

@@ -15,7 +15,7 @@ internal class HoverableRows : SectionComponent() {
     override val title: String = "Hoverable Rows"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

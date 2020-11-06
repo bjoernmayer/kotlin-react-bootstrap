@@ -16,7 +16,7 @@ internal class Blockquotes : SectionComponent() {
     override val title: String = "Blockquotes"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -42,7 +42,7 @@ any HTML as the quote.
                 )
                 .build()
         }
-        subSectionTitle("Naming a source", section)
+        subSectionTitle("Naming a source")
         Markdown {
             //language=Markdown
             +"""

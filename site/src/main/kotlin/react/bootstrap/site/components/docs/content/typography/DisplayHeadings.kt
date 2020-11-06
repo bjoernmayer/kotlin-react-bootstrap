@@ -23,7 +23,7 @@ internal class DisplayHeadings : SectionComponent() {
     override val title: String = "Display headings"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

@@ -23,7 +23,7 @@ internal class Reference : SectionComponent() {
     override val title: String = "Reference"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         mapOf(
             Button.Variants.Solid.DANGER to (solidDangerFun to outlineDangerFun),
             Button.Variants.Solid.DARK to (solidDarkFun to outlineDarkFun),
@@ -38,7 +38,7 @@ internal class Reference : SectionComponent() {
             val variantName = entry.key::class.normalName
             val (solidFun, outlineFun) = entry.value
 
-            subSectionTitle(solidFun.name, section)
+            subSectionTitle(solidFun.name)
             contentTitle(RBuilder::h4, "Button Element")
             p {
                 +"Adds a button in the \"$variantName\" context using the HTML button element."

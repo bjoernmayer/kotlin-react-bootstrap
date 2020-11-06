@@ -13,7 +13,7 @@ internal class CodeBlocks : SectionComponent() {
     override val title: String = "Code blocks"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

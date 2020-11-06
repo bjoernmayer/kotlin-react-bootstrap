@@ -31,14 +31,14 @@ internal class ResponsiveClasses : SectionComponent() {
     override val title: String = "Responsive classes"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         p {
             +"""
 Bootstrap’s grid includes five tiers of predefined classes for building complex responsive layouts. Customize the size
 of your columns on extra small, small, medium, large, or extra large devices however you see fit.
             """
         }
-        subSectionTitle("All breakpoints", section)
+        subSectionTitle("All breakpoints")
         Markdown {
             //language=Markdown
             +"""
@@ -107,7 +107,7 @@ ${EQ.name}`.
                     .build()
             }
         }
-        subSectionTitle("Stacked to horizontal", section)
+        subSectionTitle("Stacked to horizontal")
         Markdown {
             //language=Markdown
             +"""
@@ -171,7 +171,7 @@ stacked and becomes horizontal at the small breakpoint (`sm`).
                     .build()
             }
         }
-        subSectionTitle("Mix and match", section)
+        subSectionTitle("Mix and match")
         p {
             +"""
 Don’t want your columns to simply stack in some grid tiers? Use a combination of different classes for each tier as
@@ -258,7 +258,7 @@ needed. See the example below for a better idea of how it all works.
                     .build()
             }
         }
-        subSectionTitle("Row columns", section)
+        subSectionTitle("Row columns")
         Markdown {
             //language=Markdown
             +"""
@@ -474,7 +474,7 @@ your content and layout. The row columns classes are set on the parent `$rowFun 
                     .build()
             }
         }
-        subSectionTitle("No gutters", section)
+        subSectionTitle("No gutters")
         Markdown {
             //language=Markdown
             +"""

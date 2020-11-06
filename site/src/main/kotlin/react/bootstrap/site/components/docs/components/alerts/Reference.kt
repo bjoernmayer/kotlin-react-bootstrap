@@ -30,7 +30,7 @@ internal class Reference : SectionComponent() {
     override val title: String = "Reference"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         mapOf(
             Alert.Variants.DANGER to Alerts::danger,
             Alert.Variants.DARK to Alerts::dark,
@@ -42,7 +42,7 @@ internal class Reference : SectionComponent() {
             Alert.Variants.WARNING to Alerts::warning
         ).forEach { (variant, function) ->
             val variantName = variant::class.simpleName!!.toLowerCase().capitalize()
-            subSectionTitle(function.name, section)
+            subSectionTitle(function.name)
             p {
                 +"Adds an alert component with the $variantName context."
             }
@@ -65,7 +65,7 @@ internal class Reference : SectionComponent() {
             }
         }
 
-        subSectionTitle(linkName, section)
+        subSectionTitle(linkName)
         Markdown {
             //language=Markdown
             +"""
@@ -79,7 +79,7 @@ Adds `${ClassNames.ALERT_LINK.nestedName}` to the outer most `ReactElement` resu
                 .returns("ReactElement")
                 .build()
         }
-        subSectionTitle(RElementBuilder<Alert.Props>::heading.name, section)
+        subSectionTitle(RElementBuilder<Alert.Props>::heading.name)
         Markdown {
             //language=Markdown
             +"""
@@ -102,7 +102,7 @@ Adds `${ClassNames.ALERT_HEADING.nestedName}` to the outer most `ReactElement` r
             RElementBuilder<Alert.Props>::h5,
             RElementBuilder<Alert.Props>::h6,
         ).forEach { function ->
-            subSectionTitle(function.name, section)
+            subSectionTitle(function.name)
             Markdown {
                 //language=Markdown
                 +"""
@@ -118,7 +118,7 @@ Custom `${function.name}` which behaves the same but adds `${ClassNames.ALERT_HE
                     .build()
             }
         }
-        subSectionTitle(closingElementName, section)
+        subSectionTitle(closingElementName)
         p {
             +"Wrapper for a custom alert closing element."
         }

@@ -18,7 +18,7 @@ internal class VerticalVariation : SectionComponent() {
     override val title: String = "Vertical variation"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

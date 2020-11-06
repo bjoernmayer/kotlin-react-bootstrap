@@ -18,7 +18,7 @@ internal class ButtonTags : SectionComponent() {
     override val title: String = "Button tags"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

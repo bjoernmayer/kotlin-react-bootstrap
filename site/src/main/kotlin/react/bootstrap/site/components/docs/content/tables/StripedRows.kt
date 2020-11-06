@@ -15,7 +15,7 @@ internal class StripedRows : SectionComponent() {
     override val title: String = "Striped rows"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

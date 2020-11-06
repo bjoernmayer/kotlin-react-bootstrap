@@ -30,7 +30,7 @@ internal class AvailableStyles : SectionComponent() {
     override val title: String = "Available styles"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -38,7 +38,7 @@ Change the style of `nav { }` component with modifiers and utilities. Mix and ma
             """
         }
 
-        subSectionTitle("Horizontal alignment", section)
+        subSectionTitle("Horizontal alignment")
         Markdown {
             //language=Markdown
             +"""
@@ -94,7 +94,7 @@ Centered with `${ClassNames.JUSTIFY_CONTENT_END.nestedName}`:
                 .build()
         }
 
-        subSectionTitle("Vertical", section)
+        subSectionTitle("Vertical")
         Markdown {
             //language=Markdown
             +"""
@@ -182,7 +182,7 @@ As always, vertical navigation is possible without `ul`s, too.
                 ).build()
         }
 
-        subSectionTitle("Tabs", section)
+        subSectionTitle("Tabs")
         Markdown {
             //language=Markdown
             +"""
@@ -208,7 +208,7 @@ Set `appearance = ${Appearance.TABS.nestedName}` to generate a tabbed interface.
                 .build()
         }
 
-        subSectionTitle("Pills", section)
+        subSectionTitle("Pills")
         liveExample {
             child(
                 buildToglleableNavLinks {
@@ -228,7 +228,7 @@ Set `appearance = ${Appearance.TABS.nestedName}` to generate a tabbed interface.
                 .build()
         }
 
-        subSectionTitle("Fill and justify", section)
+        subSectionTitle("Fill and justify")
         Markdown {
             //language=Markdown
             +"""

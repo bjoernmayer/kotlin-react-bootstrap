@@ -20,7 +20,7 @@ internal class ButtonToolbar : SectionComponent() {
     override val title: String = "Button toolbar"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         p {
             +"""
 Combine sets of button groups into button toolbars for more complex components. Use utility classes as needed to space

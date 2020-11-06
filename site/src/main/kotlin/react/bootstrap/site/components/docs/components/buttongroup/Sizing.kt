@@ -19,7 +19,7 @@ internal class Sizing : SectionComponent() {
     override val title: String = "Sizing"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

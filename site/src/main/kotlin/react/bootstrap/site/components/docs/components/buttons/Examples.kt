@@ -16,7 +16,7 @@ internal class Examples : SectionComponent() {
     override val title: String = "Examples"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         p {
             +"""
 Bootstrap includes several predefined button styles, each serving its own semantic purpose, with a few extras thrown in

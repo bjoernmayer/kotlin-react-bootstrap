@@ -17,7 +17,7 @@ internal class DisabledState : SectionComponent() {
     override val title: String = "Disabled state"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
