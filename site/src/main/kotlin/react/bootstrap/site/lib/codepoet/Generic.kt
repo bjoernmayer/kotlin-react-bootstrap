@@ -40,4 +40,8 @@ internal data class Generic(
         IN,
         OUT
     }
+
+    companion object {
+        inline fun <reified TP, reified TC> builder(): Generic = Generic(TP::class, TC::class)
+    }
 }

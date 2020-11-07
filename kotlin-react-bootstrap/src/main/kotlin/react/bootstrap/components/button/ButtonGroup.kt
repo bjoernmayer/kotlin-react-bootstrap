@@ -23,7 +23,7 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
         buttons = props.childrenArray.gatherChildrenProps<Button.Props, Button>()
 
         activeButtons = buttons?.mapNotNull { (index, buttonProps) ->
-            if (buttonProps.active == true) {
+            if (buttonProps.active) {
                 index
             } else {
                 null
@@ -113,7 +113,7 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
     override fun buildClasses(): Set<ClassNames> {
         val btnGroupClasses = mutableSetOf<ClassNames>()
 
-        if (props.appearance == Appearance.DEFAULT || props.appearance == null) {
+        if (props.appearance == null) {
             btnGroupClasses.add(ClassNames.BTN_GROUP)
         }
 
@@ -163,8 +163,6 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
     interface Props : WithGlobalAttributes {
         /**
          * Change the appearance of the [ButtonGroup] by setting an [Appearance].
-         *
-         * Defaults to [Appearance.DEFAULT], which "connects" buttons.
          */
         var appearance: Appearance?
 
@@ -191,7 +189,6 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
     }
 
     enum class Appearance {
-        DEFAULT,
         NONE,
         VERTICAL
     }

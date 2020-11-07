@@ -49,7 +49,7 @@ internal class Reference : SectionComponent() {
             codeExample {
                 +FunSpec.builder(function)
                     .nestedBy(RBuilder::Alerts)
-                    .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                    .addParameter<String?>("classes", null)
                     .addParameter("block", Generic("RHandler", Alert.Props::class))
                     .returns("ReactElement")
                     .build()
@@ -57,8 +57,8 @@ internal class Reference : SectionComponent() {
                 +FunSpec.builder(function)
                     .nestedBy(RBuilder::Alerts)
                     .nestedBy(AlertBuilder::dismissible)
-                    .addParameter("fade", Boolean::class, false, "false")
-                    .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                    .addParameter("fade", false)
+                    .addParameter<String?>("classes", null)
                     .addParameter("block", Generic("RHandler", Alert.Dismissible.Props::class))
                     .returns("ReactElement")
                     .build()
@@ -74,7 +74,7 @@ Adds `${ClassNames.ALERT_LINK.nestedName}` to the outer most `ReactElement` resu
         }
         codeExample {
             +FunSpec.builder(RElementBuilder<Alert.Props>::link, false)
-                .nestedBy(Generic(RElementBuilder::class, Alert.Props::class))
+                .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
                 .addParameter("block", "ElementProvider")
                 .returns("ReactElement")
                 .build()
@@ -88,8 +88,8 @@ Adds `${ClassNames.ALERT_HEADING.nestedName}` to the outer most `ReactElement` r
         }
         codeExample {
             +FunSpec.builder(RElementBuilder<Alert.Props>::heading, false)
-                .nestedBy(Generic(RElementBuilder::class, Alert.Props::class))
-                .addParameter("headings", Headings::class)
+                .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
+                .addParameter<Headings>("headings")
                 .addParameter("block", "ElementProvider")
                 .returns("ReactElement")
                 .build()
@@ -111,8 +111,8 @@ Custom `${function.name}` which behaves the same but adds `${ClassNames.ALERT_HE
             }
             codeExample {
                 +FunSpec.builder(function, false)
-                    .nestedBy(Generic(RElementBuilder::class, Alert.Props::class))
-                    .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                    .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
+                    .addParameter<String?>("classes", null)
                     .addParameter("block", Generic("RDOMHandler", function.name.toUpperCase()))
                     .returns("ReactElement")
                     .build()
@@ -124,7 +124,7 @@ Custom `${function.name}` which behaves the same but adds `${ClassNames.ALERT_HE
         }
         codeExample {
             +FunSpec.builder(RElementBuilder<Alert.Dismissible.Props>::closingElement, false)
-                .nestedBy(Generic(RElementBuilder::class, Alert.Dismissible.Props::class))
+                .nestedByGeneric<RElementBuilder<*>, Alert.Dismissible.Props>()
                 .addParameter("block", "ElementProvider")
                 .returns("ReactElement")
                 .build()

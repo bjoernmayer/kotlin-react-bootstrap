@@ -27,8 +27,9 @@ internal class FunSpec private constructor(
         return this
     }
 
-    fun nestedBy(klazz: KClass<*>): FunSpec {
-        parents.add(klazz.simpleName!!)
+    inline fun <reified T> nestedBy(): FunSpec {
+        parents.add(T::class.simpleName!!)
+
         return this
     }
 
@@ -37,18 +38,25 @@ internal class FunSpec private constructor(
         return this
     }
 
-    fun nestedBy(generic: Generic): FunSpec {
-        parents.add(generic.build())
+    /**
+     * @param TP type parent
+     * @param TC type child
+     */
+    inline fun <reified TP, reified TC> nestedByGeneric(): FunSpec {
+        parents.add(Generic.builder<TP, TC>().build())
+
         return this
     }
 
-    fun nestedBy(name: String): FunSpec {
-        parents.add(name)
+    fun nestedBy(generic: Generic): FunSpec {
+        parents.add(generic.build())
+
         return this
     }
 
     fun addParameter(parameter: Parameter): FunSpec {
         parameters.add(parameter)
+
         return this
     }
 
@@ -59,22 +67,6 @@ internal class FunSpec private constructor(
         default: String? = null,
         modifier: Parameter.Modifier? = null
     ): FunSpec = addParameter(Parameter(parameterName, type, nullable, default, modifier))
-
-    fun <T : Enum<*>> addParameter(
-        parameterName: String,
-        type: KClass<T>,
-        nullable: Boolean = false,
-        default: T? = null,
-        modifier: Parameter.Modifier? = null
-    ): FunSpec = addParameter(parameterName, type.nestedName, nullable, default?.nestedName, modifier)
-
-    fun addParameter(
-        parameterName: String,
-        type: KClass<*>,
-        nullable: Boolean = false,
-        default: String? = null,
-        modifier: Parameter.Modifier? = null
-    ): FunSpec = addParameter(parameterName, type.nestedName, nullable, default, modifier)
 
     fun addParameter(
         parameterName: String,
@@ -103,6 +95,41 @@ internal class FunSpec private constructor(
         }
 
         return addParameter(Parameter(parameterName, typeString, nullable, default))
+    }
+
+    private fun addParameter(
+        parameterName: String,
+        type: KClass<*>,
+        nullable: Boolean = false,
+        default: String? = null,
+        modifier: Parameter.Modifier? = null
+    ): FunSpec = addParameter(parameterName, type.nestedName, nullable, default, modifier)
+
+    inline fun <reified T> addParameter(parameterName: String): FunSpec {
+        return addParameter(parameterName, T::class)
+    }
+
+    inline fun <reified T> addParameter(parameterName: String, default: T): FunSpec {
+        val defaultString = default?.toString() ?: Parameter.NULL
+
+        return addParameter(parameterName, T::class, default == null, defaultString)
+    }
+
+    inline fun <reified T : Enum<*>> addParameter(parameterName: String, default: T?): FunSpec {
+        val defaultString = default?.nestedName ?: Parameter.NULL
+
+        return addParameter(parameterName, T::class, default == null, defaultString)
+    }
+
+    inline fun <reified T> addParameter(parameterName: String, default: T, nullable: Boolean): FunSpec {
+        val defaultString = default?.toString() ?: Parameter.NULL
+
+        return addParameter(parameterName, T::class, nullable, defaultString)
+    }
+
+    inline fun <reified T> returns(): FunSpec {
+        returns = T::class.simpleName!!
+        return this
     }
 
     fun returns(type: KClass<*>): FunSpec {

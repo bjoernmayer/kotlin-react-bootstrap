@@ -29,20 +29,20 @@ Creates a `${Row::class.nestedName}` element.
         }
         codeExample {
             +FunSpec.builder(RBuilder::row)
-                .nestedBy(RBuilder::class)
-                .addParameter("all", RowAttributes::class, true, FunSpec.Parameter.NULL)
-                .addParameter("sm", RowAttributes::class, true, FunSpec.Parameter.NULL)
-                .addParameter("md", RowAttributes::class, true, FunSpec.Parameter.NULL)
-                .addParameter("lg", RowAttributes::class, true, FunSpec.Parameter.NULL)
-                .addParameter("xl", RowAttributes::class, true, FunSpec.Parameter.NULL)
-                .addParameter("gutters", Boolean::class, false, "true")
+                .nestedBy<RBuilder>()
+                .addParameter<RowAttributes?>("all", null)
+                .addParameter<RowAttributes?>("sm", null)
+                .addParameter<RowAttributes?>("md", null)
+                .addParameter<RowAttributes?>("lg", null)
+                .addParameter<RowAttributes?>("xl", null)
+                .addParameter("gutters", true)
                 .addParameter(
                     "rendererTag",
                     Generic("KClass", CommonAttributeGroupFacade::class).apply { setVariance(Generic.Variance.OUT) },
                     true,
                     FunSpec.Parameter.NULL
                 )
-                .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                .addParameter<String?>("classes", null)
                 .addParameter("block", Generic("RHandler", Row.Props::class))
                 .returns("ReactElement")
                 .build()
@@ -57,19 +57,19 @@ Creates a `${Col::class.nestedName}` element.
         }
         codeExample {
             +FunSpec.builder(RBuilder::col)
-                .nestedBy(RBuilder::class)
-                .addParameter("all", ColAttributes::class, true, FunSpec.Parameter.NULL)
-                .addParameter("sm", ColAttributes::class, true, FunSpec.Parameter.NULL)
-                .addParameter("md", ColAttributes::class, true, FunSpec.Parameter.NULL)
-                .addParameter("lg", ColAttributes::class, true, FunSpec.Parameter.NULL)
-                .addParameter("xl", ColAttributes::class, true, FunSpec.Parameter.NULL)
+                .nestedBy<RBuilder>()
+                .addParameter<ColAttributes?>("all", null)
+                .addParameter<ColAttributes?>("sm", null)
+                .addParameter<ColAttributes?>("md", null)
+                .addParameter<ColAttributes?>("lg", null)
+                .addParameter<ColAttributes?>("xl", null)
                 .addParameter(
                     "rendererTag",
                     Generic("KClass", CommonAttributeGroupFacade::class).apply { setVariance(Generic.Variance.OUT) },
                     true,
                     FunSpec.Parameter.NULL
                 )
-                .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                .addParameter<String?>("classes", null)
                 .addParameter("block", Generic("RHandler", Col.Props::class))
                 .returns("ReactElement")
                 .build()

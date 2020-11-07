@@ -1205,7 +1205,7 @@ val RBuilder.Buttons
  * Creates a [ButtonGroup] element.
  */
 fun RBuilder.buttonGroup(
-    appearance: ButtonGroup.Appearance = ButtonGroup.Appearance.DEFAULT,
+    appearance: ButtonGroup.Appearance? = null,
     behaviour: ButtonGroup.Behaviours? = null,
     classes: String? = null,
     label: String? = null,

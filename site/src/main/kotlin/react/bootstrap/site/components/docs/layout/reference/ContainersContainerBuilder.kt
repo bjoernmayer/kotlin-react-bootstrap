@@ -25,9 +25,9 @@ Creates a `${Container::class.nestedName}` element.
         }
         codeExample {
             +FunSpec.builder(RBuilder::container)
-                .nestedBy(RBuilder::class)
-                .addParameter("viscosity", Container.Viscosities::class, true, FunSpec.Parameter.NULL)
-                .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                .nestedBy<RBuilder>()
+                .addParameter<Container.Viscosities>("viscosity", null)
+                .addParameter<String?>("classes", null)
                 .addParameter("block", Generic("RHandler", Container.Props::class))
                 .returns("ReactElement")
                 .build()
@@ -50,8 +50,8 @@ Creates a `${Container::class.nestedName}` element with `viscosity` set to `${vi
             }
             codeExample {
                 +FunSpec.builder(function, false)
-                    .nestedBy(ContainerBuilder::class)
-                    .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                    .nestedBy<ContainerBuilder>()
+                    .addParameter<String?>("classes", null)
                     .addParameter("block", Generic("RHandler", Container.Props::class))
                     .returns("ReactElement")
                     .build()

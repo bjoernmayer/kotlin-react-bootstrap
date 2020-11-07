@@ -9,6 +9,8 @@ internal class Reference : PageComponent() {
 
         child(Headings::class)
         child(DisplayHeadings::class)
+        // there is more here
         child(Tables::class)
+        child(Figures::class)
     }
 }

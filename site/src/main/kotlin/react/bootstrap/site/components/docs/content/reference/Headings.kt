@@ -34,8 +34,8 @@ This creates a `${function.name}` using the given type **`TT`**.
                 codeExample {
                     +FunSpec.builder(function, inline = true)
                         .addTypeParameter("TT", CommonAttributeGroupFacade::class, true)
-                        .nestedBy(RBuilder::class)
-                        .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                        .nestedBy<RBuilder>()
+                        .addParameter<String?>("classes", null)
                         .addParameter(
                             "block",
                             Generic("RHandler", Heading.Props::class),

@@ -33,10 +33,10 @@ Creates a `${function.name}`-based navigation.
             }
             codeExample {
                 +FunSpec.builder(function)
-                    .nestedBy(NavBuilder::class)
-                    .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
-                    .addParameter("appearance", NavComponent.Appearance::class, true, FunSpec.Parameter.NULL)
-                    .addParameter("widthHandling", NavComponent.WidthHandling::class, true, FunSpec.Parameter.NULL)
+                    .nestedBy<NavBuilder>()
+                    .addParameter<String?>("classes", null)
+                    .addParameter<NavComponent.Appearance>("appearance", null)
+                    .addParameter<NavComponent.WidthHandling>("widthHandling", null)
                     .addParameter(
                         "activeLinkPredicate",
                         LambdaType.builder()
@@ -68,7 +68,7 @@ Creates a `${itemKlazz.nestedName}` element.
             codeExample {
                 +FunSpec.builder(RElementBuilder<NavComponent.Ul.Props>::navItem)
                     .nestedBy(elementBuilderGeneric)
-                    .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                    .addParameter<String?>("classes", null)
                     .addParameter("block", Generic("RHandler", itemPropsKlazz))
                     .returns("ReactElement")
                     .build()
@@ -93,11 +93,11 @@ Creates a `${NavLink::class.nestedName}` element.
             codeExample {
                 +FunSpec.builder(function)
                     .nestedBy(elementBuilderGeneric)
-                    .addParameter("href", String::class, true, FunSpec.Parameter.NULL)
-                    .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
-                    .addParameter("target", String::class, true, FunSpec.Parameter.NULL)
-                    .addParameter("active", Boolean::class, true, FunSpec.Parameter.NULL)
-                    .addParameter("disabled", Boolean::class, true, FunSpec.Parameter.NULL)
+                    .addParameter<String?>("href", null)
+                    .addParameter<String?>("classes", null)
+                    .addParameter<String?>("target", null)
+                    .addParameter("active", false)
+                    .addParameter("disabled", false)
                     .addParameter("block", Generic("RHandler", NavLink.Props::class))
                     .returns("ReactElement")
                     .build()

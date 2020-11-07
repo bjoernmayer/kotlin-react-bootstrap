@@ -25,12 +25,12 @@ Creates a `${ButtonGroup::class.simpleName!!}` element.
         }
         codeExample {
             +FunSpec.builder(RBuilder::buttonGroup)
-                .nestedBy(RBuilder::class)
-                .addParameter("appearance", ButtonGroup.Appearance::class, false, ButtonGroup.Appearance.DEFAULT)
-                .addParameter("behaviour", ButtonGroup.Behaviours::class, true, FunSpec.Parameter.NULL)
-                .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
-                .addParameter("label", String::class, true, FunSpec.Parameter.NULL)
-                .addParameter("sizes", ButtonGroup.Sizes::class, true, FunSpec.Parameter.NULL)
+                .nestedBy<RBuilder>()
+                .addParameter<ButtonGroup.Appearance>("appearance", null)
+                .addParameter<ButtonGroup.Behaviours>("behaviour", null)
+                .addParameter<String?>("classes", null)
+                .addParameter<String?>("label", null)
+                .addParameter<ButtonGroup.Sizes>("sizes", null)
                 .addParameter("block", Generic("RHandler", ButtonGroup.Props::class))
                 .returns("ReactElement")
                 .build()
@@ -44,9 +44,9 @@ Creates a `${ButtonToolbar::class.simpleName!!}` element.
         }
         codeExample {
             +FunSpec.builder(RBuilder::buttonToolbar)
-                .nestedBy(RBuilder::class)
-                .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
-                .addParameter("label", String::class, true, FunSpec.Parameter.NULL)
+                .nestedBy<RBuilder>()
+                .addParameter<String?>("classes", null)
+                .addParameter<String?>("label", null)
                 .addParameter("block", Generic("RHandler", ButtonToolbar.Props::class))
                 .returns("ReactElement")
                 .build()

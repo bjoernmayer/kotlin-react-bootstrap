@@ -36,14 +36,14 @@ Creates a `table` element and adds Bootstrap classes to it.
         }
         codeExample {
             +FunSpec.builder(RBuilder::table)
-                .nestedBy(RBuilder::class)
-                .addParameter("dark", Boolean::class, false, "false")
-                .addParameter("striped", Boolean::class, false, "false")
-                .addParameter("borderStyle", BorderStyles::class, true, FunSpec.Parameter.NULL)
-                .addParameter("hoverable", Boolean::class, false, "false")
-                .addParameter("small", Boolean::class, false, "false")
-                .addParameter("responsive", Breakpoints::class, true, FunSpec.Parameter.NULL)
-                .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                .nestedBy<RBuilder>()
+                .addParameter("dark", false)
+                .addParameter("striped", false)
+                .addParameter<BorderStyles>("borderStyle", null)
+                .addParameter("hoverable", false)
+                .addParameter("small", false)
+                .addParameter<Breakpoints>("responsive", null)
+                .addParameter<String?>("classes", null)
                 .addParameter("block", Generic("RDOMHandler", TABLE::class))
                 .returns("ReactElement")
                 .build()
@@ -58,9 +58,9 @@ Creates a `thead` element.
         }
         codeExample {
             +FunSpec.builder(RBuilder::thead)
-                .nestedBy(RBuilder::class)
-                .addParameter("style", THeadStyles::class, true, FunSpec.Parameter.NULL)
-                .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                .nestedBy<RBuilder>()
+                .addParameter<THeadStyles>("style", null)
+                .addParameter<String?>("classes", null)
                 .addParameter("block", Generic("RDOMHandler", THEAD::class))
                 .returns("ReactElement")
                 .build()
@@ -75,9 +75,9 @@ Creates a `tr` element.
         }
         codeExample {
             +FunSpec.builder(RBuilder::tr)
-                .nestedBy(RBuilder::class)
-                .addParameter("contextualStyle", ContextualStyle::class, true, FunSpec.Parameter.NULL)
-                .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                .nestedBy<RBuilder>()
+                .addParameter<ContextualStyle>("contextualStyle", null)
+                .addParameter<String?>("classes", null)
                 .addParameter("block", Generic("RDOMHandler", TR::class))
                 .returns("ReactElement")
                 .build()
@@ -92,10 +92,10 @@ Creates a `th` element.
         }
         codeExample {
             +FunSpec.builder(RBuilder::th)
-                .nestedBy(RBuilder::class)
-                .addParameter("contextualStyle", ContextualStyle::class, true, FunSpec.Parameter.NULL)
-                .addParameter("scope", ThScope::class, true, FunSpec.Parameter.NULL)
-                .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                .nestedBy<RBuilder>()
+                .addParameter<ContextualStyle>("contextualStyle", null)
+                .addParameter<ThScope>("scope", null)
+                .addParameter<String?>("classes", null)
                 .addParameter("block", Generic("RDOMHandler", TH::class))
                 .returns("ReactElement")
                 .build()
@@ -110,9 +110,9 @@ Creates a `td` element.
         }
         codeExample {
             +FunSpec.builder(RBuilder::td)
-                .nestedBy(RBuilder::class)
-                .addParameter("contextualStyle", ContextualStyle::class, true, FunSpec.Parameter.NULL)
-                .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                .nestedBy<RBuilder>()
+                .addParameter<ContextualStyle>("contextualStyle", null)
+                .addParameter<String?>("classes", null)
                 .addParameter("block", Generic("RDOMHandler", TD::class))
                 .returns("ReactElement")
                 .build()

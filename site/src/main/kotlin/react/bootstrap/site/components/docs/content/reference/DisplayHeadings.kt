@@ -36,8 +36,8 @@ Creates a `${Display::class.simpleName!!}` element with variant set to `${varian
             }
             codeExample {
                 +FunSpec.builder(function, false)
-                    .nestedBy(RBuilder::class)
-                    .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                    .nestedBy<RBuilder>()
+                    .addParameter<String?>("classes", null)
                     .addParameter("block", Generic("RHandler", Display.Props::class))
                     .returns("ReactElement")
                     .build()
@@ -59,9 +59,9 @@ Creates a `${Display::class.simpleName!!}` element using the given type `TT`.
                 inline = true
             )
                 .addTypeParameter("TT", HtmlInlineTag::class, true)
-                .nestedBy(RBuilder::class)
-                .addParameter("variant", Display.Variants::class)
-                .addParameter("classes", String::class, true, FunSpec.Parameter.NULL)
+                .nestedBy<RBuilder>()
+                .addParameter<Display.Variants>("variant")
+                .addParameter<String?>("classes", null)
                 .addParameter(
                     "block",
                     Generic("RHandler", Display.Props::class),

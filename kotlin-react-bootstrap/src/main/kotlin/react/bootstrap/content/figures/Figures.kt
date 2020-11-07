@@ -31,8 +31,8 @@ fun RBuilder.figure(classes: String? = null, block: RDOMHandler<FIGURE>): ReactE
  * @param classes Space separated list of CSS classes for this element.
  */
 fun RDOMBuilder<FIGURE>.img(
-    fluid: Boolean? = true,
-    isThumbnail: Boolean? = null,
+    fluid: Boolean = false,
+    isThumbnail: Boolean = false,
     alt: String? = null,
     src: String? = null,
     classes: String? = null,

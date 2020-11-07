@@ -18,8 +18,8 @@ import react.dom.img
  * @param classes Space separated list of CSS classes for this element.
  */
 fun RBuilder.img(
-    fluid: Boolean? = true,
-    isThumbnail: Boolean? = null,
+    fluid: Boolean = false,
+    isThumbnail: Boolean = false,
     alt: String? = null,
     src: String? = null,
     classes: String? = null,
@@ -27,11 +27,11 @@ fun RBuilder.img(
 ): ReactElement {
     val imageClasses = mutableSetOf<ClassNames>()
 
-    if (fluid == true) {
+    if (fluid) {
         imageClasses.add(ClassNames.IMG_FLUID)
     }
 
-    if (isThumbnail == true) {
+    if (isThumbnail) {
         imageClasses.add(ClassNames.IMG_THUMBNAIL)
     }
 
