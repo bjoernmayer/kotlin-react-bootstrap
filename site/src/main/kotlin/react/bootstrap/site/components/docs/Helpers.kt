@@ -7,6 +7,7 @@ import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
+import react.bootstrap.components.nav.NavComponent
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.layout.grid.col.col
@@ -58,7 +59,7 @@ internal fun Imports.importNavsBuilder() =
     addImport("components", "nav", RBuilder::Navs.name)
 
 internal fun Imports.importNavItemBuilder() =
-    addImport("components", "nav", RElementBuilder<Navs.Ul.Props>::navItem.name)
+    addImport("components", "nav", RElementBuilder<NavComponent.Ul.Props>::navItem.name)
 
 internal fun Imports.importNavLinkBuilder() =
     addImport("components", "nav", navLinkBuilderFun.name)

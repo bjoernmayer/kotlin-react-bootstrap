@@ -18,7 +18,7 @@ internal class ImageThumbnails : SectionComponent() {
     override val title: String = "Image thumbnails"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

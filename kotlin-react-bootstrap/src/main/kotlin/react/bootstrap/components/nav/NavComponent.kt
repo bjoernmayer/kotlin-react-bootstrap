@@ -24,8 +24,8 @@ import kotlin.reflect.KClass
  *
  * @param PT RProps Type
  */
-sealed class Navs<PT : Navs.Props> : AbstractComponent<HtmlBlockTag, PT, RState>() {
-    class Ul : Navs<Ul.Props>() {
+sealed class NavComponent<PT : NavComponent.Props> : AbstractComponent<HtmlBlockTag, PT, RState>() {
+    class Ul : NavComponent<Ul.Props>() {
         override val rendererTag: KClass<out HtmlBlockTag> = UL::class
 
         override fun RDOMBuilder<HtmlBlockTag>.transferChildren() {
@@ -38,10 +38,10 @@ sealed class Navs<PT : Navs.Props> : AbstractComponent<HtmlBlockTag, PT, RState>
             }
         }
 
-        interface Props : Navs.Props
+        interface Props : NavComponent.Props
     }
 
-    class Ol : Navs<Ol.Props>() {
+    class Ol : NavComponent<Ol.Props>() {
         override val rendererTag: KClass<out HtmlBlockTag> = OL::class
 
         override fun RDOMBuilder<HtmlBlockTag>.transferChildren() {
@@ -54,10 +54,10 @@ sealed class Navs<PT : Navs.Props> : AbstractComponent<HtmlBlockTag, PT, RState>
             }
         }
 
-        interface Props : Navs.Props
+        interface Props : NavComponent.Props
     }
 
-    class Nav : Navs<Nav.Props>() {
+    class Nav : NavComponent<Nav.Props>() {
         override val rendererTag: KClass<out HtmlBlockTag> = NAV::class
 
         override fun RDOMBuilder<HtmlBlockTag>.transferChildren() {
@@ -80,10 +80,10 @@ sealed class Navs<PT : Navs.Props> : AbstractComponent<HtmlBlockTag, PT, RState>
             }
         }
 
-        interface Props : Navs.Props
+        interface Props : NavComponent.Props
     }
 
-    class Div : Navs<Div.Props>() {
+    class Div : NavComponent<Div.Props>() {
         override val rendererTag: KClass<out HtmlBlockTag> = DIV::class
 
         override fun RDOMBuilder<HtmlBlockTag>.transferChildren() {
@@ -106,7 +106,7 @@ sealed class Navs<PT : Navs.Props> : AbstractComponent<HtmlBlockTag, PT, RState>
             }
         }
 
-        interface Props : Navs.Props
+        interface Props : NavComponent.Props
     }
 
     override fun RDOMBuilder<HtmlBlockTag>.build() {
@@ -141,7 +141,7 @@ sealed class Navs<PT : Navs.Props> : AbstractComponent<HtmlBlockTag, PT, RState>
         > Array<out Child>.mapActiveLinkPredicate(): Array<out Child> =
         mapComponents<PT, CT> { _, _ ->
             attrs {
-                activeLinkPredicate = this@Navs.props.activeLinkPredicate
+                activeLinkPredicate = this@NavComponent.props.activeLinkPredicate
             }
         }
 

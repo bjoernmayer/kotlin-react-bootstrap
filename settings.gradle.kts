@@ -5,11 +5,12 @@ rootProject.name = "kotlin_react_bootstrap"
 pluginManagement {
     resolutionStrategy {
         plugins {
-            val kotlinVersion = extra["kotlin.version"] as String
-            kotlin("js") version kotlinVersion
+            infix fun PluginDependencySpec.extraVersion(target: String) =
+                version(extra["$target.version"] as String)
 
-            val ktlintGradleVersion = extra["ktlint-gradle.version"] as String
-            id("org.jlleitschuh.gradle.ktlint") version ktlintGradleVersion
+            kotlin("js") extraVersion "kotlin"
+
+            id("org.jlleitschuh.gradle.ktlint") extraVersion "ktlint-gradle"
         }
     }
 }

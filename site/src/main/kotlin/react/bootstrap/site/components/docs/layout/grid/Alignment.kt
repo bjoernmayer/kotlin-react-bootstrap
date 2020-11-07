@@ -14,9 +14,9 @@ import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.importColFun
+import react.bootstrap.site.components.docs.importContainerFun
 import react.bootstrap.site.components.docs.importFromGrid
 import react.bootstrap.site.components.docs.importRowFun
-import react.bootstrap.site.components.docs.importContainerFun
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
@@ -33,7 +33,7 @@ internal class Alignment : SectionComponent() {
     override val title: String = "Alignment"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -42,7 +42,7 @@ vertical alignment of flex items when the flex container has a `min-height` as s
 details]("https://github.com/philipwalton/flexbugs#flexbug-3").
             """
         }
-        subSectionTitle("Vertical alignment", section)
+        subSectionTitle("Vertical alignment")
         flexColsExampleRow {
             liveExample {
                 container {
@@ -139,7 +139,7 @@ details]("https://github.com/philipwalton/flexbugs#flexbug-3").
                     .build()
             }
         }
-        subSectionTitle("Horizontal alignment", section)
+        subSectionTitle("Horizontal alignment")
         exampleRow {
             liveExample {
                 container {

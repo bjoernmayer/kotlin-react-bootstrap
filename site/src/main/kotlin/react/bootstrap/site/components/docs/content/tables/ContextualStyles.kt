@@ -21,7 +21,7 @@ internal class ContextualStyles : SectionComponent() {
     override val title: String = "Contextual styles"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         p {
             +"Use contextual styles to color table rows or individual cells."
         }

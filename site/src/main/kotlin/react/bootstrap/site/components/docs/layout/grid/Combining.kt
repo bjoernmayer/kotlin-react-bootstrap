@@ -16,9 +16,9 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.importColFun
+import react.bootstrap.site.components.docs.importContainerFun
 import react.bootstrap.site.components.docs.importFromGrid
 import react.bootstrap.site.components.docs.importRowFun
-import react.bootstrap.site.components.docs.importContainerFun
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
@@ -41,14 +41,14 @@ internal class Combining : SectionComponent() {
     override val title: String = "$sizes, $offsets, $orderings, $alignments"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         p {
             +"""
 As you can see in the examples above, all col attributes are set using the same arguments. Custom
 pairing functions are used to combine the values.
             """
         }
-        subSectionTitle("Combine with $sizes", section)
+        subSectionTitle("Combine with $sizes")
         Markdown {
             //language=Markdown
             +"""
@@ -107,7 +107,7 @@ Combine other attributes with `$sizes` by using `$sz`.
             }
         }
 
-        subSectionTitle("Combine with $offsets", section)
+        subSectionTitle("Combine with $offsets")
         Markdown {
             //language=Markdown
             +"""
@@ -166,7 +166,7 @@ Combine other attributes with `$offsets` by using `$off`.
             }
         }
 
-        subSectionTitle("Combine with $orderings", section)
+        subSectionTitle("Combine with $orderings")
         Markdown {
             //language=Markdown
             +"""
@@ -225,7 +225,7 @@ Combine other attributes with `$orderings` by using `$ord`.
             }
         }
 
-        subSectionTitle("Combine with $alignments", section)
+        subSectionTitle("Combine with $alignments")
         Markdown {
             //language=Markdown
             +"""
@@ -284,7 +284,7 @@ Combine other attributes with `$alignments` by using `$align`.
             }
         }
 
-        subSectionTitle("Combine all", section)
+        subSectionTitle("Combine all")
         p {
             +"You can use the same pairing functions in any order to combine all attributes."
         }

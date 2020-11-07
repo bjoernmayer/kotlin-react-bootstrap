@@ -12,15 +12,15 @@ import react.dom.h2
 import react.dom.h3
 
 internal abstract class SectionComponent : RComponent<SectionComponent.Props, RState>() {
-    protected val section: Section
+    private val section: Section
         get() = Section(title)
 
     protected abstract val title: String
 
-    protected fun RBuilder.sectionTitle(section: Section, block: RHandler<SectionTitle.Props> = { }): ReactElement =
+    protected fun RBuilder.sectionTitle(block: RHandler<SectionTitle.Props> = { }): ReactElement =
         child(SectionTitle::class) {
             attrs {
-                this.section = section
+                this.section = this@SectionComponent.section
                 this.onNewSection = this@SectionComponent.props.onNewSection
             }
             block()
@@ -28,14 +28,13 @@ internal abstract class SectionComponent : RComponent<SectionComponent.Props, RS
 
     protected fun RBuilder.subSectionTitle(
         title: String,
-        parentSection: Section,
         block: RHandler<SubSectionTitle.Props> = { }
     ): ReactElement =
         child(SubSectionTitle::class) {
             attrs {
                 this.title = title
                 this.onNewSection = this@SectionComponent.props.onNewSection
-                this.parentSection = parentSection
+                this.parentSection = this@SectionComponent.section
             }
             block()
         }

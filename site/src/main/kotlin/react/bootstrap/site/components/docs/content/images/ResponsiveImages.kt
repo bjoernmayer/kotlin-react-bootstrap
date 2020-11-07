@@ -18,7 +18,7 @@ internal class ResponsiveImages : SectionComponent() {
     override val title: String = "Responsive images"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

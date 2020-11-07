@@ -32,7 +32,7 @@ internal class Containers : SectionComponent() {
     override val title: String = "Containers"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -182,7 +182,7 @@ The table below illustrates how each container’s `max-width` compares to the o
                 }
             }
         }
-        subSectionTitle("All-in-one", section)
+        subSectionTitle("All-in-one")
         Markdown {
             //language=Markdown
             +"""
@@ -199,7 +199,7 @@ breakpoint.
                 .setLambdaArgument("// Content here")
                 .build()
         }
-        subSectionTitle("Fluid", section)
+        subSectionTitle("Fluid")
         Markdown {
             //language=Markdown
             +"""
@@ -218,7 +218,7 @@ spanning the entire width of the viewport.
                 .setLambdaArgument("// Content here")
                 .build()
         }
-        subSectionTitle("Responsive", section)
+        subSectionTitle("Responsive")
         Markdown {
             val renderedSmContainer = FunCall.builder(RBuilder::container, FunCall.Style.INLINE)
                 .addArgument("viscosity", Container.Viscosities.SM)

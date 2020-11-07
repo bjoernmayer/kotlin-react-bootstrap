@@ -23,7 +23,7 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
         buttons = props.childrenArray.gatherChildrenProps<Button.Props, Button>()
 
         activeButtons = buttons?.mapNotNull { (index, buttonProps) ->
-            if (buttonProps.active == true) {
+            if (buttonProps.active) {
                 index
             } else {
                 null
@@ -113,7 +113,7 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
     override fun buildClasses(): Set<ClassNames> {
         val btnGroupClasses = mutableSetOf<ClassNames>()
 
-        if (props.appearance == Appearance.DEFAULT || props.appearance == null) {
+        if (props.appearance == null) {
             btnGroupClasses.add(ClassNames.BTN_GROUP)
         }
 
@@ -145,7 +145,7 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
                 }
             }
 
-            // This basically replaces the buttons in this buttonGroup with a version, which has a onClick event
+            // This basically replaces the buttons in this buttonGroup with a version, which has an onClick event
             // It does so by manually adding each child instead of using the usual children() function
             childList.addAll(
                 props.childrenArray.mapComponents<Button.Props, Button> { index, oldProps ->
@@ -161,8 +161,24 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
     }
 
     interface Props : WithGlobalAttributes {
+        /**
+         * Change the appearance of the [ButtonGroup] by setting an [Appearance].
+         */
         var appearance: Appearance?
+
+        /**
+         * Set this to make [Button]s behave like Radio- or Checkboxes.
+         *
+         * Defaults to a smart [ButtonGroup] which does not change Behaviour for normal buttons, but lets Radio- &
+         * Checkboxes behave like they should.
+         */
         var behaviour: Behaviours?
+
+        /**
+         * aria-label
+         *
+         * Defaults to *null*.
+         */
         var label: String?
         var sizes: Sizes?
     }
@@ -173,7 +189,6 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
     }
 
     enum class Appearance {
-        DEFAULT,
         NONE,
         VERTICAL
     }

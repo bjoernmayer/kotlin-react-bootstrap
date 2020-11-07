@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package react.bootstrap.components.button
 
 import kotlinext.js.jsObject
@@ -311,10 +309,37 @@ class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(prop
     }
 
     interface Props : WithGlobalAttributes, WithActive, WithDisabled, WithDomEvents, IdentifiableProps<Button> {
+        /**
+         * Set this to *true* to disable text-wrapping for this button.
+         *
+         * Defaults to *false*
+         */
         var nowrap: Boolean
+
+        /**
+         * Use this to make buttons appear smaller or larger than usual.
+         *
+         * Defaults to *null*
+         */
         var sizes: Sizes?
+
+        /**
+         * Setting this defines the underlying HTML.
+         *
+         * Defaults to [Types.Button]
+         */
         var type: Types
+
+        /**
+         * Use the [Variants] to colour-in the button.
+         */
         var variant: Variants
+
+        /**
+         * Set this to *true* to render the button as block.
+         *
+         * Defaults to *false*
+         */
         var blockSized: Boolean
     }
 

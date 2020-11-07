@@ -13,7 +13,7 @@ internal class Lead : SectionComponent() {
     override val title: String = "Lead"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

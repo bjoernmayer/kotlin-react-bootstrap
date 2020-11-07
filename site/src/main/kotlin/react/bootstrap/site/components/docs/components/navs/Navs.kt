@@ -14,5 +14,6 @@ Documentation and examples for how to use Bootstrap’s included navigation comp
         child(BaseNav::class)
         child(AvailableStyles::class)
         child(ActiveState::class)
+        child(Reference::class)
     }
 }

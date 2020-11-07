@@ -14,7 +14,7 @@ import kotlin.random.Random
  *
  * Build whatever close element you like.
  *
- * @param block [RBuilder] block function
+ * @param block [ElementProvider] Should return a ReactElement
  * @return The ceated ReactElement
  */
 fun RElementBuilder<Alert.Dismissible.Props>.closingElement(block: ElementProvider): ReactElement {

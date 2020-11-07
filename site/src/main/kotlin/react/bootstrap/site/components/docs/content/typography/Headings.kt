@@ -23,7 +23,7 @@ internal class Headings : SectionComponent() {
     override val title: String = "Headings"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -55,7 +55,7 @@ heading but cannot use the associated HTML element.
                     .build()
             }
         }
-        subSectionTitle("Customizing headings", section)
+        subSectionTitle("Customizing headings")
         p {
             +"You can recreate the small secondary heading text from Bootstrap 3."
         }

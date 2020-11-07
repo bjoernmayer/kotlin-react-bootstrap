@@ -15,7 +15,7 @@ internal class ContainerBuilder : SectionComponent() {
     override val title: String = "Container builder"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

@@ -17,5 +17,31 @@ internal data class Generic(
         type: KClass<*>
     ) : this(className, type.nestedName)
 
-    override fun build(): String = "$className<$typeName>"
+    private var variance: Variance? = null
+
+    fun setVariance(variance: Variance): Generic {
+        this.variance = variance
+
+        return this
+    }
+
+    override fun build(): String = buildString {
+        append("$className<")
+
+        variance?.let {
+            append(it.name.toLowerCase())
+            append(" ")
+        }
+
+        append("$typeName>")
+    }
+
+    enum class Variance {
+        IN,
+        OUT
+    }
+
+    companion object {
+        inline fun <reified TP, reified TC> builder(): Generic = Generic(TP::class, TC::class)
+    }
 }

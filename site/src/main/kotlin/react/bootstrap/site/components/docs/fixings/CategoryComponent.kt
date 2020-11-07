@@ -4,8 +4,8 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
-import react.bootstrap.site.components.docs.Docs
 import react.bootstrap.site.components.docs.Category
+import react.bootstrap.site.components.docs.Docs
 import react.router.dom.RouteResultProps
 import react.router.dom.redirect
 import react.router.dom.route

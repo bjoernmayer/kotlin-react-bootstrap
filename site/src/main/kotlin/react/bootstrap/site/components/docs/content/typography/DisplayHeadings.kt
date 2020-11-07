@@ -8,7 +8,6 @@ import react.bootstrap.content.typography.display.display
 import react.bootstrap.content.typography.display.display1
 import react.bootstrap.content.typography.display.display2
 import react.bootstrap.content.typography.display.display3
-import react.bootstrap.content.typography.display.display4
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -24,7 +23,7 @@ internal class DisplayHeadings : SectionComponent() {
     override val title: String = "Display headings"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -75,7 +74,7 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
                     .build()
             }
             +LineComment.builder("Or you use a more generic way").build()
-            +FunCall.builder(RBuilder::display4)
+            +FunCall.builder("display")
                 .addTypeParameter(SPAN::class)
                 .addArgument("variant", Display.Variants.DISPLAY_4)
                 .setLambdaArgument(plusString("Display 4"))

@@ -24,7 +24,7 @@ internal class ResponsiveTables : SectionComponent() {
     override val title: String = "Responsive tables"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -32,7 +32,7 @@ Responsive tables allow tables to be scrolled horizontally with ease. Make any t
 the usual viewport breakpoints by setting the `table(responsive)`-argument.
             """
         }
-        subSectionTitle("Always responsive", section)
+        subSectionTitle("Always responsive")
         Markdown {
             //language=Markdown
             +"""
@@ -51,7 +51,7 @@ Accross every breakpoint, set `table(responsive)` to `${Breakpoints.ALL.nestedNa
                 .setLambdaArgument("...")
                 .build()
         }
-        subSectionTitle("Breakpoint specific", section)
+        subSectionTitle("Breakpoint specific")
         Markdown {
             //language=Markdown
             +"""

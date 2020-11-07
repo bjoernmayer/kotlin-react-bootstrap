@@ -1,5 +1,6 @@
 package react.bootstrap.site.components.docs.content.typography
 
+import kotlinx.html.BLOCKQUOTE
 import react.RBuilder
 import react.bootstrap.content.typography.blockquote.blockQuote
 import react.bootstrap.content.typography.blockquote.blockQuoteFooter
@@ -10,13 +11,14 @@ import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
+import react.dom.RDOMBuilder
 import react.dom.cite
 
 internal class Blockquotes : SectionComponent() {
     override val title: String = "Blockquotes"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -42,11 +44,11 @@ any HTML as the quote.
                 )
                 .build()
         }
-        subSectionTitle("Naming a source", section)
+        subSectionTitle("Naming a source")
         Markdown {
             //language=Markdown
             +"""
-Add a `${RBuilder::blockQuoteFooter.name} { }`  for identifying the source. Wrap the name of the source work in
+Add a `${RDOMBuilder<BLOCKQUOTE>::blockQuoteFooter.name} { }`  for identifying the source. Wrap the name of the source work in
 `cite { }`.
             """
         }
@@ -58,7 +60,7 @@ Add a `${RBuilder::blockQuoteFooter.name} { }`  for identifying the source. Wrap
         }
         codeExample {
             +Imports.builder()
-                .addImport("content.typography.blockquote.${RBuilder::blockQuoteFooter.name}")
+                .addImport("content.typography.blockquote.${RDOMBuilder<BLOCKQUOTE>::blockQuoteFooter.name}")
                 .addImport("content.typography.blockquote.${RBuilder::blockQuote.name}")
                 .importClassNames()
                 .build()
@@ -70,7 +72,7 @@ Add a `${RBuilder::blockQuoteFooter.name} { }`  for identifying the source. Wrap
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
                     ),
                     "\n",
-                    FunCall.builder(RBuilder::blockQuoteFooter, FunCall.Style.INLINE)
+                    FunCall.builder(RDOMBuilder<BLOCKQUOTE>::blockQuoteFooter.name, FunCall.Style.INLINE)
                         .setLambdaArgument(
                             plusString("Someone famous in "),
                             "; ",

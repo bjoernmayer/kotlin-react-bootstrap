@@ -7,22 +7,12 @@ import react.RHandler
 import react.ReactElement
 import react.bootstrap.splitClassesToSet
 
-@Suppress("unused")
-fun RBuilder.display1(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
-    display<SPAN>(variant = Display.Variants.DISPLAY_1, classes = classes, block = block)
-
-@Suppress("unused")
-fun RBuilder.display2(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
-    display<SPAN>(variant = Display.Variants.DISPLAY_2, classes = classes, block = block)
-
-@Suppress("unused")
-fun RBuilder.display3(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
-    display<SPAN>(variant = Display.Variants.DISPLAY_3, classes = classes, block = block)
-
-@Suppress("unused")
-fun RBuilder.display4(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
-    display<SPAN>(variant = Display.Variants.DISPLAY_4, classes = classes, block = block)
-
+/**
+ * Creates a generic [Display].
+ *
+ * @param TT Tag Type to be used to render this [Display].
+ * @param classes Space separated list of CSS classes for this element.
+ */
 inline fun <reified TT : HtmlInlineTag> RBuilder.display(
     variant: Display.Variants,
     classes: String? = null,
@@ -36,3 +26,35 @@ inline fun <reified TT : HtmlInlineTag> RBuilder.display(
 
     block()
 }
+
+/**
+ * Creates a [Display] element with variant set to [Display.Variants.DISPLAY_1].
+ *
+ * @param classes Space separated list of CSS classes for this element.
+ */
+fun RBuilder.display1(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
+    display<SPAN>(variant = Display.Variants.DISPLAY_1, classes = classes, block = block)
+
+/**
+ * Creates a [Display] element with variant set to [Display.Variants.DISPLAY_2].
+ *
+ * @param classes Space separated list of CSS classes for this element.
+ */
+fun RBuilder.display2(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
+    display<SPAN>(variant = Display.Variants.DISPLAY_2, classes = classes, block = block)
+
+/**
+ * Creates a [Display] element with variant set to [Display.Variants.DISPLAY_3].
+ *
+ * @param classes Space separated list of CSS classes for this element.
+ */
+fun RBuilder.display3(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
+    display<SPAN>(variant = Display.Variants.DISPLAY_3, classes = classes, block = block)
+
+/**
+ * Creates a [Display] element with variant set to [Display.Variants.DISPLAY_4].
+ *
+ * @param classes Space separated list of CSS classes for this element.
+ */
+fun RBuilder.display4(classes: String? = null, block: RHandler<Display.Props>): ReactElement =
+    display<SPAN>(variant = Display.Variants.DISPLAY_4, classes = classes, block = block)

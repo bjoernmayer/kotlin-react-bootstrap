@@ -53,7 +53,7 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
         }
 
         private fun handleDismissle(
-            @Suppress("UNUSED_PARAMETER") event: Event,
+            event: Event,
             originalEventHandler: EventHandler?
         ) {
             if (originalEventHandler is EventHandler) {

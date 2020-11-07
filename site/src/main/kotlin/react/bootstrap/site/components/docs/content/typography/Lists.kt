@@ -37,8 +37,8 @@ internal class Lists : SectionComponent() {
     override val title: String = "Lists"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
-        subSectionTitle("Unstyled", section)
+        sectionTitle()
+        subSectionTitle("Unstyled")
         Markdown {
             //language=Markdown
             +"""
@@ -118,7 +118,7 @@ immediate children list items__, meaning you will need to add the class for any 
                 )
                 .build()
         }
-        subSectionTitle("Inline", section)
+        subSectionTitle("Inline")
         Markdown {
             //language=Markdown
             +"""
@@ -152,7 +152,7 @@ Remove a list’s bullets and apply some light `margin` with a combination of tw
                 )
                 .build()
         }
-        subSectionTitle("Description list alignment", section)
+        subSectionTitle("Description list alignment")
         Markdown {
             //language=Markdown
             +"""

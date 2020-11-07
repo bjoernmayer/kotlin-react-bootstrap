@@ -15,6 +15,12 @@ import react.bootstrap.lib.Builder
 import react.bootstrap.splitClassesToSet
 
 class AlertBuilder(override val builder: RBuilder) : Builder {
+    /**
+     * Creates an [Alert] element.
+     *
+     * @param variant [Alert.Variants] change the styling of the [Alert].
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun RBuilder.alert(variant: Alert.Variants, classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
         child(Alert.Static::class) {
             attrs {
@@ -25,25 +31,65 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
             block()
         }
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.DANGER].
+     *
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun danger(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
         builder.alert(DANGER, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.DARK].
+     *
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun dark(classes: String? = null, block: RHandler<Alert.Props>): ReactElement = builder.alert(DARK, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.INFO].
+     *
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun info(classes: String? = null, block: RHandler<Alert.Props>): ReactElement = builder.alert(INFO, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.LIGHT].
+     *
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun light(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
         builder.alert(LIGHT, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.PRIMARY].
+     *
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun primary(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
         builder.alert(PRIMARY, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.SECONDARY].
+     *
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun secondary(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
         builder.alert(SECONDARY, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.SUCCESS].
+     *
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun success(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
         builder.alert(SUCCESS, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.WARNING].
+     *
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun warning(classes: String? = null, block: RHandler<Alert.Props>): ReactElement =
         builder.alert(WARNING, classes, block)
 
@@ -51,6 +97,13 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
 }
 
 class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
+    /**
+     * Creates a dismissible [Alert] element.
+     *
+     * @param variant [Alert.Variants] change the styling of the [Alert].
+     * @param fade When set to *true*, the alert fades out, when dismissed.
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun RBuilder.alert(
         variant: Alert.Variants,
         fade: Boolean = false,
@@ -66,18 +119,48 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         block()
     }
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.DANGER].
+     *
+     * @param fade When set to *true*, the alert fades out, when dismissed.
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun danger(fade: Boolean = false, classes: String? = null, block: RHandler<Alert.Dismissible.Props>): ReactElement =
         builder.alert(DANGER, fade, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.DARK].
+     *
+     * @param fade When set to *true*, the alert fades out, when dismissed.
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun dark(fade: Boolean = false, classes: String? = null, block: RHandler<Alert.Dismissible.Props>): ReactElement =
         builder.alert(DARK, fade, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.INFO].
+     *
+     * @param fade When set to *true*, the alert fades out, when dismissed.
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun info(fade: Boolean = false, classes: String? = null, block: RHandler<Alert.Dismissible.Props>): ReactElement =
         builder.alert(INFO, fade, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.LIGHT].
+     *
+     * @param fade When set to *true*, the alert fades out, when dismissed.
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun light(fade: Boolean = false, classes: String? = null, block: RHandler<Alert.Dismissible.Props>): ReactElement =
         builder.alert(LIGHT, fade, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.PRIMARY].
+     *
+     * @param fade When set to *true*, the alert fades out, when dismissed.
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun primary(
         fade: Boolean = false,
         classes: String? = null,
@@ -85,6 +168,12 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
     ): ReactElement =
         builder.alert(PRIMARY, fade, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.SECONDARY].
+     *
+     * @param fade When set to *true*, the alert fades out, when dismissed.
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun secondary(
         fade: Boolean = false,
         classes: String? = null,
@@ -92,6 +181,12 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
     ): ReactElement =
         builder.alert(SECONDARY, fade, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.SUCCESS].
+     *
+     * @param fade When set to *true*, the alert fades out, when dismissed.
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun success(
         fade: Boolean = false,
         classes: String? = null,
@@ -99,6 +194,12 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
     ): ReactElement =
         builder.alert(SUCCESS, fade, classes, block)
 
+    /**
+     * Creates an [Alert] element with *variant* set to [Alert.Variants.WARNING].
+     *
+     * @param fade When set to *true*, the alert fades out, when dismissed.
+     * @param classes Space separated list of CSS classes for this element.
+     */
     fun warning(
         fade: Boolean = false,
         classes: String? = null,

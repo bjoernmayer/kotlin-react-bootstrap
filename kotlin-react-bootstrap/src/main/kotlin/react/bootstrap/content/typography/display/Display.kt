@@ -17,7 +17,17 @@ import react.bootstrap.lib.react.rprops.WithRendererTag
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
-class Display : CustomisableComponent<HtmlInlineTag, Display.Props, RState>() {
+class Display(props: Props) : CustomisableComponent<HtmlInlineTag, Display.Props, RState>(props) {
+    init {
+        // These comparison are not senseless. The props are built using kotlin's `dynamic` keyword. Null is a possible
+        // value.
+
+        @Suppress("SENSELESS_COMPARISON")
+        require(props.variant != null) {
+            "Missing property: variant must not be null!"
+        }
+    }
+
     override val defaultRendererTag: KClass<out HtmlInlineTag>
         get() = when (props.variant) {
             Variants.DISPLAY_1 -> H1::class

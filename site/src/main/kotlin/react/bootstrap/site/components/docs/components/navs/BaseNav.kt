@@ -2,11 +2,12 @@
 
 package react.bootstrap.site.components.docs.components.navs
 
-import kotlinx.html.DIV
 import react.RBuilder
+import react.RElementBuilder
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
+import react.bootstrap.site.components.docs.fixings.LiveExample
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -14,14 +15,13 @@ import react.bootstrap.site.components.docs.importNavComponents
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
-import react.dom.RDOMBuilder
 import react.dom.div
 
 internal class BaseNav : SectionComponent() {
     override val title: String = "Base nav"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""
@@ -144,7 +144,7 @@ without the extra markup.
         }
     }
 
-    private fun RDOMBuilder<DIV>.ulTestingNav() {
+    private fun RElementBuilder<LiveExample.Props>.ulTestingNav() {
         Navs.ul {
             navItem {
                 navLink(href = "#", active = true) {
@@ -168,7 +168,7 @@ without the extra markup.
         }
     }
 
-    private fun RDOMBuilder<DIV>.olTestingNav() {
+    private fun RElementBuilder<LiveExample.Props>.olTestingNav() {
         Navs.ol {
             navItem {
                 navLink(href = "#", active = true) {
@@ -192,7 +192,7 @@ without the extra markup.
         }
     }
 
-    private fun RDOMBuilder<DIV>.navTestingNav() {
+    private fun RElementBuilder<LiveExample.Props>.navTestingNav() {
         Navs.nav {
             navItem {
                 navLink(href = "#", active = true) {
@@ -216,7 +216,7 @@ without the extra markup.
         }
     }
 
-    private fun RDOMBuilder<DIV>.divTestingNav() {
+    private fun RElementBuilder<LiveExample.Props>.divTestingNav() {
         Navs.div {
             navItem {
                 navLink(href = "#", active = true) {

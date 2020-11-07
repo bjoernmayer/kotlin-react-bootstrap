@@ -7,6 +7,12 @@ import react.bootstrap.appendClass
 import react.bootstrap.lib.RDOMHandler
 import react.dom.tr
 
+/**
+ * Creates a [TR] element.
+ *
+ * @param contextualStyle Set [ContextualStyle] to colour-in the [TR]s.
+ * @param classes Space separated list of CSS classes for this element.
+ */
 fun RBuilder.tr(
     contextualStyle: ContextualStyle? = null,
     classes: String? = null,

@@ -1,4 +1,4 @@
-@file:Suppress("ClassName", "unused")
+@file:Suppress("unused")
 
 package react.bootstrap.layout.grid.row
 
@@ -6,11 +6,23 @@ import react.bootstrap.lib.component.AttributePair
 import react.bootstrap.lib.component.AttributeTriple
 import react.bootstrap.lib.component.CombinedAttributes
 
+/**
+ * Sealed class for different row attributes.
+ *
+ * [RowAttributes] can be combined by using the provided infix functions: `xs`, `ys` & `colcount`
+ */
 sealed class RowAttributes : CombinedAttributes {
     abstract val colCount: ColCounts?
     abstract val itemsX: ItemsXs?
     abstract val itemsY: ItemsYs?
 
+    /**
+     * [ColCounts] of a [Row]. Use this to quickly set the number of columns in this [Row].
+     *
+     * Use [ColCounts.xs] to combine [ColCounts] with [ItemsXs].
+     * Use [ColCounts.ys] to combine [ColCounts] with [ItemsYs].
+     */
+    @Suppress("ClassName")
     sealed class ColCounts(private val value: Int) : RowAttributes() {
         class CNT_1 internal constructor() : ColCounts(1)
         class CNT_2 internal constructor() : ColCounts(2)
@@ -27,7 +39,9 @@ sealed class RowAttributes : CombinedAttributes {
         final override val itemsX: ItemsXs? = null
         final override val itemsY: ItemsYs? = null
 
+        @Suppress("MemberVisibilityCanBePrivate")
         infix fun xs(that: ItemsXs): ColCountItemXsPair = ColCountItemXsPair(this, that)
+        @Suppress("MemberVisibilityCanBePrivate")
         infix fun ys(that: ItemsYs): ColCountItemYsPair = ColCountItemYsPair(this, that)
 
         companion object {
@@ -40,6 +54,12 @@ sealed class RowAttributes : CombinedAttributes {
         }
     }
 
+    /**
+     * [ItemsXs] of a [Row]. Use this to change horizontal alignment of the cols in this [Row].
+     *
+     * Use [ItemsXs.colCount] to combine [ItemsXs] with [ColCounts].
+     * Use [ItemsXs.ys] to combine [ItemsXs] with [ItemsYs].
+     */
     sealed class ItemsXs : RowAttributes() {
         class AROUND internal constructor() : ItemsXs()
         class BETWEEN internal constructor() : ItemsXs()
@@ -67,6 +87,12 @@ sealed class RowAttributes : CombinedAttributes {
         }
     }
 
+    /**
+     * [ItemsYs] of a [Row]. Use this to change vertical alignment of the cols in this [Row].
+     *
+     * Use [ItemsYs.colCount] to combine [ItemsYs] with [ColCounts].
+     * Use [ItemsYs.xs] to combine [ItemsYs] with [ItemsXs].
+     */
     sealed class ItemsYs : RowAttributes() {
         class BASELINE internal constructor() : ItemsYs()
         class CENTER internal constructor() : ItemsYs()
@@ -83,6 +109,7 @@ sealed class RowAttributes : CombinedAttributes {
             get() = this
 
         infix fun colcount(that: ColCounts): ColCountItemYsPair = ColCountItemYsPair(that, this)
+        @Suppress("MemberVisibilityCanBePrivate")
         infix fun xs(that: ItemsXs): ItemsXsItemsYsPair = ItemsXsItemsYsPair(that, this)
 
         companion object {

@@ -15,7 +15,7 @@ internal class SmallTable : SectionComponent() {
     override val title: String = "Small table"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

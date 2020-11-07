@@ -4,11 +4,11 @@ import react.RBuilder
 import react.bootstrap.components.button.Button.Sizes
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.site.components.docs.importButton
-import react.bootstrap.site.components.docs.importButtonsBuilder
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
+import react.bootstrap.site.components.docs.importButton
+import react.bootstrap.site.components.docs.importButtonsBuilder
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
@@ -18,7 +18,7 @@ internal class Sizes : SectionComponent() {
     override val title: String = "Sizes"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

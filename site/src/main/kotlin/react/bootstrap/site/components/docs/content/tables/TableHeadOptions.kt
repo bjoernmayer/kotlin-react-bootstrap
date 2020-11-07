@@ -19,7 +19,7 @@ internal class TableHeadOptions : SectionComponent() {
     override val title: String = "Table head options"
 
     override fun RBuilder.render() {
-        sectionTitle(section)
+        sectionTitle()
         Markdown {
             //language=Markdown
             +"""

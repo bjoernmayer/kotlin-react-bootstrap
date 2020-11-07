@@ -20,9 +20,9 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.importColFun
+import react.bootstrap.site.components.docs.importContainerFun
 import react.bootstrap.site.components.docs.importFromGrid
 import react.bootstrap.site.components.docs.importRowFun
-import react.bootstrap.site.components.docs.importContainerFun
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
@@ -36,8 +36,8 @@ internal class Reordering : SectionComponent() {
     private val off = ColAttributes.Sizes::off.name
 
     override fun RBuilder.render() {
-        sectionTitle(section)
-        subSectionTitle("$orderingsName enum", section)
+        sectionTitle()
+        subSectionTitle("$orderingsName enum")
         Markdown {
             //language=Markdown
             +"""
@@ -86,7 +86,7 @@ for 1 through 12 across all five grid tiers.
                     .build()
             }
         }
-        subSectionTitle("Offsetting columns", section)
+        subSectionTitle("Offsetting columns")
         Markdown {
             //language=Markdown
             +"""
