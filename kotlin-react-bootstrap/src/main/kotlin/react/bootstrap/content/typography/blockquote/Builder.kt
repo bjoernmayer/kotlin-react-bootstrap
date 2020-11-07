@@ -1,13 +1,14 @@
 package react.bootstrap.content.typography.blockquote
 
 import kotlinx.html.BLOCKQUOTE
-import kotlinx.html.DIV
 import react.RBuilder
+import react.RHandler
 import react.ReactElement
 import react.bootstrap.appendClass
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.splitClassesToSet
+import react.dom.RDOMBuilder
 import react.dom.blockQuote
 
 /**
@@ -23,10 +24,14 @@ fun RBuilder.blockQuote(classes: String? = null, block: RDOMHandler<BLOCKQUOTE>)
  *
  * @param classes Space separated list of CSS classes for this element.
  */
-fun RBuilder.blockQuoteFooter(classes: String? = null, block: RDOMHandler<DIV>): ReactElement =
+fun RDOMBuilder<BLOCKQUOTE>.blockQuoteFooter(
+    classes: String? = null,
+    block: RHandler<BlockQuoteFooter.Props>
+): ReactElement =
     child(BlockQuoteFooter::class) {
         attrs {
             this.classes = classes.splitClassesToSet()
-            this.handler = block
         }
+
+        block()
     }
