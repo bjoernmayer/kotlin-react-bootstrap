@@ -1,31 +1,35 @@
 package react.bootstrap.components.alert
 
-import kotlinext.js.asJsObject
 import kotlinext.js.jsObject
+import kotlinx.html.CommonAttributeGroupFacade
+import kotlinx.html.SPAN
 import kotlinx.html.classes
 import kotlinx.html.role
 import org.w3c.dom.events.Event
 import react.RBuilder
-import react.RProps
 import react.RState
 import react.RStatics
-import react.ReactElement
-import react.asElementOrNull
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.component.ClassNameEnum
+import react.bootstrap.lib.component.CustomisableComponent
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
+import react.bootstrap.lib.react.identifiable.IdentifiableProps
+import react.bootstrap.lib.react.identifiable.isComponent
+import react.bootstrap.lib.react.identifiable.mapComponents
 import react.bootstrap.lib.react.rprops.WithDomEvents
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithRendererTag
 import react.bootstrap.lib.react.rprops.childrenArray
 import react.bootstrap.utilities.close.close
-import react.cloneElement
+import react.dom.RDOMBuilder
 import react.dom.div
 import react.setState
+import kotlin.reflect.KClass
 
 sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponent<PT, ST>(props) {
     class Static(props: Props) : Alert<Static.Props, RState>(props) {
@@ -116,37 +120,31 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
             }
 
             div {
-                children()
+                // Check if the lib-user added a closingElement manually
+                if (props.childrenArray.any { it.isComponent<ClosingElement>() }) {
+                    childList.addAll(
+                        props.childrenArray.mapComponents<ClosingElement.Props, ClosingElement> { _, oldProps ->
+                            attrs {
+                                onClick = {
+                                    handleDismissle(it, oldProps.onClick)
+                                }
+                            }
+                        }
+                    )
+                } else {
+                    children()
+                    child(ClosingElement::class) {
+                        attrs {
+                            onClick = {
+                                handleDismissle(it, null)
+                            }
+                        }
+                        close { }
+                    }
+                }
 
                 if (props.fade) {
                     attrs.onTransitionEndFunction = this@Dismissible::handleTransitionEnd
-                }
-
-                val closingElement = cloneElement<WithDomEvents>(
-                    props.closeElement,
-                    jsObject {
-                        val origEventHandler = props
-                            .closeElement
-                            .run {
-                                val props = this@Dismissible.props.asJsObject()
-
-                                if (props.hasOwnProperty(WithDomEvents::onClick.name)) {
-                                    props.unsafeCast<WithDomEvents>().onClick
-                                } else {
-                                    null
-                                }
-                            }
-
-                        onClick = {
-                            handleDismissle(it, origEventHandler)
-                        }
-                    }
-                )
-
-                if (props.closeElement != defaultCloseElement) {
-                    childList.replaceCloseElement(closingElement)
-                } else {
-                    childList.add(closingElement)
                 }
 
                 attrs {
@@ -160,34 +158,6 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
             }
         }
 
-        /**
-         * We marked the close element before. Now we find it in the children and replace it
-         */
-        private fun MutableList<Any>.replaceCloseElement(newClosingElement: ReactElement) {
-            val closeElementInChildren = props.childrenArray.indexOfFirst {
-                it.asElementOrNull()?.let { el ->
-                    val props = el.props.asJsObject()
-
-                    if (props.hasOwnProperty(CloseElementMarkerProps::random.name)) {
-                        props.unsafeCast<CloseElementMarkerProps>().random ==
-                            newClosingElement.props.unsafeCast<CloseElementMarkerProps>().random
-                    } else {
-                        false
-                    }
-                } ?: false
-            }
-
-            if (closeElementInChildren == -1) {
-                error("Given close element could not be found in children.")
-            }
-
-            this[closeElementInChildren] = newClosingElement
-        }
-
-        internal interface CloseElementMarkerProps : RProps {
-            var random: Int?
-        }
-
         enum class States {
             SHOWN,
             DISMISSING,
@@ -199,13 +169,6 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
         }
 
         interface Props : Alert.Props {
-            /**
-             * This is the element the user can click on to dismiss the alert.
-             *
-             * Defaults [react.bootstrap.utilities.close.Close]
-             */
-            var closeElement: ReactElement
-
             /**
              * When set to *true* the alert fades out, when dismissed.
              *
@@ -222,6 +185,39 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
              * This handler is called when the alert has been closed (will wait for CSS transitions to complete).
              */
             var onClosed: NoArgEventHandler?
+        }
+
+        class ClosingElement : CustomisableComponent<CommonAttributeGroupFacade, ClosingElement.Props, RState>() {
+            override val defaultRendererTag: KClass<out CommonAttributeGroupFacade> = SPAN::class
+
+            interface Props :
+                WithGlobalAttributes,
+                WithDomEvents,
+                IdentifiableProps<ClosingElement>,
+                WithRendererTag<CommonAttributeGroupFacade>
+
+            override fun RDOMBuilder<CommonAttributeGroupFacade>.build() {
+                attrs {
+                    loadGlobalAttributes(props)
+                    loadDomEvents(props)
+                }
+            }
+
+            companion object : RStatics<Props, RState, ClosingElement, Nothing>(ClosingElement::class) {
+                init {
+                    defaultProps = jsObject {
+                        componentType = ClosingElement::class
+                    }
+                }
+            }
+        }
+
+        companion object : RStatics<Props, State, Dismissible, Nothing>(Dismissible::class) {
+            init {
+                defaultProps = jsObject {
+                    fade = false
+                }
+            }
         }
     }
 
@@ -250,19 +246,5 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
 
     interface Props : WithGlobalAttributes, WithDomEvents {
         var variant: Variants
-    }
-
-    /**
-     * This special companion must be part of the sealed class. Putting it into [Dismissible] would break things.
-     */
-    companion object : RStatics<Dismissible.Props, Dismissible.State, Dismissible, Nothing>(Dismissible::class) {
-        private val defaultCloseElement = RBuilder().close { }
-
-        init {
-            defaultProps = jsObject {
-                closeElement = defaultCloseElement
-                fade = false
-            }
-        }
     }
 }
