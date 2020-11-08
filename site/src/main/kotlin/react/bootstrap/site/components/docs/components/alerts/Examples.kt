@@ -88,8 +88,8 @@ eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.nestedName}`).
         Markdown {
             //language=Markdown
             +"""
-Use the `$linkName`-function (only available inside `RElementBuilder<${Alert.Props::class.nestedName}>` to quickly
-provide matching colored links within any alert.
+Use the `${RElementBuilder<Alert.Props>::link.name}`-function (only available inside
+`RElementBuilder<${Alert.Props::class.nestedName}>` to quickly provide matching colored links within any alert.
             """
         }
         liveExample {
@@ -104,7 +104,7 @@ provide matching colored links within any alert.
         }
         codeExample {
             +Imports.builder()
-                .addImport("components.alert.$linkName")
+                .addImport("components.alert.${RElementBuilder<Alert.Props>::link.name}")
                 .addImport("components.alert.Alerts")
                 .build()
             variants.forEach { (variant, function) ->
@@ -253,7 +253,7 @@ alerts.
         Markdown {
             //language=Markdown
             +"""
-You can build your own custom close element, by using `$closingElementName { }`.
+You can build your own custom close element, by using `closingElement { }`.
         """
         }
         liveExample {
@@ -270,7 +270,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
         codeExample {
             +Imports.builder()
                 .addImport("components.alert.Alerts")
-                .addImport("components.alert.$closingElementName")
+                .addImport("components.alert.closingElement")
                 .addImport("components.button.Buttons")
                 .importClassNames()
                 .build()
@@ -283,7 +283,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
                     FunCall.builder(RBuilder::hr, FunCall.Style.NEW_INLINE)
                         .setEmptyLambdaArgument()
                         .build(),
-                    FunCall.builder(RElementBuilder<Alert.Dismissible.Props>::closingElement)
+                    FunCall.builder("closingElement")
                         .setLambdaArgument(
                             FunCall.builder(solidSuccessFun)
                                 .nestedBy(RBuilder::Buttons)
@@ -300,18 +300,48 @@ You can build your own custom close element, by using `$closingElementName { }`.
             +"The callbacks can also be used for something like this:"
         }
         liveExample {
-            child(dismissibleAlert)
+            child(
+                functionalComponent {
+                    var show by useState(false)
+
+                    if (show) {
+                        Alerts.dismissible.danger {
+                            attrs {
+                                onClosed = { show = false }
+                            }
+                            +"You picked the wrong house, fool!"
+                            hr { }
+                            closingElement {
+                                Buttons.solid.info {
+                                    attrs {
+                                        // a onClick event on the closing element can still be set
+                                        onClick = {
+                                            console.log("Phew. Good, that this worked out.")
+                                        }
+                                    }
+                                    +"Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!"
+                                }
+                            }
+                        }
+                    } else {
+                        Buttons.outline.danger {
+                            attrs {
+                                onClick = { show = true }
+                            }
+                            +"Open door & go in"
+                        }
+                    }
+                }
+            )
         }
         codeExample {
             +Imports.builder()
                 .addImport("components.alert.Alerts")
-                .addImport("components.alert.$closingElementName")
+                .addImport("components.alert.closingElement")
                 .addImport("components.button.Buttons")
                 .build()
-            +Assignment.builder("dismissibleAlert")
-                .addModifier("private")
-                .valType()
-                .value(
+            +FunCall.builder("child")
+                .addArgument(
                     FunCall.builder(Generic("functionalComponent", "RProps"))
                         .setLambdaArgument(
                             Assignment.builder("show")
@@ -349,7 +379,7 @@ You can build your own custom close element, by using `$closingElementName { }`.
                                             FunCall.builder(RBuilder::hr, FunCall.Style.NEW_INLINE)
                                                 .setEmptyLambdaArgument()
                                                 .build(),
-                                            FunCall.builder(RElementBuilder<Alert.Dismissible.Props>::closingElement)
+                                            FunCall.builder("closingElement")
                                                 .setLambdaArgument(
                                                     FunCall.builder(solidInfoFun)
                                                         .nestedBy(RBuilder::Buttons)
@@ -415,38 +445,6 @@ You can build your own custom close element, by using `$closingElementName { }`.
                         )
                 )
                 .build()
-        }
-    }
-
-    private val dismissibleAlert = functionalComponent<RProps> {
-        var show by useState(false)
-
-        if (show) {
-            Alerts.dismissible.danger {
-                attrs {
-                    onClosed = { show = false }
-                }
-                +"You picked the wrong house, fool!"
-                hr { }
-                closingElement {
-                    Buttons.solid.info {
-                        attrs {
-                            // a onClick event on the closing element can still be set
-                            onClick = {
-                                console.log("Phew. Good, that this worked out.")
-                            }
-                        }
-                        +"Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!"
-                    }
-                }
-            }
-        } else {
-            Buttons.outline.danger {
-                attrs {
-                    onClick = { show = true }
-                }
-                +"Open door & go in"
-            }
         }
     }
 }

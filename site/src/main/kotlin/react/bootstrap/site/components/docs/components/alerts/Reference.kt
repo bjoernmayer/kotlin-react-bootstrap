@@ -2,12 +2,13 @@
 
 package react.bootstrap.site.components.docs.components.alerts
 
+import kotlinx.html.Tag
 import react.RBuilder
 import react.RElementBuilder
+import react.ReactElement
 import react.bootstrap.components.alert.Alert
 import react.bootstrap.components.alert.AlertBuilder
 import react.bootstrap.components.alert.Alerts
-import react.bootstrap.components.alert.closingElement
 import react.bootstrap.components.alert.h1
 import react.bootstrap.components.alert.h2
 import react.bootstrap.components.alert.h3
@@ -25,6 +26,7 @@ import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunSpec
 import react.bootstrap.site.lib.codepoet.Generic
 import react.dom.p
+import kotlin.reflect.KFunction
 
 internal class Reference : SectionComponent() {
     override val title: String = "Reference"
@@ -65,7 +67,7 @@ internal class Reference : SectionComponent() {
             }
         }
 
-        subSectionTitle(linkName)
+        subSectionTitle(RElementBuilder<Alert.Props>::link.name)
         Markdown {
             //language=Markdown
             +"""
@@ -118,14 +120,29 @@ Custom `${function.name}` which behaves the same but adds `${ClassNames.ALERT_HE
                     .build()
             }
         }
-        subSectionTitle(closingElementName)
+        subSectionTitle("closingElement")
         p {
             +"Wrapper for a custom alert closing element."
         }
         codeExample {
-            +FunSpec.builder(RElementBuilder<Alert.Dismissible.Props>::closingElement, false)
+            +FunSpec.builder(
+                object : KFunction<ReactElement> {
+                    override val name: String = "closingElement"
+                }
+            )
                 .nestedByGeneric<RElementBuilder<*>, Alert.Dismissible.Props>()
-                .addParameter("block", "ElementProvider")
+                .addParameter("block", Generic("RHandler", Alert.Dismissible.ClosingElement.Props::class))
+                .returns("ReactElement")
+                .build()
+            +"\n"
+            +FunSpec.builder(
+                object : KFunction<ReactElement> {
+                    override val name: String = "closingElement"
+                }
+            )
+                .nestedByGeneric<RElementBuilder<*>, Alert.Dismissible.Props>()
+                .addTypeParameter("TT", Tag::class, true)
+                .addParameter("block", Generic("RHandler", Alert.Dismissible.ClosingElement.Props::class))
                 .returns("ReactElement")
                 .build()
         }

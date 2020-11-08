@@ -1,6 +1,9 @@
 package react.bootstrap.components.alert
 
+import kotlinx.html.CommonAttributeGroupFacade
+import kotlinx.html.SPAN
 import react.RBuilder
+import react.RElementBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.components.alert.Alert.Variants.DANGER
@@ -210,3 +213,23 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
 
 val RBuilder.Alerts
     get() = AlertBuilder(this)
+
+fun RElementBuilder<Alert.Dismissible.Props>.closingElement(
+    block: RHandler<Alert.Dismissible.ClosingElement.Props>
+): ReactElement = child(Alert.Dismissible.ClosingElement::class) {
+    attrs {
+        rendererTag = SPAN::class
+    }
+
+    block()
+}
+
+inline fun <reified TT : CommonAttributeGroupFacade> RElementBuilder<Alert.Dismissible.Props>.closingElement(
+    crossinline block: RHandler<Alert.Dismissible.ClosingElement.Props>
+): ReactElement = child(Alert.Dismissible.ClosingElement::class) {
+    attrs {
+        this.rendererTag = TT::class
+    }
+
+    block()
+}
