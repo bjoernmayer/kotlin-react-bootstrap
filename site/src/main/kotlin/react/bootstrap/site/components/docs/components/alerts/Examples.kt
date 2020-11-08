@@ -65,12 +65,13 @@ eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.nestedName}`).
         )
 
         liveExample {
-            variants.forEach { (variant, function) ->
-                child(
-                    function.invoke(null) {
-                        +"A simple ${variant.name.toLowerCase()} alert-check it out!"
+            variants.forEach { (variant, _) ->
+                child(Alert.Static::class) {
+                    attrs {
+                        this.variant = variant
                     }
-                )
+                    +"A simple ${variant.name.toLowerCase()} alert-check it out!"
+                }
             }
         }
         codeExample {
@@ -93,13 +94,14 @@ Use the `${RElementBuilder<Alert.Props>::link.name}`-function (only available in
             """
         }
         liveExample {
-            variants.forEach { (variant, function) ->
-                child(
-                    function.invoke(null) {
-                        +"A simple ${variant.name.toLowerCase()} alert with "
-                        link { a(href = "#") { +"an example link" } }; +". Give it a click if you like."
+            variants.forEach { (variant, _) ->
+                child(Alert.Static::class) {
+                    attrs {
+                        this.variant = variant
                     }
-                )
+                    +"A simple ${variant.name.toLowerCase()} alert with "
+                    link { a(href = "#") { +"an example link" } }; +". Give it a click if you like."
+                }
             }
         }
         codeExample {
