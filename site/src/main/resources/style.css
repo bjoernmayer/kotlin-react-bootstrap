@@ -84,7 +84,7 @@ figure.highlight > pre:before {
     bottom: 0;
     content: ' ';
     display: block;
-    left: 120ex;
+    left: 120ch;
     position: absolute;
     top: 0;
     width: 1px;

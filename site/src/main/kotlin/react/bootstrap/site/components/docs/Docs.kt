@@ -20,6 +20,7 @@ import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.components.Components
 import react.bootstrap.site.components.docs.content.Content
 import react.bootstrap.site.components.docs.fixings.CategoryComponent
+import react.bootstrap.site.components.docs.gettingstarted.GettingStarted
 import react.bootstrap.site.components.docs.layout.Layout
 import react.bootstrap.site.from
 import react.router.dom.RouteResultProps
@@ -123,6 +124,7 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
 //                addSubCategory("Webpack", "webpack")
 //                addSubCategory("Accessibility", "accessibility")
 //            },
+            GettingStarted.component,
             Layout.component,
             Content.component,
             Components.component // ,

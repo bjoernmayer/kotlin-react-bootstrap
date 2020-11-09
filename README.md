@@ -12,7 +12,12 @@ This README might make you think otherwise, but `kotlin-react-bootstrap` was not
 First release version will be `0.1.0`.
 
 ## Setup
-The library **will** be released on Github packages. You need to add this repository:
+The library **will** be released on Github packages.
+
+You need to authenticate in order to download from GitHub Packages.  
+For that [generate a GitHub token here](https://github.com/settings/tokens/new) and select the `read:packages` scope.
+
+Then, you need to add this repository:
 
 ```kotlin
 // build.gradle.kts
@@ -23,23 +28,12 @@ repositories {
         name = "GitHubPackages"
         url = uri("https://maven.pkg.github.com/bjoernmayer/kotlin-react-bootstrap")
         credentials {
-            username = project.findProperty("krb.github.username") as String
-            password = project.findProperty("krb.github.token") as String
+            username = "<< PUT YOUR GITHUB USERNAME HERE >>"
+            password = "<< PUT YOUR GITHUB TOKEN HERE>>"
         }
     }
     // . . .
 }
-```
-
-You need to authenticate in order to download from GitHub Packages.  
-For that [generate a GitHub token here](https://github.com/settings/tokens/new) and select the `read:packages` scope.
-
-Create a `gradle.properties` file in your `GRADLE_USER_HOME` (default path is `~/.gradle/gradle.properties`) and add
-the token there:
-   
-```properties
-krb.github.username=<YOUR_GITHUB_USERNAME>
-krb.github.token=<THE_TOKEN_YOU_JUST_GENERATED
 ```
 
 To start using `kotlin-react-bootstrap` in your Kotlin/JS project, add the following dependency to the `dependencies`

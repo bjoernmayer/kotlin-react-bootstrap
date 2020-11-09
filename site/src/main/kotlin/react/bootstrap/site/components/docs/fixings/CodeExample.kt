@@ -6,6 +6,7 @@ import react.RComponent
 import react.RElementBuilder
 import react.RProps
 import react.RState
+import react.RStatics
 import react.ReactElement
 import react.bootstrap.site.external.PrismLight
 import react.dom.figure
@@ -27,7 +28,7 @@ internal class CodeExample : RComponent<CodeExample.Props, RState>() {
         figure("highlight") {
             PrismLight {
                 attrs {
-                    language = "kotlin"
+                    language = props.language
                     style = coy.default
                 }
                 +code
@@ -36,7 +37,16 @@ internal class CodeExample : RComponent<CodeExample.Props, RState>() {
     }
 
     interface Props : RProps {
+        var language: String
         var code: String?
+    }
+
+    companion object : RStatics<Props, RState, CodeExample, Nothing>(CodeExample::class) {
+        init {
+            defaultProps = jsObject {
+                language = "kotlin"
+            }
+        }
     }
 }
 
