@@ -9,7 +9,7 @@ import kotlinx.html.H5
 import kotlinx.html.H6
 import kotlinx.html.classes
 import react.RState
-import react.bootstrap.addOrInit
+import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.CustomisableComponent
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes

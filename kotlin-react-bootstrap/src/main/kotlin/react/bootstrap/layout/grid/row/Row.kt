@@ -6,7 +6,7 @@ import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.DIV
 import kotlinx.html.classes
 import react.RState
-import react.bootstrap.addOrInit
+import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.CustomisableComponent

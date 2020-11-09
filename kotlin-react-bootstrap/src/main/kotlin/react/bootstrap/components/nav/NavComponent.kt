@@ -9,7 +9,7 @@ import kotlinx.html.classes
 import react.Child
 import react.Component
 import react.RState
-import react.bootstrap.addOrInit
+import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractComponent
 import react.bootstrap.lib.react.identifiable.mapComponents

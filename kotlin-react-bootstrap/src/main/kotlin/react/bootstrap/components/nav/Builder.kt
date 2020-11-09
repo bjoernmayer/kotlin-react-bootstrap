@@ -6,7 +6,7 @@ import react.RElementBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.Builder
-import react.bootstrap.splitClassesToSet
+import react.bootstrap.helpers.splitClassesToSet
 import kotlin.reflect.KClass
 
 class NavBuilder(override val builder: RBuilder) : Builder {

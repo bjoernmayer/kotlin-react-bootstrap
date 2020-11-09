@@ -2,7 +2,7 @@ package react.bootstrap.lib.component
 
 import react.RComponent
 import react.RState
-import react.bootstrap.addOrInit
+import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 

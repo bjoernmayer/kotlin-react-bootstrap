@@ -7,7 +7,7 @@ import kotlinx.html.H4
 import kotlinx.html.HtmlInlineTag
 import kotlinx.html.classes
 import react.RState
-import react.bootstrap.addOrInit
+import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.component.CustomisableComponent

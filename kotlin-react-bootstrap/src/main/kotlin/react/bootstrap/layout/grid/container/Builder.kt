@@ -4,7 +4,7 @@ import react.RBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.Builder
-import react.bootstrap.splitClassesToSet
+import react.bootstrap.helpers.splitClassesToSet
 
 fun RBuilder.container(
     viscosity: Container.Viscosities? = null,

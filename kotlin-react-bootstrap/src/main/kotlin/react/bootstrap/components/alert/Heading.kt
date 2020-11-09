@@ -8,7 +8,7 @@ import kotlinx.html.H5
 import kotlinx.html.H6
 import react.RElementBuilder
 import react.ReactElement
-import react.bootstrap.appendClass
+import react.bootstrap.helpers.appendClass
 import react.bootstrap.content.typography.Headings
 import react.bootstrap.lib.ElementProvider
 import react.bootstrap.lib.RDOMHandler

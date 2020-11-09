@@ -3,7 +3,7 @@ package react.bootstrap.site.components.docs.layout.grid
 import kotlinx.html.DIV
 import react.RBuilder
 import react.ReactElement
-import react.bootstrap.appendClass
+import react.bootstrap.helpers.appendClass
 import react.bootstrap.layout.grid.col.ColAttributes
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.row.RowAttributes

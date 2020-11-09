@@ -7,7 +7,7 @@ import kotlinx.html.LI
 import kotlinx.html.classes
 import react.RState
 import react.RStatics
-import react.bootstrap.addOrInit
+import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractComponent
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes

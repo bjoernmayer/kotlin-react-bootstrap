@@ -1,19 +1,6 @@
-package react.bootstrap
+package react.bootstrap.helpers
 
-import kotlinx.html.CommonAttributeGroupFacade
-import kotlinx.html.classes
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.dom.RDOMBuilder
-
-fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg className: String) {
-    attrs {
-        classes = classes.toMutableSet().apply {
-            className.forEach {
-                add(it)
-            }
-        }
-    }
-}
 
 fun String?.appendClass(className: ClassNames) = appendClass(setOf(className.toString()))
 

@@ -3,7 +3,7 @@ package react.bootstrap.content.tables
 import kotlinx.html.TD
 import react.RBuilder
 import react.ReactElement
-import react.bootstrap.appendClass
+import react.bootstrap.helpers.appendClass
 import react.bootstrap.lib.RDOMHandler
 import react.dom.td
 

@@ -5,7 +5,7 @@ import kotlinx.html.SPAN
 import react.RBuilder
 import react.RHandler
 import react.ReactElement
-import react.bootstrap.splitClassesToSet
+import react.bootstrap.helpers.splitClassesToSet
 
 /**
  * Creates a generic [Display].

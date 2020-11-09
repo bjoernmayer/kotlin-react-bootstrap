@@ -3,7 +3,9 @@
 package react.bootstrap.lib.kotlinxhtml
 
 import kotlinx.html.CommonAttributeGroupFacade
+import kotlinx.html.classes
 import react.bootstrap.lib.EventHandler
+import react.dom.RDOMBuilder
 
 var CommonAttributeGroupFacade.onAnimationEndFunction: EventHandler
     get() = throw UnsupportedOperationException("You can't read variable onAnimationEndFunction")
@@ -165,3 +167,11 @@ var CommonAttributeGroupFacade.ariaDisabled: Boolean
     set(newValue) {
         this.attributes["aria-disabled"] = newValue.toString()
     }
+
+fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg classNames: String) {
+    attrs {
+        classes = classes.toMutableSet().apply {
+            addAll(classNames)
+        }
+    }
+}

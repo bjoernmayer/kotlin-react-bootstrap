@@ -15,7 +15,7 @@ import react.bootstrap.components.alert.Alert.Variants.SECONDARY
 import react.bootstrap.components.alert.Alert.Variants.SUCCESS
 import react.bootstrap.components.alert.Alert.Variants.WARNING
 import react.bootstrap.lib.Builder
-import react.bootstrap.splitClassesToSet
+import react.bootstrap.helpers.splitClassesToSet
 
 class AlertBuilder(override val builder: RBuilder) : Builder {
     /**
