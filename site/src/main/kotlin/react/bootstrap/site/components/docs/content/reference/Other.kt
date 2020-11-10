@@ -1,5 +1,6 @@
 package react.bootstrap.site.components.docs.content.reference
 
+import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.content.typography.lead.Lead
@@ -49,8 +50,9 @@ Creates a generic `${Muted::class.simpleName!!}` element.
                 }
             )
                 .nestedBy<RBuilder>()
+                .addTypeParameter("TT", CommonAttributeGroupFacade::class)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RHandler", Muted.Props::class))
+                .addParameter("block", Generic("RDOMHandler", "TT"))
                 .returns("ReactElement")
                 .build()
         }
@@ -69,8 +71,9 @@ Creates a generic `${Mark::class.simpleName!!}` element.
                 }
             )
                 .nestedBy<RBuilder>()
+                .addTypeParameter("TT", CommonAttributeGroupFacade::class)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RHandler", Mark.Props::class))
+                .addParameter("block", Generic("RDOMHandler", "TT"))
                 .returns("ReactElement")
                 .build()
         }
@@ -89,8 +92,9 @@ Creates a generic `${Small::class.simpleName!!}` element.
                 }
             )
                 .nestedBy<RBuilder>()
+                .addTypeParameter("TT", CommonAttributeGroupFacade::class)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RHandler", Small.Props::class))
+                .addParameter("block", Generic("RDOMHandler", "TT"))
                 .returns("ReactElement")
                 .build()
         }

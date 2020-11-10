@@ -1,10 +1,13 @@
 package react.bootstrap.content.typography.mark
 
 import kotlinx.html.CommonAttributeGroupFacade
+import kotlinx.html.classes
 import react.RBuilder
-import react.RHandler
 import react.ReactElement
+import react.bootstrap.helpers.addOrInit
 import react.bootstrap.helpers.splitClassesToSet
+import react.bootstrap.lib.RDOMHandler
+import react.bootstrap.lib.component.DOMWrapComponent.Companion.domWrapComponent
 
 /**
  * Creates a generic [Mark] element.
@@ -14,11 +17,10 @@ import react.bootstrap.helpers.splitClassesToSet
  */
 inline fun <reified TT : CommonAttributeGroupFacade> RBuilder.mark(
     classes: String? = null,
-    noinline block: RHandler<Mark.Props>
-): ReactElement = child(Mark::class) {
+    noinline block: RDOMHandler<TT>
+): ReactElement = domWrapComponent<TT, Mark.Props<TT>>(Mark::class) {
     attrs {
-        this.rendererTag = TT::class
-        this.classes = classes.splitClassesToSet()
+        this.classes = this.classes.addOrInit(classes.splitClassesToSet())
     }
 
     block()

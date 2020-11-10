@@ -18,12 +18,14 @@ fun String?.appendClass(classNames: Set<String>) = run {
     }
 }
 
-fun String?.splitClassesToSet(): Set<String>? = this?.split(" ")?.toSet()
+fun String?.splitClassesToSet(): Set<String> = this?.split(" ")?.toSet() ?: emptySet()
 
 fun <T> Set<T>?.addOrInit(newEntries: Set<T>): Set<T> = run {
-    this?.toMutableSet()?.apply {
-        addAll(newEntries)
-    }?.toSet() ?: newEntries
+    this?.let {
+        it.toMutableSet().apply {
+            addAll(newEntries)
+        }
+    } ?: newEntries
 }
 
 fun Set<String>?.addOrInit(newClassNames: Set<ClassNames>): Set<String> = addOrInit(

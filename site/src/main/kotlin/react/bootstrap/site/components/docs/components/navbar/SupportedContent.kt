@@ -24,7 +24,7 @@ internal class SupportedContent : SectionComponent() {
                     classes = setOf(ClassNames.BG_LIGHT.className)
                 }
 
-                brand<A> {
+                brand<A>(ClassNames.TEXT_PRIMARY.className) {
                     attrs {
                         href = "#"
                     }

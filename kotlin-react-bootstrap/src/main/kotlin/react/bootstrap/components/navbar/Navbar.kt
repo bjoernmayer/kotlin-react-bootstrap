@@ -57,7 +57,6 @@ class Navbar : BootstrapComponent<Navbar.Props, RState>() {
     }
 
     open class Brand<TT : HtmlInlineTag>(props: Props<TT>) : DOMWrapComponent<TT, Brand.Props<TT>>(props) {
-
         override fun RDOMBuilder<TT>.build() {
             attrs {
                 classes = props.classes.addOrInit(ClassNames.NAVBAR_BRAND)
