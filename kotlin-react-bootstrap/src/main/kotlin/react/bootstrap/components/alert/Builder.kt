@@ -25,7 +25,7 @@ import react.bootstrap.content.typography.heading.Heading
 import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.Builder
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.DomComponent.Companion.domComponent
+import react.bootstrap.lib.component.AbstractDomComponent.Companion.domComponent
 
 class AlertBuilder(override val builder: RBuilder) : Builder {
     /**

@@ -7,7 +7,7 @@ import react.RState
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.BootstrapComponent
-import react.bootstrap.lib.component.DomComponent
+import react.bootstrap.lib.component.AbstractDomComponent
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.dom.div
@@ -54,9 +54,9 @@ class Navbar : BootstrapComponent<Navbar.Props, RState>() {
         DARK(ClassNames.NAVBAR_DARK)
     }
 
-    open class Brand<TT : HtmlInlineTag>(props: Props<TT>) : DomComponent<TT, Brand.Props<TT>, RState>(props) {
+    open class Brand<TT : HtmlInlineTag>(props: Props<TT>) : AbstractDomComponent<TT, Brand.Props<TT>, RState>(props) {
         override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.NAVBAR_BRAND)
 
-        interface Props<TT : HtmlInlineTag> : WithGlobalAttributes, DomComponent.Props<TT>
+        interface Props<TT : HtmlInlineTag> : WithGlobalAttributes, AbstractDomComponent.Props<TT>
     }
 }

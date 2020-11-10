@@ -16,7 +16,7 @@ import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.component.CustomisableComponent
-import react.bootstrap.lib.component.DomComponent
+import react.bootstrap.lib.component.AbstractDomComponent
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
@@ -245,10 +245,10 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
         var variant: Variants
     }
 
-    class Link(props: Props) : DomComponent<A, Link.Props, RState>(props) {
+    class Link(props: Props) : AbstractDomComponent<A, Link.Props, RState>(props) {
         override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.ALERT_LINK)
 
-        interface Props : WithGlobalAttributes, DomComponent.Props<A>
+        interface Props : WithGlobalAttributes, AbstractDomComponent.Props<A>
     }
 
     class Heading<TT : CommonAttributeGroupFacade>(props: Props<TT>) : BaseHeading<TT>(props) {

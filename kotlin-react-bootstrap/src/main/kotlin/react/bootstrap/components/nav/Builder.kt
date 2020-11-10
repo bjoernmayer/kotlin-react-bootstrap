@@ -9,7 +9,7 @@ import react.ReactElement
 import react.bootstrap.lib.Builder
 import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.DomComponent.Companion.domComponent
+import react.bootstrap.lib.component.AbstractDomComponent.Companion.domComponent
 import kotlin.reflect.KClass
 
 class NavBuilder(override val builder: RBuilder) : Builder {

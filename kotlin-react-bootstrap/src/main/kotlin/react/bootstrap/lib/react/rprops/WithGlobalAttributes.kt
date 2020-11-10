@@ -2,9 +2,8 @@ package react.bootstrap.lib.react.rprops
 
 import kotlinx.html.Dir
 import kotlinx.html.Draggable
-import react.RProps
 
-interface WithGlobalAttributes : RProps {
+interface WithGlobalAttributes : WithClasses {
     var accesskey: String?
     var contenteditable: Boolean?
     var data: Map<String, String>?
@@ -18,5 +17,4 @@ interface WithGlobalAttributes : RProps {
     var tabIndex: String?
     var title: String?
     var translate: String?
-    var classes: Set<String>?
 }

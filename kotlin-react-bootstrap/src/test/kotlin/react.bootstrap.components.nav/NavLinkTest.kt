@@ -16,8 +16,8 @@ class NavLinkTest {
             jsObject {
                 active = false
                 onActive = { initial = true }
-                domHandler = { }
-                domClass = A::class
+                handler = { }
+                klazz = A::class
             }
         )
         component.state.active = true
@@ -35,8 +35,8 @@ class NavLinkTest {
         val props: NavLink.Props = jsObject {
             active = false
             onActive = { initial = true }
-            domHandler = { }
-            domClass = A::class
+            handler = { }
+            klazz = A::class
         }
 
         val component = NavLink(clone(props))

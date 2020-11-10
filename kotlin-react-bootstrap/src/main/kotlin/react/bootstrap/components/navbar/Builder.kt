@@ -4,7 +4,7 @@ import kotlinx.html.HtmlInlineTag
 import react.RElementBuilder
 import react.ReactElement
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.DomComponent.Companion.domComponent
+import react.bootstrap.lib.component.AbstractDomComponent.Companion.domComponent
 
 inline fun <reified TT : HtmlInlineTag> RElementBuilder<Navbar.Props>.brand(
     classes: String? = null,

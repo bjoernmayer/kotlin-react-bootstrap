@@ -5,7 +5,7 @@ import react.RBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.DomComponent.Companion.domComponent
+import react.bootstrap.lib.component.AbstractDomComponent.Companion.domComponent
 
 /**
  * Creates a generic [Heading].

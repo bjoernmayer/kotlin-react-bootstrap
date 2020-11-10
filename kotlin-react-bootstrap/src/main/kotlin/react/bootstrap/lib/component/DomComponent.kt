@@ -1,94 +1,38 @@
 package react.bootstrap.lib.component
 
-import kotlinx.html.attributesMapOf
-import kotlinx.html.classes
+import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
 import react.RComponent
-import react.RHandler
 import react.RState
-import react.ReactElement
-import react.bootstrap.helpers.addOrInit
-import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithClasses
 import react.bootstrap.lib.react.rprops.requireProperties
-import react.dom.RDOMBuilder
-import kotlin.reflect.KClass
-import kotlinx.html.CommonAttributeGroupFacade as CommonAttribute
 
 /**
- * todo: add another component, which is not that generic but just needs a handler
- * A DOMWrapComponent is a pass-through component.
- * It can be rendered with any HTML Tag and gives the user full controll of the tag attributes
+ * A [DomComponent] is a react component, which passes through its [DomComponent.Props.handler] to the underlying
+ * HTML element.
  *
- * @param TT Tag type
- * @param PT Prop Type
+ * @param T type of the tag which is used to render this component
+ * @param P property type
+ * @param S State type
  */
-abstract class DomComponent<TT : CommonAttribute, PT : DomComponent.Props<TT>, ST : RState>(props: PT) :
-    RComponent<PT, ST>(props) {
+abstract class DomComponent<T : CommonAttributeGroupFacade, P : DomComponent.Props<T>, S : RState>(props: P) :
+    RComponent<P, S>(props) {
     init {
-        props.requireProperties(props::domClass, props::domHandler)
+        props.requireProperties(props::handler)
     }
-
-    protected open fun RDOMBuilder<TT>.build() { }
 
     /**
      * @return A set of [ClassNames] values used to render this component
      */
     protected abstract fun buildClasses(): Set<ClassNames>
 
-    final override fun RBuilder.render() {
-        @Suppress("UNUSED_VARIABLE", "UNUSED_ANONYMOUS_PARAMETER")
-        val rROMBuilder = RDOMBuilder { tagConsumer ->
-            // This intantiates the tag by using some reflection js magic.
-            // ::class.js points to the javascript constructor
-            val constructor = props.domClass.js
-            val attributes = attributesMapOf("class", null)
+    protected abstract fun RBuilder.render(componentClasses: Set<ClassNames>, handler: RDOMHandler<T>)
 
-            js("new constructor(attributes, tagConsumer)") as TT
-        }
+    final override fun RBuilder.render() = render(buildClasses(), props.handler)
 
-        child(
-            rROMBuilder
-                .apply {
-                    attrs {
-                        classes = props.classes.addOrInit(buildClasses())
-                    }
-
-                    build()
-
-                    props.domHandler.invoke(this)
-                }
-                .create()
-        )
-    }
-
-    interface Props<TT : CommonAttribute> : WithGlobalAttributes {
-        var domClass: KClass<TT>
-        var domHandler: RDOMHandler<TT>
-    }
-
-    companion object {
-        inline fun <reified TT : CommonAttribute, reified PT : Props<TT>> RBuilder.domComponent(
-            classes: String? = null,
-            klazz: KClass<out DomComponent<*, *, *>>,
-            crossinline handler: RHandler<PT> = { },
-            noinline domHandler: RDOMHandler<TT>,
-        ): ReactElement {
-
-            @Suppress("UNCHECKED_CAST")
-            val componentKlazz: KClass<out DomComponent<*, PT, *>> = klazz as KClass<out DomComponent<*, PT, *>>
-
-            return child(componentKlazz) {
-                attrs {
-                    this.classes = classes.splitClassesToSet()
-                    this.domHandler = domHandler
-                    domClass = TT::class
-                }
-
-                handler()
-            }
-        }
+    interface Props<T : CommonAttributeGroupFacade> : WithClasses {
+        var handler: RDOMHandler<T>
     }
 }
