@@ -20,7 +20,7 @@ open class Heading<TT : CommonAttributeGroupFacade>(props: Props<TT>) :
         props.requireProperties(props::size)
     }
 
-    override fun buildClasses(): Set<ClassNames> = when (props.klazz) {
+    override fun buildClasses(): Set<ClassNames> = when (props.tag) {
         H1::class -> emptySet()
         H2::class -> emptySet()
         H3::class -> emptySet()

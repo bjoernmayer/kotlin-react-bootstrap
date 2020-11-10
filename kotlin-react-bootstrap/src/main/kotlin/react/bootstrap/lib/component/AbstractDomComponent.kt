@@ -7,7 +7,6 @@ import react.RHandler
 import react.RState
 import react.ReactElement
 import react.bootstrap.helpers.addOrInit
-import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.react.rprops.requireProperties
@@ -17,7 +16,7 @@ import kotlinx.html.CommonAttributeGroupFacade as CommonAttributes
 
 /**
  * A [AbstractDomComponent] is a react component, which passes through its [AbstractDomComponent.Props.handler] to the
- * underlying HTML element, whose type is set via [AbstractDomComponent.Props.klazz].
+ * underlying HTML element, whose type is set via [AbstractDomComponent.Props.tag].
  *
  * @param T type of the tag which is used to render this component
  * @param P property type
@@ -26,7 +25,7 @@ import kotlinx.html.CommonAttributeGroupFacade as CommonAttributes
 abstract class AbstractDomComponent<T : CommonAttributes, P : AbstractDomComponent.Props<T>, S : RState>(props: P) :
     DomComponent<T, P, S>(props) {
     init {
-        props.requireProperties(props::klazz)
+        props.requireProperties(props::tag)
     }
 
     protected open fun RDOMBuilder<T>.build() {}
@@ -36,7 +35,7 @@ abstract class AbstractDomComponent<T : CommonAttributes, P : AbstractDomCompone
         val rROMBuilder = RDOMBuilder { tagConsumer ->
             // This intantiates the tag by using some reflection js magic.
             // ::class.js points to the javascript constructor
-            val constructor = props.klazz.js
+            val constructor = props.tag.js
             val attributes = attributesMapOf("class", null)
 
             js("new constructor(attributes, tagConsumer)") as T
@@ -58,30 +57,21 @@ abstract class AbstractDomComponent<T : CommonAttributes, P : AbstractDomCompone
     }
 
     interface Props<T : CommonAttributes> : DomComponent.Props<T> {
-        var klazz: KClass<T>
+        var tag: KClass<T>
     }
 
     companion object {
-        inline fun <reified T : CommonAttributes, reified P : Props<T>> RBuilder.domComponent(
+        inline fun <reified T : CommonAttributes, reified P : Props<T>> RBuilder.abstractDomComponent(
             classes: String? = null,
             klazz: KClass<out AbstractDomComponent<*, *, *>>,
             crossinline handler: RHandler<P> = { },
             noinline domHandler: RDOMHandler<T>,
-        ): ReactElement {
-
-            @Suppress("UNCHECKED_CAST")
-            val componentKlazz: KClass<out AbstractDomComponent<*, P, *>> =
-                klazz as KClass<out AbstractDomComponent<*, P, *>>
-
-            return child(componentKlazz) {
-                attrs {
-                    this.classes = classes.splitClassesToSet()
-                    this.handler = domHandler
-                    this.klazz = T::class
-                }
-
-                handler()
+        ): ReactElement = domComponent<T, P>(classes, klazz, domHandler) {
+            attrs {
+                tag = T::class
             }
+
+            handler()
         }
     }
 }

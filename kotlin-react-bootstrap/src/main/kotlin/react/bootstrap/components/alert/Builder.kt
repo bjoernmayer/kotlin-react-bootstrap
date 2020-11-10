@@ -25,7 +25,7 @@ import react.bootstrap.content.typography.heading.Heading
 import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.Builder
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.AbstractDomComponent.Companion.domComponent
+import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
 
 class AlertBuilder(override val builder: RBuilder) : Builder {
     /**
@@ -252,7 +252,7 @@ fun RElementBuilder<Alert.Props>.link(
     target: String? = null,
     classes: String? = null,
     block: RDOMHandler<A>
-): ReactElement = domComponent<A, Alert.Link.Props>(classes, Alert.Link::class) {
+): ReactElement = abstractDomComponent<A, Alert.Link.Props>(classes, Alert.Link::class) {
     attrs {
         href?.let {
             this.href = it
@@ -282,7 +282,7 @@ inline fun <reified TT : CommonAttributeGroupFacade> RElementBuilder<Alert.Props
         }
     }
 
-    return domComponent(classes, Alert.Heading::class, handler, block)
+    return abstractDomComponent(classes, Alert.Heading::class, handler, block)
 }
 
 /**

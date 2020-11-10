@@ -17,7 +17,7 @@ class NavLinkTest {
                 active = false
                 onActive = { initial = true }
                 handler = { }
-                klazz = A::class
+                tag = A::class
             }
         )
         component.state.active = true
@@ -36,7 +36,7 @@ class NavLinkTest {
             active = false
             onActive = { initial = true }
             handler = { }
-            klazz = A::class
+            tag = A::class
         }
 
         val component = NavLink(clone(props))

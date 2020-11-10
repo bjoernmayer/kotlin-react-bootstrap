@@ -4,7 +4,7 @@ import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.AbstractDomComponent.Companion.domComponent
+import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
 
 /**
  * Creates a generic [Small] element.
@@ -15,4 +15,4 @@ import react.bootstrap.lib.component.AbstractDomComponent.Companion.domComponent
 inline fun <reified TT : CommonAttributeGroupFacade> RBuilder.small(
     classes: String? = null,
     noinline block: RDOMHandler<TT>
-): ReactElement = domComponent<TT, Small.Props<TT>>(classes, Small::class, domHandler = block)
+): ReactElement = abstractDomComponent<TT, Small.Props<TT>>(classes, Small::class, domHandler = block)
