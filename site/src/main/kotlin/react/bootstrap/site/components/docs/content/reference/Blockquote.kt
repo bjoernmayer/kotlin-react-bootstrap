@@ -43,7 +43,7 @@ Creates a `${BlockQuoteFooter::class.simpleName!!}` element.
             """
         }
         codeExample {
-            +FunSpec.builder(RDOMBuilder<BLOCKQUOTE>::blockQuoteFooter, inline = true)
+            +FunSpec.builder(RDOMBuilder<BLOCKQUOTE>::blockQuoteFooter)
                 .addParameter<String?>("classes", null)
                 .addParameter("block", Generic("RHandler", BlockQuoteFooter.Props::class))
                 .returns("ReactElement")

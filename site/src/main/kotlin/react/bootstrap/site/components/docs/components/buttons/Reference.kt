@@ -13,7 +13,6 @@ import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.lib.codepoet.FunSpec
 import react.bootstrap.site.lib.codepoet.Generic
 import react.dom.h4
@@ -39,7 +38,7 @@ internal class Reference : SectionComponent() {
             val (solidFun, outlineFun) = entry.value
 
             subSectionTitle(solidFun.name)
-            contentTitle(RBuilder::h4, "Button Element")
+            h4("bd-content-title") { +"Button Element" }
             p {
                 +"Adds a button in the \"$variantName\" context using the HTML button element."
             }
@@ -81,7 +80,7 @@ internal class Reference : SectionComponent() {
                         .build()
                 }
             }
-            contentTitle(RBuilder::h4, "Link Button")
+            h4("bd-content-title") { +"Link Button" }
             p {
                 +"Adds a button in the \"$variantName\" context using the HTML anchor element."
             }
@@ -121,7 +120,7 @@ internal class Reference : SectionComponent() {
                         .build()
                 }
             }
-            contentTitle(RBuilder::h4, "Input Element Button")
+            h4("bd-content-title") { +"Input Element Button" }
             p {
                 +"Adds a button in the \"$variantName\" context using one of the HTML input elements."
             }

@@ -2,7 +2,6 @@ package react.bootstrap.site.components.docs.content.reference
 
 import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
-import react.bootstrap.content.typography.heading.Heading
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.external.Markdown
@@ -38,7 +37,7 @@ This creates a `${function.name}` using the given type **`TT`**.
                         .addParameter<String?>("classes", null)
                         .addParameter(
                             "block",
-                            Generic("RHandler", Heading.Props::class),
+                            Generic("RDOMHandler", "TT"),
                             modifier = FunSpec.Parameter.Modifier.NOINLINE
                         )
                         .returns("ReactElement")

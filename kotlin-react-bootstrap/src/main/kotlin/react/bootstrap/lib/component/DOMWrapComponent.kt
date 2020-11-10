@@ -1,13 +1,15 @@
 package react.bootstrap.lib.component
 
-import kotlinx.html.Tag
+import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.attributesMapOf
 import react.RBuilder
 import react.RComponent
-import react.RProps
+import react.RHandler
 import react.RState
 import react.ReactElement
+import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.RDOMHandler
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
@@ -18,7 +20,8 @@ import kotlin.reflect.KClass
  * @param TT Tag type
  * @param PT Prop Type
  */
-abstract class DOMWrapComponent<TT : Tag, PT : DOMWrapComponent.Props<TT>>(props: PT) : RComponent<PT, RState>(props) {
+abstract class DOMWrapComponent<TT : CommonAttributeGroupFacade, PT : DOMWrapComponent.Props<TT>>(props: PT) :
+    RComponent<PT, RState>(props) {
     init {
         // These comparison are not senseless. The props are built using kotlin's `dynamic` keyword. Null is a possible
         // value.
@@ -57,15 +60,17 @@ abstract class DOMWrapComponent<TT : Tag, PT : DOMWrapComponent.Props<TT>>(props
         )
     }
 
-    interface Props<TT : Tag> : RProps {
+    interface Props<TT : CommonAttributeGroupFacade> : WithGlobalAttributes {
         var domClass: KClass<TT>
         var domHandler: RDOMHandler<TT>
     }
 
     companion object {
-        inline fun <reified TT : Tag, reified PT : Props<TT>> RBuilder.domWrapComponent(
+        inline fun <reified TT : CommonAttributeGroupFacade, reified PT : Props<TT>> RBuilder.domWrapComponent(
+            classes: String? = null,
             klazz: KClass<out DOMWrapComponent<*, *>>,
-            noinline block: RDOMHandler<TT>,
+            crossinline handler: RHandler<PT> = { },
+            noinline domHandler: RDOMHandler<TT>,
         ): ReactElement {
 
             @Suppress("UNCHECKED_CAST")
@@ -73,9 +78,12 @@ abstract class DOMWrapComponent<TT : Tag, PT : DOMWrapComponent.Props<TT>>(props
 
             return child(componentKlazz) {
                 attrs {
-                    domHandler = block
+                    this.classes = classes.splitClassesToSet()
+                    this.domHandler = domHandler
                     domClass = TT::class
                 }
+
+                handler()
             }
         }
     }

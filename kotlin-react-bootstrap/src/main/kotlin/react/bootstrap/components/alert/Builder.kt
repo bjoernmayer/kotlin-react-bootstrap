@@ -1,6 +1,13 @@
 package react.bootstrap.components.alert
 
+import kotlinx.html.A
 import kotlinx.html.CommonAttributeGroupFacade
+import kotlinx.html.H1
+import kotlinx.html.H2
+import kotlinx.html.H3
+import kotlinx.html.H4
+import kotlinx.html.H5
+import kotlinx.html.H6
 import kotlinx.html.SPAN
 import react.RBuilder
 import react.RElementBuilder
@@ -14,8 +21,11 @@ import react.bootstrap.components.alert.Alert.Variants.PRIMARY
 import react.bootstrap.components.alert.Alert.Variants.SECONDARY
 import react.bootstrap.components.alert.Alert.Variants.SUCCESS
 import react.bootstrap.components.alert.Alert.Variants.WARNING
-import react.bootstrap.lib.Builder
+import react.bootstrap.content.typography.heading.Heading
 import react.bootstrap.helpers.splitClassesToSet
+import react.bootstrap.lib.Builder
+import react.bootstrap.lib.RDOMHandler
+import react.bootstrap.lib.component.DOMWrapComponent.Companion.domWrapComponent
 
 class AlertBuilder(override val builder: RBuilder) : Builder {
     /**
@@ -233,3 +243,141 @@ inline fun <reified TT : CommonAttributeGroupFacade> RElementBuilder<Alert.Dismi
 
     block()
 }
+
+/**
+ * Creates a [Alert.Link] element.
+ */
+fun RElementBuilder<Alert.Props>.link(
+    href: String? = null,
+    target: String? = null,
+    classes: String? = null,
+    block: RDOMHandler<A>
+): ReactElement = domWrapComponent<A, Alert.Link.Props>(classes, Alert.Link::class) {
+    attrs {
+        href?.let {
+            this.href = it
+        }
+        target?.let {
+            this.target = it
+        }
+    }
+
+    block()
+}
+
+/**
+ * Creates a generic [Alert.Heading].
+ *
+ * @param TT Tag Type to be used to render this [Heading].
+ * @param classes Space separated list of CSS classes for this element.
+ */
+inline fun <reified TT : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.heading(
+    size: Heading.Sizes,
+    classes: String?,
+    noinline block: RDOMHandler<TT>
+): ReactElement {
+    val handler: RHandler<Heading.Props<TT>> = {
+        attrs {
+            this.size = size
+        }
+    }
+
+    return domWrapComponent(classes, Alert.Heading::class, handler, block)
+}
+
+/**
+ * Creates a [Alert.Heading] element.
+ */
+fun RElementBuilder<Alert.Props>.h1(classes: String? = null, block: RDOMHandler<H1>): ReactElement =
+    heading(Heading.Sizes.H1, classes, block)
+
+/**
+ * Creates a [Alert.Heading] element with [Heading.Sizes.H1] and uses TT to render the element.
+ *
+ * @param TT Tag Type that should be used to render this [Alert.Heading]
+ */
+inline fun <reified TT : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.h1(
+    classes: String? = null,
+    noinline block: RDOMHandler<TT>
+): ReactElement = heading(Heading.Sizes.H1, classes, block)
+
+/**
+ * Creates a [Alert.Heading] element.
+ */
+fun RElementBuilder<Alert.Props>.h2(classes: String? = null, block: RDOMHandler<H2>): ReactElement =
+    heading(Heading.Sizes.H2, classes, block)
+
+/**
+ * Creates a [Alert.Heading] element with [Heading.Sizes.H2] and uses TT to render the element.
+ *
+ * @param TT Tag Type that should be used to render this [Alert.Heading]
+ */
+inline fun <reified TT : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.h2(
+    classes: String? = null,
+    noinline block: RDOMHandler<TT>
+): ReactElement = heading(Heading.Sizes.H2, classes, block)
+
+/**
+ * Creates a [Alert.Heading] element.
+ */
+fun RElementBuilder<Alert.Props>.h3(classes: String? = null, block: RDOMHandler<H3>): ReactElement =
+    heading(Heading.Sizes.H3, classes, block)
+
+/**
+ * Creates a [Alert.Heading] element with [Heading.Sizes.H3] and uses TT to render the element.
+ *
+ * @param TT Tag Type that should be used to render this [Alert.Heading]
+ */
+inline fun <reified TT : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.h3(
+    classes: String? = null,
+    noinline block: RDOMHandler<TT>
+): ReactElement = heading(Heading.Sizes.H3, classes, block)
+
+/**
+ * Creates a [Alert.Heading] element.
+ */
+fun RElementBuilder<Alert.Props>.h4(classes: String? = null, block: RDOMHandler<H4>): ReactElement =
+    heading(Heading.Sizes.H4, classes, block)
+
+/**
+ * Creates a [Alert.Heading] element with [Heading.Sizes.H4] and uses TT to render the element.
+ *
+ * @param TT Tag Type that should be used to render this [Alert.Heading]
+ */
+inline fun <reified TT : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.h4(
+    classes: String? = null,
+    noinline block: RDOMHandler<TT>
+): ReactElement = heading(Heading.Sizes.H4, classes, block)
+
+/**
+ * Creates a [Alert.Heading] element.
+ */
+fun RElementBuilder<Alert.Props>.h5(classes: String? = null, block: RDOMHandler<H5>): ReactElement =
+    heading(Heading.Sizes.H5, classes, block)
+
+/**
+ * Creates a [Alert.Heading] element with [Heading.Sizes.H5] and uses TT to render the element.
+ *
+ * @param TT Tag Type that should be used to render this [Alert.Heading]
+ */
+inline fun <reified TT : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.h5(
+    classes: String? = null,
+    noinline block: RDOMHandler<TT>
+): ReactElement =
+    heading(Heading.Sizes.H5, classes, block)
+
+/**
+ * Creates a [Alert.Heading] element.
+ */
+fun RElementBuilder<Alert.Props>.h6(classes: String? = null, block: RDOMHandler<H6>): ReactElement =
+    heading(Heading.Sizes.H6, classes, block)
+
+/**
+ * Creates a [Alert.Heading] element with [Heading.Sizes.H6] and uses TT to render the element.
+ *
+ * @param TT Tag Type that should be used to render this [Alert.Heading]
+ */
+inline fun <reified TT : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.h6(
+    classes: String? = null,
+    noinline block: RDOMHandler<TT>
+): ReactElement = heading(Heading.Sizes.H6, classes, block)

@@ -2,6 +2,8 @@
 
 package react.bootstrap.site.components.docs.components.alerts
 
+import kotlinx.html.A
+import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.Tag
 import react.RBuilder
 import react.RElementBuilder
@@ -15,7 +17,6 @@ import react.bootstrap.components.alert.h3
 import react.bootstrap.components.alert.h4
 import react.bootstrap.components.alert.h5
 import react.bootstrap.components.alert.h6
-import react.bootstrap.components.alert.heading
 import react.bootstrap.components.alert.link
 import react.bootstrap.content.typography.Headings
 import react.bootstrap.lib.bootstrap.ClassNames
@@ -24,6 +25,8 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunSpec
+import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.CROSSINLINE
+import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.NOINLINE
 import react.bootstrap.site.lib.codepoet.Generic
 import react.dom.p
 import kotlin.reflect.KFunction
@@ -71,17 +74,20 @@ internal class Reference : SectionComponent() {
         Markdown {
             //language=Markdown
             +"""
-Adds `${ClassNames.ALERT_LINK.nestedName}` to the outer most `ReactElement` resulting from `block`.
+Creates a `${Alert.Link::class.nestedName}` element.
             """
         }
         codeExample {
-            +FunSpec.builder(RElementBuilder<Alert.Props>::link, false)
+            +FunSpec.builder(RElementBuilder<Alert.Props>::link)
                 .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
-                .addParameter("block", "ElementProvider")
+                .addParameter<String?>("href", null)
+                .addParameter<String?>("target", null)
+                .addParameter<String?>("classes", null)
+                .addParameter("block", Generic("RDOMHandler", A::class))
                 .returns("ReactElement")
                 .build()
         }
-        subSectionTitle(RElementBuilder<Alert.Props>::heading.name)
+        subSectionTitle("heading")
         Markdown {
             //language=Markdown
             +"""
@@ -89,7 +95,12 @@ Adds `${ClassNames.ALERT_HEADING.nestedName}` to the outer most `ReactElement` r
             """
         }
         codeExample {
-            +FunSpec.builder(RElementBuilder<Alert.Props>::heading, false)
+            +FunSpec.builder(
+                object : KFunction<ReactElement> {
+                    override val name: String = "heading"
+                },
+                false
+            )
                 .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
                 .addParameter<Headings>("headings")
                 .addParameter("block", "ElementProvider")
@@ -108,7 +119,7 @@ Adds `${ClassNames.ALERT_HEADING.nestedName}` to the outer most `ReactElement` r
             Markdown {
                 //language=Markdown
                 +"""
-Custom `${function.name}` which behaves the same but adds `${ClassNames.ALERT_HEADING.nestedName}` to `classes`.
+Creates a `${Alert.Heading::class.nestedName}` element.
             """
             }
             codeExample {
@@ -116,6 +127,21 @@ Custom `${function.name}` which behaves the same but adds `${ClassNames.ALERT_HE
                     .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
                     .addParameter<String?>("classes", null)
                     .addParameter("block", Generic("RDOMHandler", function.name.toUpperCase()))
+                    .returns("ReactElement")
+                    .build()
+            }
+            Markdown {
+                //language=Markdown
+                +"""
+Creates a `${Alert.Heading::class.nestedName}` and uses `TT` to render the element.
+            """
+            }
+            codeExample {
+                +FunSpec.builder(function, inline = true)
+                    .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
+                    .addTypeParameter("TT", CommonAttributeGroupFacade::class, true)
+                    .addParameter<String?>("classes", null)
+                    .addParameter("block", Generic("RDOMHandler", function.name.toUpperCase()), modifier = NOINLINE)
                     .returns("ReactElement")
                     .build()
             }
@@ -138,11 +164,16 @@ Custom `${function.name}` which behaves the same but adds `${ClassNames.ALERT_HE
             +FunSpec.builder(
                 object : KFunction<ReactElement> {
                     override val name: String = "closingElement"
-                }
+                },
+                inline = true
             )
                 .nestedByGeneric<RElementBuilder<*>, Alert.Dismissible.Props>()
                 .addTypeParameter("TT", Tag::class, true)
-                .addParameter("block", Generic("RHandler", Alert.Dismissible.ClosingElement.Props::class))
+                .addParameter(
+                    "block",
+                    Generic("RHandler", Alert.Dismissible.ClosingElement.Props::class),
+                    modifier = CROSSINLINE
+                )
                 .returns("ReactElement")
                 .build()
         }

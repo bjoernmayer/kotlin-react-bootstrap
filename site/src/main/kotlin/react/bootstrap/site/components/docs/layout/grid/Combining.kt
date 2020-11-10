@@ -13,7 +13,6 @@ import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.importColFun
 import react.bootstrap.site.components.docs.importContainerFun
@@ -424,7 +423,7 @@ private fun RBuilder.allPossibleCombinations() {
     }
 
     allPairings.toSet().forEach { pairing ->
-        contentTitle(RBuilder::h4, "${pairing.thisClassName} + ${pairing.withClassName}")
+        h4("bd-content-title") { +"${pairing.thisClassName} + ${pairing.withClassName}" }
         flexColsExampleRow {
             liveExample {
                 container {
@@ -478,7 +477,7 @@ private fun RBuilder.allPossibleCombinations() {
 
             val argString = "${pairing.argString} ${tripling.tripleUsing.name} ${tripling.thisString}"
 
-            contentTitle(RBuilder::h4, combination) { }
+            h4("bd-content-title") { +combination }
             flexColsExampleRow {
                 liveExample {
                     container {
@@ -537,7 +536,7 @@ private fun RBuilder.allPossibleCombinations() {
                     "${pairing.argString} ${tripling.tripleUsing.name} ${tripling.thisString} " +
                         "${quadruple.quadrupleUsing.name} ${quadruple.thisString}"
 
-                contentTitle(RBuilder::h4, combination)
+                h4("bd-content-title") { +combination }
                 flexColsExampleRow {
                     liveExample {
                         container {

@@ -10,7 +10,6 @@ import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunSpec
@@ -58,7 +57,7 @@ Creates a `${function.name}`-based navigation.
             Triple(NavComponent.Div.Props::class, NavItems.DivItem.Props::class, NavItems.DivItem::class),
         ).forEach { (navPropsKlazz, itemPropsKlazz, itemKlazz) ->
             val elementBuilderGeneric = Generic("RElementBuilder", navPropsKlazz)
-            contentTitle(RBuilder::h4, "${elementBuilderGeneric.build()}.navItem")
+            h4("bd-content-title") { +"${elementBuilderGeneric.build()}.navItem" }
             Markdown {
                 //language=Markdown
                 +"""
@@ -83,7 +82,7 @@ Creates a `${itemKlazz.nestedName}` element.
             RElementBuilder<NavItems.DivItem.Props>::navLink to NavItems.DivItem.Props::class,
         ).forEach { (function, propsKlazz) ->
             val elementBuilderGeneric = Generic("RElementBuilder", propsKlazz)
-            contentTitle(RBuilder::h4, "${elementBuilderGeneric.build()}.navLink")
+            h4("bd-content-title") { +"${elementBuilderGeneric.build()}.navLink" }
             Markdown {
                 //language=Markdown
                 +"""

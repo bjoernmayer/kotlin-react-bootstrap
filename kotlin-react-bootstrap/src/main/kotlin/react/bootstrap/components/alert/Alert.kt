@@ -1,7 +1,14 @@
 package react.bootstrap.components.alert
 
 import kotlinext.js.jsObject
+import kotlinx.html.A
 import kotlinx.html.CommonAttributeGroupFacade
+import kotlinx.html.H1
+import kotlinx.html.H2
+import kotlinx.html.H3
+import kotlinx.html.H4
+import kotlinx.html.H5
+import kotlinx.html.H6
 import kotlinx.html.SPAN
 import kotlinx.html.classes
 import kotlinx.html.role
@@ -9,12 +16,14 @@ import org.w3c.dom.events.Event
 import react.RBuilder
 import react.RState
 import react.RStatics
+import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.component.CustomisableComponent
+import react.bootstrap.lib.component.DOMWrapComponent
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
@@ -29,6 +38,7 @@ import react.dom.RDOMBuilder
 import react.dom.div
 import react.setState
 import kotlin.reflect.KClass
+import react.bootstrap.content.typography.heading.Heading as BaseHeading
 
 sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponent<PT, ST>(props) {
     class Static(props: Props) : Alert<Static.Props, RState>(props) {
@@ -245,5 +255,37 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
 
     interface Props : WithGlobalAttributes, WithDomEvents {
         var variant: Variants
+    }
+
+    class Link(props: Props) : DOMWrapComponent<A, Link.Props>(props) {
+        override fun RDOMBuilder<A>.build() {
+            attrs {
+                classes = props.classes.addOrInit(ClassNames.ALERT_LINK)
+            }
+        }
+
+        interface Props : WithGlobalAttributes, DOMWrapComponent.Props<A>
+    }
+
+    class Heading<TT : CommonAttributeGroupFacade>(props: Props<TT>) : BaseHeading<TT>(props) {
+        override fun RDOMBuilder<TT>.build() {
+            val alertHeadingClasses = mutableSetOf(ClassNames.ALERT_HEADING)
+
+            attrs {
+                classes = when (props.domClass) {
+                    H1::class -> props.classes.addOrInit(alertHeadingClasses)
+                    H2::class -> props.classes.addOrInit(alertHeadingClasses)
+                    H3::class -> props.classes.addOrInit(alertHeadingClasses)
+                    H4::class -> props.classes.addOrInit(alertHeadingClasses)
+                    H5::class -> props.classes.addOrInit(alertHeadingClasses)
+                    H6::class -> props.classes.addOrInit(alertHeadingClasses)
+                    else -> {
+                        // See https://youtrack.jetbrains.com/issue/KT-11488
+                        alertHeadingClasses.add(props.size.className)
+                        props.classes.addOrInit(alertHeadingClasses)
+                    }
+                }
+            }
+        }
     }
 }

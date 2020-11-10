@@ -6,10 +6,11 @@ import kotlinx.html.currentTimeMillis
 import react.RBuilder
 import react.RElementBuilder
 import react.RProps
+import react.bootstrap.components.alert.Alert
 import react.bootstrap.components.alert.AlertBuilder
 import react.bootstrap.components.alert.Alerts
-import react.bootstrap.components.alert.Alert
 import react.bootstrap.components.alert.closingElement
+import react.bootstrap.components.alert.h4
 import react.bootstrap.components.alert.link
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
@@ -19,7 +20,6 @@ import react.bootstrap.site.components.docs.components.buttons.solidInfoFun
 import react.bootstrap.site.components.docs.components.buttons.solidSuccessFun
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
@@ -30,7 +30,6 @@ import react.bootstrap.site.lib.codepoet.If
 import react.bootstrap.site.lib.codepoet.Imports
 import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.child
-import react.dom.a
 import react.dom.h4
 import react.dom.hr
 import react.dom.p
@@ -100,7 +99,7 @@ Use the `${RElementBuilder<Alert.Props>::link.name}`-function (only available in
                         this.variant = variant
                     }
                     +"A simple ${variant.name.toLowerCase()} alert with "
-                    link { a(href = "#") { +"an example link" } }; +". Give it a click if you like."
+                    link(href = "#") { +"an example link" }; +". Give it a click if you like."
                 }
             }
         }
@@ -116,13 +115,10 @@ Use the `${RElementBuilder<Alert.Props>::link.name}`-function (only available in
                         plusString("A simple ${variant.name.toLowerCase()} alert with "),
                         "\n",
                         FunCall.builder(RElementBuilder<Alert.Props>::link, FunCall.Style.INLINE)
-                            .setLambdaArgument(
-                                FunCall.builder(RBuilder::a, FunCall.Style.INLINE, appendSemicolon = true)
-                                    .addArgument("href", "#")
-                                    .setLambdaArgument(plusString("an example link"))
-                                    .build(),
-                                " ${plusString(". Give it a click if you like.")}"
-                            ).build()
+                            .addArgument("href", "#")
+                            .setLambdaArgument(plusString("an example link"))
+                            .build(),
+                        " ${plusString(". Give it a click if you like.")}"
                     ).build()
             }
         }
@@ -156,7 +152,7 @@ Aww yeah, you successfully read this important alert message. This example text 
             +FunCall.builder(Alerts::success)
                 .nestedBy(RBuilder::Alerts)
                 .setLambdaArgument(
-                    FunCall.builder(RBuilder::h4, FunCall.Style.NEW_INLINE)
+                    FunCall.builder(RElementBuilder<Alert.Props>::h4, FunCall.Style.NEW_INLINE)
                         .setLambdaArgument(plusString("Well done!"))
                         .build(),
                     FunCall.builder(RBuilder::p)
@@ -251,7 +247,7 @@ alerts.
                 )
                 .build()
         }
-        contentTitle(RBuilder::h4, "Close element")
+        h4("bd-content-title") { +"Close element" }
         Markdown {
             //language=Markdown
             +"""
@@ -297,7 +293,7 @@ You can build your own custom close element, by using `closingElement { }`.
                 )
                 .build()
         }
-        contentTitle(RBuilder::h4, "State hook")
+        h4("bd-content-title") { +"State hook" }
         p {
             +"The callbacks can also be used for something like this:"
         }
