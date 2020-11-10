@@ -26,6 +26,7 @@ import react.bootstrap.lib.react.identifiable.mapComponents
 import react.bootstrap.lib.react.rprops.WithDomEvents
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.childrenArray
+import react.bootstrap.lib.react.rprops.requireProperties
 import react.bootstrap.utilities.close.close
 import react.dom.RDOMBuilder
 import react.dom.div
@@ -224,13 +225,7 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
     }
 
     init {
-        // These comparison are not senseless. The props are built using kotlin's `dynamic` keyword. Null is a possible
-        // value.
-
-        @Suppress("SENSELESS_COMPARISON")
-        require(props.variant != null) {
-            "Missing property: variant must not be null!"
-        }
+        props.requireProperties(props::variant)
     }
 
     override fun buildClasses(): Set<ClassNames> = mutableSetOf(ClassNames.ALERT, props.variant.className)

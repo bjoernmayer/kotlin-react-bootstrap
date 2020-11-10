@@ -32,6 +32,7 @@ import react.bootstrap.lib.react.rprops.WithActive
 import react.bootstrap.lib.react.rprops.WithDisabled
 import react.bootstrap.lib.react.rprops.WithDomEvents
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.lib.react.rprops.requireProperties
 import react.dom.a
 import react.dom.button
 import react.dom.input
@@ -40,13 +41,7 @@ import react.setState
 
 class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(props) {
     init {
-        // These comparison are not senseless. The props are built using kotlin's `dynamic` keyword. Null is a possible
-        // value.
-
-        @Suppress("SENSELESS_COMPARISON")
-        require(props.variant != null) {
-            "Missing property: variant must not be null!"
-        }
+        props.requireProperties(props::variant)
     }
 
     override fun State.init(props: Props) {

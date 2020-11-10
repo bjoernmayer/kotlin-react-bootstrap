@@ -12,6 +12,7 @@ import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.lib.react.rprops.requireProperties
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 import kotlinx.html.CommonAttributeGroupFacade as CommonAttribute
@@ -27,18 +28,7 @@ import kotlinx.html.CommonAttributeGroupFacade as CommonAttribute
 abstract class DOMWrapComponent<TT : CommonAttribute, PT : DOMWrapComponent.Props<TT>, ST : RState>(props: PT) :
     RComponent<PT, ST>(props) {
     init {
-        // These comparison are not senseless. The props are built using kotlin's `dynamic` keyword. Null is a possible
-        // value.
-
-        @Suppress("SENSELESS_COMPARISON")
-        require(props.domClass != null) {
-            "Missing property: domClass must not be null!"
-        }
-
-        @Suppress("SENSELESS_COMPARISON")
-        require(props.domHandler != null) {
-            "Missing property: domHandler must not be null!"
-        }
+        props.requireProperties(props::domClass, props::domHandler)
     }
 
     protected open fun RDOMBuilder<TT>.build() { }

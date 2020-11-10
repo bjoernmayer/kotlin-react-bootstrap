@@ -11,18 +11,13 @@ import react.RState
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.DOMWrapComponent
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.lib.react.rprops.requireProperties
 
 open class Heading<TT : CommonAttributeGroupFacade>(props: Props<TT>) :
     DOMWrapComponent<TT, Heading.Props<TT>, RState>(props) {
 
     init {
-        // These comparison are not senseless. The props are built using kotlin's `dynamic` keyword. Null is a possible
-        // value.
-
-        @Suppress("SENSELESS_COMPARISON")
-        require(props.size != null) {
-            "Missing property: size must not be null!"
-        }
+        props.requireProperties(props::size)
     }
 
     override fun buildClasses(): Set<ClassNames> = when (props.domClass) {
