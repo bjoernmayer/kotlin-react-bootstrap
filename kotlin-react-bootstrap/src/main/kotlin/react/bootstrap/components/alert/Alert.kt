@@ -23,7 +23,6 @@ import react.bootstrap.lib.react.identifiable.isComponent
 import react.bootstrap.lib.react.identifiable.mapComponents
 import react.bootstrap.lib.react.rprops.WithDomEvents
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithRendererTag
 import react.bootstrap.lib.react.rprops.childrenArray
 import react.bootstrap.utilities.close.close
 import react.dom.RDOMBuilder
@@ -194,7 +193,7 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
                 WithGlobalAttributes,
                 WithDomEvents,
                 IdentifiableProps<ClosingElement>,
-                WithRendererTag<CommonAttributeGroupFacade>
+                CustomisableComponent.Props<CommonAttributeGroupFacade>
 
             override fun RDOMBuilder<CommonAttributeGroupFacade>.build() {
                 attrs {

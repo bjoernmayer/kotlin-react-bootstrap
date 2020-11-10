@@ -13,7 +13,6 @@ import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.component.CustomisableComponent
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithRendererTag
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
@@ -50,7 +49,7 @@ class Display(props: Props) : CustomisableComponent<HtmlInlineTag, Display.Props
         DISPLAY_4(ClassNames.DISPLAY_4);
     }
 
-    interface Props : WithRendererTag<HtmlInlineTag>, WithGlobalAttributes {
+    interface Props : CustomisableComponent.Props<HtmlInlineTag>, WithGlobalAttributes {
         var variant: Variants
     }
 }

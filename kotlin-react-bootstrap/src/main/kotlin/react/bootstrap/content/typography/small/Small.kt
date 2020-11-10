@@ -8,7 +8,6 @@ import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.CustomisableComponent
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithRendererTag
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
@@ -21,5 +20,5 @@ class Small(props: Props) : CustomisableComponent<CommonAttributeGroupFacade, Sm
         }
     }
 
-    interface Props : WithGlobalAttributes, WithRendererTag<CommonAttributeGroupFacade>
+    interface Props : WithGlobalAttributes, CustomisableComponent.Props<CommonAttributeGroupFacade>
 }

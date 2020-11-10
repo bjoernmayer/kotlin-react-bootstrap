@@ -11,7 +11,6 @@ import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.CustomisableComponent
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithRendererTag
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
@@ -41,7 +40,7 @@ class Col : CustomisableComponent<CommonAttributeGroupFacade, Col.Props, RState>
         }
     }
 
-    interface Props : WithRendererTag<CommonAttributeGroupFacade>, WithGlobalAttributes {
+    interface Props : CustomisableComponent.Props<CommonAttributeGroupFacade>, WithGlobalAttributes {
         var all: ColAttributes?
         var sm: ColAttributes?
         var md: ColAttributes?
