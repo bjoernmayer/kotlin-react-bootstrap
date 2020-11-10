@@ -97,7 +97,7 @@ Creates a `${NavLink::class.nestedName}` element.
                     .addParameter<String?>("target", null)
                     .addParameter("active", false)
                     .addParameter("disabled", false)
-                    .addParameter("block", Generic("RHandler", NavLink.Props::class))
+                    .addParameter("block", Generic("RDOMHandler", "A"))
                     .returns("ReactElement")
                     .build()
             }

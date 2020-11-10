@@ -1,5 +1,6 @@
 package react.bootstrap.components.nav
 
+import kotlinx.html.A
 import kotlinx.html.DIV
 import kotlinx.html.HtmlBlockTag
 import kotlinx.html.NAV
@@ -148,7 +149,7 @@ sealed class NavComponent<PT : NavComponent.Props> : AbstractComponent<HtmlBlock
     interface Props : WithGlobalAttributes {
         var appearance: Appearance?
         var widthHandling: WidthHandling?
-        var activeLinkPredicate: (NavLink.Props.() -> Boolean)?
+        var activeLinkPredicate: (A.() -> Boolean)?
     }
 
     enum class Appearance {

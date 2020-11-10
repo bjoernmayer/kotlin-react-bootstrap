@@ -1,5 +1,6 @@
 package react.bootstrap.site.components.docs.components.navs
 
+import kotlinx.html.js.onClickFunction
 import react.RBuilder
 import react.RElementBuilder
 import react.RProps
@@ -73,7 +74,7 @@ behaviour.
                             navItem {
                                 navLink(href = "#", active = activeNavLink == active) {
                                     attrs {
-                                        onClick = {
+                                        onClickFunction = {
                                             it.preventDefault()
                                             activeNavLink = active
                                         }
@@ -189,16 +190,16 @@ You set a `active predicate` on each `nav` which is checked, when the nav is ren
                 activeLinkPredicate = { href == "#theActiveLink" }
             ) {
                 navLink(href = "#") {
-                    attrs { onClick = { it.preventDefault() } }
+                    attrs { onClickFunction = { it.preventDefault() } }
                     +"Not Active"
                 }
                 navLink(href = "#") {
-                    attrs { onClick = { it.preventDefault() } }
+                    attrs { onClickFunction = { it.preventDefault() } }
                     +"Also not active"
                 }
                 navLink(href = "#theActiveLink") {
                     attrs {
-                        onClick = { it.preventDefault() }
+                        onClickFunction = { it.preventDefault() }
                     }
                     +"Active"
                 }

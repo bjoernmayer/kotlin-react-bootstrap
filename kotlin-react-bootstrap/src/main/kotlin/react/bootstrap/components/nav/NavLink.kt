@@ -1,33 +1,34 @@
 package react.bootstrap.components.nav
 
 import kotlinext.js.jsObject
-import kotlinx.html.classes
+import kotlinx.html.A
 import kotlinx.html.tabIndex
 import react.RBuilder
 import react.RState
 import react.RStatics
+import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.BootstrapComponent
+import react.bootstrap.lib.component.DOMWrapComponent
 import react.bootstrap.lib.kotlinxhtml.ariaDisabled
-import react.bootstrap.lib.kotlinxhtml.loadAttributes
-import react.bootstrap.lib.kotlinxhtml.loadDomEvents
-import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.react.identifiable.IdentifiableProps
 import react.bootstrap.lib.react.rprops.WithActive
 import react.bootstrap.lib.react.rprops.WithDisabled
-import react.bootstrap.lib.react.rprops.WithDomEvents
-import react.bootstrap.lib.react.rprops.tags.WithAttributesA
+import react.dom.RDOMBuilder
 import react.dom.a
 import react.setState
 
-class NavLink(props: Props) : BootstrapComponent<NavLink.Props, NavLink.State>(props) {
+class NavLink(props: Props) : DOMWrapComponent<A, NavLink.Props, NavLink.State>(props) {
     override fun State.init(props: Props) {
+        linkProps = buildLinkProps(props.domHandler)
+
         active = props.active
 
         props.activeLinkPredicate?.let {
-            active = it.invoke(props)
+            active = it.invoke(linkProps)
         }
     }
+
+    private fun buildLinkProps(domHandler: RDOMHandler<A>): A = RBuilder().a(block = domHandler).props.unsafeCast<A>()
 
     override fun componentDidMount() {
         if (state.active) {
@@ -38,7 +39,9 @@ class NavLink(props: Props) : BootstrapComponent<NavLink.Props, NavLink.State>(p
     override fun componentDidUpdate(prevProps: Props, prevState: State, snapshot: Any) {
         if (prevProps !== props) {
             setState {
-                active = props.activeLinkPredicate?.invoke(props) ?: props.active
+                linkProps = buildLinkProps(props.domHandler)
+
+                active = props.activeLinkPredicate?.invoke(linkProps) ?: props.active
             }
         }
         if (!prevState.active && props.active) {
@@ -62,30 +65,23 @@ class NavLink(props: Props) : BootstrapComponent<NavLink.Props, NavLink.State>(p
         return navLinkClasses
     }
 
-    override fun RBuilder.render() {
-        a {
-            attrs {
-                loadGlobalAttributes(props)
-                loadDomEvents(props)
-                loadAttributes(props)
-
-                classes = getComponentClasses()
-
-                if (props.disabled) {
-                    tabIndex = "-1"
-                    ariaDisabled = true
-                }
+    override fun RDOMBuilder<A>.build() {
+        attrs {
+            if (props.disabled) {
+                tabIndex = "-1"
+                ariaDisabled = true
             }
-            children()
         }
+        children()
     }
 
-    interface Props : WithAttributesA, WithActive, WithDisabled, WithDomEvents, IdentifiableProps<NavLink> {
-        var activeLinkPredicate: (Props.() -> Boolean)?
+    interface Props : WithActive, WithDisabled, IdentifiableProps<NavLink>, DOMWrapComponent.Props<A> {
+        var activeLinkPredicate: (A.() -> Boolean)?
     }
 
     interface State : RState {
         var active: Boolean
+        var linkProps: A
     }
 
     companion object : RStatics<Props, State, NavLink, Nothing>(NavLink::class) {

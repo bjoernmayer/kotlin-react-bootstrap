@@ -3,12 +3,6 @@ package react.bootstrap.components.alert
 import kotlinext.js.jsObject
 import kotlinx.html.A
 import kotlinx.html.CommonAttributeGroupFacade
-import kotlinx.html.H1
-import kotlinx.html.H2
-import kotlinx.html.H3
-import kotlinx.html.H4
-import kotlinx.html.H5
-import kotlinx.html.H6
 import kotlinx.html.SPAN
 import kotlinx.html.classes
 import kotlinx.html.role
@@ -16,7 +10,6 @@ import org.w3c.dom.events.Event
 import react.RBuilder
 import react.RState
 import react.RStatics
-import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.lib.bootstrap.ClassNames
@@ -257,34 +250,16 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
         var variant: Variants
     }
 
-    class Link(props: Props) : DOMWrapComponent<A, Link.Props>(props) {
-        override fun RDOMBuilder<A>.build() {
-            attrs {
-                classes = props.classes.addOrInit(ClassNames.ALERT_LINK)
-            }
-        }
+    class Link(props: Props) : DOMWrapComponent<A, Link.Props, RState>(props) {
+        override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.ALERT_LINK)
 
         interface Props : WithGlobalAttributes, DOMWrapComponent.Props<A>
     }
 
     class Heading<TT : CommonAttributeGroupFacade>(props: Props<TT>) : BaseHeading<TT>(props) {
-        override fun RDOMBuilder<TT>.build() {
-            val alertHeadingClasses = mutableSetOf(ClassNames.ALERT_HEADING)
-
-            attrs {
-                classes = when (props.domClass) {
-                    H1::class -> props.classes.addOrInit(alertHeadingClasses)
-                    H2::class -> props.classes.addOrInit(alertHeadingClasses)
-                    H3::class -> props.classes.addOrInit(alertHeadingClasses)
-                    H4::class -> props.classes.addOrInit(alertHeadingClasses)
-                    H5::class -> props.classes.addOrInit(alertHeadingClasses)
-                    H6::class -> props.classes.addOrInit(alertHeadingClasses)
-                    else -> {
-                        // See https://youtrack.jetbrains.com/issue/KT-11488
-                        alertHeadingClasses.add(props.size.className)
-                        props.classes.addOrInit(alertHeadingClasses)
-                    }
-                }
+        override fun buildClasses(): Set<ClassNames> = super.buildClasses().run {
+            toMutableSet().apply {
+                add(ClassNames.ALERT_HEADING)
             }
         }
     }

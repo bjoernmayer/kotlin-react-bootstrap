@@ -1,6 +1,7 @@
 package react.bootstrap.components.nav
 
 import kotlinext.js.jsObject
+import kotlinx.html.A
 import kotlinx.html.DIV
 import kotlinx.html.HtmlBlockTag
 import kotlinx.html.LI
@@ -83,6 +84,6 @@ sealed class NavItems<P : NavItems.Props> : AbstractComponent<HtmlBlockTag, P, R
     }
 
     interface Props : WithGlobalAttributes {
-        var activeLinkPredicate: (NavLink.Props.() -> Boolean)?
+        var activeLinkPredicate: (A.() -> Boolean)?
     }
 }

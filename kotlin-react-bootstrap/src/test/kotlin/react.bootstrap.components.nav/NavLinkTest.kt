@@ -2,6 +2,7 @@ package react.bootstrap.components.nav
 
 import kotlinext.js.clone
 import kotlinext.js.jsObject
+import kotlinx.html.A
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -15,6 +16,8 @@ class NavLinkTest {
             jsObject {
                 active = false
                 onActive = { initial = true }
+                domHandler = { }
+                domClass = A::class
             }
         )
         component.state.active = true
@@ -32,6 +35,8 @@ class NavLinkTest {
         val props: NavLink.Props = jsObject {
             active = false
             onActive = { initial = true }
+            domHandler = { }
+            domClass = A::class
         }
 
         val component = NavLink(clone(props))

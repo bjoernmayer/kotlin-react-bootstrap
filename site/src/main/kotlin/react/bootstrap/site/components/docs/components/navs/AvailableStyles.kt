@@ -2,6 +2,7 @@
 
 package react.bootstrap.site.components.docs.components.navs
 
+import kotlinx.html.js.onClickFunction
 import react.RBuilder
 import react.RElementBuilder
 import react.RProps
@@ -128,15 +129,15 @@ As always, vertical navigation is possible without `ul`s, too.
         liveExample {
             Navs.nav(classes = "${ClassNames.FLEX_COLUMN}") {
                 navLink(href = "#", active = true) {
-                    attrs { onClick = { it.preventDefault() } }
+                    attrs { onClickFunction = { it.preventDefault() } }
                     +"Active"
                 }
                 navLink(href = "#") {
-                    attrs { onClick = { it.preventDefault() } }
+                    attrs { onClickFunction = { it.preventDefault() } }
                     +"Link"
                 }
                 navLink(href = "#") {
-                    attrs { onClick = { it.preventDefault() } }
+                    attrs { onClickFunction = { it.preventDefault() } }
                     +"Link"
                 }
                 navLink(href = "#", disabled = true) {
@@ -453,7 +454,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         navItem {
             navLink(href = "#", active = true) {
                 attrs {
-                    onClick = {
+                    onClickFunction = {
                         it.preventDefault()
                     }
                 }
@@ -463,7 +464,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         navItem {
             navLink(href = "#") {
                 attrs {
-                    onClick = {
+                    onClickFunction = {
                         it.preventDefault()
                     }
                 }
@@ -473,7 +474,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         navItem {
             navLink(href = "#") {
                 attrs {
-                    onClick = {
+                    onClickFunction = {
                         it.preventDefault()
                     }
                 }
@@ -501,7 +502,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
             navItem {
                 navLink(href = "#", active = activeNavLink == 0) {
                     attrs {
-                        onClick = {
+                        onClickFunction = {
                             it.preventDefault()
                             activeNavLink = 0
                         }
@@ -512,7 +513,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
             navItem {
                 navLink(href = "#", active = activeNavLink == 1) {
                     attrs {
-                        onClick = {
+                        onClickFunction = {
                             it.preventDefault()
                             activeNavLink = 1
                         }
@@ -523,7 +524,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
             navItem {
                 navLink(href = "#", active = activeNavLink == 2) {
                     attrs {
-                        onClick = {
+                        onClickFunction = {
                             it.preventDefault()
                             activeNavLink = 2
                         }
@@ -552,7 +553,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
             attrs.attrHandler()
             navLink(href = "#", active = activeNavLink == 0) {
                 attrs {
-                    onClick = {
+                    onClickFunction = {
                         it.preventDefault()
                         activeNavLink = 0
                     }
@@ -561,7 +562,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
             }
             navLink(href = "#", active = activeNavLink == 1) {
                 attrs {
-                    onClick = {
+                    onClickFunction = {
                         it.preventDefault()
                         activeNavLink = 1
                     }
@@ -570,7 +571,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
             }
             navLink(href = "#", active = activeNavLink == 2) {
                 attrs {
-                    onClick = {
+                    onClickFunction = {
                         it.preventDefault()
                         activeNavLink = 2
                     }
