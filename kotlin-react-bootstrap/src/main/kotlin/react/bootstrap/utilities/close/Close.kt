@@ -18,13 +18,13 @@ import react.dom.span
 class Close : BootstrapComponent<Close.Props, RState>() {
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.CLOSE)
 
-    override fun RBuilder.render() {
+    override fun RBuilder.render(rendererClasses: Set<String>) {
         button(type = ButtonType.button) {
             attrs {
                 loadGlobalAttributes(props)
                 loadDomEvents(props)
 
-                classes = getComponentClasses()
+                classes = rendererClasses
                 ariaLabel = props.label ?: "Close"
             }
 

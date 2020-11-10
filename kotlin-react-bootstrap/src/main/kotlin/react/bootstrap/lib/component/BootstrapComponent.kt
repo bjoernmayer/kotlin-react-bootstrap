@@ -1,19 +1,22 @@
 package react.bootstrap.lib.component
 
+import react.RBuilder
 import react.RComponent
 import react.RState
 import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.lib.react.rprops.WithClasses
 
-abstract class BootstrapComponent<RPT : WithGlobalAttributes, RST : RState> : RComponent<RPT, RST> {
+abstract class BootstrapComponent<P : WithClasses, S : RState> : RComponent<P, S> {
     constructor() : super()
-    constructor(props: RPT) : super(props)
+    constructor(props: P) : super(props)
 
     /**
      * @return A set of [ClassNames] values used to render this component
      */
     protected abstract fun buildClasses(): Set<ClassNames>
 
-    protected fun getComponentClasses(): Set<String> = props.classes.addOrInit(buildClasses())
+    abstract fun RBuilder.render(rendererClasses: Set<String>)
+
+    final override fun RBuilder.render() = render(props.classes.addOrInit(buildClasses()))
 }

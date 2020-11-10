@@ -133,11 +133,11 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
         return btnGroupClasses
     }
 
-    override fun RBuilder.render() {
+    override fun RBuilder.render(rendererClasses: Set<String>) {
         div {
             attrs {
                 loadGlobalAttributes(props)
-                classes = getComponentClasses()
+                classes = rendererClasses
                 role = "group"
 
                 props.label?.let {

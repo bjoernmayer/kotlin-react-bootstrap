@@ -12,11 +12,11 @@ import react.dom.p
 class Lead : BootstrapComponent<Lead.Props, RState>() {
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.LEAD)
 
-    override fun RBuilder.render() {
+    override fun RBuilder.render(rendererClasses: Set<String>) {
         p {
             attrs {
                 loadGlobalAttributes(props)
-                classes = getComponentClasses()
+                classes = rendererClasses
             }
 
             children()

@@ -13,11 +13,11 @@ import react.dom.div
 class Container : BootstrapComponent<Container.Props, RState>() {
     override fun buildClasses(): Set<ClassNames> = setOf(props.viscosity?.className ?: ClassNames.CONTAINER)
 
-    override fun RBuilder.render() {
+    override fun RBuilder.render(rendererClasses: Set<String>) {
         div {
             attrs {
                 loadGlobalAttributes(props)
-                classes = getComponentClasses()
+                classes = rendererClasses
             }
             children()
         }

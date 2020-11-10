@@ -15,13 +15,13 @@ import react.dom.div
 class ButtonToolbar : BootstrapComponent<ButtonToolbar.Props, RState>() {
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.BTN_TOOLBAR)
 
-    override fun RBuilder.render() {
+    override fun RBuilder.render(rendererClasses: Set<String>) {
         div {
             attrs {
                 loadGlobalAttributes(props)
 
                 role = "toolbar"
-                classes = getComponentClasses()
+                classes = rendererClasses
 
                 props.ariaLabel?.let {
                     ariaLabel = it

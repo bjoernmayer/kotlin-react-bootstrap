@@ -6,8 +6,8 @@ import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDomComponent
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 
-class Small<TT : CommonAttributeGroupFacade>(props: Props<TT>) : AbstractDomComponent<TT, Small.Props<TT>, RState>(props) {
+class Small<T : CommonAttributeGroupFacade>(props: Props<T>) : AbstractDomComponent<T, Small.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.SMALL)
 
-    interface Props<TT : CommonAttributeGroupFacade> : WithGlobalAttributes, AbstractDomComponent.Props<TT>
+    interface Props<T : CommonAttributeGroupFacade> : WithGlobalAttributes, AbstractDomComponent.Props<T>
 }

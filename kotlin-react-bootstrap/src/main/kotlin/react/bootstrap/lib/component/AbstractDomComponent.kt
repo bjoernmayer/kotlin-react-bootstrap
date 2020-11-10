@@ -6,16 +6,14 @@ import react.RBuilder
 import react.RHandler
 import react.RState
 import react.ReactElement
-import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.react.rprops.requireProperties
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 import kotlinx.html.CommonAttributeGroupFacade as CommonAttributes
 
 /**
- * A [AbstractDomComponent] is a react component, which passes through its [AbstractDomComponent.Props.handler] to the
+ * An [AbstractDomComponent] is a react component, which passes through its [AbstractDomComponent.Props.handler] to the
  * underlying HTML element, whose type is set via [AbstractDomComponent.Props.tag].
  *
  * @param T type of the tag which is used to render this component
@@ -30,7 +28,7 @@ abstract class AbstractDomComponent<T : CommonAttributes, P : AbstractDomCompone
 
     protected open fun RDOMBuilder<T>.build() {}
 
-    final override fun RBuilder.render(componentClasses: Set<ClassNames>, handler: RDOMHandler<T>) {
+    final override fun RBuilder.render(rendererClasses: Set<String>, handler: RDOMHandler<T>) {
         @Suppress("UNUSED_VARIABLE", "UNUSED_ANONYMOUS_PARAMETER")
         val rROMBuilder = RDOMBuilder { tagConsumer ->
             // This intantiates the tag by using some reflection js magic.
@@ -45,7 +43,7 @@ abstract class AbstractDomComponent<T : CommonAttributes, P : AbstractDomCompone
             rROMBuilder
                 .apply {
                     attrs {
-                        classes = props.classes.addOrInit(componentClasses)
+                        classes = rendererClasses
                     }
 
                     build()

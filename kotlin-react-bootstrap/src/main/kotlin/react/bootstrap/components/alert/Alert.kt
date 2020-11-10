@@ -36,7 +36,7 @@ import react.bootstrap.content.typography.heading.Heading as BaseHeading
 
 sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponent<PT, ST>(props) {
     class Static(props: Props) : Alert<Static.Props, RState>(props) {
-        override fun RBuilder.render() {
+        override fun RBuilder.render(rendererClasses: Set<String>) {
             div {
                 children()
 
@@ -46,7 +46,7 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
 
                     role = "alert"
 
-                    classes = getComponentClasses()
+                    classes = rendererClasses
                 }
             }
         }
@@ -117,7 +117,7 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
             }
         }
 
-        override fun RBuilder.render() {
+        override fun RBuilder.render(rendererClasses: Set<String>) {
             if (state.state == States.DISMISSED) {
                 return
             }
@@ -156,7 +156,7 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
 
                     role = "alert"
 
-                    classes = getComponentClasses()
+                    classes = rendererClasses
                 }
             }
         }

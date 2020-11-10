@@ -110,7 +110,7 @@ class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(prop
     }
 
     @Suppress("UnsafeCastFromDynamic")
-    override fun RBuilder.render() {
+    override fun RBuilder.render(rendererClasses: Set<String>) {
         when (val type = props.type) {
             is Types.Button -> {
                 button(
@@ -122,7 +122,7 @@ class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(prop
                         handleCommonAttrs()
                         loadGlobalAttributes(props)
 
-                        classes = getComponentClasses()
+                        classes = rendererClasses
 
                         attrs.disabled = props.disabled
                     }
@@ -135,7 +135,7 @@ class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(prop
                         attrs {
                             loadGlobalAttributes(props)
 
-                            classes = getComponentClasses()
+                            classes = rendererClasses
                         }
                         input(
                             type = type.type.inputType,
@@ -182,7 +182,7 @@ class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(prop
                             handleCommonAttrs()
                             loadGlobalAttributes(props)
 
-                            classes = getComponentClasses()
+                            classes = rendererClasses
                             value = type.value
 
                             type.title?.let {
@@ -204,7 +204,7 @@ class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(prop
                         handleCommonAttrs()
                         loadGlobalAttributes(props)
 
-                        classes = getComponentClasses()
+                        classes = rendererClasses
                         role = "button"
                     }
                     children()
