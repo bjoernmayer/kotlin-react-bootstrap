@@ -5,7 +5,7 @@ import react.RBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.DOMWrapComponent.Companion.domWrapComponent
+import react.bootstrap.lib.component.DomComponent.Companion.domComponent
 
 /**
  * Creates a generic [Heading].
@@ -24,7 +24,7 @@ inline fun <reified TT : CommonAttributeGroupFacade> RBuilder.heading(
         }
     }
 
-    return domWrapComponent(classes, Heading::class, handler, block)
+    return domComponent(classes, Heading::class, handler, block)
 }
 
 /**

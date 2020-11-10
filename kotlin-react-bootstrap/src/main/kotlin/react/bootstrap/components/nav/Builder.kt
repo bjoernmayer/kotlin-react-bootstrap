@@ -9,7 +9,7 @@ import react.ReactElement
 import react.bootstrap.lib.Builder
 import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.DOMWrapComponent.Companion.domWrapComponent
+import react.bootstrap.lib.component.DomComponent.Companion.domComponent
 import kotlin.reflect.KClass
 
 class NavBuilder(override val builder: RBuilder) : Builder {
@@ -178,7 +178,7 @@ private fun RBuilder.buildNavLink(
         }
     }
 
-    return domWrapComponent(classes, NavLink::class, handler) {
+    return domComponent(classes, NavLink::class, handler) {
         attrs {
             href?.let {
                 this.href = it

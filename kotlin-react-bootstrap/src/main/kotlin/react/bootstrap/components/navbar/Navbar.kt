@@ -4,14 +4,12 @@ import kotlinx.html.HtmlInlineTag
 import kotlinx.html.classes
 import react.RBuilder
 import react.RState
-import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.BootstrapComponent
-import react.bootstrap.lib.component.DOMWrapComponent
+import react.bootstrap.lib.component.DomComponent
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.dom.RDOMBuilder
 import react.dom.div
 
 class Navbar : BootstrapComponent<Navbar.Props, RState>() {
@@ -56,9 +54,9 @@ class Navbar : BootstrapComponent<Navbar.Props, RState>() {
         DARK(ClassNames.NAVBAR_DARK)
     }
 
-    open class Brand<TT : HtmlInlineTag>(props: Props<TT>) : DOMWrapComponent<TT, Brand.Props<TT>, RState>(props) {
+    open class Brand<TT : HtmlInlineTag>(props: Props<TT>) : DomComponent<TT, Brand.Props<TT>, RState>(props) {
         override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.NAVBAR_BRAND)
 
-        interface Props<TT : HtmlInlineTag> : WithGlobalAttributes, DOMWrapComponent.Props<TT>
+        interface Props<TT : HtmlInlineTag> : WithGlobalAttributes, DomComponent.Props<TT>
     }
 }

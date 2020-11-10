@@ -25,7 +25,7 @@ import kotlinx.html.CommonAttributeGroupFacade as CommonAttribute
  * @param TT Tag type
  * @param PT Prop Type
  */
-abstract class DOMWrapComponent<TT : CommonAttribute, PT : DOMWrapComponent.Props<TT>, ST : RState>(props: PT) :
+abstract class DomComponent<TT : CommonAttribute, PT : DomComponent.Props<TT>, ST : RState>(props: PT) :
     RComponent<PT, ST>(props) {
     init {
         props.requireProperties(props::domClass, props::domHandler)
@@ -70,15 +70,15 @@ abstract class DOMWrapComponent<TT : CommonAttribute, PT : DOMWrapComponent.Prop
     }
 
     companion object {
-        inline fun <reified TT : CommonAttribute, reified PT : Props<TT>> RBuilder.domWrapComponent(
+        inline fun <reified TT : CommonAttribute, reified PT : Props<TT>> RBuilder.domComponent(
             classes: String? = null,
-            klazz: KClass<out DOMWrapComponent<*, *, *>>,
+            klazz: KClass<out DomComponent<*, *, *>>,
             crossinline handler: RHandler<PT> = { },
             noinline domHandler: RDOMHandler<TT>,
         ): ReactElement {
 
             @Suppress("UNCHECKED_CAST")
-            val componentKlazz: KClass<out DOMWrapComponent<*, PT, *>> = klazz as KClass<out DOMWrapComponent<*, PT, *>>
+            val componentKlazz: KClass<out DomComponent<*, PT, *>> = klazz as KClass<out DomComponent<*, PT, *>>
 
             return child(componentKlazz) {
                 attrs {

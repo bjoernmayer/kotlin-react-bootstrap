@@ -8,7 +8,7 @@ import react.RState
 import react.RStatics
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.DOMWrapComponent
+import react.bootstrap.lib.component.DomComponent
 import react.bootstrap.lib.kotlinxhtml.ariaDisabled
 import react.bootstrap.lib.react.identifiable.IdentifiableProps
 import react.bootstrap.lib.react.rprops.WithActive
@@ -17,7 +17,7 @@ import react.dom.RDOMBuilder
 import react.dom.a
 import react.setState
 
-class NavLink(props: Props) : DOMWrapComponent<A, NavLink.Props, NavLink.State>(props) {
+class NavLink(props: Props) : DomComponent<A, NavLink.Props, NavLink.State>(props) {
     override fun State.init(props: Props) {
         linkProps = buildLinkProps(props.domHandler)
 
@@ -75,7 +75,7 @@ class NavLink(props: Props) : DOMWrapComponent<A, NavLink.Props, NavLink.State>(
         children()
     }
 
-    interface Props : WithActive, WithDisabled, IdentifiableProps<NavLink>, DOMWrapComponent.Props<A> {
+    interface Props : WithActive, WithDisabled, IdentifiableProps<NavLink>, DomComponent.Props<A> {
         var activeLinkPredicate: (A.() -> Boolean)?
     }
 

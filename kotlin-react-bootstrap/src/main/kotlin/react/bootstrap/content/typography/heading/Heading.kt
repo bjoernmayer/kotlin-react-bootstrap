@@ -9,12 +9,12 @@ import kotlinx.html.H5
 import kotlinx.html.H6
 import react.RState
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.DOMWrapComponent
+import react.bootstrap.lib.component.DomComponent
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.requireProperties
 
 open class Heading<TT : CommonAttributeGroupFacade>(props: Props<TT>) :
-    DOMWrapComponent<TT, Heading.Props<TT>, RState>(props) {
+    DomComponent<TT, Heading.Props<TT>, RState>(props) {
 
     init {
         props.requireProperties(props::size)
@@ -30,7 +30,7 @@ open class Heading<TT : CommonAttributeGroupFacade>(props: Props<TT>) :
         else -> setOf(props.size.className)
     }
 
-    interface Props<TT : CommonAttributeGroupFacade> : WithGlobalAttributes, DOMWrapComponent.Props<TT> {
+    interface Props<TT : CommonAttributeGroupFacade> : WithGlobalAttributes, DomComponent.Props<TT> {
         var size: Sizes
     }
 

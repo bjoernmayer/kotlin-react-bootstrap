@@ -4,7 +4,7 @@ import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.DOMWrapComponent.Companion.domWrapComponent
+import react.bootstrap.lib.component.DomComponent.Companion.domComponent
 
 /**
  * Creates a generic [Muted] element.
@@ -15,4 +15,4 @@ import react.bootstrap.lib.component.DOMWrapComponent.Companion.domWrapComponent
 inline fun <reified TT : CommonAttributeGroupFacade> RBuilder.muted(
     classes: String? = null,
     noinline block: RDOMHandler<TT>
-): ReactElement = domWrapComponent<TT, Muted.Props<TT>>(classes, Muted::class, domHandler = block)
+): ReactElement = domComponent<TT, Muted.Props<TT>>(classes, Muted::class, domHandler = block)
