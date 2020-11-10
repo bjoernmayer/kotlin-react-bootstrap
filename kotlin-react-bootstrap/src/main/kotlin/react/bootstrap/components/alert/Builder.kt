@@ -26,6 +26,7 @@ import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.Builder
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
+import react.bootstrap.lib.component.DomComponent.Companion.domComponent
 
 class AlertBuilder(override val builder: RBuilder) : Builder {
     /**
@@ -252,17 +253,21 @@ fun RElementBuilder<Alert.Props>.link(
     target: String? = null,
     classes: String? = null,
     block: RDOMHandler<A>
-): ReactElement = abstractDomComponent<A, Alert.Link.Props>(classes, Alert.Link::class) {
-    attrs {
-        href?.let {
-            this.href = it
+): ReactElement {
+    val domHandler: RDOMHandler<A> = {
+        attrs {
+            href?.let {
+                this.href = it
+            }
+
+            target?.let {
+                this.target = it
+            }
         }
-        target?.let {
-            this.target = it
-        }
+        block()
     }
 
-    block()
+    return domComponent(classes, Alert.Link::class, domHandler) { }
 }
 
 /**
