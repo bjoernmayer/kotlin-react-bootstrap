@@ -161,7 +161,7 @@ add a `${ClassNames.TEXT_TRUNCATE.nestedName}` class to truncate the text with a
             """
         }
         liveExample {
-            row(rendererTag = DL::class) {
+            row<DL> {
                 col<DT>(sm = ColAttributes.Sizes.SZ_3) { +"Description lists" }
                 col<DD>(sm = ColAttributes.Sizes.SZ_9) {
                     +"A description list is perfect for defining terms."
@@ -189,7 +189,7 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
 
                 col<DT>(sm = ColAttributes.Sizes.SZ_3) { +"Nesting" }
                 col<DD>(sm = ColAttributes.Sizes.SZ_9) {
-                    row(rendererTag = DL::class) {
+                    row<DL> {
                         col<DT>(sm = ColAttributes.Sizes.SZ_4) { +"Nested definition list" }
                         col<DD>(sm = ColAttributes.Sizes.SZ_8) {
                             +"Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc."

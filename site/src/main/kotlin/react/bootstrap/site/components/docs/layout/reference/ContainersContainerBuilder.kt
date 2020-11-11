@@ -11,8 +11,11 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunSpec
+import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.CROSSINLINE
 import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.NOINLINE
 import react.bootstrap.site.lib.codepoet.Generic
+import react.bootstrap.site.lib.codepoet.LambdaValue
+import react.bootstrap.site.lib.codepoet.LambdaValue.Style.INLINE
 
 internal class ContainersContainerBuilder : SectionComponent() {
     override val title: String = "Containers & ContainerBuilder"
@@ -31,6 +34,11 @@ Creates a `${Container::class.nestedName}` element.
                 .nestedBy<RBuilder>()
                 .addParameter<Container.Viscosities>("viscosity", null)
                 .addParameter<String?>("classes", null)
+                .addParameter(
+                    "handler",
+                    Generic("RHandler", Generic(Container.Props::class, DIV::class).build()),
+                    default = LambdaValue("", INLINE).build()
+                )
                 .addParameter("block", Generic("RDOMHandler", DIV::class))
                 .returns("ReactElement")
                 .build()
@@ -48,6 +56,12 @@ Creates a generic `${Container::class.nestedName}` element.
                 .addTypeParameter("T", HtmlBlockTag::class, true)
                 .addParameter<Container.Viscosities>("viscosity", null)
                 .addParameter<String?>("classes", null)
+                .addParameter(
+                    "handler",
+                    Generic("RHandler", Generic(Container.Props::class, "T").build()),
+                    default = LambdaValue("", INLINE).build(),
+                    modifier = CROSSINLINE
+                )
                 .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
                 .returns("ReactElement")
                 .build()
@@ -69,10 +83,37 @@ Creates a `${Container::class.nestedName}` element with `viscosity` set to `${vi
             """
             }
             codeExample {
-                +FunSpec.builder(function, false)
+                +FunSpec.builder(function)
                     .nestedBy<ContainerBuilder>()
                     .addParameter<String?>("classes", null)
-                    .addParameter("block", Generic("RHandler", Container.Props::class))
+                    .addParameter(
+                        "handler",
+                        Generic("RHandler", Generic(Container.Props::class, DIV::class).build()),
+                        default = LambdaValue("", INLINE).build()
+                    )
+                    .addParameter("block", Generic("RDOMHandler", DIV::class))
+                    .returns("ReactElement")
+                    .build()
+            }
+
+            Markdown {
+                //language=Markdown
+                +"""
+Creates a generic `${Container::class.nestedName}` element with `viscosity` set to `${viscosity.nestedName}`.
+            """
+            }
+            codeExample {
+                +FunSpec.builder(function, inline = true)
+                    .nestedBy<ContainerBuilder>()
+                    .addTypeParameter("T", HtmlBlockTag::class, true)
+                    .addParameter<String?>("classes", null)
+                    .addParameter(
+                        "handler",
+                        Generic("RHandler", Generic(Container.Props::class, "T").build()),
+                        default = LambdaValue("", INLINE).build(),
+                        modifier = CROSSINLINE
+                    )
+                    .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
                     .returns("ReactElement")
                     .build()
             }

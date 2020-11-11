@@ -17,6 +17,11 @@ internal data class Generic(
         type: KClass<*>
     ) : this(className, type.nestedName)
 
+    constructor(
+        className: KClass<*>,
+        type: String
+    ) : this(className.nestedName, type)
+
     private var variance: Variance? = null
 
     fun setVariance(variance: Variance): Generic {

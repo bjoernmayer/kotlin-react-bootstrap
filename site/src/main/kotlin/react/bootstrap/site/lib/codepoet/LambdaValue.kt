@@ -5,7 +5,12 @@ internal data class LambdaValue(val content: String, val style: Style = Style.BL
         if (style == Style.INLINE) {
             append("{ ")
             append(content)
-            append(" }")
+
+            if (content.isNotEmpty()) {
+                append(" ")
+            }
+
+            append("}")
         }
         if (style == Style.BLOCK) {
             appendLine("{")
