@@ -4,6 +4,7 @@ package react.bootstrap.site.components.docs.components.alerts
 
 import kotlinx.html.A
 import kotlinx.html.CommonAttributeGroupFacade
+import kotlinx.html.DIV
 import kotlinx.html.Tag
 import react.RBuilder
 import react.RElementBuilder
@@ -19,6 +20,8 @@ import react.bootstrap.components.alert.h5
 import react.bootstrap.components.alert.h6
 import react.bootstrap.components.alert.link
 import react.bootstrap.content.typography.Headings
+import react.bootstrap.content.typography.heading.Heading
+import react.bootstrap.layout.grid.col.Col
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
@@ -28,6 +31,7 @@ import react.bootstrap.site.lib.codepoet.FunSpec
 import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.CROSSINLINE
 import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.NOINLINE
 import react.bootstrap.site.lib.codepoet.Generic
+import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.dom.p
 import kotlin.reflect.KFunction
 
@@ -83,6 +87,11 @@ Creates a `${Alert.Link::class.nestedName}` element.
                 .addParameter<String?>("href", null)
                 .addParameter<String?>("target", null)
                 .addParameter<String?>("classes", null)
+                .addParameter(
+                    "handler",
+                    Generic("RHandler", Alert.Link.Props::class),
+                    default = LambdaValue("", LambdaValue.Style.INLINE).build()
+                )
                 .addParameter("block", Generic("RDOMHandler", A::class))
                 .returns("ReactElement")
                 .build()
@@ -91,7 +100,7 @@ Creates a `${Alert.Link::class.nestedName}` element.
         Markdown {
             //language=Markdown
             +"""
-Adds `${ClassNames.ALERT_HEADING.nestedName}` to the outer most `ReactElement` resulting from `block`.
+Creates a generic `${Alert.Heading::class.nestedName}` element.
             """
         }
         codeExample {
@@ -99,11 +108,19 @@ Adds `${ClassNames.ALERT_HEADING.nestedName}` to the outer most `ReactElement` r
                 object : KFunction<ReactElement> {
                     override val name: String = "heading"
                 },
-                false
+                inline = true
             )
                 .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
-                .addParameter<Headings>("headings")
-                .addParameter("block", "ElementProvider")
+                .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
+                .addParameter<Heading.Sizes>("size")
+                .addParameter<String?>("classes", null)
+                .addParameter(
+                    "handler",
+                    Generic("RHandler", Generic(Heading.Props::class, "T").build()),
+                    default = LambdaValue("", LambdaValue.Style.INLINE).build(),
+                    modifier = CROSSINLINE
+                )
+                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
                 .returns("ReactElement")
                 .build()
         }
@@ -123,9 +140,14 @@ Creates a `${Alert.Heading::class.nestedName}` element.
             """
             }
             codeExample {
-                +FunSpec.builder(function, false)
+                +FunSpec.builder(function)
                     .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
                     .addParameter<String?>("classes", null)
+                    .addParameter(
+                        "handler",
+                        Generic("RHandler", Generic(Heading.Props::class, function.name.toUpperCase()).build()),
+                        default = LambdaValue("", LambdaValue.Style.INLINE).build()
+                    )
                     .addParameter("block", Generic("RDOMHandler", function.name.toUpperCase()))
                     .returns("ReactElement")
                     .build()
@@ -141,6 +163,12 @@ Creates a `${Alert.Heading::class.nestedName}` and uses `T` to render the elemen
                     .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
                     .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
                     .addParameter<String?>("classes", null)
+                    .addParameter(
+                        "handler",
+                        Generic("RHandler", Generic(Heading.Props::class, "T").build()),
+                        default = LambdaValue("", LambdaValue.Style.INLINE).build(),
+                        modifier = CROSSINLINE
+                    )
                     .addParameter("block", Generic("RDOMHandler", function.name.toUpperCase()), modifier = NOINLINE)
                     .returns("ReactElement")
                     .build()

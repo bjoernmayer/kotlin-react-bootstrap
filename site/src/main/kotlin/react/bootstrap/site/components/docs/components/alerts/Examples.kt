@@ -152,7 +152,7 @@ Aww yeah, you successfully read this important alert message. This example text 
             +FunCall.builder(Alerts::success)
                 .nestedBy(RBuilder::Alerts)
                 .setLambdaArgument(
-                    FunCall.builder(RElementBuilder<Alert.Props>::h4, FunCall.Style.NEW_INLINE)
+                    FunCall.builder("h4", FunCall.Style.NEW_INLINE)
                         .setLambdaArgument(plusString("Well done!"))
                         .build(),
                     FunCall.builder(RBuilder::p)

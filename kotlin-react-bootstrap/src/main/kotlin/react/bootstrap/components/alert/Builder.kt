@@ -252,9 +252,11 @@ fun RElementBuilder<Alert.Props>.link(
     href: String? = null,
     target: String? = null,
     classes: String? = null,
+    handler: RHandler<Alert.Link.Props> = { },
     block: RDOMHandler<A>
 ): ReactElement = domComponent<A, Alert.Link.Props>(Alert.Link::class)
     .classes(classes)
+    .handler(handler)
     .domHandler {
         attrs {
             href?.let {
@@ -278,6 +280,7 @@ fun RElementBuilder<Alert.Props>.link(
 inline fun <reified T : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.heading(
     size: Heading.Sizes,
     classes: String?,
+    crossinline handler: RHandler<Heading.Props<T>> = { },
     noinline block: RDOMHandler<T>
 ): ReactElement = abstractDomComponent<T, Heading.Props<T>>(Alert.Heading::class)
     .classes(classes)
@@ -285,6 +288,7 @@ inline fun <reified T : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>
         attrs {
             this.size = size
         }
+        handler()
     }
     .domHandler(block)
     .build()
@@ -292,8 +296,11 @@ inline fun <reified T : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>
 /**
  * Creates a [Alert.Heading] element.
  */
-fun RElementBuilder<Alert.Props>.h1(classes: String? = null, block: RDOMHandler<H1>): ReactElement =
-    heading(Heading.Sizes.H1, classes, block)
+fun RElementBuilder<Alert.Props>.h1(
+    classes: String? = null,
+    handler: RHandler<Heading.Props<H1>> = { },
+    block: RDOMHandler<H1>
+): ReactElement = heading(Heading.Sizes.H1, classes, handler, block)
 
 /**
  * Creates a [Alert.Heading] element with [Heading.Sizes.H1] and uses T to render the element.
@@ -302,14 +309,18 @@ fun RElementBuilder<Alert.Props>.h1(classes: String? = null, block: RDOMHandler<
  */
 inline fun <reified T : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.h1(
     classes: String? = null,
+    crossinline handler: RHandler<Heading.Props<T>> = { },
     noinline block: RDOMHandler<T>
-): ReactElement = heading(Heading.Sizes.H1, classes, block)
+): ReactElement = heading(Heading.Sizes.H1, classes, handler, block)
 
 /**
  * Creates a [Alert.Heading] element.
  */
-fun RElementBuilder<Alert.Props>.h2(classes: String? = null, block: RDOMHandler<H2>): ReactElement =
-    heading(Heading.Sizes.H2, classes, block)
+fun RElementBuilder<Alert.Props>.h2(
+    classes: String? = null,
+    handler: RHandler<Heading.Props<H2>> = { },
+    block: RDOMHandler<H2>
+): ReactElement = heading(Heading.Sizes.H2, classes, handler, block)
 
 /**
  * Creates a [Alert.Heading] element with [Heading.Sizes.H2] and uses T to render the element.
@@ -318,14 +329,18 @@ fun RElementBuilder<Alert.Props>.h2(classes: String? = null, block: RDOMHandler<
  */
 inline fun <reified T : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.h2(
     classes: String? = null,
+    crossinline handler: RHandler<Heading.Props<T>> = { },
     noinline block: RDOMHandler<T>
-): ReactElement = heading(Heading.Sizes.H2, classes, block)
+): ReactElement = heading(Heading.Sizes.H2, classes, handler, block)
 
 /**
  * Creates a [Alert.Heading] element.
  */
-fun RElementBuilder<Alert.Props>.h3(classes: String? = null, block: RDOMHandler<H3>): ReactElement =
-    heading(Heading.Sizes.H3, classes, block)
+fun RElementBuilder<Alert.Props>.h3(
+    classes: String? = null,
+    handler: RHandler<Heading.Props<H3>> = { },
+    block: RDOMHandler<H3>
+): ReactElement = heading(Heading.Sizes.H3, classes, handler, block)
 
 /**
  * Creates a [Alert.Heading] element with [Heading.Sizes.H3] and uses T to render the element.
@@ -334,14 +349,18 @@ fun RElementBuilder<Alert.Props>.h3(classes: String? = null, block: RDOMHandler<
  */
 inline fun <reified T : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.h3(
     classes: String? = null,
+    crossinline handler: RHandler<Heading.Props<T>> = { },
     noinline block: RDOMHandler<T>
-): ReactElement = heading(Heading.Sizes.H3, classes, block)
+): ReactElement = heading(Heading.Sizes.H3, classes, handler, block)
 
 /**
  * Creates a [Alert.Heading] element.
  */
-fun RElementBuilder<Alert.Props>.h4(classes: String? = null, block: RDOMHandler<H4>): ReactElement =
-    heading(Heading.Sizes.H4, classes, block)
+fun RElementBuilder<Alert.Props>.h4(
+    classes: String? = null,
+    handler: RHandler<Heading.Props<H4>> = { },
+    block: RDOMHandler<H4>
+): ReactElement = heading(Heading.Sizes.H4, classes, handler, block)
 
 /**
  * Creates a [Alert.Heading] element with [Heading.Sizes.H4] and uses T to render the element.
@@ -350,14 +369,18 @@ fun RElementBuilder<Alert.Props>.h4(classes: String? = null, block: RDOMHandler<
  */
 inline fun <reified T : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.h4(
     classes: String? = null,
+    crossinline handler: RHandler<Heading.Props<T>> = { },
     noinline block: RDOMHandler<T>
-): ReactElement = heading(Heading.Sizes.H4, classes, block)
+): ReactElement = heading(Heading.Sizes.H4, classes, handler, block)
 
 /**
  * Creates a [Alert.Heading] element.
  */
-fun RElementBuilder<Alert.Props>.h5(classes: String? = null, block: RDOMHandler<H5>): ReactElement =
-    heading(Heading.Sizes.H5, classes, block)
+fun RElementBuilder<Alert.Props>.h5(
+    classes: String? = null,
+    handler: RHandler<Heading.Props<H5>> = { },
+    block: RDOMHandler<H5>
+): ReactElement = heading(Heading.Sizes.H5, classes, handler, block)
 
 /**
  * Creates a [Alert.Heading] element with [Heading.Sizes.H5] and uses T to render the element.
@@ -366,15 +389,18 @@ fun RElementBuilder<Alert.Props>.h5(classes: String? = null, block: RDOMHandler<
  */
 inline fun <reified T : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.h5(
     classes: String? = null,
+    crossinline handler: RHandler<Heading.Props<T>> = { },
     noinline block: RDOMHandler<T>
-): ReactElement =
-    heading(Heading.Sizes.H5, classes, block)
+): ReactElement = heading(Heading.Sizes.H5, classes, handler, block)
 
 /**
  * Creates a [Alert.Heading] element.
  */
-fun RElementBuilder<Alert.Props>.h6(classes: String? = null, block: RDOMHandler<H6>): ReactElement =
-    heading(Heading.Sizes.H6, classes, block)
+fun RElementBuilder<Alert.Props>.h6(
+    classes: String? = null,
+    handler: RHandler<Heading.Props<H6>> = { },
+    block: RDOMHandler<H6>
+): ReactElement = heading(Heading.Sizes.H6, classes, handler, block)
 
 /**
  * Creates a [Alert.Heading] element with [Heading.Sizes.H6] and uses T to render the element.
@@ -383,5 +409,6 @@ fun RElementBuilder<Alert.Props>.h6(classes: String? = null, block: RDOMHandler<
  */
 inline fun <reified T : CommonAttributeGroupFacade> RElementBuilder<Alert.Props>.h6(
     classes: String? = null,
+    crossinline handler: RHandler<Heading.Props<T>> = { },
     noinline block: RDOMHandler<T>
-): ReactElement = heading(Heading.Sizes.H6, classes, block)
+): ReactElement = heading(Heading.Sizes.H6, classes, handler, block)
