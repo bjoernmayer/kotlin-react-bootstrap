@@ -6,7 +6,10 @@ import react.ReactElement
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
 
-inline fun <reified TT : HtmlInlineTag> RElementBuilder<Navbar.Props>.brand(
+inline fun <reified T : HtmlInlineTag> RElementBuilder<Navbar.Props>.brand(
     classes: String? = null,
-    noinline block: RDOMHandler<TT>
-): ReactElement = abstractDomComponent<TT, Navbar.Brand.Props<TT>>(classes, Navbar.Brand::class, domHandler = block)
+    noinline block: RDOMHandler<T>
+): ReactElement = abstractDomComponent<T, Navbar.Brand.Props<T>>(Navbar.Brand::class)
+    .classes(classes)
+    .domHandler(block)
+    .build()

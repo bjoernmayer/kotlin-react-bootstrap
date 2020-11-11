@@ -8,8 +8,8 @@ import kotlinx.html.InputFormMethod
 import react.RBuilder
 import react.RHandler
 import react.ReactElement
-import react.bootstrap.lib.Builder
 import react.bootstrap.helpers.splitClassesToSet
+import react.bootstrap.lib.Builder
 
 private fun RBuilder.button(
     variant: Button.Variants,

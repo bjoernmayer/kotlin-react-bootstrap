@@ -3,8 +3,8 @@ package react.bootstrap.layout.grid.container
 import react.RBuilder
 import react.RHandler
 import react.ReactElement
-import react.bootstrap.lib.Builder
 import react.bootstrap.helpers.splitClassesToSet
+import react.bootstrap.lib.Builder
 
 fun RBuilder.container(
     viscosity: Container.Viscosities? = null,

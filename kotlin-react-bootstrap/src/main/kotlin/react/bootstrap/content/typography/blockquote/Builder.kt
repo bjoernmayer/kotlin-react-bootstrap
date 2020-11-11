@@ -5,9 +5,9 @@ import react.RBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.helpers.appendClass
+import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.helpers.splitClassesToSet
 import react.dom.RDOMBuilder
 import react.dom.blockQuote
 

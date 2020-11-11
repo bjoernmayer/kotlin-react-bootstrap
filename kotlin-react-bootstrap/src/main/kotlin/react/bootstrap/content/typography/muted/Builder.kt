@@ -9,10 +9,13 @@ import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomC
 /**
  * Creates a generic [Muted] element.
  *
- * @param TT Tag Type to be used to render this [Muted].
+ * @param T Tag Type to be used to render this [Muted].
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified TT : CommonAttributeGroupFacade> RBuilder.muted(
+inline fun <reified T : CommonAttributeGroupFacade> RBuilder.muted(
     classes: String? = null,
-    noinline block: RDOMHandler<TT>
-): ReactElement = abstractDomComponent<TT, Muted.Props<TT>>(classes, Muted::class, domHandler = block)
+    noinline block: RDOMHandler<T>
+): ReactElement = abstractDomComponent<T, Muted.Props<T>>(Muted::class)
+    .classes(classes)
+    .domHandler(block)
+    .build()

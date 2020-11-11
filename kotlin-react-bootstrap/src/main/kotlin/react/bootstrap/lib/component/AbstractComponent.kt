@@ -11,22 +11,22 @@ import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
 /**
- * @param TT Tag Type: The HTML tag type used to render this component
+ * @param T Tag Type: The HTML tag type used to render this component
  * @param ACP Abstract Component Props: The [RProps] of the [AbstractComponent] implementation
  * @param ACS Abstract Componnt State: The [RState] of  the [AbstractComponent] implementation
  */
-abstract class AbstractComponent<TT : Tag, ACP : WithGlobalAttributes, ACS : RState> : RComponent<ACP, ACS> {
+abstract class AbstractComponent<T : Tag, ACP : WithGlobalAttributes, ACS : RState> : RComponent<ACP, ACS> {
     constructor() : super()
     constructor(props: ACP) : super(props)
 
-    abstract val rendererTag: KClass<out TT>
+    abstract val rendererTag: KClass<out T>
 
-    protected abstract fun RDOMBuilder<TT>.build()
+    protected abstract fun RDOMBuilder<T>.build()
 
     /**
      * This transfers the children of the [AbstractComponent] into the actual ReactElement
      */
-    protected open fun RDOMBuilder<TT>.transferChildren() {
+    protected open fun RDOMBuilder<T>.transferChildren() {
         children()
     }
 
@@ -38,7 +38,7 @@ abstract class AbstractComponent<TT : Tag, ACP : WithGlobalAttributes, ACS : RSt
             val constructor = rendererTag.js
             val attributes = attributesMapOf("class", null)
 
-            js("new constructor(attributes, tagConsumer)") as TT
+            js("new constructor(attributes, tagConsumer)") as T
         }
 
         child(

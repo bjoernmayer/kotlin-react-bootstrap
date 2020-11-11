@@ -5,8 +5,8 @@ import kotlinx.html.FIGURE
 import kotlinx.html.IMG
 import react.RBuilder
 import react.ReactElement
-import react.bootstrap.helpers.appendClass
 import react.bootstrap.content.img
+import react.bootstrap.helpers.appendClass
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.dom.RDOMBuilder

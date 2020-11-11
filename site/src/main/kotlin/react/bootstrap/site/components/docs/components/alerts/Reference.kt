@@ -133,13 +133,13 @@ Creates a `${Alert.Heading::class.nestedName}` element.
             Markdown {
                 //language=Markdown
                 +"""
-Creates a `${Alert.Heading::class.nestedName}` and uses `TT` to render the element.
+Creates a `${Alert.Heading::class.nestedName}` and uses `T` to render the element.
             """
             }
             codeExample {
                 +FunSpec.builder(function, inline = true)
                     .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
-                    .addTypeParameter("TT", CommonAttributeGroupFacade::class, true)
+                    .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
                     .addParameter<String?>("classes", null)
                     .addParameter("block", Generic("RDOMHandler", function.name.toUpperCase()), modifier = NOINLINE)
                     .returns("ReactElement")
@@ -168,7 +168,7 @@ Creates a `${Alert.Heading::class.nestedName}` and uses `TT` to render the eleme
                 inline = true
             )
                 .nestedByGeneric<RElementBuilder<*>, Alert.Dismissible.Props>()
-                .addTypeParameter("TT", Tag::class, true)
+                .addTypeParameter("T", Tag::class, true)
                 .addParameter(
                     "block",
                     Generic("RHandler", Alert.Dismissible.ClosingElement.Props::class),

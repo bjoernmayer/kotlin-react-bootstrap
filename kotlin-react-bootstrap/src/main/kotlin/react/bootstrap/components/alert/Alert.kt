@@ -13,10 +13,10 @@ import react.RStatics
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.AbstractDomComponent
 import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.component.CustomisableComponent
-import react.bootstrap.lib.component.AbstractDomComponent
 import react.bootstrap.lib.component.DomComponent
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
@@ -252,7 +252,7 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
         interface Props : WithGlobalAttributes, AbstractDomComponent.Props<A>
     }
 
-    class Heading<TT : CommonAttributeGroupFacade>(props: Props<TT>) : BaseHeading<TT>(props) {
+    class Heading<T : CommonAttributeGroupFacade>(props: Props<T>) : BaseHeading<T, BaseHeading.Props<T>>(props) {
         override fun buildClasses(): Set<ClassNames> = super.buildClasses().run {
             toMutableSet().apply {
                 add(ClassNames.ALERT_HEADING)

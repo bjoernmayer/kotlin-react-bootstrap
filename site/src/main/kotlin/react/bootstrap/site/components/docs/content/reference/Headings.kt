@@ -27,17 +27,17 @@ internal class Headings : SectionComponent() {
                 Markdown {
                     //language=Markdown
                     +"""
-This creates a `${function.name}` using the given type **`TT`**.
+This creates a `${function.name}` using the given type **`T`**.
                     """
                 }
                 codeExample {
                     +FunSpec.builder(function, inline = true)
-                        .addTypeParameter("TT", CommonAttributeGroupFacade::class, true)
+                        .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
                         .nestedBy<RBuilder>()
                         .addParameter<String?>("classes", null)
                         .addParameter(
                             "block",
-                            Generic("RDOMHandler", "TT"),
+                            Generic("RDOMHandler", "T"),
                             modifier = FunSpec.Parameter.Modifier.NOINLINE
                         )
                         .returns("ReactElement")

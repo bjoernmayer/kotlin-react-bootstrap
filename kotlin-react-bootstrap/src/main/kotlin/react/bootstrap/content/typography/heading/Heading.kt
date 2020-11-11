@@ -13,8 +13,8 @@ import react.bootstrap.lib.component.AbstractDomComponent
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.requireProperties
 
-open class Heading<TT : CommonAttributeGroupFacade>(props: Props<TT>) :
-    AbstractDomComponent<TT, Heading.Props<TT>, RState>(props) {
+open class Heading<T : CommonAttributeGroupFacade, P : Heading.Props<T>>(props: P) :
+    AbstractDomComponent<T, P, RState>(props) {
 
     init {
         props.requireProperties(props::size)
@@ -30,7 +30,7 @@ open class Heading<TT : CommonAttributeGroupFacade>(props: Props<TT>) :
         else -> setOf(props.size.className)
     }
 
-    interface Props<TT : CommonAttributeGroupFacade> : WithGlobalAttributes, AbstractDomComponent.Props<TT> {
+    interface Props<T : CommonAttributeGroupFacade> : WithGlobalAttributes, AbstractDomComponent.Props<T> {
         var size: Sizes
     }
 

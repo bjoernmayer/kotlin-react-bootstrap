@@ -48,7 +48,7 @@ Creates a `${Display::class.simpleName!!}` element with variant set to `${varian
         Markdown {
             //language=Markdown
             +"""
-Creates a `${Display::class.simpleName!!}` element using the given type `TT`.
+Creates a `${Display::class.simpleName!!}` element using the given type `T`.
             """
         }
         codeExample {
@@ -58,7 +58,7 @@ Creates a `${Display::class.simpleName!!}` element using the given type `TT`.
                 },
                 inline = true
             )
-                .addTypeParameter("TT", HtmlInlineTag::class, true)
+                .addTypeParameter("T", HtmlInlineTag::class, true)
                 .nestedBy<RBuilder>()
                 .addParameter<Display.Variants>("variant")
                 .addParameter<String?>("classes", null)

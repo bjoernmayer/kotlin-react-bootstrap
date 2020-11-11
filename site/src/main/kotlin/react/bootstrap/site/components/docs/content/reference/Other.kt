@@ -52,9 +52,9 @@ Creates a generic `${Muted::class.simpleName!!}` element.
                 inline = true
             )
                 .nestedBy<RBuilder>()
-                .addTypeParameter("TT", CommonAttributeGroupFacade::class, true)
+                .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", "TT"), modifier = NOINLINE)
+                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
                 .returns("ReactElement")
                 .build()
         }
@@ -74,9 +74,9 @@ Creates a generic `${Mark::class.simpleName!!}` element.
                 inline = true
             )
                 .nestedBy<RBuilder>()
-                .addTypeParameter("TT", CommonAttributeGroupFacade::class, true)
+                .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", "TT"), modifier = NOINLINE)
+                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
                 .returns("ReactElement")
                 .build()
         }
@@ -96,9 +96,9 @@ Creates a generic `${Small::class.simpleName!!}` element.
                 inline = true
             )
                 .nestedBy<RBuilder>()
-                .addTypeParameter("TT", CommonAttributeGroupFacade::class, true)
+                .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", "TT"), modifier = NOINLINE)
+                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
                 .returns("ReactElement")
                 .build()
         }

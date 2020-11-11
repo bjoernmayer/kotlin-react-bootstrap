@@ -6,8 +6,8 @@ import react.RBuilder
 import react.RElementBuilder
 import react.RHandler
 import react.ReactElement
-import react.bootstrap.lib.Builder
 import react.bootstrap.helpers.splitClassesToSet
+import react.bootstrap.lib.Builder
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.component.DomComponent.Companion.domComponent
 import kotlin.reflect.KClass
@@ -170,8 +170,9 @@ private fun RBuilder.buildNavLink(
     active: Boolean = false,
     disabled: Boolean = false,
     block: RDOMHandler<A>
-): ReactElement {
-    val domHandler: RDOMHandler<A> = {
+): ReactElement = domComponent<A, NavLink.Props>(NavLink::class)
+    .classes(classes)
+    .domHandler {
         attrs {
             href?.let {
                 this.href = it
@@ -183,14 +184,13 @@ private fun RBuilder.buildNavLink(
         }
         block()
     }
-
-    return domComponent(classes, NavLink::class, domHandler) {
+    .handler {
         attrs {
             this.active = active
             this.disabled = disabled
         }
     }
-}
+    .build()
 
 fun RElementBuilder<NavItems.Li.Props>.navLink(
     href: String? = null,

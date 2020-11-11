@@ -10,10 +10,10 @@ import react.bootstrap.helpers.splitClassesToSet
 /**
  * Creates a generic [Display].
  *
- * @param TT Tag Type to be used to render this [Display].
+ * @param T Tag Type to be used to render this [Display].
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified TT : HtmlInlineTag> RBuilder.display(
+inline fun <reified T : HtmlInlineTag> RBuilder.display(
     variant: Display.Variants,
     classes: String? = null,
     crossinline block: RHandler<Display.Props>
@@ -21,7 +21,7 @@ inline fun <reified TT : HtmlInlineTag> RBuilder.display(
     attrs {
         this.variant = variant
         this.classes = classes.splitClassesToSet()
-        this.rendererTag = TT::class
+        this.rendererTag = T::class
     }
 
     block()

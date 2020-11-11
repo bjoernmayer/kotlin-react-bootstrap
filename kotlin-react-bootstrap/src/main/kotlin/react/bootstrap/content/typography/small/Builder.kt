@@ -9,10 +9,13 @@ import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomC
 /**
  * Creates a generic [Small] element.
  *
- * @param TT Tag Type to be used to render this [Small].
+ * @param T Tag Type to be used to render this [Small].
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified TT : CommonAttributeGroupFacade> RBuilder.small(
+inline fun <reified T : CommonAttributeGroupFacade> RBuilder.small(
     classes: String? = null,
-    noinline block: RDOMHandler<TT>
-): ReactElement = abstractDomComponent<TT, Small.Props<TT>>(classes, Small::class, domHandler = block)
+    noinline block: RDOMHandler<T>
+): ReactElement = abstractDomComponent<T, Small.Props<T>>(Small::class)
+    .classes(classes)
+    .domHandler(block)
+    .build()

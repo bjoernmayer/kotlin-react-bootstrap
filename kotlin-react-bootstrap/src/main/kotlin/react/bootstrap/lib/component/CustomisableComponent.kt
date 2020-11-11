@@ -9,21 +9,21 @@ import kotlinx.html.CommonAttributeGroupFacade as CommonAttributes
 /**
  * This class bundles logic to allow components being rendered as different HTML elements.
  *
- * @param TT Tag Type: The HTML tag type used to render this component
- * @param CCP Abstract Component Props: The [RProps] of the [AbstractComponent] implementation
- * @param CCS Abstract Componnt State: The [RState] of  the [AbstractComponent] implementation
+ * @param T Tag Type: The HTML tag type used to render this component
+ * @param P Abstract Component Props: The [RProps] of the [AbstractComponent] implementation
+ * @param S Abstract Componnt State: The [RState] of  the [AbstractComponent] implementation
  */
-abstract class CustomisableComponent<TT : CommonAttributes, CCP : CustomisableComponent.Props<out TT>, CCS : RState> :
-    AbstractComponent<TT, CCP, CCS> {
+abstract class CustomisableComponent<T : CommonAttributes, P : CustomisableComponent.Props<out T>, S : RState> :
+    AbstractComponent<T, P, S> {
     constructor() : super()
-    constructor(props: CCP) : super(props)
+    constructor(props: P) : super(props)
 
-    override val rendererTag: KClass<out TT>
+    override val rendererTag: KClass<out T>
         get() = props.rendererTag ?: defaultRendererTag
 
-    abstract val defaultRendererTag: KClass<out TT>
+    abstract val defaultRendererTag: KClass<out T>
 
-    interface Props<TT : CommonAttributes> : WithGlobalAttributes {
-        var rendererTag: KClass<out TT>?
+    interface Props<T : CommonAttributes> : WithGlobalAttributes {
+        var rendererTag: KClass<out T>?
     }
 }

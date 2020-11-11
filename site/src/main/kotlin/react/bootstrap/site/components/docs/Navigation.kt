@@ -5,8 +5,8 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
-import react.bootstrap.lib.kotlinxhtml.addClass
 import react.bootstrap.components.nav.Navs
+import react.bootstrap.lib.kotlinxhtml.addClass
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.site.components.PATH_DOCS
 import react.bootstrap.site.pathMatches

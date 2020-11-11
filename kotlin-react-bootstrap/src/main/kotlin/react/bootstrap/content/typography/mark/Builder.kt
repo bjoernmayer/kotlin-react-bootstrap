@@ -9,10 +9,13 @@ import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomC
 /**
  * Creates a generic [Mark] element.
  *
- * @param TT Tag Type to be used to render this [Mark].
+ * @param T Tag Type to be used to render this [Mark].
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified TT : CommonAttributeGroupFacade> RBuilder.mark(
+inline fun <reified T : CommonAttributeGroupFacade> RBuilder.mark(
     classes: String? = null,
-    noinline block: RDOMHandler<TT>
-): ReactElement = abstractDomComponent<TT, Mark.Props<TT>>(classes, Mark::class, domHandler = block)
+    noinline block: RDOMHandler<T>
+): ReactElement = abstractDomComponent<T, Mark.Props<T>>(Mark::class)
+    .classes(classes)
+    .domHandler(block)
+    .build()

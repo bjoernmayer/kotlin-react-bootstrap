@@ -7,8 +7,8 @@ import react.RHandler
 import react.RState
 import react.ReactElement
 import react.bootstrap.helpers.addOrInit
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.helpers.splitClassesToSet
+import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.dom.div
 
 internal fun RBuilder.liveExample(classes: String? = null, block: RHandler<LiveExample.Props>): ReactElement =

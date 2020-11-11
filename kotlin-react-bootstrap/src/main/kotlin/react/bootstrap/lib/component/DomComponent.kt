@@ -62,23 +62,48 @@ abstract class DomComponent<T : CommonAttributes, P : DomComponent.Props<T>, S :
         var handler: RDOMHandler<T>
     }
 
-    companion object {
-        inline fun <reified T : CommonAttributes, reified P : Props<T>> RBuilder.domComponent(
-            classes: String? = null,
-            klazz: KClass<out DomComponent<*, P, *>>,
-            noinline domHandler: RDOMHandler<T>,
-            crossinline handler: RHandler<P> = { }
-        ): ReactElement {
-            val componentKlazz: KClass<out DomComponent<*, P, *>> = klazz
+    open class Builder<T : CommonAttributes, P : Props<T>> constructor(
+        protected val builder: RBuilder,
+        protected val tag: KClass<T>,
+        protected val component: KClass<out DomComponent<T, P, *>>
+    ) {
+        protected var classes: String? = null
+        protected var handler: RHandler<P> = { }
+        protected var domHandler: RDOMHandler<T> = { }
 
-            return child(componentKlazz) {
+        fun classes(classes: String?): Builder<T, P> {
+            this.classes = classes
+
+            return this
+        }
+
+        fun handler(handler: RHandler<P>): Builder<T, P> {
+            this.handler = handler
+
+            return this
+        }
+
+        fun domHandler(domHandler: RDOMHandler<T>): Builder<T, P> {
+            this.domHandler = domHandler
+
+            return this
+        }
+
+        open fun build(): ReactElement =
+            builder.child(component) {
                 attrs {
-                    this.classes = classes.splitClassesToSet()
-                    this.handler = domHandler
+                    classes = this@Builder.classes.splitClassesToSet()
+                    handler = this@Builder.domHandler
                 }
 
-                handler()
+                this@Builder.handler.invoke(this)
             }
-        }
+    }
+
+    companion object {
+        @Suppress("UNCHECKED_CAST")
+        inline fun <reified T : CommonAttributes, P : Props<T>> RBuilder.domComponent(
+            componentKlazz: KClass<out DomComponent<*, *, *>>
+        ) = Builder(this, T::class, componentKlazz as KClass<DomComponent<T, P, *>>)
     }
 }

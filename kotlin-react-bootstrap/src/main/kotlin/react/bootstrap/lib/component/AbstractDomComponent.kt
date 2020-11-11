@@ -1,10 +1,9 @@
 package react.bootstrap.lib.component
 
 import react.RBuilder
-import react.RHandler
 import react.RState
 import react.ReactElement
-import react.bootstrap.lib.RDOMHandler
+import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.react.rprops.requireProperties
 import kotlin.reflect.KClass
 import kotlinx.html.CommonAttributeGroupFacade as CommonAttributes
@@ -28,19 +27,27 @@ abstract class AbstractDomComponent<T : CommonAttributes, P : AbstractDomCompone
         var tag: KClass<T>
     }
 
+    class Builder<T : CommonAttributes, P : Props<T>> constructor(
+        builder: RBuilder,
+        tag: KClass<T>,
+        component: KClass<out AbstractDomComponent<T, P, *>>
+    ) : DomComponent.Builder<T, P>(builder, tag, component) {
+        override fun build(): ReactElement =
+            builder.child(component) {
+                attrs {
+                    classes = this@Builder.classes.splitClassesToSet()
+                    handler = this@Builder.domHandler
+                    tag = this@Builder.tag
+                }
+
+                this@Builder.handler.invoke(this)
+            }
+    }
+
     companion object {
         @Suppress("UNCHECKED_CAST")
-        inline fun <reified T : CommonAttributes, reified P : Props<T>> RBuilder.abstractDomComponent(
-            classes: String? = null,
-            klazz: KClass<out AbstractDomComponent<*, *, *>>,
-            crossinline handler: RHandler<P> = { },
-            noinline domHandler: RDOMHandler<T>,
-        ): ReactElement = domComponent(classes, klazz as KClass<out DomComponent<*, P, *>>, domHandler) {
-            attrs {
-                tag = T::class
-            }
-
-            handler()
-        }
+        inline fun <reified T : CommonAttributes, P : Props<T>> RBuilder.abstractDomComponent(
+            componentKlazz: KClass<out AbstractDomComponent<*, *, *>>
+        ) = Builder(this, T::class, componentKlazz as KClass<AbstractDomComponent<T, P, *>>)
     }
 }
