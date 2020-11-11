@@ -1,26 +1,17 @@
 package react.bootstrap.layout.grid.container
 
-import kotlinx.html.classes
-import react.RBuilder
+import kotlinx.html.HtmlBlockTag
 import react.RState
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.BootstrapComponent
+import react.bootstrap.lib.component.AbstractDomComponent
 import react.bootstrap.lib.component.ClassNameEnum
-import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.dom.div
+import react.dom.RDOMBuilder
 
-class Container : BootstrapComponent<Container.Props, RState>() {
+class Container<T : HtmlBlockTag>(props: Props<T>) : AbstractDomComponent<T, Container.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> = setOf(props.viscosity?.className ?: ClassNames.CONTAINER)
 
-    override fun RBuilder.render(rendererClasses: Set<String>) {
-        div {
-            attrs {
-                loadGlobalAttributes(props)
-                classes = rendererClasses
-            }
-            children()
-        }
+    override fun RDOMBuilder<T>.build() {
+        children()
     }
 
     enum class Viscosities(override val className: ClassNames) : ClassNameEnum {
@@ -31,7 +22,7 @@ class Container : BootstrapComponent<Container.Props, RState>() {
         XL(ClassNames.CONTAINER_XL);
     }
 
-    interface Props : WithGlobalAttributes {
+    interface Props<T : HtmlBlockTag> : AbstractDomComponent.Props<T> {
         var viscosity: Viscosities?
     }
 }

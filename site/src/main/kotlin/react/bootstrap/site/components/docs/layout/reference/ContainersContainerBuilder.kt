@@ -1,5 +1,7 @@
 package react.bootstrap.site.components.docs.layout.reference
 
+import kotlinx.html.DIV
+import kotlinx.html.HtmlBlockTag
 import react.RBuilder
 import react.bootstrap.layout.grid.container.Container
 import react.bootstrap.layout.grid.container.ContainerBuilder
@@ -9,6 +11,7 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunSpec
+import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.NOINLINE
 import react.bootstrap.site.lib.codepoet.Generic
 
 internal class ContainersContainerBuilder : SectionComponent() {
@@ -28,7 +31,24 @@ Creates a `${Container::class.nestedName}` element.
                 .nestedBy<RBuilder>()
                 .addParameter<Container.Viscosities>("viscosity", null)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RHandler", Container.Props::class))
+                .addParameter("block", Generic("RDOMHandler", DIV::class))
+                .returns("ReactElement")
+                .build()
+        }
+
+        Markdown {
+            //language=Markdown
+            +"""
+Creates a generic `${Container::class.nestedName}` element.
+            """
+        }
+        codeExample {
+            +FunSpec.builder(RBuilder::container, inline = true)
+                .nestedBy<RBuilder>()
+                .addTypeParameter("T", HtmlBlockTag::class, true)
+                .addParameter<Container.Viscosities>("viscosity", null)
+                .addParameter<String?>("classes", null)
+                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
                 .returns("ReactElement")
                 .build()
         }
