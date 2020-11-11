@@ -71,12 +71,7 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
                     }
                 }
             }
-            col(
-                md = SZ_9,
-                xl = SZ_8,
-                classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content",
-                rendererTag = MAIN::class
-            ) {
+            col<MAIN>(md = SZ_9, xl = SZ_8, classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content") {
                 switch {
                     Pages.categories.forEach { category ->
                         route<CategoryComponent.Props>(category.link) {
