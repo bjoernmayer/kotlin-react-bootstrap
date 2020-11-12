@@ -179,8 +179,8 @@ behaviour.
         Markdown {
             //language=Markdown
             +"""
-You set a `active predicate` on each `nav` which is checked, when the nav is rendered. The predicate is passed on from
- the nav downwards to the `navItems` and `navLinks`.
+You can set an `active predicate` on each `nav` component. This is checked, when the nav is rendered. The predicate is
+passed on from the nav downwards to the `navItems` and `navLinks`.
             """
         }
 

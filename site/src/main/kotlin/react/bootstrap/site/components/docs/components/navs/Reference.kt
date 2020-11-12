@@ -1,5 +1,6 @@
 package react.bootstrap.site.components.docs.components.navs
 
+import kotlinx.html.A
 import react.RBuilder
 import react.RElementBuilder
 import react.bootstrap.components.nav.NavBuilder
@@ -39,7 +40,7 @@ Creates a `${function.name}`-based navigation.
                     .addParameter(
                         "activeLinkPredicate",
                         LambdaType.builder()
-                            .addArgument(NavLink.Props::class)
+                            .addArgument(A::class)
                             .returns(Boolean::class),
                         true,
                         FunSpec.Parameter.NULL
