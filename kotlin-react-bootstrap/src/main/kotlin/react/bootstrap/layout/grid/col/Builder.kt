@@ -5,6 +5,7 @@ import kotlinx.html.DIV
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.helpers.splitClassesToSet
+import react.bootstrap.lib.PropHandler
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
 
@@ -25,18 +26,19 @@ fun RBuilder.col(
     lg: ColAttributes? = null,
     xl: ColAttributes? = null,
     classes: String? = null,
+    propHandler: PropHandler<Col.Props<DIV>> = { },
     block: RDOMHandler<DIV>
 ): ReactElement = abstractDomComponent<DIV, Col.Props<DIV>>(Col::class)
     .classes(classes)
-    .handler {
-        attrs {
-            this.all = all
-            this.sm = sm
-            this.md = md
-            this.lg = lg
-            this.xl = xl
-            this.classes = classes.splitClassesToSet()
-        }
+    .propHandler {
+        this.all = all
+        this.sm = sm
+        this.md = md
+        this.lg = lg
+        this.xl = xl
+        this.classes = classes.splitClassesToSet()
+
+        propHandler()
     }
     .domHandler(block)
     .build()
@@ -48,18 +50,19 @@ inline fun <reified T : CommonAttributeGroupFacade> RBuilder.col(
     lg: ColAttributes? = null,
     xl: ColAttributes? = null,
     classes: String? = null,
+    crossinline propHandler: PropHandler<Col.Props<T>> = { },
     noinline block: RDOMHandler<T>
 ): ReactElement = abstractDomComponent<T, Col.Props<T>>(Col::class)
     .classes(classes)
-    .handler {
-        attrs {
-            this.all = all
-            this.sm = sm
-            this.md = md
-            this.lg = lg
-            this.xl = xl
-            this.classes = classes.splitClassesToSet()
-        }
+    .propHandler {
+        this.all = all
+        this.sm = sm
+        this.md = md
+        this.lg = lg
+        this.xl = xl
+        this.classes = classes.splitClassesToSet()
+
+        propHandler()
     }
     .domHandler(block)
     .build()

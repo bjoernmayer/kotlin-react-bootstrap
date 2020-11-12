@@ -184,11 +184,9 @@ private fun RBuilder.buildNavLink(
         }
         block()
     }
-    .handler {
-        attrs {
-            this.active = active
-            this.disabled = disabled
-        }
+    .propHandler {
+        this.active = active
+        this.disabled = disabled
     }
     .build()
 

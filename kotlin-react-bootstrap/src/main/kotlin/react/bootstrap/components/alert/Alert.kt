@@ -2,68 +2,53 @@ package react.bootstrap.components.alert
 
 import kotlinext.js.jsObject
 import kotlinx.html.A
-import kotlinx.html.CommonAttributeGroupFacade
+import kotlinx.html.HtmlBlockTag
 import kotlinx.html.SPAN
-import kotlinx.html.classes
 import kotlinx.html.js.onClickFunction
 import kotlinx.html.role
 import org.w3c.dom.events.Event
 import react.RBuilder
 import react.RState
 import react.RStatics
+import react.bootstrap.helpers.addOrInit
+import react.bootstrap.lib.DomTag
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.NoArgEventHandler
-import react.bootstrap.lib.DomTag
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDomComponent
-import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
-import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.component.DomComponent
-import react.bootstrap.lib.kotlinxhtml.loadDomEvents
-import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
 import react.bootstrap.lib.react.isComponent
 import react.bootstrap.lib.react.mapComponents
-import react.bootstrap.lib.react.rprops.WithDomEvents
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.childrenArray
 import react.bootstrap.lib.react.rprops.requireProperties
 import react.bootstrap.utilities.close.close
 import react.dom.RDOMBuilder
-import react.dom.div
 import react.setState
+import kotlin.reflect.KClass
 import react.bootstrap.content.typography.heading.Heading as BaseHeading
 
-sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponent<PT, ST>(props) {
-    class Static(props: Props) : Alert<Static.Props, RState>(props) {
-        override fun RBuilder.render(rendererClasses: Set<String>) {
-            div {
-                children()
-
-                attrs {
-                    loadDomEvents(props)
-                    loadGlobalAttributes(props)
-
-                    role = "alert"
-
-                    classes = rendererClasses
-                }
+sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(props: P) : AbstractDomComponent<T, P, S>(props) {
+    class Static<T : HtmlBlockTag>(props: Props<T>) : Alert<T, Static.Props<T>, RState>(props) {
+        override fun RDOMBuilder<T>.build() {
+            attrs {
+                role = "alert"
             }
+
+            children()
         }
 
-        interface Props : Alert.Props
+        interface Props<T : HtmlBlockTag> : Alert.Props<T>
     }
 
-    class Dismissible(props: Props) : Alert<Dismissible.Props, Dismissible.State>(props) {
-        override fun State.init(props: Props) {
+    class Dismissible<T : HtmlBlockTag>(props: Props<T>) : Alert<T, Dismissible.Props<T>, Dismissible.State>(props) {
+        override fun State.init(props: Props<T>) {
             state = States.SHOWN
         }
 
-        private fun handleDismissle(
-            event: Event,
-            originalEventHandler: EventHandler?
-        ) {
+        private fun handleDismissle(event: Event, originalEventHandler: EventHandler?) {
             if (originalEventHandler is EventHandler) {
                 originalEventHandler.invoke(event)
             }
@@ -118,60 +103,57 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
             }
         }
 
-        override fun RBuilder.render(rendererClasses: Set<String>) {
+        override fun RBuilder.render() {
             if (state.state == States.DISMISSED) {
                 return
             }
 
-            div {
-                // Check if the lib-user added a closingElement manually
-                if (props.childrenArray.any { it.isComponent<ClosingElement<*>>() }) {
-                    childList.addAll(
-                        props.childrenArray.mapComponents<ClosingElement.Props<DomTag>, ClosingElement<DomTag>> { _, oldProps ->
-                            attrs {
-                                this.handler = {
-                                    // First apply the handler so it applies a possible onClickFunction.
-                                    oldProps.handler(this)
+            render(props.classes.addOrInit(buildClasses()))
+        }
 
-                                    // Then pull out the possible onClick
-                                    val onClick = attrs["onClick"] as EventHandler?
+        override fun RDOMBuilder<T>.build() {
+            attrs {
+                role = "alert"
+            }
 
-                                    attrs {
-                                        onClickFunction = {
-                                            // And chain it with the new one
-                                            handleDismissle(it, onClick)
-                                        }
+            // Check if the lib-user added a closingElement manually
+            if (props.childrenArray.any { it.isComponent<ClosingElement<*>>() }) {
+                childList.addAll(
+                    props.childrenArray.mapComponents<ClosingElement.Props<DomTag>, ClosingElement<DomTag>> { _, oldProps ->
+                        attrs {
+                            this.handler = {
+                                // First apply the handler so it applies a possible onClickFunction.
+                                oldProps.handler(this)
+
+                                // Then pull out the possible onClick
+                                val onClick = attrs["onClick"] as EventHandler?
+
+                                attrs {
+                                    onClickFunction = {
+                                        // And chain it with the new one
+                                        handleDismissle(it, onClick)
                                     }
                                 }
                             }
                         }
-                    )
-                } else {
-                    children()
-                    abstractDomComponent<SPAN, ClosingElement.Props<SPAN>>(ClosingElement::class)
-                        .domHandler {
-                            attrs {
-                                onClickFunction = {
-                                    handleDismissle(it, null)
-                                }
-                            }
-                            close { }
+                    }
+                )
+            } else {
+                children()
+                // No [ClosingElement] in the children. So we add one and bind the eventHandler
+                abstractDomComponent<SPAN, ClosingElement.Props<SPAN>>(ClosingElement::class)
+                    .domHandler {
+                        attrs {
+                            onClickFunction = { handleDismissle(it, null) }
                         }
-                        .build()
-                }
+                        close { }
+                    }
+                    .build()
+            }
 
-                if (props.fade) {
-                    attrs.onTransitionEndFunction = this@Dismissible::handleTransitionEnd
-                }
-
-                attrs {
-                    loadDomEvents(props, props::onTransitionEnd)
-                    loadGlobalAttributes(props)
-
-                    role = "alert"
-
-                    classes = rendererClasses
-                }
+            if (props.fade) {
+                // Todo: allow orig event here
+                attrs.onTransitionEndFunction = this@Dismissible::handleTransitionEnd
             }
         }
 
@@ -185,7 +167,7 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
             var state: States
         }
 
-        interface Props : Alert.Props {
+        interface Props<T : HtmlBlockTag> : Alert.Props<T> {
             /**
              * When set to *true* the alert fades out, when dismissed.
              *
@@ -216,7 +198,10 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
             }
         }
 
-        companion object : RStatics<Props, State, Dismissible, Nothing>(Dismissible::class) {
+        @Suppress("UNCHECKED_CAST")
+        companion object : RStatics<Props<HtmlBlockTag>, State, Dismissible<HtmlBlockTag>, Nothing>(
+            Dismissible::class as KClass<Dismissible<HtmlBlockTag>>
+        ) {
             init {
                 defaultProps = jsObject {
                     fade = false
@@ -242,7 +227,7 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
         WARNING(ClassNames.ALERT_WARNING);
     }
 
-    interface Props : WithGlobalAttributes, WithDomEvents {
+    interface Props<T : HtmlBlockTag> : AbstractDomComponent.Props<T> {
         var variant: Variants
     }
 
@@ -252,7 +237,7 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
         interface Props : WithGlobalAttributes, AbstractDomComponent.Props<A>
     }
 
-    class Heading<T : CommonAttributeGroupFacade>(props: Props<T>) : BaseHeading<T, BaseHeading.Props<T>>(props) {
+    class Heading<T : DomTag>(props: Props<T>) : BaseHeading<T, BaseHeading.Props<T>>(props) {
         override fun buildClasses(): Set<ClassNames> = super.buildClasses().run {
             toMutableSet().apply {
                 add(ClassNames.ALERT_HEADING)

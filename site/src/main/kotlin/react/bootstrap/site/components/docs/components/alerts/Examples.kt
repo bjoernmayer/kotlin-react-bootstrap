@@ -11,10 +11,10 @@ import react.bootstrap.components.alert.Alert
 import react.bootstrap.components.alert.AlertBuilder
 import react.bootstrap.components.alert.Alerts
 import react.bootstrap.components.alert.closingElement
-import react.bootstrap.components.alert.h4
 import react.bootstrap.components.alert.link
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
+import react.bootstrap.lib.DomTag
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.components.buttons.outlineDangerFun
 import react.bootstrap.site.components.docs.components.buttons.solidInfoFun
@@ -66,11 +66,10 @@ eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.nestedName}`).
 
         liveExample {
             variants.forEach { (variant, _) ->
-                child(Alert.Static::class) {
-                    attrs {
-                        this.variant = variant
+                AlertBuilder(this).apply {
+                    alert(variant = variant) {
+                        +"A simple ${variant.name.toLowerCase()} alert-check it out!"
                     }
-                    +"A simple ${variant.name.toLowerCase()} alert-check it out!"
                 }
             }
         }
@@ -89,24 +88,23 @@ eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.nestedName}`).
         Markdown {
             //language=Markdown
             +"""
-Use the `${RElementBuilder<Alert.Props>::link.name}`-function (only available inside
+Use the `${RElementBuilder<Alert.Props<*>>::link.name}`-function (only available inside
 `RElementBuilder<${Alert.Props::class.nestedName}>` to quickly provide matching colored links within any alert.
             """
         }
         liveExample {
             variants.forEach { (variant, _) ->
-                child(Alert.Static::class) {
-                    attrs {
-                        this.variant = variant
+                AlertBuilder(this).apply {
+                    alert(variant = variant) {
+                        +"A simple ${variant.name.toLowerCase()} alert with "
+                        link(href = "#") { +"an example link" }; +". Give it a click if you like."
                     }
-                    +"A simple ${variant.name.toLowerCase()} alert with "
-                    link(href = "#") { +"an example link" }; +". Give it a click if you like."
                 }
             }
         }
         codeExample {
             +Imports.builder()
-                .addImport("components.alert.${RElementBuilder<Alert.Props>::link.name}")
+                .addImport("components.alert.${RElementBuilder<Alert.Props<*>>::link.name}")
                 .addImport("components.alert.Alerts")
                 .build()
             variants.forEach { (variant, function) ->
@@ -115,7 +113,7 @@ Use the `${RElementBuilder<Alert.Props>::link.name}`-function (only available in
                     .setLambdaArgument(
                         plusString("A simple ${variant.name.toLowerCase()} alert with "),
                         "\n",
-                        FunCall.builder(RElementBuilder<Alert.Props>::link, FunCall.Style.INLINE)
+                        FunCall.builder(RElementBuilder<Alert.Props<*>>::link, FunCall.Style.INLINE)
                             .addArgument("href", "#")
                             .setLambdaArgument(plusString("an example link"))
                             .build(),
@@ -189,8 +187,9 @@ alerts.
             """
         }
         liveExample {
-            Alerts.dismissible.warning(fade = true) {
-                attrs {
+            Alerts.dismissible.warning(
+                fade = true,
+                props = {
                     onClose = {
                         console.log("Close on Alert was clicked. Timestamp: ${currentTimeMillis()}")
                     }
@@ -198,6 +197,7 @@ alerts.
                         console.log("Alert was dismissed. Timestamp: ${currentTimeMillis()}")
                     }
                 }
+            ) {
                 strong { +"Holy guacamole!" }; +" You should check in on some of those fields below."
             }
         }
@@ -213,7 +213,7 @@ alerts.
                 .setLambdaArgument(
                     FunCall.builder(RElementBuilder<RProps>::attrs)
                         .setLambdaArgument(
-                            Assignment.builder(Alert.Dismissible.Props::onClose)
+                            Assignment.builder(Alert.Dismissible.Props<*>::onClose)
                                 .value(
                                     LambdaValue(
                                         FunCall.builder(Console::log, FunCall.Style.INLINE)
@@ -226,7 +226,7 @@ alerts.
                                     )
                                 )
                                 .build(),
-                            Assignment.builder(Alert.Dismissible.Props::onClosed)
+                            Assignment.builder(Alert.Dismissible.Props<*>::onClosed)
                                 .value(
                                     LambdaValue(
                                         FunCall.builder(Console::log, FunCall.Style.INLINE)
@@ -304,10 +304,11 @@ You can build your own custom close element, by using `closingElement { }`.
                     var show by useState(false)
 
                     if (show) {
-                        Alerts.dismissible.danger {
-                            attrs {
+                        Alerts.dismissible.danger(
+                            props = {
                                 onClosed = { show = false }
                             }
+                        ) {
                             +"You picked the wrong house, fool!"
                             hr { }
                             closingElement {
@@ -360,7 +361,7 @@ You can build your own custom close element, by using `closingElement { }`.
                                         .setLambdaArgument(
                                             FunCall.builder(RElementBuilder<RProps>::attrs)
                                                 .setLambdaArgument(
-                                                    Assignment.builder(Alert.Dismissible.Props::onClosed)
+                                                    Assignment.builder(Alert.Dismissible.Props<*>::onClosed)
                                                         .value(
                                                             LambdaValue(
                                                                 Assignment.builder("show")
@@ -384,7 +385,7 @@ You can build your own custom close element, by using `closingElement { }`.
                                                             "// The onClick event on the closing element " +
                                                                 "can still be set",
                                                             "\n",
-                                                            Assignment.builder(Alert.Props::onClick)
+                                                            Assignment.builder(DomTag::onClickFunction)
                                                                 .value(
                                                                     LambdaValue(
                                                                         FunCall.builder(
@@ -423,7 +424,7 @@ You can build your own custom close element, by using `closingElement { }`.
                                         .setLambdaArgument(
                                             FunCall.builder(RElementBuilder<RProps>::attrs)
                                                 .setLambdaArgument(
-                                                    Assignment.builder(Alert.Props::onClick)
+                                                    Assignment.builder(DomTag::onClickFunction)
                                                         .value(
                                                             LambdaValue(
                                                                 Assignment.builder("show")

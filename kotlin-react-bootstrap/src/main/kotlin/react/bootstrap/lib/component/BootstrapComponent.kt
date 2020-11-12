@@ -18,5 +18,5 @@ abstract class BootstrapComponent<P : WithClasses, S : RState> : RComponent<P, S
 
     abstract fun RBuilder.render(rendererClasses: Set<String>)
 
-    final override fun RBuilder.render() = render(props.classes.addOrInit(buildClasses()))
+    override fun RBuilder.render() = render(props.classes.addOrInit(buildClasses()))
 }

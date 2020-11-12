@@ -18,10 +18,8 @@ inline fun <reified T : CommonAttributeGroupFacade> RBuilder.heading(
     noinline block: RDOMHandler<T>
 ): ReactElement = abstractDomComponent<T, Heading.Props<T>>(Heading::class)
     .classes(classes)
-    .handler {
-        attrs {
-            this.size = size
-        }
+    .propHandler {
+        this.size = size
     }
     .domHandler(block)
     .build()

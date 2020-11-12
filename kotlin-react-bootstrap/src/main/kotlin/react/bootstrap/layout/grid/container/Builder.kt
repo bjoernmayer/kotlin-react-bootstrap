@@ -6,22 +6,21 @@ import react.RBuilder
 import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.Builder
+import react.bootstrap.lib.PropHandler
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
 
 fun RBuilder.container(
     viscosity: Container.Viscosities? = null,
     classes: String? = null,
-    handler: RHandler<Container.Props<DIV>> = { },
+    propHandler: PropHandler<Container.Props<DIV>> = { },
     block: RDOMHandler<DIV>
 ): ReactElement = abstractDomComponent<DIV, Container.Props<DIV>>(Container::class)
     .classes(classes)
-    .handler {
-        attrs {
-            this.viscosity = viscosity
-        }
+    .propHandler {
+        this.viscosity = viscosity
 
-        handler()
+        propHandler()
     }
     .domHandler(block)
     .build()
@@ -29,16 +28,14 @@ fun RBuilder.container(
 inline fun <reified T : HtmlBlockTag> RBuilder.container(
     viscosity: Container.Viscosities? = null,
     classes: String? = null,
-    crossinline handler: RHandler<Container.Props<T>> = { },
+    crossinline propHandler: PropHandler<Container.Props<T>> = { },
     noinline block: RDOMHandler<T>
 ): ReactElement = abstractDomComponent<T, Container.Props<T>>(Container::class)
     .classes(classes)
-    .handler {
-        attrs {
-            this.viscosity = viscosity
-        }
+    .propHandler {
+        this.viscosity = viscosity
 
-        handler()
+        propHandler()
     }
     .domHandler(block)
     .build()
@@ -46,73 +43,73 @@ inline fun <reified T : HtmlBlockTag> RBuilder.container(
 class ContainerBuilder(override val builder: RBuilder) : Builder {
     fun fluid(
         classes: String? = null,
-        handler: RHandler<Container.Props<DIV>> = { },
+        propHandler: PropHandler<Container.Props<DIV>> = { },
         block: RDOMHandler<DIV>
     ): ReactElement =
-        builder.container(viscosity = Container.Viscosities.FLUID, classes = classes, handler = handler, block = block)
+        builder.container(viscosity = Container.Viscosities.FLUID, classes = classes, propHandler = propHandler, block = block)
 
     inline fun <reified T : HtmlBlockTag> fluid(
         classes: String? = null,
-        crossinline handler: RHandler<Container.Props<T>> = { },
+        crossinline propHandler: PropHandler<Container.Props<T>> = { },
         noinline block: RDOMHandler<T>
     ): ReactElement =
-        builder.container(viscosity = Container.Viscosities.FLUID, classes = classes, handler = handler, block = block)
+        builder.container(viscosity = Container.Viscosities.FLUID, classes = classes, propHandler = propHandler, block = block)
 
     fun sm(
         classes: String? = null,
-        handler: RHandler<Container.Props<DIV>> = { },
+        propHandler: PropHandler<Container.Props<DIV>> = { },
         block: RDOMHandler<DIV>
     ): ReactElement =
-        builder.container(viscosity = Container.Viscosities.SM, classes = classes, handler = handler, block = block)
+        builder.container(viscosity = Container.Viscosities.SM, classes = classes, propHandler = propHandler, block = block)
 
     inline fun <reified T : HtmlBlockTag> sm(
         classes: String? = null,
-        crossinline handler: RHandler<Container.Props<T>> = { },
+        crossinline propHandler: PropHandler<Container.Props<T>> = { },
         noinline block: RDOMHandler<T>
     ): ReactElement =
-        builder.container(viscosity = Container.Viscosities.SM, classes = classes, handler = handler, block = block)
+        builder.container(viscosity = Container.Viscosities.SM, classes = classes, propHandler = propHandler, block = block)
 
     fun md(
         classes: String? = null,
-        handler: RHandler<Container.Props<DIV>> = { },
+        propHandler: PropHandler<Container.Props<DIV>> = { },
         block: RDOMHandler<DIV>
     ): ReactElement =
-        builder.container(viscosity = Container.Viscosities.MD, classes = classes, handler = handler, block = block)
+        builder.container(viscosity = Container.Viscosities.MD, classes = classes, propHandler = propHandler, block = block)
 
     inline fun <reified T : HtmlBlockTag> md(
         classes: String? = null,
-        crossinline handler: RHandler<Container.Props<T>> = { },
+        crossinline propHandler: PropHandler<Container.Props<T>> = { },
         noinline block: RDOMHandler<T>
     ): ReactElement =
-        builder.container(viscosity = Container.Viscosities.MD, classes = classes, handler = handler, block = block)
+        builder.container(viscosity = Container.Viscosities.MD, classes = classes, propHandler = propHandler, block = block)
 
     fun lg(
         classes: String? = null,
-        handler: RHandler<Container.Props<DIV>> = { },
+        propHandler: PropHandler<Container.Props<DIV>> = { },
         block: RDOMHandler<DIV>
     ): ReactElement =
-        builder.container(viscosity = Container.Viscosities.LG, classes = classes, handler = handler, block = block)
+        builder.container(viscosity = Container.Viscosities.LG, classes = classes, propHandler = propHandler, block = block)
 
     inline fun <reified T : HtmlBlockTag> lg(
         classes: String? = null,
-        crossinline handler: RHandler<Container.Props<T>> = { },
+        crossinline propHandler: PropHandler<Container.Props<T>> = { },
         noinline block: RDOMHandler<T>
     ): ReactElement =
-        builder.container(viscosity = Container.Viscosities.LG, classes = classes, handler = handler, block = block)
+        builder.container(viscosity = Container.Viscosities.LG, classes = classes, propHandler = propHandler, block = block)
 
     fun xl(
         classes: String? = null,
-        handler: RHandler<Container.Props<DIV>> = { },
+        propHandler: PropHandler<Container.Props<DIV>> = { },
         block: RDOMHandler<DIV>
     ): ReactElement =
-        builder.container(viscosity = Container.Viscosities.XL, classes = classes, handler = handler, block = block)
+        builder.container(viscosity = Container.Viscosities.XL, classes = classes, propHandler = propHandler, block = block)
 
     inline fun <reified T : HtmlBlockTag> xl(
         classes: String? = null,
-        crossinline handler: RHandler<Container.Props<T>> = { },
+        crossinline propHandler: PropHandler<Container.Props<T>> = { },
         noinline block: RDOMHandler<T>
     ): ReactElement =
-        builder.container(viscosity = Container.Viscosities.XL, classes = classes, handler = handler, block = block)
+        builder.container(viscosity = Container.Viscosities.XL, classes = classes, propHandler = propHandler, block = block)
 }
 
 val RBuilder.Containers: ContainerBuilder

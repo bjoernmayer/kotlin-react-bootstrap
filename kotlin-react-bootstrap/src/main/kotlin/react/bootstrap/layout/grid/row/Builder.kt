@@ -7,6 +7,7 @@ import kotlinx.html.DIV
 import react.RBuilder
 import react.RHandler
 import react.ReactElement
+import react.bootstrap.lib.PropHandler
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
 
@@ -28,21 +29,19 @@ fun RBuilder.row(
     xl: RowAttributes? = null,
     gutters: Boolean = true,
     classes: String? = null,
-    handler: RHandler<Row.Props<DIV>> = { },
+    propHandler: PropHandler<Row.Props<DIV>> = { },
     block: RDOMHandler<DIV>
 ): ReactElement = abstractDomComponent<DIV, Row.Props<DIV>>(Row::class)
     .classes(classes)
-    .handler {
-        attrs {
-            this.all = all
-            this.sm = sm
-            this.md = md
-            this.lg = lg
-            this.xl = xl
-            this.gutters = gutters
-        }
+    .propHandler {
+        this.all = all
+        this.sm = sm
+        this.md = md
+        this.lg = lg
+        this.xl = xl
+        this.gutters = gutters
 
-        handler()
+        propHandler()
     }
     .domHandler(block)
     .build()
@@ -55,21 +54,19 @@ inline fun <reified T : CommonAttributeGroupFacade> RBuilder.row(
     xl: RowAttributes? = null,
     gutters: Boolean = true,
     classes: String? = null,
-    crossinline handler: RHandler<Row.Props<T>> = { },
+    crossinline propHandler: PropHandler<Row.Props<T>> = { },
     noinline block: RDOMHandler<T>
 ): ReactElement = abstractDomComponent<T, Row.Props<T>>(Row::class)
     .classes(classes)
-    .handler {
-        attrs {
-            this.all = all
-            this.sm = sm
-            this.md = md
-            this.lg = lg
-            this.xl = xl
-            this.gutters = gutters
-        }
+    .propHandler {
+        this.all = all
+        this.sm = sm
+        this.md = md
+        this.lg = lg
+        this.xl = xl
+        this.gutters = gutters
 
-        handler()
+        propHandler()
     }
     .domHandler(block)
     .build()

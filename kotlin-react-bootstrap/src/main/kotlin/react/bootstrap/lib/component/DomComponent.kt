@@ -3,10 +3,10 @@ package react.bootstrap.lib.component
 import kotlinx.html.attributesMapOf
 import kotlinx.html.classes
 import react.RBuilder
-import react.RHandler
 import react.RState
 import react.ReactElement
 import react.bootstrap.helpers.splitClassesToSet
+import react.bootstrap.lib.PropHandler
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.react.rprops.WithClasses
 import react.bootstrap.lib.react.rprops.requireProperties
@@ -32,7 +32,7 @@ abstract class DomComponent<T : CommonAttributes, P : DomComponent.Props<T>, S :
 
     protected open fun RDOMBuilder<T>.build() {}
 
-    override fun RBuilder.render(rendererClasses: Set<String>) {
+    final override fun RBuilder.render(rendererClasses: Set<String>) {
         @Suppress("UNUSED_VARIABLE", "UNUSED_ANONYMOUS_PARAMETER")
         val rROMBuilder = RDOMBuilder { tagConsumer ->
             // This intantiates the tag by using some reflection js magic.
@@ -68,7 +68,7 @@ abstract class DomComponent<T : CommonAttributes, P : DomComponent.Props<T>, S :
         protected val component: KClass<out DomComponent<T, P, *>>
     ) {
         protected var classes: String? = null
-        protected var handler: RHandler<P> = { }
+        protected var propHandler: PropHandler<P> = { }
         protected var domHandler: RDOMHandler<T> = { }
 
         fun classes(classes: String?): Builder<T, P> {
@@ -77,8 +77,8 @@ abstract class DomComponent<T : CommonAttributes, P : DomComponent.Props<T>, S :
             return this
         }
 
-        fun handler(handler: RHandler<P>): Builder<T, P> {
-            this.handler = handler
+        fun propHandler(propHandler: PropHandler<P>): Builder<T, P> {
+            this.propHandler = propHandler
 
             return this
         }
@@ -94,9 +94,8 @@ abstract class DomComponent<T : CommonAttributes, P : DomComponent.Props<T>, S :
                 attrs {
                     classes = this@Builder.classes.splitClassesToSet()
                     handler = this@Builder.domHandler
+                    this@Builder.propHandler.invoke(this)
                 }
-
-                this@Builder.handler.invoke(this)
             }
     }
 

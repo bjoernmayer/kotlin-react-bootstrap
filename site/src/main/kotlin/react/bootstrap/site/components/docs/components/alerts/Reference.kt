@@ -70,7 +70,7 @@ internal class Reference : SectionComponent() {
             }
         }
 
-        subSectionTitle(RElementBuilder<Alert.Props>::link.name)
+        subSectionTitle(RElementBuilder<Alert.Props<*>>::link.name)
         Markdown {
             //language=Markdown
             +"""
@@ -78,8 +78,8 @@ Creates a `${Alert.Link::class.nestedName}` element.
             """
         }
         codeExample {
-            +FunSpec.builder(RElementBuilder<Alert.Props>::link)
-                .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
+            +FunSpec.builder(RElementBuilder<Alert.Props<*>>::link)
+                .nestedByGeneric<RElementBuilder<*>, Alert.Props<*>>()
                 .addParameter<String?>("href", null)
                 .addParameter<String?>("target", null)
                 .addParameter<String?>("classes", null)
@@ -106,7 +106,7 @@ Creates a generic `${Alert.Heading::class.nestedName}` element.
                 },
                 inline = true
             )
-                .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
+                .nestedByGeneric<RElementBuilder<*>, Alert.Props<*>>()
                 .addTypeParameter("T", DomTag::class, true)
                 .addParameter<Heading.Sizes>("size")
                 .addParameter<String?>("classes", null)
@@ -121,12 +121,12 @@ Creates a generic `${Alert.Heading::class.nestedName}` element.
                 .build()
         }
         listOf(
-            RElementBuilder<Alert.Props>::h1,
-            RElementBuilder<Alert.Props>::h2,
-            RElementBuilder<Alert.Props>::h3,
-            RElementBuilder<Alert.Props>::h4,
-            RElementBuilder<Alert.Props>::h5,
-            RElementBuilder<Alert.Props>::h6,
+            RElementBuilder<Alert.Props<*>>::h1,
+            RElementBuilder<Alert.Props<*>>::h2,
+            RElementBuilder<Alert.Props<*>>::h3,
+            RElementBuilder<Alert.Props<*>>::h4,
+            RElementBuilder<Alert.Props<*>>::h5,
+            RElementBuilder<Alert.Props<*>>::h6,
         ).forEach { function ->
             subSectionTitle(function.name)
             Markdown {
@@ -137,7 +137,7 @@ Creates a `${Alert.Heading::class.nestedName}` element.
             }
             codeExample {
                 +FunSpec.builder(function)
-                    .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
+                    .nestedByGeneric<RElementBuilder<*>, Alert.Props<*>>()
                     .addParameter<String?>("classes", null)
                     .addParameter(
                         "handler",
@@ -156,7 +156,7 @@ Creates a `${Alert.Heading::class.nestedName}` and uses `T` to render the elemen
             }
             codeExample {
                 +FunSpec.builder(function, inline = true)
-                    .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
+                    .nestedByGeneric<RElementBuilder<*>, Alert.Props<*>>()
                     .addTypeParameter("T", DomTag::class, true)
                     .addParameter<String?>("classes", null)
                     .addParameter(
@@ -180,7 +180,7 @@ Creates a `${Alert.Heading::class.nestedName}` and uses `T` to render the elemen
                     override val name: String = "closingElement"
                 }
             )
-                .nestedByGeneric<RElementBuilder<*>, Alert.Dismissible.Props>()
+                .nestedByGeneric<RElementBuilder<*>, Alert.Dismissible.Props<*>>()
                 .addParameter(
                     "handler",
                     Generic("RHandler", Generic(Alert.Dismissible.ClosingElement.Props::class, SPAN::class).build()),
@@ -196,7 +196,7 @@ Creates a `${Alert.Heading::class.nestedName}` and uses `T` to render the elemen
                 },
                 inline = true
             )
-                .nestedByGeneric<RElementBuilder<*>, Alert.Dismissible.Props>()
+                .nestedByGeneric<RElementBuilder<*>, Alert.Dismissible.Props<*>>()
                 .addTypeParameter("T", DomTag::class, true)
                 .addParameter(
                     "handler",

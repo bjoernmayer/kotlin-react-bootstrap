@@ -4,9 +4,9 @@ import react.RBuilder
 import react.RState
 import react.ReactElement
 import react.bootstrap.helpers.splitClassesToSet
+import react.bootstrap.lib.DomTag
 import react.bootstrap.lib.react.rprops.requireProperties
 import kotlin.reflect.KClass
-import kotlinx.html.CommonAttributeGroupFacade as CommonAttributes
 
 /**
  * An [AbstractDomComponent] is a react component, which passes through its [AbstractDomComponent.Props.handler] to the
@@ -16,18 +16,18 @@ import kotlinx.html.CommonAttributeGroupFacade as CommonAttributes
  * @param P property type
  * @param S State type
  */
-abstract class AbstractDomComponent<T : CommonAttributes, P : AbstractDomComponent.Props<T>, S : RState>(
+abstract class AbstractDomComponent<T : DomTag, P : AbstractDomComponent.Props<T>, S : RState>(
     props: P
 ) : DomComponent<T, P, S>(props, props.tag) {
     init {
         props.requireProperties(props::tag)
     }
 
-    interface Props<T : CommonAttributes> : DomComponent.Props<T> {
+    interface Props<T : DomTag> : DomComponent.Props<T> {
         var tag: KClass<T>
     }
 
-    class Builder<T : CommonAttributes, P : Props<T>> constructor(
+    class Builder<T : DomTag, P : Props<T>> constructor(
         builder: RBuilder,
         tag: KClass<T>,
         component: KClass<out AbstractDomComponent<T, P, *>>
@@ -38,15 +38,14 @@ abstract class AbstractDomComponent<T : CommonAttributes, P : AbstractDomCompone
                     classes = this@Builder.classes.splitClassesToSet()
                     handler = this@Builder.domHandler
                     tag = this@Builder.tag
+                    this@Builder.propHandler.invoke(this)
                 }
-
-                this@Builder.handler.invoke(this)
             }
     }
 
     companion object {
         @Suppress("UNCHECKED_CAST")
-        inline fun <reified T : CommonAttributes, P : Props<T>> RBuilder.abstractDomComponent(
+        inline fun <reified T : DomTag, P : Props<T>> RBuilder.abstractDomComponent(
             componentKlazz: KClass<out AbstractDomComponent<*, *, *>>
         ) = Builder(this, T::class, componentKlazz as KClass<AbstractDomComponent<T, P, *>>)
     }

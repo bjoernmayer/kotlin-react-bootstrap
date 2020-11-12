@@ -9,3 +9,4 @@ typealias DomTag = CommonAttributeGroupFacade
 typealias NoArgEventHandler = () -> Unit
 typealias EventHandler = (Event) -> Unit
 typealias RDOMHandler<T> = RDOMBuilder<T>.() -> Unit
+typealias PropHandler<P> = P.() -> Unit
