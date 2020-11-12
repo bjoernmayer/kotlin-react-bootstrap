@@ -1,19 +1,16 @@
 package react.bootstrap.components.nav
 
-import kotlinext.js.jsObject
 import kotlinx.html.A
 import kotlinx.html.DIV
 import kotlinx.html.HtmlBlockTag
 import kotlinx.html.LI
 import kotlinx.html.classes
 import react.RState
-import react.RStatics
 import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractComponent
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
-import react.bootstrap.lib.react.identifiable.IdentifiableProps
-import react.bootstrap.lib.react.identifiable.mapComponents
+import react.bootstrap.lib.react.mapComponents
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.childrenArray
 import react.dom.RDOMBuilder
@@ -23,43 +20,19 @@ sealed class NavItems<P : NavItems.Props> : AbstractComponent<HtmlBlockTag, P, R
     class Li : NavItems<Li.Props>() {
         override val rendererTag: KClass<out HtmlBlockTag> = LI::class
 
-        interface Props : NavItems.Props, IdentifiableProps<Li>
-
-        companion object : RStatics<Props, RState, Li, Nothing>(Li::class) {
-            init {
-                Li.defaultProps = jsObject {
-                    componentType = Li::class
-                }
-            }
-        }
+        interface Props : NavItems.Props
     }
 
     class NavItem : NavItems<NavItem.Props>() {
         override val rendererTag: KClass<out HtmlBlockTag> = DIV::class
 
-        interface Props : NavItems.Props, IdentifiableProps<NavItem>
-
-        companion object : RStatics<Props, RState, NavItem, Nothing>(NavItem::class) {
-            init {
-                NavItem.defaultProps = jsObject {
-                    componentType = NavItem::class
-                }
-            }
-        }
+        interface Props : NavItems.Props
     }
 
     class DivItem : NavItems<DivItem.Props>() {
         override val rendererTag: KClass<out HtmlBlockTag> = DIV::class
 
-        interface Props : NavItems.Props, IdentifiableProps<DivItem>
-
-        companion object : RStatics<Props, RState, DivItem, Nothing>(DivItem::class) {
-            init {
-                DivItem.defaultProps = jsObject {
-                    componentType = DivItem::class
-                }
-            }
-        }
+        interface Props : NavItems.Props
     }
 
     override fun RDOMBuilder<HtmlBlockTag>.transferChildren() {

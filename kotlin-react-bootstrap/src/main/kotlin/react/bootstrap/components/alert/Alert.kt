@@ -24,7 +24,7 @@ import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
 import react.bootstrap.lib.react.isComponent
-import react.bootstrap.lib.react.identifiable.mapComponents
+import react.bootstrap.lib.react.mapComponents
 import react.bootstrap.lib.react.rprops.WithDomEvents
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.childrenArray

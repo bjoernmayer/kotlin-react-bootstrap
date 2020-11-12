@@ -27,7 +27,6 @@ import react.bootstrap.lib.kotlinxhtml.ariaDisabled
 import react.bootstrap.lib.kotlinxhtml.ariaPressed
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
-import react.bootstrap.lib.react.identifiable.IdentifiableProps
 import react.bootstrap.lib.react.rprops.WithActive
 import react.bootstrap.lib.react.rprops.WithDisabled
 import react.bootstrap.lib.react.rprops.WithDomEvents
@@ -303,7 +302,7 @@ class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(prop
         ) : Types()
     }
 
-    interface Props : WithGlobalAttributes, WithActive, WithDisabled, WithDomEvents, IdentifiableProps<Button> {
+    interface Props : WithGlobalAttributes, WithActive, WithDisabled, WithDomEvents {
         /**
          * Set this to *true* to disable text-wrapping for this button.
          *
@@ -347,7 +346,6 @@ class Button(props: Props) : BootstrapComponent<Button.Props, Button.State>(prop
             defaultProps = jsObject {
                 nowrap = false
                 type = Types.Button()
-                componentType = Button::class
                 blockSized = false
                 active = false
                 disabled = false

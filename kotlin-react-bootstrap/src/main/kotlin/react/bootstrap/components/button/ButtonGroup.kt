@@ -11,8 +11,8 @@ import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
-import react.bootstrap.lib.react.identifiable.gatherChildrenProps
-import react.bootstrap.lib.react.identifiable.mapComponents
+import react.bootstrap.lib.react.gatherChildrenProps
+import react.bootstrap.lib.react.mapComponents
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.childrenArray
 import react.dom.div

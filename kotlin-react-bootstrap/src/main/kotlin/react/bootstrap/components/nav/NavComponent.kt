@@ -13,7 +13,7 @@ import react.RState
 import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractComponent
-import react.bootstrap.lib.react.identifiable.mapComponents
+import react.bootstrap.lib.react.mapComponents
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.childrenArray
 import react.dom.RDOMBuilder

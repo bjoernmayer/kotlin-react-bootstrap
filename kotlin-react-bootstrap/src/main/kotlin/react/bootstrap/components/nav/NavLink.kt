@@ -10,7 +10,6 @@ import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.DomComponent
 import react.bootstrap.lib.kotlinxhtml.ariaDisabled
-import react.bootstrap.lib.react.identifiable.IdentifiableProps
 import react.bootstrap.lib.react.rprops.WithActive
 import react.bootstrap.lib.react.rprops.WithDisabled
 import react.dom.RDOMBuilder
@@ -75,7 +74,7 @@ class NavLink(props: Props) : DomComponent<A, NavLink.Props, NavLink.State>(prop
         children()
     }
 
-    interface Props : WithActive, WithDisabled, IdentifiableProps<NavLink>, DomComponent.Props<A> {
+    interface Props : WithActive, WithDisabled, DomComponent.Props<A> {
         var activeLinkPredicate: (A.() -> Boolean)?
     }
 
@@ -87,7 +86,6 @@ class NavLink(props: Props) : DomComponent<A, NavLink.Props, NavLink.State>(prop
     companion object : RStatics<Props, State, NavLink, Nothing>(NavLink::class) {
         init {
             defaultProps = jsObject {
-                componentType = NavLink::class
                 active = false
                 disabled = false
             }
