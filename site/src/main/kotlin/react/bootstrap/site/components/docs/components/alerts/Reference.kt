@@ -4,7 +4,6 @@ package react.bootstrap.site.components.docs.components.alerts
 
 import kotlinx.html.A
 import kotlinx.html.CommonAttributeGroupFacade
-import kotlinx.html.DIV
 import kotlinx.html.Tag
 import react.RBuilder
 import react.RElementBuilder
@@ -19,10 +18,7 @@ import react.bootstrap.components.alert.h4
 import react.bootstrap.components.alert.h5
 import react.bootstrap.components.alert.h6
 import react.bootstrap.components.alert.link
-import react.bootstrap.content.typography.Headings
 import react.bootstrap.content.typography.heading.Heading
-import react.bootstrap.layout.grid.col.Col
-import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.nestedName

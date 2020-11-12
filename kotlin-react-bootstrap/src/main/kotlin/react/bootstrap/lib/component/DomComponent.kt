@@ -32,7 +32,7 @@ abstract class DomComponent<T : CommonAttributes, P : DomComponent.Props<T>, S :
 
     protected open fun RDOMBuilder<T>.build() {}
 
-    final override fun RBuilder.render(rendererClasses: Set<String>) {
+    override fun RBuilder.render(rendererClasses: Set<String>) {
         @Suppress("UNUSED_VARIABLE", "UNUSED_ANONYMOUS_PARAMETER")
         val rROMBuilder = RDOMBuilder { tagConsumer ->
             // This intantiates the tag by using some reflection js magic.
