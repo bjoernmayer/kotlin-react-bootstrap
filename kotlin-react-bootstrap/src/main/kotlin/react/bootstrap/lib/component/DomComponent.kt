@@ -1,5 +1,6 @@
 package react.bootstrap.lib.component
 
+import kotlinx.html.TagConsumer
 import kotlinx.html.attributesMapOf
 import kotlinx.html.classes
 import react.RBuilder
@@ -30,21 +31,24 @@ abstract class DomComponent<T : CommonAttributes, P : DomComponent.Props<T>, S :
         props.requireProperties(props::handler)
     }
 
+    @Suppress("UNUSED_VARIABLE", "UNUSED_ANONYMOUS_PARAMETER")
+    private val builderFactory: (TagConsumer<Unit>) -> T = { tagConsumer ->
+        // This intantiates the tag by using some reflection js magic.
+        // ::class.js points to the javascript constructor
+        val constructor = tag.js
+        val attributes = attributesMapOf("class", null)
+
+        js("new constructor(attributes, tagConsumer)") as T
+    }
+
     protected open fun RDOMBuilder<T>.build() {}
 
+    protected open fun buildBuilder(builderFactory: (TagConsumer<Unit>) -> T): RDOMBuilder<T> =
+        RDOMBuilder(builderFactory)
+
     final override fun RBuilder.render(rendererClasses: Set<String>) {
-        @Suppress("UNUSED_VARIABLE", "UNUSED_ANONYMOUS_PARAMETER")
-        val rROMBuilder = RDOMBuilder { tagConsumer ->
-            // This intantiates the tag by using some reflection js magic.
-            // ::class.js points to the javascript constructor
-            val constructor = tag.js
-            val attributes = attributesMapOf("class", null)
-
-            js("new constructor(attributes, tagConsumer)") as T
-        }
-
         child(
-            rROMBuilder
+            buildBuilder(builderFactory)
                 .apply {
                     attrs {
                         classes = rendererClasses
