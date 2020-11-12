@@ -5,6 +5,7 @@ import kotlinx.html.A
 import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.SPAN
 import kotlinx.html.classes
+import kotlinx.html.js.onClickFunction
 import kotlinx.html.role
 import org.w3c.dom.events.Event
 import react.RBuilder
@@ -12,17 +13,17 @@ import react.RState
 import react.RStatics
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.NoArgEventHandler
+import react.bootstrap.lib.DomTag
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDomComponent
+import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
 import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.component.ClassNameEnum
-import react.bootstrap.lib.component.CustomisableComponent
 import react.bootstrap.lib.component.DomComponent
 import react.bootstrap.lib.kotlinxhtml.loadDomEvents
 import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
-import react.bootstrap.lib.react.identifiable.IdentifiableProps
-import react.bootstrap.lib.react.identifiable.isComponent
+import react.bootstrap.lib.react.isComponent
 import react.bootstrap.lib.react.identifiable.mapComponents
 import react.bootstrap.lib.react.rprops.WithDomEvents
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
@@ -32,7 +33,6 @@ import react.bootstrap.utilities.close.close
 import react.dom.RDOMBuilder
 import react.dom.div
 import react.setState
-import kotlin.reflect.KClass
 import react.bootstrap.content.typography.heading.Heading as BaseHeading
 
 sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponent<PT, ST>(props) {
@@ -125,26 +125,39 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
 
             div {
                 // Check if the lib-user added a closingElement manually
-                if (props.childrenArray.any { it.isComponent<ClosingElement>() }) {
+                if (props.childrenArray.any { it.isComponent<ClosingElement<*>>() }) {
                     childList.addAll(
-                        props.childrenArray.mapComponents<ClosingElement.Props, ClosingElement> { _, oldProps ->
+                        props.childrenArray.mapComponents<ClosingElement.Props<DomTag>, ClosingElement<DomTag>> { _, oldProps ->
                             attrs {
-                                onClick = {
-                                    handleDismissle(it, oldProps.onClick)
+                                this.handler = {
+                                    // First apply the handler so it applies a possible onClickFunction.
+                                    oldProps.handler(this)
+
+                                    // Then pull out the possible onClick
+                                    val onClick = attrs["onClick"] as EventHandler?
+
+                                    attrs {
+                                        onClickFunction = {
+                                            // And chain it with the new one
+                                            handleDismissle(it, onClick)
+                                        }
+                                    }
                                 }
                             }
                         }
                     )
                 } else {
                     children()
-                    child(ClosingElement::class) {
-                        attrs {
-                            onClick = {
-                                handleDismissle(it, null)
+                    abstractDomComponent<SPAN, ClosingElement.Props<SPAN>>(ClosingElement::class)
+                        .domHandler {
+                            attrs {
+                                onClickFunction = {
+                                    handleDismissle(it, null)
+                                }
                             }
+                            close { }
                         }
-                        close { }
-                    }
+                        .build()
                 }
 
                 if (props.fade) {
@@ -191,28 +204,15 @@ sealed class Alert<PT : Alert.Props, ST : RState>(props: PT) : BootstrapComponen
             var onClosed: NoArgEventHandler?
         }
 
-        class ClosingElement : CustomisableComponent<CommonAttributeGroupFacade, ClosingElement.Props, RState>() {
-            override val defaultRendererTag: KClass<out CommonAttributeGroupFacade> = SPAN::class
+        class ClosingElement<T : DomTag>(
+            props: Props<T>
+        ) : AbstractDomComponent<T, ClosingElement.Props<T>, RState>(props) {
+            override fun buildClasses(): Set<ClassNames> = emptySet()
 
-            interface Props :
-                WithGlobalAttributes,
-                WithDomEvents,
-                IdentifiableProps<ClosingElement>,
-                CustomisableComponent.Props<CommonAttributeGroupFacade>
+            interface Props<T : DomTag> : AbstractDomComponent.Props<T>
 
-            override fun RDOMBuilder<CommonAttributeGroupFacade>.build() {
-                attrs {
-                    loadGlobalAttributes(props)
-                    loadDomEvents(props)
-                }
-            }
-
-            companion object : RStatics<Props, RState, ClosingElement, Nothing>(ClosingElement::class) {
-                init {
-                    defaultProps = jsObject {
-                        componentType = ClosingElement::class
-                    }
-                }
+            override fun RDOMBuilder<T>.build() {
+                children()
             }
         }
 

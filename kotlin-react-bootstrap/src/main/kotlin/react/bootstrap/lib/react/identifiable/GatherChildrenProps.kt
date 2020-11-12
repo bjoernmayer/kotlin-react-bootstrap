@@ -5,6 +5,7 @@ import react.Child
 import react.Component
 import react.RProps
 import react.bootstrap.lib.react.asReactElementOrNull
+import react.bootstrap.lib.react.isComponent
 import react.bootstrap.lib.react.rprops.toMutable
 
 /**

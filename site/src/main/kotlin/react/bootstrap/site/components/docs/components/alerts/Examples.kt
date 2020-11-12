@@ -3,6 +3,7 @@
 package react.bootstrap.site.components.docs.components.alerts
 
 import kotlinx.html.currentTimeMillis
+import kotlinx.html.js.onClickFunction
 import react.RBuilder
 import react.RElementBuilder
 import react.RProps
@@ -310,13 +311,12 @@ You can build your own custom close element, by using `closingElement { }`.
                             +"You picked the wrong house, fool!"
                             hr { }
                             closingElement {
-                                Buttons.solid.info {
-                                    attrs {
-                                        // a onClick event on the closing element can still be set
-                                        onClick = {
-                                            console.log("Phew. Good, that this worked out.")
-                                        }
+                                attrs {
+                                    onClickFunction = {
+                                        console.log("Phew. Good, that this worked out.")
                                     }
+                                }
+                                Buttons.solid.info {
                                     +"Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!"
                                 }
                             }
@@ -379,33 +379,33 @@ You can build your own custom close element, by using `closingElement { }`.
                                                 .build(),
                                             FunCall.builder("closingElement")
                                                 .setLambdaArgument(
+                                                    FunCall.builder(RElementBuilder<RProps>::attrs)
+                                                        .setLambdaArgument(
+                                                            "// The onClick event on the closing element " +
+                                                                "can still be set",
+                                                            "\n",
+                                                            Assignment.builder(Alert.Props::onClick)
+                                                                .value(
+                                                                    LambdaValue(
+                                                                        FunCall.builder(
+                                                                            Console::log,
+                                                                            FunCall.Style.INLINE
+                                                                        )
+                                                                            .nestedBy(::console)
+                                                                            .addArgument(
+                                                                                "Phew. Good, that this " +
+                                                                                    "worked out."
+                                                                            )
+                                                                            .build()
+                                                                    )
+                                                                )
+                                                                .build()
+                                                        )
+                                                        .build(),
                                                     FunCall.builder(solidInfoFun)
                                                         .nestedBy(RBuilder::Buttons)
                                                         .nestedBy(ButtonBuilder::solid)
                                                         .setLambdaArgument(
-                                                            FunCall.builder(RElementBuilder<RProps>::attrs)
-                                                                .setLambdaArgument(
-                                                                    "// The onClick event on the closing element " +
-                                                                        "can still be set",
-                                                                    "\n",
-                                                                    Assignment.builder(Alert.Props::onClick)
-                                                                        .value(
-                                                                            LambdaValue(
-                                                                                FunCall.builder(
-                                                                                    Console::log,
-                                                                                    FunCall.Style.INLINE
-                                                                                )
-                                                                                    .nestedBy(::console)
-                                                                                    .addArgument(
-                                                                                        "Phew. Good, that this " +
-                                                                                            "worked out."
-                                                                                    )
-                                                                                    .build()
-                                                                            )
-                                                                        )
-                                                                        .build()
-                                                                )
-                                                                .build(),
                                                             plusString(
                                                                 "Ey, ey ey ey, Big Smoke, it's me, Carl, chill, chill!"
                                                             )

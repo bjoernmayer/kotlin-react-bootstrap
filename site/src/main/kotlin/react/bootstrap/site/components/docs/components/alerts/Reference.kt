@@ -3,8 +3,7 @@
 package react.bootstrap.site.components.docs.components.alerts
 
 import kotlinx.html.A
-import kotlinx.html.CommonAttributeGroupFacade
-import kotlinx.html.Tag
+import kotlinx.html.SPAN
 import react.RBuilder
 import react.RElementBuilder
 import react.ReactElement
@@ -19,6 +18,7 @@ import react.bootstrap.components.alert.h5
 import react.bootstrap.components.alert.h6
 import react.bootstrap.components.alert.link
 import react.bootstrap.content.typography.heading.Heading
+import react.bootstrap.lib.DomTag
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.nestedName
@@ -107,7 +107,7 @@ Creates a generic `${Alert.Heading::class.nestedName}` element.
                 inline = true
             )
                 .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
-                .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
+                .addTypeParameter("T", DomTag::class, true)
                 .addParameter<Heading.Sizes>("size")
                 .addParameter<String?>("classes", null)
                 .addParameter(
@@ -157,7 +157,7 @@ Creates a `${Alert.Heading::class.nestedName}` and uses `T` to render the elemen
             codeExample {
                 +FunSpec.builder(function, inline = true)
                     .nestedByGeneric<RElementBuilder<*>, Alert.Props>()
-                    .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
+                    .addTypeParameter("T", DomTag::class, true)
                     .addParameter<String?>("classes", null)
                     .addParameter(
                         "handler",
@@ -181,7 +181,12 @@ Creates a `${Alert.Heading::class.nestedName}` and uses `T` to render the elemen
                 }
             )
                 .nestedByGeneric<RElementBuilder<*>, Alert.Dismissible.Props>()
-                .addParameter("block", Generic("RHandler", Alert.Dismissible.ClosingElement.Props::class))
+                .addParameter(
+                    "handler",
+                    Generic("RHandler", Generic(Alert.Dismissible.ClosingElement.Props::class, SPAN::class).build()),
+                    default = LambdaValue("", LambdaValue.Style.INLINE).build()
+                )
+                .addParameter("block", Generic("RDOMHandler", SPAN::class))
                 .returns("ReactElement")
                 .build()
             +"\n"
@@ -192,11 +197,17 @@ Creates a `${Alert.Heading::class.nestedName}` and uses `T` to render the elemen
                 inline = true
             )
                 .nestedByGeneric<RElementBuilder<*>, Alert.Dismissible.Props>()
-                .addTypeParameter("T", Tag::class, true)
+                .addTypeParameter("T", DomTag::class, true)
+                .addParameter(
+                    "handler",
+                    Generic("RHandler", Generic(Alert.Dismissible.ClosingElement.Props::class, SPAN::class).build()),
+                    default = LambdaValue("", LambdaValue.Style.INLINE).build(),
+                    modifier = NOINLINE
+                )
                 .addParameter(
                     "block",
-                    Generic("RHandler", Alert.Dismissible.ClosingElement.Props::class),
-                    modifier = CROSSINLINE
+                    Generic("RDOMHandler", "T"),
+                    modifier = NOINLINE
                 )
                 .returns("ReactElement")
                 .build()

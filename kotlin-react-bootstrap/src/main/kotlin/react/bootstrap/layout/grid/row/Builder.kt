@@ -11,11 +11,6 @@ import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
 
 /**
- * Notes:
- * As soon as Kotlin supports default type values, those methods can be made generic.
- */
-
-/**
  * Creates a [Row] element.
  *
  * @param all [RowAttributes] that apply to all screen sizes.

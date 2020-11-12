@@ -24,6 +24,7 @@ import react.bootstrap.components.alert.Alert.Variants.WARNING
 import react.bootstrap.content.typography.heading.Heading
 import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.Builder
+import react.bootstrap.lib.DomTag
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
 import react.bootstrap.lib.component.DomComponent.Companion.domComponent
@@ -226,24 +227,24 @@ val RBuilder.Alerts
     get() = AlertBuilder(this)
 
 fun RElementBuilder<Alert.Dismissible.Props>.closingElement(
-    block: RHandler<Alert.Dismissible.ClosingElement.Props>
-): ReactElement = child(Alert.Dismissible.ClosingElement::class) {
-    attrs {
-        rendererTag = SPAN::class
-    }
+    handler: RHandler<Alert.Dismissible.ClosingElement.Props<SPAN>> = { },
+    block: RDOMHandler<SPAN>
+): ReactElement = abstractDomComponent<SPAN, Alert.Dismissible.ClosingElement.Props<SPAN>>(
+    Alert.Dismissible.ClosingElement::class
+)
+    .handler(handler)
+    .domHandler(block)
+    .build()
 
-    block()
-}
-
-inline fun <reified T : CommonAttributeGroupFacade> RElementBuilder<Alert.Dismissible.Props>.closingElement(
-    crossinline block: RHandler<Alert.Dismissible.ClosingElement.Props>
-): ReactElement = child(Alert.Dismissible.ClosingElement::class) {
-    attrs {
-        this.rendererTag = T::class
-    }
-
-    block()
-}
+inline fun <reified T : DomTag> RElementBuilder<Alert.Dismissible.Props>.closingElement(
+    noinline handler: RHandler<Alert.Dismissible.ClosingElement.Props<T>> = { },
+    noinline block: RDOMHandler<T>
+): ReactElement = abstractDomComponent<T, Alert.Dismissible.ClosingElement.Props<T>>(
+    Alert.Dismissible.ClosingElement::class
+)
+    .handler(handler)
+    .domHandler(block)
+    .build()
 
 /**
  * Creates a [Alert.Link] element.

@@ -8,10 +8,11 @@ import react.RElementBuilder
 import react.RHandler
 import react.RProps
 import react.ReactElement
+import react.bootstrap.lib.react.isComponent
 import react.rClass
 
 /**
- * This mapping function allows you to modify Kotlin React Bootstrap Components.
+ * This mapping function allows you to modify [Component]s.
  *
  * @param PT Props type of the child component
  * @param CT Component type of the child component
