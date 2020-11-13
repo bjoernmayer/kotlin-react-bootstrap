@@ -9,7 +9,7 @@ import react.ReactElement
 import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.Builder
 import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.DomComponent.Companion.domComponent
+import react.bootstrap.lib.component.SimpleDomComponent.Companion.simpleDomComponent
 import kotlin.reflect.KClass
 
 class NavBuilder(override val builder: RBuilder) : Builder {
@@ -18,7 +18,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: NavComponent.Appearance? = null,
         widthHandling: NavComponent.WidthHandling? = null,
-        activeLinkPredicate: (A.() -> Boolean)? = null,
+        activeLinkPredicate: (ActiveLinkPredicate)? = null,
         block: RHandler<P>
     ): ReactElement = child(klazz) {
         attrs {
@@ -43,7 +43,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: NavComponent.Appearance? = null,
         widthHandling: NavComponent.WidthHandling? = null,
-        activeLinkPredicate: (A.() -> Boolean)? = null,
+        activeLinkPredicate: (ActiveLinkPredicate)? = null,
         block: RHandler<NavComponent.Ul.Props>
     ): ReactElement =
         builder.buildNav(
@@ -67,7 +67,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: NavComponent.Appearance? = null,
         widthHandling: NavComponent.WidthHandling? = null,
-        activeLinkPredicate: (A.() -> Boolean)? = null,
+        activeLinkPredicate: (ActiveLinkPredicate)? = null,
         block: RHandler<NavComponent.Ol.Props>
     ): ReactElement =
         builder.buildNav(
@@ -91,7 +91,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: NavComponent.Appearance? = null,
         widthHandling: NavComponent.WidthHandling? = null,
-        activeLinkPredicate: (A.() -> Boolean)? = null,
+        activeLinkPredicate: (ActiveLinkPredicate)? = null,
         block: RHandler<NavComponent.Nav.Props>
     ): ReactElement =
         builder.buildNav(
@@ -115,7 +115,7 @@ class NavBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         appearance: NavComponent.Appearance? = null,
         widthHandling: NavComponent.WidthHandling? = null,
-        activeLinkPredicate: (A.() -> Boolean)? = null,
+        activeLinkPredicate: (ActiveLinkPredicate)? = null,
         block: RHandler<NavComponent.Div.Props>
     ): ReactElement =
         builder.buildNav(
@@ -170,7 +170,7 @@ private fun RBuilder.buildNavLink(
     active: Boolean = false,
     disabled: Boolean = false,
     block: RDOMHandler<A>
-): ReactElement = domComponent<A, NavLink.Props>(NavLink::class)
+): ReactElement = simpleDomComponent<A, NavLink.Props>(NavLink::class)
     .classes(classes)
     .domHandler {
         attrs {

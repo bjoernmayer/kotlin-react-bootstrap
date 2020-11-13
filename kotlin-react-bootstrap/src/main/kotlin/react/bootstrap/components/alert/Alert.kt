@@ -4,6 +4,8 @@ import kotlinext.js.jsObject
 import kotlinx.html.A
 import kotlinx.html.HtmlBlockTag
 import kotlinx.html.SPAN
+import kotlinx.html.Tag
+import kotlinx.html.TagConsumer
 import kotlinx.html.js.onClickFunction
 import kotlinx.html.role
 import org.w3c.dom.events.Event
@@ -16,13 +18,13 @@ import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.NoArgEventHandler
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDomComponent
+import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.component.DomComponent
+import react.bootstrap.lib.component.SimpleDomComponent
 import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
 import react.bootstrap.lib.react.isComponent
 import react.bootstrap.lib.react.mapComponents
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.bootstrap.lib.react.rprops.childrenArray
 import react.bootstrap.lib.react.rprops.requireProperties
 import react.bootstrap.utilities.close.close
 import react.dom.RDOMBuilder
@@ -30,14 +32,24 @@ import react.setState
 import kotlin.reflect.KClass
 import react.bootstrap.content.typography.heading.Heading as BaseHeading
 
-sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(props: P) : AbstractDomComponent<T, P, S>(props) {
+sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(
+    props: P
+) : DomComponent<Alert.DomBuilder<T>, T, P, S>(props, props.tag) {
+    init {
+        props.requireProperties(props::tag)
+    }
+
+    class DomBuilder<out T : Tag>(factory: (TagConsumer<Unit>) -> T) : RDOMBuilder<T>(factory)
+
+    override fun buildBuilder(builderFactory: (TagConsumer<Unit>) -> T): DomBuilder<T> = DomBuilder(builderFactory)
+
     class Static<T : HtmlBlockTag>(props: Props<T>) : Alert<T, Static.Props<T>, RState>(props) {
-        override fun RDOMBuilder<T>.build() {
+        override fun DomBuilder<T>.build() {
             attrs {
                 role = "alert"
             }
 
-            children()
+            addChildren()
         }
 
         interface Props<T : HtmlBlockTag> : Alert.Props<T>
@@ -111,15 +123,15 @@ sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(props: P) :
             render(props.classes.addOrInit(buildClasses()))
         }
 
-        override fun RDOMBuilder<T>.build() {
+        override fun DomBuilder<T>.build() {
             attrs {
                 role = "alert"
             }
 
             // Check if the lib-user added a closingElement manually
-            if (props.childrenArray.any { it.isComponent<ClosingElement<*>>() }) {
+            if (childrenArray.any { it.isComponent<ClosingElement<*>>() }) {
                 childList.addAll(
-                    props.childrenArray.mapComponents<ClosingElement.Props<DomTag>, ClosingElement<DomTag>> { _, oldProps ->
+                    childrenArray.mapComponents<ClosingElement.Props<DomTag>, ClosingElement<DomTag>> { _, oldProps ->
                         attrs {
                             this.handler = {
                                 // First apply the handler so it applies a possible onClickFunction.
@@ -139,7 +151,7 @@ sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(props: P) :
                     }
                 )
             } else {
-                children()
+                addChildren()
                 // No [ClosingElement] in the children. So we add one and bind the eventHandler
                 abstractDomComponent<SPAN, ClosingElement.Props<SPAN>>(ClosingElement::class)
                     .domHandler {
@@ -192,10 +204,6 @@ sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(props: P) :
             override fun buildClasses(): Set<ClassNames> = emptySet()
 
             interface Props<T : DomTag> : AbstractDomComponent.Props<T>
-
-            override fun RDOMBuilder<T>.build() {
-                children()
-            }
         }
 
         @Suppress("UNCHECKED_CAST")
@@ -227,14 +235,15 @@ sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(props: P) :
         WARNING(ClassNames.ALERT_WARNING);
     }
 
-    interface Props<T : HtmlBlockTag> : AbstractDomComponent.Props<T> {
+    interface Props<T : HtmlBlockTag> : DomComponent.Props<DomBuilder<T>, T> {
         var variant: Variants
+        var tag: KClass<T>
     }
 
-    class Link(props: Props) : DomComponent<A, Link.Props, RState>(props, A::class) {
+    class Link(props: Props) : SimpleDomComponent<A, Link.Props, RState>(props, A::class) {
         override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.ALERT_LINK)
 
-        interface Props : WithGlobalAttributes, AbstractDomComponent.Props<A>
+        interface Props : SimpleDomComponent.Props<A>
     }
 
     class Heading<T : DomTag>(props: Props<T>) : BaseHeading<T, BaseHeading.Props<T>>(props) {

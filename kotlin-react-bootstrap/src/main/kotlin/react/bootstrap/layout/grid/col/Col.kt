@@ -8,7 +8,6 @@ import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.EQ
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDomComponent
-import react.dom.RDOMBuilder
 
 class Col<T : CommonAttributeGroupFacade>(props: Props<T>) : AbstractDomComponent<T, Col.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> {
@@ -27,10 +26,6 @@ class Col<T : CommonAttributeGroupFacade>(props: Props<T>) : AbstractDomComponen
         }
 
         return colClasses
-    }
-
-    override fun RDOMBuilder<T>.build() {
-        children()
     }
 
     interface Props<T : CommonAttributeGroupFacade> : AbstractDomComponent.Props<T> {

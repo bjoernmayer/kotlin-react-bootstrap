@@ -5,14 +5,9 @@ import react.RState
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDomComponent
 import react.bootstrap.lib.component.ClassNameEnum
-import react.dom.RDOMBuilder
 
 class Container<T : HtmlBlockTag>(props: Props<T>) : AbstractDomComponent<T, Container.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> = setOf(props.viscosity?.className ?: ClassNames.CONTAINER)
-
-    override fun RDOMBuilder<T>.build() {
-        children()
-    }
 
     enum class Viscosities(override val className: ClassNames) : ClassNameEnum {
         FLUID(ClassNames.CONTAINER_FLUID),

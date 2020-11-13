@@ -3,12 +3,12 @@ package react.bootstrap.site.lib.codepoet
 internal object IndentTool {
     private const val indent = "    "
 
-    fun indentLines(context: String) =
+    fun indentLines(context: String, level: Int = 1) =
         context
             .split("\n")
             .joinToString("\n") {
                 if (it.isNotEmpty()) {
-                    "${getIndent(1)}$it"
+                    "${getIndent(level)}$it"
                 } else {
                     it
                 }

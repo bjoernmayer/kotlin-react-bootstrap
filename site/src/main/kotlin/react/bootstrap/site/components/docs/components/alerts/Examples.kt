@@ -88,8 +88,8 @@ eight __required__ variants (e.g., `${Alert.Variants.SUCCESS.nestedName}`).
         Markdown {
             //language=Markdown
             +"""
-Use the `${RElementBuilder<Alert.Props<*>>::link.name}`-function (only available inside
-`RElementBuilder<${Alert.Props::class.nestedName}>` to quickly provide matching colored links within any alert.
+Use the `${Alert.DomBuilder<*>::link.name}`-function (only available inside
+`${Alert.DomBuilder::class.nestedName}` to quickly provide matching colored links within any alert.
             """
         }
         liveExample {
@@ -104,7 +104,7 @@ Use the `${RElementBuilder<Alert.Props<*>>::link.name}`-function (only available
         }
         codeExample {
             +Imports.builder()
-                .addImport("components.alert.${RElementBuilder<Alert.Props<*>>::link.name}")
+                .addImport("components.alert.${Alert.DomBuilder<*>::link.name}")
                 .addImport("components.alert.Alerts")
                 .build()
             variants.forEach { (variant, function) ->
@@ -113,7 +113,7 @@ Use the `${RElementBuilder<Alert.Props<*>>::link.name}`-function (only available
                     .setLambdaArgument(
                         plusString("A simple ${variant.name.toLowerCase()} alert with "),
                         "\n",
-                        FunCall.builder(RElementBuilder<Alert.Props<*>>::link, FunCall.Style.INLINE)
+                        FunCall.builder(Alert.DomBuilder<*>::link, FunCall.Style.INLINE)
                             .addArgument("href", "#")
                             .setLambdaArgument(plusString("an example link"))
                             .build(),
@@ -206,40 +206,49 @@ alerts.
             +Imports.builder()
                 .addImport("components.alert.Alerts")
                 .build()
-            +FunCall.builder(Alerts.dismissible::warning)
+            +FunCall.builder(Alerts.dismissible::warning, putArgumentsOnSeparateLine = true)
                 .nestedBy(RBuilder::Alerts)
                 .nestedBy(AlertBuilder::dismissible)
                 .addArgument("fade", true)
+                .addArgument(
+                    "props",
+                    LambdaValue(
+                        buildString {
+                            append(
+                                Assignment.builder(Alert.Dismissible.Props<*>::onClose)
+                                    .value(
+                                        LambdaValue(
+                                            FunCall.builder(Console::log, FunCall.Style.INLINE)
+                                                .nestedBy(::console)
+                                                .addArgument(
+                                                    "Close on Alert was clicked. Timestamp: " +
+                                                        "\${currentTimeMillis()}"
+                                                )
+                                                .build()
+                                        )
+                                    )
+                                    .build()
+                            )
+
+                            append(
+                                Assignment.builder(Alert.Dismissible.Props<*>::onClosed)
+                                    .value(
+                                        LambdaValue(
+                                            FunCall.builder(Console::log, FunCall.Style.INLINE)
+                                                .nestedBy(::console)
+                                                .addArgument(
+                                                    "Alert was dismissed. Timestamp: \${currentTimeMillis()}"
+                                                )
+                                                .build()
+                                        )
+                                    )
+                                    .build()
+                            )
+                        },
+                        LambdaValue.Style.ARGUMENT_BLOCK
+                    )
+                )
                 .setLambdaArgument(
-                    FunCall.builder(RElementBuilder<RProps>::attrs)
-                        .setLambdaArgument(
-                            Assignment.builder(Alert.Dismissible.Props<*>::onClose)
-                                .value(
-                                    LambdaValue(
-                                        FunCall.builder(Console::log, FunCall.Style.INLINE)
-                                            .nestedBy(::console)
-                                            .addArgument(
-                                                "Close on Alert was clicked. Timestamp: " +
-                                                    "\${currentTimeMillis()}"
-                                            )
-                                            .build()
-                                    )
-                                )
-                                .build(),
-                            Assignment.builder(Alert.Dismissible.Props<*>::onClosed)
-                                .value(
-                                    LambdaValue(
-                                        FunCall.builder(Console::log, FunCall.Style.INLINE)
-                                            .nestedBy(::console)
-                                            .addArgument(
-                                                "Alert was dismissed. Timestamp: \${currentTimeMillis()}"
-                                            )
-                                            .build()
-                                    )
-                                )
-                                .build(),
-                        )
-                        .build(),
                     FunCall.builder(RBuilder::strong, FunCall.Style.INLINE, appendSemicolon = true)
                         .setLambdaArgument(plusString("Holy guacamole!"))
                         .build(),

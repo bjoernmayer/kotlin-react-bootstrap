@@ -1,11 +1,13 @@
 package react.bootstrap.lib.component
 
+import kotlinx.html.TagConsumer
 import react.RBuilder
 import react.RState
 import react.ReactElement
 import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.DomTag
 import react.bootstrap.lib.react.rprops.requireProperties
+import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
 /**
@@ -18,27 +20,29 @@ import kotlin.reflect.KClass
  */
 abstract class AbstractDomComponent<T : DomTag, P : AbstractDomComponent.Props<T>, S : RState>(
     props: P
-) : DomComponent<T, P, S>(props, props.tag) {
+) : DomComponent<RDOMBuilder<T>, T, P, S>(props, props.tag) {
     init {
         props.requireProperties(props::tag)
     }
 
-    interface Props<T : DomTag> : DomComponent.Props<T> {
+    override fun buildBuilder(builderFactory: (TagConsumer<Unit>) -> T): RDOMBuilder<T> = RDOMBuilder(builderFactory)
+
+    interface Props<T : DomTag> : DomComponent.Props<RDOMBuilder<T>, T> {
         var tag: KClass<T>
     }
 
-    class Builder<T : DomTag, P : Props<T>> constructor(
+    class ComponentBuilder<T : DomTag, P : Props<T>> constructor(
         builder: RBuilder,
         tag: KClass<T>,
         component: KClass<out AbstractDomComponent<T, P, *>>
-    ) : DomComponent.Builder<T, P>(builder, tag, component) {
+    ) : DomComponent.ComponentBuilder<RDOMBuilder<T>, T, P>(builder, tag, component) {
         override fun build(): ReactElement =
             builder.child(component) {
                 attrs {
-                    classes = this@Builder.classes.splitClassesToSet()
-                    handler = this@Builder.domHandler
-                    tag = this@Builder.tag
-                    this@Builder.propHandler.invoke(this)
+                    classes = this@ComponentBuilder.classes.splitClassesToSet()
+                    handler = this@ComponentBuilder.domHandler
+                    tag = this@ComponentBuilder.tag
+                    this@ComponentBuilder.propHandler.invoke(this)
                 }
             }
     }
@@ -47,6 +51,6 @@ abstract class AbstractDomComponent<T : DomTag, P : AbstractDomComponent.Props<T
         @Suppress("UNCHECKED_CAST")
         inline fun <reified T : DomTag, P : Props<T>> RBuilder.abstractDomComponent(
             componentKlazz: KClass<out AbstractDomComponent<*, *, *>>
-        ) = Builder(this, T::class, componentKlazz as KClass<AbstractDomComponent<T, P, *>>)
+        ) = ComponentBuilder(this, T::class, componentKlazz as KClass<AbstractDomComponent<T, P, *>>)
     }
 }

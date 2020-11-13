@@ -7,7 +7,6 @@ import react.RState
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDomComponent
-import react.dom.RDOMBuilder
 
 class Row<T : CommonAttributeGroupFacade>(props: Props<T>) : AbstractDomComponent<T, Row.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> {
@@ -26,10 +25,6 @@ class Row<T : CommonAttributeGroupFacade>(props: Props<T>) : AbstractDomComponen
         }
 
         return rowClasses
-    }
-
-    override fun RDOMBuilder<T>.build() {
-        children()
     }
 
     interface Props<T : CommonAttributeGroupFacade> : AbstractDomComponent.Props<T> {

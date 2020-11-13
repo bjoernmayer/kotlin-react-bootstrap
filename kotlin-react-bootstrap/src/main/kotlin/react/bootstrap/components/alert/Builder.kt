@@ -30,6 +30,7 @@ import react.bootstrap.lib.PropHandler
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
 import react.bootstrap.lib.component.DomComponent.Companion.domComponent
+import react.bootstrap.lib.component.SimpleDomComponent.Companion.simpleDomComponent
 
 class AlertBuilder(override val builder: RBuilder) : Builder {
     /**
@@ -42,12 +43,13 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
         variant: Alert.Variants,
         classes: String? = null,
         props: PropHandler<Alert.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
-    ): ReactElement = abstractDomComponent<DIV, Alert.Props<DIV>>(Alert.Static::class)
+        block: AlertDomHandler<DIV>
+    ): ReactElement = domComponent<Alert.DomBuilder<DIV>, DIV, Alert.Props<DIV>>(Alert.Static::class)
         .classes(classes)
         .propHandler {
             this.variant = variant
             this.classes = classes.splitClassesToSet()
+            this.tag = DIV::class
 
             props()
         }
@@ -65,12 +67,13 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
         variant: Alert.Variants,
         classes: String? = null,
         crossinline props: PropHandler<Alert.Props<T>> = { },
-        noinline block: RDOMHandler<T>
-    ): ReactElement = abstractDomComponent<T, Alert.Props<T>>(Alert.Static::class)
+        noinline block: AlertDomHandler<T>
+    ): ReactElement = domComponent<Alert.DomBuilder<T>, T, Alert.Props<T>>(Alert.Static::class)
         .classes(classes)
         .propHandler {
             this.variant = variant
             this.classes = classes.splitClassesToSet()
+            this.tag = T::class
 
             props()
         }
@@ -85,7 +88,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     fun danger(
         classes: String? = null,
         props: PropHandler<Alert.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement = builder.alert(DANGER, classes, props, block)
 
     /**
@@ -97,7 +100,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     inline fun <reified T : HtmlBlockTag> danger(
         classes: String? = null,
         noinline props: PropHandler<Alert.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement = builder.alert(DANGER, classes, props, block)
 
     /**
@@ -108,7 +111,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     fun dark(
         classes: String? = null,
         props: PropHandler<Alert.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement = builder.alert(DARK, classes, props, block)
 
     /**
@@ -120,7 +123,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     inline fun <reified T : HtmlBlockTag> dark(
         classes: String? = null,
         noinline props: PropHandler<Alert.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement = builder.alert(DARK, classes, props, block)
 
     /**
@@ -131,7 +134,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     fun info(
         classes: String? = null,
         props: PropHandler<Alert.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement = builder.alert(INFO, classes, props, block)
 
     /**
@@ -143,7 +146,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     inline fun <reified T : HtmlBlockTag> info(
         classes: String? = null,
         noinline props: PropHandler<Alert.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement = builder.alert(INFO, classes, props, block)
 
     /**
@@ -154,7 +157,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     fun light(
         classes: String? = null,
         props: PropHandler<Alert.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement =
         builder.alert(LIGHT, classes, props, block)
 
@@ -167,7 +170,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     inline fun <reified T : HtmlBlockTag> light(
         classes: String? = null,
         noinline props: PropHandler<Alert.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement =
         builder.alert(LIGHT, classes, props, block)
 
@@ -179,7 +182,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     fun primary(
         classes: String? = null,
         props: PropHandler<Alert.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement =
         builder.alert(PRIMARY, classes, props, block)
 
@@ -192,7 +195,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     inline fun <reified T : HtmlBlockTag> primary(
         classes: String? = null,
         noinline props: PropHandler<Alert.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement =
         builder.alert(PRIMARY, classes, props, block)
 
@@ -204,7 +207,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     fun secondary(
         classes: String? = null,
         props: PropHandler<Alert.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement =
         builder.alert(SECONDARY, classes, props, block)
 
@@ -217,7 +220,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     inline fun <reified T : HtmlBlockTag> secondary(
         classes: String? = null,
         noinline props: PropHandler<Alert.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement =
         builder.alert(SECONDARY, classes, props, block)
 
@@ -229,7 +232,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     fun success(
         classes: String? = null,
         props: PropHandler<Alert.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement =
         builder.alert(SUCCESS, classes, props, block)
 
@@ -242,7 +245,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     inline fun <reified T : HtmlBlockTag> success(
         classes: String? = null,
         noinline props: PropHandler<Alert.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement =
         builder.alert(SUCCESS, classes, props, block)
 
@@ -254,7 +257,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     fun warning(
         classes: String? = null,
         props: PropHandler<Alert.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement =
         builder.alert(WARNING, classes, props, block)
 
@@ -267,7 +270,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     inline fun <reified T : HtmlBlockTag> warning(
         classes: String? = null,
         noinline props: PropHandler<Alert.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement =
         builder.alert(WARNING, classes, props, block)
 
@@ -287,13 +290,14 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = { },
-        block: RDOMHandler<DIV>,
-    ): ReactElement = abstractDomComponent<DIV, Alert.Dismissible.Props<DIV>>(Alert.Dismissible::class)
+        block: AlertDomHandler<DIV>,
+    ): ReactElement = domComponent<Alert.DomBuilder<DIV>, DIV, Alert.Dismissible.Props<DIV>>(Alert.Dismissible::class)
         .classes(classes)
         .propHandler {
             this.variant = variant
             this.classes = classes.splitClassesToSet()
             this.fade = fade
+            this.tag = DIV::class
 
             props()
         }
@@ -313,13 +317,14 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         crossinline props: PropHandler<Alert.Dismissible.Props<T>> = { },
-        noinline block: RDOMHandler<T>,
-    ): ReactElement = abstractDomComponent<T, Alert.Dismissible.Props<T>>(Alert.Dismissible::class)
+        noinline block: AlertDomHandler<T>,
+    ): ReactElement = domComponent<Alert.DomBuilder<T>, T, Alert.Dismissible.Props<T>>(Alert.Dismissible::class)
         .classes(classes)
         .propHandler {
             this.variant = variant
             this.classes = classes.splitClassesToSet()
             this.fade = fade
+            this.tag = T::class
 
             props()
         }
@@ -336,7 +341,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement = builder.alert(DANGER, fade, classes, props, block)
 
     /**
@@ -350,7 +355,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         noinline props: PropHandler<Alert.Dismissible.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement = builder.alert(DANGER, fade, classes, props, block)
 
     /**
@@ -363,7 +368,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement = builder.alert(DARK, fade, classes, props, block)
 
     /**
@@ -377,7 +382,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         noinline props: PropHandler<Alert.Dismissible.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement = builder.alert(DARK, fade, classes, props, block)
 
     /**
@@ -390,7 +395,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement = builder.alert(INFO, fade, classes, props, block)
 
     /**
@@ -404,7 +409,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         noinline props: PropHandler<Alert.Dismissible.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement = builder.alert(INFO, fade, classes, props, block)
 
     /**
@@ -417,7 +422,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement = builder.alert(LIGHT, fade, classes, props, block)
 
     /**
@@ -431,7 +436,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         noinline props: PropHandler<Alert.Dismissible.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement = builder.alert(LIGHT, fade, classes, props, block)
 
     /**
@@ -444,7 +449,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement = builder.alert(PRIMARY, fade, classes, props, block)
 
     /**
@@ -458,7 +463,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         noinline props: PropHandler<Alert.Dismissible.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement = builder.alert(PRIMARY, fade, classes, props, block)
 
     /**
@@ -471,7 +476,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement = builder.alert(SECONDARY, fade, classes, props, block)
 
     /**
@@ -485,7 +490,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         noinline props: PropHandler<Alert.Dismissible.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement = builder.alert(SECONDARY, fade, classes, props, block)
 
     /**
@@ -498,7 +503,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement = builder.alert(SUCCESS, fade, classes, props, block)
 
     /**
@@ -512,7 +517,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         noinline props: PropHandler<Alert.Dismissible.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement = builder.alert(SUCCESS, fade, classes, props, block)
 
     /**
@@ -525,7 +530,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = { },
-        block: RDOMHandler<DIV>
+        block: AlertDomHandler<DIV>
     ): ReactElement = builder.alert(WARNING, fade, classes, props, block)
 
     /**
@@ -539,14 +544,15 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         fade: Boolean = false,
         classes: String? = null,
         noinline props: PropHandler<Alert.Dismissible.Props<T>> = { },
-        noinline block: RDOMHandler<T>
+        noinline block: AlertDomHandler<T>
     ): ReactElement = builder.alert(WARNING, fade, classes, props, block)
 }
 
 val RBuilder.Alerts
     get() = AlertBuilder(this)
 
-fun RBuilder.closingElement(
+// Todo: A minor optimisation: There should be another DomBuilder only for Dismissible to reduce visibility
+fun Alert.DomBuilder<*>.closingElement(
     props: PropHandler<Alert.Dismissible.ClosingElement.Props<SPAN>> = { },
     block: RDOMHandler<SPAN>
 ): ReactElement = abstractDomComponent<SPAN, Alert.Dismissible.ClosingElement.Props<SPAN>>(
@@ -556,7 +562,8 @@ fun RBuilder.closingElement(
     .domHandler(block)
     .build()
 
-inline fun <reified T : DomTag> RBuilder.closingElement(
+// Todo: A minor optimisation: There should be another DomBuilder only for Dismissible to reduce visibility
+inline fun <reified T : DomTag> Alert.DomBuilder<*>.closingElement(
     noinline props: PropHandler<Alert.Dismissible.ClosingElement.Props<T>> = { },
     noinline block: RDOMHandler<T>
 ): ReactElement = abstractDomComponent<T, Alert.Dismissible.ClosingElement.Props<T>>(
@@ -569,13 +576,13 @@ inline fun <reified T : DomTag> RBuilder.closingElement(
 /**
  * Creates a [Alert.Link] element.
  */
-fun RBuilder.link(
+fun Alert.DomBuilder<*>.link(
     href: String? = null,
     target: String? = null,
     classes: String? = null,
     props: PropHandler<Alert.Link.Props> = { },
     block: RDOMHandler<A>
-): ReactElement = domComponent<A, Alert.Link.Props>(Alert.Link::class)
+): ReactElement = simpleDomComponent<A, Alert.Link.Props>(Alert.Link::class)
     .classes(classes)
     .propHandler(props)
     .domHandler {
@@ -598,7 +605,7 @@ fun RBuilder.link(
  * @param T Tag Type to be used to render this [Heading].
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified T : DomTag> RBuilder.heading(
+inline fun <reified T : DomTag> Alert.DomBuilder<*>.heading(
     size: Heading.Sizes,
     classes: String?,
     crossinline props: PropHandler<Heading.Props<T>> = { },
@@ -616,7 +623,7 @@ inline fun <reified T : DomTag> RBuilder.heading(
 /**
  * Creates a [Alert.Heading] element.
  */
-fun RBuilder.h1(
+fun Alert.DomBuilder<*>.h1(
     classes: String? = null,
     props: PropHandler<Heading.Props<H1>> = { },
     block: RDOMHandler<H1>
@@ -627,7 +634,7 @@ fun RBuilder.h1(
  *
  * @param T Tag Type that should be used to render this [Alert.Heading]
  */
-inline fun <reified T : DomTag> RBuilder.h1(
+inline fun <reified T : DomTag> Alert.DomBuilder<*>.h1(
     classes: String? = null,
     crossinline props: PropHandler<Heading.Props<T>> = { },
     noinline block: RDOMHandler<T>
@@ -636,7 +643,7 @@ inline fun <reified T : DomTag> RBuilder.h1(
 /**
  * Creates a [Alert.Heading] element.
  */
-fun RBuilder.h2(
+fun Alert.DomBuilder<*>.h2(
     classes: String? = null,
     props: PropHandler<Heading.Props<H2>> = { },
     block: RDOMHandler<H2>
@@ -647,7 +654,7 @@ fun RBuilder.h2(
  *
  * @param T Tag Type that should be used to render this [Alert.Heading]
  */
-inline fun <reified T : DomTag> RBuilder.h2(
+inline fun <reified T : DomTag> Alert.DomBuilder<*>.h2(
     classes: String? = null,
     crossinline props: PropHandler<Heading.Props<T>> = { },
     noinline block: RDOMHandler<T>
@@ -656,7 +663,7 @@ inline fun <reified T : DomTag> RBuilder.h2(
 /**
  * Creates a [Alert.Heading] element.
  */
-fun RBuilder.h3(
+fun Alert.DomBuilder<*>.h3(
     classes: String? = null,
     props: PropHandler<Heading.Props<H3>> = { },
     block: RDOMHandler<H3>
@@ -667,7 +674,7 @@ fun RBuilder.h3(
  *
  * @param T Tag Type that should be used to render this [Alert.Heading]
  */
-inline fun <reified T : DomTag> RBuilder.h3(
+inline fun <reified T : DomTag> Alert.DomBuilder<*>.h3(
     classes: String? = null,
     crossinline props: PropHandler<Heading.Props<T>> = { },
     noinline block: RDOMHandler<T>
@@ -676,7 +683,7 @@ inline fun <reified T : DomTag> RBuilder.h3(
 /**
  * Creates a [Alert.Heading] element.
  */
-fun RBuilder.h4(
+fun Alert.DomBuilder<*>.h4(
     classes: String? = null,
     props: PropHandler<Heading.Props<H4>> = { },
     block: RDOMHandler<H4>
@@ -687,7 +694,7 @@ fun RBuilder.h4(
  *
  * @param T Tag Type that should be used to render this [Alert.Heading]
  */
-inline fun <reified T : DomTag> RBuilder.h4(
+inline fun <reified T : DomTag> Alert.DomBuilder<*>.h4(
     classes: String? = null,
     crossinline props: PropHandler<Heading.Props<T>> = { },
     noinline block: RDOMHandler<T>
@@ -696,7 +703,7 @@ inline fun <reified T : DomTag> RBuilder.h4(
 /**
  * Creates a [Alert.Heading] element.
  */
-fun RBuilder.h5(
+fun Alert.DomBuilder<*>.h5(
     classes: String? = null,
     props: PropHandler<Heading.Props<H5>> = { },
     block: RDOMHandler<H5>
@@ -707,7 +714,7 @@ fun RBuilder.h5(
  *
  * @param T Tag Type that should be used to render this [Alert.Heading]
  */
-inline fun <reified T : DomTag> RBuilder.h5(
+inline fun <reified T : DomTag> Alert.DomBuilder<*>.h5(
     classes: String? = null,
     crossinline props: PropHandler<Heading.Props<T>> = { },
     noinline block: RDOMHandler<T>
@@ -716,7 +723,7 @@ inline fun <reified T : DomTag> RBuilder.h5(
 /**
  * Creates a [Alert.Heading] element.
  */
-fun RBuilder.h6(
+fun Alert.DomBuilder<*>.h6(
     classes: String? = null,
     props: PropHandler<Heading.Props<H6>> = { },
     block: RDOMHandler<H6>
@@ -727,7 +734,7 @@ fun RBuilder.h6(
  *
  * @param T Tag Type that should be used to render this [Alert.Heading]
  */
-inline fun <reified T : DomTag> RBuilder.h6(
+inline fun <reified T : DomTag> Alert.DomBuilder<*>.h6(
     classes: String? = null,
     crossinline props: PropHandler<Heading.Props<T>> = { },
     noinline block: RDOMHandler<T>

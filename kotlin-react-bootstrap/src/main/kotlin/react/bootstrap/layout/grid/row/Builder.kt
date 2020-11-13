@@ -5,7 +5,6 @@ package react.bootstrap.layout.grid.row
 import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.DIV
 import react.RBuilder
-import react.RHandler
 import react.ReactElement
 import react.bootstrap.lib.PropHandler
 import react.bootstrap.lib.RDOMHandler

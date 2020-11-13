@@ -17,10 +17,18 @@ internal data class LambdaValue(val content: String, val style: Style = Style.BL
             appendLine(IndentTool.indentLines(content))
             appendLine("}")
         }
+
+        if (style == Style.ARGUMENT_BLOCK) {
+            appendLine("{")
+            appendLine(IndentTool.indentLines(content, 2))
+            append(IndentTool.getIndent(1))
+            append("}")
+        }
     }
 
     internal enum class Style {
         INLINE,
-        BLOCK
+        BLOCK,
+        ARGUMENT_BLOCK
     }
 }

@@ -3,9 +3,10 @@
 package react.bootstrap.site.components.docs.components.alerts
 
 import kotlinx.html.A
+import kotlinx.html.DIV
+import kotlinx.html.HtmlBlockTag
 import kotlinx.html.SPAN
 import react.RBuilder
-import react.RElementBuilder
 import react.ReactElement
 import react.bootstrap.components.alert.Alert
 import react.bootstrap.components.alert.AlertBuilder
@@ -46,16 +47,24 @@ internal class Reference : SectionComponent() {
             Alert.Variants.SUCCESS to Alerts::success,
             Alert.Variants.WARNING to Alerts::warning
         ).forEach { (variant, function) ->
-            val variantName = variant::class.simpleName!!.toLowerCase().capitalize()
+            val variantName = variant.name.toLowerCase().capitalize()
             subSectionTitle(function.name)
-            p {
-                +"Adds an alert component with the $variantName context."
+            Markdown {
+                //language=Markdown
+                +"""
+Creates an `alert` component with `$variantName` context.
+                """
             }
             codeExample {
                 +FunSpec.builder(function)
                     .nestedBy(RBuilder::Alerts)
                     .addParameter<String?>("classes", null)
-                    .addParameter("block", Generic("RHandler", Alert.Props::class))
+                    .addParameter(
+                        "props",
+                        Generic("PropHandler", Alert.Props::class),
+                        default = LambdaValue("", LambdaValue.Style.INLINE).build()
+                    )
+                    .addParameter("block", Generic("AlertDomHandler", DIV::class))
                     .returns("ReactElement")
                     .build()
                 +"\n"
@@ -64,13 +73,55 @@ internal class Reference : SectionComponent() {
                     .nestedBy(AlertBuilder::dismissible)
                     .addParameter("fade", false)
                     .addParameter<String?>("classes", null)
-                    .addParameter("block", Generic("RHandler", Alert.Dismissible.Props::class))
+                    .addParameter(
+                        "props",
+                        Generic("PropHandler", Alert.Dismissible.Props::class),
+                        default = LambdaValue("", LambdaValue.Style.INLINE).build()
+                    )
+                    .addParameter("block", Generic("AlertDomHandler", DIV::class))
+                    .returns("ReactElement")
+                    .build()
+            }
+            Markdown {
+                //language=Markdown
+                +"""
+Creates a generic `alert` component with $variantName context.
+                """
+            }
+            codeExample {
+                +FunSpec.builder(function, inline = true)
+                    .nestedBy(RBuilder::Alerts)
+                    .addTypeParameter("T", HtmlBlockTag::class, true)
+                    .addParameter<String?>("classes", null)
+                    .addParameter(
+                        "props",
+                        Generic("PropHandler", Alert.Props::class),
+                        default = LambdaValue("", LambdaValue.Style.INLINE).build(),
+                        modifier = CROSSINLINE
+                    )
+                    .addParameter("block", Generic("AlertDomHandler", "T"), modifier = NOINLINE)
+                    .returns("ReactElement")
+                    .build()
+                +"\n"
+                +FunSpec.builder(function, inline = true)
+                    .nestedBy(RBuilder::Alerts)
+                    .addTypeParameter("T", HtmlBlockTag::class, true)
+                    .nestedBy(AlertBuilder::dismissible)
+                    .addParameter("fade", false)
+                    .addParameter<String?>("classes", null)
+                    .addParameter(
+                        "props",
+                        Generic("PropHandler", Alert.Dismissible.Props::class),
+                        default = LambdaValue("", LambdaValue.Style.INLINE).build(),
+                        modifier = CROSSINLINE
+                    )
+                    .addParameter("block", Generic("AlertDomHandler", "T"), modifier = NOINLINE)
                     .returns("ReactElement")
                     .build()
             }
         }
 
-        subSectionTitle(RElementBuilder<Alert.Props<*>>::link.name)
+        subSectionTitle(Alert.DomBuilder<*>::link.name)
         Markdown {
             //language=Markdown
             +"""
@@ -78,14 +129,14 @@ Creates a `${Alert.Link::class.nestedName}` element.
             """
         }
         codeExample {
-            +FunSpec.builder(RElementBuilder<Alert.Props<*>>::link)
-                .nestedByGeneric<RElementBuilder<*>, Alert.Props<*>>()
+            +FunSpec.builder(Alert.DomBuilder<*>::link)
+                .nestedBy(Generic(Alert.DomBuilder::class, "*"))
                 .addParameter<String?>("href", null)
                 .addParameter<String?>("target", null)
                 .addParameter<String?>("classes", null)
                 .addParameter(
-                    "handler",
-                    Generic("RHandler", Alert.Link.Props::class),
+                    "props",
+                    Generic("PropHandler", Alert.Link.Props::class),
                     default = LambdaValue("", LambdaValue.Style.INLINE).build()
                 )
                 .addParameter("block", Generic("RDOMHandler", A::class))
@@ -106,13 +157,13 @@ Creates a generic `${Alert.Heading::class.nestedName}` element.
                 },
                 inline = true
             )
-                .nestedByGeneric<RElementBuilder<*>, Alert.Props<*>>()
+                .nestedBy(Generic(Alert.DomBuilder::class, "*"))
                 .addTypeParameter("T", DomTag::class, true)
                 .addParameter<Heading.Sizes>("size")
                 .addParameter<String?>("classes", null)
                 .addParameter(
-                    "handler",
-                    Generic("RHandler", Generic(Heading.Props::class, "T").build()),
+                    "props",
+                    Generic("PropHandler", Generic(Heading.Props::class, "T").build()),
                     default = LambdaValue("", LambdaValue.Style.INLINE).build(),
                     modifier = CROSSINLINE
                 )
@@ -121,12 +172,12 @@ Creates a generic `${Alert.Heading::class.nestedName}` element.
                 .build()
         }
         listOf(
-            RElementBuilder<Alert.Props<*>>::h1,
-            RElementBuilder<Alert.Props<*>>::h2,
-            RElementBuilder<Alert.Props<*>>::h3,
-            RElementBuilder<Alert.Props<*>>::h4,
-            RElementBuilder<Alert.Props<*>>::h5,
-            RElementBuilder<Alert.Props<*>>::h6,
+            Alert.DomBuilder<*>::h1,
+            Alert.DomBuilder<*>::h2,
+            Alert.DomBuilder<*>::h3,
+            Alert.DomBuilder<*>::h4,
+            Alert.DomBuilder<*>::h5,
+            Alert.DomBuilder<*>::h6,
         ).forEach { function ->
             subSectionTitle(function.name)
             Markdown {
@@ -137,11 +188,11 @@ Creates a `${Alert.Heading::class.nestedName}` element.
             }
             codeExample {
                 +FunSpec.builder(function)
-                    .nestedByGeneric<RElementBuilder<*>, Alert.Props<*>>()
+                    .nestedBy(Generic(Alert.DomBuilder::class, "*"))
                     .addParameter<String?>("classes", null)
                     .addParameter(
-                        "handler",
-                        Generic("RHandler", Generic(Heading.Props::class, function.name.toUpperCase()).build()),
+                        "props",
+                        Generic("PropHandler", Generic(Heading.Props::class, function.name.toUpperCase()).build()),
                         default = LambdaValue("", LambdaValue.Style.INLINE).build()
                     )
                     .addParameter("block", Generic("RDOMHandler", function.name.toUpperCase()))
@@ -151,17 +202,17 @@ Creates a `${Alert.Heading::class.nestedName}` element.
             Markdown {
                 //language=Markdown
                 +"""
-Creates a `${Alert.Heading::class.nestedName}` and uses `T` to render the element.
+Creates a generic `${Alert.Heading::class.nestedName}` element.
             """
             }
             codeExample {
                 +FunSpec.builder(function, inline = true)
-                    .nestedByGeneric<RElementBuilder<*>, Alert.Props<*>>()
+                    .nestedBy(Generic(Alert.DomBuilder::class, "*"))
                     .addTypeParameter("T", DomTag::class, true)
                     .addParameter<String?>("classes", null)
                     .addParameter(
-                        "handler",
-                        Generic("RHandler", Generic(Heading.Props::class, "T").build()),
+                        "props",
+                        Generic("PropHandler", Generic(Heading.Props::class, "T").build()),
                         default = LambdaValue("", LambdaValue.Style.INLINE).build(),
                         modifier = CROSSINLINE
                     )
@@ -180,10 +231,13 @@ Creates a `${Alert.Heading::class.nestedName}` and uses `T` to render the elemen
                     override val name: String = "closingElement"
                 }
             )
-                .nestedByGeneric<RElementBuilder<*>, Alert.Dismissible.Props<*>>()
+                .nestedBy(Generic(Alert.DomBuilder::class, "*"))
                 .addParameter(
-                    "handler",
-                    Generic("RHandler", Generic(Alert.Dismissible.ClosingElement.Props::class, SPAN::class).build()),
+                    "props",
+                    Generic(
+                        "PropHandler",
+                        Generic(Alert.Dismissible.ClosingElement.Props::class, SPAN::class).build()
+                    ),
                     default = LambdaValue("", LambdaValue.Style.INLINE).build()
                 )
                 .addParameter("block", Generic("RDOMHandler", SPAN::class))
@@ -196,11 +250,14 @@ Creates a `${Alert.Heading::class.nestedName}` and uses `T` to render the elemen
                 },
                 inline = true
             )
-                .nestedByGeneric<RElementBuilder<*>, Alert.Dismissible.Props<*>>()
+                .nestedBy(Generic(Alert.DomBuilder::class, "*"))
                 .addTypeParameter("T", DomTag::class, true)
                 .addParameter(
-                    "handler",
-                    Generic("RHandler", Generic(Alert.Dismissible.ClosingElement.Props::class, SPAN::class).build()),
+                    "props",
+                    Generic(
+                        "PropHandler",
+                        Generic(Alert.Dismissible.ClosingElement.Props::class, SPAN::class).build()
+                    ),
                     default = LambdaValue("", LambdaValue.Style.INLINE).build(),
                     modifier = NOINLINE
                 )

@@ -2,7 +2,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,500,700);
 
 
-
 body {
     font-family: "Open Sans", sans-serif;
 }
@@ -30,6 +29,11 @@ h1, h2, h3, h4, h5 {
     padding: 1.5rem;
     margin-top: 1rem;
     border: .2rem solid #f8f9fa;
+}
+
+.bd-example-row .row > .col, .bd-example-row .row > [class^=col-] {
+    background-color: rgba(245, 136, 15, .47);
+    border: 1px solid rgba(0, 0, 0, .29);
 }
 
 .bd-navbar .navbar-nav .nav-link {

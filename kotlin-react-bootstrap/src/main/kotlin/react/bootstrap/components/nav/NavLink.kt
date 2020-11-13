@@ -8,7 +8,7 @@ import react.RState
 import react.RStatics
 import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.DomComponent
+import react.bootstrap.lib.component.SimpleDomComponent
 import react.bootstrap.lib.kotlinxhtml.ariaDisabled
 import react.bootstrap.lib.react.rprops.WithActive
 import react.bootstrap.lib.react.rprops.WithDisabled
@@ -16,14 +16,14 @@ import react.dom.RDOMBuilder
 import react.dom.a
 import react.setState
 
-class NavLink(props: Props) : DomComponent<A, NavLink.Props, NavLink.State>(props, A::class) {
+class NavLink(props: Props) : SimpleDomComponent<A, NavLink.Props, NavLink.State>(props, A::class) {
     override fun State.init(props: Props) {
         linkProps = buildLinkProps(props.handler)
 
         active = props.active
 
         props.activeLinkPredicate?.let {
-            active = it.invoke(linkProps)
+            active = it.isActive(linkProps)
         }
     }
 
@@ -40,7 +40,7 @@ class NavLink(props: Props) : DomComponent<A, NavLink.Props, NavLink.State>(prop
             setState {
                 linkProps = buildLinkProps(props.handler)
 
-                active = props.activeLinkPredicate?.invoke(linkProps) ?: props.active
+                active = props.activeLinkPredicate?.isActive(linkProps) ?: props.active
             }
         }
         if (!prevState.active && props.active) {
@@ -71,11 +71,11 @@ class NavLink(props: Props) : DomComponent<A, NavLink.Props, NavLink.State>(prop
                 ariaDisabled = true
             }
         }
-        children()
+        addChildren()
     }
 
-    interface Props : WithActive, WithDisabled, DomComponent.Props<A> {
-        var activeLinkPredicate: (A.() -> Boolean)?
+    interface Props : WithActive, WithDisabled, SimpleDomComponent.Props<A> {
+        var activeLinkPredicate: ActiveLinkPredicate?
     }
 
     interface State : RState {

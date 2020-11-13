@@ -187,7 +187,7 @@ passed on from the nav downwards to the `navItems` and `navLinks`.
         liveExample {
             Navs.nav(
                 appearance = Appearance.TABS,
-                activeLinkPredicate = { href == "#theActiveLink" }
+                activeLinkPredicate = { it.href == "#theActiveLink" }
             ) {
                 navLink(href = "#") {
                     attrs { onClickFunction = { it.preventDefault() } }
@@ -218,7 +218,7 @@ passed on from the nav downwards to the `navItems` and `navLinks`.
                 .addArgument("appearance", Appearance.TABS)
                 .addArgument(
                     "activeLinkPredicate",
-                    LambdaValue("href == \"#theActiveLink\"", LambdaValue.Style.INLINE)
+                    LambdaValue("it.href == \"#theActiveLink\"", LambdaValue.Style.INLINE)
                 )
                 .setLambdaArgument(
                     FunCall.builder(navLinkBuilderFun)

@@ -1,10 +1,5 @@
 package react.bootstrap.site.components.docs
 
-// import react.bootstrap.site.components.docs.about.About
-// import react.bootstrap.site.components.docs.components.Components
-// import react.bootstrap.site.components.docs.extend.Extend
-// import react.bootstrap.site.components.docs.gettingstarted.GettingStarted
-// import react.bootstrap.site.components.docs.utilities.Utilities
 import kotlinx.html.MAIN
 import react.RBuilder
 import react.RComponent
@@ -104,66 +99,10 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
 
     internal object Pages {
         var categories: List<Category> = listOf(
-//            Category(
-//                "Getting started",
-//                "getting-started",
-//                GettingStarted::class
-//            ).apply {
-//                addSubCategory("Introduction", "introduction")
-//                addSubCategory("Download", "download")
-//                addSubCategory("Contents", "contents")
-//                addSubCategory("Browsers & devices", "browsers-devices")
-//                addSubCategory("JavaScript", "javascript")
-//                addSubCategory("Theming", "theming")
-//                addSubCategory("Build,ols", "build-tools")
-//                addSubCategory("Webpack", "webpack")
-//                addSubCategory("Accessibility", "accessibility")
-//            },
             GettingStarted.component,
             Layout.component,
             Content.component,
-            Components.component // ,
-//            Category(
-//                "Utilities",
-//                "utilities",
-//                Utilities::class
-//            ).apply {
-//                addSubCategory("Borders", "borders")
-//                addSubCategory("Clearfix", "clearfix")
-//                addSubCategory("Close icon", "close-icon")
-//                addSubCategory("Colors", "colors")
-//                addSubCategory("Display", "display")
-//                addSubCategory("Embed", "embed")
-//                addSubCategory("Flex", "flex")
-//                addSubCategory("Float", "float")
-//                addSubCategory("Image replacement", "image-replacement")
-//                addSubCategory("Overflow", "overflow")
-//                addSubCategory("Position", "position")
-//                addSubCategory("Screen readers", "screen readers")
-//                addSubCategory("Shadows", "shadows")
-//                addSubCategory("Sizing", "sizing")
-//                addSubCategory("Spacing", "spacing")
-//                addSubCategory("Stretched link", "stretched link")
-//                addSubCategory("Text", "text")
-//                addSubCategory("Vertical align", "vertical align")
-//                addSubCategory("Visibility", "visibility")
-//                addSubCategory("Extend", "extend")
-//            },
-//            Category(
-//                "Extend",
-//                "extend",
-//                Extend::class
-//            ).apply {
-//                addSubCategory("Approach", "approach")
-//                addSubCategory("Icons", "icons")
-//            },
-//            Category(
-//                "About",
-//                "about",
-//                About::class
-//            ).apply {
-//                addSubCategory("Overview", "overview")
-//            }
+            Components.component
         )
     }
 }
