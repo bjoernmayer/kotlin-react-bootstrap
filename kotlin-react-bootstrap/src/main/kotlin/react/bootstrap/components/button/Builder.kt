@@ -5,6 +5,8 @@ import kotlinx.html.BUTTON
 import kotlinx.html.ButtonFormEncType
 import kotlinx.html.ButtonFormMethod
 import kotlinx.html.ButtonType
+import kotlinx.html.DIV
+import kotlinx.html.HtmlBlockTag
 import kotlinx.html.INPUT
 import kotlinx.html.InputFormEncType
 import kotlinx.html.InputFormMethod
@@ -16,6 +18,7 @@ import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.Builder
 import react.bootstrap.lib.PropHandler
 import react.bootstrap.lib.RDOMHandler
+import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
 import react.bootstrap.lib.component.SimpleDomComponent.Companion.simpleDomComponent
 
 private fun RBuilder.buttonButton(
@@ -1780,17 +1783,44 @@ fun RBuilder.buttonGroup(
     classes: String? = null,
     label: String? = null,
     sizes: ButtonGroup.Sizes? = null,
-    block: RHandler<ButtonGroup.Props>
-): ReactElement = child(ButtonGroup::class) {
-    attrs {
+    props: PropHandler<ButtonGroup.Props<DIV>> = { },
+    block: RDOMHandler<DIV>
+): ReactElement = abstractDomComponent<DIV, ButtonGroup.Props<DIV>>(ButtonGroup::class)
+    .classes(classes)
+    .propHandler {
         this.appearance = appearance
         this.behaviour = behaviour
-        this.classes = classes.splitClassesToSet()
         this.label = label
         this.sizes = sizes
+
+        props()
     }
-    block()
-}
+    .domHandler(block)
+    .build()
+
+/**
+ * Creates a generic [ButtonGroup] element.
+ */
+inline fun <reified T : HtmlBlockTag> RBuilder.buttonGroup(
+    appearance: ButtonGroup.Appearance? = null,
+    behaviour: ButtonGroup.Behaviours? = null,
+    classes: String? = null,
+    label: String? = null,
+    sizes: ButtonGroup.Sizes? = null,
+    crossinline props: PropHandler<ButtonGroup.Props<T>> = { },
+    noinline block: RDOMHandler<T>
+): ReactElement = abstractDomComponent<T, ButtonGroup.Props<T>>(ButtonGroup::class)
+    .classes(classes)
+    .propHandler {
+        this.appearance = appearance
+        this.behaviour = behaviour
+        this.label = label
+        this.sizes = sizes
+
+        props()
+    }
+    .domHandler(block)
+    .build()
 
 /**
  * Creates a [ButtonToolbar] element.

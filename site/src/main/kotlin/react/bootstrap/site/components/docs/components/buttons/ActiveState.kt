@@ -256,7 +256,7 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
             //language=Markdown
             +"""
 Or you use actual checkboxes and radios and display them as buttons. If you do not like the looks of a `buttonGroup` you
-can set `${ButtonGroup.Props::appearance.name}` to `${ButtonGroup.Appearance.NONE.nestedName}`.
+can set `${ButtonGroup.Props<*>::appearance.name}` to `${ButtonGroup.Appearance.NONE.nestedName}`.
             """
         }
         liveExample {

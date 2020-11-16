@@ -1,7 +1,7 @@
 package react.bootstrap.components.button
 
+import kotlinx.html.HtmlBlockTag
 import kotlinx.html.INPUT
-import kotlinx.html.classes
 import kotlinx.html.js.onClickFunction
 import kotlinx.html.role
 import org.w3c.dom.events.Event
@@ -11,40 +11,43 @@ import react.RState
 import react.ReactElement
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.BootstrapComponent
+import react.bootstrap.lib.component.AbstractDomComponent
 import react.bootstrap.lib.component.ClassNameEnum
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
-import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
 import react.bootstrap.lib.react.isComponent
 import react.bootstrap.lib.react.mapReactElementsIndexed
 import react.bootstrap.lib.react.onEachComponent
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.childrenArray
-import react.dom.div
+import react.dom.RDOMBuilder
 import react.dom.input
 import react.setState
 import kotlinx.html.CommonAttributeGroupFacadeFlowInteractivePhrasingContent as InteractiveTag
 
-class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGroup.State>(props) {
-    override fun State.init(props: Props) {
+class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
+    AbstractDomComponent<T, ButtonGroup.Props<T>, ButtonGroup.State>(props) {
+    override fun State.init(props: Props<T>) {
+        val children = buildBuilder(getBuilderFactory(props.tag)).apply {
+            props.handler.invoke(this)
+        }.create().props.childrenArray
+
         buttons = mutableMapOf<Int, Pair<ReactElement, ButtonComponent.Props<*>>>().apply {
             putAll(
-                props.childrenArray.mapReactElementsIndexed(ButtonComponent.Button::class) { index, pairedElement ->
+                children.mapReactElementsIndexed(ButtonComponent.Button::class) { index, pairedElement ->
                     index to pairedElement
                 }.toMap()
             )
             putAll(
-                props.childrenArray.mapReactElementsIndexed(ButtonComponent.Box::class) { index, pairedElement ->
+                children.mapReactElementsIndexed(ButtonComponent.Box::class) { index, pairedElement ->
                     index to pairedElement
                 }.toMap()
             )
             putAll(
-                props.childrenArray.mapReactElementsIndexed(ButtonComponent.Input::class) { index, pairedElement ->
+                children.mapReactElementsIndexed(ButtonComponent.Input::class) { index, pairedElement ->
                     index to pairedElement
                 }.toMap()
             )
             putAll(
-                props.childrenArray.mapReactElementsIndexed(ButtonComponent.Link::class) { index, pairedElement ->
+                children.mapReactElementsIndexed(ButtonComponent.Link::class) { index, pairedElement ->
                     index to pairedElement
                 }.toMap()
             )
@@ -181,36 +184,32 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
         return btnGroupClasses
     }
 
-    override fun RBuilder.render(rendererClasses: Set<String>) {
-        div {
-            attrs {
-                loadGlobalAttributes(props)
-                classes = rendererClasses
-                role = "group"
+    override fun RDOMBuilder<T>.build() {
+        attrs {
+            role = "group"
 
-                props.label?.let {
-                    ariaLabel = it
-                }
+            props.label?.let {
+                ariaLabel = it
             }
-
-            // This basically replaces the buttons in this buttonGroup with a version, which has an onClick event
-            // It does so by manually adding each child instead of using the usual children() function
-            childList.addAll(
-                props.childrenArray
-                    .onEachComponent(ButtonComponent.Button::class) { index, originalProps ->
-                        setProps(index, originalProps)
-                    }
-                    .onEachComponent(ButtonComponent.Box::class) { index, originalProps ->
-                        setBoxProps(index, originalProps)
-                    }
-                    .onEachComponent(ButtonComponent.Input::class) { index, originalProps ->
-                        setProps(index, originalProps)
-                    }
-                    .onEachComponent(ButtonComponent.Link::class) { index, originalProps ->
-                        setProps(index, originalProps)
-                    }
-            )
         }
+
+        // This basically replaces the buttons in this buttonGroup with a version, which has an onClick event
+        // It does so by manually adding each child instead of using the usual children() function
+        childList.addAll(
+            childrenArray
+                .onEachComponent(ButtonComponent.Button::class) { index, originalProps ->
+                    setProps(index, originalProps)
+                }
+                .onEachComponent(ButtonComponent.Box::class) { index, originalProps ->
+                    setBoxProps(index, originalProps)
+                }
+                .onEachComponent(ButtonComponent.Input::class) { index, originalProps ->
+                    setProps(index, originalProps)
+                }
+                .onEachComponent(ButtonComponent.Link::class) { index, originalProps ->
+                    setProps(index, originalProps)
+                }
+        )
     }
 
     private fun <T : InteractiveTag, P : ButtonComponent.Props<T>> RElementBuilder<P>.setProps(
@@ -261,7 +260,7 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
         }
     }
 
-    interface Props : WithGlobalAttributes {
+    interface Props<T : HtmlBlockTag> : AbstractDomComponent.Props<T> {
         /**
          * Change the appearance of the [ButtonGroup] by setting an [Appearance].
          */

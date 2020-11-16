@@ -30,7 +30,7 @@ import kotlin.reflect.KClass
  */
 abstract class DomComponent<B : RDOMBuilder<T>, T : DomTag, P : DomComponent.Props<B, T>, S : RState>(
     props: P,
-    private val tag: KClass<T>
+    tag: KClass<T>
 ) : BootstrapComponent<P, S>(props) {
     init {
         props.requireProperties(props::handler)
@@ -41,15 +41,7 @@ abstract class DomComponent<B : RDOMBuilder<T>, T : DomTag, P : DomComponent.Pro
         }
     }
 
-    @Suppress("UNUSED_VARIABLE", "UNUSED_ANONYMOUS_PARAMETER")
-    private val builderFactory: (TagConsumer<Unit>) -> T = { tagConsumer ->
-        // This intantiates the tag by using some reflection js magic.
-        // ::class.js points to the javascript constructor
-        val constructor = tag.js
-        val attributes = attributesMapOf("class", null)
-
-        js("new constructor(attributes, tagConsumer)") as T
-    }
+    private val builderFactory: (TagConsumer<Unit>) -> T = getBuilderFactory(tag)
 
     protected val childrenArray: Array<out Child>
         get() = buildBuilder(builderFactory).apply {
@@ -131,6 +123,16 @@ abstract class DomComponent<B : RDOMBuilder<T>, T : DomTag, P : DomComponent.Pro
     }
 
     companion object {
+        @Suppress("UNUSED_VARIABLE", "UNUSED_ANONYMOUS_PARAMETER")
+        internal fun <T : Any> getBuilderFactory(tag: KClass<T>): (TagConsumer<Unit>) -> T = { tagConsumer ->
+            // This intantiates the tag by using some reflection js magic.
+            // ::class.js points to the javascript constructor
+            val constructor = tag.js
+            val attributes = attributesMapOf("class", null)
+
+            js("new constructor(attributes, tagConsumer)") as T
+        }
+
         @Suppress("UNCHECKED_CAST")
         inline fun <B : RDOMBuilder<T>, reified T : DomTag, P : Props<B, T>> RBuilder.domComponent(
             componentKlazz: KClass<out DomComponent<*, *, *, *>>
