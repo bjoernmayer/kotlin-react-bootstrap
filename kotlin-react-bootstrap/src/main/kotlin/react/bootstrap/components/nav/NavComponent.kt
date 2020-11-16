@@ -12,7 +12,7 @@ import react.RState
 import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractComponent
-import react.bootstrap.lib.react.mapComponents
+import react.bootstrap.lib.react.onEachComponent
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.childrenArray
 import react.dom.RDOMBuilder
@@ -22,9 +22,9 @@ import kotlin.reflect.KClass
  * This is designed as a sealed class in order to differentiate between different Props in the builder extension
  * functions
  *
- * @param PT RProps Type
+ * @param P RProps Type
  */
-sealed class NavComponent<PT : NavComponent.Props> : AbstractComponent<HtmlBlockTag, PT, RState>() {
+sealed class NavComponent<P : NavComponent.Props> : AbstractComponent<HtmlBlockTag, P, RState>() {
     class Ul : NavComponent<Ul.Props>() {
         override val rendererTag: KClass<out HtmlBlockTag> = UL::class
 
@@ -34,7 +34,7 @@ sealed class NavComponent<PT : NavComponent.Props> : AbstractComponent<HtmlBlock
             if (props.activeLinkPredicate == null) {
                 children()
             } else {
-                childList.addAll(props.childrenArray.mapActiveLinkPredicate<NavItems.Li.Props, NavItems.Li>())
+                childList.addAll(props.childrenArray.setActiveLinkPredicate(NavItems.Li::class))
             }
         }
 
@@ -50,7 +50,7 @@ sealed class NavComponent<PT : NavComponent.Props> : AbstractComponent<HtmlBlock
             if (props.activeLinkPredicate == null) {
                 children()
             } else {
-                childList.addAll(props.childrenArray.mapActiveLinkPredicate<NavItems.Li.Props, NavItems.Li>())
+                childList.addAll(props.childrenArray.setActiveLinkPredicate(NavItems.Li::class))
             }
         }
 
@@ -68,10 +68,10 @@ sealed class NavComponent<PT : NavComponent.Props> : AbstractComponent<HtmlBlock
             } else {
                 // For nav based navs we also need to check for direct children of type navLink, since such navs do not
                 // need navItems
-                val items = props.childrenArray.mapActiveLinkPredicate<NavItems.NavItem.Props, NavItems.NavItem>()
+                val items = props.childrenArray.setActiveLinkPredicate(NavItems.NavItem::class)
 
                 childList.addAll(
-                    items.mapComponents<NavLink.Props, NavLink> { _, _ ->
+                    items.onEachComponent(NavLink::class) { _, _ ->
                         attrs {
                             activeLinkPredicate = this@Nav.props.activeLinkPredicate
                         }
@@ -94,10 +94,10 @@ sealed class NavComponent<PT : NavComponent.Props> : AbstractComponent<HtmlBlock
             } else {
                 // For div based navs we also need to check for direct children of type navLink, since such navs do not
                 // need navItems
-                val items = props.childrenArray.mapActiveLinkPredicate<NavItems.DivItem.Props, NavItems.DivItem>()
+                val items = props.childrenArray.setActiveLinkPredicate(NavItems.DivItem::class)
 
                 childList.addAll(
-                    items.mapComponents<NavLink.Props, NavLink> { _, _ ->
+                    items.onEachComponent(NavLink::class) { _, _ ->
                         attrs {
                             activeLinkPredicate = this@Div.props.activeLinkPredicate
                         }
@@ -136,10 +136,12 @@ sealed class NavComponent<PT : NavComponent.Props> : AbstractComponent<HtmlBlock
     }
 
     protected inline fun <
-        PT : NavItems.Props,
-        reified CT : Component<PT, *>
-        > Array<out Child>.mapActiveLinkPredicate(): Array<out Child> =
-        mapComponents<PT, CT> { _, _ ->
+        reified C : Component<P, *>,
+        P : NavItems.Props
+        > Array<out Child>.setActiveLinkPredicate(
+        @Suppress("UNUSED_PARAMETER") component: KClass<C> = C::class,
+    ): Array<out Child> =
+        onEachComponent(component) { _, _ ->
             attrs {
                 activeLinkPredicate = this@NavComponent.props.activeLinkPredicate
             }

@@ -1,5 +1,6 @@
 package react.bootstrap.lib.react
 
+import react.Component
 import react.ReactElement
 
 /**
@@ -25,3 +26,7 @@ val ReactElement.componentJsClass: JsClass<*>?
     } else {
         null
     }
+
+inline fun <reified C : Component<*, *>> ReactElement.isComponent(): Boolean {
+    return this.componentJsClass == C::class.js
+}

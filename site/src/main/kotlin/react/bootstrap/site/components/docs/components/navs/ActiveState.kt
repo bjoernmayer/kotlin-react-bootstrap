@@ -4,11 +4,11 @@ import kotlinx.html.js.onClickFunction
 import react.RBuilder
 import react.RElementBuilder
 import react.RProps
-import react.bootstrap.components.button.Button
 import react.bootstrap.components.nav.NavComponent.Appearance
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
+import react.bootstrap.lib.DomTag
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
@@ -134,7 +134,7 @@ behaviour.
                                                             .setLambdaArgument(
                                                                 FunCall.builder(RElementBuilder<RProps>::attrs)
                                                                     .setLambdaArgument(
-                                                                        Assignment.builder(Button.Props::onClick)
+                                                                        Assignment.builder(DomTag::onClickFunction)
                                                                             .value(
                                                                                 LambdaValue(
                                                                                     "it.preventDefault()\n" +

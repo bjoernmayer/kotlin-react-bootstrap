@@ -582,7 +582,7 @@ fun Alert.DomBuilder<*>.link(
     classes: String? = null,
     props: PropHandler<Alert.Link.Props> = { },
     block: RDOMHandler<A>
-): ReactElement = simpleDomComponent<A, Alert.Link.Props>(Alert.Link::class)
+): ReactElement = simpleDomComponent(Alert.Link::class)
     .classes(classes)
     .propHandler(props)
     .domHandler {

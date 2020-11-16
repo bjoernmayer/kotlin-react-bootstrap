@@ -8,48 +8,52 @@ import react.RBuilder
 import react.RElementBuilder
 import react.RProps
 import react.ReactElement
-import react.bootstrap.lib.react.rprops.toMutable
 import react.rClass
+import kotlin.reflect.KClass
 
 /**
  * This identifies a child as a component of the specified type
  *
- * @param CT Component Type
- * @return True if the child is of type [CT]
+ * @param C Component Type
+ * @return True if the child is of type [C]
  */
-inline fun <reified CT : Component<*, *>> Child.isComponent(): Boolean {
+inline fun <reified C : Component<*, *>> Child.isComponent(): Boolean {
     val reactElement = asJsObject().asReactElementOrNull() ?: return false
 
-    return reactElement.componentJsClass == CT::class.js
+    return reactElement.componentJsClass == C::class.js
 }
 
 /**
- * Gathers Properties P of children of type C
+ * Returns a list containing the results of applying the given [transform] function to each [ReactElement] of type [C],
+ * its props of type [P] and its index in the original array.
  *
- * @param C Some Kotlin React Bootstrap Component
- * @param P RProps of the same Kotlin React Bootstrap Component
- * @return A map with found children with the child index as key
+ * @param C React Component
+ * @param P Props of the same Component
+ * @param R value type of the result [List]
  */
-inline fun <reified P : RProps, reified C : Component<P, *>> Array<out Child>.gatherChildrenProps(): Map<Int, P> =
-    mapIndexedNotNull { index, child ->
-        if (child.isComponent<C>().not()) {
-            return@mapIndexedNotNull null
-        }
-        val reactElement = child.asJsObject().asReactElementOrNull() ?: return@mapIndexedNotNull null
-        val elProps = reactElement.props.asJsObject()
+inline fun <reified C : Component<P, *>, P : RProps, R : Any> Array<out Child>.mapReactElementsIndexed(
+    @Suppress("UNUSED_PARAMETER") component: KClass<C> = C::class,
+    transform: (index: Int, pairedElement: Pair<ReactElement, P>) -> R
+): List<R> = mapIndexedNotNull { index, child ->
+    if (child.isComponent<C>().not()) {
+        return@mapIndexedNotNull null
+    }
 
-        index to elProps.unsafeCast<P>().toMutable()
-    }.toMap()
+    val reactElement = child.asJsObject().asReactElementOrNull() ?: return@mapIndexedNotNull null
+
+    transform(index, reactElement to reactElement.props.unsafeCast<P>())
+}
 
 /**
- * This mapping function allows you to modify [Component]s.
+ * Executes the given action on each [RElementBuilder] of type [P]
  *
- * @param P Props type of the child component
- * @param C Component type of the child component
- * @param transform Basically a [RElementBuilder] which receives the index and the old props of the child
+ * @param C Component type Component
+ * @param P Props type Component
+ * @param action Basically a [RElementBuilder] which receives the index and the old props of the child
  */
-inline fun <P : RProps, reified C : Component<P, *>> Array<out Child>.mapComponents(
-    noinline transform: RElementBuilder<P>.(index: Int, oldProps: P) -> Unit
+inline fun <reified C : Component<P, *>, P : RProps> Array<out Child>.onEachComponent(
+    @Suppress("UNUSED_PARAMETER") component: KClass<C> = C::class,
+    noinline action: RElementBuilder<P>.(index: Int, originalProps: P) -> Unit
 ): Array<out Child> {
     val rBuilder = RBuilder()
 
@@ -61,7 +65,7 @@ inline fun <P : RProps, reified C : Component<P, *>> Array<out Child>.mapCompone
         val props: P = child.unsafeCast<ReactElement>().props.unsafeCast<P>()
 
         rBuilder.child(C::class.rClass, clone(props)) {
-            transform(index, props)
+            action(index, props)
         }
     }.toTypedArray()
 }

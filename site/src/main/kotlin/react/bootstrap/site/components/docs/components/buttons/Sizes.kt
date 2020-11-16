@@ -1,8 +1,8 @@
 package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
-import react.bootstrap.components.button.Button.Sizes
 import react.bootstrap.components.button.ButtonBuilder
+import react.bootstrap.components.button.ButtonComponent.Sizes
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample

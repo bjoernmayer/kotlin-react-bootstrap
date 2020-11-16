@@ -334,7 +334,7 @@ You can build your own custom close element, by using `closingElement { }`.
                     } else {
                         Buttons.outline.danger {
                             attrs {
-                                onClick = { show = true }
+                                onClickFunction = { show = true }
                             }
                             +"Open door & go in"
                         }

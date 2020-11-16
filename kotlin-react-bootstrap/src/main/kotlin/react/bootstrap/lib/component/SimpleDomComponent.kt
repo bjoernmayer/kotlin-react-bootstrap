@@ -27,7 +27,7 @@ abstract class SimpleDomComponent<T : DomTag, P : SimpleDomComponent.Props<T>, S
     companion object {
         @Suppress("UNCHECKED_CAST")
         inline fun <reified T : DomTag, P : Props<T>> RBuilder.simpleDomComponent(
-            componentKlazzSimple: KClass<out SimpleDomComponent<*, *, *>>
+            componentKlazzSimple: KClass<out SimpleDomComponent<T, P, *>>
         ) = domComponent<RDOMBuilder<T>, T, P>(componentKlazzSimple)
     }
 }

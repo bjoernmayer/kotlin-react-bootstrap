@@ -170,7 +170,7 @@ private fun RBuilder.buildNavLink(
     active: Boolean = false,
     disabled: Boolean = false,
     block: RDOMHandler<A>
-): ReactElement = simpleDomComponent<A, NavLink.Props>(NavLink::class)
+): ReactElement = simpleDomComponent(NavLink::class)
     .classes(classes)
     .domHandler {
         attrs {

@@ -3,7 +3,7 @@ package react.bootstrap.site.components.docs
 import kotlinx.browser.document
 import react.RBuilder
 import react.RElementBuilder
-import react.bootstrap.components.button.Button
+import react.bootstrap.components.button.ButtonComponent
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
@@ -53,7 +53,7 @@ internal fun Imports.importButtonGroupBuilder() =
     addImport("components", "button", RBuilder::buttonGroup.name)
 
 internal fun Imports.importButton() =
-    addImport("components", "button", Button::class.simpleName!!)
+    addImport("components", "button", ButtonComponent::class.simpleName!!)
 
 internal fun Imports.importNavsBuilder() =
     addImport("components", "nav", RBuilder::Navs.name)

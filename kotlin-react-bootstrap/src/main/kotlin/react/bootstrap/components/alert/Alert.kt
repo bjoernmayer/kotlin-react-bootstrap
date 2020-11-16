@@ -24,7 +24,7 @@ import react.bootstrap.lib.component.DomComponent
 import react.bootstrap.lib.component.SimpleDomComponent
 import react.bootstrap.lib.kotlinxhtml.onTransitionEndFunction
 import react.bootstrap.lib.react.isComponent
-import react.bootstrap.lib.react.mapComponents
+import react.bootstrap.lib.react.onEachComponent
 import react.bootstrap.lib.react.rprops.requireProperties
 import react.bootstrap.utilities.close.close
 import react.dom.RDOMBuilder
@@ -131,24 +131,25 @@ sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(
             // Check if the lib-user added a closingElement manually
             if (childrenArray.any { it.isComponent<ClosingElement<*>>() }) {
                 childList.addAll(
-                    childrenArray.mapComponents<ClosingElement.Props<DomTag>, ClosingElement<DomTag>> { _, oldProps ->
-                        attrs {
-                            this.handler = {
-                                // First apply the handler so it applies a possible onClickFunction.
-                                oldProps.handler(this)
+                    childrenArray
+                        .onEachComponent<ClosingElement<DomTag>, ClosingElement.Props<DomTag>> { _, originalProps ->
+                            attrs {
+                                this.handler = {
+                                    // First apply the handler so it applies a possible onClickFunction.
+                                    originalProps.handler(this)
 
-                                // Then pull out the possible onClick
-                                val onClick = attrs["onClick"] as EventHandler?
+                                    // Then pull out the possible onClick
+                                    val onClick = attrs["onClick"] as EventHandler?
 
-                                attrs {
-                                    onClickFunction = {
-                                        // And chain it with the new one
-                                        handleDismissle(it, onClick)
+                                    attrs {
+                                        onClickFunction = {
+                                            // And chain it with the new one
+                                            handleDismissle(it, onClick)
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
                 )
             } else {
                 addChildren()
