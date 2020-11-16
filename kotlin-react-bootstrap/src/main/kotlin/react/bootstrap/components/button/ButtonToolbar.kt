@@ -1,35 +1,23 @@
 package react.bootstrap.components.button
 
-import kotlinx.html.classes
+import kotlinx.html.HtmlBlockTag
 import kotlinx.html.role
-import react.RBuilder
 import react.RState
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.BootstrapComponent
-import react.bootstrap.lib.kotlinxhtml.ariaLabel
-import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithAriaLabel
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.dom.div
+import react.bootstrap.lib.component.AbstractDomComponent
+import react.dom.RDOMBuilder
 
-class ButtonToolbar : BootstrapComponent<ButtonToolbar.Props, RState>() {
+class ButtonToolbar<T : HtmlBlockTag>(
+    props: Props<T>
+) : AbstractDomComponent<T, ButtonToolbar.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.BTN_TOOLBAR)
 
-    override fun RBuilder.render(rendererClasses: Set<String>) {
-        div {
-            attrs {
-                loadGlobalAttributes(props)
-
-                role = "toolbar"
-                classes = rendererClasses
-
-                props.ariaLabel?.let {
-                    ariaLabel = it
-                }
-            }
-            children()
+    override fun RDOMBuilder<T>.build() {
+        attrs {
+            role = "toolbar"
         }
+        addChildren()
     }
 
-    interface Props : WithGlobalAttributes, WithAriaLabel
+    interface Props<T : HtmlBlockTag> : AbstractDomComponent.Props<T>
 }

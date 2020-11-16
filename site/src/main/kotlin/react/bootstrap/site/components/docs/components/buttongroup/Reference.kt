@@ -3,7 +3,6 @@ package react.bootstrap.site.components.docs.components.buttongroup
 import kotlinx.html.DIV
 import kotlinx.html.HtmlBlockTag
 import react.RBuilder
-import react.bootstrap.components.button.ButtonComponent
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.ButtonToolbar
 import react.bootstrap.components.button.buttonGroup
@@ -34,7 +33,6 @@ Creates a `${ButtonGroup::class.simpleName!!}` element.
                 .addParameter<ButtonGroup.Appearance>("appearance", null)
                 .addParameter<ButtonGroup.Behaviours>("behaviour", null)
                 .addParameter<String?>("classes", null)
-                .addParameter<String?>("label", null)
                 .addParameter<ButtonGroup.Sizes>("sizes", null)
                 .addParameter(
                     "props",
@@ -58,7 +56,6 @@ Creates a generic `${ButtonGroup::class.simpleName!!}` element.
                 .addParameter<ButtonGroup.Appearance>("appearance", null)
                 .addParameter<ButtonGroup.Behaviours>("behaviour", null)
                 .addParameter<String?>("classes", null)
-                .addParameter<String?>("label", null)
                 .addParameter<ButtonGroup.Sizes>("sizes", null)
                 .addParameter(
                     "props",
@@ -81,8 +78,28 @@ Creates a `${ButtonToolbar::class.simpleName!!}` element.
             +FunSpec.builder(RBuilder::buttonToolbar)
                 .nestedBy<RBuilder>()
                 .addParameter<String?>("classes", null)
-                .addParameter<String?>("label", null)
                 .addParameter("block", Generic("RHandler", ButtonToolbar.Props::class))
+                .returns("ReactElement")
+                .build()
+        }
+        Markdown {
+            //language=Markdown
+            +"""
+Creates a generic `${ButtonToolbar::class.simpleName!!}` element.
+            """
+        }
+        codeExample {
+            +FunSpec.builder(RBuilder::buttonToolbar)
+                .nestedBy<RBuilder>()
+                .addTypeParameter("T", HtmlBlockTag::class, true)
+                .addParameter<String?>("classes", null)
+                .addParameter(
+                    "props",
+                    Generic("PropHandler", Generic(ButtonToolbar.Props::class, "T").build()),
+                    default = "{ }",
+                    modifier = NOINLINE
+                )
+                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
                 .returns("ReactElement")
                 .build()
         }

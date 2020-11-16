@@ -1,3 +1,5 @@
+@file:Suppress("DuplicatedCode")
+
 package react.bootstrap.components.button
 
 import kotlinx.html.A
@@ -12,9 +14,7 @@ import kotlinx.html.InputFormEncType
 import kotlinx.html.InputFormMethod
 import kotlinx.html.LABEL
 import react.RBuilder
-import react.RHandler
 import react.ReactElement
-import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.Builder
 import react.bootstrap.lib.PropHandler
 import react.bootstrap.lib.RDOMHandler
@@ -1781,7 +1781,6 @@ fun RBuilder.buttonGroup(
     appearance: ButtonGroup.Appearance? = null,
     behaviour: ButtonGroup.Behaviours? = null,
     classes: String? = null,
-    label: String? = null,
     sizes: ButtonGroup.Sizes? = null,
     props: PropHandler<ButtonGroup.Props<DIV>> = { },
     block: RDOMHandler<DIV>
@@ -1790,7 +1789,6 @@ fun RBuilder.buttonGroup(
     .propHandler {
         this.appearance = appearance
         this.behaviour = behaviour
-        this.label = label
         this.sizes = sizes
 
         props()
@@ -1805,7 +1803,6 @@ inline fun <reified T : HtmlBlockTag> RBuilder.buttonGroup(
     appearance: ButtonGroup.Appearance? = null,
     behaviour: ButtonGroup.Behaviours? = null,
     classes: String? = null,
-    label: String? = null,
     sizes: ButtonGroup.Sizes? = null,
     crossinline props: PropHandler<ButtonGroup.Props<T>> = { },
     noinline block: RDOMHandler<T>
@@ -1814,7 +1811,6 @@ inline fun <reified T : HtmlBlockTag> RBuilder.buttonGroup(
     .propHandler {
         this.appearance = appearance
         this.behaviour = behaviour
-        this.label = label
         this.sizes = sizes
 
         props()
@@ -1826,18 +1822,28 @@ inline fun <reified T : HtmlBlockTag> RBuilder.buttonGroup(
  * Creates a [ButtonToolbar] element.
  *
  * @param classes Space separated list of CSS classes for this element.
- * @param label aria-label to describe the [ButtonToolbar]
  */
 fun RBuilder.buttonToolbar(
     classes: String? = null,
-    label: String? = null,
-    block: RHandler<ButtonToolbar.Props>
-): ReactElement =
-    child(ButtonToolbar::class) {
-        attrs {
-            this.classes = classes.splitClassesToSet()
-            ariaLabel = label
-        }
+    props: PropHandler<ButtonToolbar.Props<DIV>> = { },
+    block: RDOMHandler<DIV>
+): ReactElement = abstractDomComponent<DIV, ButtonToolbar.Props<DIV>>(ButtonToolbar::class)
+    .classes(classes)
+    .propHandler(props)
+    .domHandler(block)
+    .build()
 
-        block()
-    }
+/**
+ * Creates a generic [ButtonToolbar] element.
+ *
+ * @param classes Space separated list of CSS classes for this element.
+ */
+inline fun <reified T : HtmlBlockTag> RBuilder.buttonToolbar(
+    classes: String? = null,
+    noinline props: PropHandler<ButtonToolbar.Props<T>> = { },
+    noinline block: RDOMHandler<T>
+): ReactElement = abstractDomComponent<T, ButtonToolbar.Props<T>>(ButtonToolbar::class)
+    .classes(classes)
+    .propHandler(props)
+    .domHandler(block)
+    .build()

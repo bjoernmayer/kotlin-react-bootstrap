@@ -29,19 +29,19 @@ Instead of applying button sizing classes to every button in a group, just set `
         }
         val leftMiddleRight = listOf("Left", "Middle", "Right")
         liveExample {
-            buttonGroup(sizes = ButtonGroup.Sizes.LG, label = "...") {
+            buttonGroup(sizes = ButtonGroup.Sizes.LG) {
                 leftMiddleRight.forEach {
                     Buttons.solid.secondary { +it }
                 }
             }
             br { }
-            buttonGroup(label = "...") {
+            buttonGroup {
                 leftMiddleRight.forEach {
                     Buttons.solid.secondary { +it }
                 }
             }
             br { }
-            buttonGroup(sizes = ButtonGroup.Sizes.SM, label = "...") {
+            buttonGroup(sizes = ButtonGroup.Sizes.SM) {
                 leftMiddleRight.forEach {
                     Buttons.solid.secondary { +it }
                 }
@@ -56,7 +56,6 @@ Instead of applying button sizing classes to every button in a group, just set `
                 .build()
 
             +FunCall.builder(RBuilder::buttonGroup)
-                .addArgument("label", "...")
                 .setLambdaArgument("...")
                 .build()
             +FunCall.builder(RBuilder::br, FunCall.Style.NEW_INLINE)
@@ -64,7 +63,6 @@ Instead of applying button sizing classes to every button in a group, just set `
                 .build()
             +FunCall.builder(RBuilder::buttonGroup)
                 .addArgument("sizes", ButtonGroup.Sizes.SM)
-                .addArgument("label", "...")
                 .setLambdaArgument("...")
                 .build()
         }

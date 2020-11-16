@@ -13,7 +13,6 @@ import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDomComponent
 import react.bootstrap.lib.component.ClassNameEnum
-import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.lib.react.isComponent
 import react.bootstrap.lib.react.mapReactElementsIndexed
 import react.bootstrap.lib.react.onEachComponent
@@ -187,10 +186,6 @@ class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
     override fun RDOMBuilder<T>.build() {
         attrs {
             role = "group"
-
-            props.label?.let {
-                ariaLabel = it
-            }
         }
 
         // This basically replaces the buttons in this buttonGroup with a version, which has an onClick event
@@ -274,12 +269,6 @@ class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
          */
         var behaviour: Behaviours?
 
-        /**
-         * aria-label
-         *
-         * Defaults to *null*.
-         */
-        var label: String?
         var sizes: Sizes?
     }
 
