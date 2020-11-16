@@ -74,12 +74,13 @@ sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>
 
                     type = props.type.inputType
 
+                    val onChange = attrs["onChange"] as EventHandler?
+
                     onChangeFunction = {
-                        // FIXME: this triggers a loop
-                        val onChange = attrs["onChange"] as EventHandler?
-                        handleChange(it, null)
+                        handleChange(it, onChange)
                     }
 
+                    // Hide the box/circle
                     @Suppress("UnsafeCastFromDynamic")
                     style = kotlinext.js.js {
                         position = "absolute"
@@ -204,7 +205,6 @@ sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>
         }
         val target = event.target as HTMLInputElement
 
-        // Todo: check this, yes?
         setState {
             active = target.checked
         }

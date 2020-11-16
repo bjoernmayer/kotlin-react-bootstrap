@@ -224,7 +224,6 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
                 // First apply the handler so it applies a possible onClickFunction.
                 originalProps.handler(this)
 
-                // FIXME click is fired twice
                 // Then pull out the possible onClick
                 val onClick = attrs["onClick"] as EventHandler?
 
