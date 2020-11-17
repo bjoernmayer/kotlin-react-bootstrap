@@ -1,18 +1,29 @@
 package react.bootstrap.components.navbar
 
+import kotlinx.html.HtmlBlockTag
 import kotlinx.html.HtmlInlineTag
-import kotlinx.html.classes
-import react.RBuilder
+import kotlinx.html.Tag
+import kotlinx.html.TagConsumer
 import react.RState
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.BootstrapComponent
 import react.bootstrap.lib.component.AbstractDOMComponent
-import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.dom.div
+import react.bootstrap.lib.component.DOMComponent
+import react.bootstrap.lib.react.rprops.requireProperties
+import react.dom.RDOMBuilder
+import kotlin.reflect.KClass
 
-class Navbar : BootstrapComponent<Navbar.Props, RState>() {
+class Navbar<T : HtmlBlockTag>(
+    props: Props<T>
+) : DOMComponent<T, NavbarDOMHandler<T>, Navbar.DomBuilder<T>, Navbar.Props<T>, RState>(props, props.tag) {
+    init {
+        props.requireProperties(props::tag)
+    }
+
+    class DomBuilder<out T : Tag>(factory: (TagConsumer<Unit>) -> T) : RDOMBuilder<T>(factory)
+
+    override fun buildBuilder(builderFactory: (TagConsumer<Unit>) -> T): DomBuilder<T> = DomBuilder(builderFactory)
+
     override fun buildClasses(): Set<ClassNames> {
         val navbarClasses = mutableSetOf(ClassNames.NAVBAR)
 
@@ -34,19 +45,10 @@ class Navbar : BootstrapComponent<Navbar.Props, RState>() {
         return navbarClasses
     }
 
-    override fun RBuilder.render(rendererClasses: Set<String>) {
-        div {
-            attrs {
-                loadGlobalAttributes(props)
-                classes = rendererClasses
-            }
-            children()
-        }
-    }
-
-    interface Props : WithGlobalAttributes {
+    interface Props<T : HtmlBlockTag> : DOMComponent.Props<NavbarDOMHandler<T>> {
         var expand: Breakpoints?
         var theme: Theme?
+        var tag: KClass<out T>
     }
 
     enum class Theme(internal val classNames: ClassNames) {

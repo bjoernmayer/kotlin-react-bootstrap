@@ -5,6 +5,7 @@ package react.bootstrap.lib.kotlinxhtml
 import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.classes
 import react.bootstrap.lib.EventHandler
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.dom.RDOMBuilder
 
 var CommonAttributeGroupFacade.onAnimationEndFunction: EventHandler
@@ -172,6 +173,15 @@ fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg classNames: String) 
     attrs {
         classes = classes.toMutableSet().apply {
             addAll(classNames)
+        }
+    }
+}
+
+
+fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg classNames: ClassNames) {
+    attrs {
+        classes = classes.toMutableSet().apply {
+            addAll(classNames.map(ClassNames::className))
         }
     }
 }
