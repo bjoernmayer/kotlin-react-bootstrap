@@ -1,27 +1,12 @@
 package react.bootstrap.content.typography.lead
 
-import kotlinx.html.classes
-import react.RBuilder
+import kotlinx.html.P
 import react.RState
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.BootstrapComponent
-import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.dom.p
+import react.bootstrap.lib.component.SimpleDOMComponent
 
-class Lead : BootstrapComponent<Lead.Props, RState>() {
+class Lead(props: Props) : SimpleDOMComponent<P, Lead.Props, RState>(props, P::class) {
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.LEAD)
 
-    override fun RBuilder.render(rendererClasses: Set<String>) {
-        p {
-            attrs {
-                loadGlobalAttributes(props)
-                classes = rendererClasses
-            }
-
-            children()
-        }
-    }
-
-    interface Props : WithGlobalAttributes
+    interface Props : SimpleDOMComponent.Props<P>
 }

@@ -5,16 +5,12 @@ import react.RBuilder
 import react.bootstrap.content.tables.table
 import react.bootstrap.content.typography.display.Display
 import react.bootstrap.content.typography.display.display
-import react.bootstrap.content.typography.display.display1
-import react.bootstrap.content.typography.display.display2
-import react.bootstrap.content.typography.display.display3
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
-import react.bootstrap.site.lib.codepoet.LineComment
 import react.dom.tbody
 import react.dom.td
 import react.dom.tr

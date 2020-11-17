@@ -57,6 +57,6 @@ class Navbar : BootstrapComponent<Navbar.Props, RState>() {
     open class Brand<T : HtmlInlineTag>(props: Props<T>) : AbstractDOMComponent<T, Brand.Props<T>, RState>(props) {
         override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.NAVBAR_BRAND)
 
-        interface Props<T : HtmlInlineTag> : WithGlobalAttributes, AbstractDOMComponent.Props<T>
+        interface Props<T : HtmlInlineTag> : AbstractDOMComponent.Props<T>
     }
 }

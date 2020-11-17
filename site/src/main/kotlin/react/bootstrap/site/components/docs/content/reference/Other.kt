@@ -1,5 +1,6 @@
 package react.bootstrap.site.components.docs.content.reference
 
+import kotlinx.html.P
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.content.typography.lead.Lead
@@ -34,7 +35,15 @@ Creates a `${Lead::class.simpleName!!}` element.
             +FunSpec.builder(RBuilder::lead)
                 .nestedBy<RBuilder>()
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RHandler", Lead.Props::class))
+                .addParameter(
+                    "props",
+                    Generic(PropHandler::class, Generic.builder<Lead.Props, P>().build()),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
+                )
+                .addParameter("block", Generic.builder<RDOMHandler<*>, P>())
                 .returns("ReactElement")
                 .build()
         }
