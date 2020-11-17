@@ -4,8 +4,8 @@ import react.bootstrap.site.components.docs.nestedName
 import kotlin.reflect.KClass
 
 internal data class Generic(
-    private val className: String,
-    private val typeName: String
+    val className: String,
+    val typeName: String
 ) : CodePoet {
     constructor(
         clazz: KClass<*>,

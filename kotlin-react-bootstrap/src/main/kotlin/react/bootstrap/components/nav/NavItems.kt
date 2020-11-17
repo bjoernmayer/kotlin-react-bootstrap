@@ -3,43 +3,39 @@ package react.bootstrap.components.nav
 import kotlinx.html.DIV
 import kotlinx.html.HtmlBlockTag
 import kotlinx.html.LI
-import kotlinx.html.classes
+import kotlinx.html.Tag
+import kotlinx.html.TagConsumer
 import react.RState
-import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.AbstractComponent
-import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
+import react.bootstrap.lib.component.DomComponent
 import react.bootstrap.lib.react.onEachComponent
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.bootstrap.lib.react.rprops.childrenArray
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
-sealed class NavItems<P : NavItems.Props> : AbstractComponent<HtmlBlockTag, P, RState>() {
-    class Li : NavItems<Li.Props>() {
-        override val rendererTag: KClass<out HtmlBlockTag> = LI::class
+sealed class NavItems<T : HtmlBlockTag, P : NavItems.Props<T>>(
+    props: P,
+    tag: KClass<T>
+) : DomComponent<NavItems.DomBuilder<T>, T, P, RState>(props, tag) {
+    class DomBuilder<out T : Tag>(factory: (TagConsumer<Unit>) -> T) : RDOMBuilder<T>(factory)
 
-        interface Props : NavItems.Props
+    override fun buildBuilder(builderFactory: (TagConsumer<Unit>) -> T): DomBuilder<T> = DomBuilder(builderFactory)
+
+    class Li(props: Props) : NavItems<LI, Li.Props>(props, LI::class) {
+        interface Props : NavItems.Props<LI>
     }
 
-    class NavItem : NavItems<NavItem.Props>() {
-        override val rendererTag: KClass<out HtmlBlockTag> = DIV::class
-
-        interface Props : NavItems.Props
+    class DivItem(props: Props) : NavItems<DIV, DivItem.Props>(props, DIV::class) {
+        interface Props : NavItems.Props<DIV>
     }
 
-    class DivItem : NavItems<DivItem.Props>() {
-        override val rendererTag: KClass<out HtmlBlockTag> = DIV::class
+    override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.NAV_ITEM)
 
-        interface Props : NavItems.Props
-    }
-
-    override fun RDOMBuilder<HtmlBlockTag>.transferChildren() {
+    override fun DomBuilder<T>.build() {
         if (props.activeLinkPredicate == null) {
-            children()
+            addChildren()
         } else {
             childList.addAll(
-                props.childrenArray.onEachComponent(NavLink::class) { _, _ ->
+                childrenArray.onEachComponent(NavLink::class) { _, _ ->
                     attrs {
                         activeLinkPredicate = this@NavItems.props.activeLinkPredicate
                     }
@@ -48,14 +44,7 @@ sealed class NavItems<P : NavItems.Props> : AbstractComponent<HtmlBlockTag, P, R
         }
     }
 
-    override fun RDOMBuilder<HtmlBlockTag>.build() {
-        attrs {
-            loadGlobalAttributes(props)
-            classes = props.classes.addOrInit(setOf(ClassNames.NAV_ITEM))
-        }
-    }
-
-    interface Props : WithGlobalAttributes {
+    interface Props<T : HtmlBlockTag> : DomComponent.Props<DomBuilder<T>, T> {
         var activeLinkPredicate: ActiveLinkPredicate?
     }
 }

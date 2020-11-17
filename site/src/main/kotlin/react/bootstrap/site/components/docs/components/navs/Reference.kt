@@ -1,8 +1,12 @@
 package react.bootstrap.site.components.docs.components.navs
 
 import kotlinx.html.A
+import kotlinx.html.DIV
+import kotlinx.html.LI
+import kotlinx.html.NAV
+import kotlinx.html.OL
+import kotlinx.html.UL
 import react.RBuilder
-import react.RElementBuilder
 import react.bootstrap.components.nav.NavBuilder
 import react.bootstrap.components.nav.NavComponent
 import react.bootstrap.components.nav.NavItems
@@ -23,7 +27,12 @@ internal class Reference : SectionComponent() {
 
     override fun RBuilder.render() {
         sectionTitle()
-        listOf(NavBuilder::ul, NavBuilder::ol, NavBuilder::nav, NavBuilder::div).forEach { function ->
+        listOf(
+            Triple(NavBuilder::ul, NavComponent.Ul.Props::class, UL::class),
+            Triple(NavBuilder::ol, NavComponent.Ol.Props::class, OL::class),
+            Triple(NavBuilder::nav, NavComponent.Nav.Props::class, NAV::class),
+            Triple(NavBuilder::div, NavComponent.Div.Props::class, DIV::class)
+        ).forEach { (function, propKlazz, tagKlazz) ->
             subSectionTitle(function.name)
             Markdown {
                 //language=Markdown
@@ -45,20 +54,28 @@ Creates a `${function.name}`-based navigation.
                         true,
                         FunSpec.Parameter.NULL
                     )
-                    .addParameter("block", Generic("RHandler", NavComponent.Ul.Props::class))
+                    .addParameter("props", Generic("PropHandler", propKlazz), default = "{ }")
+                    .addParameter("block", Generic("NavDomHandler", tagKlazz))
                     .returns("ReactElement")
                     .build()
             }
         }
         subSectionTitle("navItem")
         listOf(
-            Triple(NavComponent.Ul.Props::class, NavItems.Li.Props::class, NavItems.Li::class),
-            Triple(NavComponent.Ol.Props::class, NavItems.Li.Props::class, NavItems.Li::class),
-            Triple(NavComponent.Nav.Props::class, NavItems.NavItem.Props::class, NavItems.NavItem::class),
-            Triple(NavComponent.Div.Props::class, NavItems.DivItem.Props::class, NavItems.DivItem::class),
-        ).forEach { (navPropsKlazz, itemPropsKlazz, itemKlazz) ->
-            val elementBuilderGeneric = Generic("RElementBuilder", navPropsKlazz)
-            h4("bd-content-title") { +"${elementBuilderGeneric.build()}.navItem" }
+            Triple(Generic.builder<NavComponent.DomBuilder<*>, UL>(), NavItems.Li.Props::class, NavItems.Li::class),
+            Triple(Generic.builder<NavComponent.DomBuilder<*>, OL>(), NavItems.Li.Props::class, NavItems.Li::class),
+            Triple(
+                Generic.builder<NavComponent.DomBuilder<*>, NAV>(),
+                NavItems.DivItem.Props::class,
+                NavItems.DivItem::class
+            ),
+            Triple(
+                Generic.builder<NavComponent.DomBuilder<*>, DIV>(),
+                NavItems.DivItem.Props::class,
+                NavItems.DivItem::class
+            ),
+        ).forEach { (navDomBuilder, itemPropsKlazz, itemKlazz) ->
+            h4("bd-content-title") { +"${navDomBuilder.build()}.navItem" }
             Markdown {
                 //language=Markdown
                 +"""
@@ -66,23 +83,22 @@ Creates a `${itemKlazz.nestedName}` element.
                 """
             }
             codeExample {
-                +FunSpec.builder(RElementBuilder<NavComponent.Ul.Props>::navItem)
-                    .nestedBy(elementBuilderGeneric)
+                +FunSpec.builder(NavComponent.DomBuilder<UL>::navItem)
+                    .nestedBy(navDomBuilder)
                     .addParameter<String?>("classes", null)
-                    .addParameter("block", Generic("RHandler", itemPropsKlazz))
+                    .addParameter("props", Generic("PropHandler", itemPropsKlazz), default = "{ }")
+                    .addParameter("block", Generic("NavItemDomHandler", navDomBuilder.typeName))
                     .returns("ReactElement")
                     .build()
             }
         }
         subSectionTitle("navLink")
         listOf(
-            RElementBuilder<NavItems.Li.Props>::navLink to NavItems.Li.Props::class,
-            RElementBuilder<NavComponent.Nav.Props>::navLink to NavComponent.Nav.Props::class,
-            RElementBuilder<NavItems.NavItem.Props>::navLink to NavItems.NavItem.Props::class,
-            RElementBuilder<NavComponent.Div.Props>::navLink to NavComponent.Div.Props::class,
-            RElementBuilder<NavItems.DivItem.Props>::navLink to NavItems.DivItem.Props::class,
-        ).forEach { (function, propsKlazz) ->
-            val elementBuilderGeneric = Generic("RElementBuilder", propsKlazz)
+            Generic.builder<NavComponent.DomBuilder<*>, NAV>() to NavComponent.DomBuilder<NAV>::navLink,
+            Generic.builder<NavComponent.DomBuilder<*>, DIV>() to NavComponent.DomBuilder<DIV>::navLink,
+            Generic.builder<NavItems.DomBuilder<*>, LI>() to NavItems.DomBuilder<LI>::navLink,
+            Generic.builder<NavItems.DomBuilder<*>, DIV>() to NavItems.DomBuilder<DIV>::navLink
+        ).forEach { (elementBuilderGeneric, function) ->
             h4("bd-content-title") { +"${elementBuilderGeneric.build()}.navLink" }
             Markdown {
                 //language=Markdown
@@ -98,6 +114,7 @@ Creates a `${NavLink::class.nestedName}` element.
                     .addParameter<String?>("target", null)
                     .addParameter("active", false)
                     .addParameter("disabled", false)
+                    .addParameter("props", Generic("PropHandler", NavLink.Props::class), default = "{ }")
                     .addParameter("block", Generic("RDOMHandler", "A"))
                     .returns("ReactElement")
                     .build()

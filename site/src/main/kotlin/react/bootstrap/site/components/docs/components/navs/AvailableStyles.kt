@@ -2,9 +2,9 @@
 
 package react.bootstrap.site.components.docs.components.navs
 
+import kotlinx.html.UL
 import kotlinx.html.js.onClickFunction
 import react.RBuilder
-import react.RElementBuilder
 import react.RProps
 import react.bootstrap.components.nav.NavComponent
 import react.bootstrap.components.nav.NavComponent.Appearance
@@ -450,7 +450,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         }
     }
 
-    private fun RElementBuilder<NavComponent.Ul.Props>.buildDefaultExample() {
+    private fun NavComponent.DomBuilder<UL>.buildDefaultExample() {
         navItem {
             navLink(href = "#", active = true) {
                 attrs {
@@ -493,12 +493,15 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         linkText1: String = "Link",
         linkText2: String = "Link",
         disabledLinkText: String = "Disabled",
-        attrHandler: NavComponent.Ul.Props.() -> Unit
+        props: NavComponent.Ul.Props.() -> Unit
     ) = functionalComponent<RProps> {
         var activeNavLink by useState(0)
 
-        Navs.ul {
-            attrs.attrHandler()
+        Navs.ul(
+            props = {
+                props()
+            }
+        ) {
             navItem {
                 navLink(href = "#", active = activeNavLink == 0) {
                     attrs {
@@ -545,12 +548,15 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         linkText1: String = "Link",
         linkText2: String = "Link",
         disabledLinkText: String = "Disabled",
-        attrHandler: NavComponent.Nav.Props.() -> Unit
+        props: NavComponent.Nav.Props.() -> Unit
     ) = functionalComponent<RProps> {
         var activeNavLink by useState(0)
 
-        Navs.nav {
-            attrs.attrHandler()
+        Navs.nav(
+            props = {
+                props()
+            }
+        ) {
             navLink(href = "#", active = activeNavLink == 0) {
                 attrs {
                     onClickFunction = {
