@@ -12,9 +12,7 @@ import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDOMComponent
 import react.bootstrap.lib.react.rprops.requireProperties
 
-open class Heading<T : DOMTag, P : Heading.Props<T>>(props: P) :
-    AbstractDOMComponent<T, P, RState>(props) {
-
+open class Heading<T : DOMTag, P : Heading.Props<T>>(props: P) : AbstractDOMComponent<T, P, RState>(props) {
     init {
         props.requireProperties(props::size)
     }

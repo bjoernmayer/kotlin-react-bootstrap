@@ -1,41 +1,18 @@
 package react.bootstrap.content.typography.display
 
-import kotlinx.html.H1
-import kotlinx.html.H2
-import kotlinx.html.H3
-import kotlinx.html.H4
 import kotlinx.html.HtmlInlineTag
-import kotlinx.html.classes
 import react.RState
-import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.AbstractDOMComponent
 import react.bootstrap.lib.component.ClassNameEnum
-import react.bootstrap.lib.component.CustomisableComponent
-import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import react.bootstrap.lib.react.rprops.requireProperties
-import react.dom.RDOMBuilder
-import kotlin.reflect.KClass
 
-class Display(props: Props) : CustomisableComponent<HtmlInlineTag, Display.Props, RState>(props) {
+class Display<T : HtmlInlineTag>(props: Props<T>) : AbstractDOMComponent<T, Display.Props<T>, RState>(props) {
     init {
         props.requireProperties(props::variant)
     }
 
-    override val defaultRendererTag: KClass<out HtmlInlineTag>
-        get() = when (props.variant) {
-            Variants.DISPLAY_1 -> H1::class
-            Variants.DISPLAY_2 -> H2::class
-            Variants.DISPLAY_3 -> H3::class
-            Variants.DISPLAY_4 -> H4::class
-        }
-
-    override fun RDOMBuilder<HtmlInlineTag>.build() {
-        attrs {
-            loadGlobalAttributes(props)
-            classes = props.classes.addOrInit(props.variant.className)
-        }
-    }
+    override fun buildClasses(): Set<ClassNames> = setOf(props.variant.className)
 
     enum class Variants(override val className: ClassNames) : ClassNameEnum {
         DISPLAY_1(ClassNames.DISPLAY_1),
@@ -44,7 +21,7 @@ class Display(props: Props) : CustomisableComponent<HtmlInlineTag, Display.Props
         DISPLAY_4(ClassNames.DISPLAY_4);
     }
 
-    interface Props : CustomisableComponent.Props<HtmlInlineTag>, WithGlobalAttributes {
+    interface Props<T : HtmlInlineTag> : AbstractDOMComponent.Props<T> {
         var variant: Variants
     }
 }

@@ -54,31 +54,21 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
         codeExample {
             +Imports.builder()
                 .addImport("content.typography.display.${Display::class.simpleName}")
-                .addImport("content.typography.display.display")
                 .apply {
-                    for (x in 1..3) {
+                    for (x in 1..4) {
                         addImport("content.typography.display.display$x")
                     }
                 }
                 .build()
 
-            listOf(
-                RBuilder::display1,
-                RBuilder::display2,
-                RBuilder::display3
-            ).forEachIndexed { index, kFunction3 ->
-                +FunCall.builder(kFunction3)
+            repeat(4) {
+                +FunCall.builder("display${it + 1}")
+                    .addTypeParameter(SPAN::class)
                     .setLambdaArgument(
-                        plusString("Display ${index + 1}")
+                        plusString("Display ${it + 1}")
                     )
                     .build()
             }
-            +LineComment.builder("Or you use a more generic way").build()
-            +FunCall.builder("display")
-                .addTypeParameter(SPAN::class)
-                .addArgument("variant", Display.Variants.DISPLAY_4)
-                .setLambdaArgument(plusString("Display 4"))
-                .build()
         }
     }
 }
