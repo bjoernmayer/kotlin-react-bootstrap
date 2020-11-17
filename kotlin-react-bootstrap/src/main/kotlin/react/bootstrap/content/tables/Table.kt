@@ -4,12 +4,12 @@ import kotlinx.html.TABLE
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.helpers.appendClass
-import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.ClassNameEnum
+import react.bootstrap.lib.component.RDOMHandler
 import react.dom.div
-import react.dom.table
+import react.dom.table as reactTable
 
 /**
  * Creates a [TABLE] element and adds Bootstrap classes to it.
@@ -64,10 +64,20 @@ fun RBuilder.table(
         }
 
         div(classes = divClassName.className) {
-            table(classes = classes.appendClass(tableClasses), block = block)
+            reactTable(classes = classes.appendClass(tableClasses)) {
+                val builder = this
+                with(block) {
+                    builder.handle()
+                }
+            }
         }
     } else {
-        table(classes = classes.appendClass(tableClasses), block = block)
+        reactTable(classes = classes.appendClass(tableClasses)) {
+            val builder = this
+            with(block) {
+                builder.handle()
+            }
+        }
     }
 }
 

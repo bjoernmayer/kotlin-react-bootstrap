@@ -11,8 +11,9 @@ import react.RState
 import react.ReactElement
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.AbstractDomComponent
+import react.bootstrap.lib.component.AbstractDOMComponent
 import react.bootstrap.lib.component.ClassNameEnum
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.lib.react.isComponent
 import react.bootstrap.lib.react.mapReactElementsIndexed
 import react.bootstrap.lib.react.onEachComponent
@@ -23,10 +24,12 @@ import react.setState
 import kotlinx.html.CommonAttributeGroupFacadeFlowInteractivePhrasingContent as InteractiveTag
 
 class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
-    AbstractDomComponent<T, ButtonGroup.Props<T>, ButtonGroup.State>(props) {
+    AbstractDOMComponent<T, ButtonGroup.Props<T>, ButtonGroup.State>(props) {
     override fun State.init(props: Props<T>) {
         val children = buildBuilder(getBuilderFactory(props.tag)).apply {
-            props.handler.invoke(this)
+            with(props.handler) {
+                this@apply.handle()
+            }
         }.create().props.childrenArray
 
         buttons = mutableMapOf<Int, Pair<ReactElement, ButtonComponent.Props<*>>>().apply {
@@ -95,7 +98,11 @@ class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
 
             val clickedName =
                 RBuilder()
-                    .input { clickedButtonProps.inputHandler(this) }
+                    .input {
+                        with(clickedButtonProps.inputHandler) {
+                            this@input.handle()
+                        }
+                    }
                     .props
                     .unsafeCast<INPUT>()
                     .name
@@ -124,7 +131,11 @@ class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
                             // name
                             val buttonPropsName =
                                 RBuilder()
-                                    .input { buttonProps.inputHandler(this) }
+                                    .input {
+                                        with(buttonProps.inputHandler) {
+                                            this@input.handle()
+                                        }
+                                    }
                                     .props
                                     .unsafeCast<INPUT>()
                                     .name
@@ -214,9 +225,11 @@ class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
         attrs {
             active = state.activeButtons.contains(index)
 
-            this.handler = {
+            this.handler = RDOMHandler {
                 // First apply the handler so it applies a possible onClickFunction.
-                originalProps.handler(this)
+                with(originalProps.handler) {
+                    this@RDOMHandler.handle()
+                }
 
                 // Then pull out the possible onClick
                 val onClick = attrs["onClick"] as EventHandler?
@@ -240,8 +253,11 @@ class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
 
             // onClick needs to be set on the input. Otherwise onClick will be fired twice!
             // See https://stackoverflow.com/questions/50819162/why-is-my-function-being-called-twice-in-react
-            this.inputHandler = {
-                originalProps.inputHandler(this)
+            this.inputHandler = RDOMHandler {
+
+                with(originalProps.inputHandler) {
+                    this@RDOMHandler.handle()
+                }
 
                 val onClick = attrs["onClick"] as EventHandler?
 
@@ -255,7 +271,7 @@ class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
         }
     }
 
-    interface Props<T : HtmlBlockTag> : AbstractDomComponent.Props<T> {
+    interface Props<T : HtmlBlockTag> : AbstractDOMComponent.Props<T> {
         /**
          * Change the appearance of the [ButtonGroup] by setting an [Appearance].
          */

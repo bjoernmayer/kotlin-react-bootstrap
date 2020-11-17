@@ -11,7 +11,7 @@ import react.bootstrap.components.button.ButtonComponent
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
-import react.bootstrap.lib.DomTag
+import react.bootstrap.lib.DOMTag
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -134,7 +134,7 @@ Since we are working with react here, implementing a toggleable button is quite 
                                 .setLambdaArgument(
                                     FunCall.builder(RElementBuilder<RProps>::attrs)
                                         .setLambdaArgument(
-                                            Assignment.builder(DomTag::onClickFunction)
+                                            Assignment.builder(DOMTag::onClickFunction)
                                                 .value(
                                                     LambdaValue(
                                                         "active = !active",

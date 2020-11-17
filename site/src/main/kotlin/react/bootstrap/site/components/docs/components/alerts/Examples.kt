@@ -14,7 +14,7 @@ import react.bootstrap.components.alert.closingElement
 import react.bootstrap.components.alert.link
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.lib.DomTag
+import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.components.buttons.outlineDangerFun
 import react.bootstrap.site.components.docs.components.buttons.solidInfoFun
@@ -394,7 +394,7 @@ You can build your own custom close element, by using `closingElement { }`.
                                                             "// The onClick event on the closing element " +
                                                                 "can still be set",
                                                             "\n",
-                                                            Assignment.builder(DomTag::onClickFunction)
+                                                            Assignment.builder(DOMTag::onClickFunction)
                                                                 .value(
                                                                     LambdaValue(
                                                                         FunCall.builder(
@@ -433,7 +433,7 @@ You can build your own custom close element, by using `closingElement { }`.
                                         .setLambdaArgument(
                                             FunCall.builder(RElementBuilder<RProps>::attrs)
                                                 .setLambdaArgument(
-                                                    Assignment.builder(DomTag::onClickFunction)
+                                                    Assignment.builder(DOMTag::onClickFunction)
                                                         .value(
                                                             LambdaValue(
                                                                 Assignment.builder("show")

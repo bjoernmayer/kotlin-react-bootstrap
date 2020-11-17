@@ -11,7 +11,7 @@ import react.Child
 import react.Component
 import react.RState
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.DomComponent
+import react.bootstrap.lib.component.DOMComponent
 import react.bootstrap.lib.react.onEachComponent
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
@@ -24,8 +24,8 @@ import kotlin.reflect.KClass
  */
 sealed class NavComponent<T : HtmlBlockTag, P : NavComponent.Props<T>>(
     props: P,
-    tag: KClass<T>
-) : DomComponent<NavComponent.DomBuilder<T>, T, P, RState>(props, tag) {
+    tag: KClass<out T>
+) : DOMComponent<T, NavDOMHandler<T>, NavComponent.DomBuilder<T>, P, RState>(props, tag) {
     class DomBuilder<out T : Tag>(factory: (TagConsumer<Unit>) -> T) : RDOMBuilder<T>(factory)
 
     override fun buildBuilder(builderFactory: (TagConsumer<Unit>) -> T): DomBuilder<T> = DomBuilder(builderFactory)
@@ -130,19 +130,15 @@ sealed class NavComponent<T : HtmlBlockTag, P : NavComponent.Props<T>>(
         return navClasses
     }
 
-    protected inline fun <
-        reified C : Component<P, *>,
-        P : NavItems.Props<*>
-        > Array<out Child>.setActiveLinkPredicate(
-        @Suppress("UNUSED_PARAMETER") component: KClass<C> = C::class,
-    ): Array<out Child> =
-        onEachComponent(component) { _, _ ->
-            attrs {
-                activeLinkPredicate = this@NavComponent.props.activeLinkPredicate
-            }
+    protected fun <P : NavItems.Props<*>> Array<out Child>.setActiveLinkPredicate(
+        component: KClass<out Component<P, *>>,
+    ): Array<out Child> = onEachComponent(component) { _, _ ->
+        attrs {
+            activeLinkPredicate = this@NavComponent.props.activeLinkPredicate
         }
+    }
 
-    interface Props<T : HtmlBlockTag> : DomComponent.Props<DomBuilder<T>, T> {
+    interface Props<T : HtmlBlockTag> : DOMComponent.Props<NavDOMHandler<T>> {
         var appearance: Appearance?
         var widthHandling: WidthHandling?
         var activeLinkPredicate: ActiveLinkPredicate?

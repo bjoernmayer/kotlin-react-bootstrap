@@ -2,14 +2,14 @@
 
 package react.bootstrap.layout.grid.col
 
-import kotlinx.html.CommonAttributeGroupFacade
 import react.RState
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.EQ
+import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.AbstractDomComponent
+import react.bootstrap.lib.component.AbstractDOMComponent
 
-class Col<T : CommonAttributeGroupFacade>(props: Props<T>) : AbstractDomComponent<T, Col.Props<T>, RState>(props) {
+class Col<T : DOMTag>(props: Props<T>) : AbstractDOMComponent<T, Col.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> {
         val colClasses = mutableSetOf<ClassNames>()
 
@@ -28,7 +28,7 @@ class Col<T : CommonAttributeGroupFacade>(props: Props<T>) : AbstractDomComponen
         return colClasses
     }
 
-    interface Props<T : CommonAttributeGroupFacade> : AbstractDomComponent.Props<T> {
+    interface Props<T : DOMTag> : AbstractDOMComponent.Props<T> {
         var all: ColAttributes?
         var sm: ColAttributes?
         var md: ColAttributes?

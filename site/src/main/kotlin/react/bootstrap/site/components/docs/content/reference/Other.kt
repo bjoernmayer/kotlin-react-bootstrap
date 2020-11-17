@@ -1,6 +1,5 @@
 package react.bootstrap.site.components.docs.content.reference
 
-import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.content.typography.lead.Lead
@@ -8,11 +7,14 @@ import react.bootstrap.content.typography.lead.lead
 import react.bootstrap.content.typography.mark.Mark
 import react.bootstrap.content.typography.muted.Muted
 import react.bootstrap.content.typography.small.Small
+import react.bootstrap.lib.DOMTag
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.FunSpec
-import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.NOINLINE
 import react.bootstrap.site.lib.codepoet.Generic
 import kotlin.reflect.KFunction
 
@@ -52,9 +54,17 @@ Creates a generic `${Muted::class.simpleName!!}` element.
                 inline = true
             )
                 .nestedBy<RBuilder>()
-                .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
+                .addTypeParameter("T", DOMTag::class, true)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
+                .addParameter(
+                    "props",
+                    Generic(PropHandler::class, Generic(Muted.Props::class, "T").build()),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
+                )
+                .addParameter("block", Generic(RDOMHandler::class, "T"))
                 .returns("ReactElement")
                 .build()
         }
@@ -74,9 +84,17 @@ Creates a generic `${Mark::class.simpleName!!}` element.
                 inline = true
             )
                 .nestedBy<RBuilder>()
-                .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
+                .addTypeParameter("T", DOMTag::class, true)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
+                .addParameter(
+                    "props",
+                    Generic(PropHandler::class, Generic(Mark.Props::class, "T").build()),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
+                )
+                .addParameter("block", Generic(RDOMHandler::class, "T"))
                 .returns("ReactElement")
                 .build()
         }
@@ -96,9 +114,17 @@ Creates a generic `${Small::class.simpleName!!}` element.
                 inline = true
             )
                 .nestedBy<RBuilder>()
-                .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
+                .addTypeParameter("T", DOMTag::class, true)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
+                .addParameter(
+                    "props",
+                    Generic(PropHandler::class, Generic(Small.Props::class, "T").build()),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
+                )
+                .addParameter("block", Generic(RDOMHandler::class, "T"))
                 .returns("ReactElement")
                 .build()
         }

@@ -9,7 +9,8 @@ import react.ReactElement
 import react.bootstrap.components.button.ButtonComponent
 import react.bootstrap.components.button.ButtonComponent.Variants
 import react.bootstrap.components.button.Buttons
-import react.dom.RDOMBuilder
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction11
 
@@ -17,8 +18,8 @@ internal val KClass<out Variants>.normalName
     get() = simpleName!!.toLowerCase().capitalize()
 
 internal typealias ButtonFun = KFunction11<ButtonType, ButtonFormEncType?, ButtonFormMethod?, Boolean, Boolean,
-    Boolean, ButtonComponent.Sizes?, Boolean, String?, ButtonComponent.Button.Props.() -> Unit,
-    RDOMBuilder<BUTTON>.() -> Unit, ReactElement>
+    Boolean, ButtonComponent.Sizes?, Boolean, String?, PropHandler<ButtonComponent.Button.Props>,
+    RDOMHandler<BUTTON>, ReactElement>
 
 internal val RBuilder.solidDangerFun: ButtonFun
     get() = Buttons.solid::danger

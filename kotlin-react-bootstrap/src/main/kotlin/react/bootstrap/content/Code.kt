@@ -4,8 +4,8 @@ import kotlinx.html.PRE
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.helpers.appendClass
-import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.RDOMHandler
 import react.dom.pre
 
 /**
@@ -21,5 +21,9 @@ fun RBuilder.pre(scrollable: Boolean, classes: String? = null, block: RDOMHandle
         } else {
             classes
         },
-        block = block
-    )
+    ) {
+        val builder = this
+        with(block) {
+            builder.handle()
+        }
+    }

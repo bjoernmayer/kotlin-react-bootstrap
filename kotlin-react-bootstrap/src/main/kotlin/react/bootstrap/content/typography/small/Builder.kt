@@ -1,10 +1,12 @@
 package react.bootstrap.content.typography.small
 
-import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
 import react.ReactElement
-import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
+import react.bootstrap.lib.DOMTag
+import react.bootstrap.lib.component.AbstractDOMComponent.Companion.abstractDomComponent
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
+import kotlin.reflect.KClass
 
 /**
  * Creates a generic [Small] element.
@@ -12,10 +14,13 @@ import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomC
  * @param T Tag Type to be used to render this [Small].
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified T : CommonAttributeGroupFacade> RBuilder.small(
+@Suppress("UNCHECKED_CAST")
+inline fun <reified T : DOMTag> RBuilder.small(
     classes: String? = null,
-    noinline block: RDOMHandler<T>
-): ReactElement = abstractDomComponent<T, Small.Props<T>>(Small::class)
+    props: PropHandler<Small.Props<T>> = PropHandler { },
+    block: RDOMHandler<T>
+): ReactElement = abstractDomComponent(Small::class as KClass<Small<T>>)
     .classes(classes)
+    .propHandler(props)
     .domHandler(block)
     .build()

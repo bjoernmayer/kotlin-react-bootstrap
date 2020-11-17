@@ -5,8 +5,8 @@ import kotlinx.html.ThScope
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.helpers.appendClass
-import react.bootstrap.lib.RDOMHandler
-import react.dom.th
+import react.bootstrap.lib.component.RDOMHandler
+import react.dom.th as reactTh
 
 /**
  * Creates a [TH] element.
@@ -21,8 +21,9 @@ fun RBuilder.th(
     classes: String? = null,
     block: RDOMHandler<TH>
 ): ReactElement =
-    th(
-        classes = contextualStyle?.let { classes.appendClass(it.className) } ?: classes,
-        scope = scope,
-        block = block
-    )
+    reactTh(classes = contextualStyle?.let { classes.appendClass(it.className) } ?: classes, scope = scope) {
+        val builder = this
+        with(block) {
+            builder.handle()
+        }
+    }

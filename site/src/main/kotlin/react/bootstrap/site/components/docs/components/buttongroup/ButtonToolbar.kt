@@ -1,6 +1,5 @@
 package react.bootstrap.site.components.docs.components.buttongroup
 
-import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
 import react.RElementBuilder
 import react.RProps
@@ -8,6 +7,7 @@ import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
 import react.bootstrap.components.button.buttonToolbar
+import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.site.components.docs.components.buttons.solidSecondaryFun
@@ -72,7 +72,7 @@ out groups, buttons, and more.
                 .setLambdaArgument(
                     FunCall.builder(RElementBuilder<RProps>::attrs)
                         .setLambdaArgument(
-                            Assignment.builder(CommonAttributeGroupFacade::ariaLabel)
+                            Assignment.builder(DOMTag::ariaLabel)
                                 .value("Toolbar with button groups")
                                 .build()
                         )
@@ -82,7 +82,7 @@ out groups, buttons, and more.
                         .setLambdaArgument(
                             FunCall.builder(RElementBuilder<RProps>::attrs)
                                 .setLambdaArgument(
-                                    Assignment.builder(CommonAttributeGroupFacade::ariaLabel)
+                                    Assignment.builder(DOMTag::ariaLabel)
                                         .value("First group")
                                         .build()
                                 )
@@ -104,7 +104,7 @@ out groups, buttons, and more.
                         .setLambdaArgument(
                             FunCall.builder(RElementBuilder<RProps>::attrs)
                                 .setLambdaArgument(
-                                    Assignment.builder(CommonAttributeGroupFacade::ariaLabel)
+                                    Assignment.builder(DOMTag::ariaLabel)
                                         .value("Second group")
                                         .build()
                                 )
@@ -126,7 +126,7 @@ out groups, buttons, and more.
                         .setLambdaArgument(
                             FunCall.builder(RElementBuilder<RProps>::attrs)
                                 .setLambdaArgument(
-                                    Assignment.builder(CommonAttributeGroupFacade::ariaLabel)
+                                    Assignment.builder(DOMTag::ariaLabel)
                                         .value("Third group")
                                         .build()
                                 )

@@ -4,12 +4,12 @@ import kotlinx.html.HtmlBlockTag
 import kotlinx.html.role
 import react.RState
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.AbstractDomComponent
+import react.bootstrap.lib.component.AbstractDOMComponent
 import react.dom.RDOMBuilder
 
 class ButtonToolbar<T : HtmlBlockTag>(
     props: Props<T>
-) : AbstractDomComponent<T, ButtonToolbar.Props<T>, RState>(props) {
+) : AbstractDOMComponent<T, ButtonToolbar.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.BTN_TOOLBAR)
 
     override fun RDOMBuilder<T>.build() {
@@ -19,5 +19,5 @@ class ButtonToolbar<T : HtmlBlockTag>(
         addChildren()
     }
 
-    interface Props<T : HtmlBlockTag> : AbstractDomComponent.Props<T>
+    interface Props<T : HtmlBlockTag> : AbstractDOMComponent.Props<T>
 }

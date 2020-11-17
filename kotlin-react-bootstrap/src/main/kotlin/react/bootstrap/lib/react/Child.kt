@@ -24,6 +24,18 @@ inline fun <reified C : Component<*, *>> Child.isComponent(): Boolean {
 }
 
 /**
+ * This identifies a child as a component of the specified type
+ *
+ * @param C Component Type
+ * @return True if the child is of type [C]
+ */
+fun <C : Component<*, *>> Child.isComponent(componentKlazz: KClass<out C>): Boolean {
+    val reactElement = asJsObject().asReactElementOrNull() ?: return false
+
+    return reactElement.componentJsClass == componentKlazz.js
+}
+
+/**
  * Returns a list containing the results of applying the given [transform] function to each [ReactElement] of type [C],
  * its props of type [P] and its index in the original array.
  *
@@ -51,20 +63,20 @@ inline fun <reified C : Component<P, *>, P : RProps, R : Any> Array<out Child>.m
  * @param P Props type Component
  * @param action Basically a [RElementBuilder] which receives the index and the old props of the child
  */
-inline fun <reified C : Component<P, *>, P : RProps> Array<out Child>.onEachComponent(
-    @Suppress("UNUSED_PARAMETER") component: KClass<C> = C::class,
-    noinline action: RElementBuilder<P>.(index: Int, originalProps: P) -> Unit
+fun <P : RProps> Array<out Child>.onEachComponent(
+    component: KClass<out Component<P, *>>,
+    action: RElementBuilder<P>.(index: Int, originalProps: P) -> Unit
 ): Array<out Child> {
     val rBuilder = RBuilder()
 
     return mapIndexed { index, child ->
-        if (child.isComponent<C>().not()) {
+        if (child.isComponent(component).not()) {
             return@mapIndexed child
         }
 
         val props: P = child.unsafeCast<ReactElement>().props.unsafeCast<P>()
 
-        rBuilder.child(C::class.rClass, clone(props)) {
+        rBuilder.child(component.rClass, clone(props)) {
             action(index, props)
         }
     }.toTypedArray()

@@ -2,13 +2,14 @@
 
 package react.bootstrap.layout.grid.row
 
-import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.DIV
 import react.RBuilder
 import react.ReactElement
-import react.bootstrap.lib.PropHandler
-import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
+import react.bootstrap.lib.DOMTag
+import react.bootstrap.lib.component.AbstractDOMComponent.Companion.abstractDomComponent
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
+import kotlin.reflect.KClass
 
 /**
  * Creates a [Row] element.
@@ -20,6 +21,7 @@ import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomC
  * @param xl [RowAttributes] that apply to extra-large screen sizes.
  * @param classes Space separated list of CSS classes for this element.
  */
+@Suppress("UNCHECKED_CAST")
 fun RBuilder.row(
     all: RowAttributes? = null,
     sm: RowAttributes? = null,
@@ -28,9 +30,9 @@ fun RBuilder.row(
     xl: RowAttributes? = null,
     gutters: Boolean = true,
     classes: String? = null,
-    propHandler: PropHandler<Row.Props<DIV>> = { },
+    props: PropHandler<Row.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
-): ReactElement = abstractDomComponent<DIV, Row.Props<DIV>>(Row::class)
+): ReactElement = abstractDomComponent(Row::class as KClass<Row<DIV>>)
     .classes(classes)
     .propHandler {
         this.all = all
@@ -40,12 +42,15 @@ fun RBuilder.row(
         this.xl = xl
         this.gutters = gutters
 
-        propHandler()
+        with(props) {
+            this@propHandler.handle()
+        }
     }
     .domHandler(block)
     .build()
 
-inline fun <reified T : CommonAttributeGroupFacade> RBuilder.row(
+@Suppress("UNCHECKED_CAST")
+inline fun <reified T : DOMTag> RBuilder.row(
     all: RowAttributes? = null,
     sm: RowAttributes? = null,
     md: RowAttributes? = null,
@@ -53,9 +58,9 @@ inline fun <reified T : CommonAttributeGroupFacade> RBuilder.row(
     xl: RowAttributes? = null,
     gutters: Boolean = true,
     classes: String? = null,
-    crossinline propHandler: PropHandler<Row.Props<T>> = { },
-    noinline block: RDOMHandler<T>
-): ReactElement = abstractDomComponent<T, Row.Props<T>>(Row::class)
+    props: PropHandler<Row.Props<T>> = PropHandler { },
+    block: RDOMHandler<T>
+): ReactElement = abstractDomComponent(Row::class as KClass<Row<T>>)
     .classes(classes)
     .propHandler {
         this.all = all
@@ -65,7 +70,9 @@ inline fun <reified T : CommonAttributeGroupFacade> RBuilder.row(
         this.xl = xl
         this.gutters = gutters
 
-        propHandler()
+        with(props) {
+            this@propHandler.handle()
+        }
     }
     .domHandler(block)
     .build()

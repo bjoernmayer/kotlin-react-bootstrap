@@ -2,13 +2,13 @@
 
 package react.bootstrap.layout.grid.row
 
-import kotlinx.html.CommonAttributeGroupFacade
 import react.RState
+import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.AbstractDomComponent
+import react.bootstrap.lib.component.AbstractDOMComponent
 
-class Row<T : CommonAttributeGroupFacade>(props: Props<T>) : AbstractDomComponent<T, Row.Props<T>, RState>(props) {
+class Row<T : DOMTag>(props: Props<T>) : AbstractDOMComponent<T, Row.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> {
         val rowClasses = mutableSetOf(ClassNames.ROW)
 
@@ -27,7 +27,7 @@ class Row<T : CommonAttributeGroupFacade>(props: Props<T>) : AbstractDomComponen
         return rowClasses
     }
 
-    interface Props<T : CommonAttributeGroupFacade> : AbstractDomComponent.Props<T> {
+    interface Props<T : DOMTag> : AbstractDOMComponent.Props<T> {
         var all: RowAttributes?
         var sm: RowAttributes?
         var md: RowAttributes?

@@ -16,10 +16,11 @@ import kotlinx.html.LABEL
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.lib.Builder
-import react.bootstrap.lib.PropHandler
-import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
-import react.bootstrap.lib.component.SimpleDomComponent.Companion.simpleDomComponent
+import react.bootstrap.lib.component.AbstractDOMComponent.Companion.abstractDomComponent
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
+import react.bootstrap.lib.component.SimpleDOMComponent.Companion.simpleDomComponent
+import kotlin.reflect.KClass
 
 private fun RBuilder.buttonButton(
     formEncType: ButtonFormEncType? = null,
@@ -32,7 +33,7 @@ private fun RBuilder.buttonButton(
     nowrap: Boolean = false,
     sizes: ButtonComponent.Sizes? = null,
     blockSized: Boolean = false,
-    props: PropHandler<ButtonComponent.Button.Props> = { },
+    props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
     block: RDOMHandler<BUTTON>
 ): ReactElement = simpleDomComponent(ButtonComponent.Button::class)
     .classes(classes)
@@ -44,23 +45,29 @@ private fun RBuilder.buttonButton(
         this.sizes = sizes
         this.blockSized = blockSized
 
-        props()
+        with(props) {
+            this@propHandler.handle()
+        }
     }
-    .domHandler {
-        attrs {
-            formEncType?.let {
-                this.formEncType = it
+    .domHandler(
+        RDOMHandler {
+            attrs {
+                formEncType?.let {
+                    this.formEncType = it
+                }
+                formMethod?.let {
+                    this.formMethod = it
+                }
+                type?.let {
+                    this.type = it
+                }
             }
-            formMethod?.let {
-                this.formMethod = it
-            }
-            type?.let {
-                this.type = it
+
+            with(block) {
+                this@RDOMHandler.handle()
             }
         }
-
-        block()
-    }
+    )
     .build()
 
 private fun RBuilder.buttonLabel(
@@ -76,8 +83,8 @@ private fun RBuilder.buttonLabel(
     nowrap: Boolean = false,
     sizes: ButtonComponent.Sizes? = null,
     classes: String? = null,
-    input: RDOMHandler<INPUT> = { },
-    props: PropHandler<ButtonComponent.Box.Props> = { },
+    input: RDOMHandler<INPUT> = RDOMHandler { },
+    props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
     block: RDOMHandler<LABEL>
 ): ReactElement = simpleDomComponent(ButtonComponent.Box::class)
     .classes(classes)
@@ -89,7 +96,7 @@ private fun RBuilder.buttonLabel(
         this.sizes = sizes
         this.blockSized = blockSized
         this.type = type
-        this.inputHandler = {
+        this.inputHandler = RDOMHandler {
             attrs {
                 formEncType?.let {
                     this.formEncType = it
@@ -107,10 +114,16 @@ private fun RBuilder.buttonLabel(
                     this.value = it
                 }
             }
-            input()
+            val inputHandlerScope = this
+
+            with(input) {
+                inputHandlerScope.handle()
+            }
         }
 
-        props()
+        with(props) {
+            this@propHandler.handle()
+        }
     }
     .domHandler(block)
     .build()
@@ -128,7 +141,7 @@ private fun RBuilder.buttonInput(
     sizes: ButtonComponent.Sizes? = null,
     blockSized: Boolean = false,
     classes: String? = null,
-    props: PropHandler<ButtonComponent.Input.Props> = { },
+    props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
     block: RDOMHandler<INPUT>
 ): ReactElement = simpleDomComponent(ButtonComponent.Input::class)
     .classes(classes)
@@ -141,29 +154,35 @@ private fun RBuilder.buttonInput(
         this.blockSized = blockSized
         this.type = type
 
-        props()
+        with(props) {
+            this@propHandler.handle()
+        }
     }
-    .domHandler {
-        attrs {
-            formEncType?.let {
-                this.formEncType = it
+    .domHandler(
+        RDOMHandler {
+            attrs {
+                formEncType?.let {
+                    this.formEncType = it
+                }
+
+                formMethod?.let {
+                    this.formMethod = it
+                }
+
+                name?.let {
+                    this.name = it
+                }
+
+                value?.let {
+                    this.value = it
+                }
             }
 
-            formMethod?.let {
-                this.formMethod = it
-            }
-
-            name?.let {
-                this.name = it
-            }
-
-            value?.let {
-                this.value = it
+            with(block) {
+                this@RDOMHandler.handle()
             }
         }
-
-        block()
-    }
+    )
     .build()
 
 private fun RBuilder.buttonLink(
@@ -176,7 +195,7 @@ private fun RBuilder.buttonLink(
     sizes: ButtonComponent.Sizes? = null,
     blockSized: Boolean = false,
     classes: String? = null,
-    props: PropHandler<ButtonComponent.Link.Props> = { },
+    props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
     block: RDOMHandler<A>
 ): ReactElement = simpleDomComponent(ButtonComponent.Link::class)
     .classes(classes)
@@ -188,21 +207,27 @@ private fun RBuilder.buttonLink(
         this.sizes = sizes
         this.blockSized = blockSized
 
-        props()
+        with(props) {
+            this@propHandler.handle()
+        }
     }
-    .domHandler {
-        attrs {
-            href?.let {
-                this.href = it
+    .domHandler(
+        RDOMHandler {
+            attrs {
+                href?.let {
+                    this.href = it
+                }
+
+                target?.let {
+                    this.target = it
+                }
             }
 
-            target?.let {
-                this.target = it
+            with(block) {
+                this@RDOMHandler.handle()
             }
         }
-
-        block()
-    }
+    )
     .build()
 
 class ButtonBuilder(override val builder: RBuilder) : Builder {
@@ -239,7 +264,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Button.Props> = { },
+            props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = danger,
@@ -277,7 +302,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Link.Props> = { },
+            props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = danger,
@@ -320,7 +345,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Input.Props> = { },
+            props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
             variant = danger,
@@ -366,8 +391,8 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Box.Props> = { },
-            input: RDOMHandler<INPUT> = { },
+            props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
+            input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
         ): ReactElement = builder.buttonLabel(
             variant = danger,
@@ -410,7 +435,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Button.Props> = { },
+            props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = dark,
@@ -448,7 +473,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Link.Props> = { },
+            props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = dark,
@@ -491,7 +516,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Input.Props> = { },
+            props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
             variant = dark,
@@ -537,8 +562,8 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Box.Props> = { },
-            input: RDOMHandler<INPUT> = { },
+            props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
+            input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
         ): ReactElement = builder.buttonLabel(
             variant = dark,
@@ -581,7 +606,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Button.Props> = { },
+            props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = info,
@@ -619,7 +644,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Link.Props> = { },
+            props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = info,
@@ -662,7 +687,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Input.Props> = { },
+            props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
             variant = info,
@@ -708,8 +733,8 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Box.Props> = { },
-            input: RDOMHandler<INPUT> = { },
+            props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
+            input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
         ): ReactElement = builder.buttonLabel(
             variant = info,
@@ -752,7 +777,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Button.Props> = { },
+            props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = light,
@@ -790,7 +815,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Link.Props> = { },
+            props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = light,
@@ -833,7 +858,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Input.Props> = { },
+            props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
             variant = light,
@@ -879,8 +904,8 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Box.Props> = { },
-            input: RDOMHandler<INPUT> = { },
+            props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
+            input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
         ): ReactElement = builder.buttonLabel(
             variant = light,
@@ -923,7 +948,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Button.Props> = { },
+            props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = primary,
@@ -961,7 +986,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Link.Props> = { },
+            props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = primary,
@@ -1004,7 +1029,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Input.Props> = { },
+            props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
             variant = primary,
@@ -1050,8 +1075,8 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Box.Props> = { },
-            input: RDOMHandler<INPUT> = { },
+            props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
+            input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
         ): ReactElement = builder.buttonLabel(
             variant = primary,
@@ -1094,7 +1119,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Button.Props> = { },
+            props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = secondary,
@@ -1132,7 +1157,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Link.Props> = { },
+            props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = secondary,
@@ -1175,7 +1200,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Input.Props> = { },
+            props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
             variant = secondary,
@@ -1221,8 +1246,8 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Box.Props> = { },
-            input: RDOMHandler<INPUT> = { },
+            props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
+            input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
         ): ReactElement = builder.buttonLabel(
             variant = secondary,
@@ -1265,7 +1290,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Button.Props> = { },
+            props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = success,
@@ -1303,7 +1328,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Link.Props> = { },
+            props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = success,
@@ -1346,7 +1371,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Input.Props> = { },
+            props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
             variant = success,
@@ -1392,8 +1417,8 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Box.Props> = { },
-            input: RDOMHandler<INPUT> = { },
+            props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
+            input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
         ): ReactElement = builder.buttonLabel(
             variant = success,
@@ -1436,7 +1461,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Button.Props> = { },
+            props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = warning,
@@ -1474,7 +1499,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Link.Props> = { },
+            props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = warning,
@@ -1517,7 +1542,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Input.Props> = { },
+            props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
             variant = warning,
@@ -1563,8 +1588,8 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Box.Props> = { },
-            input: RDOMHandler<INPUT> = { },
+            props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
+            input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
         ): ReactElement = builder.buttonLabel(
             variant = warning,
@@ -1618,7 +1643,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Button.Props> = { },
+            props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = ButtonComponent.Variants.Solid.LINK,
@@ -1656,7 +1681,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Link.Props> = { },
+            props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = ButtonComponent.Variants.Solid.LINK,
@@ -1699,7 +1724,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Input.Props> = { },
+            props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
             variant = ButtonComponent.Variants.Solid.LINK,
@@ -1745,8 +1770,8 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
             classes: String? = null,
-            props: PropHandler<ButtonComponent.Box.Props> = { },
-            input: RDOMHandler<INPUT> = { },
+            props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
+            input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
         ): ReactElement = builder.buttonLabel(
             variant = ButtonComponent.Variants.Solid.LINK,
@@ -1777,21 +1802,24 @@ val RBuilder.Buttons
 /**
  * Creates a [ButtonGroup] element.
  */
+@Suppress("UNCHECKED_CAST")
 fun RBuilder.buttonGroup(
     appearance: ButtonGroup.Appearance? = null,
     behaviour: ButtonGroup.Behaviours? = null,
     classes: String? = null,
     sizes: ButtonGroup.Sizes? = null,
-    props: PropHandler<ButtonGroup.Props<DIV>> = { },
+    props: PropHandler<ButtonGroup.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
-): ReactElement = abstractDomComponent<DIV, ButtonGroup.Props<DIV>>(ButtonGroup::class)
+): ReactElement = abstractDomComponent(ButtonGroup::class as KClass<ButtonGroup<DIV>>)
     .classes(classes)
     .propHandler {
         this.appearance = appearance
         this.behaviour = behaviour
         this.sizes = sizes
 
-        props()
+        with(props) {
+            this@propHandler.handle()
+        }
     }
     .domHandler(block)
     .build()
@@ -1799,21 +1827,24 @@ fun RBuilder.buttonGroup(
 /**
  * Creates a generic [ButtonGroup] element.
  */
+@Suppress("UNCHECKED_CAST")
 inline fun <reified T : HtmlBlockTag> RBuilder.buttonGroup(
     appearance: ButtonGroup.Appearance? = null,
     behaviour: ButtonGroup.Behaviours? = null,
     classes: String? = null,
     sizes: ButtonGroup.Sizes? = null,
-    crossinline props: PropHandler<ButtonGroup.Props<T>> = { },
-    noinline block: RDOMHandler<T>
-): ReactElement = abstractDomComponent<T, ButtonGroup.Props<T>>(ButtonGroup::class)
+    props: PropHandler<ButtonGroup.Props<T>> = PropHandler { },
+    block: RDOMHandler<T>
+): ReactElement = abstractDomComponent(ButtonGroup::class as KClass<ButtonGroup<T>>)
     .classes(classes)
     .propHandler {
         this.appearance = appearance
         this.behaviour = behaviour
         this.sizes = sizes
 
-        props()
+        with(props) {
+            this@propHandler.handle()
+        }
     }
     .domHandler(block)
     .build()
@@ -1823,11 +1854,12 @@ inline fun <reified T : HtmlBlockTag> RBuilder.buttonGroup(
  *
  * @param classes Space separated list of CSS classes for this element.
  */
+@Suppress("UNCHECKED_CAST")
 fun RBuilder.buttonToolbar(
     classes: String? = null,
-    props: PropHandler<ButtonToolbar.Props<DIV>> = { },
+    props: PropHandler<ButtonToolbar.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
-): ReactElement = abstractDomComponent<DIV, ButtonToolbar.Props<DIV>>(ButtonToolbar::class)
+): ReactElement = abstractDomComponent(ButtonToolbar::class as KClass<ButtonToolbar<DIV>>)
     .classes(classes)
     .propHandler(props)
     .domHandler(block)
@@ -1838,11 +1870,12 @@ fun RBuilder.buttonToolbar(
  *
  * @param classes Space separated list of CSS classes for this element.
  */
+@Suppress("UNCHECKED_CAST")
 inline fun <reified T : HtmlBlockTag> RBuilder.buttonToolbar(
     classes: String? = null,
-    noinline props: PropHandler<ButtonToolbar.Props<T>> = { },
-    noinline block: RDOMHandler<T>
-): ReactElement = abstractDomComponent<T, ButtonToolbar.Props<T>>(ButtonToolbar::class)
+    props: PropHandler<ButtonToolbar.Props<T>> = PropHandler { },
+    block: RDOMHandler<T>
+): ReactElement = abstractDomComponent(ButtonToolbar::class as KClass<ButtonToolbar<T>>)
     .classes(classes)
     .propHandler(props)
     .domHandler(block)

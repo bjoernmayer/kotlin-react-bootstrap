@@ -4,9 +4,9 @@ import kotlinx.html.IMG
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.helpers.appendClass
-import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.dom.img
+import react.bootstrap.lib.component.RDOMHandler
+import react.dom.img as reactImg
 
 /**
  * Creates an [IMG] element.
@@ -35,5 +35,10 @@ fun RBuilder.img(
         imageClasses.add(ClassNames.IMG_THUMBNAIL)
     }
 
-    return img(alt = alt, src = src, classes = classes.appendClass(imageClasses), block = block)
+    return reactImg(alt = alt, src = src, classes = classes.appendClass(imageClasses)) {
+        val builder = this
+        with(block) {
+            builder.handle()
+        }
+    }
 }

@@ -1,13 +1,12 @@
 package react.bootstrap.content.typography.mark
 
-import kotlinx.html.CommonAttributeGroupFacade
 import react.RState
+import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.AbstractDomComponent
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.lib.component.AbstractDOMComponent
 
-class Mark<T : CommonAttributeGroupFacade>(props: Props<T>) : AbstractDomComponent<T, Mark.Props<T>, RState>(props) {
+class Mark<T : DOMTag>(props: Props<T>) : AbstractDOMComponent<T, Mark.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.MARK)
 
-    interface Props<T : CommonAttributeGroupFacade> : WithGlobalAttributes, AbstractDomComponent.Props<T>
+    interface Props<T : DOMTag> : AbstractDOMComponent.Props<T>
 }

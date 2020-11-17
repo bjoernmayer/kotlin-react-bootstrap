@@ -8,7 +8,7 @@ import react.bootstrap.components.nav.NavComponent.Appearance
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
-import react.bootstrap.lib.DomTag
+import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
@@ -134,7 +134,7 @@ behaviour.
                                                             .setLambdaArgument(
                                                                 FunCall.builder(RElementBuilder<RProps>::attrs)
                                                                     .setLambdaArgument(
-                                                                        Assignment.builder(DomTag::onClickFunction)
+                                                                        Assignment.builder(DOMTag::onClickFunction)
                                                                             .value(
                                                                                 LambdaValue(
                                                                                     "it.preventDefault()\n" +
@@ -187,7 +187,7 @@ passed on from the nav downwards to the `navItems` and `navLinks`.
         liveExample {
             Navs.nav(
                 appearance = Appearance.TABS,
-                activeLinkPredicate = { it.href == "#theActiveLink" }
+                activeLinkPredicate = { href == "#theActiveLink" }
             ) {
                 navLink(href = "#") {
                     attrs { onClickFunction = { it.preventDefault() } }
@@ -218,7 +218,7 @@ passed on from the nav downwards to the `navItems` and `navLinks`.
                 .addArgument("appearance", Appearance.TABS)
                 .addArgument(
                     "activeLinkPredicate",
-                    LambdaValue("it.href == \"#theActiveLink\"", LambdaValue.Style.INLINE)
+                    LambdaValue("href == \"#theActiveLink\"", LambdaValue.Style.INLINE)
                 )
                 .setLambdaArgument(
                     FunCall.builder(navLinkBuilderFun)

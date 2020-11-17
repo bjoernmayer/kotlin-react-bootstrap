@@ -9,16 +9,16 @@ import react.bootstrap.components.nav.NavItems
 import react.bootstrap.components.nav.NavLink
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
-import react.bootstrap.lib.PropHandler
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.CodeExampleBuilder
 import react.bootstrap.site.lib.codepoet.FunCall
-import react.dom.RDOMBuilder
 import kotlin.reflect.KFunction8
 
 internal val navItemBuilderFun = NavComponent.DomBuilder<UL>::navItem
 internal val navLinkBuilderFun: KFunction8<
     NavItems.DomBuilder<LI>, String?, String?, String?, Boolean, Boolean, PropHandler<NavLink.Props>,
-    RDOMBuilder<A>.() -> Unit, ReactElement> =
+    RDOMHandler<A>, ReactElement> =
     NavItems.DomBuilder<LI>::navLink
 
 internal fun CodeExampleBuilder.testingNavItemsString() =

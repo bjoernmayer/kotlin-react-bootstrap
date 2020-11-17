@@ -7,11 +7,11 @@ import react.RBuilder
 import react.ReactElement
 import react.bootstrap.content.img
 import react.bootstrap.helpers.appendClass
-import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.RDOMHandler
 import react.dom.RDOMBuilder
-import react.dom.figcaption
-import react.dom.figure
+import react.dom.figcaption as reactFigcaption
+import react.dom.figure as reactFigure
 
 /**
  * Creates a [FIGURE] and adds [ClassNames.FIGURE] to it.
@@ -19,7 +19,12 @@ import react.dom.figure
  * @param classes Space separated list of CSS classes for this element.
  */
 fun RBuilder.figure(classes: String? = null, block: RDOMHandler<FIGURE>): ReactElement =
-    figure(classes.appendClass(ClassNames.FIGURE), block)
+    reactFigure(classes.appendClass(ClassNames.FIGURE)) {
+        val builder = this
+        with(block) {
+            builder.handle()
+        }
+    }
 
 /**
  * Creates an [IMG] and adds [ClassNames.FIGURE_IMG] to it.
@@ -40,4 +45,9 @@ fun RDOMBuilder<FIGURE>.img(
 ): ReactElement = img(fluid, isThumbnail, alt, src, classes.appendClass(ClassNames.FIGURE_IMG), block)
 
 fun RBuilder.figcaption(classes: String? = null, block: RDOMHandler<FIGCAPTION>): ReactElement =
-    figcaption(classes.appendClass(ClassNames.FIGURE_CAPTION), block)
+    reactFigcaption(classes.appendClass(ClassNames.FIGURE_CAPTION)) {
+        val builder = this
+        with(block) {
+            builder.handle()
+        }
+    }

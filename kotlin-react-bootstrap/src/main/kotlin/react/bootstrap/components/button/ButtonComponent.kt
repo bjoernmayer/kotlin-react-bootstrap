@@ -15,10 +15,10 @@ import org.w3c.dom.events.Event
 import react.RState
 import react.RStatics
 import react.bootstrap.lib.EventHandler
-import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.ClassNameEnum
-import react.bootstrap.lib.component.SimpleDomComponent
+import react.bootstrap.lib.component.RDOMHandler
+import react.bootstrap.lib.component.SimpleDOMComponent
 import react.bootstrap.lib.kotlinxhtml.ariaDisabled
 import react.bootstrap.lib.kotlinxhtml.ariaPressed
 import react.bootstrap.lib.react.rprops.WithActive
@@ -33,7 +33,7 @@ import kotlinx.html.CommonAttributeGroupFacadeFlowInteractivePhrasingContent as 
 sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>>(
     props: P,
     tag: KClass<T>
-) : SimpleDomComponent<T, P, ButtonComponent.State>(props, tag) {
+) : SimpleDOMComponent<T, P, ButtonComponent.State>(props, tag) {
     init {
         props.requireProperties(props::variant)
     }
@@ -66,7 +66,9 @@ sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>
         override fun RDOMBuilder<LABEL>.build() {
             input {
                 // This handler needs to be called first, so this component can override values
-                props.inputHandler.invoke(this)
+                with(props.inputHandler) {
+                    this@input.handle()
+                }
 
                 attrs {
                     ariaPressed = state.active
@@ -292,7 +294,7 @@ sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>
         LG(ClassNames.BTN_LG);
     }
 
-    interface Props<T : InteractiveDomTag> : WithActive, WithDisabled, SimpleDomComponent.Props<T> {
+    interface Props<T : InteractiveDomTag> : WithActive, WithDisabled, SimpleDOMComponent.Props<T> {
         /**
          * Set this to *true* to disable text-wrapping for this button.
          *

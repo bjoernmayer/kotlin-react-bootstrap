@@ -4,9 +4,9 @@ import kotlinx.html.THEAD
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.helpers.appendClass
-import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.dom.thead
+import react.bootstrap.lib.component.RDOMHandler
+import react.dom.thead as reactThead
 
 /**
  * Creates a [THEAD] element.
@@ -25,7 +25,12 @@ fun RBuilder.thead(
         tHeadClasses.add(it.className)
     }
 
-    return thead(classes = classes.appendClass(tHeadClasses), block = block)
+    return reactThead(classes = classes.appendClass(tHeadClasses)) {
+        val builder = this
+        with(block) {
+            builder.handle()
+        }
+    }
 }
 
 enum class THeadStyles(val className: ClassNames) {

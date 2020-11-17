@@ -7,19 +7,24 @@ import kotlinx.html.NAV
 import kotlinx.html.OL
 import kotlinx.html.UL
 import react.RBuilder
+import react.bootstrap.components.nav.ActiveLinkPredicate
 import react.bootstrap.components.nav.NavBuilder
 import react.bootstrap.components.nav.NavComponent
+import react.bootstrap.components.nav.NavDOMHandler
+import react.bootstrap.components.nav.NavItemDOMHandler
 import react.bootstrap.components.nav.NavItems
 import react.bootstrap.components.nav.NavLink
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.FunSpec
 import react.bootstrap.site.lib.codepoet.Generic
-import react.bootstrap.site.lib.codepoet.LambdaType
 import react.dom.h4
 
 internal class Reference : SectionComponent() {
@@ -46,16 +51,16 @@ Creates a `${function.name}`-based navigation.
                     .addParameter<String?>("classes", null)
                     .addParameter<NavComponent.Appearance>("appearance", null)
                     .addParameter<NavComponent.WidthHandling>("widthHandling", null)
+                    .addParameter<ActiveLinkPredicate?>("activeLinkPredicate", null)
                     .addParameter(
-                        "activeLinkPredicate",
-                        LambdaType.builder()
-                            .addArgument(A::class)
-                            .returns(Boolean::class),
-                        true,
-                        FunSpec.Parameter.NULL
+                        "props",
+                        Generic(PropHandler::class, propKlazz),
+                        default = FunCall.builder(
+                            PropHandler::class.simpleName!!,
+                            style = FunCall.Style.INLINE
+                        ).setEmptyLambdaArgument().build()
                     )
-                    .addParameter("props", Generic("PropHandler", propKlazz), default = "{ }")
-                    .addParameter("block", Generic("NavDomHandler", tagKlazz))
+                    .addParameter("block", Generic(NavDOMHandler::class, tagKlazz))
                     .returns("ReactElement")
                     .build()
             }
@@ -86,8 +91,15 @@ Creates a `${itemKlazz.nestedName}` element.
                 +FunSpec.builder(NavComponent.DomBuilder<UL>::navItem)
                     .nestedBy(navDomBuilder)
                     .addParameter<String?>("classes", null)
-                    .addParameter("props", Generic("PropHandler", itemPropsKlazz), default = "{ }")
-                    .addParameter("block", Generic("NavItemDomHandler", navDomBuilder.typeName))
+                    .addParameter(
+                        "props",
+                        Generic(PropHandler::class, itemPropsKlazz),
+                        default = FunCall.builder(
+                            PropHandler::class.simpleName!!,
+                            style = FunCall.Style.INLINE
+                        ).setEmptyLambdaArgument().build()
+                    )
+                    .addParameter("block", Generic(NavItemDOMHandler::class, navDomBuilder.typeName))
                     .returns("ReactElement")
                     .build()
             }
@@ -114,8 +126,15 @@ Creates a `${NavLink::class.nestedName}` element.
                     .addParameter<String?>("target", null)
                     .addParameter("active", false)
                     .addParameter("disabled", false)
-                    .addParameter("props", Generic("PropHandler", NavLink.Props::class), default = "{ }")
-                    .addParameter("block", Generic("RDOMHandler", "A"))
+                    .addParameter(
+                        "props",
+                        Generic(PropHandler::class, NavLink.Props::class),
+                        default = FunCall.builder(
+                            PropHandler::class.simpleName!!,
+                            style = FunCall.Style.INLINE
+                        ).setEmptyLambdaArgument().build()
+                    )
+                    .addParameter("block", Generic.builder<RDOMHandler<*>, A>())
                     .returns("ReactElement")
                     .build()
             }

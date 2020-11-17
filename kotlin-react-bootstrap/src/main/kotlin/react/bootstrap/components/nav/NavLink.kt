@@ -6,9 +6,9 @@ import kotlinx.html.tabIndex
 import react.RBuilder
 import react.RState
 import react.RStatics
-import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.SimpleDomComponent
+import react.bootstrap.lib.component.RDOMHandler
+import react.bootstrap.lib.component.SimpleDOMComponent
 import react.bootstrap.lib.kotlinxhtml.ariaDisabled
 import react.bootstrap.lib.react.rprops.WithActive
 import react.bootstrap.lib.react.rprops.WithDisabled
@@ -16,18 +16,20 @@ import react.dom.RDOMBuilder
 import react.dom.a
 import react.setState
 
-class NavLink(props: Props) : SimpleDomComponent<A, NavLink.Props, NavLink.State>(props, A::class) {
+class NavLink(props: Props) : SimpleDOMComponent<A, NavLink.Props, NavLink.State>(props, A::class) {
     override fun State.init(props: Props) {
         linkProps = buildLinkProps(props.handler)
 
         active = props.active
 
-        props.activeLinkPredicate?.let {
-            active = it.isActive(linkProps)
+        props.activeLinkPredicate?.apply {
+            active = linkProps.isActive()
         }
     }
 
-    private fun buildLinkProps(domHandler: RDOMHandler<A>): A = RBuilder().a(block = domHandler).props.unsafeCast<A>()
+    private fun buildLinkProps(domHandler: RDOMHandler<A>): A = RBuilder().a {
+        with(domHandler) { this@a.handle() }
+    }.props.unsafeCast<A>()
 
     override fun componentDidMount() {
         if (state.active) {
@@ -40,7 +42,9 @@ class NavLink(props: Props) : SimpleDomComponent<A, NavLink.Props, NavLink.State
             setState {
                 linkProps = buildLinkProps(props.handler)
 
-                active = props.activeLinkPredicate?.isActive(linkProps) ?: props.active
+                active = props.activeLinkPredicate?.run {
+                    linkProps.isActive()
+                } ?: props.active
             }
         }
         if (!prevState.active && props.active) {
@@ -74,7 +78,7 @@ class NavLink(props: Props) : SimpleDomComponent<A, NavLink.Props, NavLink.State
         addChildren()
     }
 
-    interface Props : WithActive, WithDisabled, SimpleDomComponent.Props<A> {
+    interface Props : WithActive, WithDisabled, SimpleDOMComponent.Props<A> {
         var activeLinkPredicate: ActiveLinkPredicate?
     }
 

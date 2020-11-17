@@ -2,9 +2,9 @@ package react.bootstrap.lib.component
 
 import react.RProps
 import react.RState
+import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.react.rprops.WithGlobalAttributes
 import kotlin.reflect.KClass
-import kotlinx.html.CommonAttributeGroupFacade as CommonAttributes
 
 /**
  * This class bundles logic to allow components being rendered as different HTML elements.
@@ -13,7 +13,7 @@ import kotlinx.html.CommonAttributeGroupFacade as CommonAttributes
  * @param P Abstract Component Props: The [RProps] of the [AbstractComponent] implementation
  * @param S Abstract Componnt State: The [RState] of  the [AbstractComponent] implementation
  */
-abstract class CustomisableComponent<T : CommonAttributes, P : CustomisableComponent.Props<out T>, S : RState> :
+abstract class CustomisableComponent<T : DOMTag, P : CustomisableComponent.Props<out T>, S : RState> :
     AbstractComponent<T, P, S> {
     constructor() : super()
     constructor(props: P) : super(props)
@@ -23,7 +23,7 @@ abstract class CustomisableComponent<T : CommonAttributes, P : CustomisableCompo
 
     abstract val defaultRendererTag: KClass<out T>
 
-    interface Props<T : CommonAttributes> : WithGlobalAttributes {
+    interface Props<T : DOMTag> : WithGlobalAttributes {
         var rendererTag: KClass<out T>?
     }
 }

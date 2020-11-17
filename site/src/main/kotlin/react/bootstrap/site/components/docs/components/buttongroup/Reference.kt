@@ -7,12 +7,13 @@ import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.ButtonToolbar
 import react.bootstrap.components.button.buttonGroup
 import react.bootstrap.components.button.buttonToolbar
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.FunSpec
-import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.CROSSINLINE
-import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.NOINLINE
 import react.bootstrap.site.lib.codepoet.Generic
 
 internal class Reference : SectionComponent() {
@@ -37,9 +38,12 @@ Creates a `${ButtonGroup::class.simpleName!!}` element.
                 .addParameter(
                     "props",
                     Generic("PropHandler", Generic(ButtonGroup.Props::class, DIV::class).build()),
-                    default = "{ }"
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 )
-                .addParameter("block", Generic("RDOMHandler", DIV::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, DIV>())
                 .returns("ReactElement")
                 .build()
         }
@@ -60,10 +64,12 @@ Creates a generic `${ButtonGroup::class.simpleName!!}` element.
                 .addParameter(
                     "props",
                     Generic("PropHandler", Generic(ButtonGroup.Props::class, "T").build()),
-                    default = "{ }",
-                    modifier = CROSSINLINE
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 )
-                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
+                .addParameter("block", Generic(RDOMHandler::class, "T"))
                 .returns("ReactElement")
                 .build()
         }
@@ -96,10 +102,12 @@ Creates a generic `${ButtonToolbar::class.simpleName!!}` element.
                 .addParameter(
                     "props",
                     Generic("PropHandler", Generic(ButtonToolbar.Props::class, "T").build()),
-                    default = "{ }",
-                    modifier = NOINLINE
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 )
-                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
+                .addParameter("block", Generic(RDOMHandler::class, "T"))
                 .returns("ReactElement")
                 .build()
         }

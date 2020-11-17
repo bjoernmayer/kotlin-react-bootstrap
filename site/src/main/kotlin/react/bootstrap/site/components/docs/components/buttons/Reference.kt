@@ -15,11 +15,13 @@ import react.RBuilder
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.ButtonComponent
 import react.bootstrap.components.button.Buttons
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.FunSpec
 import react.bootstrap.site.lib.codepoet.Generic
-import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.dom.h4
 import react.dom.p
 
@@ -59,10 +61,13 @@ internal class Reference : SectionComponent() {
                 FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter(
                     "props",
-                    Generic("PropHandler", ButtonComponent.Button.Props::class),
-                    default = LambdaValue("", LambdaValue.Style.INLINE).build(),
+                    Generic.builder<PropHandler<*>, ButtonComponent.Button.Props>(),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 ),
-                FunSpec.Parameter("block", Generic("RDOMHandler", BUTTON::class))
+                FunSpec.Parameter("block", Generic.builder<RDOMHandler<*>, BUTTON>())
             )
             codeExample {
                 +FunSpec.builder(solidFun)
@@ -105,10 +110,13 @@ internal class Reference : SectionComponent() {
                 FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter(
                     "props",
-                    Generic("PropHandler", ButtonComponent.Link.Props::class),
-                    default = LambdaValue("", LambdaValue.Style.INLINE).build(),
+                    Generic.builder<PropHandler<*>, ButtonComponent.Link.Props>(),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 ),
-                FunSpec.Parameter("block", Generic("RDOMHandler", A::class))
+                FunSpec.Parameter("block", Generic.builder<RDOMHandler<*>, A>())
             )
             codeExample {
                 +FunSpec.builder(solidFun)
@@ -153,10 +161,13 @@ internal class Reference : SectionComponent() {
                 FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter(
                     "props",
-                    Generic("PropHandler", ButtonComponent.Link.Props::class),
-                    default = LambdaValue("", LambdaValue.Style.INLINE).build(),
+                    Generic.builder<PropHandler<*>, ButtonComponent.Input.Props>(),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 ),
-                FunSpec.Parameter("block", Generic("RDOMHandler", INPUT::class))
+                FunSpec.Parameter("block", Generic.builder<RDOMHandler<*>, INPUT>())
             )
             codeExample {
                 +FunSpec.builder(solidFun)
@@ -202,15 +213,21 @@ internal class Reference : SectionComponent() {
                 FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter(
                     "props",
-                    Generic("PropHandler", ButtonComponent.Link.Props::class),
-                    default = "{ }"
+                    Generic.builder<PropHandler<*>, ButtonComponent.Box.Props>(),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 ),
                 FunSpec.Parameter(
                     "input",
-                    Generic("RDOMHandler", INPUT::class),
-                    default = LambdaValue("", LambdaValue.Style.INLINE).build(),
+                    Generic.builder<RDOMHandler<*>, INPUT>(),
+                    default = FunCall.builder(
+                        RDOMHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 ),
-                FunSpec.Parameter("block", Generic("RDOMHandler", LABEL::class))
+                FunSpec.Parameter("block", Generic.builder<RDOMHandler<*>, LABEL>())
             )
             codeExample {
                 +FunSpec.builder(solidFun)

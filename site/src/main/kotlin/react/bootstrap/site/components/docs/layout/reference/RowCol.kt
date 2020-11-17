@@ -1,6 +1,5 @@
 package react.bootstrap.site.components.docs.layout.reference
 
-import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.DIV
 import react.RBuilder
 import react.bootstrap.layout.grid.col.Col
@@ -9,14 +8,16 @@ import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.row.Row
 import react.bootstrap.layout.grid.row.RowAttributes
 import react.bootstrap.layout.grid.row.row
+import react.bootstrap.lib.DOMTag
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.FunSpec
-import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.NOINLINE
 import react.bootstrap.site.lib.codepoet.Generic
-import react.bootstrap.site.lib.codepoet.LambdaValue
 
 internal class RowCol : SectionComponent() {
     override val title: String = "Row & Col"
@@ -41,11 +42,14 @@ Creates a `${Row::class.nestedName}` element.
                 .addParameter("gutters", true)
                 .addParameter<String?>("classes", null)
                 .addParameter(
-                    "handler",
-                    Generic("RHandler", Generic(Row.Props::class, DIV::class).build()),
-                    default = LambdaValue("", LambdaValue.Style.INLINE).build()
+                    "props",
+                    Generic(PropHandler::class, Generic.builder<Row.Props<*>, DIV>().build()),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 )
-                .addParameter("block", Generic("RDOMHandler", DIV::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, DIV>())
                 .returns("ReactElement")
                 .build()
         }
@@ -58,7 +62,7 @@ Creates a generic `${Row::class.nestedName}` element.
         codeExample {
             +FunSpec.builder(RBuilder::row, inline = true)
                 .nestedBy<RBuilder>()
-                .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
+                .addTypeParameter("T", DOMTag::class, true)
                 .addParameter<RowAttributes?>("all", null)
                 .addParameter<RowAttributes?>("sm", null)
                 .addParameter<RowAttributes?>("md", null)
@@ -67,12 +71,14 @@ Creates a generic `${Row::class.nestedName}` element.
                 .addParameter("gutters", true)
                 .addParameter<String?>("classes", null)
                 .addParameter(
-                    "handler",
-                    Generic("RHandler", Generic(Row.Props::class, "T").build()),
-                    default = LambdaValue("", LambdaValue.Style.INLINE).build(),
-                    modifier = FunSpec.Parameter.Modifier.CROSSINLINE
+                    "props",
+                    Generic(PropHandler::class, Generic(Row.Props::class, "T").build()),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 )
-                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
+                .addParameter("block", Generic(RDOMHandler::class, "T"))
                 .returns("ReactElement")
                 .build()
         }
@@ -94,11 +100,14 @@ Creates a `${Col::class.nestedName}` element.
                 .addParameter<ColAttributes?>("xl", null)
                 .addParameter<String?>("classes", null)
                 .addParameter(
-                    "handler",
-                    Generic("RHandler", Generic(Col.Props::class, DIV::class).build()),
-                    default = LambdaValue("", LambdaValue.Style.INLINE).build()
+                    "props",
+                    Generic(PropHandler::class, Generic.builder<Col.Props<*>, DIV>().build()),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 )
-                .addParameter("block", Generic("RDOMHandler", DIV::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, DIV>())
                 .returns("ReactElement")
                 .build()
         }
@@ -111,7 +120,7 @@ Creates a generic `${Col::class.nestedName}` element.
         codeExample {
             +FunSpec.builder(RBuilder::col, inline = true)
                 .nestedBy<RBuilder>()
-                .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
+                .addTypeParameter("T", DOMTag::class, true)
                 .addParameter<ColAttributes?>("all", null)
                 .addParameter<ColAttributes?>("sm", null)
                 .addParameter<ColAttributes?>("md", null)
@@ -119,12 +128,14 @@ Creates a generic `${Col::class.nestedName}` element.
                 .addParameter<ColAttributes?>("xl", null)
                 .addParameter<String?>("classes", null)
                 .addParameter(
-                    "handler",
-                    Generic("RHandler", Generic(Col.Props::class, "T").build()),
-                    default = LambdaValue("", LambdaValue.Style.INLINE).build(),
-                    modifier = FunSpec.Parameter.Modifier.CROSSINLINE
+                    "props",
+                    Generic(PropHandler::class, Generic(Col.Props::class, "T").build()),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 )
-                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
+                .addParameter("block", Generic(RDOMHandler::class, "T"))
                 .returns("ReactElement")
                 .build()
         }

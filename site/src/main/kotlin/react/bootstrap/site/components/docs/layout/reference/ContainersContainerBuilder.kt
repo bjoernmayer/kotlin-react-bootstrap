@@ -6,16 +6,15 @@ import react.RBuilder
 import react.bootstrap.layout.grid.container.Container
 import react.bootstrap.layout.grid.container.ContainerBuilder
 import react.bootstrap.layout.grid.container.container
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.FunSpec
-import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.CROSSINLINE
-import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.NOINLINE
 import react.bootstrap.site.lib.codepoet.Generic
-import react.bootstrap.site.lib.codepoet.LambdaValue
-import react.bootstrap.site.lib.codepoet.LambdaValue.Style.INLINE
 
 internal class ContainersContainerBuilder : SectionComponent() {
     override val title: String = "Containers & ContainerBuilder"
@@ -35,11 +34,14 @@ Creates a `${Container::class.nestedName}` element.
                 .addParameter<Container.Viscosities>("viscosity", null)
                 .addParameter<String?>("classes", null)
                 .addParameter(
-                    "handler",
-                    Generic("RHandler", Generic(Container.Props::class, DIV::class).build()),
-                    default = LambdaValue("", INLINE).build()
+                    "props",
+                    Generic(PropHandler::class, Generic.builder<Container.Props<*>, DIV>().build()),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 )
-                .addParameter("block", Generic("RDOMHandler", DIV::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, DIV>())
                 .returns("ReactElement")
                 .build()
         }
@@ -57,12 +59,14 @@ Creates a generic `${Container::class.nestedName}` element.
                 .addParameter<Container.Viscosities>("viscosity", null)
                 .addParameter<String?>("classes", null)
                 .addParameter(
-                    "handler",
-                    Generic("RHandler", Generic(Container.Props::class, "T").build()),
-                    default = LambdaValue("", INLINE).build(),
-                    modifier = CROSSINLINE
+                    "props",
+                    Generic(PropHandler::class, Generic(Container.Props::class, "T").build()),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 )
-                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
+                .addParameter("block", Generic(RDOMHandler::class, "T"))
                 .returns("ReactElement")
                 .build()
         }
@@ -87,9 +91,12 @@ Creates a `${Container::class.nestedName}` element with `viscosity` set to `${vi
                     .nestedBy<ContainerBuilder>()
                     .addParameter<String?>("classes", null)
                     .addParameter(
-                        "handler",
-                        Generic("RHandler", Generic(Container.Props::class, DIV::class).build()),
-                        default = LambdaValue("", INLINE).build()
+                        "props",
+                        Generic(PropHandler::class, Generic.builder<Container.Props<*>, DIV>().build()),
+                        default = FunCall.builder(
+                            PropHandler::class.simpleName!!,
+                            style = FunCall.Style.INLINE
+                        ).setEmptyLambdaArgument().build()
                     )
                     .addParameter("block", Generic("RDOMHandler", DIV::class))
                     .returns("ReactElement")
@@ -108,12 +115,14 @@ Creates a generic `${Container::class.nestedName}` element with `viscosity` set 
                     .addTypeParameter("T", HtmlBlockTag::class, true)
                     .addParameter<String?>("classes", null)
                     .addParameter(
-                        "handler",
-                        Generic("RHandler", Generic(Container.Props::class, "T").build()),
-                        default = LambdaValue("", INLINE).build(),
-                        modifier = CROSSINLINE
+                        "props",
+                        Generic(PropHandler::class, Generic(Container.Props::class, "T").build()),
+                        default = FunCall.builder(
+                            PropHandler::class.simpleName!!,
+                            style = FunCall.Style.INLINE
+                        ).setEmptyLambdaArgument().build()
                     )
-                    .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
+                    .addParameter("block", Generic(RDOMHandler::class, "T"))
                     .returns("ReactElement")
                     .build()
             }

@@ -4,8 +4,8 @@ import kotlinx.html.TR
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.helpers.appendClass
-import react.bootstrap.lib.RDOMHandler
-import react.dom.tr
+import react.bootstrap.lib.component.RDOMHandler
+import react.dom.tr as reactTr
 
 /**
  * Creates a [TR] element.
@@ -18,7 +18,9 @@ fun RBuilder.tr(
     classes: String? = null,
     block: RDOMHandler<TR>
 ): ReactElement =
-    tr(
-        classes = contextualStyle?.let { classes.appendClass(it.className) } ?: classes,
-        block = block
-    )
+    reactTr(classes = contextualStyle?.let { classes.appendClass(it.className) } ?: classes) {
+        val builder = this
+        with(block) {
+            builder.handle()
+        }
+    }

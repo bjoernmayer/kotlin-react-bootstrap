@@ -10,6 +10,7 @@ import react.RBuilder
 import react.ReactElement
 import react.bootstrap.components.alert.Alert
 import react.bootstrap.components.alert.AlertBuilder
+import react.bootstrap.components.alert.AlertDOMHandler
 import react.bootstrap.components.alert.Alerts
 import react.bootstrap.components.alert.h1
 import react.bootstrap.components.alert.h2
@@ -19,16 +20,16 @@ import react.bootstrap.components.alert.h5
 import react.bootstrap.components.alert.h6
 import react.bootstrap.components.alert.link
 import react.bootstrap.content.typography.heading.Heading
-import react.bootstrap.lib.DomTag
+import react.bootstrap.lib.DOMTag
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.FunSpec
-import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.CROSSINLINE
-import react.bootstrap.site.lib.codepoet.FunSpec.Parameter.Modifier.NOINLINE
 import react.bootstrap.site.lib.codepoet.Generic
-import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.dom.p
 import kotlin.reflect.KFunction
 
@@ -61,10 +62,13 @@ Creates an `alert` component with `$variantName` context.
                     .addParameter<String?>("classes", null)
                     .addParameter(
                         "props",
-                        Generic("PropHandler", Alert.Props::class),
-                        default = LambdaValue("", LambdaValue.Style.INLINE).build()
+                        Generic.builder<PropHandler<*>, Alert.Props<*>>(),
+                        default = FunCall.builder(
+                            PropHandler::class.simpleName!!,
+                            style = FunCall.Style.INLINE
+                        ).setEmptyLambdaArgument().build()
                     )
-                    .addParameter("block", Generic("AlertDomHandler", DIV::class))
+                    .addParameter("block", Generic.builder<AlertDOMHandler<*>, DIV>())
                     .returns("ReactElement")
                     .build()
                 +"\n"
@@ -75,10 +79,13 @@ Creates an `alert` component with `$variantName` context.
                     .addParameter<String?>("classes", null)
                     .addParameter(
                         "props",
-                        Generic("PropHandler", Alert.Dismissible.Props::class),
-                        default = LambdaValue("", LambdaValue.Style.INLINE).build()
+                        Generic.builder<PropHandler<*>, Alert.Dismissible<*>>(),
+                        default = FunCall.builder(
+                            PropHandler::class.simpleName!!,
+                            style = FunCall.Style.INLINE
+                        ).setEmptyLambdaArgument().build()
                     )
-                    .addParameter("block", Generic("AlertDomHandler", DIV::class))
+                    .addParameter("block", Generic.builder<AlertDOMHandler<*>, DIV>())
                     .returns("ReactElement")
                     .build()
             }
@@ -95,11 +102,13 @@ Creates a generic `alert` component with $variantName context.
                     .addParameter<String?>("classes", null)
                     .addParameter(
                         "props",
-                        Generic("PropHandler", Alert.Props::class),
-                        default = LambdaValue("", LambdaValue.Style.INLINE).build(),
-                        modifier = CROSSINLINE
+                        Generic.builder<PropHandler<*>, Alert.Props<*>>(),
+                        default = FunCall.builder(
+                            PropHandler::class.simpleName!!,
+                            style = FunCall.Style.INLINE
+                        ).setEmptyLambdaArgument().build()
                     )
-                    .addParameter("block", Generic("AlertDomHandler", "T"), modifier = NOINLINE)
+                    .addParameter("block", Generic(AlertDOMHandler::class, "T"))
                     .returns("ReactElement")
                     .build()
                 +"\n"
@@ -111,11 +120,13 @@ Creates a generic `alert` component with $variantName context.
                     .addParameter<String?>("classes", null)
                     .addParameter(
                         "props",
-                        Generic("PropHandler", Alert.Dismissible.Props::class),
-                        default = LambdaValue("", LambdaValue.Style.INLINE).build(),
-                        modifier = CROSSINLINE
+                        Generic.builder<PropHandler<*>, Alert.Dismissible.Props<*>>(),
+                        default = FunCall.builder(
+                            PropHandler::class.simpleName!!,
+                            style = FunCall.Style.INLINE
+                        ).setEmptyLambdaArgument().build()
                     )
-                    .addParameter("block", Generic("AlertDomHandler", "T"), modifier = NOINLINE)
+                    .addParameter("block", Generic(AlertDOMHandler::class, "T"))
                     .returns("ReactElement")
                     .build()
             }
@@ -136,10 +147,13 @@ Creates a `${Alert.Link::class.nestedName}` element.
                 .addParameter<String?>("classes", null)
                 .addParameter(
                     "props",
-                    Generic("PropHandler", Alert.Link.Props::class),
-                    default = LambdaValue("", LambdaValue.Style.INLINE).build()
+                    Generic.builder<PropHandler<*>, Alert.Link.Props>(),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 )
-                .addParameter("block", Generic("RDOMHandler", A::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, A>())
                 .returns("ReactElement")
                 .build()
         }
@@ -158,16 +172,18 @@ Creates a generic `${Alert.Heading::class.nestedName}` element.
                 inline = true
             )
                 .nestedBy(Generic(Alert.DomBuilder::class, "*"))
-                .addTypeParameter("T", DomTag::class, true)
+                .addTypeParameter("T", DOMTag::class, true)
                 .addParameter<Heading.Sizes>("size")
                 .addParameter<String?>("classes", null)
                 .addParameter(
                     "props",
-                    Generic("PropHandler", Generic(Heading.Props::class, "T").build()),
-                    default = LambdaValue("", LambdaValue.Style.INLINE).build(),
-                    modifier = CROSSINLINE
+                    Generic(PropHandler::class, Generic(Heading.Props::class, "T").build()),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 )
-                .addParameter("block", Generic("RDOMHandler", "T"), modifier = NOINLINE)
+                .addParameter("block", Generic(RDOMHandler::class, "T"))
                 .returns("ReactElement")
                 .build()
         }
@@ -192,10 +208,13 @@ Creates a `${Alert.Heading::class.nestedName}` element.
                     .addParameter<String?>("classes", null)
                     .addParameter(
                         "props",
-                        Generic("PropHandler", Generic(Heading.Props::class, function.name.toUpperCase()).build()),
-                        default = LambdaValue("", LambdaValue.Style.INLINE).build()
+                        Generic(PropHandler::class, Generic(Heading.Props::class, function.name.toUpperCase()).build()),
+                        default = FunCall.builder(
+                            PropHandler::class.simpleName!!,
+                            style = FunCall.Style.INLINE
+                        ).setEmptyLambdaArgument().build()
                     )
-                    .addParameter("block", Generic("RDOMHandler", function.name.toUpperCase()))
+                    .addParameter("block", Generic(RDOMHandler::class, function.name.toUpperCase()))
                     .returns("ReactElement")
                     .build()
             }
@@ -208,15 +227,17 @@ Creates a generic `${Alert.Heading::class.nestedName}` element.
             codeExample {
                 +FunSpec.builder(function, inline = true)
                     .nestedBy(Generic(Alert.DomBuilder::class, "*"))
-                    .addTypeParameter("T", DomTag::class, true)
+                    .addTypeParameter("T", DOMTag::class, true)
                     .addParameter<String?>("classes", null)
                     .addParameter(
                         "props",
-                        Generic("PropHandler", Generic(Heading.Props::class, "T").build()),
-                        default = LambdaValue("", LambdaValue.Style.INLINE).build(),
-                        modifier = CROSSINLINE
+                        Generic(PropHandler::class, Generic(Heading.Props::class, "T").build()),
+                        default = FunCall.builder(
+                            PropHandler::class.simpleName!!,
+                            style = FunCall.Style.INLINE
+                        ).setEmptyLambdaArgument().build()
                     )
-                    .addParameter("block", Generic("RDOMHandler", function.name.toUpperCase()), modifier = NOINLINE)
+                    .addParameter("block", Generic(RDOMHandler::class, function.name.toUpperCase()))
                     .returns("ReactElement")
                     .build()
             }
@@ -235,12 +256,15 @@ Creates a generic `${Alert.Heading::class.nestedName}` element.
                 .addParameter(
                     "props",
                     Generic(
-                        "PropHandler",
+                        PropHandler::class,
                         Generic(Alert.Dismissible.ClosingElement.Props::class, SPAN::class).build()
                     ),
-                    default = LambdaValue("", LambdaValue.Style.INLINE).build()
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 )
-                .addParameter("block", Generic("RDOMHandler", SPAN::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, SPAN>())
                 .returns("ReactElement")
                 .build()
             +"\n"
@@ -251,20 +275,21 @@ Creates a generic `${Alert.Heading::class.nestedName}` element.
                 inline = true
             )
                 .nestedBy(Generic(Alert.DomBuilder::class, "*"))
-                .addTypeParameter("T", DomTag::class, true)
+                .addTypeParameter("T", DOMTag::class, true)
                 .addParameter(
                     "props",
                     Generic(
-                        "PropHandler",
+                        PropHandler::class,
                         Generic(Alert.Dismissible.ClosingElement.Props::class, SPAN::class).build()
                     ),
-                    default = LambdaValue("", LambdaValue.Style.INLINE).build(),
-                    modifier = NOINLINE
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
                 )
                 .addParameter(
                     "block",
-                    Generic("RDOMHandler", "T"),
-                    modifier = NOINLINE
+                    Generic(RDOMHandler::class, "T")
                 )
                 .returns("ReactElement")
                 .build()

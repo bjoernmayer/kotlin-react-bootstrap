@@ -1,6 +1,5 @@
 package react.bootstrap.content.typography.heading
 
-import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.H1
 import kotlinx.html.H2
 import kotlinx.html.H3
@@ -8,13 +7,13 @@ import kotlinx.html.H4
 import kotlinx.html.H5
 import kotlinx.html.H6
 import react.RState
+import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.AbstractDomComponent
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.lib.component.AbstractDOMComponent
 import react.bootstrap.lib.react.rprops.requireProperties
 
-open class Heading<T : CommonAttributeGroupFacade, P : Heading.Props<T>>(props: P) :
-    AbstractDomComponent<T, P, RState>(props) {
+open class Heading<T : DOMTag, P : Heading.Props<T>>(props: P) :
+    AbstractDOMComponent<T, P, RState>(props) {
 
     init {
         props.requireProperties(props::size)
@@ -30,7 +29,7 @@ open class Heading<T : CommonAttributeGroupFacade, P : Heading.Props<T>>(props: 
         else -> setOf(props.size.className)
     }
 
-    interface Props<T : CommonAttributeGroupFacade> : WithGlobalAttributes, AbstractDomComponent.Props<T> {
+    interface Props<T : DOMTag> : AbstractDOMComponent.Props<T> {
         var size: Sizes
     }
 

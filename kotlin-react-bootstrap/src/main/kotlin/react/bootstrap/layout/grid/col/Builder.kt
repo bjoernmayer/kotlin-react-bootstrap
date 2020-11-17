@@ -1,13 +1,14 @@
 package react.bootstrap.layout.grid.col
 
-import kotlinx.html.CommonAttributeGroupFacade
 import kotlinx.html.DIV
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.helpers.splitClassesToSet
-import react.bootstrap.lib.PropHandler
-import react.bootstrap.lib.RDOMHandler
-import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomComponent
+import react.bootstrap.lib.DOMTag
+import react.bootstrap.lib.component.AbstractDOMComponent.Companion.abstractDomComponent
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
+import kotlin.reflect.KClass
 
 /**
  * Creates a [Col] element.
@@ -19,6 +20,7 @@ import react.bootstrap.lib.component.AbstractDomComponent.Companion.abstractDomC
  * @param xl [ColAttributes] that apply to extra-large screen sizes.
  * @param classes Space separated list of CSS classes for this element.
  */
+@Suppress("UNCHECKED_CAST")
 fun RBuilder.col(
     all: ColAttributes? = null,
     sm: ColAttributes? = null,
@@ -26,9 +28,9 @@ fun RBuilder.col(
     lg: ColAttributes? = null,
     xl: ColAttributes? = null,
     classes: String? = null,
-    propHandler: PropHandler<Col.Props<DIV>> = { },
+    props: PropHandler<Col.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
-): ReactElement = abstractDomComponent<DIV, Col.Props<DIV>>(Col::class)
+): ReactElement = abstractDomComponent(Col::class as KClass<Col<DIV>>)
     .classes(classes)
     .propHandler {
         this.all = all
@@ -38,21 +40,24 @@ fun RBuilder.col(
         this.xl = xl
         this.classes = classes.splitClassesToSet()
 
-        propHandler()
+        with(props) {
+            this@propHandler.handle()
+        }
     }
     .domHandler(block)
     .build()
 
-inline fun <reified T : CommonAttributeGroupFacade> RBuilder.col(
+@Suppress("UNCHECKED_CAST")
+inline fun <reified T : DOMTag> RBuilder.col(
     all: ColAttributes? = null,
     sm: ColAttributes? = null,
     md: ColAttributes? = null,
     lg: ColAttributes? = null,
     xl: ColAttributes? = null,
     classes: String? = null,
-    crossinline propHandler: PropHandler<Col.Props<T>> = { },
-    noinline block: RDOMHandler<T>
-): ReactElement = abstractDomComponent<T, Col.Props<T>>(Col::class)
+    props: PropHandler<Col.Props<T>> = PropHandler { },
+    block: RDOMHandler<T>
+): ReactElement = abstractDomComponent(Col::class as KClass<Col<T>>)
     .classes(classes)
     .propHandler {
         this.all = all
@@ -62,7 +67,9 @@ inline fun <reified T : CommonAttributeGroupFacade> RBuilder.col(
         this.xl = xl
         this.classes = classes.splitClassesToSet()
 
-        propHandler()
+        with(props) {
+            this@propHandler.handle()
+        }
     }
     .domHandler(block)
     .build()

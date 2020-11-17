@@ -1,10 +1,14 @@
 package react.bootstrap.site.components.docs.content.reference
 
-import kotlinx.html.CommonAttributeGroupFacade
 import react.RBuilder
+import react.bootstrap.content.typography.heading.Heading
+import react.bootstrap.lib.DOMTag
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.external.Markdown
+import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.FunSpec
 import react.bootstrap.site.lib.codepoet.Generic
 import react.dom.h1
@@ -32,14 +36,18 @@ This creates a `${function.name}` using the given type **`T`**.
                 }
                 codeExample {
                     +FunSpec.builder(function, inline = true)
-                        .addTypeParameter("T", CommonAttributeGroupFacade::class, true)
+                        .addTypeParameter("T", DOMTag::class, true)
                         .nestedBy<RBuilder>()
                         .addParameter<String?>("classes", null)
                         .addParameter(
-                            "block",
-                            Generic("RDOMHandler", "T"),
-                            modifier = FunSpec.Parameter.Modifier.NOINLINE
+                            "props",
+                            Generic(PropHandler::class, Generic(Heading.Props::class, "T").build()),
+                            default = FunCall.builder(
+                                PropHandler::class.simpleName!!,
+                                style = FunCall.Style.INLINE
+                            ).setEmptyLambdaArgument().build()
                         )
+                        .addParameter("block", Generic(RDOMHandler::class, "T"))
                         .returns("ReactElement")
                         .build()
                 }

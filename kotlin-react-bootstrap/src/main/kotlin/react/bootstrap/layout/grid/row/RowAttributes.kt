@@ -41,6 +41,7 @@ sealed class RowAttributes : CombinedAttributes {
 
         @Suppress("MemberVisibilityCanBePrivate")
         infix fun xs(that: ItemsXs): ColCountItemXsPair = ColCountItemXsPair(this, that)
+
         @Suppress("MemberVisibilityCanBePrivate")
         infix fun ys(that: ItemsYs): ColCountItemYsPair = ColCountItemYsPair(this, that)
 
@@ -109,6 +110,7 @@ sealed class RowAttributes : CombinedAttributes {
             get() = this
 
         infix fun colcount(that: ColCounts): ColCountItemYsPair = ColCountItemYsPair(that, this)
+
         @Suppress("MemberVisibilityCanBePrivate")
         infix fun xs(that: ItemsXs): ItemsXsItemsYsPair = ItemsXsItemsYsPair(that, this)
 
