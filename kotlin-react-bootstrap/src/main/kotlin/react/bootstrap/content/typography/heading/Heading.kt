@@ -18,11 +18,11 @@ open class Heading<T : DOMTag, P : Heading.Props<T>>(props: P) : AbstractDOMComp
     }
 
     override fun buildClasses(): Set<ClassNames> = when (props.tag) {
-        H1::class -> emptySet()
-        H2::class -> emptySet()
-        H3::class -> emptySet()
-        H4::class -> emptySet()
-        H5::class -> emptySet()
+        H1::class,
+        H2::class,
+        H3::class,
+        H4::class,
+        H5::class,
         H6::class -> emptySet()
         else -> setOf(props.size.className)
     }
