@@ -37,7 +37,7 @@ Creates a `${ButtonGroup::class.simpleName!!}` element.
                 .addParameter<ButtonGroup.Sizes>("sizes", null)
                 .addParameter(
                     "props",
-                    Generic("PropHandler", Generic(ButtonGroup.Props::class, DIV::class).build()),
+                    Generic(PropHandler::class, Generic(ButtonGroup.Props::class, DIV::class).build()),
                     default = FunCall.builder(
                         PropHandler::class.simpleName!!,
                         style = FunCall.Style.INLINE
@@ -63,7 +63,7 @@ Creates a generic `${ButtonGroup::class.simpleName!!}` element.
                 .addParameter<ButtonGroup.Sizes>("sizes", null)
                 .addParameter(
                     "props",
-                    Generic("PropHandler", Generic(ButtonGroup.Props::class, "T").build()),
+                    Generic(PropHandler::class, Generic(ButtonGroup.Props::class, "T").build()),
                     default = FunCall.builder(
                         PropHandler::class.simpleName!!,
                         style = FunCall.Style.INLINE
@@ -101,7 +101,7 @@ Creates a generic `${ButtonToolbar::class.simpleName!!}` element.
                 .addParameter<String?>("classes", null)
                 .addParameter(
                     "props",
-                    Generic("PropHandler", Generic(ButtonToolbar.Props::class, "T").build()),
+                    Generic(PropHandler::class, Generic(ButtonToolbar.Props::class, "T").build()),
                     default = FunCall.builder(
                         PropHandler::class.simpleName!!,
                         style = FunCall.Style.INLINE

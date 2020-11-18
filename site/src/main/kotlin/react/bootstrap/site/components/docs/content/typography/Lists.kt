@@ -238,7 +238,7 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                 .build()
 
             +FunCall.builder(RBuilder::row)
-                .addArgument("rendererTag", KlazzValue(DL::class))
+                .addTypeParameter(DL::class)
                 .setLambdaArgument(
                     FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                         .addSz3Argument()
@@ -314,7 +314,7 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                         .addDdType()
                         .setLambdaArgument(
                             FunCall.builder(RBuilder::row)
-                                .addArgument("rendererTag", KlazzValue(DL::class))
+                                .addTypeParameter(DL::class)
                                 .setLambdaArgument(
                                     FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                         .addArgument(
