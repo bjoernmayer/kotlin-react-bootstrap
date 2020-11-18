@@ -7,6 +7,8 @@ plugins {
 dependencies {
     implementation(project(":kotlin-react-bootstrap"))
 
+    implementation(kotlinJsWrapper("react"))
+    implementation(kotlinJsWrapper("react-dom"))
     implementation(kotlinJsWrapper("react-router-dom"))
 
     implementation(npm("file-loader", version("file-loader")))
