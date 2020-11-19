@@ -4,7 +4,6 @@ import kotlinx.html.TagConsumer
 import react.RBuilder
 import react.RState
 import react.ReactElement
-import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.react.rprops.requireProperties
 import react.dom.RDOMBuilder

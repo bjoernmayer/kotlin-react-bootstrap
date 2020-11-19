@@ -3,7 +3,6 @@ package react.bootstrap.layout.grid.col
 import kotlinx.html.DIV
 import react.RBuilder
 import react.ReactElement
-import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.component.AbstractDOMComponent.Companion.abstractDomComponent
 import react.bootstrap.lib.component.PropHandler
@@ -50,7 +49,6 @@ inline fun <reified T : DOMTag> RBuilder.col(
         this.md = md
         this.lg = lg
         this.xl = xl
-        this.classes = classes.splitClassesToSet()
 
         with(props) {
             this@propHandler.handle()

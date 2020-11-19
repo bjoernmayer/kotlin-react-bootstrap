@@ -8,7 +8,6 @@ import react.Child
 import react.RBuilder
 import react.RState
 import react.ReactElement
-import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.react.rprops.WithClasses
 import react.bootstrap.lib.react.rprops.childrenArray
@@ -145,6 +144,8 @@ abstract class DOMComponent
                     }
                 }
             }
+
+        protected fun String?.splitClassesToSet(): Set<String> = this?.split(" ")?.toSet() ?: emptySet()
     }
 
     companion object {

@@ -17,7 +17,7 @@ internal class SupportedContent : SectionComponent() {
     override fun RBuilder.render() {
         sectionTitle()
         liveExample {
-            navbar(theme = Navbar.Theme.LIGHT, classes = classes(ClassNames.BG_LIGHT)) {
+            navbar(classes(ClassNames.BG_LIGHT), theme = Navbar.Theme.LIGHT) {
                 brand<A> {
                     attrs {
                         href = "#"
@@ -27,8 +27,8 @@ internal class SupportedContent : SectionComponent() {
             }
         }
         liveExample {
-            navbar(theme = Navbar.Theme.LIGHT, classes = classes(ClassNames.BG_LIGHT)) {
-                brand<SPAN>(classes = classes(ClassNames.MB_0, ClassNames.H1)) {
+            navbar(classes(ClassNames.BG_LIGHT), theme = Navbar.Theme.LIGHT) {
+                brand<SPAN>(classes(ClassNames.MB_0, ClassNames.H1)) {
                     +"Navbar"
                 }
             }

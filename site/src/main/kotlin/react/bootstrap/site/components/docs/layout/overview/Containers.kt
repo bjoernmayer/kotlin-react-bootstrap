@@ -98,7 +98,7 @@ The table below illustrates how each container’s `max-width` compares to the o
         // p {
         //     +"See them in action and compare them in our Grid example." // Todo link to examples
         // }
-        table(classes = classes(ClassNames.TEXT_LEFT)) {
+        table(classes(ClassNames.TEXT_LEFT)) {
             thead {
                 tr {
                     th { }

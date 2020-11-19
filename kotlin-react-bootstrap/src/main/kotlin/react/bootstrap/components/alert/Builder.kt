@@ -24,7 +24,6 @@ import react.bootstrap.components.alert.Alert.Variants.SECONDARY
 import react.bootstrap.components.alert.Alert.Variants.SUCCESS
 import react.bootstrap.components.alert.Alert.Variants.WARNING
 import react.bootstrap.content.typography.heading.Heading
-import react.bootstrap.helpers.splitClassesToSet
 import react.bootstrap.lib.Builder
 import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.component.AbstractDOMComponent.Companion.abstractDomComponent
@@ -66,7 +65,6 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
         .classes(classes)
         .propHandler {
             this.variant = variant
-            this.classes = classes.splitClassesToSet()
             this.tag = T::class
 
             with(props) {
@@ -299,7 +297,6 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         .classes(classes)
         .propHandler {
             this.variant = variant
-            this.classes = classes.splitClassesToSet()
             this.fade = fade
             this.tag = T::class
 

@@ -50,8 +50,8 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
     }
 
     override fun RBuilder.render() {
-        row(classes = classes(ClassNames.FLEX_XL_NOWRAP)) {
-            col(classes = "bd-sidebar", md = SZ_3, xl = SZ_2) {
+        row( classes(ClassNames.FLEX_XL_NOWRAP)) {
+            col("bd-sidebar", md = SZ_3, xl = SZ_2) {
                 route<RProps>(props.location.pathname) {
                     child(Navigation::class) {
                         attrs {
@@ -60,14 +60,14 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
                     }
                 }
             }
-            col(classes = classes(ClassNames.D_NONE, ClassNames.D_XL_BLOCK, "bd-toc"), xl = SZ_2) {
+            col(classes(ClassNames.D_NONE, ClassNames.D_XL_BLOCK, "bd-toc"), xl = SZ_2) {
                 child(SectionNav::class) {
                     attrs {
                         sections = state.sections
                     }
                 }
             }
-            col<MAIN>(classes = classes(ClassNames.PY_MD_3, ClassNames.PL_MD_5, "bd-content"), md = SZ_9, xl = SZ_8) {
+            col<MAIN>(classes(ClassNames.PY_MD_3, ClassNames.PL_MD_5, "bd-content"), md = SZ_9, xl = SZ_8) {
                 switch {
                     Pages.categories.forEach { category ->
                         route<CategoryComponent.Props>(category.link) {

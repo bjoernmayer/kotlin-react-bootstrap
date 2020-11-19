@@ -24,7 +24,7 @@ val Home = functionalComponent<RProps> {
     main("bd-masthead") {
         container {
             row(all = CENTER) {
-                col(classes = classes(ClassNames.MX_AUTO), all = SZ_6, md = SZ_6 ord ORD_2) {
+                col(classes(ClassNames.MX_AUTO), all = SZ_6, md = SZ_6 ord ORD_2) {
                     img(
                         src = logo.default as? String,
                         classes = classes(ClassNames.MB_3, ClassNames.MB_MD_0, "home-logo"),
@@ -37,13 +37,13 @@ val Home = functionalComponent<RProps> {
                         +"The most popular front-end framework"; br { }
                         +"Rebuilt for Kotlin React"
                     }
-                    row(classes = classes(ClassNames.MX_N2)) {
-                        col(classes = classes(ClassNames.PX_2), lg = EQ) {
+                    row(classes(ClassNames.MX_N2)) {
+                        col(classes(ClassNames.PX_2), lg = EQ) {
                             routeLink(PATH_DOCS, className = "btn btn-lg btn-bd-primary rounded-pill w-100 mb-3") {
                                 +"Get started"
                             }
                         }
-                        col(classes = classes(ClassNames.PX_2), lg = EQ) {
+                        col(classes(ClassNames.PX_2), lg = EQ) {
                             routeLink(
                                 "${PATH_DOCS}components",
                                 className = "btn btn-lg btn-outline-secondary rounded-pill w-100 mb-3"

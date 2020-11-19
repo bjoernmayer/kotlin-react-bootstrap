@@ -29,7 +29,7 @@ components. It includes some style overrides (for working with lists), some link
 disabled styling.
             """
         }
-        div(classes = "bd-callout bd-callout-info") {
+        div("bd-callout bd-callout-info") {
             Markdown {
                 //language=Markdown
                 +"""

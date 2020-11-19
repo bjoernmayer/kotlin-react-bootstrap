@@ -39,7 +39,7 @@ data class Section(
 
 class SectionNav : RComponent<SectionNav.Props, RState>() {
     override fun RBuilder.render() {
-        ul(classes = "section-nav") {
+        ul("section-nav") {
             props.sections?.forEach { section ->
                 li("toc-entry toc-h2") {
                     a(href = "#${section.id}") { +section.title }

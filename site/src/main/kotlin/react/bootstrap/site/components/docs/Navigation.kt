@@ -37,7 +37,7 @@ class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
                         +category.name
                     }
 
-                    Navs.ul(classes = "bd-sidenav") {
+                    Navs.ul("bd-sidenav") {
                         category.pages.forEach { subCategory ->
                             li {
                                 if (pathMatches(props.location.pathname, subCategory.matchProps)) {
