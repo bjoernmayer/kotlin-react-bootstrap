@@ -30,22 +30,7 @@ fun RBuilder.col(
     classes: String? = null,
     props: PropHandler<Col.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
-): ReactElement = abstractDomComponent(Col::class as KClass<Col<DIV>>)
-    .classes(classes)
-    .propHandler {
-        this.all = all
-        this.sm = sm
-        this.md = md
-        this.lg = lg
-        this.xl = xl
-        this.classes = classes.splitClassesToSet()
-
-        with(props) {
-            this@propHandler.handle()
-        }
-    }
-    .domHandler(block)
-    .build()
+): ReactElement = col<DIV>(all, sm, md, lg, xl, classes, props, block)
 
 @Suppress("UNCHECKED_CAST")
 inline fun <reified T : DOMTag> RBuilder.col(

@@ -32,22 +32,7 @@ fun RBuilder.row(
     classes: String? = null,
     props: PropHandler<Row.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
-): ReactElement = abstractDomComponent(Row::class as KClass<Row<DIV>>)
-    .classes(classes)
-    .propHandler {
-        this.all = all
-        this.sm = sm
-        this.md = md
-        this.lg = lg
-        this.xl = xl
-        this.gutters = gutters
-
-        with(props) {
-            this@propHandler.handle()
-        }
-    }
-    .domHandler(block)
-    .build()
+): ReactElement = row<DIV>(all, sm, md, lg, xl, gutters, classes, props, block)
 
 @Suppress("UNCHECKED_CAST")
 inline fun <reified T : DOMTag> RBuilder.row(

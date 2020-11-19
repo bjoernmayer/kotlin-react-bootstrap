@@ -16,17 +16,7 @@ fun RBuilder.container(
     classes: String? = null,
     props: PropHandler<Container.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
-): ReactElement = abstractDomComponent(Container::class as KClass<Container<DIV>>)
-    .classes(classes)
-    .propHandler {
-        this.viscosity = viscosity
-
-        with(props) {
-            this@propHandler.handle()
-        }
-    }
-    .domHandler(block)
-    .build()
+): ReactElement = container<DIV>(viscosity, classes, props, block)
 
 @Suppress("UNCHECKED_CAST")
 inline fun <reified T : HtmlBlockTag> RBuilder.container(

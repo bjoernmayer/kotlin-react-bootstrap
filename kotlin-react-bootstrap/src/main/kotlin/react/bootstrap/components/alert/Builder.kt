@@ -47,19 +47,7 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         props: PropHandler<Alert.Props<DIV>> = PropHandler { },
         block: AlertDOMHandler<DIV>
-    ): ReactElement = domComponent(Alert.Static::class as KClass<Alert.Static<DIV>>)
-        .classes(classes)
-        .propHandler {
-            this.variant = variant
-            this.classes = classes.splitClassesToSet()
-            this.tag = DIV::class
-
-            with(props) {
-                this@propHandler.handle()
-            }
-        }
-        .domHandler(block)
-        .build()
+    ): ReactElement = alert<DIV>(variant, classes, props, block)
 
     /**
      * Creates a generic [Alert.Static] element.
@@ -290,20 +278,7 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
         classes: String? = null,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = PropHandler { },
         block: AlertDOMHandler<DIV>,
-    ): ReactElement = domComponent(Alert.Dismissible::class as KClass<Alert.Dismissible<DIV>>)
-        .classes(classes)
-        .propHandler {
-            this.variant = variant
-            this.classes = classes.splitClassesToSet()
-            this.fade = fade
-            this.tag = DIV::class
-
-            with(props) {
-                this@propHandler.handle()
-            }
-        }
-        .domHandler(block)
-        .build()
+    ): ReactElement = alert<DIV>(variant, fade, classes, props, block)
 
     /**
      * Creates a generic, dismissible [Alert.Dismissible] element.
@@ -560,10 +535,7 @@ val RBuilder.Alerts
 fun Alert.DomBuilder<*>.closingElement(
     props: PropHandler<ClosingElement.Props<SPAN>> = PropHandler { },
     block: RDOMHandler<SPAN>
-): ReactElement = abstractDomComponent(ClosingElement::class as KClass<ClosingElement<SPAN>>)
-    .propHandler(props)
-    .domHandler(block)
-    .build()
+): ReactElement = closingElement<SPAN>(props, block)
 
 // Todo: A minor optimisation: There should be another DomBuilder only for Dismissible to reduce visibility
 @Suppress("UNCHECKED_CAST")

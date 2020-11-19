@@ -177,7 +177,6 @@ fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg classNames: String) 
     }
 }
 
-
 fun RDOMBuilder<CommonAttributeGroupFacade>.addClass(vararg classNames: ClassNames) {
     attrs {
         classes = classes.toMutableSet().apply {

@@ -37,11 +37,7 @@ fun RDOMBuilder<BLOCKQUOTE>.blockQuoteFooter(
     classes: String? = null,
     props: PropHandler<BlockQuoteFooter.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
-): ReactElement = abstractDomComponent(BlockQuoteFooter::class as KClass<BlockQuoteFooter<DIV>>)
-    .classes(classes)
-    .propHandler(props)
-    .domHandler(block)
-    .build()
+): ReactElement = blockQuoteFooter<DIV>(classes, props, block)
 
 /**
  * Creates a generic [BlockQuoteFooter] element.

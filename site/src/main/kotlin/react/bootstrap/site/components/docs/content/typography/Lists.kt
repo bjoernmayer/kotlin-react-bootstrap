@@ -26,7 +26,6 @@ import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
-import react.bootstrap.site.lib.codepoet.KlazzValue
 import react.dom.RDOMBuilder
 import react.dom.li
 import react.dom.p

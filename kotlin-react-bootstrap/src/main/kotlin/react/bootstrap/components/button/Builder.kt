@@ -1810,19 +1810,7 @@ fun RBuilder.buttonGroup(
     sizes: ButtonGroup.Sizes? = null,
     props: PropHandler<ButtonGroup.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
-): ReactElement = abstractDomComponent(ButtonGroup::class as KClass<ButtonGroup<DIV>>)
-    .classes(classes)
-    .propHandler {
-        this.appearance = appearance
-        this.behaviour = behaviour
-        this.sizes = sizes
-
-        with(props) {
-            this@propHandler.handle()
-        }
-    }
-    .domHandler(block)
-    .build()
+): ReactElement = buttonGroup<DIV>(appearance, behaviour, classes, sizes, props, block)
 
 /**
  * Creates a generic [ButtonGroup] element.
@@ -1859,11 +1847,7 @@ fun RBuilder.buttonToolbar(
     classes: String? = null,
     props: PropHandler<ButtonToolbar.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
-): ReactElement = abstractDomComponent(ButtonToolbar::class as KClass<ButtonToolbar<DIV>>)
-    .classes(classes)
-    .propHandler(props)
-    .domHandler(block)
-    .build()
+): ReactElement = buttonToolbar<DIV>(classes, props, block)
 
 /**
  * Creates a generic [ButtonToolbar] element.
