@@ -50,7 +50,7 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
     }
 
     override fun RBuilder.render() {
-        row( classes(ClassNames.FLEX_XL_NOWRAP)) {
+        row(classes(ClassNames.FLEX_XL_NOWRAP)) {
             col("bd-sidebar", md = SZ_3, xl = SZ_2) {
                 route<RProps>(props.location.pathname) {
                     child(Navigation::class) {
