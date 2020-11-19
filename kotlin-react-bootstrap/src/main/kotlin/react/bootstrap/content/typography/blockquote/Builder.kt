@@ -20,7 +20,7 @@ import react.dom.blockQuote as reactBlockQuote
  * @param classes Space separated list of CSS classes for this element.
  */
 fun RBuilder.blockQuote(classes: String? = null, block: RDOMHandler<BLOCKQUOTE>): ReactElement =
-    reactBlockQuote(classes = classes.appendClass(ClassNames.BLOCKQUOTE)) {
+    reactBlockQuote(classes.appendClass(ClassNames.BLOCKQUOTE)) {
         val builder = this
         with(block) {
             builder.handle()

@@ -30,7 +30,7 @@ Creates an `ul` element.
                 .nestedBy<RBuilder>()
                 .addParameter<ListStyles>("listStyles")
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", UL::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, UL>())
                 .returns("ReactElement")
                 .build()
         }
@@ -47,7 +47,7 @@ Creates an `li` element.
                 .nestedBy<RBuilder>()
                 .addParameter<ListItemStyles>("listItemStyles")
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", LI::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, LI>())
                 .returns("ReactElement")
                 .build()
         }

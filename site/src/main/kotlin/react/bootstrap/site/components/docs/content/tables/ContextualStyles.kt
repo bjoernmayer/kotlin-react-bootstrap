@@ -42,7 +42,7 @@ internal class ContextualStyles : SectionComponent() {
                         td { +"Cell" }
                     }
                     ContextualStyle.values().forEach {
-                        tr(it) {
+                        tr(contextualStyle = it) {
                             th(ThScope.row) { +it.name.toLowerCase().capitalize() }
                             td { +"Cell" }
                             td { +"Cell" }
@@ -62,7 +62,7 @@ internal class ContextualStyles : SectionComponent() {
             +LineComment.builder("On rows").build()
             ContextualStyle.values().forEach {
                 +FunCall.builder(RBuilder::tr, FunCall.Style.NEW_INLINE)
-                    .addArgument(it)
+                    .addArgument("contextualStyle", it)
                     .setLambdaArgument(plusString("..."))
                     .build()
             }

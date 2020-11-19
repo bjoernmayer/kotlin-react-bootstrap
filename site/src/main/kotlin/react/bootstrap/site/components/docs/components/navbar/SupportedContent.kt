@@ -6,8 +6,8 @@ import react.RBuilder
 import react.bootstrap.components.navbar.Navbar
 import react.bootstrap.components.navbar.brand
 import react.bootstrap.components.navbar.navbar
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.kotlinxhtml.addClass
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.liveExample
 
@@ -17,11 +17,7 @@ internal class SupportedContent : SectionComponent() {
     override fun RBuilder.render() {
         sectionTitle()
         liveExample {
-            navbar(theme = Navbar.Theme.LIGHT) {
-                attrs {
-                    addClass(ClassNames.BG_LIGHT)
-                }
-
+            navbar(theme = Navbar.Theme.LIGHT, classes = classes(ClassNames.BG_LIGHT)) {
                 brand<A> {
                     attrs {
                         href = "#"
@@ -31,15 +27,8 @@ internal class SupportedContent : SectionComponent() {
             }
         }
         liveExample {
-            navbar(theme = Navbar.Theme.LIGHT) {
-                attrs {
-                    addClass(ClassNames.BG_LIGHT)
-                }
-
-                brand<SPAN> {
-                    attrs {
-                        addClass(ClassNames.MB_0, ClassNames.H1)
-                    }
+            navbar(theme = Navbar.Theme.LIGHT, classes = classes(ClassNames.BG_LIGHT)) {
+                brand<SPAN>(classes = classes(ClassNames.MB_0, ClassNames.H1)) {
                     +"Navbar"
                 }
             }

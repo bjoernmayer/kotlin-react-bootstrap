@@ -25,12 +25,12 @@ Creates an `img` element.
         codeExample {
             +FunSpec.builder(RBuilder::img)
                 .nestedBy<RBuilder>()
-                .addParameter("fluid", false)
-                .addParameter("isThumbnail", false)
                 .addParameter<String?>("alt", null)
                 .addParameter<String?>("src", null)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", IMG::class))
+                .addParameter("fluid", false)
+                .addParameter("isThumbnail", false)
+                .addParameter("block", Generic.builder<RDOMHandler<*>, IMG>())
                 .returns("ReactElement")
                 .build()
         }

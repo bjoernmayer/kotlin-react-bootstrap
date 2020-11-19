@@ -34,13 +34,13 @@ Creates a `${Row::class.nestedName}` element.
         codeExample {
             +FunSpec.builder(RBuilder::row)
                 .nestedBy<RBuilder>()
+                .addParameter<String?>("classes", null)
                 .addParameter<RowAttributes?>("all", null)
                 .addParameter<RowAttributes?>("sm", null)
                 .addParameter<RowAttributes?>("md", null)
                 .addParameter<RowAttributes?>("lg", null)
                 .addParameter<RowAttributes?>("xl", null)
                 .addParameter("gutters", true)
-                .addParameter<String?>("classes", null)
                 .addParameter(
                     "props",
                     Generic(PropHandler::class, Generic.builder<Row.Props<*>, DIV>().build()),
@@ -63,13 +63,13 @@ Creates a generic `${Row::class.nestedName}` element.
             +FunSpec.builder(RBuilder::row, inline = true)
                 .nestedBy<RBuilder>()
                 .addTypeParameter("T", DOMTag::class, true)
+                .addParameter<String?>("classes", null)
                 .addParameter<RowAttributes?>("all", null)
                 .addParameter<RowAttributes?>("sm", null)
                 .addParameter<RowAttributes?>("md", null)
                 .addParameter<RowAttributes?>("lg", null)
                 .addParameter<RowAttributes?>("xl", null)
                 .addParameter("gutters", true)
-                .addParameter<String?>("classes", null)
                 .addParameter(
                     "props",
                     Generic(PropHandler::class, Generic(Row.Props::class, "T").build()),
@@ -93,12 +93,12 @@ Creates a `${Col::class.nestedName}` element.
         codeExample {
             +FunSpec.builder(RBuilder::col)
                 .nestedBy<RBuilder>()
+                .addParameter<String?>("classes", null)
                 .addParameter<ColAttributes?>("all", null)
                 .addParameter<ColAttributes?>("sm", null)
                 .addParameter<ColAttributes?>("md", null)
                 .addParameter<ColAttributes?>("lg", null)
                 .addParameter<ColAttributes?>("xl", null)
-                .addParameter<String?>("classes", null)
                 .addParameter(
                     "props",
                     Generic(PropHandler::class, Generic.builder<Col.Props<*>, DIV>().build()),
@@ -121,12 +121,12 @@ Creates a generic `${Col::class.nestedName}` element.
             +FunSpec.builder(RBuilder::col, inline = true)
                 .nestedBy<RBuilder>()
                 .addTypeParameter("T", DOMTag::class, true)
+                .addParameter<String?>("classes", null)
                 .addParameter<ColAttributes?>("all", null)
                 .addParameter<ColAttributes?>("sm", null)
                 .addParameter<ColAttributes?>("md", null)
                 .addParameter<ColAttributes?>("lg", null)
                 .addParameter<ColAttributes?>("xl", null)
-                .addParameter<String?>("classes", null)
                 .addParameter(
                     "props",
                     Generic(PropHandler::class, Generic(Col.Props::class, "T").build()),

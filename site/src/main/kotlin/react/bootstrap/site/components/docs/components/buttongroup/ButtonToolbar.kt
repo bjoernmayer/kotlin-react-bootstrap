@@ -7,6 +7,7 @@ import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
 import react.bootstrap.components.button.buttonToolbar
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
@@ -18,6 +19,7 @@ import react.bootstrap.site.components.docs.importButtonGroupBuilder
 import react.bootstrap.site.components.docs.importButtonsBuilder
 import react.bootstrap.site.lib.codepoet.Assignment
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.FunCall.Style.INLINE
 import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.p
 
@@ -37,7 +39,7 @@ out groups, buttons, and more.
                 attrs {
                     ariaLabel = "Toolbar with button groups"
                 }
-                buttonGroup(classes = "${ClassNames.MR_2}") {
+                buttonGroup(classes(ClassNames.MR_2)) {
                     attrs {
                         ariaLabel = "First group"
                     }
@@ -45,7 +47,7 @@ out groups, buttons, and more.
                         Buttons.solid.secondary { +x.toString() }
                     }
                 }
-                buttonGroup(classes = "${ClassNames.MR_2}") {
+                buttonGroup(classes(ClassNames.MR_2)) {
                     attrs {
                         ariaLabel = "Second group"
                     }
@@ -78,7 +80,7 @@ out groups, buttons, and more.
                         )
                         .build(),
                     FunCall.builder(RBuilder::buttonGroup)
-                        .addArgument("classes", ClassNames.MR_2)
+                        .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.MR_2))
                         .setLambdaArgument(
                             FunCall.builder(RElementBuilder<RProps>::attrs)
                                 .setLambdaArgument(
@@ -100,7 +102,7 @@ out groups, buttons, and more.
                             }
                         ).build(),
                     FunCall.builder(RBuilder::buttonGroup)
-                        .addArgument("classes", ClassNames.MR_2)
+                        .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.MR_2))
                         .setLambdaArgument(
                             FunCall.builder(RElementBuilder<RProps>::attrs)
                                 .setLambdaArgument(
@@ -122,7 +124,7 @@ out groups, buttons, and more.
                             }
                         ).build(),
                     FunCall.builder(RBuilder::buttonGroup)
-                        .addArgument("classes", ClassNames.MR_2)
+                        .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.MR_2))
                         .setLambdaArgument(
                             FunCall.builder(RElementBuilder<RProps>::attrs)
                                 .setLambdaArgument(
@@ -131,7 +133,7 @@ out groups, buttons, and more.
                                         .build()
                                 )
                                 .build(),
-                            FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
+                            FunCall.builder(solidSecondaryFun, INLINE)
                                 .nestedBy(RBuilder::Buttons)
                                 .nestedBy(ButtonBuilder::solid)
                                 .setLambdaArgument(plusString("8"))

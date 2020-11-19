@@ -7,6 +7,7 @@ import kotlinx.html.unsafe
 import react.RBuilder
 import react.bootstrap.content.figures.figcaption
 import react.bootstrap.content.figures.figure
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.site.components.docs.fixings.PageComponent
@@ -14,6 +15,7 @@ import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.FunCall.Style.INLINE
 import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.img
 import react.dom.svg
@@ -40,7 +42,7 @@ Images in figures have no explicit size, so be sure to add the `img(fluid)` to `
         liveExample {
             figure {
                 svg(
-                    "bd-placeholder-img ${ClassNames.IMG_FLUID} ${ClassNames.FIGURE_IMG} ${ClassNames.ROUNDED}"
+                    classes("bd-placeholder-img", ClassNames.IMG_FLUID, ClassNames.FIGURE_IMG, ClassNames.ROUNDED)
                 ) {
                     attrs {
                         set("width", "400")
@@ -73,10 +75,10 @@ Images in figures have no explicit size, so be sure to add the `img(fluid)` to `
             +FunCall.builder(RBuilder::figure)
                 .setLambdaArgument(
                     FunCall.builder(RBuilder::img, FunCall.Style.NEW_INLINE)
-                        .addArgument("fluid", true)
-                        .addArgument("classes", ClassNames.ROUNDED)
                         .addArgument("src", "...")
                         .addArgument("alt", "...")
+                        .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.ROUNDED))
+                        .addArgument("fluid", true)
                         .setEmptyLambdaArgument()
                         .build(),
                     FunCall.builder(RBuilder::figcaption)

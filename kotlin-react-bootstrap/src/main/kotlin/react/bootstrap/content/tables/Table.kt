@@ -23,13 +23,13 @@ import react.dom.table as reactTable
  * @param classes Space separated list of CSS classes for this element.
  */
 fun RBuilder.table(
+    classes: String? = null,
     dark: Boolean = false,
     striped: Boolean = false,
     borderStyle: BorderStyles? = null,
     hoverable: Boolean = false,
     small: Boolean = false,
     responsive: Breakpoints? = null,
-    classes: String? = null,
     block: RDOMHandler<TABLE>
 ): ReactElement {
     val tableClasses = mutableSetOf(ClassNames.TABLE)
@@ -63,8 +63,8 @@ fun RBuilder.table(
             Breakpoints.ALL -> ClassNames.TABLE_RESPONSIVE
         }
 
-        div(classes = divClassName.className) {
-            reactTable(classes = classes.appendClass(tableClasses)) {
+        div(divClassName.className) {
+            reactTable(classes.appendClass(tableClasses)) {
                 val builder = this
                 with(block) {
                     builder.handle()
@@ -72,7 +72,7 @@ fun RBuilder.table(
             }
         }
     } else {
-        reactTable(classes = classes.appendClass(tableClasses)) {
+        reactTable(classes.appendClass(tableClasses)) {
             val builder = this
             with(block) {
                 builder.handle()

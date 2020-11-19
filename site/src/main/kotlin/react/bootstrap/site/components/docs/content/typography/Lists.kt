@@ -13,6 +13,7 @@ import react.bootstrap.content.typography.ListItemStyles
 import react.bootstrap.content.typography.ListStyles
 import react.bootstrap.content.typography.li
 import react.bootstrap.content.typography.ul
+import react.bootstrap.helpers.classes
 import react.bootstrap.layout.grid.col.ColAttributes
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.row.row
@@ -25,6 +26,7 @@ import react.bootstrap.site.components.docs.layout.grid.rowFun
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.FunCall.Style.INLINE
 import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.RDOMBuilder
 import react.dom.li
@@ -144,7 +146,7 @@ Remove a list’s bullets and apply some light `margin` with a combination of tw
                 .addArgument(ListStyles.INLINE)
                 .setLambdaArgument(
                     listOf("Lorem ipsum", "Phasellus iaculis", "Nulla volutpat").joinToString("\n") {
-                        FunCall.builder(liFun, FunCall.Style.INLINE)
+                        FunCall.builder(liFun, INLINE)
                             .setLambdaArgument(plusString(it))
                             .build()
                     }
@@ -177,7 +179,7 @@ add a `${ClassNames.TEXT_TRUNCATE.nestedName}` class to truncate the text with a
                     +"Etiam porta sem malesuada magna mollis euismod."
                 }
 
-                col<DT>(classes = "${ClassNames.TEXT_TRUNCATE}", sm = ColAttributes.Sizes.SZ_3) {
+                col<DT>(classes(ClassNames.TEXT_TRUNCATE), sm = ColAttributes.Sizes.SZ_3) {
                     +"Truncated term is truncated"
                 }
                 col<DD>(sm = ColAttributes.Sizes.SZ_9) {
@@ -267,7 +269,7 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                                     )
                                 )
                                 .build(),
-                            FunCall.builder(RBuilder::p, FunCall.Style.INLINE)
+                            FunCall.builder(RBuilder::p, INLINE)
                                 .setLambdaArgument(plusString("Donec id elit non mi porta gravida at eget metus."))
                                 .build()
                         )
@@ -285,7 +287,7 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                         .build(),
                     "\n",
                     FunCall.builder(RBuilder::col)
-                        .addArgument("classes", ClassNames.TEXT_TRUNCATE)
+                        .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.TEXT_TRUNCATE))
                         .addSz3Argument()
                         .addDtType()
                         .setLambdaArgument(plusString("Truncated term is truncated"))

@@ -75,8 +75,8 @@ Creates an `alert` component with `$variantName` context.
                 +FunSpec.builder(function)
                     .nestedBy(RBuilder::Alerts)
                     .nestedBy(AlertBuilder::dismissible)
-                    .addParameter("fade", false)
                     .addParameter<String?>("classes", null)
+                    .addParameter("fade", false)
                     .addParameter(
                         "props",
                         Generic.builder<PropHandler<*>, Alert.Dismissible<*>>(),
@@ -116,8 +116,8 @@ Creates a generic `alert` component with $variantName context.
                     .nestedBy(RBuilder::Alerts)
                     .addTypeParameter("T", HtmlBlockTag::class, true)
                     .nestedBy(AlertBuilder::dismissible)
-                    .addParameter("fade", false)
                     .addParameter<String?>("classes", null)
+                    .addParameter("fade", false)
                     .addParameter(
                         "props",
                         Generic.builder<PropHandler<*>, Alert.Dismissible.Props<*>>(),

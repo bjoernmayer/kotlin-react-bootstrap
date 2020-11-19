@@ -31,8 +31,8 @@ Creates a `${Container::class.nestedName}` element.
         codeExample {
             +FunSpec.builder(RBuilder::container)
                 .nestedBy<RBuilder>()
-                .addParameter<Container.Viscosities>("viscosity", null)
                 .addParameter<String?>("classes", null)
+                .addParameter<Container.Viscosities>("viscosity", null)
                 .addParameter(
                     "props",
                     Generic(PropHandler::class, Generic.builder<Container.Props<*>, DIV>().build()),
@@ -56,8 +56,8 @@ Creates a generic `${Container::class.nestedName}` element.
             +FunSpec.builder(RBuilder::container, inline = true)
                 .nestedBy<RBuilder>()
                 .addTypeParameter("T", HtmlBlockTag::class, true)
-                .addParameter<Container.Viscosities>("viscosity", null)
                 .addParameter<String?>("classes", null)
+                .addParameter<Container.Viscosities>("viscosity", null)
                 .addParameter(
                     "props",
                     Generic(PropHandler::class, Generic(Container.Props::class, "T").build()),
@@ -98,7 +98,7 @@ Creates a `${Container::class.nestedName}` element with `viscosity` set to `${vi
                             style = FunCall.Style.INLINE
                         ).setEmptyLambdaArgument().build()
                     )
-                    .addParameter("block", Generic("RDOMHandler", DIV::class))
+                    .addParameter("block", Generic.builder<RDOMHandler<*>, DIV>())
                     .returns("ReactElement")
                     .build()
             }

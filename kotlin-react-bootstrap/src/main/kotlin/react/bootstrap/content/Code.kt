@@ -11,10 +11,10 @@ import react.dom.pre
 /**
  * Creates a [PRE] element.
  *
- * @param scrollable Set this to *true* to make preformatted contents scrollable.
  * @param classes Space separated list of CSS classes for this element.
+ * @param scrollable Set this to *true* to make preformatted contents scrollable.
  */
-fun RBuilder.pre(scrollable: Boolean, classes: String? = null, block: RDOMHandler<PRE>): ReactElement =
+fun RBuilder.pre(classes: String? = null, scrollable: Boolean, block: RDOMHandler<PRE>): ReactElement =
     pre(
         classes = if (scrollable) {
             classes.appendClass(ClassNames.PRE_SCROLLABLE)

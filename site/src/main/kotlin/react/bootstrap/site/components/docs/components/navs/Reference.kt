@@ -122,8 +122,8 @@ Creates a `${NavLink::class.nestedName}` element.
                 +FunSpec.builder(function)
                     .nestedBy(elementBuilderGeneric)
                     .addParameter<String?>("href", null)
-                    .addParameter<String?>("classes", null)
                     .addParameter<String?>("target", null)
+                    .addParameter<String?>("classes", null)
                     .addParameter("active", false)
                     .addParameter("disabled", false)
                     .addParameter(

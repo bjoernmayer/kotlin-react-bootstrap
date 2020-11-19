@@ -50,15 +50,15 @@ internal class Reference : SectionComponent() {
                 +"Adds a button in the \"$variantName\" context using the HTML button element."
             }
             val buttonTypeParameters = setOf(
-                FunSpec.Parameter("type", ButtonType::class, false, ButtonType.button),
                 FunSpec.Parameter("formEncType", ButtonFormEncType::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("formMethod", ButtonFormMethod::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("type", ButtonType::class, false, ButtonType.button),
+                FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("active", Boolean::class, false, "false"),
                 FunSpec.Parameter("disabled", Boolean::class, false, "false"),
                 FunSpec.Parameter("nowrap", Boolean::class, false, "false"),
                 FunSpec.Parameter("sizes", ButtonComponent.Sizes::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("blockSized", Boolean::class, false, "false"),
-                FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter(
                     "props",
                     Generic.builder<PropHandler<*>, ButtonComponent.Button.Props>(),
@@ -102,12 +102,12 @@ internal class Reference : SectionComponent() {
             val linkButtonParameters = setOf(
                 FunSpec.Parameter("href", String::class, true),
                 FunSpec.Parameter("target", String::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("active", Boolean::class, false, "false"),
                 FunSpec.Parameter("disabled", Boolean::class, false, "false"),
                 FunSpec.Parameter("nowrap", Boolean::class, false, "false"),
                 FunSpec.Parameter("sizes", ButtonComponent.Sizes::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("blockSized", Boolean::class, false, "false"),
-                FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter(
                     "props",
                     Generic.builder<PropHandler<*>, ButtonComponent.Link.Props>(),
@@ -148,17 +148,17 @@ internal class Reference : SectionComponent() {
                 +"Adds a button in the \"$variantName\" context using one of the HTML input button elements."
             }
             val inputElementButtonParameters = setOf(
-                FunSpec.Parameter("name", String::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("value", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("type", ButtonComponent.Input.Type::class, false),
                 FunSpec.Parameter("formEncType", InputFormEncType::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("formMethod", InputFormMethod::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("name", String::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("value", String::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("active", Boolean::class, false, "false"),
                 FunSpec.Parameter("disabled", Boolean::class, false, "false"),
                 FunSpec.Parameter("nowrap", Boolean::class, false, "false"),
                 FunSpec.Parameter("sizes", ButtonComponent.Sizes::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("blockSized", Boolean::class, false, "false"),
-                FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter(
                     "props",
                     Generic.builder<PropHandler<*>, ButtonComponent.Input.Props>(),
@@ -200,17 +200,17 @@ internal class Reference : SectionComponent() {
                 +"Adds a button in the \"$variantName\" context using check- or radio-boxes."
             }
             val boxButtonParameters = setOf(
-                FunSpec.Parameter("name", String::class, true, FunSpec.Parameter.NULL),
-                FunSpec.Parameter("value", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("type", ButtonComponent.Box.Type::class, false),
                 FunSpec.Parameter("formEncType", InputFormEncType::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("formMethod", InputFormMethod::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("name", String::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("value", String::class, true, FunSpec.Parameter.NULL),
+                FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("active", Boolean::class, false, "false"),
                 FunSpec.Parameter("disabled", Boolean::class, false, "false"),
                 FunSpec.Parameter("nowrap", Boolean::class, false, "false"),
                 FunSpec.Parameter("sizes", ButtonComponent.Sizes::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter("blockSized", Boolean::class, false, "false"),
-                FunSpec.Parameter("classes", String::class, true, FunSpec.Parameter.NULL),
                 FunSpec.Parameter(
                     "props",
                     Generic.builder<PropHandler<*>, ButtonComponent.Box.Props>(),

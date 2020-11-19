@@ -23,26 +23,26 @@ import kotlin.reflect.KClass
  */
 @Suppress("UNCHECKED_CAST")
 fun RBuilder.row(
+    classes: String? = null,
     all: RowAttributes? = null,
     sm: RowAttributes? = null,
     md: RowAttributes? = null,
     lg: RowAttributes? = null,
     xl: RowAttributes? = null,
     gutters: Boolean = true,
-    classes: String? = null,
     props: PropHandler<Row.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
-): ReactElement = row<DIV>(all, sm, md, lg, xl, gutters, classes, props, block)
+): ReactElement = row<DIV>(classes, all, sm, md, lg, xl, gutters, props, block)
 
 @Suppress("UNCHECKED_CAST")
 inline fun <reified T : DOMTag> RBuilder.row(
+    classes: String? = null,
     all: RowAttributes? = null,
     sm: RowAttributes? = null,
     md: RowAttributes? = null,
     lg: RowAttributes? = null,
     xl: RowAttributes? = null,
     gutters: Boolean = true,
-    classes: String? = null,
     props: PropHandler<Row.Props<T>> = PropHandler { },
     block: RDOMHandler<T>
 ): ReactElement = abstractDomComponent(Row::class as KClass<Row<T>>)

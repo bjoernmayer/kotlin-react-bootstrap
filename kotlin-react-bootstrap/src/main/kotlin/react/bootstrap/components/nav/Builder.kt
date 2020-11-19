@@ -178,8 +178,8 @@ fun NavComponent.DomBuilder<DIV>.navItem(
 
 private fun RBuilder.buildNavLink(
     href: String? = null,
-    classes: String? = null,
     target: String? = null,
+    classes: String? = null,
     active: Boolean = false,
     disabled: Boolean = false,
     props: PropHandler<NavLink.Props> = PropHandler { },
@@ -215,40 +215,40 @@ private fun RBuilder.buildNavLink(
 
 fun NavItems.DomBuilder<LI>.navLink(
     href: String? = null,
-    classes: String? = null,
     target: String? = null,
+    classes: String? = null,
     active: Boolean = false,
     disabled: Boolean = false,
     props: PropHandler<NavLink.Props> = PropHandler { },
     block: RDOMHandler<A>
-): ReactElement = buildNavLink(href, classes, target, active, disabled, props, block)
+): ReactElement = buildNavLink(href, target, classes, active, disabled, props, block)
 
 fun NavComponent.DomBuilder<NAV>.navLink(
     href: String? = null,
-    classes: String? = null,
     target: String? = null,
+    classes: String? = null,
     active: Boolean = false,
     disabled: Boolean = false,
     props: PropHandler<NavLink.Props> = PropHandler { },
     block: RDOMHandler<A>
-): ReactElement = buildNavLink(href, classes, target, active, disabled, props, block)
+): ReactElement = buildNavLink(href, target, classes, active, disabled, props, block)
 
 fun NavItems.DomBuilder<DIV>.navLink(
     href: String? = null,
-    classes: String? = null,
     target: String? = null,
+    classes: String? = null,
     active: Boolean = false,
     disabled: Boolean = false,
     props: PropHandler<NavLink.Props> = PropHandler { },
     block: RDOMHandler<A>
-): ReactElement = buildNavLink(href, classes, target, active, disabled, props, block)
+): ReactElement = buildNavLink(href, target, classes, active, disabled, props, block)
 
 fun NavComponent.DomBuilder<DIV>.navLink(
     href: String? = null,
-    classes: String? = null,
     target: String? = null,
+    classes: String? = null,
     active: Boolean = false,
     disabled: Boolean = false,
     props: PropHandler<NavLink.Props> = PropHandler { },
     block: RDOMHandler<A>
-): ReactElement = buildNavLink(href, classes, target, active, disabled, props, block)
+): ReactElement = buildNavLink(href, target, classes, active, disabled, props, block)

@@ -31,7 +31,7 @@ Creates a `figure` element and adds `${ClassNames.FIGURE.nestedName}` to it.
             +FunSpec.builder(RBuilder::figure)
                 .nestedBy<RBuilder>()
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", FIGURE::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, FIGURE>())
                 .returns("ReactElement")
                 .build()
         }
@@ -46,12 +46,12 @@ Creates an `img` element and adds `${ClassNames.FIGURE_IMG.nestedName}` to it.
         codeExample {
             +FunSpec.builder(RBuilder::img)
                 .nestedByGeneric<RDOMBuilder<*>, FIGURE>()
-                .addParameter("fluid", false)
-                .addParameter("isThumbnail", false)
                 .addParameter<String?>("alt", null)
                 .addParameter<String?>("src", null)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", IMG::class))
+                .addParameter("fluid", false)
+                .addParameter("isThumbnail", false)
+                .addParameter("block", Generic.builder<RDOMHandler<*>, IMG>())
                 .returns("ReactElement")
                 .build()
         }

@@ -28,7 +28,7 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
             """
         }
         liveExample {
-            table {
+            table() {
                 tbody {
                     listOf(
                         Display.Variants.DISPLAY_1,

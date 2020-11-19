@@ -14,6 +14,7 @@ import react.bootstrap.components.alert.closingElement
 import react.bootstrap.components.alert.link
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.Buttons
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.components.buttons.outlineDangerFun
@@ -26,6 +27,7 @@ import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.Assignment
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.FunCall.Style.INLINE
 import react.bootstrap.site.lib.codepoet.Generic
 import react.bootstrap.site.lib.codepoet.If
 import react.bootstrap.site.lib.codepoet.Imports
@@ -113,7 +115,7 @@ Use the `${Alert.DomBuilder<*>::link.name}`-function (only available inside
                     .setLambdaArgument(
                         plusString("A simple ${variant.name.toLowerCase()} alert with "),
                         "\n",
-                        FunCall.builder(Alert.DomBuilder<*>::link, FunCall.Style.INLINE)
+                        FunCall.builder(Alert.DomBuilder<*>::link, INLINE)
                             .addArgument("href", "#")
                             .setLambdaArgument(plusString("an example link"))
                             .build(),
@@ -137,7 +139,7 @@ Aww yeah, you successfully read this important alert message. This example text 
                     """
                 }
                 hr { }
-                p(classes = "${ClassNames.MB_0}") {
+                p(classes(ClassNames.MB_0)) {
                     +"Whenever you need to, be sure to use margin utilities to keep things nice and tidy."
                 }
             }
@@ -170,7 +172,7 @@ Aww yeah, you successfully read this important alert message. This example text 
                         .setEmptyLambdaArgument()
                         .build(),
                     FunCall.builder(RBuilder::p)
-                        .addArgument("classes", ClassNames.MB_0)
+                        .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.MB_0))
                         .setLambdaArgument(
                             plusString(
                                 "Whenever you need to, be sure to use margin utilities to keep things nice and tidy."
@@ -218,7 +220,7 @@ alerts.
                                 Assignment.builder(Alert.Dismissible.Props<*>::onClose)
                                     .value(
                                         LambdaValue(
-                                            FunCall.builder(Console::log, FunCall.Style.INLINE)
+                                            FunCall.builder(Console::log, INLINE)
                                                 .nestedBy(::console)
                                                 .addArgument(
                                                     "Close on Alert was clicked. Timestamp: " +
@@ -234,7 +236,7 @@ alerts.
                                 Assignment.builder(Alert.Dismissible.Props<*>::onClosed)
                                     .value(
                                         LambdaValue(
-                                            FunCall.builder(Console::log, FunCall.Style.INLINE)
+                                            FunCall.builder(Console::log, INLINE)
                                                 .nestedBy(::console)
                                                 .addArgument(
                                                     "Alert was dismissed. Timestamp: \${currentTimeMillis()}"
@@ -249,7 +251,7 @@ alerts.
                     )
                 )
                 .setLambdaArgument(
-                    FunCall.builder(RBuilder::strong, FunCall.Style.INLINE, appendSemicolon = true)
+                    FunCall.builder(RBuilder::strong, INLINE, appendSemicolon = true)
                         .setLambdaArgument(plusString("Holy guacamole!"))
                         .build(),
                     " ",
@@ -399,7 +401,7 @@ You can build your own custom close element, by using `closingElement { }`.
                                                                     LambdaValue(
                                                                         FunCall.builder(
                                                                             Console::log,
-                                                                            FunCall.Style.INLINE
+                                                                            INLINE
                                                                         )
                                                                             .nestedBy(::console)
                                                                             .addArgument(

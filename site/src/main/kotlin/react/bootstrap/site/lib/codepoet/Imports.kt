@@ -1,11 +1,13 @@
 package react.bootstrap.site.lib.codepoet
 
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.bootstrap.ClassNames
 
 internal class Imports private constructor() : CodePoet {
     private val imports: MutableSet<String> = mutableSetOf()
 
     fun importClassNames() = addImport("lib.bootstrap.${ClassNames::class.simpleName}")
+        .addImport("helpers.${::classes.name}")
 
     fun addImport(import: String): Imports {
         imports.add(import)

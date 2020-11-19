@@ -4,6 +4,7 @@ import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
 import react.bootstrap.content.img
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -27,7 +28,7 @@ appearance.
             """
         }
         liveExample("bd-example-images") {
-            svg(classes = "bd-placeholder-img bd-placeholder-img-lg ${ClassNames.IMG_THUMBNAIL}") {
+            svg(classes("bd-placeholder-img bd-placeholder-img-lg", ClassNames.IMG_THUMBNAIL)) {
                 attrs {
                     set("width", "200")
                     set("height", "200")
@@ -36,7 +37,7 @@ appearance.
                     role = "img"
                     ariaLabel =
                         "A generic square placeholder image with a white border around it, making it resemble a " +
-                        "photograph taken with an old instant camera: 200x200"
+                            "photograph taken with an old instant camera: 200x200"
                     unsafe {
                         raw(
                             "<rect width=\"100%\" height=\"100%\" fill=\"#868e96\"></rect>" +

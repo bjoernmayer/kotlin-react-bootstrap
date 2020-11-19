@@ -29,20 +29,20 @@ fun RBuilder.figure(classes: String? = null, block: RDOMHandler<FIGURE>): ReactE
 /**
  * Creates an [IMG] and adds [ClassNames.FIGURE_IMG] to it.
  *
- * @param fluid If set to *true* the image resizes fluently.
- * @param isThumbnail If set to `true`, a border is shown around the image.
  * @param alt alternative string
  * @param src Src-Attribute of the [IMG]
  * @param classes Space separated list of CSS classes for this element.
+ * @param fluid If set to *true* the image resizes fluently.
+ * @param isThumbnail If set to `true`, a border is shown around the image.
  */
 fun RDOMBuilder<FIGURE>.img(
-    fluid: Boolean = false,
-    isThumbnail: Boolean = false,
     alt: String? = null,
     src: String? = null,
     classes: String? = null,
+    fluid: Boolean = false,
+    isThumbnail: Boolean = false,
     block: RDOMHandler<IMG>
-): ReactElement = img(fluid, isThumbnail, alt, src, classes.appendClass(ClassNames.FIGURE_IMG), block)
+): ReactElement = img(alt, src, classes.appendClass(ClassNames.FIGURE_IMG), fluid, isThumbnail, block)
 
 fun RBuilder.figcaption(classes: String? = null, block: RDOMHandler<FIGCAPTION>): ReactElement =
     reactFigcaption(classes.appendClass(ClassNames.FIGURE_CAPTION)) {

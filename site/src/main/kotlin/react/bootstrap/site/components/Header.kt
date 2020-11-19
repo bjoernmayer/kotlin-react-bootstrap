@@ -4,6 +4,7 @@ import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
 import react.RProps
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.dom.a
@@ -20,11 +21,11 @@ external val logo: dynamic
 
 fun RBuilder.header() {
     header("navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar") {
-        a(href = "/", classes = "navbar-brand ${ClassNames.MR_0} ${ClassNames.MR_MD_2}") {
+        a(href = "/", classes = classes("navbar-brand", ClassNames.MR_0, ClassNames.MR_MD_2)) {
             attrs {
                 ariaLabel = "Kotlin React Bootstrap"
             }
-            img(src = logo.default as? String, classes = "${ClassNames.MR_2}") { attrs { height = "30" } }
+            img(src = logo.default as? String, classes = classes(ClassNames.MR_2)) { attrs { height = "30" } }
             +"Kotlin React Bootstrap"
         }
         div("navbar-nav-scroll") {

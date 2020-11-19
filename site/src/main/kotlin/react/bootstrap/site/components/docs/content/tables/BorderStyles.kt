@@ -30,7 +30,7 @@ table and cells. Or set the value to `${BorderStyles.BORDERLESS.nestedName}` for
                 defaultExample()
             }
 
-            table(borderStyle = BorderStyles.BORDERED, dark = true) {
+            table(dark = true, borderStyle = BorderStyles.BORDERED) {
                 defaultExample()
             }
 
@@ -38,7 +38,7 @@ table and cells. Or set the value to `${BorderStyles.BORDERLESS.nestedName}` for
                 defaultExample()
             }
 
-            table(borderStyle = BorderStyles.BORDERLESS, dark = true) {
+            table(dark = true, borderStyle = BorderStyles.BORDERLESS) {
                 defaultExample()
             }
         }

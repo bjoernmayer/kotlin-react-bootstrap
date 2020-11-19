@@ -13,33 +13,33 @@ import kotlin.reflect.KClass
 /**
  * Creates a [Col] element.
  *
+ * @param classes Space separated list of CSS classes for this element.
  * @param all [ColAttributes] that apply to all screen sizes.
  * @param sm [ColAttributes] that apply to small screen sizes.
  * @param md [ColAttributes] that apply to medium screen sizes.
  * @param lg [ColAttributes] that apply to large screen sizes.
  * @param xl [ColAttributes] that apply to extra-large screen sizes.
- * @param classes Space separated list of CSS classes for this element.
  */
 @Suppress("UNCHECKED_CAST")
 fun RBuilder.col(
+    classes: String? = null,
     all: ColAttributes? = null,
     sm: ColAttributes? = null,
     md: ColAttributes? = null,
     lg: ColAttributes? = null,
     xl: ColAttributes? = null,
-    classes: String? = null,
     props: PropHandler<Col.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
-): ReactElement = col<DIV>(all, sm, md, lg, xl, classes, props, block)
+): ReactElement = col<DIV>(classes, all, sm, md, lg, xl, props, block)
 
 @Suppress("UNCHECKED_CAST")
 inline fun <reified T : DOMTag> RBuilder.col(
+    classes: String? = null,
     all: ColAttributes? = null,
     sm: ColAttributes? = null,
     md: ColAttributes? = null,
     lg: ColAttributes? = null,
     xl: ColAttributes? = null,
-    classes: String? = null,
     props: PropHandler<Col.Props<T>> = PropHandler { },
     block: RDOMHandler<T>
 ): ReactElement = abstractDomComponent(Col::class as KClass<Col<T>>)

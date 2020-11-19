@@ -12,6 +12,7 @@ import react.bootstrap.components.nav.NavComponent.WidthHandling
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
@@ -20,6 +21,7 @@ import react.bootstrap.site.components.docs.importNavComponents
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.FunCall.Style.INLINE
 import react.bootstrap.site.lib.codepoet.Imports
 import react.child
 import react.functionalComponent
@@ -55,7 +57,7 @@ Centered with `${ClassNames.JUSTIFY_CONTENT_CENTER.nestedName}`:
             """
         }
         liveExample {
-            Navs.ul(classes = "${ClassNames.JUSTIFY_CONTENT_CENTER}") {
+            Navs.ul(classes(ClassNames.JUSTIFY_CONTENT_CENTER)) {
                 buildDefaultExample()
             }
         }
@@ -67,7 +69,7 @@ Centered with `${ClassNames.JUSTIFY_CONTENT_CENTER.nestedName}`:
 
             +FunCall.builder(Navs::ul)
                 .nestedBy(RBuilder::Navs)
-                .addArgument("classes", ClassNames.JUSTIFY_CONTENT_CENTER)
+                .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.JUSTIFY_CONTENT_CENTER))
                 .setLambdaArgument(testingNavItemsString())
                 .build()
         }
@@ -78,7 +80,7 @@ Centered with `${ClassNames.JUSTIFY_CONTENT_END.nestedName}`:
             """
         }
         liveExample {
-            Navs.ul(classes = "${ClassNames.JUSTIFY_CONTENT_END}") {
+            Navs.ul(classes(ClassNames.JUSTIFY_CONTENT_END)) {
                 buildDefaultExample()
             }
         }
@@ -90,7 +92,7 @@ Centered with `${ClassNames.JUSTIFY_CONTENT_END.nestedName}`:
 
             +FunCall.builder(Navs::ul)
                 .nestedBy(RBuilder::Navs)
-                .addArgument("classes", ClassNames.JUSTIFY_CONTENT_END)
+                .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.JUSTIFY_CONTENT_END))
                 .setLambdaArgument(testingNavItemsString())
                 .build()
         }
@@ -104,7 +106,7 @@ them on some viewports but not others? Use the responsive versions (e.g., `${Cla
             """
         }
         liveExample {
-            Navs.ul(classes = "${ClassNames.FLEX_COLUMN}") {
+            Navs.ul(classes(ClassNames.FLEX_COLUMN)) {
                 buildDefaultExample()
             }
         }
@@ -116,7 +118,7 @@ them on some viewports but not others? Use the responsive versions (e.g., `${Cla
 
             +FunCall.builder(Navs::ul)
                 .nestedBy(RBuilder::Navs)
-                .addArgument("classes", ClassNames.FLEX_COLUMN)
+                .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.FLEX_COLUMN))
                 .setLambdaArgument(testingNavItemsString())
                 .build()
         }
@@ -127,7 +129,7 @@ As always, vertical navigation is possible without `ul`s, too.
             """
         }
         liveExample {
-            Navs.nav(classes = "${ClassNames.FLEX_COLUMN}") {
+            Navs.nav(classes(ClassNames.FLEX_COLUMN)) {
                 navLink(href = "#", active = true) {
                     attrs { onClickFunction = { it.preventDefault() } }
                     +"Active"
@@ -153,7 +155,7 @@ As always, vertical navigation is possible without `ul`s, too.
 
             +FunCall.builder(Navs::nav)
                 .nestedBy(RBuilder::Navs)
-                .addArgument("classes", ClassNames.FLEX_COLUMN)
+                .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.FLEX_COLUMN))
                 .setLambdaArgument(
                     buildString {
                         append(

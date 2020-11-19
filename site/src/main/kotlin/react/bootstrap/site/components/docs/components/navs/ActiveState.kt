@@ -8,6 +8,7 @@ import react.bootstrap.components.nav.NavComponent.Appearance
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -17,6 +18,7 @@ import react.bootstrap.site.components.docs.importNavComponents
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.Assignment
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.FunCall.Style.INLINE
 import react.bootstrap.site.lib.codepoet.Generic
 import react.bootstrap.site.lib.codepoet.Imports
 import react.bootstrap.site.lib.codepoet.LambdaValue
@@ -41,7 +43,7 @@ In a few examples above you will see a visual change, when clicking through the 
  marked as active on a click. Here we will show you two ways to accomplish this.
             """
         }
-        div(classes = "bd-callout bd-callout-info") {
+        div("bd-callout bd-callout-info") {
             Markdown {
                 //language=Markdown
                 +"""
@@ -84,7 +86,7 @@ behaviour.
                             }
                         }
                     }
-                    h3(classes = "${ClassNames.MT_3}") {
+                    h3(classes(ClassNames.MT_3)) {
                         +when (activeNavLink) {
                             0 -> "Content about Link"
                             1 -> "Content about Zelda"
@@ -157,7 +159,7 @@ behaviour.
                                 )
                                 .build(),
                             FunCall.builder(RBuilder::h3)
-                                .addArgument("classes", ClassNames.MT_3)
+                                .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.MT_3))
                                 .setLambdaArgument(
                                     "+",
                                     When.builder("activeNavLink")

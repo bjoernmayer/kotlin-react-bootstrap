@@ -31,9 +31,9 @@ Creates a `${ButtonGroup::class.simpleName!!}` element.
         codeExample {
             +FunSpec.builder(RBuilder::buttonGroup)
                 .nestedBy<RBuilder>()
+                .addParameter<String?>("classes", null)
                 .addParameter<ButtonGroup.Appearance>("appearance", null)
                 .addParameter<ButtonGroup.Behaviours>("behaviour", null)
-                .addParameter<String?>("classes", null)
                 .addParameter<ButtonGroup.Sizes>("sizes", null)
                 .addParameter(
                     "props",
@@ -57,9 +57,9 @@ Creates a generic `${ButtonGroup::class.simpleName!!}` element.
             +FunSpec.builder(RBuilder::buttonGroup, inline = true)
                 .nestedBy<RBuilder>()
                 .addTypeParameter("T", HtmlBlockTag::class, true)
+                .addParameter<String?>("classes", null)
                 .addParameter<ButtonGroup.Appearance>("appearance", null)
                 .addParameter<ButtonGroup.Behaviours>("behaviour", null)
-                .addParameter<String?>("classes", null)
                 .addParameter<ButtonGroup.Sizes>("sizes", null)
                 .addParameter(
                     "props",
@@ -84,7 +84,15 @@ Creates a `${ButtonToolbar::class.simpleName!!}` element.
             +FunSpec.builder(RBuilder::buttonToolbar)
                 .nestedBy<RBuilder>()
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RHandler", ButtonToolbar.Props::class))
+                .addParameter(
+                    "props",
+                    Generic(PropHandler::class, Generic(ButtonToolbar.Props::class, DIV::class).build()),
+                    default = FunCall.builder(
+                        PropHandler::class.simpleName!!,
+                        style = FunCall.Style.INLINE
+                    ).setEmptyLambdaArgument().build()
+                )
+                .addParameter("block", Generic.builder<RDOMHandler<*>, DIV>())
                 .returns("ReactElement")
                 .build()
         }

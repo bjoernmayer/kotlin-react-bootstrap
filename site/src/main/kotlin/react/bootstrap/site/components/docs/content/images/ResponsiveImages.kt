@@ -4,6 +4,7 @@ import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
 import react.bootstrap.content.img
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -26,7 +27,7 @@ Images in Bootstrap are made responsive with `img(fluid = true)`.
             """
         }
         liveExample("bd-example-images") {
-            svg(classes = "bd-placeholder-img bd-placeholder-img-lg ${ClassNames.IMG_FLUID}") {
+            svg(classes("bd-placeholder-img bd-placeholder-img-lg", ClassNames.IMG_FLUID)) {
                 attrs {
                     set("width", "100%")
                     set("height", "250")

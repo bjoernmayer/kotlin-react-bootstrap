@@ -24,9 +24,9 @@ Creates a scrollable `pre` element.
         codeExample {
             +FunSpec.builder(RBuilder::pre)
                 .nestedBy<RBuilder>()
-                .addParameter<Boolean>("scrollable")
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", PRE::class))
+                .addParameter<Boolean>("scrollable")
+                .addParameter("block", Generic.builder<RDOMHandler<*>, PRE>())
                 .returns("ReactElement")
                 .build()
         }

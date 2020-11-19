@@ -4,12 +4,14 @@ import kotlinx.html.BLOCKQUOTE
 import react.RBuilder
 import react.bootstrap.content.typography.blockquote.blockQuote
 import react.bootstrap.content.typography.blockquote.blockQuoteFooter
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.FunCall.Style.INLINE
 import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.RDOMBuilder
 import react.dom.cite
@@ -27,7 +29,7 @@ any HTML as the quote.
             """
         }
         liveExample {
-            blockQuote("${ClassNames.MB_0}") {
+            blockQuote(classes(ClassNames.MB_0)) {
                 +"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
             }
         }
@@ -38,7 +40,7 @@ any HTML as the quote.
                 .build()
 
             +FunCall.builder(RBuilder::blockQuote)
-                .addArgument(ClassNames.MB_0)
+                .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.MB_0))
                 .setLambdaArgument(
                     plusString("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.")
                 )
@@ -53,7 +55,7 @@ Add a `${RDOMBuilder<BLOCKQUOTE>::blockQuoteFooter.name} { }`  for identifying t
             """
         }
         liveExample {
-            blockQuote("${ClassNames.MB_0}") {
+            blockQuote(classes(ClassNames.MB_0)) {
                 +"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
                 blockQuoteFooter { +"Someone famous in "; cite { +"Source Title" } }
             }
@@ -66,17 +68,17 @@ Add a `${RDOMBuilder<BLOCKQUOTE>::blockQuoteFooter.name} { }`  for identifying t
                 .build()
 
             +FunCall.builder(RBuilder::blockQuote)
-                .addArgument(ClassNames.MB_0)
+                .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.MB_0))
                 .setLambdaArgument(
                     plusString(
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
                     ),
                     "\n",
-                    FunCall.builder(RDOMBuilder<BLOCKQUOTE>::blockQuoteFooter.name, FunCall.Style.INLINE)
+                    FunCall.builder(RDOMBuilder<BLOCKQUOTE>::blockQuoteFooter.name, INLINE)
                         .setLambdaArgument(
                             plusString("Someone famous in "),
                             "; ",
-                            FunCall.builder(RBuilder::cite, FunCall.Style.INLINE)
+                            FunCall.builder(RBuilder::cite, INLINE)
                                 .setLambdaArgument(plusString("Source Title"))
                                 .build()
                         ).build()

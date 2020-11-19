@@ -2,6 +2,14 @@ package react.bootstrap.helpers
 
 import react.bootstrap.lib.bootstrap.ClassNames
 
+fun classes(vararg classes: Any): String = classes.joinToString(" ") {
+    if (it is ClassNames) {
+        it.className
+    } else {
+        it.toString()
+    }
+}
+
 fun String?.appendClass(className: ClassNames) = appendClass(setOf(className.toString()))
 
 fun String?.appendClass(className: String) = appendClass(setOf(className))

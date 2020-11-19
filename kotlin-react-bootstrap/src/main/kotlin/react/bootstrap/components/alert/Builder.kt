@@ -52,9 +52,9 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     /**
      * Creates a generic [Alert.Static] element.
      *
+     * @param T [HtmlBlockTag] that should be used to render this [Alert]
      * @param variant [Alert.Variants] change the styling of the [Alert].
      * @param classes Space separated list of CSS classes for this element.
-     * @param T [HtmlBlockTag] that should be used to render this [Alert]
      */
     @Suppress("UNCHECKED_CAST")
     inline fun <reified T : HtmlBlockTag> RBuilder.alert(
@@ -90,8 +90,8 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     /**
      * Creates a generic [Alert.Static] element with *variant* set to [Alert.Variants.DANGER].
      *
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
      */
     inline fun <reified T : HtmlBlockTag> danger(
         classes: String? = null,
@@ -113,8 +113,8 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     /**
      * Creates a generic [Alert.Static] element with *variant* set to [Alert.Variants.DARK].
      *
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
      */
     inline fun <reified T : HtmlBlockTag> dark(
         classes: String? = null,
@@ -136,8 +136,8 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     /**
      * Creates a generic [Alert.Static] element with *variant* set to [Alert.Variants.INFO].
      *
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
      */
     inline fun <reified T : HtmlBlockTag> info(
         classes: String? = null,
@@ -159,8 +159,8 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     /**
      * Creates a generic [Alert.Static] element with *variant* set to [Alert.Variants.LIGHT].
      *
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
      */
     inline fun <reified T : HtmlBlockTag> light(
         classes: String? = null,
@@ -182,8 +182,8 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     /**
      * Creates a generic [Alert.Static] element with *variant* set to [Alert.Variants.PRIMARY].
      *
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
      */
     inline fun <reified T : HtmlBlockTag> primary(
         classes: String? = null,
@@ -228,8 +228,8 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     /**
      * Creates a generic [Alert.Static] element with *variant* set to [Alert.Variants.SUCCESS].
      *
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
      */
     inline fun <reified T : HtmlBlockTag> success(
         classes: String? = null,
@@ -251,8 +251,8 @@ class AlertBuilder(override val builder: RBuilder) : Builder {
     /**
      * Creates a generic [Alert.Static] element with *variant* set to [Alert.Variants.WARNING].
      *
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
      */
     inline fun <reified T : HtmlBlockTag> warning(
         classes: String? = null,
@@ -267,32 +267,32 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
     /**
      * Creates a dismissible [Alert.Dismissible] element.
      *
-     * @param variant [Alert.Variants] change the styling of the [Alert].
-     * @param fade When set to *true*, the alert fades out, when dismissed.
      * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
+     * @param variant [Alert.Variants] change the styling of the [Alert].
      */
     @Suppress("UNCHECKED_CAST")
     fun RBuilder.alert(
         variant: Alert.Variants,
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = PropHandler { },
         block: AlertDOMHandler<DIV>,
-    ): ReactElement = alert<DIV>(variant, fade, classes, props, block)
+    ): ReactElement = alert<DIV>(variant, classes, fade, props, block)
 
     /**
      * Creates a generic, dismissible [Alert.Dismissible] element.
      *
+     * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
      * @param variant [Alert.Variants] change the styling of the [Alert].
      * @param fade When set to *true*, the alert fades out, when dismissed.
-     * @param classes Space separated list of CSS classes for this element.
-     * @param T [HtmlBlockTag] that should be used to render this [Alert]
      */
     @Suppress("UNCHECKED_CAST")
     inline fun <reified T : HtmlBlockTag> RBuilder.alert(
         variant: Alert.Variants,
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<T>> = PropHandler { },
         block: AlertDOMHandler<T>,
     ): ReactElement = domComponent(Alert.Dismissible::class as KClass<Alert.Dismissible<T>>)
@@ -313,110 +313,110 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
     /**
      * Creates an [Alert.Dismissible] element with *variant* set to [Alert.Variants.DANGER].
      *
-     * @param fade When set to *true*, the alert fades out, when dismissed.
      * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
      */
     fun danger(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = PropHandler { },
         block: AlertDOMHandler<DIV>
-    ): ReactElement = builder.alert(DANGER, fade, classes, props, block)
+    ): ReactElement = builder.alert(DANGER, classes, fade, props, block)
 
     /**
      * Creates a generic [Alert.Dismissible] element with *variant* set to [Alert.Variants.DANGER].
      *
-     * @param fade When set to *true*, the alert fades out, when dismissed.
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
      */
     inline fun <reified T : HtmlBlockTag> danger(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<T>> = PropHandler { },
         block: AlertDOMHandler<T>
-    ): ReactElement = builder.alert(DANGER, fade, classes, props, block)
+    ): ReactElement = builder.alert(DANGER, classes, fade, props, block)
 
     /**
      * Creates an [Alert.Dismissible] element with *variant* set to [Alert.Variants.DARK].
      *
-     * @param fade When set to *true*, the alert fades out, when dismissed.
      * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
      */
     fun dark(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = PropHandler { },
         block: AlertDOMHandler<DIV>
-    ): ReactElement = builder.alert(DARK, fade, classes, props, block)
+    ): ReactElement = builder.alert(DARK, classes, fade, props, block)
 
     /**
      * Creates a generic [Alert.Dismissible] element with *variant* set to [Alert.Variants.DARK].
      *
-     * @param fade When set to *true*, the alert fades out, when dismissed.
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
      */
     inline fun <reified T : HtmlBlockTag> dark(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<T>> = PropHandler { },
         block: AlertDOMHandler<T>
-    ): ReactElement = builder.alert(DARK, fade, classes, props, block)
+    ): ReactElement = builder.alert(DARK, classes, fade, props, block)
 
     /**
      * Creates an [Alert.Dismissible] element with *variant* set to [Alert.Variants.INFO].
      *
-     * @param fade When set to *true*, the alert fades out, when dismissed.
      * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
      */
     fun info(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = PropHandler { },
         block: AlertDOMHandler<DIV>
-    ): ReactElement = builder.alert(INFO, fade, classes, props, block)
+    ): ReactElement = builder.alert(INFO, classes, fade, props, block)
 
     /**
      * Creates a generic [Alert.Dismissible] element with *variant* set to [Alert.Variants.INFO].
      *
-     * @param fade When set to *true*, the alert fades out, when dismissed.
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
      */
     inline fun <reified T : HtmlBlockTag> info(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<T>> = PropHandler { },
         block: AlertDOMHandler<T>
-    ): ReactElement = builder.alert(INFO, fade, classes, props, block)
+    ): ReactElement = builder.alert(INFO, classes, fade, props, block)
 
     /**
      * Creates an [Alert.Dismissible] element with *variant* set to [Alert.Variants.LIGHT].
      *
-     * @param fade When set to *true*, the alert fades out, when dismissed.
      * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
      */
     fun light(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = PropHandler { },
         block: AlertDOMHandler<DIV>
-    ): ReactElement = builder.alert(LIGHT, fade, classes, props, block)
+    ): ReactElement = builder.alert(LIGHT, classes, fade, props, block)
 
     /**
      * Creates a generic [Alert.Dismissible] element with *variant* set to [Alert.Variants.LIGHT].
      *
-     * @param fade When set to *true*, the alert fades out, when dismissed.
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
      */
     inline fun <reified T : HtmlBlockTag> light(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<T>> = PropHandler { },
         block: AlertDOMHandler<T>
-    ): ReactElement = builder.alert(LIGHT, fade, classes, props, block)
+    ): ReactElement = builder.alert(LIGHT, classes, fade, props, block)
 
     /**
      * Creates an [Alert.Dismissible] element with *variant* set to [Alert.Variants.PRIMARY].
@@ -425,79 +425,79 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
      * @param classes Space separated list of CSS classes for this element.
      */
     fun primary(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = PropHandler { },
         block: AlertDOMHandler<DIV>
-    ): ReactElement = builder.alert(PRIMARY, fade, classes, props, block)
+    ): ReactElement = builder.alert(PRIMARY, classes, fade, props, block)
 
     /**
      * Creates a generic [Alert.Dismissible] element with *variant* set to [Alert.Variants.PRIMARY].
      *
-     * @param fade When set to *true*, the alert fades out, when dismissed.
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
      */
     inline fun <reified T : HtmlBlockTag> primary(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<T>> = PropHandler { },
         block: AlertDOMHandler<T>
-    ): ReactElement = builder.alert(PRIMARY, fade, classes, props, block)
+    ): ReactElement = builder.alert(PRIMARY, classes, fade, props, block)
 
     /**
      * Creates an [Alert.Dismissible] element with *variant* set to [Alert.Variants.SECONDARY].
      *
-     * @param fade When set to *true*, the alert fades out, when dismissed.
      * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
      */
     fun secondary(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = PropHandler { },
         block: AlertDOMHandler<DIV>
-    ): ReactElement = builder.alert(SECONDARY, fade, classes, props, block)
+    ): ReactElement = builder.alert(SECONDARY, classes, fade, props, block)
 
     /**
      * Creates a generic [Alert.Dismissible] element with *variant* set to [Alert.Variants.SECONDARY].
      *
+     * @param T [HtmlBlockTag] that should be used to render this [Alert]
      * @param fade When set to *true*, the alert fades out, when dismissed.
      * @param classes Space separated list of CSS classes for this element.
-     * @param T [HtmlBlockTag] that should be used to render this [Alert]
      */
     inline fun <reified T : HtmlBlockTag> secondary(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<T>> = PropHandler { },
         block: AlertDOMHandler<T>
-    ): ReactElement = builder.alert(SECONDARY, fade, classes, props, block)
+    ): ReactElement = builder.alert(SECONDARY, classes, fade, props, block)
 
     /**
      * Creates an [Alert.Dismissible] element with *variant* set to [Alert.Variants.SUCCESS].
      *
-     * @param fade When set to *true*, the alert fades out, when dismissed.
      * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
      */
     fun success(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = PropHandler { },
         block: AlertDOMHandler<DIV>
-    ): ReactElement = builder.alert(SUCCESS, fade, classes, props, block)
+    ): ReactElement = builder.alert(SUCCESS, classes, fade, props, block)
 
     /**
      * Creates a generic [Alert.Dismissible] element with *variant* set to [Alert.Variants.SUCCESS].
      *
-     * @param fade When set to *true*, the alert fades out, when dismissed.
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
      */
     inline fun <reified T : HtmlBlockTag> success(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<T>> = PropHandler { },
         block: AlertDOMHandler<T>
-    ): ReactElement = builder.alert(SUCCESS, fade, classes, props, block)
+    ): ReactElement = builder.alert(SUCCESS, classes, fade, props, block)
 
     /**
      * Creates an [Alert.Dismissible] element with *variant* set to [Alert.Variants.WARNING].
@@ -506,25 +506,25 @@ class DismissibleAlertBuilder(override val builder: RBuilder) : Builder {
      * @param classes Space separated list of CSS classes for this element.
      */
     fun warning(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<DIV>> = PropHandler { },
         block: AlertDOMHandler<DIV>
-    ): ReactElement = builder.alert(WARNING, fade, classes, props, block)
+    ): ReactElement = builder.alert(WARNING, classes, fade, props, block)
 
     /**
      * Creates a generic [Alert.Dismissible] element with *variant* set to [Alert.Variants.WARNING].
      *
-     * @param fade When set to *true*, the alert fades out, when dismissed.
-     * @param classes Space separated list of CSS classes for this element.
      * @param T [HtmlBlockTag] that should be used to render this [Alert]
+     * @param classes Space separated list of CSS classes for this element.
+     * @param fade When set to *true*, the alert fades out, when dismissed.
      */
     inline fun <reified T : HtmlBlockTag> warning(
-        fade: Boolean = false,
         classes: String? = null,
+        fade: Boolean = false,
         props: PropHandler<Alert.Dismissible.Props<T>> = PropHandler { },
         block: AlertDOMHandler<T>
-    ): ReactElement = builder.alert(WARNING, fade, classes, props, block)
+    ): ReactElement = builder.alert(WARNING, classes, fade, props, block)
 }
 
 val RBuilder.Alerts
@@ -604,6 +604,8 @@ inline fun <reified T : DOMTag> Alert.DomBuilder<*>.heading(
 
 /**
  * Creates a [Alert.Heading] element.
+ *
+ * @param classes Space separated list of CSS classes for this element.
  */
 fun Alert.DomBuilder<*>.h1(
     classes: String? = null,
@@ -615,6 +617,7 @@ fun Alert.DomBuilder<*>.h1(
  * Creates a [Alert.Heading] element with [Heading.Sizes.H1] and uses T to render the element.
  *
  * @param T Tag Type that should be used to render this [Alert.Heading]
+ * @param classes Space separated list of CSS classes for this element.
  */
 inline fun <reified T : DOMTag> Alert.DomBuilder<*>.h1(
     classes: String? = null,
@@ -624,6 +627,8 @@ inline fun <reified T : DOMTag> Alert.DomBuilder<*>.h1(
 
 /**
  * Creates a [Alert.Heading] element.
+ *
+ * @param classes Space separated list of CSS classes for this element.
  */
 fun Alert.DomBuilder<*>.h2(
     classes: String? = null,
@@ -635,6 +640,7 @@ fun Alert.DomBuilder<*>.h2(
  * Creates a [Alert.Heading] element with [Heading.Sizes.H2] and uses T to render the element.
  *
  * @param T Tag Type that should be used to render this [Alert.Heading]
+ * @param classes Space separated list of CSS classes for this element.
  */
 inline fun <reified T : DOMTag> Alert.DomBuilder<*>.h2(
     classes: String? = null,
@@ -644,6 +650,8 @@ inline fun <reified T : DOMTag> Alert.DomBuilder<*>.h2(
 
 /**
  * Creates a [Alert.Heading] element.
+ *
+ * @param classes Space separated list of CSS classes for this element.
  */
 fun Alert.DomBuilder<*>.h3(
     classes: String? = null,
@@ -655,6 +663,7 @@ fun Alert.DomBuilder<*>.h3(
  * Creates a [Alert.Heading] element with [Heading.Sizes.H3] and uses T to render the element.
  *
  * @param T Tag Type that should be used to render this [Alert.Heading]
+ * @param classes Space separated list of CSS classes for this element.
  */
 inline fun <reified T : DOMTag> Alert.DomBuilder<*>.h3(
     classes: String? = null,
@@ -664,6 +673,8 @@ inline fun <reified T : DOMTag> Alert.DomBuilder<*>.h3(
 
 /**
  * Creates a [Alert.Heading] element.
+ *
+ * @param classes Space separated list of CSS classes for this element.
  */
 fun Alert.DomBuilder<*>.h4(
     classes: String? = null,
@@ -675,6 +686,7 @@ fun Alert.DomBuilder<*>.h4(
  * Creates a [Alert.Heading] element with [Heading.Sizes.H4] and uses T to render the element.
  *
  * @param T Tag Type that should be used to render this [Alert.Heading]
+ * @param classes Space separated list of CSS classes for this element.
  */
 inline fun <reified T : DOMTag> Alert.DomBuilder<*>.h4(
     classes: String? = null,
@@ -684,6 +696,8 @@ inline fun <reified T : DOMTag> Alert.DomBuilder<*>.h4(
 
 /**
  * Creates a [Alert.Heading] element.
+ *
+ * @param classes Space separated list of CSS classes for this element.
  */
 fun Alert.DomBuilder<*>.h5(
     classes: String? = null,
@@ -695,6 +709,7 @@ fun Alert.DomBuilder<*>.h5(
  * Creates a [Alert.Heading] element with [Heading.Sizes.H5] and uses T to render the element.
  *
  * @param T Tag Type that should be used to render this [Alert.Heading]
+ * @param classes Space separated list of CSS classes for this element.
  */
 inline fun <reified T : DOMTag> Alert.DomBuilder<*>.h5(
     classes: String? = null,
@@ -704,6 +719,8 @@ inline fun <reified T : DOMTag> Alert.DomBuilder<*>.h5(
 
 /**
  * Creates a [Alert.Heading] element.
+ *
+ * @param classes Space separated list of CSS classes for this element.
  */
 fun Alert.DomBuilder<*>.h6(
     classes: String? = null,
@@ -715,6 +732,7 @@ fun Alert.DomBuilder<*>.h6(
  * Creates a [Alert.Heading] element with [Heading.Sizes.H6] and uses T to render the element.
  *
  * @param T Tag Type that should be used to render this [Alert.Heading]
+ * @param classes Space separated list of CSS classes for this element.
  */
 inline fun <reified T : DOMTag> Alert.DomBuilder<*>.h6(
     classes: String? = null,

@@ -31,7 +31,7 @@ This library's `button` component is designed to be used with the HTML `button` 
 classes on `a` or `input` elements (though some browsers may apply a slightly different rendering).
             """
         }
-        div(classes = "bd-callout bd-callout-info") {
+        div("bd-callout bd-callout-info") {
             h5<SPAN> { +"Child elements" }
             Markdown {
                 //language=Markdown
@@ -41,7 +41,7 @@ Keep in mind: Buttons based on `${ButtonComponent.Input.Type.BUTTON.nestedName}`
                 """
             }
         }
-        div(classes = "bd-callout bd-callout-info") {
+        div("bd-callout bd-callout-info") {
             h5<SPAN> { +"onClickFunction" }
             Markdown {
                 //language=Markdown
@@ -57,11 +57,11 @@ the `onClick` event on the wrapping label.
             +" "
             Buttons.solid.primary(type = ButtonType.submit) { +"Button" }
             +" "
-            Buttons.solid.primary(value = "Submit", type = ButtonComponent.Input.Type.SUBMIT) { }
+            Buttons.solid.primary(type = ButtonComponent.Input.Type.SUBMIT, value = "Submit") { }
             +" "
-            Buttons.solid.primary(value = "Reset", type = ButtonComponent.Input.Type.RESET) { }
+            Buttons.solid.primary(type = ButtonComponent.Input.Type.RESET, value = "Reset") { }
             +" "
-            Buttons.solid.primary(value = "Input Button", type = ButtonComponent.Input.Type.BUTTON) { }
+            Buttons.solid.primary(type = ButtonComponent.Input.Type.BUTTON, value = "Input Button") { }
             +" "
             Buttons.solid.primary(type = ButtonComponent.Box.Type.CHECKBOX) { +"Checkbox" }
             +" "
@@ -90,24 +90,24 @@ the `onClick` event on the wrapping label.
             +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
-                .addArgument("value", "Submit")
                 .addArgument("type", ButtonComponent.Input.Type.SUBMIT)
+                .addArgument("value", "Submit")
                 .setEmptyLambdaArgument()
                 .build()
             appendLine(plusString(" "))
             +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
-                .addArgument("value", "Reset")
                 .addArgument("type", ButtonComponent.Input.Type.RESET)
+                .addArgument("value", "Reset")
                 .setEmptyLambdaArgument()
                 .build()
             appendLine(plusString(" "))
             +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
-                .addArgument("value", "Input Button")
                 .addArgument("type", ButtonComponent.Input.Type.BUTTON)
+                .addArgument("value", "Input Button")
                 .setEmptyLambdaArgument()
                 .build()
             appendLine(plusString(" "))

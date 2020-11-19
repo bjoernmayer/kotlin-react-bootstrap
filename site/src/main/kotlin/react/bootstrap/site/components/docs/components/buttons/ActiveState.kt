@@ -264,18 +264,18 @@ can set `${ButtonGroup.Props<*>::appearance.name}` to `${ButtonGroup.Appearance.
                 for (x in 1..6) {
                     if (x % 2 == 0) {
                         Buttons.solid.secondary(
+                            type = ButtonComponent.Box.Type.CHECKBOX,
                             name = "checkboxes",
-                            value = "${x / 2}",
-                            type = ButtonComponent.Box.Type.CHECKBOX
+                            value = "${x / 2}"
                         ) {
                             +"Actual Checkbox${x / 2}"
                         }
                         +" "
                     } else {
                         Buttons.solid.secondary(
+                            type = ButtonComponent.Box.Type.RADIO,
                             name = "radios",
-                            value = "${(x + 1) / 2}",
-                            type = ButtonComponent.Box.Type.RADIO
+                            value = "${(x + 1) / 2}"
                         ) {
                             +"Actual Radio${(x + 1) / 2}"
                         }
@@ -302,9 +302,9 @@ can set `${ButtonGroup.Props<*>::appearance.name}` to `${ButtonGroup.Appearance.
                                     FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE, true)
                                         .nestedBy(RBuilder::Buttons)
                                         .nestedBy(ButtonBuilder::solid)
-                                        .addArgument("value", "${x / 2}")
-                                        .addArgument("name", "checkboxes")
                                         .addArgument("type", ButtonComponent.Box.Type.CHECKBOX)
+                                        .addArgument("name", "checkboxes")
+                                        .addArgument("value", "${x / 2}")
                                         .setLambdaArgument(
                                             plusString("Actual Checkbox${x / 2}")
                                         )
@@ -315,9 +315,9 @@ can set `${ButtonGroup.Props<*>::appearance.name}` to `${ButtonGroup.Appearance.
                                     FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE, true)
                                         .nestedBy(RBuilder::Buttons)
                                         .nestedBy(ButtonBuilder::solid)
-                                        .addArgument("value", "${(x + 1) / 2}")
-                                        .addArgument("name", "radios")
                                         .addArgument("type", ButtonComponent.Box.Type.RADIO)
+                                        .addArgument("name", "radios")
+                                        .addArgument("value", "${(x + 1) / 2}")
                                         .setLambdaArgument(
                                             plusString("Actual Radio${(x + 1) / 2}")
                                         )

@@ -23,11 +23,11 @@ import react.bootstrap.lib.component.SimpleDOMComponent.Companion.simpleDomCompo
 import kotlin.reflect.KClass
 
 private fun RBuilder.buttonButton(
+    variant: ButtonComponent.Variants,
     formEncType: ButtonFormEncType? = null,
     formMethod: ButtonFormMethod? = null,
-    classes: String? = null,
     type: ButtonType? = null,
-    variant: ButtonComponent.Variants,
+    classes: String? = null,
     active: Boolean = false,
     disabled: Boolean = false,
     nowrap: Boolean = false,
@@ -71,13 +71,13 @@ private fun RBuilder.buttonButton(
     .build()
 
 private fun RBuilder.buttonLabel(
+    variant: ButtonComponent.Variants,
     type: ButtonComponent.Box.Type,
     formEncType: InputFormEncType? = null,
     formMethod: InputFormMethod? = null,
     blockSized: Boolean = false,
     name: String? = null,
     value: String? = null,
-    variant: ButtonComponent.Variants,
     active: Boolean = false,
     disabled: Boolean = false,
     nowrap: Boolean = false,
@@ -129,12 +129,12 @@ private fun RBuilder.buttonLabel(
     .build()
 
 private fun RBuilder.buttonInput(
+    variant: ButtonComponent.Variants,
     type: ButtonComponent.Input.Type,
     formEncType: InputFormEncType? = null,
     formMethod: InputFormMethod? = null,
     name: String? = null,
     value: String? = null,
-    variant: ButtonComponent.Variants,
     active: Boolean = false,
     disabled: Boolean = false,
     nowrap: Boolean = false,
@@ -186,15 +186,15 @@ private fun RBuilder.buttonInput(
     .build()
 
 private fun RBuilder.buttonLink(
+    variant: ButtonComponent.Variants,
     href: String? = null,
     target: String? = null,
-    variant: ButtonComponent.Variants,
+    classes: String? = null,
     active: Boolean = false,
     disabled: Boolean = false,
     nowrap: Boolean = false,
     sizes: ButtonComponent.Sizes? = null,
     blockSized: Boolean = false,
-    classes: String? = null,
     props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
     block: RDOMHandler<A>
 ): ReactElement = simpleDomComponent(ButtonComponent.Link::class)
@@ -244,39 +244,39 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a danger button using a HTML button
          *
-         * @param type Choose between different [ButtonType]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param type Choose between different [ButtonType]s for this button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun danger(
-            type: ButtonType = ButtonType.button,
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
+            type: ButtonType = ButtonType.button,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = danger,
-            type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            type = type,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -286,34 +286,34 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          *
          * @param href Href of the underlying link.
          * @param target Target-Attribute of the underlying link
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun danger(
             href: String?,
             target: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = danger,
             href = href,
             target = target,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -321,30 +321,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a danger button using an input button.
          *
-         * @param name Name-Attribute of the input button.
-         * @param value Value-Attribute of the input button.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input button.
+         * @param value Value-Attribute of the input button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun danger(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
@@ -367,30 +367,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a danger button using a check- or radiobox
          *
-         * @param name Name-Attribute of the input.
-         * @param value Value-Attribute of the input.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input.
+         * @param value Value-Attribute of the input.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun danger(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
             input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
@@ -399,13 +399,13 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            blockSized = blockSized,
             name = name,
             value = value,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
-            blockSized = blockSized,
             classes = classes,
             input = input,
             props = props,
@@ -415,39 +415,39 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a dark button using a HTML button
          *
-         * @param type Choose between different [ButtonType]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param type Choose between different [ButtonType]s for this button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun dark(
-            type: ButtonType = ButtonType.button,
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
+            type: ButtonType = ButtonType.button,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = dark,
-            type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            type = type,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -457,34 +457,34 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          *
          * @param href Href of the underlying link.
          * @param target Target-Attribute of the underlying link
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun dark(
             href: String?,
             target: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = dark,
             href = href,
             target = target,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -492,30 +492,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a dark button using an input button.
          *
-         * @param name Name-Attribute of the input button.
-         * @param value Value-Attribute of the input button.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input button.
+         * @param value Value-Attribute of the input button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun dark(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
@@ -538,30 +538,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a dark button using a check- or radiobox
          *
-         * @param name Name-Attribute of the input.
-         * @param value Value-Attribute of the input.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input.
+         * @param value Value-Attribute of the input.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun dark(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
             input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
@@ -570,13 +570,13 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            blockSized = blockSized,
             name = name,
             value = value,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
-            blockSized = blockSized,
             classes = classes,
             input = input,
             props = props,
@@ -586,39 +586,39 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a info button using a HTML button
          *
-         * @param type Choose between different [ButtonType]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param type Choose between different [ButtonType]s for this button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun info(
-            type: ButtonType = ButtonType.button,
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
+            type: ButtonType = ButtonType.button,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = info,
-            type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            type = type,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -628,34 +628,34 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          *
          * @param href Href of the underlying link.
          * @param target Target-Attribute of the underlying link
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun info(
             href: String?,
             target: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = info,
             href = href,
             target = target,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -663,30 +663,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a info button using an input button.
          *
-         * @param name Name-Attribute of the input button.
-         * @param value Value-Attribute of the input button.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input button.
+         * @param value Value-Attribute of the input button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun info(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
@@ -709,30 +709,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a info button using a check- or radiobox
          *
-         * @param name Name-Attribute of the input.
-         * @param value Value-Attribute of the input.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input.
+         * @param value Value-Attribute of the input.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun info(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
             input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
@@ -741,13 +741,13 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            blockSized = blockSized,
             name = name,
             value = value,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
-            blockSized = blockSized,
             classes = classes,
             input = input,
             props = props,
@@ -757,39 +757,39 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a light button using a HTML button
          *
-         * @param type Choose between different [ButtonType]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param type Choose between different [ButtonType]s for this button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun light(
-            type: ButtonType = ButtonType.button,
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
+            type: ButtonType = ButtonType.button,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = light,
-            type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            type = type,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -799,34 +799,34 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          *
          * @param href Href of the underlying link.
          * @param target Target-Attribute of the underlying link
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun light(
             href: String?,
             target: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = light,
             href = href,
             target = target,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -834,30 +834,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a light button using an input button.
          *
-         * @param name Name-Attribute of the input button.
-         * @param value Value-Attribute of the input button.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input button.
+         * @param value Value-Attribute of the input button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun light(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
@@ -880,30 +880,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a light button using a check- or radiobox
          *
-         * @param name Name-Attribute of the input.
-         * @param value Value-Attribute of the input.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input.
+         * @param value Value-Attribute of the input.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun light(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
             input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
@@ -912,13 +912,13 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            blockSized = blockSized,
             name = name,
             value = value,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
-            blockSized = blockSized,
             classes = classes,
             input = input,
             props = props,
@@ -928,39 +928,39 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a primary button using a HTML button
          *
-         * @param type Choose between different [ButtonType]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param type Choose between different [ButtonType]s for this button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun primary(
-            type: ButtonType = ButtonType.button,
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
+            type: ButtonType = ButtonType.button,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = primary,
-            type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            type = type,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -970,34 +970,34 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          *
          * @param href Href of the underlying link.
          * @param target Target-Attribute of the underlying link
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun primary(
             href: String?,
             target: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = primary,
             href = href,
             target = target,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -1005,30 +1005,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a primary button using an input button.
          *
-         * @param name Name-Attribute of the input button.
-         * @param value Value-Attribute of the input button.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input button.
+         * @param value Value-Attribute of the input button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun primary(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
@@ -1083,13 +1083,13 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            blockSized = blockSized,
             name = name,
             value = value,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
-            blockSized = blockSized,
             classes = classes,
             input = input,
             props = props,
@@ -1099,39 +1099,39 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a secondary button using a HTML button
          *
-         * @param type Choose between different [ButtonType]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param type Choose between different [ButtonType]s for this button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun secondary(
-            type: ButtonType = ButtonType.button,
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
+            type: ButtonType = ButtonType.button,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = secondary,
-            type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            type = type,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -1141,34 +1141,34 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          *
          * @param href Href of the underlying link.
          * @param target Target-Attribute of the underlying link
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun secondary(
             href: String?,
             target: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = secondary,
             href = href,
             target = target,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -1176,30 +1176,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a secondary button using an input button.
          *
-         * @param name Name-Attribute of the input button.
-         * @param value Value-Attribute of the input button.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input button.
+         * @param value Value-Attribute of the input button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun secondary(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
@@ -1222,30 +1222,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a secondary button using a check- or radiobox
          *
-         * @param name Name-Attribute of the input.
-         * @param value Value-Attribute of the input.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input.
+         * @param value Value-Attribute of the input.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun secondary(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
             input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
@@ -1254,13 +1254,13 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            blockSized = blockSized,
             name = name,
             value = value,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
-            blockSized = blockSized,
             classes = classes,
             input = input,
             props = props,
@@ -1270,39 +1270,39 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a success button using a HTML button
          *
-         * @param type Choose between different [ButtonType]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param classes Space separated list of CSS classes for this element.
+         * @param type Choose between different [ButtonType]s for this button.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun success(
-            type: ButtonType = ButtonType.button,
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
+            type: ButtonType = ButtonType.button,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = success,
-            type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            type = type,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -1312,34 +1312,34 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          *
          * @param href Href of the underlying link.
          * @param target Target-Attribute of the underlying link
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun success(
             href: String?,
             target: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = success,
             href = href,
             target = target,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -1347,30 +1347,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a success button using an input button.
          *
-         * @param name Name-Attribute of the input button.
-         * @param value Value-Attribute of the input button.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input button.
+         * @param value Value-Attribute of the input button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun success(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
@@ -1393,30 +1393,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a success button using a check- or radiobox
          *
-         * @param name Name-Attribute of the input.
-         * @param value Value-Attribute of the input.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input.
+         * @param value Value-Attribute of the input.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun success(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
             input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
@@ -1425,13 +1425,13 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            blockSized = blockSized,
             name = name,
             value = value,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
-            blockSized = blockSized,
             classes = classes,
             input = input,
             props = props,
@@ -1444,36 +1444,36 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param type Choose between different [ButtonType]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun warning(
-            type: ButtonType = ButtonType.button,
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
+            type: ButtonType = ButtonType.button,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = warning,
-            type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            type = type,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -1483,34 +1483,34 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          *
          * @param href Href of the underlying link.
          * @param target Target-Attribute of the underlying link
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun warning(
             href: String?,
             target: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = warning,
             href = href,
             target = target,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -1518,30 +1518,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a warning button using an input button.
          *
-         * @param name Name-Attribute of the input button.
-         * @param value Value-Attribute of the input button.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input button.
+         * @param value Value-Attribute of the input button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun warning(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
@@ -1577,17 +1577,17 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param classes Space separated list of CSS classes for this element.
          */
         fun warning(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
             input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
@@ -1596,13 +1596,13 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            blockSized = blockSized,
             name = name,
             value = value,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
-            blockSized = blockSized,
             classes = classes,
             input = input,
             props = props,
@@ -1634,28 +1634,28 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param classes Space separated list of CSS classes for this element.
          */
         fun link(
-            type: ButtonType = ButtonType.button,
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
+            type: ButtonType = ButtonType.button,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Button.Props> = PropHandler { },
             block: RDOMHandler<BUTTON>
         ): ReactElement = builder.buttonButton(
             variant = ButtonComponent.Variants.Solid.LINK,
-            type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            type = type,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -1665,34 +1665,34 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          *
          * @param href Href of the underlying link.
          * @param target Target-Attribute of the underlying link
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun link(
             href: String?,
             target: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Link.Props> = PropHandler { },
             block: RDOMHandler<A>
         ): ReactElement = builder.buttonLink(
             variant = ButtonComponent.Variants.Solid.LINK,
             href = href,
             target = target,
+            classes = classes,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
             blockSized = blockSized,
-            classes = classes,
             props = props,
             block = block
         )
@@ -1700,30 +1700,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a link button using a input button.
          *
-         * @param name Name-Attribute of the input button.
-         * @param value Value-Attribute of the input button.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input button.
+         * @param value Value-Attribute of the input button.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun link(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Input.Props> = PropHandler { },
             block: RDOMHandler<INPUT>
         ): ReactElement = builder.buttonInput(
@@ -1746,30 +1746,30 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         /**
          * Creates a link button using a check- or radiobox
          *
-         * @param name Name-Attribute of the input.
-         * @param value Value-Attribute of the input.
          * @param type Choose between different [ButtonComponent.Input.Type]s for this button.
          * @param formEncType HTML Form Enc Type.
          * @param formMethod GET/POST.
+         * @param name Name-Attribute of the input.
+         * @param value Value-Attribute of the input.
+         * @param classes Space separated list of CSS classes for this element.
          * @param active Renders the button in a *pressed* look.
          * @param disabled Renders the button as *disabled*. Changes the cursor.
          * @param nowrap Set this to *true*, to disable text-wrapping.
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
-         * @param classes Space separated list of CSS classes for this element.
          */
         fun link(
-            name: String? = null,
-            value: String? = null,
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
+            name: String? = null,
+            value: String? = null,
+            classes: String? = null,
             active: Boolean = false,
             disabled: Boolean = false,
             nowrap: Boolean = false,
             sizes: ButtonComponent.Sizes? = null,
             blockSized: Boolean = false,
-            classes: String? = null,
             props: PropHandler<ButtonComponent.Box.Props> = PropHandler { },
             input: RDOMHandler<INPUT> = RDOMHandler { },
             block: RDOMHandler<LABEL>
@@ -1778,13 +1778,13 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
             type = type,
             formEncType = formEncType,
             formMethod = formMethod,
+            blockSized = blockSized,
             name = name,
             value = value,
             active = active,
             disabled = disabled,
             nowrap = nowrap,
             sizes = sizes,
-            blockSized = blockSized,
             classes = classes,
             input = input,
             props = props,
@@ -1804,22 +1804,22 @@ val RBuilder.Buttons
  */
 @Suppress("UNCHECKED_CAST")
 fun RBuilder.buttonGroup(
+    classes: String? = null,
     appearance: ButtonGroup.Appearance? = null,
     behaviour: ButtonGroup.Behaviours? = null,
-    classes: String? = null,
     sizes: ButtonGroup.Sizes? = null,
     props: PropHandler<ButtonGroup.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
-): ReactElement = buttonGroup<DIV>(appearance, behaviour, classes, sizes, props, block)
+): ReactElement = buttonGroup<DIV>(classes, appearance, behaviour, sizes, props, block)
 
 /**
  * Creates a generic [ButtonGroup] element.
  */
 @Suppress("UNCHECKED_CAST")
 inline fun <reified T : HtmlBlockTag> RBuilder.buttonGroup(
+    classes: String? = null,
     appearance: ButtonGroup.Appearance? = null,
     behaviour: ButtonGroup.Behaviours? = null,
-    classes: String? = null,
     sizes: ButtonGroup.Sizes? = null,
     props: PropHandler<ButtonGroup.Props<T>> = PropHandler { },
     block: RDOMHandler<T>

@@ -10,12 +10,12 @@ import react.dom.tr as reactTr
 /**
  * Creates a [TR] element.
  *
- * @param contextualStyle Set [ContextualStyle] to colour-in the [TR]s.
  * @param classes Space separated list of CSS classes for this element.
+ * @param contextualStyle Set [ContextualStyle] to colour-in the [TR]s.
  */
 fun RBuilder.tr(
-    contextualStyle: ContextualStyle? = null,
     classes: String? = null,
+    contextualStyle: ContextualStyle? = null,
     block: RDOMHandler<TR>
 ): ReactElement =
     reactTr(classes = contextualStyle?.let { classes.appendClass(it.className) } ?: classes) {

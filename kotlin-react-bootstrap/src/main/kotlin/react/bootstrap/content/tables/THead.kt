@@ -11,12 +11,12 @@ import react.dom.thead as reactThead
 /**
  * Creates a [THEAD] element.
  *
- * @param style Set a style for light and dark colouring.
  * @param classes Space separated list of CSS classes for this element.
+ * @param style Set a style for light and dark colouring.
  */
 fun RBuilder.thead(
-    style: THeadStyles? = null,
     classes: String? = null,
+    style: THeadStyles? = null,
     block: RDOMHandler<THEAD>
 ): ReactElement {
     val tHeadClasses = mutableSetOf<ClassNames>()

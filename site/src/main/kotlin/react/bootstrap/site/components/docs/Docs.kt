@@ -5,6 +5,7 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
+import react.bootstrap.helpers.classes
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_2
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_3
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_8
@@ -49,8 +50,8 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
     }
 
     override fun RBuilder.render() {
-        row(classes = "${ClassNames.FLEX_XL_NOWRAP}") {
-            col(md = SZ_3, xl = SZ_2, classes = "bd-sidebar") {
+        row(classes = classes(ClassNames.FLEX_XL_NOWRAP)) {
+            col(classes = "bd-sidebar", md = SZ_3, xl = SZ_2) {
                 route<RProps>(props.location.pathname) {
                     child(Navigation::class) {
                         attrs {
@@ -59,14 +60,14 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
                     }
                 }
             }
-            col(xl = SZ_2, classes = "${ClassNames.D_NONE} ${ClassNames.D_XL_BLOCK} bd-toc") {
+            col(classes = classes(ClassNames.D_NONE, ClassNames.D_XL_BLOCK, "bd-toc"), xl = SZ_2) {
                 child(SectionNav::class) {
                     attrs {
                         sections = state.sections
                     }
                 }
             }
-            col<MAIN>(md = SZ_9, xl = SZ_8, classes = "${ClassNames.PY_MD_3} ${ClassNames.PL_MD_5} bd-content") {
+            col<MAIN>(classes = classes(ClassNames.PY_MD_3, ClassNames.PL_MD_5, "bd-content"), md = SZ_9, xl = SZ_8) {
                 switch {
                     Pages.categories.forEach { category ->
                         route<CategoryComponent.Props>(category.link) {
