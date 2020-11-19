@@ -7,6 +7,7 @@ import react.bootstrap.content.typography.ListItemStyles
 import react.bootstrap.content.typography.ListStyles
 import react.bootstrap.content.typography.li
 import react.bootstrap.content.typography.ul
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.external.Markdown

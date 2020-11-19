@@ -17,8 +17,8 @@ import kotlin.reflect.KFunction11
 internal val KClass<out Variants>.normalName
     get() = simpleName!!.toLowerCase().capitalize()
 
-internal typealias ButtonFun = KFunction11<ButtonType, ButtonFormEncType?, ButtonFormMethod?, Boolean, Boolean,
-    Boolean, ButtonComponent.Sizes?, Boolean, String?, PropHandler<ButtonComponent.Button.Props>,
+internal typealias ButtonFun = KFunction11<ButtonFormEncType?, ButtonFormMethod?, ButtonType, String?, Boolean, Boolean,
+    Boolean, ButtonComponent.Sizes?, Boolean, PropHandler<ButtonComponent.Button.Props>,
     RDOMHandler<BUTTON>, ReactElement>
 
 internal val RBuilder.solidDangerFun: ButtonFun

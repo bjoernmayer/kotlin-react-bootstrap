@@ -6,6 +6,7 @@ import react.RBuilder
 import react.bootstrap.content.figures.figure
 import react.bootstrap.content.img
 import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.nestedName
