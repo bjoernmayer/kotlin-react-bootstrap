@@ -63,6 +63,12 @@ sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>
             props.requireProperties(props::type)
         }
 
+        override fun buildClasses(): Set<ClassNames> {
+            return super.buildClasses().toMutableSet().apply {
+                add(ClassNames.MB_0)
+            }
+        }
+
         override fun RDOMBuilder<LABEL>.build() {
             input {
                 // This handler needs to be called first, so this component can override values

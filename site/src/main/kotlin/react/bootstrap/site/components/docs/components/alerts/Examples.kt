@@ -259,7 +259,7 @@ alerts.
                 )
                 .build()
         }
-        h4("bd-content-title") { +"Close element" }
+        h4 { +"Close element" }
         Markdown {
             //language=Markdown
             +"""
@@ -305,7 +305,7 @@ You can build your own custom close element, by using `closingElement { }`.
                 )
                 .build()
         }
-        h4("bd-content-title") { +"State hook" }
+        h4 { +"State hook" }
         p {
             +"The callbacks can also be used for something like this:"
         }

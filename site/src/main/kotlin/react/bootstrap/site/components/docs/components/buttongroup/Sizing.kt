@@ -4,6 +4,8 @@ import react.RBuilder
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
+import react.bootstrap.helpers.classes
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -29,13 +31,13 @@ Instead of applying button sizing classes to every button in a group, just set `
         }
         val leftMiddleRight = listOf("Left", "Middle", "Right")
         liveExample {
-            buttonGroup(sizes = ButtonGroup.Sizes.LG) {
+            buttonGroup(classes(ClassNames.MB_2), sizes = ButtonGroup.Sizes.LG) {
                 leftMiddleRight.forEach {
                     Buttons.solid.secondary { +it }
                 }
             }
             br { }
-            buttonGroup {
+            buttonGroup(classes(ClassNames.MB_2)) {
                 leftMiddleRight.forEach {
                     Buttons.solid.secondary { +it }
                 }

@@ -7,11 +7,13 @@ import react.RHandler
 import react.RProps
 import react.RState
 import react.ReactElement
+import react.bootstrap.content.typography.lead.lead
+import react.bootstrap.helpers.classes
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.Docs
 import react.bootstrap.site.components.docs.pageTitle
 import react.dom.h1
-import react.dom.p
 import kotlin.reflect.KClass
 
 internal abstract class PageComponent : RComponent<Docs.SectionNavEvents, RState>() {
@@ -42,11 +44,9 @@ internal abstract class PageComponent : RComponent<Docs.SectionNavEvents, RState
         }
 
         override fun RBuilder.render() {
-            val className = "bd-title"
-
             pageTitle(props.title)
 
-            h1(className) {
+            h1 {
                 +props.title
                 children()
             }
@@ -59,7 +59,7 @@ internal abstract class PageComponent : RComponent<Docs.SectionNavEvents, RState
     }
 
     protected fun RBuilder.pageLead(block: RDOMHandler<P>): ReactElement =
-        p("bd-lead") {
+        lead(classes(ClassNames.MB_5)) {
             val builder = this
             with(block) {
                 builder.handle()

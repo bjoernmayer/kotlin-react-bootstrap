@@ -423,7 +423,7 @@ private fun RBuilder.allPossibleCombinations() {
     }
 
     allPairings.toSet().forEach { pairing ->
-        h4("bd-content-title") { +"${pairing.thisClassName} + ${pairing.withClassName}" }
+        h4 { +"${pairing.thisClassName} + ${pairing.withClassName}" }
         flexColsExampleRow {
             liveExample {
                 container {
@@ -477,7 +477,7 @@ private fun RBuilder.allPossibleCombinations() {
 
             val argString = "${pairing.argString} ${tripling.tripleUsing.name} ${tripling.thisString}"
 
-            h4("bd-content-title") { +combination }
+            h4 { +combination }
             flexColsExampleRow {
                 liveExample {
                     container {
@@ -536,7 +536,7 @@ private fun RBuilder.allPossibleCombinations() {
                     "${pairing.argString} ${tripling.tripleUsing.name} ${tripling.thisString} " +
                         "${quadruple.quadrupleUsing.name} ${quadruple.thisString}"
 
-                h4("bd-content-title") { +combination }
+                h4 { +combination }
                 flexColsExampleRow {
                     liveExample {
                         container {

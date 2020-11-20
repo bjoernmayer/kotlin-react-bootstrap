@@ -1,19 +1,17 @@
 package react.bootstrap.site.components.docs
 
-import kotlinx.html.LI
 import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
 import react.bootstrap.components.nav.Navs
+import react.bootstrap.components.nav.navItem
+import react.bootstrap.helpers.classes
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.kotlinxhtml.addClass
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.site.components.PATH_DOCS
 import react.bootstrap.site.pathMatches
-import react.dom.RDOMBuilder
-import react.dom.div
-import react.dom.li
-import react.dom.nav
 import react.router.dom.RouteResultProps
 import react.router.dom.navLink
 import react.router.dom.routeLink
@@ -21,29 +19,36 @@ import react.router.dom.routeLink
 // categories should come in via props
 class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
     override fun RBuilder.render() {
-        nav("collapse bd-links") {
+        Navs.nav(classes = classes(ClassNames.FLEX_COLUMN, ClassNames.STICKY_TOP, "krbd-nav")) {
             attrs { ariaLabel = "Main navigation" }
 
             Docs.Pages.categories.forEach { category ->
-                div("bd-toc-item") {
-                    if (pathMatches(props.location.pathname, category.matchProps)) {
-                        addClass("active")
+                navItem {
+                    val classes = mutableSetOf(ClassNames.NAV_LINK, ClassNames.PY_2).apply {
+                        if (pathMatches(props.location.pathname, category.matchProps)) {
+                            add(ClassNames.ACTIVE)
+                        }
                     }
 
                     routeLink(
                         "$PATH_DOCS${category.path}/${category.pages.first().path}",
-                        className = "bd-toc-link"
+                        className = classes(*classes.toTypedArray())
                     ) {
                         +category.name
                     }
 
-                    Navs.ul("bd-sidenav") {
+                    Navs.nav(classes(ClassNames.FLEX_COLUMN, ClassNames.COLLAPSE, ClassNames.PL_3, ClassNames.PB_2)) {
+                        if (pathMatches(props.location.pathname, category.matchProps)) {
+                            addClass("show")
+                        }
+
                         category.pages.forEach { subCategory ->
-                            li {
-                                if (pathMatches(props.location.pathname, subCategory.matchProps)) {
-                                    markActive()
-                                }
-                                navLink<RProps>(subCategory.link) {
+                            navItem {
+
+                                navLink<RProps>(
+                                    subCategory.link,
+                                    className = classes(ClassNames.NAV_LINK, ClassNames.PY_1)
+                                ) {
                                     +subCategory.name
                                 }
                             }
@@ -51,12 +56,6 @@ class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
                     }
                 }
             }
-        }
-    }
-
-    companion object {
-        fun RDOMBuilder<LI>.markActive() {
-            addClass("active", "bd-sidenav-active")
         }
     }
 }

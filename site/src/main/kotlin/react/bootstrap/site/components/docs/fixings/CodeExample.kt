@@ -8,6 +8,8 @@ import react.RProps
 import react.RState
 import react.RStatics
 import react.ReactElement
+import react.bootstrap.helpers.classes
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.external.PrismLight
 import react.dom.figure
 
@@ -25,7 +27,7 @@ internal class CodeExample : RComponent<CodeExample.Props, RState>() {
 
         PrismLight.registerLanguage("kotlin", kotlin.default)
 
-        figure("highlight") {
+        figure(classes(ClassNames.BG_LIGHT, ClassNames.MB_5, ClassNames.PL_3, "krbd")) {
             PrismLight {
                 attrs {
                     language = props.language
@@ -50,7 +52,7 @@ internal class CodeExample : RComponent<CodeExample.Props, RState>() {
     }
 }
 
-internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<CodeExample.Props>(jsObject()) {
+internal class CodeExampleBuilder : RElementBuilder<CodeExample.Props>(jsObject()) {
     internal fun joinToString(): String = childList.joinToString("")
 
     internal fun plusString(content: String): String = "+\"$content\""
@@ -59,7 +61,7 @@ internal class CodeExampleBuilder(private val indent: Int) : RElementBuilder<Cod
 }
 
 internal fun RBuilder.codeExample(block: CodeExampleBuilder.() -> Unit): ReactElement {
-    val code = CodeExampleBuilder(0).apply {
+    val code = CodeExampleBuilder().apply {
         block()
     }
 

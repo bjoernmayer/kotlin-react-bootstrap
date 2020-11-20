@@ -45,7 +45,7 @@ internal class Reference : SectionComponent() {
             val (solidFun, outlineFun) = entry.value
 
             subSectionTitle(solidFun.name)
-            h4("bd-content-title") { +"Button Element" }
+            h4 { +"Button Element" }
             p {
                 +"Adds a button in the \"$variantName\" context using the HTML button element."
             }
@@ -95,7 +95,7 @@ internal class Reference : SectionComponent() {
                         .build()
                 }
             }
-            h4("bd-content-title") { +"Link Button" }
+            h4 { +"Link Button" }
             p {
                 +"Adds a button in the \"$variantName\" context using the HTML anchor element."
             }
@@ -143,7 +143,7 @@ internal class Reference : SectionComponent() {
                         .build()
                 }
             }
-            h4("bd-content-title") { +"Input Element Button" }
+            h4 { +"Input Element Button" }
             p {
                 +"Adds a button in the \"$variantName\" context using one of the HTML input button elements."
             }
@@ -195,7 +195,7 @@ internal class Reference : SectionComponent() {
                         .build()
                 }
             }
-            h4("bd-content-title") { +"Check-/Radio-Box Button" }
+            h4 { +"Check-/Radio-Box Button" }
             p {
                 +"Adds a button in the \"$variantName\" context using check- or radio-boxes."
             }

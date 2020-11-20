@@ -6,11 +6,13 @@ import react.RComponent
 import react.RProps
 import react.RState
 import react.bootstrap.helpers.classes
+import react.bootstrap.layout.grid.col.ColAttributes.Orderings.Companion.ORD_3
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_2
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_3
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_8
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_9
 import react.bootstrap.layout.grid.col.col
+import react.bootstrap.layout.grid.container.Containers
 import react.bootstrap.layout.grid.row.row
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.components.Components
@@ -50,39 +52,44 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
     }
 
     override fun RBuilder.render() {
-        row(classes(ClassNames.FLEX_XL_NOWRAP)) {
-            col("bd-sidebar", md = SZ_3, xl = SZ_2) {
-                route<RProps>(props.location.pathname) {
-                    child(Navigation::class) {
-                        attrs {
-                            from(it)
-                        }
-                    }
-                }
-            }
-            col(classes(ClassNames.D_NONE, ClassNames.D_XL_BLOCK, "bd-toc"), xl = SZ_2) {
-                child(SectionNav::class) {
-                    attrs {
-                        sections = state.sections
-                    }
-                }
-            }
-            col<MAIN>(classes(ClassNames.PY_MD_3, ClassNames.PL_MD_5, "bd-content"), md = SZ_9, xl = SZ_8) {
-                switch {
-                    Pages.categories.forEach { category ->
-                        route<CategoryComponent.Props>(category.link) {
-                            child(category.component) {
-                                attrs {
-                                    from(it)
-                                    match.params.category = category
-                                    match.params.onNewPage = this@Docs::handleClearSections
-                                    match.params.onNewSection = this@Docs::handleAddSection
-                                }
+        Containers.fluid {
+            row {
+                col(classes(ClassNames.PY_3), md = SZ_3, xl = SZ_2) {
+                    route<RProps>(props.location.pathname) {
+                        child(Navigation::class) {
+                            attrs {
+                                from(it)
                             }
                         }
                     }
-                    route<RProps>(props.match.path) {
-                        redirect(from = props.location.pathname, to = Pages.categories.first().link)
+                }
+                col(
+                    classes(ClassNames.D_NONE, ClassNames.D_XL_BLOCK, ClassNames.PY_3),
+                    xl = SZ_2 ord ORD_3
+                ) {
+                    child(SectionNav::class) {
+                        attrs {
+                            sections = state.sections
+                        }
+                    }
+                }
+                col<MAIN>(classes(ClassNames.PY_3), md = SZ_9, xl = SZ_8) {
+                    switch {
+                        Pages.categories.forEach { category ->
+                            route<CategoryComponent.Props>(category.link) {
+                                child(category.component) {
+                                    attrs {
+                                        from(it)
+                                        match.params.category = category
+                                        match.params.onNewPage = this@Docs::handleClearSections
+                                        match.params.onNewSection = this@Docs::handleAddSection
+                                    }
+                                }
+                            }
+                        }
+                        route<RProps>(props.match.path) {
+                            redirect(from = props.location.pathname, to = Pages.categories.first().link)
+                        }
                     }
                 }
             }

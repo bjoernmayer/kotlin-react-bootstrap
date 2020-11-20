@@ -11,7 +11,9 @@ import react.bootstrap.components.button.ButtonComponent
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.DOMTag
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -163,7 +165,7 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
             """
         }
         liveExample {
-            buttonGroup(behaviour = ButtonGroup.Behaviours.RADIOS) {
+            buttonGroup(classes(ClassNames.MB_2), behaviour = ButtonGroup.Behaviours.RADIOS) {
                 for (x in 1..3) {
                     Buttons.solid.secondary(props = { onActive = { console.log("Radio$x") } }) { +"Radio$x" }
                 }
@@ -183,6 +185,7 @@ When wrapped in a `buttonGroup` a bunch of buttons can behave like radio- or che
                 .build()
 
             +FunCall.builder(RBuilder::buttonGroup)
+                .addArgument(FunCall.builder(::classes, FunCall.Style.INLINE).addArgument(ClassNames.MB_2))
                 .addArgument("behaviour", ButtonGroup.Behaviours.RADIOS)
                 .setLambdaArgument(
                     buildString {

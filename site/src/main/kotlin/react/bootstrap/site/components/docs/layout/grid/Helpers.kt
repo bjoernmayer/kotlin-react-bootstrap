@@ -98,7 +98,7 @@ internal val RBuilder.rowFun: String
     get() = RBuilder::row.name
 
 internal fun RBuilder.exampleRow(classes: String? = null, block: RDOMHandler<DIV>): ReactElement =
-    div(classes.appendClass("bd-example-row")) {
+    div(classes.appendClass("krbd-example-row")) {
         val builder = this
         with(block) {
             builder.handle()
@@ -106,4 +106,4 @@ internal fun RBuilder.exampleRow(classes: String? = null, block: RDOMHandler<DIV
     }
 
 internal fun RBuilder.flexColsExampleRow(classes: String? = null, block: RDOMHandler<DIV>): ReactElement =
-    exampleRow(classes.appendClass("bd-example-row-flex-cols"), block)
+    exampleRow(classes.appendClass("krbd-example-row-flex-cols"), block)

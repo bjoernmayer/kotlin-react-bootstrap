@@ -1,7 +1,7 @@
 package react.bootstrap.lib.bootstrap
 
 /**
- * @see "https://gistgithubcom/JacobLett/3f16b4c857fdec22472ac20e3dd0366a"
+ * @see "https://gist.github.com/JacobLett/3f16b4c857fdec22472ac20e3dd0366a"
  */
 enum class ClassNames {
     ACCORDION,
@@ -1464,6 +1464,7 @@ enum class ClassNames {
     SPINNER_GROW_SM,
     SR_ONLY,
     SR_ONLY_FOCUSABLE,
+    STICKY_TOP,
     STRETCHED_LINK,
     TAB_CONTENT,
     TAB_PANE,

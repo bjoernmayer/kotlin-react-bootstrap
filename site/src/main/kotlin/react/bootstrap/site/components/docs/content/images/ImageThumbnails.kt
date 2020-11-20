@@ -27,8 +27,8 @@ You can set the `img(thumbnail)`-argument to `true` to give an image a rounded 1
 appearance.
             """
         }
-        liveExample("bd-example-images") {
-            svg(classes("bd-placeholder-img bd-placeholder-img-lg", ClassNames.IMG_THUMBNAIL)) {
+        liveExample {
+            svg(classes(ClassNames.IMG_THUMBNAIL)) {
                 attrs {
                     set("width", "200")
                     set("height", "200")
@@ -37,11 +37,11 @@ appearance.
                     role = "img"
                     ariaLabel =
                         "A generic square placeholder image with a white border around it, making it resemble a " +
-                        "photograph taken with an old instant camera: 200x200"
+                            "photograph taken with an old instant camera: 200x200"
                     unsafe {
                         raw(
                             "<rect width=\"100%\" height=\"100%\" fill=\"#868e96\"></rect>" +
-                                "<text x=\"50%\" y=\"50%\" fill=\"#dee2e6\" dy=\".3em\">200x200</text>"
+                                "<text x=\"50%\" y=\"50%\" fill=\"#dee2e6\" dy=\".3em\" text-anchor=\"middle\">200x200</text>"
                         )
                     }
                 }

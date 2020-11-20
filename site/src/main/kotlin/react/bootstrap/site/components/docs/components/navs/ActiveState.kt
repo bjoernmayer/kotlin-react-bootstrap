@@ -4,6 +4,7 @@ import kotlinx.html.js.onClickFunction
 import react.RBuilder
 import react.RElementBuilder
 import react.RProps
+import react.bootstrap.components.alert.Alerts
 import react.bootstrap.components.nav.NavComponent.Appearance
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
@@ -24,7 +25,6 @@ import react.bootstrap.site.lib.codepoet.Imports
 import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.bootstrap.site.lib.codepoet.When
 import react.child
-import react.dom.div
 import react.dom.h3
 import react.functionalComponent
 import react.getValue
@@ -43,7 +43,7 @@ In a few examples above you will see a visual change, when clicking through the 
  marked as active on a click. Here we will show you two ways to accomplish this.
             """
         }
-        div("bd-callout bd-callout-info") {
+        Alerts.light {
             Markdown {
                 //language=Markdown
                 +"""

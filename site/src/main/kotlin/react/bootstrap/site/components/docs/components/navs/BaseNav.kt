@@ -4,6 +4,7 @@ package react.bootstrap.site.components.docs.components.navs
 
 import kotlinx.html.js.onClickFunction
 import react.RBuilder
+import react.bootstrap.components.alert.Alerts
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
@@ -14,7 +15,6 @@ import react.bootstrap.site.components.docs.importNavComponents
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
-import react.dom.div
 
 internal class BaseNav : SectionComponent() {
     override val title: String = "Base nav"
@@ -29,7 +29,7 @@ components. It includes some style overrides (for working with lists), some link
 disabled styling.
             """
         }
-        div("bd-callout bd-callout-info") {
+        Alerts.light {
             Markdown {
                 //language=Markdown
                 +"""

@@ -4,9 +4,11 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
-import react.dom.a
-import react.dom.li
-import react.dom.ul
+import react.bootstrap.components.nav.Navs
+import react.bootstrap.components.nav.navItem
+import react.bootstrap.components.nav.navLink
+import react.bootstrap.helpers.classes
+import react.bootstrap.lib.bootstrap.ClassNames
 
 data class Section(
     val title: String,
@@ -39,15 +41,26 @@ data class Section(
 
 class SectionNav : RComponent<SectionNav.Props, RState>() {
     override fun RBuilder.render() {
-        ul("section-nav") {
+        Navs.nav(
+            classes(
+                ClassNames.FLEX_COLUMN,
+                ClassNames.FLEX_NOWRAP,
+                ClassNames.STICKY_TOP,
+                ClassNames.BORDER_LEFT,
+                ClassNames.PB_3,
+                "krbd-side-nav"
+            )
+        ) {
             props.sections?.forEach { section ->
-                li("toc-entry toc-h2") {
-                    a(href = "#${section.id}") { +section.title }
+                navItem {
+                    navLink(href = "#${section.id}", classes = classes(ClassNames.PY_0)) { +section.title }
                     if (section.subSections.isNotEmpty()) {
-                        ul {
+                        Navs.nav(classes = classes(ClassNames.FLEX_COLUMN, ClassNames.ML_3, ClassNames.SMALL)) {
                             section.subSections.forEach { subsection ->
-                                li("toc-entry toc-h3") {
-                                    a(href = "#${subsection.id}") { +subsection.title }
+                                navItem {
+                                    navLink(href = "#${subsection.id}", classes = classes(ClassNames.PY_1)) {
+                                        +subsection.title
+                                    }
                                 }
                             }
                         }

@@ -1,4 +1,4 @@
-package react.bootstrap.components.nav
+package react.bootstrap.components.navbar
 
 import kotlinx.html.DIV
 import kotlinx.html.HtmlBlockTag
@@ -10,6 +10,9 @@ import kotlinx.html.UL
 import react.Child
 import react.Component
 import react.RState
+import react.bootstrap.components.nav.ActiveLinkPredicate
+import react.bootstrap.components.nav.NavItems
+import react.bootstrap.components.nav.NavLink
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.DOMComponent
 import react.bootstrap.lib.react.onEachComponent
@@ -17,18 +20,23 @@ import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
 /**
+ * Todo: Add a new "AbstractNavComponent" to share at least the navbar code.
+ * In the same step: Try to move the build logic also into this abstract class
+ *
+ * This is a SubComponent. So consider to move it into Navbar
+ *
  * @param T Tag to render
  * @param P RProps Type
  */
-sealed class NavComponent<T : HtmlBlockTag, P : NavComponent.Props<T>>(
+sealed class NavbarNavComponent<T : HtmlBlockTag, P : NavbarNavComponent.Props<T>>(
     props: P,
     tag: KClass<out T>
-) : DOMComponent<T, NavDOMHandler<T>, NavComponent.DomBuilder<T>, P, RState>(props, tag) {
+) : DOMComponent<T, NavbarNavDOMHandler<T>, NavbarNavComponent.DomBuilder<T>, P, RState>(props, tag) {
     class DomBuilder<out T : Tag>(factory: (TagConsumer<Unit>) -> T) : RDOMBuilder<T>(factory)
 
     override fun buildBuilder(builderFactory: (TagConsumer<Unit>) -> T): DomBuilder<T> = DomBuilder(builderFactory)
 
-    class Ul(props: Props) : NavComponent<UL, Ul.Props>(props, UL::class) {
+    class Ul(props: Props) : NavbarNavComponent<UL, Ul.Props>(props, UL::class) {
         override fun DomBuilder<UL>.build() {
             // We don't need to do special child handling, if no activeLinkPredicate is there
             // This is because, the children can stay as they are
@@ -39,10 +47,10 @@ sealed class NavComponent<T : HtmlBlockTag, P : NavComponent.Props<T>>(
             }
         }
 
-        interface Props : NavComponent.Props<UL>
+        interface Props : NavbarNavComponent.Props<UL>
     }
 
-    class Ol(props: Props) : NavComponent<OL, Ol.Props>(props, OL::class) {
+    class Ol(props: Props) : NavbarNavComponent<OL, Ol.Props>(props, OL::class) {
         override fun DomBuilder<OL>.build() {
             // We don't need to do special child handling, if no activeLinkPredicate is there
             // This is because, the children can stay as they are
@@ -53,10 +61,10 @@ sealed class NavComponent<T : HtmlBlockTag, P : NavComponent.Props<T>>(
             }
         }
 
-        interface Props : NavComponent.Props<OL>
+        interface Props : NavbarNavComponent.Props<OL>
     }
 
-    class Nav(props: Props) : NavComponent<NAV, Nav.Props>(props, NAV::class) {
+    class Nav(props: Props) : NavbarNavComponent<NAV, Nav.Props>(props, NAV::class) {
         override fun DomBuilder<NAV>.build() {
             // We don't need to do special child handling, if no activeLinkPredicate is there
             // This is because, the children can stay as they are
@@ -77,10 +85,10 @@ sealed class NavComponent<T : HtmlBlockTag, P : NavComponent.Props<T>>(
             }
         }
 
-        interface Props : NavComponent.Props<NAV>
+        interface Props : NavbarNavComponent.Props<NAV>
     }
 
-    class Div(props: Props) : NavComponent<DIV, Div.Props>(props, DIV::class) {
+    class Div(props: Props) : NavbarNavComponent<DIV, Div.Props>(props, DIV::class) {
         override fun DomBuilder<DIV>.build() {
             // We don't need to do special child handling, if no activeLinkPredicate is there
             // This is because, the children can stay as they are
@@ -101,12 +109,12 @@ sealed class NavComponent<T : HtmlBlockTag, P : NavComponent.Props<T>>(
             }
         }
 
-        interface Props : NavComponent.Props<DIV>
+        interface Props : NavbarNavComponent.Props<DIV>
     }
 
     override fun buildClasses(): Set<ClassNames> {
         val navClasses = mutableSetOf(
-            ClassNames.NAV
+            ClassNames.NAVBAR_NAV
         )
 
         if (props.appearance == Appearance.TABS) {
@@ -132,11 +140,11 @@ sealed class NavComponent<T : HtmlBlockTag, P : NavComponent.Props<T>>(
         component: KClass<out Component<P, *>>,
     ): Array<out Child> = onEachComponent(component) { _, _ ->
         attrs {
-            activeLinkPredicate = this@NavComponent.props.activeLinkPredicate
+            activeLinkPredicate = this@NavbarNavComponent.props.activeLinkPredicate
         }
     }
 
-    interface Props<T : HtmlBlockTag> : DOMComponent.Props<NavDOMHandler<T>> {
+    interface Props<T : HtmlBlockTag> : DOMComponent.Props<NavbarNavDOMHandler<T>> {
         var appearance: Appearance?
         var widthHandling: WidthHandling?
         var activeLinkPredicate: ActiveLinkPredicate?

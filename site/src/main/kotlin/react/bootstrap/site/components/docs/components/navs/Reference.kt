@@ -80,7 +80,7 @@ Creates a `${function.name}`-based navigation.
                 NavItems.DivItem::class
             ),
         ).forEach { (navDomBuilder, itemPropsKlazz, itemKlazz) ->
-            h4("bd-content-title") { +"${navDomBuilder.build()}.navItem" }
+            h4 { +"${navDomBuilder.build()}.navItem" }
             Markdown {
                 //language=Markdown
                 +"""
@@ -111,7 +111,7 @@ Creates a `${itemKlazz.nestedName}` element.
             Generic.builder<NavItems.DomBuilder<*>, LI>() to NavItems.DomBuilder<LI>::navLink,
             Generic.builder<NavItems.DomBuilder<*>, DIV>() to NavItems.DomBuilder<DIV>::navLink
         ).forEach { (elementBuilderGeneric, function) ->
-            h4("bd-content-title") { +"${elementBuilderGeneric.build()}.navLink" }
+            h4 { +"${elementBuilderGeneric.build()}.navLink" }
             Markdown {
                 //language=Markdown
                 +"""

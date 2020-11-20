@@ -42,7 +42,7 @@ Images in figures have no explicit size, so be sure to add the `img(fluid)` to `
         liveExample {
             figure {
                 svg(
-                    classes("bd-placeholder-img", ClassNames.IMG_FLUID, ClassNames.FIGURE_IMG, ClassNames.ROUNDED)
+                    classes(ClassNames.IMG_FLUID, ClassNames.FIGURE_IMG, ClassNames.ROUNDED)
                 ) {
                     attrs {
                         set("width", "400")
@@ -54,7 +54,7 @@ Images in figures have no explicit size, so be sure to add the `img(fluid)` to `
                         unsafe {
                             raw(
                                 "<rect width=\"100%\" height=\"100%\" fill=\"#868e96\"></rect>" +
-                                    "<text x=\"50%\" y=\"50%\" fill=\"#dee2e6\" dy=\".3em\">400x300</text>"
+                                    "<text x=\"50%\" y=\"50%\" fill=\"#dee2e6\" dy=\".3em\" text-anchor=\"middle\">400x300</text>"
                             )
                         }
                     }

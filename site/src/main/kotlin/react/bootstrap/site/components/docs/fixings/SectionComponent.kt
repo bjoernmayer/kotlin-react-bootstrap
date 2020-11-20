@@ -45,9 +45,7 @@ internal abstract class SectionComponent : RComponent<SectionComponent.Props, RS
         }
 
         override fun RBuilder.render() {
-            val className = "bd-content-title"
-
-            h2(className) {
+            h2 {
                 attrs {
                     set("id", props.section.id)
                 }
@@ -75,9 +73,8 @@ internal abstract class SectionComponent : RComponent<SectionComponent.Props, RS
 
         override fun RBuilder.render() {
             section = Section(props.title)
-            val className = "bd-content-title"
 
-            h3(className) {
+            h3 {
                 attrs {
                     set("id", section.id)
                 }

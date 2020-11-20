@@ -12,7 +12,7 @@ Documentation and examples for Bootstrap’s powerful, responsive navigation hea
 branding, navigation, and more.
             """
         }
-        // how it works blabla
+        child(HowItWorks::class)
         child(SupportedContent::class)
     }
 }

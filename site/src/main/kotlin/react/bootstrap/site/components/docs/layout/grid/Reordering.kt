@@ -94,7 +94,7 @@ You can offset grid columns in two ways: our `$offsetsName` values and Bootstrap
 margins are more useful for quick layouts where the width of the offset is variable.
             """
         }
-        h4("bd-content-title") { +"$offsetsName enum" }
+        h4 { +"$offsetsName enum" }
         Markdown {
             //language=Markdown
             +"""

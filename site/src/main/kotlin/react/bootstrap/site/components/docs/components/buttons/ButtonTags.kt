@@ -4,10 +4,11 @@ import kotlinx.html.ButtonType
 import kotlinx.html.SPAN
 import kotlinx.html.js.onClickFunction
 import react.RBuilder
+import react.bootstrap.components.alert.Alerts
+import react.bootstrap.components.alert.h5
 import react.bootstrap.components.button.ButtonBuilder
 import react.bootstrap.components.button.ButtonComponent
 import react.bootstrap.components.button.Buttons
-import react.bootstrap.content.typography.heading.h5
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -17,7 +18,6 @@ import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
-import react.dom.div
 
 internal class ButtonTags : SectionComponent() {
     override val title: String = "Button tags"
@@ -31,7 +31,7 @@ This library's `button` component is designed to be used with the HTML `button` 
 classes on `a` or `input` elements (though some browsers may apply a slightly different rendering).
             """
         }
-        div("bd-callout bd-callout-info") {
+        Alerts.light {
             h5<SPAN> { +"Child elements" }
             Markdown {
                 //language=Markdown
@@ -41,7 +41,7 @@ Keep in mind: Buttons based on `${ButtonComponent.Input.Type.BUTTON.nestedName}`
                 """
             }
         }
-        div("bd-callout bd-callout-info") {
+        Alerts.light {
             h5<SPAN> { +"onClickFunction" }
             Markdown {
                 //language=Markdown
