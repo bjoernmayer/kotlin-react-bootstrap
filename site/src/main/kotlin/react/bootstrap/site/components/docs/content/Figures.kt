@@ -53,8 +53,10 @@ Images in figures have no explicit size, so be sure to add the `img(fluid)` to `
                         ariaLabel = "Placeholder: Responsive image"
                         unsafe {
                             raw(
-                                "<rect width=\"100%\" height=\"100%\" fill=\"#868e96\"></rect>" +
-                                    "<text x=\"50%\" y=\"50%\" fill=\"#dee2e6\" dy=\".3em\" text-anchor=\"middle\">400x300</text>"
+                                """
+<rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em"
+text-anchor="middle">400x300</text>
+"""
                             )
                         }
                     }

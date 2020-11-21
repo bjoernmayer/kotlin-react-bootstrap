@@ -16,6 +16,7 @@ import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.RowAttributes.ItemsXs.Companion.CENTER
 import react.bootstrap.layout.grid.row.row
 import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.site.BuildConfig
 import react.dom.br
 import react.dom.main
 import react.functionalComponent
@@ -55,7 +56,7 @@ val Home = functionalComponent<RProps> {
                     }
 
                     muted<P>(classes(ClassNames.MB_0)) {
-                        +"0.0.0"
+                        +BuildConfig.VERSION
                     }
                 }
             }

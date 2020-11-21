@@ -8,12 +8,12 @@ import kotlinx.html.OL
 import kotlinx.html.UL
 import react.RBuilder
 import react.bootstrap.components.nav.ActiveLinkPredicate
-import react.bootstrap.components.nav.NavBuilder
-import react.bootstrap.components.nav.NavComponent
 import react.bootstrap.components.nav.NavDOMHandler
 import react.bootstrap.components.nav.NavItemDOMHandler
 import react.bootstrap.components.nav.NavItems
 import react.bootstrap.components.nav.NavLink
+import react.bootstrap.components.nav.Navigation
+import react.bootstrap.components.nav.NavigationBuilder
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
 import react.bootstrap.lib.component.PropHandler
@@ -33,10 +33,10 @@ internal class Reference : SectionComponent() {
     override fun RBuilder.render() {
         sectionTitle()
         listOf(
-            Triple(NavBuilder::ul, NavComponent.Ul.Props::class, UL::class),
-            Triple(NavBuilder::ol, NavComponent.Ol.Props::class, OL::class),
-            Triple(NavBuilder::nav, NavComponent.Nav.Props::class, NAV::class),
-            Triple(NavBuilder::div, NavComponent.Div.Props::class, DIV::class)
+            Triple(NavigationBuilder::ul, Navigation.Ul.Props::class, UL::class),
+            Triple(NavigationBuilder::ol, Navigation.Ol.Props::class, OL::class),
+            Triple(NavigationBuilder::nav, Navigation.Nav.Props::class, NAV::class),
+            Triple(NavigationBuilder::div, Navigation.Div.Props::class, DIV::class)
         ).forEach { (function, propKlazz, tagKlazz) ->
             subSectionTitle(function.name)
             Markdown {
@@ -47,10 +47,10 @@ Creates a `${function.name}`-based navigation.
             }
             codeExample {
                 +FunSpec.builder(function)
-                    .nestedBy<NavBuilder>()
+                    .nestedBy<NavigationBuilder>()
                     .addParameter<String?>("classes", null)
-                    .addParameter<NavComponent.Appearance>("appearance", null)
-                    .addParameter<NavComponent.WidthHandling>("widthHandling", null)
+                    .addParameter<Navigation.Appearance>("appearance", null)
+                    .addParameter<Navigation.WidthHandling>("widthHandling", null)
                     .addParameter<ActiveLinkPredicate?>("activeLinkPredicate", null)
                     .addParameter(
                         "props",
@@ -67,15 +67,15 @@ Creates a `${function.name}`-based navigation.
         }
         subSectionTitle("navItem")
         listOf(
-            Triple(Generic.builder<NavComponent.DomBuilder<*>, UL>(), NavItems.Li.Props::class, NavItems.Li::class),
-            Triple(Generic.builder<NavComponent.DomBuilder<*>, OL>(), NavItems.Li.Props::class, NavItems.Li::class),
+            Triple(Generic.builder<Navigation.DomBuilder<*>, UL>(), NavItems.Li.Props::class, NavItems.Li::class),
+            Triple(Generic.builder<Navigation.DomBuilder<*>, OL>(), NavItems.Li.Props::class, NavItems.Li::class),
             Triple(
-                Generic.builder<NavComponent.DomBuilder<*>, NAV>(),
+                Generic.builder<Navigation.DomBuilder<*>, NAV>(),
                 NavItems.DivItem.Props::class,
                 NavItems.DivItem::class
             ),
             Triple(
-                Generic.builder<NavComponent.DomBuilder<*>, DIV>(),
+                Generic.builder<Navigation.DomBuilder<*>, DIV>(),
                 NavItems.DivItem.Props::class,
                 NavItems.DivItem::class
             ),
@@ -88,7 +88,7 @@ Creates a `${itemKlazz.nestedName}` element.
                 """
             }
             codeExample {
-                +FunSpec.builder(NavComponent.DomBuilder<UL>::navItem)
+                +FunSpec.builder(Navigation.DomBuilder<UL>::navItem)
                     .nestedBy(navDomBuilder)
                     .addParameter<String?>("classes", null)
                     .addParameter(
@@ -106,8 +106,8 @@ Creates a `${itemKlazz.nestedName}` element.
         }
         subSectionTitle("navLink")
         listOf(
-            Generic.builder<NavComponent.DomBuilder<*>, NAV>() to NavComponent.DomBuilder<NAV>::navLink,
-            Generic.builder<NavComponent.DomBuilder<*>, DIV>() to NavComponent.DomBuilder<DIV>::navLink,
+            Generic.builder<Navigation.DomBuilder<*>, NAV>() to Navigation.DomBuilder<NAV>::navLink,
+            Generic.builder<Navigation.DomBuilder<*>, DIV>() to Navigation.DomBuilder<DIV>::navLink,
             Generic.builder<NavItems.DomBuilder<*>, LI>() to NavItems.DomBuilder<LI>::navLink,
             Generic.builder<NavItems.DomBuilder<*>, DIV>() to NavItems.DomBuilder<DIV>::navLink
         ).forEach { (elementBuilderGeneric, function) ->

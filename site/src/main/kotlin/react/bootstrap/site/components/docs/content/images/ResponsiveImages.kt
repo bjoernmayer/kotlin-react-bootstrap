@@ -37,8 +37,10 @@ Images in Bootstrap are made responsive with `img(fluid = true)`.
                     ariaLabel = "Placeholder: Responsive image"
                     unsafe {
                         raw(
-                            "<rect width=\"100%\" height=\"100%\" fill=\"#868e96\"></rect>" +
-                                "<text x=\"50%\" y=\"50%\" fill=\"#dee2e6\" dy=\".3em\" text-anchor=\"middle\">Responsive image</text>"
+                            """
+<rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em"
+text-anchor="middle">Responsive image</text>
+"""
                         )
                     }
                 }

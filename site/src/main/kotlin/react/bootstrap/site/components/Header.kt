@@ -19,6 +19,7 @@ import react.bootstrap.helpers.classes
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
+import react.bootstrap.site.BuildConfig
 import react.dom.img
 import react.dom.svg
 import react.router.dom.navLink
@@ -39,8 +40,12 @@ fun RBuilder.header() {
             }
             img(src = logo.default as? String, classes = classes(ClassNames.MR_2, ClassNames.MB_1)) { }
             +"Kotlin React Bootstrap"
-            small<SPAN>(classes(ClassNames.ML_1)) {
-                +"0.0.0"
+            small<A>(classes(ClassNames.ML_1)) {
+                attrs {
+                    href = "https://github.com/bjoernmayer/kotlin-react-bootstrap/releases"
+                    target = "_blank"
+                }
+                +BuildConfig.VERSION
             }
         }
         NavbarNavs.nav {

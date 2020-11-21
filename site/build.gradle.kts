@@ -2,6 +2,8 @@
 
 plugins {
     kotlin("js")
+    id("com.palantir.git-version").version("0.12.3")
+    id("com.github.gmazzo.buildconfig")
 }
 
 dependencies {
@@ -30,5 +32,20 @@ kotlin.js {
             cssSupport.enabled = true
             cssSupport.mode = "inline"
         }
+    }
+}
+
+val gitVersion: groovy.lang.Closure<*> by extra
+
+buildConfig {
+    packageName("react.bootstrap.site")
+    useKotlinOutput()
+
+    buildConfigField("String", "VERSION", "\"${gitVersion() as String}\"")
+}
+
+kotlin {
+    sourceSets.main {
+        kotlin.srcDir(file("$buildDir/generated/source"))
     }
 }

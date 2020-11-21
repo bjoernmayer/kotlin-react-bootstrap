@@ -26,6 +26,14 @@ header.krbd .navbar-brand .small {
     font-size: 60%
 }
 
+header.krbd a {
+    color: rgba(255,255,255,.75)
+}
+
+header.krbd a:hover, header.krbd a.active {
+    color: white
+}
+
 .krbd-nav > .nav-item > .nav-link:hover, .krbd-nav > .nav-item > .nav-link.active {
     /*background-color: #f2f2f2;*/
 }

@@ -141,8 +141,8 @@ anchor works best as some elements might require utility classes or custom style
                             +"Disabled"
                         }
                     }
-
                 }
+                // regarding collapse:
             }
         }
     }

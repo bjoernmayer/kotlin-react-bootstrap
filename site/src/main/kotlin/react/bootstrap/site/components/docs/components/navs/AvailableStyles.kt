@@ -6,9 +6,9 @@ import kotlinx.html.UL
 import kotlinx.html.js.onClickFunction
 import react.RBuilder
 import react.RProps
-import react.bootstrap.components.nav.NavComponent
-import react.bootstrap.components.nav.NavComponent.Appearance
-import react.bootstrap.components.nav.NavComponent.WidthHandling
+import react.bootstrap.components.nav.Navigation
+import react.bootstrap.components.nav.Navigation.Appearance
+import react.bootstrap.components.nav.Navigation.WidthHandling
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
@@ -452,7 +452,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         }
     }
 
-    private fun NavComponent.DomBuilder<UL>.buildDefaultExample() {
+    private fun Navigation.DomBuilder<UL>.buildDefaultExample() {
         navItem {
             navLink(href = "#", active = true) {
                 attrs {
@@ -495,7 +495,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         linkText1: String = "Link",
         linkText2: String = "Link",
         disabledLinkText: String = "Disabled",
-        props: NavComponent.Ul.Props.() -> Unit
+        props: Navigation.Ul.Props.() -> Unit
     ) = functionalComponent<RProps> {
         var activeNavLink by useState(0)
 
@@ -550,7 +550,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         linkText1: String = "Link",
         linkText2: String = "Link",
         disabledLinkText: String = "Disabled",
-        props: NavComponent.Nav.Props.() -> Unit
+        props: Navigation.Nav.Props.() -> Unit
     ) = functionalComponent<RProps> {
         var activeNavLink by useState(0)
 

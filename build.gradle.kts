@@ -13,6 +13,7 @@ plugins {
     kotlin("js") apply false
 
     id("org.jlleitschuh.gradle.ktlint")
+    id("com.github.gmazzo.buildconfig").version("2.0.2")
 }
 
 allprojects {

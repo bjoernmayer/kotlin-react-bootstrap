@@ -53,7 +53,7 @@ class SectionNav : RComponent<SectionNav.Props, RState>() {
         ) {
             props.sections?.forEach { section ->
                 navItem {
-                    navLink(href = "#${section.id}", classes = classes(ClassNames.PY_0)) { +section.title }
+                    navLink(href = "#${section.id}", classes = classes(ClassNames.PY_1)) { +section.title }
                     if (section.subSections.isNotEmpty()) {
                         Navs.nav(classes = classes(ClassNames.FLEX_COLUMN, ClassNames.ML_3, ClassNames.SMALL)) {
                             section.subSections.forEach { subsection ->
