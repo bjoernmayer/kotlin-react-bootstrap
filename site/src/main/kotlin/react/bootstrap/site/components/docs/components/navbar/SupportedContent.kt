@@ -11,8 +11,10 @@ import react.bootstrap.components.nav.navLink
 import react.bootstrap.components.navbar.Navbar
 import react.bootstrap.components.navbar.NavbarNavs
 import react.bootstrap.components.navbar.brand
+import react.bootstrap.components.navbar.collapse
 import react.bootstrap.components.navbar.navItem
 import react.bootstrap.components.navbar.navbar
+import react.bootstrap.components.navbar.toggler
 import react.bootstrap.helpers.classes
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
@@ -43,7 +45,19 @@ Navbars come with built-in support for a handful of sub-components. Choose from 
 Here’s an example of all the sub-components included in a responsive light-themed navbar.
             """
         }
-        // todo example
+        liveExample {
+            navbar<NAV>(classes(ClassNames.BG_LIGHT), expand = Breakpoints.LG, theme = Navbar.Theme.LIGHT) {
+                brand<A> {
+                    attrs {
+                        href = "#"
+                    }
+                    +"Navbar"
+                }
+                toggler { }
+                collapse {
+                }
+            }
+        }
         subSectionTitle("Brand")
         Markdown {
             //language=Markdown
@@ -142,7 +156,6 @@ anchor works best as some elements might require utility classes or custom style
                         }
                     }
                 }
-                // regarding collapse:
             }
         }
     }

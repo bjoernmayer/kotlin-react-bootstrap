@@ -1,6 +1,7 @@
 package react.bootstrap.components.navbar
 
 import kotlinx.html.A
+import kotlinx.html.BUTTON
 import kotlinx.html.DIV
 import kotlinx.html.HtmlBlockTag
 import kotlinx.html.HtmlInlineTag
@@ -23,6 +24,7 @@ import react.bootstrap.lib.component.AbstractDOMComponent.Companion.abstractDomC
 import react.bootstrap.lib.component.DOMComponent.Companion.domComponent
 import react.bootstrap.lib.component.PropHandler
 import react.bootstrap.lib.component.RDOMHandler
+import react.bootstrap.lib.component.SimpleDOMComponent.Companion.simpleDomComponent
 import kotlin.reflect.KClass
 
 @Suppress("UNCHECKED_CAST")
@@ -221,3 +223,30 @@ fun Navbar.Navigation.DomBuilder<DIV>.navLink(
     props: PropHandler<NavLink.Props> = PropHandler { },
     block: RDOMHandler<A>
 ): ReactElement = buildNavLink(href, target, classes, active, disabled, props, block)
+
+fun Navbar.DomBuilder<*>.toggler(
+    classes: String? = null,
+    props: PropHandler<Navbar.Toggler.Props> = PropHandler { },
+    block: RDOMHandler<BUTTON>
+): ReactElement = simpleDomComponent(Navbar.Toggler::class)
+    .classes(classes)
+    .propHandler(props)
+    .domHandler(block)
+    .build()
+
+@Suppress("UNCHECKED_CAST")
+inline fun <reified T : HtmlBlockTag> Navbar.DomBuilder<*>.collapse(
+    classes: String? = null,
+    props: PropHandler<Navbar.Collapse.Props<T>> = PropHandler { },
+    block: RDOMHandler<T>
+): ReactElement = abstractDomComponent(Navbar.Collapse::class as KClass<Navbar.Collapse<T>>)
+    .classes(classes)
+    .propHandler(props)
+    .domHandler(block)
+    .build()
+
+fun Navbar.DomBuilder<*>.collapse(
+    classes: String? = null,
+    props: PropHandler<Navbar.Collapse.Props<DIV>> = PropHandler { },
+    block: RDOMHandler<DIV>
+): ReactElement = collapse<DIV>(classes, props, block)
