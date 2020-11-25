@@ -20,6 +20,7 @@ import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.site.BuildConfig
+import react.dom.a
 import react.dom.img
 import react.dom.svg
 import react.router.dom.navLink
@@ -33,13 +34,15 @@ fun RBuilder.header() {
         theme = Navbar.Theme.DARK,
         classes = classes(ClassNames.STICKY_TOP, "krbd")
     ) {
-        brand<A> {
-            attrs {
-                href = "#"
-                ariaLabel = "Kotlin React Bootstrap"
+        brand<SPAN> {
+            a(href = "/", classes = classes(ClassNames.TEXT_WHITE)) {
+                attrs {
+                    href = "#"
+                    ariaLabel = "Kotlin React Bootstrap"
+                }
+                img(src = logo.default as? String, classes = classes(ClassNames.MR_2, ClassNames.MB_1)) { }
+                +"Kotlin React Bootstrap"
             }
-            img(src = logo.default as? String, classes = classes(ClassNames.MR_2, ClassNames.MB_1)) { }
-            +"Kotlin React Bootstrap"
             small<A>(classes(ClassNames.ML_1)) {
                 attrs {
                     href = "https://github.com/bjoernmayer/kotlin-react-bootstrap/releases"

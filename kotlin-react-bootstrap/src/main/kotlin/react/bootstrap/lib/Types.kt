@@ -3,7 +3,7 @@ package react.bootstrap.lib
 import kotlinx.html.CommonAttributeGroupFacade
 import org.w3c.dom.events.Event
 
-typealias DOMTag = CommonAttributeGroupFacade
+public typealias DOMTag = CommonAttributeGroupFacade
 
-typealias NoArgEventHandler = () -> Unit
-typealias EventHandler = (Event) -> Unit
+public typealias NoArgEventHandler = () -> Unit
+public typealias EventHandler = (Event) -> Unit

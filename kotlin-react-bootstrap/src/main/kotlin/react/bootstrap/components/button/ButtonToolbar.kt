@@ -7,7 +7,7 @@ import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDOMComponent
 import react.dom.RDOMBuilder
 
-class ButtonToolbar<T : HtmlBlockTag>(
+public class ButtonToolbar<T : HtmlBlockTag>(
     props: Props<T>
 ) : AbstractDOMComponent<T, ButtonToolbar.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.BTN_TOOLBAR)
@@ -19,5 +19,5 @@ class ButtonToolbar<T : HtmlBlockTag>(
         addChildren()
     }
 
-    interface Props<T : HtmlBlockTag> : AbstractDOMComponent.Props<T>
+    public interface Props<T : HtmlBlockTag> : AbstractDOMComponent.Props<T>
 }

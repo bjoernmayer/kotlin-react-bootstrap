@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package react.bootstrap.components.button
 
 import kotlinext.js.jsObject
@@ -30,7 +32,7 @@ import react.setState
 import kotlin.reflect.KClass
 import kotlinx.html.CommonAttributeGroupFacadeFlowInteractivePhrasingContent as InteractiveDomTag
 
-sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>>(
+public sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>>(
     props: P,
     tag: KClass<T>
 ) : SimpleDOMComponent<T, P, ButtonComponent.State>(props, tag) {
@@ -38,7 +40,7 @@ sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>
         props.requireProperties(props::variant)
     }
 
-    class Button(props: Props) : ButtonComponent<BUTTON, Button.Props>(props, BUTTON::class) {
+    public class Button(props: Props) : ButtonComponent<BUTTON, Button.Props>(props, BUTTON::class) {
         override fun RDOMBuilder<BUTTON>.build() {
             attrs {
                 ariaPressed = state.active
@@ -49,16 +51,16 @@ sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>
             addChildren()
         }
 
-        interface Props : ButtonComponent.Props<BUTTON>
+        public interface Props : ButtonComponent.Props<BUTTON>
 
-        companion object : RStatics<Props, State, Button, Nothing>(Button::class) {
+        public companion object : RStatics<Props, State, Button, Nothing>(Button::class) {
             init {
                 defaultProps = getDefaultProps<Props, BUTTON>()
             }
         }
     }
 
-    class Box(props: Props) : ButtonComponent<LABEL, Box.Props>(props, LABEL::class) {
+    public class Box(props: Props) : ButtonComponent<LABEL, Box.Props>(props, LABEL::class) {
         init {
             props.requireProperties(props::type)
         }
@@ -107,24 +109,24 @@ sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>
             addChildren()
         }
 
-        interface Props : ButtonComponent.Props<LABEL> {
-            var type: Type
-            var inputHandler: RDOMHandler<INPUT>
+        public interface Props : ButtonComponent.Props<LABEL> {
+            public var type: Type
+            public var inputHandler: RDOMHandler<INPUT>
         }
 
-        enum class Type(internal val inputType: InputType) {
+        public enum class Type(internal val inputType: InputType) {
             RADIO(InputType.radio),
             CHECKBOX(InputType.checkBox);
         }
 
-        companion object : RStatics<Props, State, Box, Nothing>(Box::class) {
+        public companion object : RStatics<Props, State, Box, Nothing>(Box::class) {
             init {
                 defaultProps = getDefaultProps<Props, LABEL>()
             }
         }
     }
 
-    class Input(props: Props) : ButtonComponent<INPUT, Input.Props>(props, INPUT::class) {
+    public class Input(props: Props) : ButtonComponent<INPUT, Input.Props>(props, INPUT::class) {
         init {
             props.requireProperties(props::type)
         }
@@ -141,24 +143,24 @@ sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>
             // No children allowed
         }
 
-        interface Props : ButtonComponent.Props<INPUT> {
-            var type: Type
+        public interface Props : ButtonComponent.Props<INPUT> {
+            public var type: Type
         }
 
-        enum class Type(internal val inputType: InputType) {
+        public enum class Type(internal val inputType: InputType) {
             BUTTON(InputType.button),
             SUBMIT(InputType.submit),
             RESET(InputType.reset)
         }
 
-        companion object : RStatics<Props, State, Input, Nothing>(Input::class) {
+        public companion object : RStatics<Props, State, Input, Nothing>(Input::class) {
             init {
                 defaultProps = getDefaultProps<Props, INPUT>()
             }
         }
     }
 
-    class Link(props: Props) : ButtonComponent<A, Link.Props>(props, A::class) {
+    public class Link(props: Props) : ButtonComponent<A, Link.Props>(props, A::class) {
         override fun buildClasses(): Set<ClassNames> {
             return super.buildClasses().toMutableSet().apply {
                 if (props.disabled) {
@@ -177,9 +179,9 @@ sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>
             addChildren()
         }
 
-        interface Props : ButtonComponent.Props<A>
+        public interface Props : ButtonComponent.Props<A>
 
-        companion object : RStatics<Props, State, Link, Nothing>(Link::class) {
+        public companion object : RStatics<Props, State, Link, Nothing>(Link::class) {
             init {
                 defaultProps = getDefaultProps<Props, A>()
             }
@@ -247,92 +249,92 @@ sealed class ButtonComponent<T : InteractiveDomTag, P : ButtonComponent.Props<T>
         return btnClasses
     }
 
-    sealed class Variants(val className: ClassNames) {
-        class Solid {
-            class DANGER internal constructor() : Variants(ClassNames.BTN_DANGER)
-            class DARK internal constructor() : Variants(ClassNames.BTN_DARK)
-            class INFO internal constructor() : Variants(ClassNames.BTN_INFO)
-            class LIGHT internal constructor() : Variants(ClassNames.BTN_LIGHT)
-            class LINK internal constructor() : Variants(ClassNames.BTN_LINK)
-            class PRIMARY internal constructor() : Variants(ClassNames.BTN_PRIMARY)
-            class SECONDARY internal constructor() : Variants(ClassNames.BTN_SECONDARY)
-            class SUCCESS internal constructor() : Variants(ClassNames.BTN_SUCCESS)
-            class WARNING internal constructor() : Variants(ClassNames.BTN_WARNING)
+    public sealed class Variants(public val className: ClassNames) {
+        public class Solid {
+            public class DANGER internal constructor() : Variants(ClassNames.BTN_DANGER)
+            public class DARK internal constructor() : Variants(ClassNames.BTN_DARK)
+            public class INFO internal constructor() : Variants(ClassNames.BTN_INFO)
+            public class LIGHT internal constructor() : Variants(ClassNames.BTN_LIGHT)
+            public class LINK internal constructor() : Variants(ClassNames.BTN_LINK)
+            public class PRIMARY internal constructor() : Variants(ClassNames.BTN_PRIMARY)
+            public class SECONDARY internal constructor() : Variants(ClassNames.BTN_SECONDARY)
+            public class SUCCESS internal constructor() : Variants(ClassNames.BTN_SUCCESS)
+            public class WARNING internal constructor() : Variants(ClassNames.BTN_WARNING)
 
-            companion object {
-                val DANGER = DANGER()
-                val DARK = DARK()
-                val INFO = INFO()
-                val LIGHT = LIGHT()
-                val LINK = LINK()
-                val PRIMARY = PRIMARY()
-                val SECONDARY = SECONDARY()
-                val SUCCESS = SUCCESS()
-                val WARNING = WARNING()
+            public companion object {
+                public val DANGER: DANGER = DANGER()
+                public val DARK: DARK = DARK()
+                public val INFO: INFO = INFO()
+                public val LIGHT: LIGHT = LIGHT()
+                public val LINK: LINK = LINK()
+                public val PRIMARY: PRIMARY = PRIMARY()
+                public val SECONDARY: SECONDARY = SECONDARY()
+                public val SUCCESS: SUCCESS = SUCCESS()
+                public val WARNING: WARNING = WARNING()
             }
         }
 
-        class Outline {
-            class DANGER internal constructor() : Variants(ClassNames.BTN_OUTLINE_DANGER)
-            class DARK internal constructor() : Variants(ClassNames.BTN_OUTLINE_DARK)
-            class INFO internal constructor() : Variants(ClassNames.BTN_OUTLINE_INFO)
-            class LIGHT internal constructor() : Variants(ClassNames.BTN_OUTLINE_LIGHT)
-            class PRIMARY internal constructor() : Variants(ClassNames.BTN_OUTLINE_PRIMARY)
-            class SECONDARY internal constructor() : Variants(ClassNames.BTN_OUTLINE_SECONDARY)
-            class SUCCESS internal constructor() : Variants(ClassNames.BTN_OUTLINE_SUCCESS)
-            class WARNING internal constructor() : Variants(ClassNames.BTN_OUTLINE_WARNING)
+        public class Outline {
+            public class DANGER internal constructor() : Variants(ClassNames.BTN_OUTLINE_DANGER)
+            public class DARK internal constructor() : Variants(ClassNames.BTN_OUTLINE_DARK)
+            public class INFO internal constructor() : Variants(ClassNames.BTN_OUTLINE_INFO)
+            public class LIGHT internal constructor() : Variants(ClassNames.BTN_OUTLINE_LIGHT)
+            public class PRIMARY internal constructor() : Variants(ClassNames.BTN_OUTLINE_PRIMARY)
+            public class SECONDARY internal constructor() : Variants(ClassNames.BTN_OUTLINE_SECONDARY)
+            public class SUCCESS internal constructor() : Variants(ClassNames.BTN_OUTLINE_SUCCESS)
+            public class WARNING internal constructor() : Variants(ClassNames.BTN_OUTLINE_WARNING)
 
-            companion object {
-                val DANGER = DANGER()
-                val DARK = DARK()
-                val INFO = INFO()
-                val LIGHT = LIGHT()
-                val PRIMARY = PRIMARY()
-                val SECONDARY = SECONDARY()
-                val SUCCESS = SUCCESS()
-                val WARNING = WARNING()
+            public companion object {
+                public val DANGER: DANGER = DANGER()
+                public val DARK: DARK = DARK()
+                public val INFO: INFO = INFO()
+                public val LIGHT: LIGHT = LIGHT()
+                public val PRIMARY: PRIMARY = PRIMARY()
+                public val SECONDARY: SECONDARY = SECONDARY()
+                public val SUCCESS: SUCCESS = SUCCESS()
+                public val WARNING: WARNING = WARNING()
             }
         }
     }
 
-    enum class Sizes(override val className: ClassNames) : ClassNameEnum {
+    public enum class Sizes(override val className: ClassNames) : ClassNameEnum {
         SM(ClassNames.BTN_SM),
         LG(ClassNames.BTN_LG);
     }
 
-    interface Props<T : InteractiveDomTag> : WithActive, WithDisabled, SimpleDOMComponent.Props<T> {
+    public interface Props<T : InteractiveDomTag> : WithActive, WithDisabled, SimpleDOMComponent.Props<T> {
         /**
          * Set this to *true* to disable text-wrapping for this button.
          *
          * Defaults to *false*
          */
-        var nowrap: Boolean
+        public var nowrap: Boolean
 
         /**
          * Use this to make buttons appear smaller or larger than usual.
          *
          * Defaults to *null*
          */
-        var sizes: Sizes?
+        public var sizes: Sizes?
 
         /**
          * Use the [Variants] to colour-in the button.
          */
-        var variant: Variants
+        public var variant: Variants
 
         /**
          * Set this to *true* to render the button as block.
          *
          * Defaults to *false*
          */
-        var blockSized: Boolean
+        public var blockSized: Boolean
     }
 
-    interface State : RState {
-        var active: Boolean
+    public interface State : RState {
+        public var active: Boolean
     }
 
-    companion object {
+    public companion object {
         private fun <P : Props<T>, T : InteractiveDomTag> getDefaultProps(): P = jsObject {
             nowrap = false
             blockSized = false

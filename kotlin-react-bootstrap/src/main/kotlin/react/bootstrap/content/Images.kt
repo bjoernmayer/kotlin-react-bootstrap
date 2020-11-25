@@ -17,7 +17,7 @@ import react.dom.img as reactImg
  * @param fluid If set to *true* the image resizes fluently.
  * @param isThumbnail If set to `true`, a border is shown around the image.
  */
-fun RBuilder.img(
+public fun RBuilder.img(
     alt: String? = null,
     src: String? = null,
     classes: String? = null,

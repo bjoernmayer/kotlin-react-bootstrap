@@ -5,8 +5,8 @@ import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDOMComponent
 
-class Mark<T : DOMTag>(props: Props<T>) : AbstractDOMComponent<T, Mark.Props<T>, RState>(props) {
+public class Mark<T : DOMTag>(props: Props<T>) : AbstractDOMComponent<T, Mark.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.MARK)
 
-    interface Props<T : DOMTag> : AbstractDOMComponent.Props<T>
+    public interface Props<T : DOMTag> : AbstractDOMComponent.Props<T>
 }

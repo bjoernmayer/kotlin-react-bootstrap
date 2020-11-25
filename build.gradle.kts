@@ -5,6 +5,7 @@ import org.jlleitschuh.gradle.ktlint.BaseKtlintCheckTask
 import org.jlleitschuh.gradle.ktlint.KtlintApplyToIdeaTask
 import org.jlleitschuh.gradle.ktlint.KtlintCheckTask
 import org.jlleitschuh.gradle.ktlint.KtlintFormatTask
+import org.jlleitschuh.gradle.ktlint.KtlintInstallGitHookTask
 import org.jlleitschuh.gradle.ktlint.KtlintPlugin
 
 plugins {
@@ -64,7 +65,7 @@ subprojects {
             KtlintCheckTask::class,
             KtlintApplyToIdeaTask::class,
             KtlintFormatTask::class,
-            org.jlleitschuh.gradle.ktlint.KtlintInstallGitHookTask::class
+            KtlintInstallGitHookTask::class
         )
     )
 

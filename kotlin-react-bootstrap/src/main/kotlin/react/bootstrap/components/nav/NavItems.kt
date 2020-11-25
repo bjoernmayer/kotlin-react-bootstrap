@@ -12,20 +12,20 @@ import react.bootstrap.lib.react.onEachComponent
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
-sealed class NavItems<T : HtmlBlockTag, P : NavItems.Props<T>>(
+public sealed class NavItems<T : HtmlBlockTag, P : NavItems.Props<T>>(
     props: P,
     tag: KClass<out T>
 ) : DOMComponent<T, NavItemDOMHandler<T>, NavItems.DomBuilder<T>, P, RState>(props, tag) {
-    class DomBuilder<out T : Tag>(factory: (TagConsumer<Unit>) -> T) : RDOMBuilder<T>(factory)
+    public class DomBuilder<out T : Tag>(factory: (TagConsumer<Unit>) -> T) : RDOMBuilder<T>(factory)
 
     override fun buildBuilder(builderFactory: (TagConsumer<Unit>) -> T): DomBuilder<T> = DomBuilder(builderFactory)
 
-    class Li(props: Props) : NavItems<LI, Li.Props>(props, LI::class) {
-        interface Props : NavItems.Props<LI>
+    public class Li(props: Props) : NavItems<LI, Li.Props>(props, LI::class) {
+        public interface Props : NavItems.Props<LI>
     }
 
-    class DivItem(props: Props) : NavItems<DIV, DivItem.Props>(props, DIV::class) {
-        interface Props : NavItems.Props<DIV>
+    public class DivItem(props: Props) : NavItems<DIV, DivItem.Props>(props, DIV::class) {
+        public interface Props : NavItems.Props<DIV>
     }
 
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.NAV_ITEM)
@@ -44,7 +44,7 @@ sealed class NavItems<T : HtmlBlockTag, P : NavItems.Props<T>>(
         }
     }
 
-    interface Props<T : HtmlBlockTag> : DOMComponent.Props<NavItemDOMHandler<T>> {
-        var activeLinkPredicate: ActiveLinkPredicate?
+    public interface Props<T : HtmlBlockTag> : DOMComponent.Props<NavItemDOMHandler<T>> {
+        public var activeLinkPredicate: ActiveLinkPredicate?
     }
 }

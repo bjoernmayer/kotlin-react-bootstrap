@@ -15,7 +15,7 @@ import react.dom.th as reactTh
  * @param classes Space separated list of CSS classes for this element.
  * @param contextualStyle Set a [ContextualStyle] to colour-in the [TH]s.
  */
-fun RBuilder.th(
+public fun RBuilder.th(
     scope: ThScope? = null,
     classes: String? = null,
     contextualStyle: ContextualStyle? = null,

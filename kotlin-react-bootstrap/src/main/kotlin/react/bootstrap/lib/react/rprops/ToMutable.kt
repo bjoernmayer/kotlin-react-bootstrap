@@ -7,4 +7,4 @@ import react.RProps
 /**
  * @return a mutable copy
  */
-fun <T : RProps> T.toMutable(): T = Object.assign(jsObject(), this)
+public fun <T : RProps> T.toMutable(): T = Object.assign(jsObject(), this)

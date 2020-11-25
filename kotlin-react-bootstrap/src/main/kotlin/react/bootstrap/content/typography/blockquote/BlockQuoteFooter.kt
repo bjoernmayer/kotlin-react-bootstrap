@@ -5,10 +5,10 @@ import react.RState
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDOMComponent
 
-class BlockQuoteFooter<T : HtmlBlockTag>(
+public class BlockQuoteFooter<T : HtmlBlockTag>(
     props: Props<T>
 ) : AbstractDOMComponent<T, BlockQuoteFooter.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.BLOCKQUOTE_FOOTER)
 
-    interface Props<T : HtmlBlockTag> : AbstractDOMComponent.Props<T>
+    public interface Props<T : HtmlBlockTag> : AbstractDOMComponent.Props<T>
 }

@@ -18,7 +18,7 @@ import react.dom.figure as reactFigure
  *
  * @param classes Space separated list of CSS classes for this element.
  */
-fun RBuilder.figure(classes: String? = null, block: RDOMHandler<FIGURE>): ReactElement =
+public fun RBuilder.figure(classes: String? = null, block: RDOMHandler<FIGURE>): ReactElement =
     reactFigure(classes.appendClass(ClassNames.FIGURE)) {
         val builder = this
         with(block) {
@@ -35,7 +35,7 @@ fun RBuilder.figure(classes: String? = null, block: RDOMHandler<FIGURE>): ReactE
  * @param fluid If set to *true* the image resizes fluently.
  * @param isThumbnail If set to `true`, a border is shown around the image.
  */
-fun RDOMBuilder<FIGURE>.img(
+public fun RDOMBuilder<FIGURE>.img(
     alt: String? = null,
     src: String? = null,
     classes: String? = null,
@@ -44,7 +44,7 @@ fun RDOMBuilder<FIGURE>.img(
     block: RDOMHandler<IMG>
 ): ReactElement = img(alt, src, classes.appendClass(ClassNames.FIGURE_IMG), fluid, isThumbnail, block)
 
-fun RBuilder.figcaption(classes: String? = null, block: RDOMHandler<FIGCAPTION>): ReactElement =
+public fun RBuilder.figcaption(classes: String? = null, block: RDOMHandler<FIGCAPTION>): ReactElement =
     reactFigcaption(classes.appendClass(ClassNames.FIGURE_CAPTION)) {
         val builder = this
         with(block) {

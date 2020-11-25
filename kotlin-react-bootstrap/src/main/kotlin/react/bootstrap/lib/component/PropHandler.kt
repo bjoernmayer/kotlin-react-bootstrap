@@ -1,5 +1,5 @@
 package react.bootstrap.lib.component
 
-fun interface PropHandler<P> {
-    fun P.handle()
+public fun interface PropHandler<P> {
+    public fun P.handle()
 }

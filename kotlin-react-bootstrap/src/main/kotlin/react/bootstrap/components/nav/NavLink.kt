@@ -16,7 +16,7 @@ import react.dom.RDOMBuilder
 import react.dom.a
 import react.setState
 
-class NavLink(props: Props) : SimpleDOMComponent<A, NavLink.Props, NavLink.State>(props, A::class) {
+public class NavLink(props: Props) : SimpleDOMComponent<A, NavLink.Props, NavLink.State>(props, A::class) {
     override fun State.init(props: Props) {
         linkProps = buildLinkProps(props.handler)
 
@@ -78,16 +78,16 @@ class NavLink(props: Props) : SimpleDOMComponent<A, NavLink.Props, NavLink.State
         addChildren()
     }
 
-    interface Props : WithActive, WithDisabled, SimpleDOMComponent.Props<A> {
-        var activeLinkPredicate: ActiveLinkPredicate?
+    public interface Props : WithActive, WithDisabled, SimpleDOMComponent.Props<A> {
+        public var activeLinkPredicate: ActiveLinkPredicate?
     }
 
-    interface State : RState {
-        var active: Boolean
-        var linkProps: A
+    public interface State : RState {
+        public var active: Boolean
+        public var linkProps: A
     }
 
-    companion object : RStatics<Props, State, NavLink, Nothing>(NavLink::class) {
+    public companion object : RStatics<Props, State, NavLink, Nothing>(NavLink::class) {
         init {
             defaultProps = jsObject {
                 active = false

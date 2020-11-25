@@ -12,7 +12,7 @@ import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDOMComponent
 import react.bootstrap.lib.react.rprops.requireProperties
 
-open class Heading<T : DOMTag, P : Heading.Props<T>>(props: P) : AbstractDOMComponent<T, P, RState>(props) {
+public open class Heading<T : DOMTag, P : Heading.Props<T>>(props: P) : AbstractDOMComponent<T, P, RState>(props) {
     init {
         props.requireProperties(props::size)
     }
@@ -27,11 +27,11 @@ open class Heading<T : DOMTag, P : Heading.Props<T>>(props: P) : AbstractDOMComp
         else -> setOf(props.size.className)
     }
 
-    interface Props<T : DOMTag> : AbstractDOMComponent.Props<T> {
-        var size: Sizes
+    public interface Props<T : DOMTag> : AbstractDOMComponent.Props<T> {
+        public var size: Sizes
     }
 
-    enum class Sizes(internal val className: ClassNames) {
+    public enum class Sizes(internal val className: ClassNames) {
         H1(ClassNames.H1),
         H2(ClassNames.H2),
         H3(ClassNames.H3),

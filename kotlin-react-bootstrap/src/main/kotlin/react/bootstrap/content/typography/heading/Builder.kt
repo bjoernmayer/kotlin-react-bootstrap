@@ -15,7 +15,7 @@ import kotlin.reflect.KClass
  * @param classes Space separated list of CSS classes for this element.
  */
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : DOMTag> RBuilder.heading(
+public inline fun <reified T : DOMTag> RBuilder.heading(
     size: Heading.Sizes,
     classes: String?,
     props: PropHandler<Heading.Props<T>> = PropHandler { },
@@ -38,7 +38,7 @@ inline fun <reified T : DOMTag> RBuilder.heading(
  * @param T Tag Type to be used to render this [Heading].
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified T : DOMTag> RBuilder.h1(
+public inline fun <reified T : DOMTag> RBuilder.h1(
     classes: String? = null,
     props: PropHandler<Heading.Props<T>> = PropHandler { },
     block: RDOMHandler<T>
@@ -50,7 +50,7 @@ inline fun <reified T : DOMTag> RBuilder.h1(
  * @param T Tag Type to be used to render this [Heading].
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified T : DOMTag> RBuilder.h2(
+public inline fun <reified T : DOMTag> RBuilder.h2(
     classes: String? = null,
     props: PropHandler<Heading.Props<T>> = PropHandler { },
     block: RDOMHandler<T>
@@ -62,7 +62,7 @@ inline fun <reified T : DOMTag> RBuilder.h2(
  * @param T Tag Type to be used to render this [Heading].
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified T : DOMTag> RBuilder.h3(
+public inline fun <reified T : DOMTag> RBuilder.h3(
     classes: String? = null,
     props: PropHandler<Heading.Props<T>> = PropHandler { },
     block: RDOMHandler<T>
@@ -74,7 +74,7 @@ inline fun <reified T : DOMTag> RBuilder.h3(
  * @param T Tag Type to be used to render this [Heading].
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified T : DOMTag> RBuilder.h4(
+public inline fun <reified T : DOMTag> RBuilder.h4(
     classes: String? = null,
     props: PropHandler<Heading.Props<T>> = PropHandler { },
     block: RDOMHandler<T>
@@ -86,7 +86,7 @@ inline fun <reified T : DOMTag> RBuilder.h4(
  * @param T Tag Type to be used to render this [Heading].
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified T : DOMTag> RBuilder.h5(
+public inline fun <reified T : DOMTag> RBuilder.h5(
     classes: String? = null,
     props: PropHandler<Heading.Props<T>> = PropHandler { },
     block: RDOMHandler<T>
@@ -98,7 +98,7 @@ inline fun <reified T : DOMTag> RBuilder.h5(
  * @param T Tag Type to be used to render this [Heading].
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified T : DOMTag> RBuilder.h6(
+public inline fun <reified T : DOMTag> RBuilder.h6(
     classes: String? = null,
     props: PropHandler<Heading.Props<T>> = PropHandler { },
     block: RDOMHandler<T>

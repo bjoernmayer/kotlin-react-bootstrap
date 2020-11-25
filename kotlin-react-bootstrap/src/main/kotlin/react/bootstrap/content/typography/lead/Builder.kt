@@ -12,7 +12,7 @@ import react.bootstrap.lib.component.SimpleDOMComponent.Companion.simpleDomCompo
  *
  * @param classes Space separated list of CSS classes for this element.
  */
-fun RBuilder.lead(
+public fun RBuilder.lead(
     classes: String? = null,
     props: PropHandler<Lead.Props> = PropHandler { },
     block: RDOMHandler<P>

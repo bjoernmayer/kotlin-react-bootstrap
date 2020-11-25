@@ -17,7 +17,7 @@ import kotlin.reflect.KClass
  * @param P property type
  * @param S State type
  */
-abstract class AbstractDOMComponent<T : DOMTag, P : AbstractDOMComponent.Props<T>, S : RState>(
+public abstract class AbstractDOMComponent<T : DOMTag, P : AbstractDOMComponent.Props<T>, S : RState>(
     props: P
 ) : DOMComponent<T, RDOMHandler<T>, RDOMBuilder<T>, P, S>(props, props.tag) {
     init {
@@ -26,11 +26,11 @@ abstract class AbstractDOMComponent<T : DOMTag, P : AbstractDOMComponent.Props<T
 
     override fun buildBuilder(builderFactory: (TagConsumer<Unit>) -> T): RDOMBuilder<T> = RDOMBuilder(builderFactory)
 
-    interface Props<T : DOMTag> : DOMComponent.Props<RDOMHandler<T>> {
-        var tag: KClass<out T>
+    public interface Props<T : DOMTag> : DOMComponent.Props<RDOMHandler<T>> {
+        public var tag: KClass<out T>
     }
 
-    class ComponentBuilder<T : DOMTag, P : Props<T>> constructor(
+    public class ComponentBuilder<T : DOMTag, P : Props<T>> constructor(
         builder: RBuilder,
         private val tag: KClass<out T>,
         component: KClass<out AbstractDOMComponent<T, P, *>>
@@ -49,10 +49,10 @@ abstract class AbstractDOMComponent<T : DOMTag, P : AbstractDOMComponent.Props<T
             }
     }
 
-    companion object {
+    public companion object {
         @Suppress("UNCHECKED_CAST")
-        inline fun <reified T : DOMTag, P : Props<T>> RBuilder.abstractDomComponent(
+        public inline fun <reified T : DOMTag, P : Props<T>> RBuilder.abstractDomComponent(
             componentKlazz: KClass<out AbstractDOMComponent<T, P, *>>
-        ) = ComponentBuilder(this, T::class, componentKlazz)
+        ): ComponentBuilder<T, P> = ComponentBuilder(this, T::class, componentKlazz)
     }
 }

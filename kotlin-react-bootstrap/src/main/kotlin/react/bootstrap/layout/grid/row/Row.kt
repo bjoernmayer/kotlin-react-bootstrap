@@ -8,7 +8,7 @@ import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDOMComponent
 
-class Row<T : DOMTag>(props: Props<T>) : AbstractDOMComponent<T, Row.Props<T>, RState>(props) {
+public class Row<T : DOMTag>(props: Props<T>) : AbstractDOMComponent<T, Row.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> {
         val rowClasses = mutableSetOf(ClassNames.ROW)
 
@@ -27,12 +27,12 @@ class Row<T : DOMTag>(props: Props<T>) : AbstractDOMComponent<T, Row.Props<T>, R
         return rowClasses
     }
 
-    interface Props<T : DOMTag> : AbstractDOMComponent.Props<T> {
-        var all: RowAttributes?
-        var sm: RowAttributes?
-        var md: RowAttributes?
-        var lg: RowAttributes?
-        var xl: RowAttributes?
-        var gutters: Boolean?
+    public interface Props<T : DOMTag> : AbstractDOMComponent.Props<T> {
+        public var all: RowAttributes?
+        public var sm: RowAttributes?
+        public var md: RowAttributes?
+        public var lg: RowAttributes?
+        public var xl: RowAttributes?
+        public var gutters: Boolean?
     }
 }

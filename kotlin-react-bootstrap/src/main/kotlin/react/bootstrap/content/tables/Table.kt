@@ -22,7 +22,7 @@ import react.dom.table as reactTable
  * @param responsive Set [Breakpoints] to specify, when a table should start to show scrollbars.
  * @param classes Space separated list of CSS classes for this element.
  */
-fun RBuilder.table(
+public fun RBuilder.table(
     classes: String? = null,
     dark: Boolean = false,
     striped: Boolean = false,
@@ -81,12 +81,12 @@ fun RBuilder.table(
     }
 }
 
-enum class BorderStyles(override val className: ClassNames) : ClassNameEnum {
+public enum class BorderStyles(override val className: ClassNames) : ClassNameEnum {
     BORDERED(ClassNames.TABLE_BORDERED),
     BORDERLESS(ClassNames.TABLE_BORDERLESS);
 }
 
-enum class ContextualStyle(override val className: ClassNames) : ClassNameEnum {
+public enum class ContextualStyle(override val className: ClassNames) : ClassNameEnum {
     ACTIVE(ClassNames.TABLE_ACTIVE),
     DANGER(ClassNames.TABLE_DANGER),
     DARK(ClassNames.TABLE_DARK),

@@ -15,21 +15,21 @@ import kotlin.reflect.KClass
  * @param P property type
  * @param S State type
  */
-abstract class SimpleDOMComponent<T : DOMTag, P : SimpleDOMComponent.Props<T>, S : RState>(
+public abstract class SimpleDOMComponent<T : DOMTag, P : SimpleDOMComponent.Props<T>, S : RState>(
     props: P,
     tag: KClass<T>
 ) : DOMComponent<T, RDOMHandler<T>, RDOMBuilder<T>, P, S>(props, tag) {
 
     override fun buildBuilder(builderFactory: (TagConsumer<Unit>) -> T): RDOMBuilder<T> = RDOMBuilder(builderFactory)
 
-    interface Props<T : DOMTag> : DOMComponent.Props<RDOMHandler<T>> {
+    public interface Props<T : DOMTag> : DOMComponent.Props<RDOMHandler<T>> {
         override var handler: RDOMHandler<T>
     }
 
-    companion object {
+    public companion object {
         @Suppress("UNCHECKED_CAST")
-        fun <T : DOMTag, P : Props<T>> RBuilder.simpleDomComponent(
+        public fun <T : DOMTag, P : Props<T>> RBuilder.simpleDomComponent(
             componentKlazz: KClass<out SimpleDOMComponent<T, P, *>>
-        ) = domComponent(componentKlazz)
+        ): ComponentBuilder<T, RDOMHandler<T>, RDOMBuilder<T>, P> = domComponent(componentKlazz)
     }
 }

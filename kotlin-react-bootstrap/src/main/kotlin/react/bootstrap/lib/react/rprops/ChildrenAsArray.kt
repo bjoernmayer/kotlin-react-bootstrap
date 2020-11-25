@@ -5,5 +5,5 @@ import react.Children
 import react.RProps
 import react.children
 
-val RProps.childrenArray: Array<out Child>
+public val RProps.childrenArray: Array<out Child>
     get() = Children.toArray(children)

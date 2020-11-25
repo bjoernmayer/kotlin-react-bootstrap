@@ -6,10 +6,10 @@ import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDOMComponent
 import react.bootstrap.lib.component.ClassNameEnum
 
-class Container<T : HtmlBlockTag>(props: Props<T>) : AbstractDOMComponent<T, Container.Props<T>, RState>(props) {
+public class Container<T : HtmlBlockTag>(props: Props<T>) : AbstractDOMComponent<T, Container.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> = setOf(props.viscosity?.className ?: ClassNames.CONTAINER)
 
-    enum class Viscosities(override val className: ClassNames) : ClassNameEnum {
+    public enum class Viscosities(override val className: ClassNames) : ClassNameEnum {
         FLUID(ClassNames.CONTAINER_FLUID),
         SM(ClassNames.CONTAINER_SM),
         MD(ClassNames.CONTAINER_MD),
@@ -17,7 +17,7 @@ class Container<T : HtmlBlockTag>(props: Props<T>) : AbstractDOMComponent<T, Con
         XL(ClassNames.CONTAINER_XL);
     }
 
-    interface Props<T : HtmlBlockTag> : AbstractDOMComponent.Props<T> {
-        var viscosity: Viscosities?
+    public interface Props<T : HtmlBlockTag> : AbstractDOMComponent.Props<T> {
+        public var viscosity: Viscosities?
     }
 }

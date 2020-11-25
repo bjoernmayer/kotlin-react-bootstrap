@@ -9,7 +9,7 @@ import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.dom.RDOMBuilder
 import react.dom.span
 
-class Close(props: Props) : SimpleDOMComponent<BUTTON, Close.Props, RState>(props, BUTTON::class) {
+public class Close(props: Props) : SimpleDOMComponent<BUTTON, Close.Props, RState>(props, BUTTON::class) {
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.CLOSE)
 
     override fun RDOMBuilder<BUTTON>.build() {
@@ -28,7 +28,7 @@ class Close(props: Props) : SimpleDOMComponent<BUTTON, Close.Props, RState>(prop
         addChildren()
     }
 
-    interface Props : SimpleDOMComponent.Props<BUTTON> {
-        var symbol: String?
+    public interface Props : SimpleDOMComponent.Props<BUTTON> {
+        public var symbol: String?
     }
 }

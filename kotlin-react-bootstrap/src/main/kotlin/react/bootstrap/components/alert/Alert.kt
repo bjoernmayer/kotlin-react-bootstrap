@@ -33,18 +33,18 @@ import react.setState
 import kotlin.reflect.KClass
 import react.bootstrap.content.typography.heading.Heading as BaseHeading
 
-sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(
+public sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(
     props: P
 ) : DOMComponent<T, AlertDOMHandler<T>, Alert.DomBuilder<T>, P, S>(props, props.tag) {
     init {
         props.requireProperties(props::tag)
     }
 
-    class DomBuilder<out T : Tag>(factory: (TagConsumer<Unit>) -> T) : RDOMBuilder<T>(factory)
+    public class DomBuilder<out T : Tag>(factory: (TagConsumer<Unit>) -> T) : RDOMBuilder<T>(factory)
 
     override fun buildBuilder(builderFactory: (TagConsumer<Unit>) -> T): DomBuilder<T> = DomBuilder(builderFactory)
 
-    class Static<T : HtmlBlockTag>(props: Props<T>) : Alert<T, Static.Props<T>, RState>(props) {
+    public class Static<T : HtmlBlockTag>(props: Props<T>) : Alert<T, Static.Props<T>, RState>(props) {
         override fun DomBuilder<T>.build() {
             attrs {
                 role = "alert"
@@ -53,10 +53,11 @@ sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(
             addChildren()
         }
 
-        interface Props<T : HtmlBlockTag> : Alert.Props<T>
+        public interface Props<T : HtmlBlockTag> : Alert.Props<T>
     }
 
-    class Dismissible<T : HtmlBlockTag>(props: Props<T>) : Alert<T, Dismissible.Props<T>, Dismissible.State>(props) {
+    public class Dismissible<T : HtmlBlockTag>(props: Props<T>) :
+        Alert<T, Dismissible.Props<T>, Dismissible.State>(props) {
         override fun State.init(props: Props<T>) {
             state = States.SHOWN
         }
@@ -177,45 +178,45 @@ sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(
             }
         }
 
-        enum class States {
+        public enum class States {
             SHOWN,
             DISMISSING,
             DISMISSED;
         }
 
-        interface State : RState {
-            var state: States
+        public interface State : RState {
+            public var state: States
         }
 
-        interface Props<T : HtmlBlockTag> : Alert.Props<T> {
+        public interface Props<T : HtmlBlockTag> : Alert.Props<T> {
             /**
              * When set to *true* the alert fades out, when dismissed.
              *
              * Defaults to *false*
              */
-            var fade: Boolean
+            public var fade: Boolean
 
             /**
              * This handler is called immediately when the [handleDismissle] handler was called.
              */
-            var onClose: NoArgEventHandler?
+            public var onClose: NoArgEventHandler?
 
             /**
              * This handler is called when the alert has been closed (will wait for CSS transitions to complete).
              */
-            var onClosed: NoArgEventHandler?
+            public var onClosed: NoArgEventHandler?
         }
 
-        class ClosingElement<T : DOMTag>(
+        public class ClosingElement<T : DOMTag>(
             props: Props<T>
         ) : AbstractDOMComponent<T, ClosingElement.Props<T>, RState>(props) {
             override fun buildClasses(): Set<ClassNames> = emptySet()
 
-            interface Props<T : DOMTag> : AbstractDOMComponent.Props<T>
+            public interface Props<T : DOMTag> : AbstractDOMComponent.Props<T>
         }
 
         @Suppress("UNCHECKED_CAST")
-        companion object : RStatics<Props<HtmlBlockTag>, State, Dismissible<HtmlBlockTag>, Nothing>(
+        public companion object : RStatics<Props<HtmlBlockTag>, State, Dismissible<HtmlBlockTag>, Nothing>(
             Dismissible::class as KClass<Dismissible<HtmlBlockTag>>
         ) {
             init {
@@ -232,7 +233,7 @@ sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(
 
     override fun buildClasses(): Set<ClassNames> = mutableSetOf(ClassNames.ALERT, props.variant.className)
 
-    enum class Variants(override val className: ClassNames) : ClassNameEnum {
+    public enum class Variants(override val className: ClassNames) : ClassNameEnum {
         DANGER(ClassNames.ALERT_DANGER),
         DARK(ClassNames.ALERT_DARK),
         INFO(ClassNames.ALERT_INFO),
@@ -243,18 +244,18 @@ sealed class Alert<T : HtmlBlockTag, P : Alert.Props<T>, S : RState>(
         WARNING(ClassNames.ALERT_WARNING);
     }
 
-    interface Props<T : HtmlBlockTag> : DOMComponent.Props<AlertDOMHandler<T>> {
-        var variant: Variants
-        var tag: KClass<out T>
+    public interface Props<T : HtmlBlockTag> : DOMComponent.Props<AlertDOMHandler<T>> {
+        public var variant: Variants
+        public var tag: KClass<out T>
     }
 
-    class Link(props: Props) : SimpleDOMComponent<A, Link.Props, RState>(props, A::class) {
+    public class Link(props: Props) : SimpleDOMComponent<A, Link.Props, RState>(props, A::class) {
         override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.ALERT_LINK)
 
-        interface Props : SimpleDOMComponent.Props<A>
+        public interface Props : SimpleDOMComponent.Props<A>
     }
 
-    class Heading<T : DOMTag>(props: Props<T>) : BaseHeading<T, BaseHeading.Props<T>>(props) {
+    public class Heading<T : DOMTag>(props: Props<T>) : BaseHeading<T, BaseHeading.Props<T>>(props) {
         override fun buildClasses(): Set<ClassNames> = super.buildClasses().run {
             toMutableSet().apply {
                 add(ClassNames.ALERT_HEADING)

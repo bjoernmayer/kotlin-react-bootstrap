@@ -16,7 +16,6 @@ dependencies {
     implementation(npm("file-loader", version("file-loader")))
     implementation(npm("react-syntax-highlighter", version("react-syntax-highlighter")))
     implementation(npm("markdown-to-jsx", version("markdown-to-jsx")))
-    implementation(npm("karma", version("karma")))
 }
 
 kotlin.js {

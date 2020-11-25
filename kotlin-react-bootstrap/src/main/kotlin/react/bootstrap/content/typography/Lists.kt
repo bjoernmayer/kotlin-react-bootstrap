@@ -11,7 +11,7 @@ import react.bootstrap.lib.component.RDOMHandler
 import react.dom.li
 import react.dom.ul
 
-enum class ListStyles(override val className: ClassNames) : ClassNameEnum {
+public enum class ListStyles(override val className: ClassNames) : ClassNameEnum {
     UNSTYLED(ClassNames.LIST_UNSTYLED),
     INLINE(ClassNames.LIST_INLINE);
 }
@@ -22,7 +22,7 @@ enum class ListStyles(override val className: ClassNames) : ClassNameEnum {
  * @param listStyles Set different [ListStyles].
  * @param classes Space separated list of CSS classes for this element.
  */
-fun RBuilder.ul(
+public fun RBuilder.ul(
     listStyles: ListStyles,
     classes: String? = null,
     block: RDOMHandler<UL>
@@ -33,7 +33,7 @@ fun RBuilder.ul(
     }
 }
 
-enum class ListItemStyles(override val className: ClassNames) : ClassNameEnum {
+public enum class ListItemStyles(override val className: ClassNames) : ClassNameEnum {
     INLINE(ClassNames.LIST_INLINE);
 }
 
@@ -43,7 +43,7 @@ enum class ListItemStyles(override val className: ClassNames) : ClassNameEnum {
  * @param listItemStyles Set different [ListItemStyles].
  * @param classes Space separated list of CSS classes for this element.
  */
-fun RBuilder.li(
+public fun RBuilder.li(
     listItemStyles: ListItemStyles,
     classes: String? = null,
     block: RDOMHandler<LI>

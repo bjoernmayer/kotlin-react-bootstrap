@@ -13,7 +13,7 @@ import react.dom.tr as reactTr
  * @param classes Space separated list of CSS classes for this element.
  * @param contextualStyle Set [ContextualStyle] to colour-in the [TR]s.
  */
-fun RBuilder.tr(
+public fun RBuilder.tr(
     classes: String? = null,
     contextualStyle: ContextualStyle? = null,
     block: RDOMHandler<TR>

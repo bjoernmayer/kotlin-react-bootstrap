@@ -11,7 +11,7 @@ import react.bootstrap.lib.component.RDOMHandler
 import kotlin.reflect.KClass
 
 @Suppress("UNCHECKED_CAST")
-fun RBuilder.container(
+public fun RBuilder.container(
     viscosity: Container.Viscosities? = null,
     classes: String? = null,
     props: PropHandler<Container.Props<DIV>> = PropHandler { },
@@ -19,7 +19,7 @@ fun RBuilder.container(
 ): ReactElement = container<DIV>(viscosity, classes, props, block)
 
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : HtmlBlockTag> RBuilder.container(
+public inline fun <reified T : HtmlBlockTag> RBuilder.container(
     viscosity: Container.Viscosities? = null,
     classes: String? = null,
     props: PropHandler<Container.Props<T>> = PropHandler { },
@@ -36,8 +36,8 @@ inline fun <reified T : HtmlBlockTag> RBuilder.container(
     .domHandler(block)
     .build()
 
-class ContainerBuilder(override val builder: RBuilder) : Builder {
-    fun fluid(
+public class ContainerBuilder(override val builder: RBuilder) : Builder {
+    public fun fluid(
         classes: String? = null,
         props: PropHandler<Container.Props<DIV>> = PropHandler { },
         block: RDOMHandler<DIV>
@@ -49,7 +49,7 @@ class ContainerBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
-    inline fun <reified T : HtmlBlockTag> fluid(
+    public inline fun <reified T : HtmlBlockTag> fluid(
         classes: String? = null,
         props: PropHandler<Container.Props<T>> = PropHandler { },
         block: RDOMHandler<T>
@@ -61,7 +61,7 @@ class ContainerBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
-    fun sm(
+    public fun sm(
         classes: String? = null,
         props: PropHandler<Container.Props<DIV>> = PropHandler { },
         block: RDOMHandler<DIV>
@@ -73,7 +73,7 @@ class ContainerBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
-    inline fun <reified T : HtmlBlockTag> sm(
+    public inline fun <reified T : HtmlBlockTag> sm(
         classes: String? = null,
         props: PropHandler<Container.Props<T>> = PropHandler { },
         block: RDOMHandler<T>
@@ -85,7 +85,7 @@ class ContainerBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
-    fun md(
+    public fun md(
         classes: String? = null,
         props: PropHandler<Container.Props<DIV>> = PropHandler { },
         block: RDOMHandler<DIV>
@@ -97,7 +97,7 @@ class ContainerBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
-    inline fun <reified T : HtmlBlockTag> md(
+    public inline fun <reified T : HtmlBlockTag> md(
         classes: String? = null,
         props: PropHandler<Container.Props<T>> = PropHandler { },
         block: RDOMHandler<T>
@@ -109,7 +109,7 @@ class ContainerBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
-    fun lg(
+    public fun lg(
         classes: String? = null,
         props: PropHandler<Container.Props<DIV>> = PropHandler { },
         block: RDOMHandler<DIV>
@@ -121,7 +121,7 @@ class ContainerBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
-    inline fun <reified T : HtmlBlockTag> lg(
+    public inline fun <reified T : HtmlBlockTag> lg(
         classes: String? = null,
         props: PropHandler<Container.Props<T>> = PropHandler { },
         block: RDOMHandler<T>
@@ -133,7 +133,7 @@ class ContainerBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
-    fun xl(
+    public fun xl(
         classes: String? = null,
         props: PropHandler<Container.Props<DIV>> = PropHandler { },
         block: RDOMHandler<DIV>
@@ -145,7 +145,7 @@ class ContainerBuilder(override val builder: RBuilder) : Builder {
             block = block
         )
 
-    inline fun <reified T : HtmlBlockTag> xl(
+    public inline fun <reified T : HtmlBlockTag> xl(
         classes: String? = null,
         props: PropHandler<Container.Props<T>> = PropHandler { },
         block: RDOMHandler<T>
@@ -158,5 +158,5 @@ class ContainerBuilder(override val builder: RBuilder) : Builder {
         )
 }
 
-val RBuilder.Containers: ContainerBuilder
+public val RBuilder.Containers: ContainerBuilder
     get() = ContainerBuilder(this)

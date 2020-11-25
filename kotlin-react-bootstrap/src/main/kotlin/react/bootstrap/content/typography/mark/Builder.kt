@@ -15,7 +15,7 @@ import kotlin.reflect.KClass
  * @param classes Space separated list of CSS classes for this element.
  */
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : DOMTag> RBuilder.mark(
+public inline fun <reified T : DOMTag> RBuilder.mark(
     classes: String? = null,
     props: PropHandler<Mark.Props<T>> = PropHandler { },
     block: RDOMHandler<T>

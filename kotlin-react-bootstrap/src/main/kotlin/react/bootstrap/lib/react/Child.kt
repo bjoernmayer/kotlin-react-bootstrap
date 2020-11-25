@@ -17,7 +17,7 @@ import kotlin.reflect.KClass
  * @param C Component Type
  * @return True if the child is of type [C]
  */
-inline fun <reified C : Component<*, *>> Child.isComponent(): Boolean {
+public inline fun <reified C : Component<*, *>> Child.isComponent(): Boolean {
     val reactElement = asJsObject().asReactElementOrNull() ?: return false
 
     return reactElement.componentJsClass == C::class.js
@@ -29,7 +29,7 @@ inline fun <reified C : Component<*, *>> Child.isComponent(): Boolean {
  * @param C Component Type
  * @return True if the child is of type [C]
  */
-fun <C : Component<*, *>> Child.isComponent(componentKlazz: KClass<out C>): Boolean {
+public fun <C : Component<*, *>> Child.isComponent(componentKlazz: KClass<out C>): Boolean {
     val reactElement = asJsObject().asReactElementOrNull() ?: return false
 
     return reactElement.componentJsClass == componentKlazz.js
@@ -43,7 +43,7 @@ fun <C : Component<*, *>> Child.isComponent(componentKlazz: KClass<out C>): Bool
  * @param P Props of the same Component
  * @param R value type of the result [List]
  */
-inline fun <reified C : Component<P, *>, P : RProps, R : Any> Array<out Child>.mapReactElementsIndexed(
+public inline fun <reified C : Component<P, *>, P : RProps, R : Any> Array<out Child>.mapReactElementsIndexed(
     @Suppress("UNUSED_PARAMETER") component: KClass<C> = C::class,
     transform: (index: Int, pairedElement: Pair<ReactElement, P>) -> R
 ): List<R> = mapIndexedNotNull { index, child ->
@@ -63,7 +63,7 @@ inline fun <reified C : Component<P, *>, P : RProps, R : Any> Array<out Child>.m
  * @param P Props type Component
  * @param action Basically a [RElementBuilder] which receives the index and the old props of the child
  */
-fun <P : RProps> Array<out Child>.onEachComponent(
+public fun <P : RProps> Array<out Child>.onEachComponent(
     component: KClass<out Component<P, *>>,
     action: RElementBuilder<P>.(index: Int, originalProps: P) -> Unit
 ): Array<out Child> {

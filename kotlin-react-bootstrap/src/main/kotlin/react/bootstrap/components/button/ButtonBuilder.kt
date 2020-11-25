@@ -1,4 +1,4 @@
-@file:Suppress("DuplicatedCode")
+@file:Suppress("DuplicatedCode", "unused")
 
 package react.bootstrap.components.button
 
@@ -230,8 +230,8 @@ private fun RBuilder.buttonLink(
     )
     .build()
 
-class ButtonBuilder(override val builder: RBuilder) : Builder {
-    open class OutlineButtonBuilder(override val builder: RBuilder) : Builder {
+public class ButtonBuilder(override val builder: RBuilder) : Builder {
+    public open class OutlineButtonBuilder(override val builder: RBuilder) : Builder {
         protected open val danger: ButtonComponent.Variants = ButtonComponent.Variants.Outline.DANGER
         protected open val dark: ButtonComponent.Variants = ButtonComponent.Variants.Outline.DARK
         protected open val info: ButtonComponent.Variants = ButtonComponent.Variants.Outline.INFO
@@ -254,7 +254,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun danger(
+        public fun danger(
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
             type: ButtonType = ButtonType.button,
@@ -293,7 +293,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun danger(
+        public fun danger(
             href: String?,
             target: String? = null,
             classes: String? = null,
@@ -333,7 +333,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun danger(
+        public fun danger(
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -379,7 +379,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun danger(
+        public fun danger(
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -425,7 +425,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun dark(
+        public fun dark(
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
             type: ButtonType = ButtonType.button,
@@ -464,7 +464,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun dark(
+        public fun dark(
             href: String?,
             target: String? = null,
             classes: String? = null,
@@ -504,7 +504,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun dark(
+        public fun dark(
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -550,7 +550,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun dark(
+        public fun dark(
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -596,7 +596,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun info(
+        public fun info(
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
             type: ButtonType = ButtonType.button,
@@ -635,7 +635,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun info(
+        public fun info(
             href: String?,
             target: String? = null,
             classes: String? = null,
@@ -675,7 +675,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun info(
+        public fun info(
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -721,7 +721,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun info(
+        public fun info(
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -767,7 +767,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun light(
+        public fun light(
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
             type: ButtonType = ButtonType.button,
@@ -806,7 +806,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun light(
+        public fun light(
             href: String?,
             target: String? = null,
             classes: String? = null,
@@ -846,7 +846,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun light(
+        public fun light(
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -892,7 +892,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun light(
+        public fun light(
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -938,7 +938,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun primary(
+        public fun primary(
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
             type: ButtonType = ButtonType.button,
@@ -977,7 +977,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun primary(
+        public fun primary(
             href: String?,
             target: String? = null,
             classes: String? = null,
@@ -1017,7 +1017,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun primary(
+        public fun primary(
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -1063,7 +1063,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param blockSized Renders the button as block, if set to *true*.
          * @param classes Space separated list of CSS classes for this element.
          */
-        fun primary(
+        public fun primary(
             name: String? = null,
             value: String? = null,
             type: ButtonComponent.Box.Type,
@@ -1109,7 +1109,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun secondary(
+        public fun secondary(
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
             type: ButtonType = ButtonType.button,
@@ -1148,7 +1148,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun secondary(
+        public fun secondary(
             href: String?,
             target: String? = null,
             classes: String? = null,
@@ -1188,7 +1188,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun secondary(
+        public fun secondary(
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -1234,7 +1234,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun secondary(
+        public fun secondary(
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -1280,7 +1280,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun success(
+        public fun success(
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
             type: ButtonType = ButtonType.button,
@@ -1319,7 +1319,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun success(
+        public fun success(
             href: String?,
             target: String? = null,
             classes: String? = null,
@@ -1359,7 +1359,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun success(
+        public fun success(
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -1405,7 +1405,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun success(
+        public fun success(
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -1451,7 +1451,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun warning(
+        public fun warning(
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
             type: ButtonType = ButtonType.button,
@@ -1490,7 +1490,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun warning(
+        public fun warning(
             href: String?,
             target: String? = null,
             classes: String? = null,
@@ -1530,7 +1530,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun warning(
+        public fun warning(
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -1576,7 +1576,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param blockSized Renders the button as block, if set to *true*.
          * @param classes Space separated list of CSS classes for this element.
          */
-        fun warning(
+        public fun warning(
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -1610,7 +1610,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         )
     }
 
-    class SolidButtonBuilder(builder: RBuilder) : OutlineButtonBuilder(builder) {
+    public class SolidButtonBuilder(builder: RBuilder) : OutlineButtonBuilder(builder) {
         override val danger: ButtonComponent.Variants = ButtonComponent.Variants.Solid.DANGER
         override val dark: ButtonComponent.Variants = ButtonComponent.Variants.Solid.DARK
         override val info: ButtonComponent.Variants = ButtonComponent.Variants.Solid.INFO
@@ -1633,7 +1633,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param blockSized Renders the button as block, if set to *true*.
          * @param classes Space separated list of CSS classes for this element.
          */
-        fun link(
+        public fun link(
             formEncType: ButtonFormEncType? = null,
             formMethod: ButtonFormMethod? = null,
             type: ButtonType = ButtonType.button,
@@ -1672,7 +1672,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun link(
+        public fun link(
             href: String?,
             target: String? = null,
             classes: String? = null,
@@ -1712,7 +1712,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun link(
+        public fun link(
             type: ButtonComponent.Input.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -1758,7 +1758,7 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
          * @param sizes Choose between different [ButtonComponent.Sizes].
          * @param blockSized Renders the button as block, if set to *true*.
          */
-        fun link(
+        public fun link(
             type: ButtonComponent.Box.Type,
             formEncType: InputFormEncType? = null,
             formMethod: InputFormMethod? = null,
@@ -1792,18 +1792,18 @@ class ButtonBuilder(override val builder: RBuilder) : Builder {
         )
     }
 
-    val solid = SolidButtonBuilder(builder)
-    val outline = OutlineButtonBuilder(builder)
+    public val solid: SolidButtonBuilder = SolidButtonBuilder(builder)
+    public val outline: OutlineButtonBuilder = OutlineButtonBuilder(builder)
 }
 
-val RBuilder.Buttons
+public val RBuilder.Buttons: ButtonBuilder
     get() = ButtonBuilder(this)
 
 /**
  * Creates a [ButtonGroup] element.
  */
 @Suppress("UNCHECKED_CAST")
-fun RBuilder.buttonGroup(
+public fun RBuilder.buttonGroup(
     classes: String? = null,
     appearance: ButtonGroup.Appearance? = null,
     behaviour: ButtonGroup.Behaviours? = null,
@@ -1816,7 +1816,7 @@ fun RBuilder.buttonGroup(
  * Creates a generic [ButtonGroup] element.
  */
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : HtmlBlockTag> RBuilder.buttonGroup(
+public inline fun <reified T : HtmlBlockTag> RBuilder.buttonGroup(
     classes: String? = null,
     appearance: ButtonGroup.Appearance? = null,
     behaviour: ButtonGroup.Behaviours? = null,
@@ -1843,7 +1843,7 @@ inline fun <reified T : HtmlBlockTag> RBuilder.buttonGroup(
  * @param classes Space separated list of CSS classes for this element.
  */
 @Suppress("UNCHECKED_CAST")
-fun RBuilder.buttonToolbar(
+public fun RBuilder.buttonToolbar(
     classes: String? = null,
     props: PropHandler<ButtonToolbar.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
@@ -1855,7 +1855,7 @@ fun RBuilder.buttonToolbar(
  * @param classes Space separated list of CSS classes for this element.
  */
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : HtmlBlockTag> RBuilder.buttonToolbar(
+public inline fun <reified T : HtmlBlockTag> RBuilder.buttonToolbar(
     classes: String? = null,
     props: PropHandler<ButtonToolbar.Props<T>> = PropHandler { },
     block: RDOMHandler<T>

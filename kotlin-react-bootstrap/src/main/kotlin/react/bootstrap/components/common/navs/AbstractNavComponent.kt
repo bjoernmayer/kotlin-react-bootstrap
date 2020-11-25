@@ -15,7 +15,7 @@ import react.bootstrap.lib.react.onEachComponent
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
-abstract class AbstractNavComponent
+public abstract class AbstractNavComponent
 <T : HtmlBlockTag, H : DOMHandler<out T, B>, B : RDOMBuilder<T>, P : AbstractNavComponent.Props<T, H, B>>(
     props: P,
     tag: KClass<out T>
@@ -81,9 +81,9 @@ abstract class AbstractNavComponent
         }
     }
 
-    interface Props<T : HtmlBlockTag, H : DOMHandler<out T, B>, B : RDOMBuilder<T>> : DOMComponent.Props<H> {
-        var appearance: Navigation.Appearance?
-        var widthHandling: Navigation.WidthHandling?
-        var activeLinkPredicate: ActiveLinkPredicate?
+    public interface Props<T : HtmlBlockTag, H : DOMHandler<out T, B>, B : RDOMBuilder<T>> : DOMComponent.Props<H> {
+        public var appearance: Navigation.Appearance?
+        public var widthHandling: Navigation.WidthHandling?
+        public var activeLinkPredicate: ActiveLinkPredicate?
     }
 }

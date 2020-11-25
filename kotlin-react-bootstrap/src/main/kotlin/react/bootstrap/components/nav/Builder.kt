@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package react.bootstrap.components.nav
 
 import kotlinx.html.A
@@ -16,7 +18,7 @@ import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.lib.component.SimpleDOMComponent.Companion.simpleDomComponent
 import kotlin.reflect.KClass
 
-class NavigationBuilder(override val builder: RBuilder) : Builder {
+public class NavigationBuilder(override val builder: RBuilder) : Builder {
     private fun <T : HtmlBlockTag, P : Navigation.Props<T>> buildNav(
         componentKlazz: KClass<out Navigation<T, P>>,
         classes: String?,
@@ -48,7 +50,7 @@ class NavigationBuilder(override val builder: RBuilder) : Builder {
      * @param widthHandling Set this value to change the width handling among the [NavItems] and [NavLink]s of this nav.
      * @param activeLinkPredicate Set this predicate to mark a [NavLink] active
      */
-    fun ul(
+    public fun ul(
         classes: String? = null,
         appearance: Navigation.Appearance? = null,
         widthHandling: Navigation.WidthHandling? = null,
@@ -67,7 +69,7 @@ class NavigationBuilder(override val builder: RBuilder) : Builder {
      * @param widthHandling Set this value to change the width handling among the [NavItems] and [NavLink]s of this nav.
      * @param activeLinkPredicate Set this predicate to mark a [NavLink] active
      */
-    fun ol(
+    public fun ol(
         classes: String? = null,
         appearance: Navigation.Appearance? = null,
         widthHandling: Navigation.WidthHandling? = null,
@@ -86,7 +88,7 @@ class NavigationBuilder(override val builder: RBuilder) : Builder {
      * @param widthHandling Set this value to change the width handling among the [NavItems] and [NavLink]s of this nav.
      * @param activeLinkPredicate Set this predicate to mark a [NavLink] active
      */
-    fun nav(
+    public fun nav(
         classes: String? = null,
         appearance: Navigation.Appearance? = null,
         widthHandling: Navigation.WidthHandling? = null,
@@ -105,7 +107,7 @@ class NavigationBuilder(override val builder: RBuilder) : Builder {
      * @param widthHandling Set this value to change the width handling among the [NavItems] and [NavLink]s of this nav.
      * @param activeLinkPredicate Set this predicate to mark a [NavLink] active
      */
-    fun div(
+    public fun div(
         classes: String? = null,
         appearance: Navigation.Appearance? = null,
         widthHandling: Navigation.WidthHandling? = null,
@@ -117,7 +119,7 @@ class NavigationBuilder(override val builder: RBuilder) : Builder {
     )
 }
 
-val RBuilder.Navs
+public val RBuilder.Navs: NavigationBuilder
     get() = NavigationBuilder(this)
 
 internal inline fun <reified T : HtmlBlockTag, P : NavItems.Props<T>> RBuilder.buildNavItem(
@@ -131,25 +133,25 @@ internal inline fun <reified T : HtmlBlockTag, P : NavItems.Props<T>> RBuilder.b
     .domHandler(block)
     .build()
 
-fun Navigation.DomBuilder<UL>.navItem(
+public fun Navigation.DomBuilder<UL>.navItem(
     classes: String? = null,
     props: PropHandler<NavItems.Li.Props> = PropHandler { },
     block: NavItemDOMHandler<LI>
 ): ReactElement = buildNavItem(NavItems.Li::class, classes, props, block)
 
-fun Navigation.DomBuilder<OL>.navItem(
+public fun Navigation.DomBuilder<OL>.navItem(
     classes: String? = null,
     props: PropHandler<NavItems.Li.Props> = PropHandler { },
     block: NavItemDOMHandler<LI>
 ): ReactElement = buildNavItem(NavItems.Li::class, classes, props, block)
 
-fun Navigation.DomBuilder<NAV>.navItem(
+public fun Navigation.DomBuilder<NAV>.navItem(
     classes: String? = null,
     props: PropHandler<NavItems.DivItem.Props> = PropHandler { },
     block: NavItemDOMHandler<DIV>
 ): ReactElement = buildNavItem(NavItems.DivItem::class, classes, props, block)
 
-fun Navigation.DomBuilder<DIV>.navItem(
+public fun Navigation.DomBuilder<DIV>.navItem(
     classes: String? = null,
     props: PropHandler<NavItems.DivItem.Props> = PropHandler { },
     block: NavItemDOMHandler<DIV>
@@ -192,7 +194,7 @@ internal fun RBuilder.buildNavLink(
     )
     .build()
 
-fun NavItems.DomBuilder<LI>.navLink(
+public fun NavItems.DomBuilder<LI>.navLink(
     href: String? = null,
     target: String? = null,
     classes: String? = null,
@@ -202,7 +204,7 @@ fun NavItems.DomBuilder<LI>.navLink(
     block: RDOMHandler<A>
 ): ReactElement = buildNavLink(href, target, classes, active, disabled, props, block)
 
-fun Navigation.DomBuilder<NAV>.navLink(
+public fun Navigation.DomBuilder<NAV>.navLink(
     href: String? = null,
     target: String? = null,
     classes: String? = null,
@@ -212,7 +214,7 @@ fun Navigation.DomBuilder<NAV>.navLink(
     block: RDOMHandler<A>
 ): ReactElement = buildNavLink(href, target, classes, active, disabled, props, block)
 
-fun NavItems.DomBuilder<DIV>.navLink(
+public fun NavItems.DomBuilder<DIV>.navLink(
     href: String? = null,
     target: String? = null,
     classes: String? = null,
@@ -222,7 +224,7 @@ fun NavItems.DomBuilder<DIV>.navLink(
     block: RDOMHandler<A>
 ): ReactElement = buildNavLink(href, target, classes, active, disabled, props, block)
 
-fun Navigation.DomBuilder<DIV>.navLink(
+public fun Navigation.DomBuilder<DIV>.navLink(
     href: String? = null,
     target: String? = null,
     classes: String? = null,

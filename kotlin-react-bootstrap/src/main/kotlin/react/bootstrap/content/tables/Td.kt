@@ -13,7 +13,7 @@ import react.dom.td as reactTd
  * @param classes Space separated list of CSS classes for this element.
  * @param contextualStyle Set [ContextualStyle] to colour-in the [TD]s.
  */
-fun RBuilder.td(
+public fun RBuilder.td(
     classes: String? = null,
     contextualStyle: ContextualStyle? = null,
     block: RDOMHandler<TD>

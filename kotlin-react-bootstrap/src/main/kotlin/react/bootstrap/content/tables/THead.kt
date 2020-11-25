@@ -14,7 +14,7 @@ import react.dom.thead as reactThead
  * @param classes Space separated list of CSS classes for this element.
  * @param style Set a style for light and dark colouring.
  */
-fun RBuilder.thead(
+public fun RBuilder.thead(
     classes: String? = null,
     style: THeadStyles? = null,
     block: RDOMHandler<THEAD>
@@ -33,7 +33,7 @@ fun RBuilder.thead(
     }
 }
 
-enum class THeadStyles(val className: ClassNames) {
+public enum class THeadStyles(public val className: ClassNames) {
     LIGHT(ClassNames.THEAD_LIGHT),
     DARK(ClassNames.THEAD_DARK);
 }

@@ -22,7 +22,7 @@ import kotlin.reflect.KClass
  * @param classes Space separated list of CSS classes for this element.
  */
 @Suppress("UNCHECKED_CAST")
-fun RBuilder.row(
+public fun RBuilder.row(
     classes: String? = null,
     all: RowAttributes? = null,
     sm: RowAttributes? = null,
@@ -35,7 +35,7 @@ fun RBuilder.row(
 ): ReactElement = row<DIV>(classes, all, sm, md, lg, xl, gutters, props, block)
 
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : DOMTag> RBuilder.row(
+public inline fun <reified T : DOMTag> RBuilder.row(
     classes: String? = null,
     all: RowAttributes? = null,
     sm: RowAttributes? = null,

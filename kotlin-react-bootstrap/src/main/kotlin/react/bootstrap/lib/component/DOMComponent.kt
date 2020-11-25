@@ -28,7 +28,7 @@ import kotlin.reflect.KClass
  * @param P property type
  * @param S State type
  */
-abstract class DOMComponent
+public abstract class DOMComponent
 <T : DOMTag, H : DOMHandler<out T, B>, B : RDOMBuilder<T>, P : DOMComponent.Props<H>, S : RState>(
     props: P,
     tag: KClass<out T>
@@ -86,26 +86,27 @@ abstract class DOMComponent
         )
     }
 
-    interface Props<H : DOMHandler<out Tag, *>> : WithClasses {
-        var handler: H
+    public interface Props<H : DOMHandler<out Tag, *>> : WithClasses {
+        public var handler: H
     }
 
-    open class ComponentBuilder<T : DOMTag, H : DOMHandler<out T, B>, B : RDOMBuilder<T>, P : Props<H>> constructor(
+    public open class ComponentBuilder<T : DOMTag, H : DOMHandler<out T, B>, B : RDOMBuilder<T>, P : Props<H>>
+    constructor(
         protected val builder: RBuilder,
         protected val component: KClass<out DOMComponent<T, H, *, P, *>>
     ) {
         protected var classes: String? = null
-        var propHandler: PropHandler<P> = PropHandler { }
+        public var propHandler: PropHandler<P> = PropHandler { }
 
-        lateinit var domHandler: H
+        public lateinit var domHandler: H
 
-        fun classes(classes: String?): ComponentBuilder<T, H, B, P> {
+        public fun classes(classes: String?): ComponentBuilder<T, H, B, P> {
             this.classes = classes
 
             return this
         }
 
-        fun propHandler(propHandler: PropHandler<P>): ComponentBuilder<T, H, B, P> {
+        public fun propHandler(propHandler: PropHandler<P>): ComponentBuilder<T, H, B, P> {
             this.propHandler = propHandler
 
             return this
@@ -124,7 +125,7 @@ abstract class DOMComponent
         //     return this
         // }
 
-        fun domHandler(domHandler: DOMHandler<T, B>): ComponentBuilder<T, H, B, P> {
+        public fun domHandler(domHandler: DOMHandler<T, B>): ComponentBuilder<T, H, B, P> {
             // This is a neccessary Hack. If type of domHandler would be just H, some lambdas might not be converted
             // into the typed DOMHandler. Resulting in weird errors.
             // Without this hack, the failing FunInterfaces need to be created using FUNINTERFACE { ... }
@@ -133,7 +134,7 @@ abstract class DOMComponent
             return this
         }
 
-        open fun build(): ReactElement =
+        public open fun build(): ReactElement =
             builder.child(component) {
                 attrs {
                     classes = this@ComponentBuilder.classes.splitClassesToSet()
@@ -148,7 +149,7 @@ abstract class DOMComponent
         protected fun String?.splitClassesToSet(): Set<String> = this?.split(" ")?.toSet() ?: emptySet()
     }
 
-    companion object {
+    public companion object {
         @Suppress("UNUSED_VARIABLE", "UNUSED_ANONYMOUS_PARAMETER")
         internal fun <T : Any> getBuilderFactory(tag: KClass<T>): (TagConsumer<Unit>) -> T = { tagConsumer ->
             // This intantiates the tag by using some reflection js magic.
@@ -159,8 +160,8 @@ abstract class DOMComponent
             js("new constructor(attributes, tagConsumer)") as T
         }
 
-        fun <T : DOMTag, H : DOMHandler<T, B>, B : RDOMBuilder<T>, P : Props<H>> RBuilder.domComponent(
+        public fun <T : DOMTag, H : DOMHandler<T, B>, B : RDOMBuilder<T>, P : Props<H>> RBuilder.domComponent(
             componentKlazz: KClass<out DOMComponent<T, H, B, P, *>>
-        ) = ComponentBuilder(this, componentKlazz)
+        ): ComponentBuilder<T, H, B, P> = ComponentBuilder(this, componentKlazz)
     }
 }

@@ -19,7 +19,7 @@ import react.dom.blockQuote as reactBlockQuote
  *
  * @param classes Space separated list of CSS classes for this element.
  */
-fun RBuilder.blockQuote(classes: String? = null, block: RDOMHandler<BLOCKQUOTE>): ReactElement =
+public fun RBuilder.blockQuote(classes: String? = null, block: RDOMHandler<BLOCKQUOTE>): ReactElement =
     reactBlockQuote(classes.appendClass(ClassNames.BLOCKQUOTE)) {
         val builder = this
         with(block) {
@@ -33,7 +33,7 @@ fun RBuilder.blockQuote(classes: String? = null, block: RDOMHandler<BLOCKQUOTE>)
  * @param classes Space separated list of CSS classes for this element.
  */
 @Suppress("UNCHECKED_CAST")
-fun RDOMBuilder<BLOCKQUOTE>.blockQuoteFooter(
+public fun RDOMBuilder<BLOCKQUOTE>.blockQuoteFooter(
     classes: String? = null,
     props: PropHandler<BlockQuoteFooter.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>
@@ -45,7 +45,7 @@ fun RDOMBuilder<BLOCKQUOTE>.blockQuoteFooter(
  * @param classes Space separated list of CSS classes for this element.
  */
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : HtmlBlockTag> RDOMBuilder<BLOCKQUOTE>.blockQuoteFooter(
+public inline fun <reified T : HtmlBlockTag> RDOMBuilder<BLOCKQUOTE>.blockQuoteFooter(
     classes: String? = null,
     props: PropHandler<BlockQuoteFooter.Props<T>> = PropHandler { },
     block: RDOMHandler<T>

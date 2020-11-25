@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package react.bootstrap.components.button
 
 import kotlinx.html.HtmlBlockTag
@@ -23,7 +25,7 @@ import react.dom.input
 import react.setState
 import kotlinx.html.CommonAttributeGroupFacadeFlowInteractivePhrasingContent as InteractiveTag
 
-class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
+public class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
     AbstractDOMComponent<T, ButtonGroup.Props<T>, ButtonGroup.State>(props) {
     override fun State.init(props: Props<T>) {
         val children = buildBuilder(getBuilderFactory(props.tag)).apply {
@@ -271,11 +273,11 @@ class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
         }
     }
 
-    interface Props<T : HtmlBlockTag> : AbstractDOMComponent.Props<T> {
+    public interface Props<T : HtmlBlockTag> : AbstractDOMComponent.Props<T> {
         /**
          * Change the appearance of the [ButtonGroup] by setting an [Appearance].
          */
-        var appearance: Appearance?
+        public var appearance: Appearance?
 
         /**
          * Set this to make [ButtonComponent]s behave like Radio- or Checkboxes.
@@ -283,27 +285,27 @@ class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
          * Defaults to a smart [ButtonGroup] which does not change Behaviour for normal buttons, but lets Radio- &
          * Checkboxes behave like they should.
          */
-        var behaviour: Behaviours?
+        public var behaviour: Behaviours?
 
-        var sizes: Sizes?
+        public var sizes: Sizes?
     }
 
-    interface State : RState {
-        var buttons: Map<Int, Pair<ReactElement, ButtonComponent.Props<*>>>
-        var activeButtons: Collection<Int>
+    public interface State : RState {
+        public var buttons: Map<Int, Pair<ReactElement, ButtonComponent.Props<*>>>
+        public var activeButtons: Collection<Int>
     }
 
-    enum class Appearance {
+    public enum class Appearance {
         NONE,
         VERTICAL
     }
 
-    enum class Behaviours {
+    public enum class Behaviours {
         CHECKBOXES,
         RADIOS;
     }
 
-    enum class Sizes(override val className: ClassNames) : ClassNameEnum {
+    public enum class Sizes(override val className: ClassNames) : ClassNameEnum {
         SM(ClassNames.BTN_GROUP_SM),
         LG(ClassNames.BTN_GROUP_LG);
     }

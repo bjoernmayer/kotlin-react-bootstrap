@@ -13,7 +13,7 @@ import react.bootstrap.lib.component.SimpleDOMComponent.Companion.simpleDomCompo
  * @param symbol Symbol/Text shown for this element
  * @param classes Space separated list of CSS classes for this element.
  */
-fun RBuilder.close(
+public fun RBuilder.close(
     symbol: String? = null,
     classes: String? = null,
     props: PropHandler<Close.Props> = PropHandler { },

@@ -20,7 +20,7 @@ import kotlin.reflect.KClass
  * @param xl [ColAttributes] that apply to extra-large screen sizes.
  */
 @Suppress("UNCHECKED_CAST")
-fun RBuilder.col(
+public fun RBuilder.col(
     classes: String? = null,
     all: ColAttributes? = null,
     sm: ColAttributes? = null,
@@ -32,7 +32,7 @@ fun RBuilder.col(
 ): ReactElement = col<DIV>(classes, all, sm, md, lg, xl, props, block)
 
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : DOMTag> RBuilder.col(
+public inline fun <reified T : DOMTag> RBuilder.col(
     classes: String? = null,
     all: ColAttributes? = null,
     sm: ColAttributes? = null,

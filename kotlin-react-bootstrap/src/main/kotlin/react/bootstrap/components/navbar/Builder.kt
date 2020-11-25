@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package react.bootstrap.components.navbar
 
 import kotlinx.html.A
@@ -28,7 +30,7 @@ import react.bootstrap.lib.component.SimpleDOMComponent.Companion.simpleDomCompo
 import kotlin.reflect.KClass
 
 @Suppress("UNCHECKED_CAST")
-fun RBuilder.navbar(
+public fun RBuilder.navbar(
     classes: String? = null,
     expand: Breakpoints? = null,
     theme: Navbar.Theme? = null,
@@ -37,7 +39,7 @@ fun RBuilder.navbar(
 ): ReactElement = navbar<DIV>(classes, expand, theme, props, block)
 
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : HtmlBlockTag> RBuilder.navbar(
+public inline fun <reified T : HtmlBlockTag> RBuilder.navbar(
     classes: String? = null,
     expand: Breakpoints? = null,
     theme: Navbar.Theme? = null,
@@ -59,14 +61,14 @@ inline fun <reified T : HtmlBlockTag> RBuilder.navbar(
     .build()
 
 @Suppress("UNCHECKED_CAST")
-fun Navbar.DomBuilder<*>.brand(
+public fun Navbar.DomBuilder<*>.brand(
     classes: String? = null,
     props: PropHandler<Navbar.Brand.Props<A>> = PropHandler { },
     block: RDOMHandler<A>
 ): ReactElement = brand<A>(classes, props, block)
 
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : HtmlInlineTag> Navbar.DomBuilder<*>.brand(
+public inline fun <reified T : HtmlInlineTag> Navbar.DomBuilder<*>.brand(
     classes: String? = null,
     props: PropHandler<Navbar.Brand.Props<T>> = PropHandler { },
     block: RDOMHandler<T>
@@ -76,7 +78,7 @@ inline fun <reified T : HtmlInlineTag> Navbar.DomBuilder<*>.brand(
     .domHandler(block)
     .build()
 
-class NavbarNavigationBuilder(override val builder: Navbar.DomBuilder<*>) : Builder {
+public class NavbarNavigationBuilder(override val builder: Navbar.DomBuilder<*>) : Builder {
     private fun <T : HtmlBlockTag, P : Navbar.Navigation.Props<T>> buildNav(
         componentKlazz: KClass<out Navbar.Navigation<T, P>>,
         classes: String?,
@@ -108,7 +110,7 @@ class NavbarNavigationBuilder(override val builder: Navbar.DomBuilder<*>) : Buil
      * @param widthHandling Set this value to change the width handling among the [NavItems] and [NavLink]s of this nav.
      * @param activeLinkPredicate Set this predicate to mark a [NavLink] active
      */
-    fun ul(
+    public fun ul(
         classes: String? = null,
         appearance: Navigation.Appearance? = null,
         widthHandling: Navigation.WidthHandling? = null,
@@ -127,7 +129,7 @@ class NavbarNavigationBuilder(override val builder: Navbar.DomBuilder<*>) : Buil
      * @param widthHandling Set this value to change the width handling among the [NavItems] and [NavLink]s of this nav.
      * @param activeLinkPredicate Set this predicate to mark a [NavLink] active
      */
-    fun ol(
+    public fun ol(
         classes: String? = null,
         appearance: Navigation.Appearance? = null,
         widthHandling: Navigation.WidthHandling? = null,
@@ -146,7 +148,7 @@ class NavbarNavigationBuilder(override val builder: Navbar.DomBuilder<*>) : Buil
      * @param widthHandling Set this value to change the width handling among the [NavItems] and [NavLink]s of this nav.
      * @param activeLinkPredicate Set this predicate to mark a [NavLink] active
      */
-    fun nav(
+    public fun nav(
         classes: String? = null,
         appearance: Navigation.Appearance? = null,
         widthHandling: Navigation.WidthHandling? = null,
@@ -165,7 +167,7 @@ class NavbarNavigationBuilder(override val builder: Navbar.DomBuilder<*>) : Buil
      * @param widthHandling Set this value to change the width handling among the [NavItems] and [NavLink]s of this nav.
      * @param activeLinkPredicate Set this predicate to mark a [NavLink] active
      */
-    fun div(
+    public fun div(
         classes: String? = null,
         appearance: Navigation.Appearance? = null,
         widthHandling: Navigation.WidthHandling? = null,
@@ -177,34 +179,34 @@ class NavbarNavigationBuilder(override val builder: Navbar.DomBuilder<*>) : Buil
     )
 }
 
-val Navbar.DomBuilder<*>.NavbarNavs
+public val Navbar.DomBuilder<*>.NavbarNavs: NavbarNavigationBuilder
     get() = NavbarNavigationBuilder(this)
 
-fun Navbar.Navigation.DomBuilder<UL>.navItem(
+public fun Navbar.Navigation.DomBuilder<UL>.navItem(
     classes: String? = null,
     props: PropHandler<NavItems.Li.Props> = PropHandler { },
     block: NavItemDOMHandler<LI>
 ): ReactElement = buildNavItem(NavItems.Li::class, classes, props, block)
 
-fun Navbar.Navigation.DomBuilder<OL>.navItem(
+public fun Navbar.Navigation.DomBuilder<OL>.navItem(
     classes: String? = null,
     props: PropHandler<NavItems.Li.Props> = PropHandler { },
     block: NavItemDOMHandler<LI>
 ): ReactElement = buildNavItem(NavItems.Li::class, classes, props, block)
 
-fun Navbar.Navigation.DomBuilder<NAV>.navItem(
+public fun Navbar.Navigation.DomBuilder<NAV>.navItem(
     classes: String? = null,
     props: PropHandler<NavItems.DivItem.Props> = PropHandler { },
     block: NavItemDOMHandler<DIV>
 ): ReactElement = buildNavItem(NavItems.DivItem::class, classes, props, block)
 
-fun Navbar.Navigation.DomBuilder<DIV>.navItem(
+public fun Navbar.Navigation.DomBuilder<DIV>.navItem(
     classes: String? = null,
     props: PropHandler<NavItems.DivItem.Props> = PropHandler { },
     block: NavItemDOMHandler<DIV>
 ): ReactElement = buildNavItem(NavItems.DivItem::class, classes, props, block)
 
-fun Navbar.Navigation.DomBuilder<NAV>.navLink(
+public fun Navbar.Navigation.DomBuilder<NAV>.navLink(
     href: String? = null,
     target: String? = null,
     classes: String? = null,
@@ -214,7 +216,7 @@ fun Navbar.Navigation.DomBuilder<NAV>.navLink(
     block: RDOMHandler<A>
 ): ReactElement = buildNavLink(href, target, classes, active, disabled, props, block)
 
-fun Navbar.Navigation.DomBuilder<DIV>.navLink(
+public fun Navbar.Navigation.DomBuilder<DIV>.navLink(
     href: String? = null,
     target: String? = null,
     classes: String? = null,
@@ -224,7 +226,7 @@ fun Navbar.Navigation.DomBuilder<DIV>.navLink(
     block: RDOMHandler<A>
 ): ReactElement = buildNavLink(href, target, classes, active, disabled, props, block)
 
-fun Navbar.DomBuilder<*>.toggler(
+public fun Navbar.DomBuilder<*>.toggler(
     classes: String? = null,
     props: PropHandler<Navbar.Toggler.Props> = PropHandler { },
     block: RDOMHandler<BUTTON>
@@ -235,7 +237,7 @@ fun Navbar.DomBuilder<*>.toggler(
     .build()
 
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : HtmlBlockTag> Navbar.DomBuilder<*>.collapse(
+public inline fun <reified T : HtmlBlockTag> Navbar.DomBuilder<*>.collapse(
     classes: String? = null,
     props: PropHandler<Navbar.Collapse.Props<T>> = PropHandler { },
     block: RDOMHandler<T>
@@ -245,7 +247,7 @@ inline fun <reified T : HtmlBlockTag> Navbar.DomBuilder<*>.collapse(
     .domHandler(block)
     .build()
 
-fun Navbar.DomBuilder<*>.collapse(
+public fun Navbar.DomBuilder<*>.collapse(
     classes: String? = null,
     props: PropHandler<Navbar.Collapse.Props<DIV>> = PropHandler { },
     block: RDOMHandler<DIV>

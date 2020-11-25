@@ -9,7 +9,7 @@ import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.AbstractDOMComponent
 
-class Col<T : DOMTag>(props: Props<T>) : AbstractDOMComponent<T, Col.Props<T>, RState>(props) {
+public class Col<T : DOMTag>(props: Props<T>) : AbstractDOMComponent<T, Col.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> {
         val colClasses = mutableSetOf<ClassNames>()
 
@@ -28,11 +28,11 @@ class Col<T : DOMTag>(props: Props<T>) : AbstractDOMComponent<T, Col.Props<T>, R
         return colClasses
     }
 
-    interface Props<T : DOMTag> : AbstractDOMComponent.Props<T> {
-        var all: ColAttributes?
-        var sm: ColAttributes?
-        var md: ColAttributes?
-        var lg: ColAttributes?
-        var xl: ColAttributes?
+    public interface Props<T : DOMTag> : AbstractDOMComponent.Props<T> {
+        public var all: ColAttributes?
+        public var sm: ColAttributes?
+        public var md: ColAttributes?
+        public var lg: ColAttributes?
+        public var xl: ColAttributes?
     }
 }

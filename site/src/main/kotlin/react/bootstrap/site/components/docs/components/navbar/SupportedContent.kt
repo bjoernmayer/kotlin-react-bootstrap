@@ -4,6 +4,7 @@ import kotlinx.html.A
 import kotlinx.html.HtmlInlineTag
 import kotlinx.html.NAV
 import kotlinx.html.SPAN
+import kotlinx.html.id
 import react.RBuilder
 import react.RElementBuilder
 import react.RProps
@@ -54,7 +55,12 @@ Here’s an example of all the sub-components included in a responsive light-the
                     +"Navbar"
                 }
                 toggler { }
-                collapse {
+                collapse(
+                    props = {
+                        // instead I could require the property of the div. this is possible
+                        id = "navbarSupportedContent"
+                    }
+                ) {
                 }
             }
         }

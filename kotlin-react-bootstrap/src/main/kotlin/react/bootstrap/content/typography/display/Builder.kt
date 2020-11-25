@@ -15,7 +15,7 @@ import kotlin.reflect.KClass
  * @param classes Space separated list of CSS classes for this element.
  */
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : HtmlInlineTag> RBuilder.display(
+public inline fun <reified T : HtmlInlineTag> RBuilder.display(
     variant: Display.Variants,
     classes: String? = null,
     props: PropHandler<Display.Props<T>> = PropHandler { },
@@ -37,7 +37,7 @@ inline fun <reified T : HtmlInlineTag> RBuilder.display(
  *
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified T : HtmlInlineTag> RBuilder.display1(
+public inline fun <reified T : HtmlInlineTag> RBuilder.display1(
     classes: String? = null,
     props: PropHandler<Display.Props<T>> = PropHandler { },
     block: RDOMHandler<T>
@@ -49,7 +49,7 @@ inline fun <reified T : HtmlInlineTag> RBuilder.display1(
  *
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified T : HtmlInlineTag> RBuilder.display2(
+public inline fun <reified T : HtmlInlineTag> RBuilder.display2(
     classes: String? = null,
     props: PropHandler<Display.Props<T>> = PropHandler { },
     block: RDOMHandler<T>
@@ -61,7 +61,7 @@ inline fun <reified T : HtmlInlineTag> RBuilder.display2(
  *
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified T : HtmlInlineTag> RBuilder.display3(
+public inline fun <reified T : HtmlInlineTag> RBuilder.display3(
     classes: String? = null,
     props: PropHandler<Display.Props<T>> = PropHandler { },
     block: RDOMHandler<T>
@@ -73,7 +73,7 @@ inline fun <reified T : HtmlInlineTag> RBuilder.display3(
  *
  * @param classes Space separated list of CSS classes for this element.
  */
-inline fun <reified T : HtmlInlineTag> RBuilder.display4(
+public inline fun <reified T : HtmlInlineTag> RBuilder.display4(
     classes: String? = null,
     props: PropHandler<Display.Props<T>> = PropHandler { },
     block: RDOMHandler<T>

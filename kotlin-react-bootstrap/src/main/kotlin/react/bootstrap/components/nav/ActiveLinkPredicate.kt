@@ -2,6 +2,6 @@ package react.bootstrap.components.nav
 
 import kotlinx.html.A
 
-fun interface ActiveLinkPredicate {
-    fun A.isActive(): Boolean
+public fun interface ActiveLinkPredicate {
+    public fun A.isActive(): Boolean
 }

@@ -12,7 +12,7 @@ private val ReactElement.type: dynamic
     get() = asDynamic().type
 
 @Suppress("UnsafeCastFromDynamic")
-val ReactElement.tagName: String?
+public val ReactElement.tagName: String?
     get() = if (type is String) {
         type
     } else {
@@ -20,13 +20,13 @@ val ReactElement.tagName: String?
     }
 
 @Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
-val ReactElement.componentJsClass: JsClass<*>?
+public val ReactElement.componentJsClass: JsClass<*>?
     get() = if (type !is String) {
         type as JsClass<*>
     } else {
         null
     }
 
-inline fun <reified C : Component<*, *>> ReactElement.isComponent(): Boolean {
+public inline fun <reified C : Component<*, *>> ReactElement.isComponent(): Boolean {
     return this.componentJsClass == C::class.js
 }

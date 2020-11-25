@@ -15,7 +15,7 @@ import kotlin.reflect.KClass
  * @param classes Space separated list of CSS classes for this element.
  */
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T : DOMTag> RBuilder.small(
+public inline fun <reified T : DOMTag> RBuilder.small(
     classes: String? = null,
     props: PropHandler<Small.Props<T>> = PropHandler { },
     block: RDOMHandler<T>
