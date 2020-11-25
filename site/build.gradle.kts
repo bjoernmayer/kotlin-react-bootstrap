@@ -23,11 +23,7 @@ kotlin.js {
         distribution {
             directory = File("$rootDir/docs/")
         }
-        webpackTask {
-            cssSupport.enabled = true
-            cssSupport.mode = "inline"
-        }
-        runTask {
+        commonWebpackConfig {
             cssSupport.enabled = true
             cssSupport.mode = "inline"
         }
@@ -36,6 +32,7 @@ kotlin.js {
 
 val gitVersion: groovy.lang.Closure<*> by extra
 
+// FIXME: The task for this needs to run before build
 buildConfig {
     packageName("react.bootstrap.site")
     useKotlinOutput()

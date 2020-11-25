@@ -27,8 +27,6 @@ import react.bootstrap.site.lib.codepoet.When
 import react.child
 import react.dom.h3
 import react.functionalComponent
-import react.getValue
-import react.setValue
 import react.useState
 
 internal class ActiveState : SectionComponent() {

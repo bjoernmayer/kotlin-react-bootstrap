@@ -25,8 +25,6 @@ import react.bootstrap.site.lib.codepoet.FunCall.Style.INLINE
 import react.bootstrap.site.lib.codepoet.Imports
 import react.child
 import react.functionalComponent
-import react.getValue
-import react.setValue
 import react.useState
 
 internal class AvailableStyles : SectionComponent() {

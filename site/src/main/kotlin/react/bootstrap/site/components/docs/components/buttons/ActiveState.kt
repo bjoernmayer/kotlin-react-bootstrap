@@ -31,8 +31,6 @@ import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.child
 import react.dom.br
 import react.functionalComponent
-import react.getValue
-import react.setValue
 import react.useState
 import kotlin.js.Console
 

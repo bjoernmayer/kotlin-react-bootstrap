@@ -38,8 +38,6 @@ import react.dom.hr
 import react.dom.p
 import react.dom.strong
 import react.functionalComponent
-import react.getValue
-import react.setValue
 import react.useState
 import kotlin.js.Console
 
