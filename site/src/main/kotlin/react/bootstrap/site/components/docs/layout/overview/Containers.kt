@@ -37,9 +37,9 @@ internal class Containers : SectionComponent() {
         Markdown {
             //language=Markdown
             +"""
-Containers are the most basic layout element in Bootstrap and are __required when using our default grid system__.
-Containers are used to contain, pad, and (sometimes) center the content within them. While containers *can* be nested,
-most layouts do not require a nested container.
+Containers are the most basic layout element in Bootstrap and are __required when using Bootstrap's default grid
+system__. Containers are used to contain, pad, and (sometimes) center the content within them. While containers *can*
+be nested, most layouts do not require a nested container.
             """
         }
         p {

@@ -31,7 +31,7 @@ This library's `button` component is designed to be used with the HTML `button` 
 classes on `a` or `input` elements (though some browsers may apply a slightly different rendering).
             """
         }
-        Alerts.light {
+        Alerts.info {
             h5<SPAN> { +"Child elements" }
             Markdown {
                 //language=Markdown
@@ -41,7 +41,7 @@ Keep in mind: Buttons based on `${ButtonComponent.Input.Type.BUTTON.nestedName}`
                 """
             }
         }
-        Alerts.light {
+        Alerts.warning {
             h5<SPAN> { +"onClickFunction" }
             Markdown {
                 //language=Markdown

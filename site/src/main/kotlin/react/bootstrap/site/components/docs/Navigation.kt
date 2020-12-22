@@ -24,7 +24,7 @@ class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
 
             Docs.Pages.categories.forEach { category ->
                 navItem {
-                    val classes = mutableSetOf(ClassNames.NAV_LINK, ClassNames.PY_2).apply {
+                    val classes = mutableSetOf(ClassNames.NAV_LINK, ClassNames.PY_2, ClassNames.PL_4).apply {
                         if (pathMatches(props.location.pathname, category.matchProps)) {
                             add(ClassNames.ACTIVE)
                         }
@@ -37,7 +37,7 @@ class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
                         +category.name
                     }
 
-                    Navs.nav(classes(ClassNames.FLEX_COLUMN, ClassNames.COLLAPSE, ClassNames.PL_3, ClassNames.PB_2)) {
+                    Navs.nav(classes(ClassNames.FLEX_COLUMN, ClassNames.COLLAPSE, ClassNames.PB_2)) {
                         if (pathMatches(props.location.pathname, category.matchProps)) {
                             addClass("show")
                         }
@@ -47,7 +47,7 @@ class Navigation : RComponent<RouteResultProps<RProps>, RState>() {
 
                                 navLink<RProps>(
                                     subCategory.link,
-                                    className = classes(ClassNames.NAV_LINK, ClassNames.PY_1)
+                                    className = classes(ClassNames.NAV_LINK, ClassNames.PY_2, ClassNames.PL_5)
                                 ) {
                                     +subCategory.name
                                 }

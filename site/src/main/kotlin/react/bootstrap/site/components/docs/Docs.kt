@@ -6,11 +6,11 @@ import react.RComponent
 import react.RProps
 import react.RState
 import react.bootstrap.helpers.classes
-import react.bootstrap.layout.grid.col.ColAttributes.Orderings.Companion.ORD_3
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_10
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_12
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_2
-import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_3
+import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_4
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_8
-import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_9
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.container.Containers
 import react.bootstrap.layout.grid.row.row
@@ -54,7 +54,7 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
     override fun RBuilder.render() {
         Containers.fluid {
             row {
-                col(classes(ClassNames.PY_3), md = SZ_3, xl = SZ_2) {
+                col(classes(ClassNames.P_0), all = SZ_12, md = SZ_2, lg = SZ_2) {
                     route<RProps>(props.location.pathname) {
                         child(Navigation::class) {
                             attrs {
@@ -63,32 +63,33 @@ class Docs : RComponent<RouteResultProps<RProps>, Docs.State>() {
                         }
                     }
                 }
-                col(
-                    classes(ClassNames.D_NONE, ClassNames.D_XL_BLOCK, ClassNames.PY_3),
-                    xl = SZ_2 ord ORD_3
-                ) {
-                    child(SectionNav::class) {
-                        attrs {
-                            sections = state.sections
-                        }
-                    }
-                }
-                col<MAIN>(classes(ClassNames.PY_3), md = SZ_9, xl = SZ_8) {
-                    switch {
-                        Pages.categories.forEach { category ->
-                            route<CategoryComponent.Props>(category.link) {
-                                child(category.component) {
-                                    attrs {
-                                        from(it)
-                                        match.params.category = category
-                                        match.params.onNewPage = this@Docs::handleClearSections
-                                        match.params.onNewSection = this@Docs::handleAddSection
+                col<MAIN>(classes(ClassNames.PY_3, ClassNames.MX_LG_AUTO), all = SZ_12, md = SZ_10, lg = SZ_10) {
+                    row {
+                        col(all = SZ_12, lg = SZ_8) {
+                            switch {
+                                Pages.categories.forEach { category ->
+                                    route<CategoryComponent.Props>(category.link) {
+                                        child(category.component) {
+                                            attrs {
+                                                from(it)
+                                                match.params.category = category
+                                                match.params.onNewPage = this@Docs::handleClearSections
+                                                match.params.onNewSection = this@Docs::handleAddSection
+                                            }
+                                        }
                                     }
+                                }
+                                route<RProps>(props.match.path) {
+                                    redirect(from = props.location.pathname, to = Pages.categories.first().link)
                                 }
                             }
                         }
-                        route<RProps>(props.match.path) {
-                            redirect(from = props.location.pathname, to = Pages.categories.first().link)
+                        col(classes = classes(ClassNames.D_NONE, ClassNames.D_LG_BLOCK), lg = SZ_4) {
+                            child(SectionNav::class) {
+                                attrs {
+                                    sections = state.sections
+                                }
+                            }
                         }
                     }
                 }

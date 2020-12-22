@@ -56,7 +56,7 @@ fun RBuilder.header() {
                 navLink<RProps>(to = "/", className = "nav-link", exact = true) { +"Home" }
             }
             navItem {
-                navLink<RProps>(to = PATH_DOCS, className = "nav-link") { +"Documentation" }
+                navLink<RProps>(to = PATH_DOCS, className = "nav-link") { +"Docs" }
             }
         }
         NavbarNavs.nav(classes(ClassNames.ML_MD_AUTO)) {

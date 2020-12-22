@@ -27,7 +27,7 @@ internal class CodeExample : RComponent<CodeExample.Props, RState>() {
 
         PrismLight.registerLanguage("kotlin", kotlin.default)
 
-        figure(classes(ClassNames.BG_LIGHT, ClassNames.MB_5, ClassNames.PL_3, "krbd")) {
+        figure(classes(ClassNames.MB_5, ClassNames.PL_3, "krbd")) {
             PrismLight {
                 attrs {
                     language = props.language
