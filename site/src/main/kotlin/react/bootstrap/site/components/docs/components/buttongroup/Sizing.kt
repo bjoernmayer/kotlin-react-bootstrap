@@ -4,6 +4,8 @@ import react.RBuilder
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
+import react.bootstrap.helpers.classes
+import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
@@ -29,19 +31,19 @@ Instead of applying button sizing classes to every button in a group, just set `
         }
         val leftMiddleRight = listOf("Left", "Middle", "Right")
         liveExample {
-            buttonGroup(sizes = ButtonGroup.Sizes.LG, label = "...") {
+            buttonGroup(classes(ClassNames.MB_2), sizes = ButtonGroup.Sizes.LG) {
                 leftMiddleRight.forEach {
                     Buttons.solid.secondary { +it }
                 }
             }
             br { }
-            buttonGroup(label = "...") {
+            buttonGroup(classes(ClassNames.MB_2)) {
                 leftMiddleRight.forEach {
                     Buttons.solid.secondary { +it }
                 }
             }
             br { }
-            buttonGroup(sizes = ButtonGroup.Sizes.SM, label = "...") {
+            buttonGroup(sizes = ButtonGroup.Sizes.SM) {
                 leftMiddleRight.forEach {
                     Buttons.solid.secondary { +it }
                 }
@@ -56,7 +58,6 @@ Instead of applying button sizing classes to every button in a group, just set `
                 .build()
 
             +FunCall.builder(RBuilder::buttonGroup)
-                .addArgument("label", "...")
                 .setLambdaArgument("...")
                 .build()
             +FunCall.builder(RBuilder::br, FunCall.Style.NEW_INLINE)
@@ -64,7 +65,6 @@ Instead of applying button sizing classes to every button in a group, just set `
                 .build()
             +FunCall.builder(RBuilder::buttonGroup)
                 .addArgument("sizes", ButtonGroup.Sizes.SM)
-                .addArgument("label", "...")
                 .setLambdaArgument("...")
                 .build()
         }

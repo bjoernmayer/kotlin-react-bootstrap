@@ -1,34 +1,69 @@
+@file:Suppress("unused")
+
 package react.bootstrap.components.button
 
-import kotlinx.html.classes
+import kotlinx.html.HtmlBlockTag
+import kotlinx.html.INPUT
+import kotlinx.html.js.onClickFunction
 import kotlinx.html.role
 import org.w3c.dom.events.Event
 import react.RBuilder
+import react.RElementBuilder
 import react.RState
+import react.ReactElement
 import react.bootstrap.lib.EventHandler
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.BootstrapComponent
+import react.bootstrap.lib.component.AbstractDOMComponent
 import react.bootstrap.lib.component.ClassNameEnum
-import react.bootstrap.lib.kotlinxhtml.ariaLabel
-import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
-import react.bootstrap.lib.react.identifiable.gatherChildrenProps
-import react.bootstrap.lib.react.identifiable.mapComponents
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
+import react.bootstrap.lib.component.RDOMHandler
+import react.bootstrap.lib.react.isComponent
+import react.bootstrap.lib.react.mapReactElementsIndexed
+import react.bootstrap.lib.react.onEachComponent
 import react.bootstrap.lib.react.rprops.childrenArray
-import react.dom.div
+import react.dom.RDOMBuilder
+import react.dom.input
 import react.setState
+import kotlinx.html.CommonAttributeGroupFacadeFlowInteractivePhrasingContent as InteractiveTag
 
-class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGroup.State>(props) {
-    override fun State.init(props: Props) {
-        buttons = props.childrenArray.gatherChildrenProps<Button.Props, Button>()
+public class ButtonGroup<T : HtmlBlockTag>(props: Props<T>) :
+    AbstractDOMComponent<T, ButtonGroup.Props<T>, ButtonGroup.State>(props) {
+    override fun State.init(props: Props<T>) {
+        val children = buildBuilder(getBuilderFactory(props.tag)).apply {
+            with(props.handler) {
+                this@apply.handle()
+            }
+        }.create().props.childrenArray
 
-        activeButtons = buttons?.mapNotNull { (index, buttonProps) ->
-            if (buttonProps.active) {
+        buttons = mutableMapOf<Int, Pair<ReactElement, ButtonComponent.Props<*>>>().apply {
+            putAll(
+                children.mapReactElementsIndexed(ButtonComponent.Button::class) { index, pairedElement ->
+                    index to pairedElement
+                }.toMap()
+            )
+            putAll(
+                children.mapReactElementsIndexed(ButtonComponent.Box::class) { index, pairedElement ->
+                    index to pairedElement
+                }.toMap()
+            )
+            putAll(
+                children.mapReactElementsIndexed(ButtonComponent.Input::class) { index, pairedElement ->
+                    index to pairedElement
+                }.toMap()
+            )
+            putAll(
+                children.mapReactElementsIndexed(ButtonComponent.Link::class) { index, pairedElement ->
+                    index to pairedElement
+                }.toMap()
+            )
+        }
+
+        activeButtons = buttons.mapNotNull { (index, pairedElement) ->
+            if (pairedElement.second.active) {
                 index
             } else {
                 null
             }
-        } ?: emptySet()
+        }
     }
 
     private fun handleButtonClick(index: Int, event: Event, originalEventHandler: EventHandler?) {
@@ -40,73 +75,101 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
             setState {
                 activeButtons = setOf(index)
             }
+
+            return
         }
 
         if (props.behaviour == Behaviours.CHECKBOXES) {
             handleCheckboxClick(index)
+
+            return
         }
 
         // Behaviour was not given. Buttons might be of type Radio or Checkbox
-        if (props.behaviour == null) {
-            (state.buttons?.get(index) ?: error("Buttongroup has no buttons.")).also { clickedButtonProps ->
-                if (clickedButtonProps.type !is Button.Types.Input) {
-                    return@also
-                }
+        (state.buttons[index] ?: error("Buttongroup has no buttons.")).also { (element, props) ->
+            if (element.isComponent<ButtonComponent.Box>().not()) {
+                return@also
+            }
 
-                val inputType = (clickedButtonProps.type as Button.Types.Input).type
-                if (inputType != Button.Types.Input.Type.RADIO && inputType != Button.Types.Input.Type.CHECKBOX) {
-                    return@also
-                }
+            val clickedButtonProps = props.unsafeCast<ButtonComponent.Box.Props>()
 
-                if (inputType == Button.Types.Input.Type.CHECKBOX) {
-                    handleCheckboxClick(index)
-                    return@also
-                }
+            if (clickedButtonProps.type == ButtonComponent.Box.Type.CHECKBOX) {
+                handleCheckboxClick(index)
+                return@also
+            }
 
-                setState {
-                    // Behaviour is not given. Gather already checked Checkboxes and Radios that do not have the same
-                    // name as the clicked one. Then add the clicked one to set of active buttons
-                    activeButtons = state.buttons!!.mapNotNull { (key, buttonProps) ->
-                        if (activeButtons?.contains(key) != true) {
-                            return@mapNotNull null
+            val clickedName =
+                RBuilder()
+                    .input {
+                        with(clickedButtonProps.inputHandler) {
+                            this@input.handle()
                         }
-
-                        if (buttonProps.type !is Button.Types.Input) {
-                            return@mapNotNull key
-                        }
-
-                        if ((buttonProps.type as Button.Types.Input).type != Button.Types.Input.Type.RADIO) {
-                            return@mapNotNull key
-                        }
-
-                        if (
-                            (clickedButtonProps.type as Button.Types.Input).name !=
-                            (buttonProps.type as Button.Types.Input).name
-                        ) {
-                            return@mapNotNull key
-                        }
-
-                        null
-                    }.toMutableSet().apply {
-                        add(index)
                     }
-                }
+                    .props
+                    .unsafeCast<INPUT>()
+                    .name
+
+            setState {
+                // Clicked button was a radio box.
+                // Gather all currently active buttons, but filter out the clicked radio box, if it was active before
+                activeButtons =
+                    state.buttons
+                        .filter { activeButtons.contains(it.key) }
+                        .mapNotNull { (key, pairedElement) ->
+
+                            // Only the active-flag of [ButtonComponent.Box] get changed here. Hence leave it active
+                            if (!pairedElement.first.isComponent<ButtonComponent.Box>()) {
+                                return@mapNotNull key
+                            }
+
+                            val buttonProps = pairedElement.second.unsafeCast<ButtonComponent.Box.Props>()
+
+                            // Only the active-flag of Radio-Boxes get changed here. Hence leave it active
+                            if (buttonProps.type != ButtonComponent.Box.Type.RADIO) {
+                                return@mapNotNull key
+                            }
+
+                            // The names get set via the inputHandler. We do no apply it first, to be able to read the
+                            // name
+                            val buttonPropsName =
+                                RBuilder()
+                                    .input {
+                                        with(buttonProps.inputHandler) {
+                                            this@input.handle()
+                                        }
+                                    }
+                                    .props
+                                    .unsafeCast<INPUT>()
+                                    .name
+
+                            // A Radio-Box of a different name group was clicked. Both can be active
+                            if (clickedName != buttonPropsName) {
+                                return@mapNotNull key
+                            }
+
+                            // The clicked radio box has the same as this one. So do not include it
+                            null
+                        }
+                        .toMutableSet()
+                        .apply {
+                            add(index)
+                        }
             }
         }
     }
 
     private fun handleCheckboxClick(index: Int) {
         setState {
-            // Already checked. Remove from active Buttons
-            if (activeButtons?.contains(index) == true) {
-                activeButtons = activeButtons?.filterNot { it == index } ?: emptySet()
+            if (activeButtons.contains(index)) {
+                // Already checked. Remove from active Buttons
+                activeButtons = activeButtons.filterNot { it == index }
 
                 return@setState
             }
 
-            activeButtons = activeButtons?.toMutableSet()?.apply {
+            activeButtons = activeButtons.toMutableSet().apply {
                 add(index)
-            } ?: setOf(index)
+            }
         }
     }
 
@@ -133,72 +196,116 @@ class ButtonGroup(props: Props) : BootstrapComponent<ButtonGroup.Props, ButtonGr
         return btnGroupClasses
     }
 
-    override fun RBuilder.render() {
-        div {
-            attrs {
-                loadGlobalAttributes(props)
-                classes = getComponentClasses()
-                role = "group"
+    override fun RDOMBuilder<T>.build() {
+        attrs {
+            role = "group"
+        }
 
-                props.label?.let {
-                    ariaLabel = it
+        // This basically replaces the buttons in this buttonGroup with a version, which has an onClick event
+        // It does so by manually adding each child instead of using the usual children() function
+        childList.addAll(
+            childrenArray
+                .onEachComponent(ButtonComponent.Button::class) { index, originalProps ->
+                    setProps(index, originalProps)
                 }
-            }
+                .onEachComponent(ButtonComponent.Box::class) { index, originalProps ->
+                    setBoxProps(index, originalProps)
+                }
+                .onEachComponent(ButtonComponent.Input::class) { index, originalProps ->
+                    setProps(index, originalProps)
+                }
+                .onEachComponent(ButtonComponent.Link::class) { index, originalProps ->
+                    setProps(index, originalProps)
+                }
+        )
+    }
 
-            // This basically replaces the buttons in this buttonGroup with a version, which has an onClick event
-            // It does so by manually adding each child instead of using the usual children() function
-            childList.addAll(
-                props.childrenArray.mapComponents<Button.Props, Button> { index, oldProps ->
-                    attrs {
-                        onClick = { event ->
-                            handleButtonClick(index, event, oldProps.onClick)
-                        }
-                        active = state.activeButtons?.contains(index) ?: false
+    private fun <T : InteractiveTag, P : ButtonComponent.Props<T>> RElementBuilder<P>.setProps(
+        index: Int,
+        originalProps: P
+    ) {
+        attrs {
+            active = state.activeButtons.contains(index)
+
+            this.handler = RDOMHandler {
+                // First apply the handler so it applies a possible onClickFunction.
+                with(originalProps.handler) {
+                    this@RDOMHandler.handle()
+                }
+
+                // Then pull out the possible onClick
+                val onClick = attrs["onClick"] as EventHandler?
+
+                attrs {
+                    onClickFunction = { event ->
+                        // And chain it with the new one
+                        handleButtonClick(index, event, onClick)
                     }
                 }
-            )
+            }
         }
     }
 
-    interface Props : WithGlobalAttributes {
+    private fun RElementBuilder<ButtonComponent.Box.Props>.setBoxProps(
+        index: Int,
+        originalProps: ButtonComponent.Box.Props
+    ) {
+        attrs {
+            active = state.activeButtons.contains(index)
+
+            // onClick needs to be set on the input. Otherwise onClick will be fired twice!
+            // See https://stackoverflow.com/questions/50819162/why-is-my-function-being-called-twice-in-react
+            this.inputHandler = RDOMHandler {
+
+                with(originalProps.inputHandler) {
+                    this@RDOMHandler.handle()
+                }
+
+                val onClick = attrs["onClick"] as EventHandler?
+
+                attrs {
+                    onClickFunction = { event ->
+                        // And chain it with the new one
+                        handleButtonClick(index, event, onClick)
+                    }
+                }
+            }
+        }
+    }
+
+    public interface Props<T : HtmlBlockTag> : AbstractDOMComponent.Props<T> {
         /**
          * Change the appearance of the [ButtonGroup] by setting an [Appearance].
          */
-        var appearance: Appearance?
+        public var appearance: Appearance?
 
         /**
-         * Set this to make [Button]s behave like Radio- or Checkboxes.
+         * Set this to make [ButtonComponent]s behave like Radio- or Checkboxes.
          *
          * Defaults to a smart [ButtonGroup] which does not change Behaviour for normal buttons, but lets Radio- &
          * Checkboxes behave like they should.
          */
-        var behaviour: Behaviours?
+        public var behaviour: Behaviours?
 
-        /**
-         * aria-label
-         *
-         * Defaults to *null*.
-         */
-        var label: String?
-        var sizes: Sizes?
+        public var sizes: Sizes?
     }
 
-    interface State : RState {
-        var buttons: Map<Int, Button.Props>?
-        var activeButtons: Collection<Int>?
+    public interface State : RState {
+        public var buttons: Map<Int, Pair<ReactElement, ButtonComponent.Props<*>>>
+        public var activeButtons: Collection<Int>
     }
 
-    enum class Appearance {
+    public enum class Appearance {
         NONE,
         VERTICAL
     }
 
-    enum class Behaviours {
+    public enum class Behaviours {
         CHECKBOXES,
         RADIOS;
     }
 
-    enum class Sizes(override val className: ClassNames) : ClassNameEnum {
+    public enum class Sizes(override val className: ClassNames) : ClassNameEnum {
         SM(ClassNames.BTN_GROUP_SM),
         LG(ClassNames.BTN_GROUP_LG);
     }

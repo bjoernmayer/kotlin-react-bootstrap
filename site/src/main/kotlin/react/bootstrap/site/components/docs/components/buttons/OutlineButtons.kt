@@ -1,8 +1,8 @@
 package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
-import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.ButtonBuilder
+import react.bootstrap.components.button.ButtonComponent
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
@@ -22,25 +22,25 @@ internal class OutlineButtons : SectionComponent() {
             //language=Markdown
             +"""
 In need of a button, but not the hefty background colors they bring? Use the
-`${Button.Variants.Outline::class.nestedName}` variants!
+`${ButtonComponent.Variants.Outline::class.nestedName}` variants!
             """
         }
         liveExample {
-            Buttons.outline.danger { +Button.Variants.Outline.DANGER::class.normalName }
+            Buttons.outline.danger { +ButtonComponent.Variants.Outline.DANGER::class.normalName }
             +" "
-            Buttons.outline.dark { +Button.Variants.Outline.DARK::class.normalName }
+            Buttons.outline.dark { +ButtonComponent.Variants.Outline.DARK::class.normalName }
             +" "
-            Buttons.outline.info { +Button.Variants.Outline.INFO::class.normalName }
+            Buttons.outline.info { +ButtonComponent.Variants.Outline.INFO::class.normalName }
             +" "
-            Buttons.outline.light { +Button.Variants.Outline.LIGHT::class.normalName }
+            Buttons.outline.light { +ButtonComponent.Variants.Outline.LIGHT::class.normalName }
             +" "
-            Buttons.outline.primary { +Button.Variants.Outline.PRIMARY::class.normalName }
+            Buttons.outline.primary { +ButtonComponent.Variants.Outline.PRIMARY::class.normalName }
             +" "
-            Buttons.outline.secondary { +Button.Variants.Outline.SECONDARY::class.normalName }
+            Buttons.outline.secondary { +ButtonComponent.Variants.Outline.SECONDARY::class.normalName }
             +" "
-            Buttons.outline.success { +Button.Variants.Outline.SUCCESS::class.normalName }
+            Buttons.outline.success { +ButtonComponent.Variants.Outline.SUCCESS::class.normalName }
             +" "
-            Buttons.outline.warning { +Button.Variants.Outline.WARNING::class.normalName }
+            Buttons.outline.warning { +ButtonComponent.Variants.Outline.WARNING::class.normalName }
             +" "
         }
 
@@ -50,14 +50,14 @@ In need of a button, but not the hefty background colors they bring? Use the
                 .build()
 
             mapOf(
-                outlineDangerFun to Button.Variants.Outline.DANGER,
-                outlineDarkFun to Button.Variants.Outline.DARK,
-                outlineInfoFun to Button.Variants.Outline.INFO,
-                outlineLightFun to Button.Variants.Outline.LIGHT,
-                outlinePrimaryFun to Button.Variants.Outline.PRIMARY,
-                outlineSecondaryFun to Button.Variants.Outline.SECONDARY,
-                outlineSuccessFun to Button.Variants.Outline.SUCCESS,
-                outlineWarningFun to Button.Variants.Outline.WARNING
+                outlineDangerFun to ButtonComponent.Variants.Outline.DANGER,
+                outlineDarkFun to ButtonComponent.Variants.Outline.DARK,
+                outlineInfoFun to ButtonComponent.Variants.Outline.INFO,
+                outlineLightFun to ButtonComponent.Variants.Outline.LIGHT,
+                outlinePrimaryFun to ButtonComponent.Variants.Outline.PRIMARY,
+                outlineSecondaryFun to ButtonComponent.Variants.Outline.SECONDARY,
+                outlineSuccessFun to ButtonComponent.Variants.Outline.SUCCESS,
+                outlineWarningFun to ButtonComponent.Variants.Outline.WARNING
             ).forEach {
                 +FunCall.builder(it.key, FunCall.Style.NEW_INLINE)
                     .nestedBy(RBuilder::Buttons)

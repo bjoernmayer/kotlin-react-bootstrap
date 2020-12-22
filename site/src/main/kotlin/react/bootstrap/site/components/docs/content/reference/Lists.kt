@@ -7,6 +7,7 @@ import react.bootstrap.content.typography.ListItemStyles
 import react.bootstrap.content.typography.ListStyles
 import react.bootstrap.content.typography.li
 import react.bootstrap.content.typography.ul
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.external.Markdown
@@ -30,7 +31,7 @@ Creates an `ul` element.
                 .nestedBy<RBuilder>()
                 .addParameter<ListStyles>("listStyles")
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", UL::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, UL>())
                 .returns("ReactElement")
                 .build()
         }
@@ -47,7 +48,7 @@ Creates an `li` element.
                 .nestedBy<RBuilder>()
                 .addParameter<ListItemStyles>("listItemStyles")
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", LI::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, LI>())
                 .returns("ReactElement")
                 .build()
         }

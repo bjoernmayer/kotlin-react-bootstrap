@@ -2,6 +2,6 @@ package react.bootstrap.lib
 
 import react.RBuilder
 
-interface Builder {
-    val builder: RBuilder
+public interface Builder {
+    public val builder: RBuilder
 }

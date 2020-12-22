@@ -4,7 +4,7 @@ import kotlinext.js.Object
 import kotlinext.js.asJsObject
 import react.ReactElement
 
-fun Object.asReactElementOrNull(): ReactElement? {
+public fun Object.asReactElementOrNull(): ReactElement? {
     val element = asJsObject()
 
     if (!element.hasOwnProperty(ReactElement::props.name)) {

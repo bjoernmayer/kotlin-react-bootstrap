@@ -1,6 +1,5 @@
 package react.bootstrap.site.lib.codepoet
 
-import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.lib.codepoet.IndentTool.getIndent
 import react.bootstrap.site.lib.codepoet.IndentTool.indentLines
@@ -178,12 +177,17 @@ internal class FunCall private constructor(
 
             append(
                 when (value) {
-                    is ClassNames -> "\"\${${value.nestedName}}\""
                     is Enum<*> -> value.nestedName
                     is PureValue -> value.value
                     is LambdaValue -> value.build()
                     is KlazzValue -> value.build()
-                    is FunCall -> "\n${indentLines(value.build())}\n"
+                    is FunCall -> {
+                        if (value.style == Style.INLINE) {
+                            value.build()
+                        } else {
+                            "\n${indentLines(value.build())}\n"
+                        }
+                    }
                     is String -> "\"$value\""
                     else -> value
                 }

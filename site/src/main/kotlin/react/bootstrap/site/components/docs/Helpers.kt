@@ -1,13 +1,13 @@
 package react.bootstrap.site.components.docs
 
 import kotlinx.browser.document
+import kotlinx.html.UL
 import react.RBuilder
-import react.RElementBuilder
-import react.bootstrap.components.button.Button
+import react.bootstrap.components.button.ButtonComponent
 import react.bootstrap.components.button.ButtonGroup
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.components.button.buttonGroup
-import react.bootstrap.components.nav.NavComponent
+import react.bootstrap.components.nav.Navigation
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.layout.grid.col.col
@@ -53,13 +53,13 @@ internal fun Imports.importButtonGroupBuilder() =
     addImport("components", "button", RBuilder::buttonGroup.name)
 
 internal fun Imports.importButton() =
-    addImport("components", "button", Button::class.simpleName!!)
+    addImport("components", "button", ButtonComponent::class.simpleName!!)
 
 internal fun Imports.importNavsBuilder() =
     addImport("components", "nav", RBuilder::Navs.name)
 
 internal fun Imports.importNavItemBuilder() =
-    addImport("components", "nav", RElementBuilder<NavComponent.Ul.Props>::navItem.name)
+    addImport("components", "nav", Navigation.DomBuilder<UL>::navItem.name)
 
 internal fun Imports.importNavLinkBuilder() =
     addImport("components", "nav", navLinkBuilderFun.name)

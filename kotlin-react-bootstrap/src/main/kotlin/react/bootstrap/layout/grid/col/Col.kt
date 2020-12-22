@@ -1,51 +1,38 @@
+@file:Suppress("DuplicatedCode")
+
 package react.bootstrap.layout.grid.col
 
-import kotlinx.html.CommonAttributeGroupFacade
-import kotlinx.html.DIV
-import kotlinx.html.classes
 import react.RState
-import react.bootstrap.helpers.addOrInit
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.EQ
+import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.CustomisableComponent
-import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithRendererTag
-import react.dom.RDOMBuilder
-import kotlin.reflect.KClass
+import react.bootstrap.lib.component.AbstractDOMComponent
 
-class Col : CustomisableComponent<CommonAttributeGroupFacade, Col.Props, RState>() {
-    override val defaultRendererTag: KClass<out CommonAttributeGroupFacade> = DIV::class
+public class Col<T : DOMTag>(props: Props<T>) : AbstractDOMComponent<T, Col.Props<T>, RState>(props) {
+    override fun buildClasses(): Set<ClassNames> {
+        val colClasses = mutableSetOf<ClassNames>()
 
-    override fun RDOMBuilder<CommonAttributeGroupFacade>.build() {
-        attrs {
-            // Pairs and Triples match in multiple of those. That's why we need a Set
-            val colClasses = mutableSetOf<ClassNames>()
-
-            with(props) {
-                if (all?.size == null && sm?.size == null && md?.size == null && lg?.size == null && xl?.size == null) {
-                    EQ.getClassNames(null).let(colClasses::addAll)
-                }
-
-                all?.getClassNames(null)?.let(colClasses::addAll)
-                sm?.getClassNames(Breakpoints.SM)?.let(colClasses::addAll)
-                md?.getClassNames(Breakpoints.MD)?.let(colClasses::addAll)
-                lg?.getClassNames(Breakpoints.LG)?.let(colClasses::addAll)
-                xl?.getClassNames(Breakpoints.XL)?.let(colClasses::addAll)
+        with(props) {
+            if (all?.size == null && sm?.size == null && md?.size == null && lg?.size == null && xl?.size == null) {
+                EQ.getClassNames(null).let(colClasses::addAll)
             }
 
-            loadGlobalAttributes(props)
-
-            classes = props.classes.addOrInit(colClasses)
+            all?.getClassNames(null)?.let(colClasses::addAll)
+            sm?.getClassNames(Breakpoints.SM)?.let(colClasses::addAll)
+            md?.getClassNames(Breakpoints.MD)?.let(colClasses::addAll)
+            lg?.getClassNames(Breakpoints.LG)?.let(colClasses::addAll)
+            xl?.getClassNames(Breakpoints.XL)?.let(colClasses::addAll)
         }
+
+        return colClasses
     }
 
-    interface Props : WithRendererTag<CommonAttributeGroupFacade>, WithGlobalAttributes {
-        var all: ColAttributes?
-        var sm: ColAttributes?
-        var md: ColAttributes?
-        var lg: ColAttributes?
-        var xl: ColAttributes?
+    public interface Props<T : DOMTag> : AbstractDOMComponent.Props<T> {
+        public var all: ColAttributes?
+        public var sm: ColAttributes?
+        public var md: ColAttributes?
+        public var lg: ColAttributes?
+        public var xl: ColAttributes?
     }
 }

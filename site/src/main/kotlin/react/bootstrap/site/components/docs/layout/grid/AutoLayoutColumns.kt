@@ -3,6 +3,7 @@
 package react.bootstrap.site.components.docs.layout.grid
 
 import react.RBuilder
+import react.bootstrap.helpers.classes
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.AUTO
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.EQ
 import react.bootstrap.layout.grid.col.ColAttributes.Sizes.Companion.SZ_2
@@ -21,6 +22,7 @@ import react.bootstrap.site.components.docs.importFromGrid
 import react.bootstrap.site.components.docs.importRowFun
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.FunCall.Style.INLINE
 import react.bootstrap.site.lib.codepoet.Imports
 import react.dom.p
 
@@ -81,7 +83,7 @@ equal-size enums for each breakpoint you need and every column will be the same 
                                     }
                                 },
                                 "// Same as: \n// ",
-                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                FunCall.builder(RBuilder::col, INLINE)
                                     .addArgument(FunCall.Argument.PureValue(EQ.name))
                                     .setLambdaArgument(plusString("x of 2"))
                                     .build()
@@ -148,7 +150,7 @@ Note that the other columns will resize no matter the width of the center column
                                         .addArgument("all", FunCall.Argument.PureValue(size.name))
                                         .setLambdaArgument(plusString("2 of 3 (wider)"))
                                         .build(),
-                                    FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                    FunCall.builder(RBuilder::col, INLINE)
                                         .setLambdaArgument(plusString("3 of 3"))
                                         .build(),
                                 )
@@ -168,7 +170,7 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
         exampleRow {
             liveExample {
                 container {
-                    row(classes = "${ClassNames.JUSTIFY_CONTENT_MD_CENTER}") {
+                    row(classes(ClassNames.JUSTIFY_CONTENT_MD_CENTER)) {
                         col(all = EQ, lg = SZ_2) { +"1 of 3" }
                         col(md = AUTO) { +"Variable width content" }
                         col(all = EQ, lg = SZ_2) { +"3 of 3" }
@@ -194,7 +196,9 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
                 +FunCall.builder(RBuilder::container)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::row)
-                            .addArgument("classes", ClassNames.JUSTIFY_CONTENT_MD_CENTER)
+                            .addArgument(
+                                FunCall.builder(::classes, INLINE).addArgument(ClassNames.JUSTIFY_CONTENT_MD_CENTER)
+                            )
                             .setLambdaArgument(
                                 FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                     .addArgument("all", FunCall.Argument.PureValue(EQ.name))
@@ -205,7 +209,7 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
                                     .addArgument("md", FunCall.Argument.PureValue(AUTO.name))
                                     .setLambdaArgument(plusString("Variable width content"))
                                     .build(),
-                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                FunCall.builder(RBuilder::col, INLINE)
                                     .addArgument("all", FunCall.Argument.PureValue(EQ.name))
                                     .addArgument("lg", FunCall.Argument.PureValue(SZ_2.name))
                                     .setLambdaArgument(plusString("3 of 3"))
@@ -221,7 +225,7 @@ Use the `${AUTO.name}` enum value to size columns based on the natural width of 
                                     .addArgument("md", FunCall.Argument.PureValue(AUTO.name))
                                     .setLambdaArgument(plusString("Variable width content"))
                                     .build(),
-                                FunCall.builder(RBuilder::col, FunCall.Style.INLINE)
+                                FunCall.builder(RBuilder::col, INLINE)
                                     .addArgument("all", FunCall.Argument.PureValue(EQ.name))
                                     .addArgument("lg", FunCall.Argument.PureValue(SZ_2.name))
                                     .setLambdaArgument(plusString("3 of 3"))

@@ -1,25 +1,12 @@
 package react.bootstrap.content.typography.muted
 
-import kotlinx.html.CommonAttributeGroupFacade
-import kotlinx.html.SPAN
-import kotlinx.html.classes
 import react.RState
-import react.bootstrap.helpers.addOrInit
+import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.CustomisableComponent
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithRendererTag
-import react.dom.RDOMBuilder
-import kotlin.reflect.KClass
+import react.bootstrap.lib.component.AbstractDOMComponent
 
-class Muted(props: Props) : CustomisableComponent<CommonAttributeGroupFacade, Muted.Props, RState>(props) {
-    override val defaultRendererTag: KClass<out CommonAttributeGroupFacade> = SPAN::class
+public class Muted<T : DOMTag>(props: Props<T>) : AbstractDOMComponent<T, Muted.Props<T>, RState>(props) {
+    override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.TEXT_MUTED)
 
-    override fun RDOMBuilder<CommonAttributeGroupFacade>.build() {
-        attrs {
-            classes = props.classes.addOrInit(ClassNames.TEXT_MUTED)
-        }
-    }
-
-    interface Props : WithGlobalAttributes, WithRendererTag<CommonAttributeGroupFacade>
+    public interface Props<T : DOMTag> : AbstractDOMComponent.Props<T>
 }

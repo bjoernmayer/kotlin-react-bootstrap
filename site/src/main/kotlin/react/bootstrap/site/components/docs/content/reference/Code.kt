@@ -3,6 +3,7 @@ package react.bootstrap.site.components.docs.content.reference
 import kotlinx.html.PRE
 import react.RBuilder
 import react.bootstrap.content.pre
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.external.Markdown
@@ -24,9 +25,9 @@ Creates a scrollable `pre` element.
         codeExample {
             +FunSpec.builder(RBuilder::pre)
                 .nestedBy<RBuilder>()
-                .addParameter<Boolean>("scrollable")
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", PRE::class))
+                .addParameter<Boolean>("scrollable")
+                .addParameter("block", Generic.builder<RDOMHandler<*>, PRE>())
                 .returns("ReactElement")
                 .build()
         }

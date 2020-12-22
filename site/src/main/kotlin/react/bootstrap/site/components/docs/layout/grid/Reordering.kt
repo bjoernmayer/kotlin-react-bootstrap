@@ -17,7 +17,6 @@ import react.bootstrap.layout.grid.container.container
 import react.bootstrap.layout.grid.row.row
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
-import react.bootstrap.site.components.docs.fixings.contentTitle
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.components.docs.importColFun
 import react.bootstrap.site.components.docs.importContainerFun
@@ -95,7 +94,7 @@ You can offset grid columns in two ways: our `$offsetsName` values and Bootstrap
 margins are more useful for quick layouts where the width of the offset is variable.
             """
         }
-        contentTitle(RBuilder::h4, "$offsetsName enum")
+        h4 { +"$offsetsName enum" }
         Markdown {
             //language=Markdown
             +"""

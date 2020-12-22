@@ -1,72 +1,41 @@
 package react.bootstrap.components.nav
 
-import kotlinext.js.jsObject
 import kotlinx.html.DIV
 import kotlinx.html.HtmlBlockTag
 import kotlinx.html.LI
-import kotlinx.html.classes
+import kotlinx.html.Tag
+import kotlinx.html.TagConsumer
 import react.RState
-import react.RStatics
-import react.bootstrap.helpers.addOrInit
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.AbstractComponent
-import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
-import react.bootstrap.lib.react.identifiable.IdentifiableProps
-import react.bootstrap.lib.react.identifiable.mapComponents
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.bootstrap.lib.react.rprops.childrenArray
+import react.bootstrap.lib.component.DOMComponent
+import react.bootstrap.lib.react.onEachComponent
 import react.dom.RDOMBuilder
 import kotlin.reflect.KClass
 
-sealed class NavItems<P : NavItems.Props> : AbstractComponent<HtmlBlockTag, P, RState>() {
-    class Li : NavItems<Li.Props>() {
-        override val rendererTag: KClass<out HtmlBlockTag> = LI::class
+public sealed class NavItems<T : HtmlBlockTag, P : NavItems.Props<T>>(
+    props: P,
+    tag: KClass<out T>
+) : DOMComponent<T, NavItemDOMHandler<T>, NavItems.DomBuilder<T>, P, RState>(props, tag) {
+    public class DomBuilder<out T : Tag>(factory: (TagConsumer<Unit>) -> T) : RDOMBuilder<T>(factory)
 
-        interface Props : NavItems.Props, IdentifiableProps<Li>
+    override fun buildBuilder(builderFactory: (TagConsumer<Unit>) -> T): DomBuilder<T> = DomBuilder(builderFactory)
 
-        companion object : RStatics<Props, RState, Li, Nothing>(Li::class) {
-            init {
-                Li.defaultProps = jsObject {
-                    componentType = Li::class
-                }
-            }
-        }
+    public class Li(props: Props) : NavItems<LI, Li.Props>(props, LI::class) {
+        public interface Props : NavItems.Props<LI>
     }
 
-    class NavItem : NavItems<NavItem.Props>() {
-        override val rendererTag: KClass<out HtmlBlockTag> = DIV::class
-
-        interface Props : NavItems.Props, IdentifiableProps<NavItem>
-
-        companion object : RStatics<Props, RState, NavItem, Nothing>(NavItem::class) {
-            init {
-                NavItem.defaultProps = jsObject {
-                    componentType = NavItem::class
-                }
-            }
-        }
+    public class DivItem(props: Props) : NavItems<DIV, DivItem.Props>(props, DIV::class) {
+        public interface Props : NavItems.Props<DIV>
     }
 
-    class DivItem : NavItems<DivItem.Props>() {
-        override val rendererTag: KClass<out HtmlBlockTag> = DIV::class
+    override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.NAV_ITEM)
 
-        interface Props : NavItems.Props, IdentifiableProps<DivItem>
-
-        companion object : RStatics<Props, RState, DivItem, Nothing>(DivItem::class) {
-            init {
-                DivItem.defaultProps = jsObject {
-                    componentType = DivItem::class
-                }
-            }
-        }
-    }
-
-    override fun RDOMBuilder<HtmlBlockTag>.transferChildren() {
+    override fun DomBuilder<T>.build() {
         if (props.activeLinkPredicate == null) {
-            children()
+            addChildren()
         } else {
             childList.addAll(
-                props.childrenArray.mapComponents<NavLink.Props, NavLink> { _, _ ->
+                childrenArray.onEachComponent(NavLink::class) { _, _ ->
                     attrs {
                         activeLinkPredicate = this@NavItems.props.activeLinkPredicate
                     }
@@ -75,14 +44,7 @@ sealed class NavItems<P : NavItems.Props> : AbstractComponent<HtmlBlockTag, P, R
         }
     }
 
-    override fun RDOMBuilder<HtmlBlockTag>.build() {
-        attrs {
-            loadGlobalAttributes(props)
-            classes = props.classes.addOrInit(setOf(ClassNames.NAV_ITEM))
-        }
-    }
-
-    interface Props : WithGlobalAttributes {
-        var activeLinkPredicate: (NavLink.Props.() -> Boolean)?
+    public interface Props<T : HtmlBlockTag> : DOMComponent.Props<NavItemDOMHandler<T>> {
+        public var activeLinkPredicate: ActiveLinkPredicate?
     }
 }

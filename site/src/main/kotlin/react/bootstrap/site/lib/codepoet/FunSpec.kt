@@ -39,11 +39,11 @@ internal class FunSpec private constructor(
     }
 
     /**
-     * @param TP type parent
-     * @param TC type child
+     * @param PT type parent
+     * @param CT type child
      */
-    inline fun <reified TP, reified TC> nestedByGeneric(): FunSpec {
-        parents.add(Generic.builder<TP, TC>().build())
+    inline fun <reified PT, reified CT> nestedByGeneric(): FunSpec {
+        parents.add(Generic.builder<PT, CT>().build())
 
         return this
     }

@@ -1,13 +1,16 @@
 package react.bootstrap.site.components.docs.components.navs
 
+import kotlinx.html.js.onClickFunction
 import react.RBuilder
 import react.RElementBuilder
 import react.RProps
-import react.bootstrap.components.button.Button
-import react.bootstrap.components.nav.NavComponent.Appearance
+import react.bootstrap.components.alert.Alerts
+import react.bootstrap.components.nav.Navigation.Appearance
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
+import react.bootstrap.helpers.classes
+import react.bootstrap.lib.DOMTag
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
@@ -16,16 +19,14 @@ import react.bootstrap.site.components.docs.importNavComponents
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.Assignment
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.FunCall.Style.INLINE
 import react.bootstrap.site.lib.codepoet.Generic
 import react.bootstrap.site.lib.codepoet.Imports
 import react.bootstrap.site.lib.codepoet.LambdaValue
 import react.bootstrap.site.lib.codepoet.When
 import react.child
-import react.dom.div
 import react.dom.h3
 import react.functionalComponent
-import react.getValue
-import react.setValue
 import react.useState
 
 internal class ActiveState : SectionComponent() {
@@ -40,7 +41,7 @@ In a few examples above you will see a visual change, when clicking through the 
  marked as active on a click. Here we will show you two ways to accomplish this.
             """
         }
-        div(classes = "bd-callout bd-callout-info") {
+        Alerts.light {
             Markdown {
                 //language=Markdown
                 +"""
@@ -73,7 +74,7 @@ behaviour.
                             navItem {
                                 navLink(href = "#", active = activeNavLink == active) {
                                     attrs {
-                                        onClick = {
+                                        onClickFunction = {
                                             it.preventDefault()
                                             activeNavLink = active
                                         }
@@ -83,7 +84,7 @@ behaviour.
                             }
                         }
                     }
-                    h3(classes = "${ClassNames.MT_3}") {
+                    h3(classes(ClassNames.MT_3)) {
                         +when (activeNavLink) {
                             0 -> "Content about Link"
                             1 -> "Content about Zelda"
@@ -133,7 +134,7 @@ behaviour.
                                                             .setLambdaArgument(
                                                                 FunCall.builder(RElementBuilder<RProps>::attrs)
                                                                     .setLambdaArgument(
-                                                                        Assignment.builder(Button.Props::onClick)
+                                                                        Assignment.builder(DOMTag::onClickFunction)
                                                                             .value(
                                                                                 LambdaValue(
                                                                                     "it.preventDefault()\n" +
@@ -156,7 +157,7 @@ behaviour.
                                 )
                                 .build(),
                             FunCall.builder(RBuilder::h3)
-                                .addArgument("classes", ClassNames.MT_3)
+                                .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.MT_3))
                                 .setLambdaArgument(
                                     "+",
                                     When.builder("activeNavLink")
@@ -178,8 +179,8 @@ behaviour.
         Markdown {
             //language=Markdown
             +"""
-You set a `active predicate` on each `nav` which is checked, when the nav is rendered. The predicate is passed on from
- the nav downwards to the `navItems` and `navLinks`.
+You can set an `active predicate` on each `nav` component. This is checked, when the nav is rendered. The predicate is
+passed on from the nav downwards to the `navItems` and `navLinks`.
             """
         }
 
@@ -189,16 +190,16 @@ You set a `active predicate` on each `nav` which is checked, when the nav is ren
                 activeLinkPredicate = { href == "#theActiveLink" }
             ) {
                 navLink(href = "#") {
-                    attrs { onClick = { it.preventDefault() } }
+                    attrs { onClickFunction = { it.preventDefault() } }
                     +"Not Active"
                 }
                 navLink(href = "#") {
-                    attrs { onClick = { it.preventDefault() } }
+                    attrs { onClickFunction = { it.preventDefault() } }
                     +"Also not active"
                 }
                 navLink(href = "#theActiveLink") {
                     attrs {
-                        onClick = { it.preventDefault() }
+                        onClickFunction = { it.preventDefault() }
                     }
                     +"Active"
                 }

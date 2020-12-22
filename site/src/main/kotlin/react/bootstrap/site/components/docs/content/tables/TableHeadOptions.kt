@@ -28,7 +28,7 @@ Similar to tables and dark tables, use the `thead(style)`-argument to make table
         }
         liveExample {
             table {
-                thead(THeadStyles.DARK) {
+                thead(style = THeadStyles.DARK) {
                     tr {
                         headerCells()
                     }
@@ -41,7 +41,7 @@ Similar to tables and dark tables, use the `thead(style)`-argument to make table
             }
 
             table {
-                thead(THeadStyles.LIGHT) {
+                thead(style = THeadStyles.LIGHT) {
                     tr {
                         headerCells()
                     }
@@ -64,7 +64,7 @@ Similar to tables and dark tables, use the `thead(style)`-argument to make table
                 FunCall.builder(RBuilder::table)
                     .setLambdaArgument(
                         FunCall.builder(RBuilder::thead)
-                            .addArgument(tHeadStyles)
+                            .addArgument("style", tHeadStyles)
                             .setLambdaArgument(
                                 FunCall.builder(RBuilder::tr)
                                     .setLambdaArgument(headerCells())

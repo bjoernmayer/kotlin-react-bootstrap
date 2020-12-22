@@ -8,7 +8,7 @@ import react.bootstrap.layout.grid.col.ColAttributes
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.row.RowAttributes
 import react.bootstrap.layout.grid.row.row
-import react.bootstrap.lib.RDOMHandler
+import react.bootstrap.lib.component.RDOMHandler
 import react.dom.div
 import kotlin.reflect.KClass
 
@@ -98,9 +98,12 @@ internal val RBuilder.rowFun: String
     get() = RBuilder::row.name
 
 internal fun RBuilder.exampleRow(classes: String? = null, block: RDOMHandler<DIV>): ReactElement =
-    div(classes.appendClass("bd-example-row")) {
-        block()
+    div(classes.appendClass("krbd-example-row")) {
+        val builder = this
+        with(block) {
+            builder.handle()
+        }
     }
 
 internal fun RBuilder.flexColsExampleRow(classes: String? = null, block: RDOMHandler<DIV>): ReactElement =
-    exampleRow(classes.appendClass("bd-example-row-flex-cols"), block)
+    exampleRow(classes.appendClass("krbd-example-row-flex-cols"), block)

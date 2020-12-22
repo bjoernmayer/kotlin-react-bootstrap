@@ -1,13 +1,9 @@
 package react.bootstrap.lib
 
+import kotlinx.html.CommonAttributeGroupFacade
 import org.w3c.dom.events.Event
-import react.RBuilder
-import react.ReactElement
-import react.dom.RDOMBuilder
 
-typealias NoArgEventHandler = () -> Unit
-typealias EventHandler = (Event) -> Unit
+public typealias DOMTag = CommonAttributeGroupFacade
 
-typealias ElementProvider = RBuilder.() -> ReactElement
-
-typealias RDOMHandler<T> = RDOMBuilder<T>.() -> Unit
+public typealias NoArgEventHandler = () -> Unit
+public typealias EventHandler = (Event) -> Unit

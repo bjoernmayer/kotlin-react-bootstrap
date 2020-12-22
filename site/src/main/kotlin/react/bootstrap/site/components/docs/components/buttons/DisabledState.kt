@@ -1,8 +1,8 @@
 package react.bootstrap.site.components.docs.components.buttons
 
 import react.RBuilder
-import react.bootstrap.components.button.Button
 import react.bootstrap.components.button.ButtonBuilder
+import react.bootstrap.components.button.ButtonComponent
 import react.bootstrap.components.button.Buttons
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
@@ -25,9 +25,9 @@ Make buttons look inactive by setting the `disabled` boolean attribute to any `b
             """
         }
         liveExample {
-            Buttons.solid.primary(disabled = true, sizes = Button.Sizes.LG) { +"Primary Button" }
+            Buttons.solid.primary(disabled = true, sizes = ButtonComponent.Sizes.LG) { +"Primary Button" }
             +" "
-            Buttons.solid.secondary(disabled = true, sizes = Button.Sizes.LG) { +"Button" }
+            Buttons.solid.secondary(disabled = true, sizes = ButtonComponent.Sizes.LG) { +"Button" }
         }
         codeExample {
             +Imports.builder()
@@ -39,7 +39,7 @@ Make buttons look inactive by setting the `disabled` boolean attribute to any `b
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
                 .addArgument("disabled", true)
-                .addArgument("sizes", Button.Sizes.LG)
+                .addArgument("sizes", ButtonComponent.Sizes.LG)
                 .setLambdaArgument(plusString("Primary Button"))
                 .build()
             appendLine(plusString(" "))
@@ -47,7 +47,7 @@ Make buttons look inactive by setting the `disabled` boolean attribute to any `b
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
                 .addArgument("disabled", true)
-                .addArgument("sizes", Button.Sizes.LG)
+                .addArgument("sizes", ButtonComponent.Sizes.LG)
                 .setLambdaArgument(plusString("Button"))
                 .build()
         }
@@ -59,9 +59,9 @@ Usage for you stays the same, though:
             """
         }
         liveExample {
-            Buttons.solid.primary(href = "#", disabled = true, sizes = Button.Sizes.LG) { +"Primary Button" }
+            Buttons.solid.primary(href = "#", disabled = true, sizes = ButtonComponent.Sizes.LG) { +"Primary Button" }
             +" "
-            Buttons.solid.secondary(href = "#", disabled = true, sizes = Button.Sizes.LG) { +"Button" }
+            Buttons.solid.secondary(href = "#", disabled = true, sizes = ButtonComponent.Sizes.LG) { +"Button" }
         }
         codeExample {
             +Imports.builder()
@@ -72,18 +72,18 @@ Usage for you stays the same, though:
             +FunCall.builder(solidPrimaryFun, FunCall.Style.NEW_INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
-                .addArgument("href", "#")
                 .addArgument("disabled", true)
-                .addArgument("sizes", Button.Sizes.LG)
+                .addArgument("href", "#")
+                .addArgument("sizes", ButtonComponent.Sizes.LG)
                 .setLambdaArgument(plusString("Primary Button"))
                 .build()
             appendLine(plusString(" "))
             +FunCall.builder(solidSecondaryFun, FunCall.Style.INLINE)
                 .nestedBy(RBuilder::Buttons)
                 .nestedBy(ButtonBuilder::solid)
-                .addArgument("href", "#")
                 .addArgument("disabled", true)
-                .addArgument("sizes", Button.Sizes.LG)
+                .addArgument("href", "#")
+                .addArgument("sizes", ButtonComponent.Sizes.LG)
                 .setLambdaArgument(plusString("Button"))
                 .build()
         }

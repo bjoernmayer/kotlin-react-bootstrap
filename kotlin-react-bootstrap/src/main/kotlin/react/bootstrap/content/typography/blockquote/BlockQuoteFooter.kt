@@ -1,27 +1,14 @@
 package react.bootstrap.content.typography.blockquote
 
-import kotlinx.html.classes
-import react.RBuilder
+import kotlinx.html.HtmlBlockTag
 import react.RState
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.bootstrap.lib.component.BootstrapComponent
-import react.bootstrap.lib.kotlinxhtml.loadGlobalAttributes
-import react.bootstrap.lib.react.rprops.WithGlobalAttributes
-import react.dom.div
+import react.bootstrap.lib.component.AbstractDOMComponent
 
-class BlockQuoteFooter : BootstrapComponent<BlockQuoteFooter.Props, RState>() {
+public class BlockQuoteFooter<T : HtmlBlockTag>(
+    props: Props<T>
+) : AbstractDOMComponent<T, BlockQuoteFooter.Props<T>, RState>(props) {
     override fun buildClasses(): Set<ClassNames> = setOf(ClassNames.BLOCKQUOTE_FOOTER)
 
-    override fun RBuilder.render() {
-        div {
-            attrs {
-                loadGlobalAttributes(props)
-                classes = getComponentClasses()
-            }
-
-            children()
-        }
-    }
-
-    interface Props : WithGlobalAttributes
+    public interface Props<T : HtmlBlockTag> : AbstractDOMComponent.Props<T>
 }

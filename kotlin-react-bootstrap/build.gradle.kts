@@ -7,8 +7,8 @@ plugins {
 }
 
 dependencies {
-    api(kotlinJsWrapper("react"))
-    api(kotlinJsWrapper("react-dom"))
+    implementation(kotlinJsWrapper("react"))
+    implementation(kotlinJsWrapper("react-dom"))
 
     testImplementation(kotlin("test-js"))
 }

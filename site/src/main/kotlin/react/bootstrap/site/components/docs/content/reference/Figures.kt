@@ -6,6 +6,7 @@ import react.RBuilder
 import react.bootstrap.content.figures.figure
 import react.bootstrap.content.img
 import react.bootstrap.lib.bootstrap.ClassNames
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.nestedName
@@ -31,7 +32,7 @@ Creates a `figure` element and adds `${ClassNames.FIGURE.nestedName}` to it.
             +FunSpec.builder(RBuilder::figure)
                 .nestedBy<RBuilder>()
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", FIGURE::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, FIGURE>())
                 .returns("ReactElement")
                 .build()
         }
@@ -46,12 +47,12 @@ Creates an `img` element and adds `${ClassNames.FIGURE_IMG.nestedName}` to it.
         codeExample {
             +FunSpec.builder(RBuilder::img)
                 .nestedByGeneric<RDOMBuilder<*>, FIGURE>()
-                .addParameter("fluid", false)
-                .addParameter("isThumbnail", false)
                 .addParameter<String?>("alt", null)
                 .addParameter<String?>("src", null)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", IMG::class))
+                .addParameter("fluid", false)
+                .addParameter("isThumbnail", false)
+                .addParameter("block", Generic.builder<RDOMHandler<*>, IMG>())
                 .returns("ReactElement")
                 .build()
         }

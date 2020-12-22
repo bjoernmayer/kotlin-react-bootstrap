@@ -1,9 +1,9 @@
 package react.bootstrap.lib.bootstrap
 
 /**
- * @see "https://gistgithubcom/JacobLett/3f16b4c857fdec22472ac20e3dd0366a"
+ * @see "https://gist.github.com/JacobLett/3f16b4c857fdec22472ac20e3dd0366a"
  */
-enum class ClassNames {
+public enum class ClassNames {
     ACCORDION,
     ACTIVE,
     ALERT,
@@ -1464,6 +1464,7 @@ enum class ClassNames {
     SPINNER_GROW_SM,
     SR_ONLY,
     SR_ONLY_FOCUSABLE,
+    STICKY_TOP,
     STRETCHED_LINK,
     TAB_CONTENT,
     TAB_PANE,
@@ -1546,11 +1547,7 @@ enum class ClassNames {
     W_AUTO,
     WAS_VALIDATED;
 
-    val className: String
-
-    init {
-        className = this::name.get().toLowerCase().replace('_', '-')
-    }
+    public val className: String = this::name.get().toLowerCase().replace('_', '-')
 
     override fun toString(): String {
         return className

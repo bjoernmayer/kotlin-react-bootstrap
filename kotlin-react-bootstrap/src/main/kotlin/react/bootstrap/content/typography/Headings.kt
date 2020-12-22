@@ -2,7 +2,7 @@ package react.bootstrap.content.typography
 
 import react.bootstrap.lib.bootstrap.ClassNames
 
-enum class Headings(val className: ClassNames) {
+public enum class Headings(public val className: ClassNames) {
     H1(ClassNames.H1),
     H2(ClassNames.H2),
     H3(ClassNames.H3),

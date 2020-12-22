@@ -5,16 +5,12 @@ import react.RBuilder
 import react.bootstrap.content.tables.table
 import react.bootstrap.content.typography.display.Display
 import react.bootstrap.content.typography.display.display
-import react.bootstrap.content.typography.display.display1
-import react.bootstrap.content.typography.display.display2
-import react.bootstrap.content.typography.display.display3
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.components.docs.fixings.liveExample
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
 import react.bootstrap.site.lib.codepoet.Imports
-import react.bootstrap.site.lib.codepoet.LineComment
 import react.dom.tbody
 import react.dom.td
 import react.dom.tr
@@ -32,7 +28,7 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
             """
         }
         liveExample {
-            table {
+            table() {
                 tbody {
                     listOf(
                         Display.Variants.DISPLAY_1,
@@ -54,31 +50,21 @@ stand out, consider using a __display heading__ - a larger, slightly more opinio
         codeExample {
             +Imports.builder()
                 .addImport("content.typography.display.${Display::class.simpleName}")
-                .addImport("content.typography.display.display")
                 .apply {
-                    for (x in 1..3) {
+                    for (x in 1..4) {
                         addImport("content.typography.display.display$x")
                     }
                 }
                 .build()
 
-            listOf(
-                RBuilder::display1,
-                RBuilder::display2,
-                RBuilder::display3
-            ).forEachIndexed { index, kFunction3 ->
-                +FunCall.builder(kFunction3)
+            repeat(4) {
+                +FunCall.builder("display${it + 1}")
+                    .addTypeParameter(SPAN::class)
                     .setLambdaArgument(
-                        plusString("Display ${index + 1}")
+                        plusString("Display ${it + 1}")
                     )
                     .build()
             }
-            +LineComment.builder("Or you use a more generic way").build()
-            +FunCall.builder("display")
-                .addTypeParameter(SPAN::class)
-                .addArgument("variant", Display.Variants.DISPLAY_4)
-                .setLambdaArgument(plusString("Display 4"))
-                .build()
         }
     }
 }

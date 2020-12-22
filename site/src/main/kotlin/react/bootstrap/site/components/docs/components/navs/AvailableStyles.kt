@@ -2,15 +2,17 @@
 
 package react.bootstrap.site.components.docs.components.navs
 
+import kotlinx.html.UL
+import kotlinx.html.js.onClickFunction
 import react.RBuilder
-import react.RElementBuilder
 import react.RProps
-import react.bootstrap.components.nav.NavComponent
-import react.bootstrap.components.nav.NavComponent.Appearance
-import react.bootstrap.components.nav.NavComponent.WidthHandling
+import react.bootstrap.components.nav.Navigation
+import react.bootstrap.components.nav.Navigation.Appearance
+import react.bootstrap.components.nav.Navigation.WidthHandling
 import react.bootstrap.components.nav.Navs
 import react.bootstrap.components.nav.navItem
 import react.bootstrap.components.nav.navLink
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
@@ -19,11 +21,10 @@ import react.bootstrap.site.components.docs.importNavComponents
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.FunCall.Style.INLINE
 import react.bootstrap.site.lib.codepoet.Imports
 import react.child
 import react.functionalComponent
-import react.getValue
-import react.setValue
 import react.useState
 
 internal class AvailableStyles : SectionComponent() {
@@ -54,7 +55,7 @@ Centered with `${ClassNames.JUSTIFY_CONTENT_CENTER.nestedName}`:
             """
         }
         liveExample {
-            Navs.ul(classes = "${ClassNames.JUSTIFY_CONTENT_CENTER}") {
+            Navs.ul(classes(ClassNames.JUSTIFY_CONTENT_CENTER)) {
                 buildDefaultExample()
             }
         }
@@ -66,7 +67,7 @@ Centered with `${ClassNames.JUSTIFY_CONTENT_CENTER.nestedName}`:
 
             +FunCall.builder(Navs::ul)
                 .nestedBy(RBuilder::Navs)
-                .addArgument("classes", ClassNames.JUSTIFY_CONTENT_CENTER)
+                .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.JUSTIFY_CONTENT_CENTER))
                 .setLambdaArgument(testingNavItemsString())
                 .build()
         }
@@ -77,7 +78,7 @@ Centered with `${ClassNames.JUSTIFY_CONTENT_END.nestedName}`:
             """
         }
         liveExample {
-            Navs.ul(classes = "${ClassNames.JUSTIFY_CONTENT_END}") {
+            Navs.ul(classes(ClassNames.JUSTIFY_CONTENT_END)) {
                 buildDefaultExample()
             }
         }
@@ -89,7 +90,7 @@ Centered with `${ClassNames.JUSTIFY_CONTENT_END.nestedName}`:
 
             +FunCall.builder(Navs::ul)
                 .nestedBy(RBuilder::Navs)
-                .addArgument("classes", ClassNames.JUSTIFY_CONTENT_END)
+                .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.JUSTIFY_CONTENT_END))
                 .setLambdaArgument(testingNavItemsString())
                 .build()
         }
@@ -103,7 +104,7 @@ them on some viewports but not others? Use the responsive versions (e.g., `${Cla
             """
         }
         liveExample {
-            Navs.ul(classes = "${ClassNames.FLEX_COLUMN}") {
+            Navs.ul(classes(ClassNames.FLEX_COLUMN)) {
                 buildDefaultExample()
             }
         }
@@ -115,7 +116,7 @@ them on some viewports but not others? Use the responsive versions (e.g., `${Cla
 
             +FunCall.builder(Navs::ul)
                 .nestedBy(RBuilder::Navs)
-                .addArgument("classes", ClassNames.FLEX_COLUMN)
+                .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.FLEX_COLUMN))
                 .setLambdaArgument(testingNavItemsString())
                 .build()
         }
@@ -126,17 +127,17 @@ As always, vertical navigation is possible without `ul`s, too.
             """
         }
         liveExample {
-            Navs.nav(classes = "${ClassNames.FLEX_COLUMN}") {
+            Navs.nav(classes(ClassNames.FLEX_COLUMN)) {
                 navLink(href = "#", active = true) {
-                    attrs { onClick = { it.preventDefault() } }
+                    attrs { onClickFunction = { it.preventDefault() } }
                     +"Active"
                 }
                 navLink(href = "#") {
-                    attrs { onClick = { it.preventDefault() } }
+                    attrs { onClickFunction = { it.preventDefault() } }
                     +"Link"
                 }
                 navLink(href = "#") {
-                    attrs { onClick = { it.preventDefault() } }
+                    attrs { onClickFunction = { it.preventDefault() } }
                     +"Link"
                 }
                 navLink(href = "#", disabled = true) {
@@ -152,7 +153,7 @@ As always, vertical navigation is possible without `ul`s, too.
 
             +FunCall.builder(Navs::nav)
                 .nestedBy(RBuilder::Navs)
-                .addArgument("classes", ClassNames.FLEX_COLUMN)
+                .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.FLEX_COLUMN))
                 .setLambdaArgument(
                     buildString {
                         append(
@@ -449,11 +450,11 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         }
     }
 
-    private fun RElementBuilder<NavComponent.Ul.Props>.buildDefaultExample() {
+    private fun Navigation.DomBuilder<UL>.buildDefaultExample() {
         navItem {
             navLink(href = "#", active = true) {
                 attrs {
-                    onClick = {
+                    onClickFunction = {
                         it.preventDefault()
                     }
                 }
@@ -463,7 +464,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         navItem {
             navLink(href = "#") {
                 attrs {
-                    onClick = {
+                    onClickFunction = {
                         it.preventDefault()
                     }
                 }
@@ -473,7 +474,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         navItem {
             navLink(href = "#") {
                 attrs {
-                    onClick = {
+                    onClickFunction = {
                         it.preventDefault()
                     }
                 }
@@ -492,16 +493,19 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         linkText1: String = "Link",
         linkText2: String = "Link",
         disabledLinkText: String = "Disabled",
-        attrHandler: NavComponent.Ul.Props.() -> Unit
+        props: Navigation.Ul.Props.() -> Unit
     ) = functionalComponent<RProps> {
         var activeNavLink by useState(0)
 
-        Navs.ul {
-            attrs.attrHandler()
+        Navs.ul(
+            props = {
+                props()
+            }
+        ) {
             navItem {
                 navLink(href = "#", active = activeNavLink == 0) {
                     attrs {
-                        onClick = {
+                        onClickFunction = {
                             it.preventDefault()
                             activeNavLink = 0
                         }
@@ -512,7 +516,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
             navItem {
                 navLink(href = "#", active = activeNavLink == 1) {
                     attrs {
-                        onClick = {
+                        onClickFunction = {
                             it.preventDefault()
                             activeNavLink = 1
                         }
@@ -523,7 +527,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
             navItem {
                 navLink(href = "#", active = activeNavLink == 2) {
                     attrs {
-                        onClick = {
+                        onClickFunction = {
                             it.preventDefault()
                             activeNavLink = 2
                         }
@@ -544,15 +548,18 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
         linkText1: String = "Link",
         linkText2: String = "Link",
         disabledLinkText: String = "Disabled",
-        attrHandler: NavComponent.Nav.Props.() -> Unit
+        props: Navigation.Nav.Props.() -> Unit
     ) = functionalComponent<RProps> {
         var activeNavLink by useState(0)
 
-        Navs.nav {
-            attrs.attrHandler()
+        Navs.nav(
+            props = {
+                props()
+            }
+        ) {
             navLink(href = "#", active = activeNavLink == 0) {
                 attrs {
-                    onClick = {
+                    onClickFunction = {
                         it.preventDefault()
                         activeNavLink = 0
                     }
@@ -561,7 +568,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
             }
             navLink(href = "#", active = activeNavLink == 1) {
                 attrs {
-                    onClick = {
+                    onClickFunction = {
                         it.preventDefault()
                         activeNavLink = 1
                     }
@@ -570,7 +577,7 @@ Similar to the `${WidthHandling.FILL.nestedName}` example using a `<nav>`-based 
             }
             navLink(href = "#", active = activeNavLink == 2) {
                 attrs {
-                    onClick = {
+                    onClickFunction = {
                         it.preventDefault()
                         activeNavLink = 2
                     }

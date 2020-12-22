@@ -4,19 +4,19 @@ import kotlinx.html.THEAD
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.helpers.appendClass
-import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
-import react.dom.thead
+import react.bootstrap.lib.component.RDOMHandler
+import react.dom.thead as reactThead
 
 /**
  * Creates a [THEAD] element.
  *
- * @param style Set a style for light and dark colouring.
  * @param classes Space separated list of CSS classes for this element.
+ * @param style Set a style for light and dark colouring.
  */
-fun RBuilder.thead(
-    style: THeadStyles? = null,
+public fun RBuilder.thead(
     classes: String? = null,
+    style: THeadStyles? = null,
     block: RDOMHandler<THEAD>
 ): ReactElement {
     val tHeadClasses = mutableSetOf<ClassNames>()
@@ -25,10 +25,15 @@ fun RBuilder.thead(
         tHeadClasses.add(it.className)
     }
 
-    return thead(classes = classes.appendClass(tHeadClasses), block = block)
+    return reactThead(classes = classes.appendClass(tHeadClasses)) {
+        val builder = this
+        with(block) {
+            builder.handle()
+        }
+    }
 }
 
-enum class THeadStyles(val className: ClassNames) {
+public enum class THeadStyles(public val className: ClassNames) {
     LIGHT(ClassNames.THEAD_LIGHT),
     DARK(ClassNames.THEAD_DARK);
 }

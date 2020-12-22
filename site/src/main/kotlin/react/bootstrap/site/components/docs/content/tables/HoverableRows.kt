@@ -27,7 +27,7 @@ Set the `table(hoverable)`-argument to `true` to enable a hover state on table r
                 defaultExample()
             }
 
-            table(hoverable = true, dark = true) {
+            table(dark = true, hoverable = true) {
                 defaultExample()
             }
         }

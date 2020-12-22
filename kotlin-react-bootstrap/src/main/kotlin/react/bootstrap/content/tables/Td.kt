@@ -4,21 +4,23 @@ import kotlinx.html.TD
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.helpers.appendClass
-import react.bootstrap.lib.RDOMHandler
-import react.dom.td
+import react.bootstrap.lib.component.RDOMHandler
+import react.dom.td as reactTd
 
 /**
  * Creates a [TD] element.
  *
- * @param contextualStyle Set [ContextualStyle] to colour-in the [TD]s.
  * @param classes Space separated list of CSS classes for this element.
+ * @param contextualStyle Set [ContextualStyle] to colour-in the [TD]s.
  */
-fun RBuilder.td(
-    contextualStyle: ContextualStyle? = null,
+public fun RBuilder.td(
     classes: String? = null,
+    contextualStyle: ContextualStyle? = null,
     block: RDOMHandler<TD>
 ): ReactElement =
-    td(
-        classes = contextualStyle?.let { classes.appendClass(it.className) } ?: classes,
-        block = block
-    )
+    reactTd(classes = contextualStyle?.let { classes.appendClass(it.className) } ?: classes) {
+        val builder = this
+        with(block) {
+            builder.handle()
+        }
+    }

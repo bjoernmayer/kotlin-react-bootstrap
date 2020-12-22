@@ -16,6 +16,7 @@ import react.bootstrap.content.tables.th
 import react.bootstrap.content.tables.thead
 import react.bootstrap.content.tables.tr
 import react.bootstrap.lib.bootstrap.Breakpoints
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.external.Markdown
@@ -37,14 +38,14 @@ Creates a `table` element and adds Bootstrap classes to it.
         codeExample {
             +FunSpec.builder(RBuilder::table)
                 .nestedBy<RBuilder>()
+                .addParameter<String?>("classes", null)
                 .addParameter("dark", false)
                 .addParameter("striped", false)
                 .addParameter<BorderStyles>("borderStyle", null)
                 .addParameter("hoverable", false)
                 .addParameter("small", false)
                 .addParameter<Breakpoints>("responsive", null)
-                .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", TABLE::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, TABLE>())
                 .returns("ReactElement")
                 .build()
         }
@@ -59,9 +60,9 @@ Creates a `thead` element.
         codeExample {
             +FunSpec.builder(RBuilder::thead)
                 .nestedBy<RBuilder>()
-                .addParameter<THeadStyles>("style", null)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", THEAD::class))
+                .addParameter<THeadStyles>("style", null)
+                .addParameter("block", Generic.builder<RDOMHandler<*>, THEAD>())
                 .returns("ReactElement")
                 .build()
         }
@@ -76,9 +77,9 @@ Creates a `tr` element.
         codeExample {
             +FunSpec.builder(RBuilder::tr)
                 .nestedBy<RBuilder>()
-                .addParameter<ContextualStyle>("contextualStyle", null)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", TR::class))
+                .addParameter<ContextualStyle>("contextualStyle", null)
+                .addParameter("block", Generic.builder<RDOMHandler<*>, TR>())
                 .returns("ReactElement")
                 .build()
         }
@@ -93,10 +94,10 @@ Creates a `th` element.
         codeExample {
             +FunSpec.builder(RBuilder::th)
                 .nestedBy<RBuilder>()
+                .addParameter<String?>("classes", null)
                 .addParameter<ContextualStyle>("contextualStyle", null)
                 .addParameter<ThScope>("scope", null)
-                .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", TH::class))
+                .addParameter("block", Generic.builder<RDOMHandler<*>, TH>())
                 .returns("ReactElement")
                 .build()
         }
@@ -111,9 +112,9 @@ Creates a `td` element.
         codeExample {
             +FunSpec.builder(RBuilder::td)
                 .nestedBy<RBuilder>()
-                .addParameter<ContextualStyle>("contextualStyle", null)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", TD::class))
+                .addParameter<ContextualStyle>("contextualStyle", null)
+                .addParameter("block", Generic.builder<RDOMHandler<*>, TD>())
                 .returns("ReactElement")
                 .build()
         }

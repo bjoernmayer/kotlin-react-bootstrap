@@ -13,6 +13,7 @@ import react.bootstrap.content.typography.ListItemStyles
 import react.bootstrap.content.typography.ListStyles
 import react.bootstrap.content.typography.li
 import react.bootstrap.content.typography.ul
+import react.bootstrap.helpers.classes
 import react.bootstrap.layout.grid.col.ColAttributes
 import react.bootstrap.layout.grid.col.col
 import react.bootstrap.layout.grid.row.row
@@ -25,8 +26,8 @@ import react.bootstrap.site.components.docs.layout.grid.rowFun
 import react.bootstrap.site.components.docs.nestedName
 import react.bootstrap.site.external.Markdown
 import react.bootstrap.site.lib.codepoet.FunCall
+import react.bootstrap.site.lib.codepoet.FunCall.Style.INLINE
 import react.bootstrap.site.lib.codepoet.Imports
-import react.bootstrap.site.lib.codepoet.KlazzValue
 import react.dom.RDOMBuilder
 import react.dom.li
 import react.dom.p
@@ -145,7 +146,7 @@ Remove a list’s bullets and apply some light `margin` with a combination of tw
                 .addArgument(ListStyles.INLINE)
                 .setLambdaArgument(
                     listOf("Lorem ipsum", "Phasellus iaculis", "Nulla volutpat").joinToString("\n") {
-                        FunCall.builder(liFun, FunCall.Style.INLINE)
+                        FunCall.builder(liFun, INLINE)
                             .setLambdaArgument(plusString(it))
                             .build()
                     }
@@ -161,37 +162,37 @@ add a `${ClassNames.TEXT_TRUNCATE.nestedName}` class to truncate the text with a
             """
         }
         liveExample {
-            row(rendererTag = DL::class) {
-                col(sm = ColAttributes.Sizes.SZ_3, rendererTag = DT::class) { +"Description lists" }
-                col(sm = ColAttributes.Sizes.SZ_9, rendererTag = DD::class) {
+            row<DL> {
+                col<DT>(sm = ColAttributes.Sizes.SZ_3) { +"Description lists" }
+                col<DD>(sm = ColAttributes.Sizes.SZ_9) {
                     +"A description list is perfect for defining terms."
                 }
 
-                col(sm = ColAttributes.Sizes.SZ_3, rendererTag = DT::class) { +"Euismod" }
-                col(sm = ColAttributes.Sizes.SZ_9, rendererTag = DD::class) {
+                col<DT>(sm = ColAttributes.Sizes.SZ_3) { +"Euismod" }
+                col<DD>(sm = ColAttributes.Sizes.SZ_9) {
                     p { +"Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit." }
                     p { +"Donec id elit non mi porta gravida at eget metus." }
                 }
 
-                col(sm = ColAttributes.Sizes.SZ_3, rendererTag = DT::class) { +"Malesuada porta" }
-                col(sm = ColAttributes.Sizes.SZ_9, rendererTag = DD::class) {
+                col<DT>(sm = ColAttributes.Sizes.SZ_3) { +"Malesuada porta" }
+                col<DD>(sm = ColAttributes.Sizes.SZ_9) {
                     +"Etiam porta sem malesuada magna mollis euismod."
                 }
 
-                col(classes = "${ClassNames.TEXT_TRUNCATE}", sm = ColAttributes.Sizes.SZ_3, rendererTag = DT::class) {
+                col<DT>(classes(ClassNames.TEXT_TRUNCATE), sm = ColAttributes.Sizes.SZ_3) {
                     +"Truncated term is truncated"
                 }
-                col(sm = ColAttributes.Sizes.SZ_9, rendererTag = DD::class) {
+                col<DD>(sm = ColAttributes.Sizes.SZ_9) {
                     +"""
 Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massajustosit amet risus.
                     """
                 }
 
-                col(sm = ColAttributes.Sizes.SZ_3, rendererTag = DT::class) { +"Nesting" }
-                col(sm = ColAttributes.Sizes.SZ_9, rendererTag = DD::class) {
-                    row(rendererTag = DL::class) {
-                        col(sm = ColAttributes.Sizes.SZ_4, rendererTag = DT::class) { +"Nested definition list" }
-                        col(sm = ColAttributes.Sizes.SZ_8, rendererTag = DD::class) {
+                col<DT>(sm = ColAttributes.Sizes.SZ_3) { +"Nesting" }
+                col<DD>(sm = ColAttributes.Sizes.SZ_9) {
+                    row<DL> {
+                        col<DT>(sm = ColAttributes.Sizes.SZ_4) { +"Nested definition list" }
+                        col<DD>(sm = ColAttributes.Sizes.SZ_8) {
                             +"Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc."
                         }
                     }
@@ -220,14 +221,14 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                 return this
             }
 
-            fun FunCall.addDtArgument(): FunCall {
-                addArgument("rendererTag", KlazzValue(DT::class))
+            fun FunCall.addDtType(): FunCall {
+                addTypeParameter(DT::class)
 
                 return this
             }
 
-            fun FunCall.addDdArgument(): FunCall {
-                addArgument("rendererTag", KlazzValue(DD::class))
+            fun FunCall.addDdType(): FunCall {
+                addTypeParameter(DD::class)
                 return this
             }
 
@@ -238,27 +239,27 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                 .build()
 
             +FunCall.builder(RBuilder::row)
-                .addArgument("rendererTag", KlazzValue(DL::class))
+                .addTypeParameter(DL::class)
                 .setLambdaArgument(
                     FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                         .addSz3Argument()
-                        .addDtArgument()
+                        .addDtType()
                         .setLambdaArgument(plusString("Description lists"))
                         .build(),
                     FunCall.builder(RBuilder::col)
                         .addSz9Argument()
-                        .addDdArgument()
+                        .addDdType()
                         .setLambdaArgument(plusString("A description list is perfect for defining terms."))
                         .build(),
                     "\n",
                     FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                         .addSz3Argument()
-                        .addDtArgument()
+                        .addDtType()
                         .setLambdaArgument(plusString("Euismod"))
                         .build(),
                     FunCall.builder(RBuilder::col)
                         .addSz9Argument()
-                        .addDdArgument()
+                        .addDdType()
                         .setLambdaArgument(
                             FunCall.builder(RBuilder::p, FunCall.Style.NEW_INLINE)
                                 .setLambdaArgument(
@@ -268,7 +269,7 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                                     )
                                 )
                                 .build(),
-                            FunCall.builder(RBuilder::p, FunCall.Style.INLINE)
+                            FunCall.builder(RBuilder::p, INLINE)
                                 .setLambdaArgument(plusString("Donec id elit non mi porta gravida at eget metus."))
                                 .build()
                         )
@@ -276,24 +277,24 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                     "\n",
                     FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                         .addSz3Argument()
-                        .addDtArgument()
+                        .addDtType()
                         .setLambdaArgument(plusString("Malesuada porta"))
                         .build(),
                     FunCall.builder(RBuilder::col)
                         .addSz9Argument()
-                        .addDdArgument()
+                        .addDdType()
                         .setLambdaArgument(plusString("Etiam porta sem malesuada magna mollis euismod."))
                         .build(),
                     "\n",
                     FunCall.builder(RBuilder::col)
-                        .addArgument("classes", ClassNames.TEXT_TRUNCATE)
+                        .addArgument(FunCall.builder(::classes, INLINE).addArgument(ClassNames.TEXT_TRUNCATE))
                         .addSz3Argument()
-                        .addDtArgument()
+                        .addDtType()
                         .setLambdaArgument(plusString("Truncated term is truncated"))
                         .build(),
                     FunCall.builder(RBuilder::col)
                         .addSz9Argument()
-                        .addDdArgument()
+                        .addDdType()
                         .setLambdaArgument(
                             plusString(
                                 "Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut " +
@@ -306,15 +307,15 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                     "\n",
                     FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                         .addSz3Argument()
-                        .addDtArgument()
+                        .addDtType()
                         .setLambdaArgument(plusString("Nesting"))
                         .build(),
                     FunCall.builder(RBuilder::col)
                         .addSz9Argument()
-                        .addDdArgument()
+                        .addDdType()
                         .setLambdaArgument(
                             FunCall.builder(RBuilder::row)
-                                .addArgument("rendererTag", KlazzValue(DL::class))
+                                .addTypeParameter(DL::class)
                                 .setLambdaArgument(
                                     FunCall.builder(RBuilder::col, FunCall.Style.NEW_INLINE)
                                         .addArgument(
@@ -327,7 +328,7 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                                                 }
                                             )
                                         )
-                                        .addDtArgument()
+                                        .addDtType()
                                         .setLambdaArgument(plusString("Nested definition list"))
                                         .build(),
                                     FunCall.builder(RBuilder::col)
@@ -341,7 +342,7 @@ Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut ferm
                                                 }
                                             )
                                         )
-                                        .addDdArgument()
+                                        .addDdType()
                                         .setLambdaArgument(
                                             plusString(
                                                 "Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc."

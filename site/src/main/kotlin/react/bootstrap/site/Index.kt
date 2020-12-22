@@ -9,7 +9,6 @@ import react.dom.render
 external val favicon: dynamic
 
 fun main() {
-    require("docs.min.css")
     require("style.css")
 
     val rootDiv = document.getElementById("root")

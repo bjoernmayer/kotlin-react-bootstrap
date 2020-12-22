@@ -6,6 +6,7 @@ import kotlinx.html.TD
 import react.RBuilder
 import react.bootstrap.content.tables.table
 import react.bootstrap.content.typography.muted.muted
+import react.bootstrap.helpers.classes
 import react.bootstrap.layout.grid.container.Container
 import react.bootstrap.layout.grid.container.container
 import react.bootstrap.lib.bootstrap.ClassNames
@@ -36,9 +37,9 @@ internal class Containers : SectionComponent() {
         Markdown {
             //language=Markdown
             +"""
-Containers are the most basic layout element in Bootstrap and are __required when using our default grid system__.
-Containers are used to contain, pad, and (sometimes) center the content within them. While containers *can* be nested,
-most layouts do not require a nested container.
+Containers are the most basic layout element in Bootstrap and are __required when using Bootstrap's default grid
+system__. Containers are used to contain, pad, and (sometimes) center the content within them. While containers *can*
+be nested, most layouts do not require a nested container.
             """
         }
         p {
@@ -97,15 +98,15 @@ The table below illustrates how each container’s `max-width` compares to the o
         // p {
         //     +"See them in action and compare them in our Grid example." // Todo link to examples
         // }
-        table(classes = "${ClassNames.TEXT_LEFT}") {
+        table(classes(ClassNames.TEXT_LEFT)) {
             thead {
                 tr {
                     th { }
-                    th { +"Extra small"; br { }; span(classes = "${ClassNames.FONT_WEIGHT_NORMAL}") { +"<576px" } }
-                    th { +"Small"; br { }; span(classes = "${ClassNames.FONT_WEIGHT_NORMAL}") { +"≥576px" } }
-                    th { +"Medium"; br { }; span(classes = "${ClassNames.FONT_WEIGHT_NORMAL}") { +"≥768px" } }
-                    th { +"Large"; br { }; span(classes = "${ClassNames.FONT_WEIGHT_NORMAL}") { +"≥992px" } }
-                    th { +"Extra large"; br { }; span(classes = "${ClassNames.FONT_WEIGHT_NORMAL}") { +"≥1200px" } }
+                    th { +"Extra small"; br { }; span(classes(ClassNames.FONT_WEIGHT_NORMAL)) { +"<576px" } }
+                    th { +"Small"; br { }; span(classes(ClassNames.FONT_WEIGHT_NORMAL)) { +"≥576px" } }
+                    th { +"Medium"; br { }; span(classes(ClassNames.FONT_WEIGHT_NORMAL)) { +"≥768px" } }
+                    th { +"Large"; br { }; span(classes(ClassNames.FONT_WEIGHT_NORMAL)) { +"≥992px" } }
+                    th { +"Extra large"; br { }; span(classes(ClassNames.FONT_WEIGHT_NORMAL)) { +"≥1200px" } }
                 }
                 tr {
                     td { code { +renderedContainerFun } }

@@ -4,6 +4,7 @@ import kotlinx.html.role
 import kotlinx.html.unsafe
 import react.RBuilder
 import react.bootstrap.content.img
+import react.bootstrap.helpers.classes
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.kotlinxhtml.ariaLabel
 import react.bootstrap.site.components.docs.fixings.SectionComponent
@@ -25,8 +26,8 @@ internal class ResponsiveImages : SectionComponent() {
 Images in Bootstrap are made responsive with `img(fluid = true)`.
             """
         }
-        liveExample("bd-example-images") {
-            svg(classes = "bd-placeholder-img bd-placeholder-img-lg ${ClassNames.IMG_FLUID}") {
+        liveExample {
+            svg(classes(ClassNames.IMG_FLUID)) {
                 attrs {
                     set("width", "100%")
                     set("height", "250")
@@ -36,8 +37,10 @@ Images in Bootstrap are made responsive with `img(fluid = true)`.
                     ariaLabel = "Placeholder: Responsive image"
                     unsafe {
                         raw(
-                            "<rect width=\"100%\" height=\"100%\" fill=\"#868e96\"></rect>" +
-                                "<text x=\"50%\" y=\"50%\" fill=\"#dee2e6\" dy=\".3em\">Responsive image</text>"
+                            """
+<rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em"
+text-anchor="middle">Responsive image</text>
+"""
                         )
                     }
                 }

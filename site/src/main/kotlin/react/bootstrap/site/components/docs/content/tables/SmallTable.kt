@@ -27,7 +27,7 @@ Set the `table(hoverable)`-argument to `true` to make tables more compact by cut
                 defaultExample()
             }
 
-            table(small = true, dark = true) {
+            table(dark = true, small = true) {
                 defaultExample()
             }
         }

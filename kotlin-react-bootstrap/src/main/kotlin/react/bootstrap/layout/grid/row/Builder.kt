@@ -1,16 +1,15 @@
+@file:Suppress("DuplicatedCode")
+
 package react.bootstrap.layout.grid.row
 
-import kotlinx.html.CommonAttributeGroupFacade
+import kotlinx.html.DIV
 import react.RBuilder
-import react.RHandler
 import react.ReactElement
-import react.bootstrap.helpers.splitClassesToSet
+import react.bootstrap.lib.DOMTag
+import react.bootstrap.lib.component.AbstractDOMComponent.Companion.abstractDomComponent
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
 import kotlin.reflect.KClass
-
-/**
- * Notes:
- * As soon as Kotlin supports default type values, those methods can be made generic.
- */
 
 /**
  * Creates a [Row] element.
@@ -20,30 +19,45 @@ import kotlin.reflect.KClass
  * @param md [RowAttributes] that apply to medium screen sizes.
  * @param lg [RowAttributes] that apply to large screen sizes.
  * @param xl [RowAttributes] that apply to extra-large screen sizes.
- * @param rendererTag [KClass] of a tag that should be used to render this [Row].
  * @param classes Space separated list of CSS classes for this element.
  */
-fun RBuilder.row(
+@Suppress("UNCHECKED_CAST")
+public fun RBuilder.row(
+    classes: String? = null,
     all: RowAttributes? = null,
     sm: RowAttributes? = null,
     md: RowAttributes? = null,
     lg: RowAttributes? = null,
     xl: RowAttributes? = null,
     gutters: Boolean = true,
-    rendererTag: KClass<out CommonAttributeGroupFacade>? = null,
+    props: PropHandler<Row.Props<DIV>> = PropHandler { },
+    block: RDOMHandler<DIV>
+): ReactElement = row<DIV>(classes, all, sm, md, lg, xl, gutters, props, block)
+
+@Suppress("UNCHECKED_CAST")
+public inline fun <reified T : DOMTag> RBuilder.row(
     classes: String? = null,
-    block: RHandler<Row.Props>
-): ReactElement = child(Row::class) {
-    attrs {
+    all: RowAttributes? = null,
+    sm: RowAttributes? = null,
+    md: RowAttributes? = null,
+    lg: RowAttributes? = null,
+    xl: RowAttributes? = null,
+    gutters: Boolean = true,
+    props: PropHandler<Row.Props<T>> = PropHandler { },
+    block: RDOMHandler<T>
+): ReactElement = abstractDomComponent(Row::class as KClass<Row<T>>)
+    .classes(classes)
+    .propHandler {
         this.all = all
         this.sm = sm
         this.md = md
         this.lg = lg
         this.xl = xl
         this.gutters = gutters
-        this.rendererTag = rendererTag
-        this.classes = classes.splitClassesToSet()
-    }
 
-    block()
-}
+        with(props) {
+            this@propHandler.handle()
+        }
+    }
+    .domHandler(block)
+    .build()

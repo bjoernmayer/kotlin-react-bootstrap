@@ -4,8 +4,8 @@ import react.bootstrap.site.components.docs.nestedName
 import kotlin.reflect.KClass
 
 internal data class Generic(
-    private val className: String,
-    private val typeName: String
+    val className: String,
+    val typeName: String
 ) : CodePoet {
     constructor(
         clazz: KClass<*>,
@@ -16,6 +16,11 @@ internal data class Generic(
         className: String,
         type: KClass<*>
     ) : this(className, type.nestedName)
+
+    constructor(
+        className: KClass<*>,
+        type: String
+    ) : this(className.nestedName, type)
 
     private var variance: Variance? = null
 
@@ -42,6 +47,6 @@ internal data class Generic(
     }
 
     companion object {
-        inline fun <reified TP, reified TC> builder(): Generic = Generic(TP::class, TC::class)
+        inline fun <reified PT, reified CT> builder(): Generic = Generic(PT::class, CT::class)
     }
 }

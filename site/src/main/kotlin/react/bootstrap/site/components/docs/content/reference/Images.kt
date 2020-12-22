@@ -3,6 +3,7 @@ package react.bootstrap.site.components.docs.content.reference
 import kotlinx.html.IMG
 import react.RBuilder
 import react.bootstrap.content.img
+import react.bootstrap.lib.component.RDOMHandler
 import react.bootstrap.site.components.docs.fixings.SectionComponent
 import react.bootstrap.site.components.docs.fixings.codeExample
 import react.bootstrap.site.external.Markdown
@@ -25,12 +26,12 @@ Creates an `img` element.
         codeExample {
             +FunSpec.builder(RBuilder::img)
                 .nestedBy<RBuilder>()
-                .addParameter("fluid", false)
-                .addParameter("isThumbnail", false)
                 .addParameter<String?>("alt", null)
                 .addParameter<String?>("src", null)
                 .addParameter<String?>("classes", null)
-                .addParameter("block", Generic("RDOMHandler", IMG::class))
+                .addParameter("fluid", false)
+                .addParameter("isThumbnail", false)
+                .addParameter("block", Generic.builder<RDOMHandler<*>, IMG>())
                 .returns("ReactElement")
                 .build()
         }

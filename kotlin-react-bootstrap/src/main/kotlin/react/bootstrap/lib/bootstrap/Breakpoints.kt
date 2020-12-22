@@ -1,6 +1,6 @@
 package react.bootstrap.lib.bootstrap
 
-enum class Breakpoints {
+public enum class Breakpoints {
     ALL,
     SM,
     MD,

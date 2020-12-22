@@ -5,24 +5,25 @@ import kotlinx.html.ThScope
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.helpers.appendClass
-import react.bootstrap.lib.RDOMHandler
-import react.dom.th
+import react.bootstrap.lib.component.RDOMHandler
+import react.dom.th as reactTh
 
 /**
  * Creates a [TH] element.
  *
- * @param contextualStyle Set a [ContextualStyle] to colour-in the [TH]s.
  * @param scope
  * @param classes Space separated list of CSS classes for this element.
+ * @param contextualStyle Set a [ContextualStyle] to colour-in the [TH]s.
  */
-fun RBuilder.th(
-    contextualStyle: ContextualStyle? = null,
+public fun RBuilder.th(
     scope: ThScope? = null,
     classes: String? = null,
+    contextualStyle: ContextualStyle? = null,
     block: RDOMHandler<TH>
 ): ReactElement =
-    th(
-        classes = contextualStyle?.let { classes.appendClass(it.className) } ?: classes,
-        scope = scope,
-        block = block
-    )
+    reactTh(classes = contextualStyle?.let { classes.appendClass(it.className) } ?: classes, scope = scope) {
+        val builder = this
+        with(block) {
+            builder.handle()
+        }
+    }

@@ -27,7 +27,7 @@ here.__
             """
         }
         liveExample {
-            buttonGroup(ButtonGroup.Appearance.VERTICAL) {
+            buttonGroup(appearance = ButtonGroup.Appearance.VERTICAL) {
                 for (x in 1..6) {
                     Buttons.solid.secondary { +"Button" }
                 }
@@ -42,7 +42,7 @@ here.__
                 .build()
 
             +FunCall.builder(RBuilder::buttonGroup)
-                .addArgument(ButtonGroup.Appearance.VERTICAL)
+                .addArgument("appearance", ButtonGroup.Appearance.VERTICAL)
                 .setLambdaArgument("...")
                 .build()
         }

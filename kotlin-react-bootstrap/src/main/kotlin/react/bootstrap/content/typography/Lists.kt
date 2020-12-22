@@ -5,13 +5,13 @@ import kotlinx.html.UL
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.helpers.appendClass
-import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.ClassNameEnum
+import react.bootstrap.lib.component.RDOMHandler
 import react.dom.li
 import react.dom.ul
 
-enum class ListStyles(override val className: ClassNames) : ClassNameEnum {
+public enum class ListStyles(override val className: ClassNames) : ClassNameEnum {
     UNSTYLED(ClassNames.LIST_UNSTYLED),
     INLINE(ClassNames.LIST_INLINE);
 }
@@ -22,13 +22,18 @@ enum class ListStyles(override val className: ClassNames) : ClassNameEnum {
  * @param listStyles Set different [ListStyles].
  * @param classes Space separated list of CSS classes for this element.
  */
-fun RBuilder.ul(
+public fun RBuilder.ul(
     listStyles: ListStyles,
     classes: String? = null,
     block: RDOMHandler<UL>
-): ReactElement = ul(classes = classes.appendClass(listStyles.className), block = block)
+): ReactElement = ul(classes = classes.appendClass(listStyles.className)) {
+    val builder = this
+    with(block) {
+        builder.handle()
+    }
+}
 
-enum class ListItemStyles(override val className: ClassNames) : ClassNameEnum {
+public enum class ListItemStyles(override val className: ClassNames) : ClassNameEnum {
     INLINE(ClassNames.LIST_INLINE);
 }
 
@@ -38,8 +43,13 @@ enum class ListItemStyles(override val className: ClassNames) : ClassNameEnum {
  * @param listItemStyles Set different [ListItemStyles].
  * @param classes Space separated list of CSS classes for this element.
  */
-fun RBuilder.li(
+public fun RBuilder.li(
     listItemStyles: ListItemStyles,
     classes: String? = null,
     block: RDOMHandler<LI>
-): ReactElement = li(classes = classes.appendClass(listItemStyles.className), block = block)
+): ReactElement = li(classes = classes.appendClass(listItemStyles.className)) {
+    val builder = this
+    with(block) {
+        builder.handle()
+    }
+}

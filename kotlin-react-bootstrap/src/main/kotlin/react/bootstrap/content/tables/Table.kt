@@ -4,12 +4,12 @@ import kotlinx.html.TABLE
 import react.RBuilder
 import react.ReactElement
 import react.bootstrap.helpers.appendClass
-import react.bootstrap.lib.RDOMHandler
 import react.bootstrap.lib.bootstrap.Breakpoints
 import react.bootstrap.lib.bootstrap.ClassNames
 import react.bootstrap.lib.component.ClassNameEnum
+import react.bootstrap.lib.component.RDOMHandler
 import react.dom.div
-import react.dom.table
+import react.dom.table as reactTable
 
 /**
  * Creates a [TABLE] element and adds Bootstrap classes to it.
@@ -22,14 +22,14 @@ import react.dom.table
  * @param responsive Set [Breakpoints] to specify, when a table should start to show scrollbars.
  * @param classes Space separated list of CSS classes for this element.
  */
-fun RBuilder.table(
+public fun RBuilder.table(
+    classes: String? = null,
     dark: Boolean = false,
     striped: Boolean = false,
     borderStyle: BorderStyles? = null,
     hoverable: Boolean = false,
     small: Boolean = false,
     responsive: Breakpoints? = null,
-    classes: String? = null,
     block: RDOMHandler<TABLE>
 ): ReactElement {
     val tableClasses = mutableSetOf(ClassNames.TABLE)
@@ -63,20 +63,30 @@ fun RBuilder.table(
             Breakpoints.ALL -> ClassNames.TABLE_RESPONSIVE
         }
 
-        div(classes = divClassName.className) {
-            table(classes = classes.appendClass(tableClasses), block = block)
+        div(divClassName.className) {
+            reactTable(classes.appendClass(tableClasses)) {
+                val builder = this
+                with(block) {
+                    builder.handle()
+                }
+            }
         }
     } else {
-        table(classes = classes.appendClass(tableClasses), block = block)
+        reactTable(classes.appendClass(tableClasses)) {
+            val builder = this
+            with(block) {
+                builder.handle()
+            }
+        }
     }
 }
 
-enum class BorderStyles(override val className: ClassNames) : ClassNameEnum {
+public enum class BorderStyles(override val className: ClassNames) : ClassNameEnum {
     BORDERED(ClassNames.TABLE_BORDERED),
     BORDERLESS(ClassNames.TABLE_BORDERLESS);
 }
 
-enum class ContextualStyle(override val className: ClassNames) : ClassNameEnum {
+public enum class ContextualStyle(override val className: ClassNames) : ClassNameEnum {
     ACTIVE(ClassNames.TABLE_ACTIVE),
     DANGER(ClassNames.TABLE_DANGER),
     DARK(ClassNames.TABLE_DARK),

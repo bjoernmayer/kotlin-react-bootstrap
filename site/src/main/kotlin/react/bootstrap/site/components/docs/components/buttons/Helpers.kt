@@ -1,22 +1,25 @@
 package react.bootstrap.site.components.docs.components.buttons
 
+import kotlinx.html.BUTTON
 import kotlinx.html.ButtonFormEncType
 import kotlinx.html.ButtonFormMethod
 import kotlinx.html.ButtonType
 import react.RBuilder
-import react.RElementBuilder
 import react.ReactElement
-import react.bootstrap.components.button.Button
-import react.bootstrap.components.button.Button.Variants
+import react.bootstrap.components.button.ButtonComponent
+import react.bootstrap.components.button.ButtonComponent.Variants
 import react.bootstrap.components.button.Buttons
+import react.bootstrap.lib.component.PropHandler
+import react.bootstrap.lib.component.RDOMHandler
 import kotlin.reflect.KClass
-import kotlin.reflect.KFunction10
+import kotlin.reflect.KFunction11
 
 internal val KClass<out Variants>.normalName
     get() = simpleName!!.toLowerCase().capitalize()
 
-internal typealias ButtonFun = KFunction10<ButtonType, ButtonFormEncType?, ButtonFormMethod?, Boolean, Boolean,
-    Boolean, Button.Sizes?, Boolean, String?, (RElementBuilder<Button.Props>.() -> Unit), ReactElement>
+internal typealias ButtonFun = KFunction11<ButtonFormEncType?, ButtonFormMethod?, ButtonType, String?, Boolean, Boolean,
+    Boolean, ButtonComponent.Sizes?, Boolean, PropHandler<ButtonComponent.Button.Props>,
+    RDOMHandler<BUTTON>, ReactElement>
 
 internal val RBuilder.solidDangerFun: ButtonFun
     get() = Buttons.solid::danger
